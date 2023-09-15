@@ -2,8 +2,8 @@ force_eval:
   method: quickstep
   DFT:
     mgrid:
-      cutoff: 280
-      rel_cutoff: 40.0
+      cutoff: 400
+      rel_cutoff: 60.0
       ngrids: 5
     QS:
       eps_filter_matrix: 0.0
@@ -36,11 +36,6 @@ force_eval:
           calculate_c9_term: true
           short_range_correction: true
         potential_type: pair_potential
-    print:
-      moments:
-        _: "ON"
-      hirshfeld:
-        _: "ON"
     charge: 0
     basis_set_file_name: GTH_BASIS_SETS
     potential_file_name: GTH_POTENTIALS

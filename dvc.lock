@@ -86,8 +86,8 @@ stages:
           method: quickstep
           DFT:
             mgrid:
-              cutoff: 280
-              rel_cutoff: 40.0
+              cutoff: 400
+              rel_cutoff: 60.0
               ngrids: 5
             QS:
               eps_filter_matrix: 0.0
@@ -120,11 +120,6 @@ stages:
                   calculate_c9_term: true
                   short_range_correction: true
                 potential_type: pair_potential
-            print:
-              moments:
-                _: ON
-              hirshfeld:
-                _: ON
             charge: 0
             basis_set_file_name: GTH_BASIS_SETS
             potential_file_name: GTH_POTENTIALS
@@ -148,14 +143,14 @@ stages:
     outs:
     - path: nodes/CP2KSinglePoint/atoms.h5
       hash: md5
-      md5: 561e3ed02d470e9875bce61a86f74d3e
+      md5: 8ab733d8e6f2db41bb0c1e943fe9a540
       size: 209872
     - path: nodes/CP2KSinglePoint/cp2k
       hash: md5
-      md5: 0f4b85cddf6a24224c5f6b15de8cc2e6.dir
-      size: 12862980
+      md5: b6d8e2a7f0e14e9577c0fdc019bbb5fc.dir
+      size: 12856518
       nfiles: 3
     - path: nodes/CP2KSinglePoint/node-meta.json
       hash: md5
-      md5: 0fc10a27d1bd012f283526afe5e8a54c
+      md5: 77ba9a29a100db6552f0abc4bf0709fe
       size: 48
