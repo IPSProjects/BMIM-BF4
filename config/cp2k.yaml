@@ -2,10 +2,10 @@ force_eval:
   method: quickstep
   DFT:
     mgrid:
-      cutoff: 2501
+      cutoff: 1801
       rel_cutoff: 120.0
       ngrids: 5
-    QS:
+    QS: 
       eps_filter_matrix: 0.0
       eps_pgf_orb: 0.0001
     SCF:
