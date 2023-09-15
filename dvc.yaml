@@ -1,0 +1,40 @@
+stages:
+  AddData:
+    cmd: zntrack run ipsuite.nodes.AddData --name AddData
+    deps:
+    - data/BMIM_BF4_400_00K.extxyz
+    params:
+    - AddData
+    outs:
+    - nodes/AddData/atoms.h5
+    metrics:
+    - nodes/AddData/node-meta.json:
+        cache: false
+  ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name ConfigurationSelection
+    deps:
+    - nodes/AddData/atoms.h5
+    - nodes/AddData/node-meta.json
+    params:
+    - ConfigurationSelection
+    outs:
+    - nodes/ConfigurationSelection/selected_configurations.json
+    metrics:
+    - nodes/ConfigurationSelection/node-meta.json:
+        cache: false
+  CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/ConfigurationSelection/node-meta.json
+    - nodes/ConfigurationSelection/selected_configurations.json
+    params:
+    - config/cp2k.yaml:
+    outs:
+    - nodes/CP2KSinglePoint/atoms.h5
+    - nodes/CP2KSinglePoint/cp2k
+    metrics:
+    - nodes/CP2KSinglePoint/node-meta.json:
+        cache: false

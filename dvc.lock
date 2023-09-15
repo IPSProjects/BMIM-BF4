@@ -1,0 +1,161 @@
+schema: '2.0'
+stages:
+  AddDataH5MD:
+    cmd: zntrack run ipsuite.nodes.AddDataH5MD --name AddDataH5MD
+    deps:
+    - path: data/BMIM_BF4_400_00K.extxyz
+      hash: md5
+      md5: e1ec2958e637de5ce25e40cbc6444e68
+      size: 31845384
+    outs:
+    - path: nodes/AddDataH5MD/node-meta.json
+      hash: md5
+      md5: e8bcaf69834bcb512796b41b2308311d
+      size: 48
+  AddData:
+    cmd: zntrack run ipsuite.nodes.AddData --name AddData
+    deps:
+    - path: data/BMIM_BF4_400_00K.extxyz
+      hash: md5
+      md5: e1ec2958e637de5ce25e40cbc6444e68
+      size: 31845384
+    params:
+      params.yaml:
+        AddData:
+          lines_to_read:
+    outs:
+    - path: nodes/AddData/atoms.h5
+      hash: md5
+      md5: 3806133b4faef0e5d2e7a4676ff22e98
+      size: 17422435
+    - path: nodes/AddData/node-meta.json
+      hash: md5
+      md5: 937c65035b63322ea8593a7315c8c854
+      size: 48
+  ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name ConfigurationSelection
+    deps:
+    - path: nodes/AddData/atoms.h5
+      hash: md5
+      md5: 3806133b4faef0e5d2e7a4676ff22e98
+      size: 17422435
+    - path: nodes/AddData/node-meta.json
+      hash: md5
+      md5: 937c65035b63322ea8593a7315c8c854
+      size: 48
+    params:
+      params.yaml:
+        ConfigurationSelection:
+          n_configurations: 10
+          seed: 1234
+    outs:
+    - path: nodes/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 12255d5d96221d0bd539e305cf671ed7
+      size: 48
+    - path: nodes/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 8fad246b0ccde2a67f1c559143f3838d
+      size: 154
+  CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name CP2KSinglePoint
+    deps:
+    - path: GTH_BASIS_SETS
+      hash: md5
+      md5: 518e733a7344699cf0b4192bb97eb6a3
+      size: 119403
+    - path: GTH_POTENTIALS
+      hash: md5
+      md5: 3a35b03b26b8ba5cf6c1d849dba11f15
+      size: 128982
+    - path: dftd3.dat
+      hash: md5
+      md5: 88745bcc951a4bcdccc4d6bcfa78d105
+      size: 1959318
+    - path: nodes/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 12255d5d96221d0bd539e305cf671ed7
+      size: 48
+    - path: nodes/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 8fad246b0ccde2a67f1c559143f3838d
+      size: 154
+    params:
+      config/cp2k.yaml:
+        force_eval:
+          method: quickstep
+          DFT:
+            mgrid:
+              cutoff: 1800.0
+              rel_cutoff: 120.0
+              ngrids: 5
+            QS:
+              eps_filter_matrix: 0.0
+              eps_pgf_orb: 0.0001
+            SCF:
+              scf_guess: restart
+              max_scf: 100
+              eps_scf: 1e-06
+              OT:
+                minimizer: diis
+                preconditioner: full_single_inverse
+              outer_scf:
+                max_scf: 100
+                eps_scf: 1e-06
+              print:
+                restart:
+                  each:
+                    QS_SCF: 0
+            XC:
+              xc_functional:
+                becke97:
+                  scale_c: 1.0
+                  scale_x: 1.0
+              vdw_potential:
+                pair_potential:
+                  type: dftd3(bj)
+                  parameter_file_name: dftd3.dat
+                  reference_functional: B97-3c
+                  r_cutoff: 7.93766
+                  calculate_c9_term: true
+                  short_range_correction: true
+                potential_type: pair_potential
+            print:
+              moments:
+                _: ON
+              hirshfeld:
+                _: ON
+            charge: 0
+            basis_set_file_name: GTH_BASIS_SETS
+            potential_file_name: GTH_POTENTIALS
+          subsys:
+            kind:
+              N:
+                basis_set: TZVP-GTH-q5
+                potential: GTH-PBE-q5
+              C:
+                basis_set: TZVP-GTH-q4
+                potential: GTH-PBE-q4
+              H:
+                basis_set: TZVP-GTH-q1
+                potential: GTH-PBE-q1
+              B:
+                basis_set: TZVP-GTH-q3
+                potential: GTH-PBE-q3
+              F:
+                basis_set: TZVP-GTH-q7
+                potential: GTH-PBE-q7
+    outs:
+    - path: nodes/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 4545f476fe532df30629b58a8547f76e
+      size: 209872
+    - path: nodes/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 950a62a67d4d376220aaaee79e615e1c.dir
+      size: 12862741
+      nfiles: 3
+    - path: nodes/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: e63c2978714084f1eae13f92d6ccb3ed
+      size: 48

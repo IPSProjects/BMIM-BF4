@@ -1,0 +1,5 @@
+AddData:
+    lines_to_read: null
+ConfigurationSelection:
+    n_configurations: 10
+    seed: 1234
