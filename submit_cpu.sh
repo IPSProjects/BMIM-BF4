@@ -11,6 +11,6 @@ export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
 
 module load compiler/gnu
 module load mpi/openmpi
-conda activate ipsuite
+conda activate ips_apax
 
 dvc repro

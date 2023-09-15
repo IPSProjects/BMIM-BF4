@@ -1,72 +1,17 @@
+plots:
+- nodes/initial_model/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/initial_model/MLModel_1/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
 stages:
-  GeoOpt_SmilesToAtoms:
-    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name GeoOpt_SmilesToAtoms
-    params:
-    - GeoOpt_SmilesToAtoms
-    outs:
-    - nodes/GeoOpt/SmilesToAtoms/atoms.h5
-    - nodes/GeoOpt/SmilesToAtoms/molecule.png
-    metrics:
-    - nodes/GeoOpt/SmilesToAtoms/node-meta.json:
-        cache: false
-  GeoOpt_SmilesToAtoms_1:
-    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name GeoOpt_SmilesToAtoms_1
-    params:
-    - GeoOpt_SmilesToAtoms_1
-    outs:
-    - nodes/GeoOpt/SmilesToAtoms_1/atoms.h5
-    - nodes/GeoOpt/SmilesToAtoms_1/molecule.png
-    metrics:
-    - nodes/GeoOpt/SmilesToAtoms_1/node-meta.json:
-        cache: false
-  GeoOpt_Packmol:
-    cmd: zntrack run ipsuite.nodes.Packmol --name GeoOpt_Packmol
-    deps:
-    - nodes/GeoOpt/SmilesToAtoms/atoms.h5
-    - nodes/GeoOpt/SmilesToAtoms/molecule.png
-    - nodes/GeoOpt/SmilesToAtoms/node-meta.json
-    - nodes/GeoOpt/SmilesToAtoms_1/atoms.h5
-    - nodes/GeoOpt/SmilesToAtoms_1/molecule.png
-    - nodes/GeoOpt/SmilesToAtoms_1/node-meta.json
-    params:
-    - GeoOpt_Packmol
-    outs:
-    - nodes/GeoOpt/Packmol/atoms.h5
-    - nodes/GeoOpt/Packmol/packmol
-    metrics:
-    - nodes/GeoOpt/Packmol/node-meta.json:
-        cache: false
-  GeoOpt_Packmol_1:
-    cmd: zntrack run ipsuite.nodes.Packmol --name GeoOpt_Packmol_1
-    deps:
-    - nodes/GeoOpt/Packmol/atoms.h5
-    - nodes/GeoOpt/Packmol/node-meta.json
-    - nodes/GeoOpt/Packmol/packmol
-    params:
-    - GeoOpt_Packmol_1
-    outs:
-    - nodes/GeoOpt/Packmol_1/atoms.h5
-    - nodes/GeoOpt/Packmol_1/packmol
-    metrics:
-    - nodes/GeoOpt/Packmol_1/node-meta.json:
-        cache: false
-  GeoOpt_CP2KSinglePoint:
-    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name GeoOpt_CP2KSinglePoint
-    deps:
-    - GTH_BASIS_SETS
-    - GTH_POTENTIALS
-    - dftd3.dat
-    - nodes/GeoOpt/Packmol_1/atoms.h5
-    - nodes/GeoOpt/Packmol_1/node-meta.json
-    - nodes/GeoOpt/Packmol_1/packmol
-    params:
-    - config/cp2k.yaml:
-    outs:
-    - nodes/GeoOpt/CP2KSinglePoint/atoms.h5
-    - nodes/GeoOpt/CP2KSinglePoint/cp2k
-    metrics:
-    - nodes/GeoOpt/CP2KSinglePoint/node-meta.json:
-        cache: false
   GeoOpt_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name GeoOpt_ASEGeoOpt
     deps:
@@ -76,53 +21,82 @@ stages:
     - nodes/GeoOpt/Packmol_1/atoms.h5
     - nodes/GeoOpt/Packmol_1/node-meta.json
     - nodes/GeoOpt/Packmol_1/packmol
-    params:
-    - GeoOpt_ASEGeoOpt
-    outs:
-    - nodes/GeoOpt/ASEGeoOpt/model_outs
-    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
     metrics:
     - nodes/GeoOpt/ASEGeoOpt/node-meta.json:
         cache: false
-  bootstrap_RotateMolecules:
-    cmd: zntrack run ipsuite.nodes.RotateMolecules --name bootstrap_RotateMolecules
-    deps:
+    outs:
     - nodes/GeoOpt/ASEGeoOpt/model_outs
-    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
     - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
     params:
-    - bootstrap_RotateMolecules
-    outs:
-    - nodes/bootstrap/RotateMolecules/atoms.h5
-    metrics:
-    - nodes/bootstrap/RotateMolecules/node-meta.json:
-        cache: false
-  bootstrap_TranslateMolecules:
-    cmd: zntrack run ipsuite.nodes.TranslateMolecules --name bootstrap_TranslateMolecules
+    - GeoOpt_ASEGeoOpt
+  GeoOpt_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name GeoOpt_CP2KSinglePoint
     deps:
-    - nodes/GeoOpt/ASEGeoOpt/model_outs
-    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
-    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
-    params:
-    - bootstrap_TranslateMolecules
-    outs:
-    - nodes/bootstrap/TranslateMolecules/atoms.h5
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/GeoOpt/Packmol_1/atoms.h5
+    - nodes/GeoOpt/Packmol_1/node-meta.json
+    - nodes/GeoOpt/Packmol_1/packmol
     metrics:
-    - nodes/bootstrap/TranslateMolecules/node-meta.json:
+    - nodes/GeoOpt/CP2KSinglePoint/node-meta.json:
         cache: false
-  bootstrap_RattleAtoms:
-    cmd: zntrack run ipsuite.nodes.RattleAtoms --name bootstrap_RattleAtoms
+    outs:
+    - nodes/GeoOpt/CP2KSinglePoint/atoms.h5
+    - nodes/GeoOpt/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
+  GeoOpt_Packmol:
+    cmd: zntrack run ipsuite.nodes.Packmol --name GeoOpt_Packmol
     deps:
-    - nodes/GeoOpt/ASEGeoOpt/model_outs
-    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
-    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
-    params:
-    - bootstrap_RattleAtoms
-    outs:
-    - nodes/bootstrap/RattleAtoms/atoms.h5
+    - nodes/GeoOpt/SmilesToAtoms/atoms.h5
+    - nodes/GeoOpt/SmilesToAtoms/molecule.png
+    - nodes/GeoOpt/SmilesToAtoms/node-meta.json
+    - nodes/GeoOpt/SmilesToAtoms_1/atoms.h5
+    - nodes/GeoOpt/SmilesToAtoms_1/molecule.png
+    - nodes/GeoOpt/SmilesToAtoms_1/node-meta.json
     metrics:
-    - nodes/bootstrap/RattleAtoms/node-meta.json:
+    - nodes/GeoOpt/Packmol/node-meta.json:
         cache: false
+    outs:
+    - nodes/GeoOpt/Packmol/atoms.h5
+    - nodes/GeoOpt/Packmol/packmol
+    params:
+    - GeoOpt_Packmol
+  GeoOpt_Packmol_1:
+    cmd: zntrack run ipsuite.nodes.Packmol --name GeoOpt_Packmol_1
+    deps:
+    - nodes/GeoOpt/Packmol/atoms.h5
+    - nodes/GeoOpt/Packmol/node-meta.json
+    - nodes/GeoOpt/Packmol/packmol
+    metrics:
+    - nodes/GeoOpt/Packmol_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/GeoOpt/Packmol_1/atoms.h5
+    - nodes/GeoOpt/Packmol_1/packmol
+    params:
+    - GeoOpt_Packmol_1
+  GeoOpt_SmilesToAtoms:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name GeoOpt_SmilesToAtoms
+    metrics:
+    - nodes/GeoOpt/SmilesToAtoms/node-meta.json:
+        cache: false
+    outs:
+    - nodes/GeoOpt/SmilesToAtoms/atoms.h5
+    - nodes/GeoOpt/SmilesToAtoms/molecule.png
+    params:
+    - GeoOpt_SmilesToAtoms
+  GeoOpt_SmilesToAtoms_1:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name GeoOpt_SmilesToAtoms_1
+    metrics:
+    - nodes/GeoOpt/SmilesToAtoms_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/GeoOpt/SmilesToAtoms_1/atoms.h5
+    - nodes/GeoOpt/SmilesToAtoms_1/molecule.png
+    params:
+    - GeoOpt_SmilesToAtoms_1
   bootstrap_CP2KSinglePoint:
     cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name bootstrap_CP2KSinglePoint
     deps:
@@ -131,14 +105,14 @@ stages:
     - dftd3.dat
     - nodes/bootstrap/RotateMolecules/atoms.h5
     - nodes/bootstrap/RotateMolecules/node-meta.json
-    params:
-    - config/cp2k.yaml:
-    outs:
-    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
-    - nodes/bootstrap/CP2KSinglePoint/cp2k
     metrics:
     - nodes/bootstrap/CP2KSinglePoint/node-meta.json:
         cache: false
+    outs:
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
   bootstrap_CP2KSinglePoint_1:
     cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name bootstrap_CP2KSinglePoint_1
     deps:
@@ -147,14 +121,14 @@ stages:
     - dftd3.dat
     - nodes/bootstrap/TranslateMolecules/atoms.h5
     - nodes/bootstrap/TranslateMolecules/node-meta.json
-    params:
-    - config/cp2k.yaml:
-    outs:
-    - nodes/bootstrap/CP2KSinglePoint_1/atoms.h5
-    - nodes/bootstrap/CP2KSinglePoint_1/cp2k
     metrics:
     - nodes/bootstrap/CP2KSinglePoint_1/node-meta.json:
         cache: false
+    outs:
+    - nodes/bootstrap/CP2KSinglePoint_1/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint_1/cp2k
+    params:
+    - config/cp2k.yaml:
   bootstrap_CP2KSinglePoint_2:
     cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name bootstrap_CP2KSinglePoint_2
     deps:
@@ -163,11 +137,202 @@ stages:
     - dftd3.dat
     - nodes/bootstrap/RattleAtoms/atoms.h5
     - nodes/bootstrap/RattleAtoms/node-meta.json
-    params:
-    - config/cp2k.yaml:
+    metrics:
+    - nodes/bootstrap/CP2KSinglePoint_2/node-meta.json:
+        cache: false
     outs:
     - nodes/bootstrap/CP2KSinglePoint_2/atoms.h5
     - nodes/bootstrap/CP2KSinglePoint_2/cp2k
+    params:
+    - config/cp2k.yaml:
+  bootstrap_RattleAtoms:
+    cmd: zntrack run ipsuite.nodes.RattleAtoms --name bootstrap_RattleAtoms
+    deps:
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
     metrics:
-    - nodes/bootstrap/CP2KSinglePoint_2/node-meta.json:
+    - nodes/bootstrap/RattleAtoms/node-meta.json:
+        cache: false
+    outs:
+    - nodes/bootstrap/RattleAtoms/atoms.h5
+    params:
+    - bootstrap_RattleAtoms
+  bootstrap_RotateMolecules:
+    cmd: zntrack run ipsuite.nodes.RotateMolecules --name bootstrap_RotateMolecules
+    deps:
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+    metrics:
+    - nodes/bootstrap/RotateMolecules/node-meta.json:
+        cache: false
+    outs:
+    - nodes/bootstrap/RotateMolecules/atoms.h5
+    params:
+    - bootstrap_RotateMolecules
+  bootstrap_TranslateMolecules:
+    cmd: zntrack run ipsuite.nodes.TranslateMolecules --name bootstrap_TranslateMolecules
+    deps:
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+    metrics:
+    - nodes/bootstrap/TranslateMolecules/node-meta.json:
+        cache: false
+    outs:
+    - nodes/bootstrap/TranslateMolecules/atoms.h5
+    params:
+    - bootstrap_TranslateMolecules
+  initial_model_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name initial_model_ConfigurationSelection
+    deps:
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    - nodes/bootstrap/CP2KSinglePoint_1/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint_1/cp2k
+    - nodes/bootstrap/CP2KSinglePoint_1/node-meta.json
+    - nodes/bootstrap/CP2KSinglePoint_2/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint_2/cp2k
+    - nodes/bootstrap/CP2KSinglePoint_2/node-meta.json
+    metrics:
+    - nodes/initial_model/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    params:
+    - initial_model_ConfigurationSelection
+  initial_model_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name initial_model_ConfigurationSelection_1
+    deps:
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+    metrics:
+    - nodes/initial_model/ConfigurationSelection_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/initial_model/ConfigurationSelection_1/selected_configurations.json
+    params:
+    - initial_model_ConfigurationSelection_1
+  initial_model_ConfigurationSelection_2:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name initial_model_ConfigurationSelection_2
+    deps:
+    - nodes/initial_model/ConfigurationSelection_1/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_1/selected_configurations.json
+    metrics:
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json:
+        cache: false
+    outs:
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    params:
+    - initial_model_ConfigurationSelection_2
+  initial_model_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name initial_model_MLModel
+    deps:
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/initial_model/MLModel/metrics.json:
+        cache: false
+    - nodes/initial_model/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/initial_model/MLModel/apax_model
+    - nodes/initial_model/MLModel/log.csv
+    - nodes/initial_model/MLModel/train.log
+    - nodes/initial_model/MLModel/train_atoms.extxyz
+    - nodes/initial_model/MLModel/val_atoms.extxyz
+    params:
+    - initial_model_MLModel
+    - config/initial_model_1.yaml:
+  initial_model_MLModel_1:
+    cmd: zntrack run ipsuite.nodes.Apax --name initial_model_MLModel_1
+    deps:
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/initial_model/MLModel_1/metrics.json:
+        cache: false
+    - nodes/initial_model/MLModel_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/initial_model/MLModel_1/apax_model
+    - nodes/initial_model/MLModel_1/log.csv
+    - nodes/initial_model/MLModel_1/train.log
+    - nodes/initial_model/MLModel_1/train_atoms.extxyz
+    - nodes/initial_model/MLModel_1/val_atoms.extxyz
+    params:
+    - initial_model_MLModel_1
+    - config/initial_model_2.yaml:
+  initial_model_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name initial_model_Prediction
+    deps:
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    - nodes/bootstrap/CP2KSinglePoint_1/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint_1/cp2k
+    - nodes/bootstrap/CP2KSinglePoint_1/node-meta.json
+    - nodes/bootstrap/CP2KSinglePoint_2/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint_2/cp2k
+    - nodes/bootstrap/CP2KSinglePoint_2/node-meta.json
+    - nodes/initial_model/EnsembleModel/node-meta.json
+    - nodes/initial_model/EnsembleModel/uuid.json
+    metrics:
+    - nodes/initial_model/Prediction/node-meta.json:
+        cache: false
+    outs:
+    - nodes/initial_model/Prediction/atoms.h5
+  initial_model_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name initial_model_PredictionMetrics
+    deps:
+    - nodes/initial_model/Prediction/atoms.h5
+    - nodes/initial_model/Prediction/node-meta.json
+    metrics:
+    - nodes/initial_model/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/initial_model/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/initial_model/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/initial_model/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/initial_model/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/initial_model/PredictionMetrics/stress.json:
+        cache: false
+    outs:
+    - nodes/initial_model/PredictionMetrics/energy_df.csv
+    - nodes/initial_model/PredictionMetrics/forces_df.csv
+    - nodes/initial_model/PredictionMetrics/plots
+    - nodes/initial_model/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/initial_model/PredictionMetrics/stress_df.csv
+    - nodes/initial_model/PredictionMetrics/stress_hydrostatic_df.csv
+  initial_model_EnsembleModel:
+    cmd: zntrack run ipsuite.nodes.EnsembleModel --name initial_model_EnsembleModel
+    deps:
+    - nodes/initial_model/MLModel/apax_model
+    - nodes/initial_model/MLModel/log.csv
+    - nodes/initial_model/MLModel/metrics.json
+    - nodes/initial_model/MLModel/node-meta.json
+    - nodes/initial_model/MLModel/train.log
+    - nodes/initial_model/MLModel/train_atoms.extxyz
+    - nodes/initial_model/MLModel/val_atoms.extxyz
+    - nodes/initial_model/MLModel_1/apax_model
+    - nodes/initial_model/MLModel_1/log.csv
+    - nodes/initial_model/MLModel_1/metrics.json
+    - nodes/initial_model/MLModel_1/node-meta.json
+    - nodes/initial_model/MLModel_1/train.log
+    - nodes/initial_model/MLModel_1/train_atoms.extxyz
+    - nodes/initial_model/MLModel_1/val_atoms.extxyz
+    outs:
+    - nodes/initial_model/EnsembleModel/uuid.json
+    metrics:
+    - nodes/initial_model/EnsembleModel/node-meta.json:
         cache: false

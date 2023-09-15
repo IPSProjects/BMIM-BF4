@@ -52,3 +52,26 @@ bootstrap_TranslateMolecules:
     maximum: 0.1
     n_configurations: 15
     seed: 1
+initial_model_ConfigurationSelection:
+    n_configurations: 30
+    seed: 1234
+initial_model_ConfigurationSelection_1:
+    indices:
+        _type: slice
+        value:
+            start: 10
+            step: null
+            stop: null
+initial_model_ConfigurationSelection_2:
+    n_configurations: 50
+    seed: 1234
+initial_model_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+initial_model_MLModel_1:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false

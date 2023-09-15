@@ -78,4 +78,34 @@ with project.group("bootstrap"):
         cp2k_shell=cp2k_shell,
     )
 
+
+with project.group("initial_model"):
+    data = cp2k_rotate.atoms + cp2k_translate.atoms + cp2k_rattle.atoms
+    train_data_bootstrap = ips.configuration_selection.RandomSelection(data=data, n_configurations=30)
+    geoopt_data = ips.configuration_selection.IndexSelection(data = geopt.atoms, indices=slice(10, None, None))
+
+    train_data_geoopt = ips.configuration_selection.RandomSelection(data=geoopt_data, n_configurations=50)
+    train_data = train_data_bootstrap.atoms + train_data_geoopt.atoms
+    validation_data = train_data_bootstrap.excluded_atoms + train_data_geoopt.excluded_atoms
+    
+
+    seed_model_1 = ips.models.Apax(
+            data=train_data,
+            validation_data=validation_data,
+            config="config/initial_model_1.yaml",
+        )
+    seed_model_2 = ips.models.Apax(
+            data=train_data,
+            validation_data=validation_data,
+            config="config/initial_model_2.yaml",
+        )
+
+    seed_model = ips.models.EnsembleModel(models=[seed_model_1, seed_model_2])
+    
+    prediction = ips.analysis.Prediction(data=data, model=seed_model)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
+
+# with project.group("AL0") as al0:
+
+
 project.build()
