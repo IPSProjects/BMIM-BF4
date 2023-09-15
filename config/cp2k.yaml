@@ -2,7 +2,7 @@ force_eval:
   method: quickstep
   DFT:
     mgrid:
-      cutoff: 600
+      cutoff: 1400
       rel_cutoff: 60
       ngrids: 5
     QS: 
