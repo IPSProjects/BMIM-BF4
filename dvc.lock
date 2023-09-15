@@ -86,7 +86,7 @@ stages:
           method: quickstep
           DFT:
             mgrid:
-              cutoff: 1000
+              cutoff: 1200
               rel_cutoff: 60.0
               ngrids: 5
             QS:
@@ -143,14 +143,14 @@ stages:
     outs:
     - path: nodes/CP2KSinglePoint/atoms.h5
       hash: md5
-      md5: 0a5853e9b8514ef3619e66aa9eaebd1b
+      md5: d5a753523309995102aad23662ff7a70
       size: 209872
     - path: nodes/CP2KSinglePoint/cp2k
       hash: md5
-      md5: 9956d8bd8972f52b4aaebb435ac12b45.dir
-      size: 12856762
+      md5: 758f3e6cc0e437ffa507e5a569ca8bfc.dir
+      size: 12856600
       nfiles: 3
     - path: nodes/CP2KSinglePoint/node-meta.json
       hash: md5
-      md5: 7bafa88a7ec372d3d928d0b239a04aec
+      md5: 2780aa340c6211ccbf9ba2f5f9d24f98
       size: 48
