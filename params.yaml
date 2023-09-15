@@ -34,3 +34,21 @@ GeoOpt_SmilesToAtoms_1:
     optimizer: UFF
     seed: 1234
     smiles: '[B-](F)(F)(F)F'
+bootstrap_RattleAtoms:
+    data_id: -1
+    include_original: false
+    maximum: 0.1
+    n_configurations: 15
+    seed: 1
+bootstrap_RotateMolecules:
+    data_id: -1
+    include_original: false
+    maximum: 0.08726388888888889
+    n_configurations: 15
+    seed: 1
+bootstrap_TranslateMolecules:
+    data_id: -1
+    include_original: false
+    maximum: 0.1
+    n_configurations: 15
+    seed: 1

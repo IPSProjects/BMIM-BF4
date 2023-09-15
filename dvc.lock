@@ -292,3 +292,393 @@ stages:
       hash: md5
       md5: e6b9d42af4b89a4b223c285c4a098198
       size: 4115992
+  bootstrap_RotateMolecules:
+    cmd: zntrack run ipsuite.nodes.RotateMolecules --name bootstrap_RotateMolecules
+    deps:
+    - path: nodes/GeoOpt/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 015e047451eb78b79b9bab2aae26601c.dir
+      size: 61473654
+      nfiles: 7
+    - path: nodes/GeoOpt/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: a59e7ac1bcf7332d67b46e6e1a266769
+      size: 48
+    - path: nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: e6b9d42af4b89a4b223c285c4a098198
+      size: 4115992
+    params:
+      params.yaml:
+        bootstrap_RotateMolecules:
+          data_id: -1
+          include_original: false
+          maximum: 0.08726388888888889
+          n_configurations: 15
+          seed: 1
+    outs:
+    - path: nodes/bootstrap/RotateMolecules/atoms.h5
+      hash: md5
+      md5: b4d8b88ee016d8830b71f14fc6cc23c7
+      size: 219968
+    - path: nodes/bootstrap/RotateMolecules/node-meta.json
+      hash: md5
+      md5: 96449827b169efb96f1a2ba5bb51d091
+      size: 48
+  bootstrap_TranslateMolecules:
+    cmd: zntrack run ipsuite.nodes.TranslateMolecules --name bootstrap_TranslateMolecules
+    deps:
+    - path: nodes/GeoOpt/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 015e047451eb78b79b9bab2aae26601c.dir
+      size: 61473654
+      nfiles: 7
+    - path: nodes/GeoOpt/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: a59e7ac1bcf7332d67b46e6e1a266769
+      size: 48
+    - path: nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: e6b9d42af4b89a4b223c285c4a098198
+      size: 4115992
+    params:
+      params.yaml:
+        bootstrap_TranslateMolecules:
+          data_id: -1
+          include_original: false
+          maximum: 0.1
+          n_configurations: 15
+          seed: 1
+    outs:
+    - path: nodes/bootstrap/TranslateMolecules/atoms.h5
+      hash: md5
+      md5: d2d77af6af1c80606497b402c8cd0dc7
+      size: 219968
+    - path: nodes/bootstrap/TranslateMolecules/node-meta.json
+      hash: md5
+      md5: e69edb9994f2b8f7f6426f0c012ebe46
+      size: 48
+  bootstrap_RattleAtoms:
+    cmd: zntrack run ipsuite.nodes.RattleAtoms --name bootstrap_RattleAtoms
+    deps:
+    - path: nodes/GeoOpt/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 015e047451eb78b79b9bab2aae26601c.dir
+      size: 61473654
+      nfiles: 7
+    - path: nodes/GeoOpt/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: a59e7ac1bcf7332d67b46e6e1a266769
+      size: 48
+    - path: nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: e6b9d42af4b89a4b223c285c4a098198
+      size: 4115992
+    params:
+      params.yaml:
+        bootstrap_RattleAtoms:
+          data_id: -1
+          include_original: false
+          maximum: 0.1
+          n_configurations: 15
+          seed: 1
+    outs:
+    - path: nodes/bootstrap/RattleAtoms/atoms.h5
+      hash: md5
+      md5: 5a5899fffa253f801d7455faadccb374
+      size: 219968
+    - path: nodes/bootstrap/RattleAtoms/node-meta.json
+      hash: md5
+      md5: 35378663125ce1f9b134f4e730c0ade0
+      size: 48
+  bootstrap_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name bootstrap_CP2KSinglePoint
+    deps:
+    - path: GTH_BASIS_SETS
+      hash: md5
+      md5: 518e733a7344699cf0b4192bb97eb6a3
+      size: 119403
+    - path: GTH_POTENTIALS
+      hash: md5
+      md5: 3a35b03b26b8ba5cf6c1d849dba11f15
+      size: 128982
+    - path: dftd3.dat
+      hash: md5
+      md5: 88745bcc951a4bcdccc4d6bcfa78d105
+      size: 1959318
+    - path: nodes/bootstrap/RotateMolecules/atoms.h5
+      hash: md5
+      md5: b4d8b88ee016d8830b71f14fc6cc23c7
+      size: 219968
+    - path: nodes/bootstrap/RotateMolecules/node-meta.json
+      hash: md5
+      md5: 96449827b169efb96f1a2ba5bb51d091
+      size: 48
+    params:
+      config/cp2k.yaml:
+        force_eval:
+          method: quickstep
+          DFT:
+            mgrid:
+              cutoff: 800
+              rel_cutoff: 60
+              ngrids: 5
+            QS:
+              eps_filter_matrix: 0.0
+              eps_pgf_orb: 0.0001
+            SCF:
+              scf_guess: restart
+              max_scf: 100
+              eps_scf: 1e-06
+              OT:
+                minimizer: diis
+                preconditioner: full_single_inverse
+              outer_scf:
+                max_scf: 100
+                eps_scf: 1e-06
+              print:
+                restart:
+                  each:
+                    QS_SCF: 0
+            XC:
+              xc_functional:
+                becke97:
+                  scale_c: 1.0
+                  scale_x: 1.0
+              vdw_potential:
+                pair_potential:
+                  type: dftd3(bj)
+                  parameter_file_name: dftd3.dat
+                  reference_functional: B97-3c
+                  r_cutoff: 7.93766
+                  calculate_c9_term: true
+                  short_range_correction: true
+                potential_type: pair_potential
+            charge: 0
+            basis_set_file_name: GTH_BASIS_SETS
+            potential_file_name: GTH_POTENTIALS
+          subsys:
+            kind:
+              N:
+                basis_set: TZVP-GTH-q5
+                potential: GTH-PBE-q5
+              C:
+                basis_set: TZVP-GTH-q4
+                potential: GTH-PBE-q4
+              H:
+                basis_set: TZVP-GTH-q1
+                potential: GTH-PBE-q1
+              B:
+                basis_set: TZVP-GTH-q3
+                potential: GTH-PBE-q3
+              F:
+                basis_set: TZVP-GTH-q7
+                potential: GTH-PBE-q7
+    outs:
+    - path: nodes/bootstrap/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 6b51edbd4fdc5b5b5a7dd7347b84c777
+      size: 294552
+    - path: nodes/bootstrap/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 9d22247dc48a67efc79ed1feb03d182b.dir
+      size: 13133120
+      nfiles: 3
+    - path: nodes/bootstrap/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 21f69e8f72b080a5f3db1fba976fb2ce
+      size: 48
+  bootstrap_CP2KSinglePoint_1:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name bootstrap_CP2KSinglePoint_1
+    deps:
+    - path: GTH_BASIS_SETS
+      hash: md5
+      md5: 518e733a7344699cf0b4192bb97eb6a3
+      size: 119403
+    - path: GTH_POTENTIALS
+      hash: md5
+      md5: 3a35b03b26b8ba5cf6c1d849dba11f15
+      size: 128982
+    - path: dftd3.dat
+      hash: md5
+      md5: 88745bcc951a4bcdccc4d6bcfa78d105
+      size: 1959318
+    - path: nodes/bootstrap/TranslateMolecules/atoms.h5
+      hash: md5
+      md5: d2d77af6af1c80606497b402c8cd0dc7
+      size: 219968
+    - path: nodes/bootstrap/TranslateMolecules/node-meta.json
+      hash: md5
+      md5: e69edb9994f2b8f7f6426f0c012ebe46
+      size: 48
+    params:
+      config/cp2k.yaml:
+        force_eval:
+          method: quickstep
+          DFT:
+            mgrid:
+              cutoff: 800
+              rel_cutoff: 60
+              ngrids: 5
+            QS:
+              eps_filter_matrix: 0.0
+              eps_pgf_orb: 0.0001
+            SCF:
+              scf_guess: restart
+              max_scf: 100
+              eps_scf: 1e-06
+              OT:
+                minimizer: diis
+                preconditioner: full_single_inverse
+              outer_scf:
+                max_scf: 100
+                eps_scf: 1e-06
+              print:
+                restart:
+                  each:
+                    QS_SCF: 0
+            XC:
+              xc_functional:
+                becke97:
+                  scale_c: 1.0
+                  scale_x: 1.0
+              vdw_potential:
+                pair_potential:
+                  type: dftd3(bj)
+                  parameter_file_name: dftd3.dat
+                  reference_functional: B97-3c
+                  r_cutoff: 7.93766
+                  calculate_c9_term: true
+                  short_range_correction: true
+                potential_type: pair_potential
+            charge: 0
+            basis_set_file_name: GTH_BASIS_SETS
+            potential_file_name: GTH_POTENTIALS
+          subsys:
+            kind:
+              N:
+                basis_set: TZVP-GTH-q5
+                potential: GTH-PBE-q5
+              C:
+                basis_set: TZVP-GTH-q4
+                potential: GTH-PBE-q4
+              H:
+                basis_set: TZVP-GTH-q1
+                potential: GTH-PBE-q1
+              B:
+                basis_set: TZVP-GTH-q3
+                potential: GTH-PBE-q3
+              F:
+                basis_set: TZVP-GTH-q7
+                potential: GTH-PBE-q7
+    outs:
+    - path: nodes/bootstrap/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 3d9a9db4499f0f247548b999c786aa0d
+      size: 294552
+    - path: nodes/bootstrap/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: ed2abf48e4733f799bc64d6f92ca663b.dir
+      size: 13131098
+      nfiles: 3
+    - path: nodes/bootstrap/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: d068c6d44d609fa1a49f5b397280bd00
+      size: 48
+  bootstrap_CP2KSinglePoint_2:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name bootstrap_CP2KSinglePoint_2
+    deps:
+    - path: GTH_BASIS_SETS
+      hash: md5
+      md5: 518e733a7344699cf0b4192bb97eb6a3
+      size: 119403
+    - path: GTH_POTENTIALS
+      hash: md5
+      md5: 3a35b03b26b8ba5cf6c1d849dba11f15
+      size: 128982
+    - path: dftd3.dat
+      hash: md5
+      md5: 88745bcc951a4bcdccc4d6bcfa78d105
+      size: 1959318
+    - path: nodes/bootstrap/RattleAtoms/atoms.h5
+      hash: md5
+      md5: 5a5899fffa253f801d7455faadccb374
+      size: 219968
+    - path: nodes/bootstrap/RattleAtoms/node-meta.json
+      hash: md5
+      md5: 35378663125ce1f9b134f4e730c0ade0
+      size: 48
+    params:
+      config/cp2k.yaml:
+        force_eval:
+          method: quickstep
+          DFT:
+            mgrid:
+              cutoff: 800
+              rel_cutoff: 60
+              ngrids: 5
+            QS:
+              eps_filter_matrix: 0.0
+              eps_pgf_orb: 0.0001
+            SCF:
+              scf_guess: restart
+              max_scf: 100
+              eps_scf: 1e-06
+              OT:
+                minimizer: diis
+                preconditioner: full_single_inverse
+              outer_scf:
+                max_scf: 100
+                eps_scf: 1e-06
+              print:
+                restart:
+                  each:
+                    QS_SCF: 0
+            XC:
+              xc_functional:
+                becke97:
+                  scale_c: 1.0
+                  scale_x: 1.0
+              vdw_potential:
+                pair_potential:
+                  type: dftd3(bj)
+                  parameter_file_name: dftd3.dat
+                  reference_functional: B97-3c
+                  r_cutoff: 7.93766
+                  calculate_c9_term: true
+                  short_range_correction: true
+                potential_type: pair_potential
+            charge: 0
+            basis_set_file_name: GTH_BASIS_SETS
+            potential_file_name: GTH_POTENTIALS
+          subsys:
+            kind:
+              N:
+                basis_set: TZVP-GTH-q5
+                potential: GTH-PBE-q5
+              C:
+                basis_set: TZVP-GTH-q4
+                potential: GTH-PBE-q4
+              H:
+                basis_set: TZVP-GTH-q1
+                potential: GTH-PBE-q1
+              B:
+                basis_set: TZVP-GTH-q3
+                potential: GTH-PBE-q3
+              F:
+                basis_set: TZVP-GTH-q7
+                potential: GTH-PBE-q7
+    outs:
+    - path: nodes/bootstrap/CP2KSinglePoint_2/atoms.h5
+      hash: md5
+      md5: 087cf73fb2fc0e2cd2e2517e722623aa
+      size: 294552
+    - path: nodes/bootstrap/CP2KSinglePoint_2/cp2k
+      hash: md5
+      md5: 8e9ad1d41b899ff67c38486365ee2278.dir
+      size: 13137152
+      nfiles: 3
+    - path: nodes/bootstrap/CP2KSinglePoint_2/node-meta.json
+      hash: md5
+      md5: d6c2323769a97a7ac2913a29959e38f8
+      size: 48

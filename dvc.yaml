@@ -84,3 +84,90 @@ stages:
     metrics:
     - nodes/GeoOpt/ASEGeoOpt/node-meta.json:
         cache: false
+  bootstrap_RotateMolecules:
+    cmd: zntrack run ipsuite.nodes.RotateMolecules --name bootstrap_RotateMolecules
+    deps:
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+    params:
+    - bootstrap_RotateMolecules
+    outs:
+    - nodes/bootstrap/RotateMolecules/atoms.h5
+    metrics:
+    - nodes/bootstrap/RotateMolecules/node-meta.json:
+        cache: false
+  bootstrap_TranslateMolecules:
+    cmd: zntrack run ipsuite.nodes.TranslateMolecules --name bootstrap_TranslateMolecules
+    deps:
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+    params:
+    - bootstrap_TranslateMolecules
+    outs:
+    - nodes/bootstrap/TranslateMolecules/atoms.h5
+    metrics:
+    - nodes/bootstrap/TranslateMolecules/node-meta.json:
+        cache: false
+  bootstrap_RattleAtoms:
+    cmd: zntrack run ipsuite.nodes.RattleAtoms --name bootstrap_RattleAtoms
+    deps:
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+    params:
+    - bootstrap_RattleAtoms
+    outs:
+    - nodes/bootstrap/RattleAtoms/atoms.h5
+    metrics:
+    - nodes/bootstrap/RattleAtoms/node-meta.json:
+        cache: false
+  bootstrap_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name bootstrap_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/bootstrap/RotateMolecules/atoms.h5
+    - nodes/bootstrap/RotateMolecules/node-meta.json
+    params:
+    - config/cp2k.yaml:
+    outs:
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    metrics:
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json:
+        cache: false
+  bootstrap_CP2KSinglePoint_1:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name bootstrap_CP2KSinglePoint_1
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/bootstrap/TranslateMolecules/atoms.h5
+    - nodes/bootstrap/TranslateMolecules/node-meta.json
+    params:
+    - config/cp2k.yaml:
+    outs:
+    - nodes/bootstrap/CP2KSinglePoint_1/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint_1/cp2k
+    metrics:
+    - nodes/bootstrap/CP2KSinglePoint_1/node-meta.json:
+        cache: false
+  bootstrap_CP2KSinglePoint_2:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name bootstrap_CP2KSinglePoint_2
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/bootstrap/RattleAtoms/atoms.h5
+    - nodes/bootstrap/RattleAtoms/node-meta.json
+    params:
+    - config/cp2k.yaml:
+    outs:
+    - nodes/bootstrap/CP2KSinglePoint_2/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint_2/cp2k
+    metrics:
+    - nodes/bootstrap/CP2KSinglePoint_2/node-meta.json:
+        cache: false

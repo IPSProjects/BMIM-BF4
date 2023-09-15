@@ -33,4 +33,49 @@ with project.group("GeoOpt"):
         run_kwargs={"fmax": 0.1},
     )
 
+with project.group("bootstrap"):
+    rotate = ips.bootstrap.RotateMolecules(
+        data=geopt.atoms,
+        data_id=-1,
+        n_configurations=15,
+        maximum=5 * 3.1415 / 180,  # deg max rotation
+        include_original=False,
+        seed=1,
+    )
+    translate = ips.bootstrap.TranslateMolecules(
+        data=geopt.atoms,
+        data_id=-1,
+        n_configurations=15,
+        maximum=0.1,  # Ang max molecular displacement
+        include_original=False,
+        seed=1,
+    )
+    rattle = ips.bootstrap.RattleAtoms(
+        data=geopt.atoms,
+        data_id=-1,
+        n_configurations=15,
+        maximum=0.1,
+        include_original=False,
+        seed=1,
+    )
+
+    cp2k_rotate = ips.calculators.CP2KSinglePoint(
+        data=rotate.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+        cp2k_shell=cp2k_shell,
+    )
+    cp2k_translate = ips.calculators.CP2KSinglePoint(
+        data=translate.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+        cp2k_shell=cp2k_shell,
+    )
+    cp2k_rattle = ips.calculators.CP2KSinglePoint(
+        data=rattle.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+        cp2k_shell=cp2k_shell,
+    )
+
 project.build()
