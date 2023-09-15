@@ -1,0 +1,188 @@
+{
+    "GeoOpt_SmilesToAtoms": {
+        "image": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/molecule.png"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/GeoOpt/SmilesToAtoms"
+        }
+    },
+    "GeoOpt_SmilesToAtoms_1": {
+        "image": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/molecule.png"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/GeoOpt/SmilesToAtoms_1"
+        }
+    },
+    "GeoOpt_Packmol": {
+        "data": [
+            {
+                "_type": "znflow.Connection",
+                "value": {
+                    "instance": {
+                        "_type": "zntrack.Node",
+                        "value": {
+                            "module": "ipsuite.nodes",
+                            "cls": "SmilesToAtoms",
+                            "name": "GeoOpt_SmilesToAtoms",
+                            "remote": null,
+                            "rev": null
+                        }
+                    },
+                    "attribute": "atoms",
+                    "item": null
+                }
+            },
+            {
+                "_type": "znflow.Connection",
+                "value": {
+                    "instance": {
+                        "_type": "zntrack.Node",
+                        "value": {
+                            "module": "ipsuite.nodes",
+                            "cls": "SmilesToAtoms",
+                            "name": "GeoOpt_SmilesToAtoms_1",
+                            "remote": null,
+                            "rev": null
+                        }
+                    },
+                    "attribute": "atoms",
+                    "item": null
+                }
+            }
+        ],
+        "structures": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/packmol"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/GeoOpt/Packmol"
+        }
+    },
+    "GeoOpt_Packmol_1": {
+        "data": [
+            {
+                "_type": "znflow.Connection",
+                "value": {
+                    "instance": {
+                        "_type": "zntrack.Node",
+                        "value": {
+                            "module": "ipsuite.nodes",
+                            "cls": "Packmol",
+                            "name": "GeoOpt_Packmol",
+                            "remote": null,
+                            "rev": null
+                        }
+                    },
+                    "attribute": "atoms",
+                    "item": null
+                }
+            }
+        ],
+        "structures": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/packmol"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/GeoOpt/Packmol_1"
+        }
+    },
+    "GeoOpt_CP2KSinglePoint": {
+        "cp2k_directory": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/cp2k"
+        },
+        "cp2k_files": [
+            "GTH_BASIS_SETS",
+            "GTH_POTENTIALS",
+            "dftd3.dat"
+        ],
+        "cp2k_params": "config/cp2k.yaml",
+        "cp2k_shell": "mpirun -n 32 cp2k_shell.psmp",
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "Packmol",
+                        "name": "GeoOpt_Packmol_1",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "output_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/atoms.h5"
+        },
+        "wfn_restart_file": null,
+        "wfn_restart_node": null,
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/GeoOpt/CP2KSinglePoint"
+        }
+    },
+    "GeoOpt_ASEGeoOpt": {
+        "checker_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "Packmol",
+                        "name": "GeoOpt_Packmol_1",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "GeoOpt_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model_outs"
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/GeoOpt/ASEGeoOpt"
+        }
+    }
+}

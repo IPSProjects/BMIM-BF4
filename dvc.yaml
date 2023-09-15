@@ -1,0 +1,86 @@
+stages:
+  GeoOpt_SmilesToAtoms:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name GeoOpt_SmilesToAtoms
+    params:
+    - GeoOpt_SmilesToAtoms
+    outs:
+    - nodes/GeoOpt/SmilesToAtoms/atoms.h5
+    - nodes/GeoOpt/SmilesToAtoms/molecule.png
+    metrics:
+    - nodes/GeoOpt/SmilesToAtoms/node-meta.json:
+        cache: false
+  GeoOpt_SmilesToAtoms_1:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name GeoOpt_SmilesToAtoms_1
+    params:
+    - GeoOpt_SmilesToAtoms_1
+    outs:
+    - nodes/GeoOpt/SmilesToAtoms_1/atoms.h5
+    - nodes/GeoOpt/SmilesToAtoms_1/molecule.png
+    metrics:
+    - nodes/GeoOpt/SmilesToAtoms_1/node-meta.json:
+        cache: false
+  GeoOpt_Packmol:
+    cmd: zntrack run ipsuite.nodes.Packmol --name GeoOpt_Packmol
+    deps:
+    - nodes/GeoOpt/SmilesToAtoms/atoms.h5
+    - nodes/GeoOpt/SmilesToAtoms/molecule.png
+    - nodes/GeoOpt/SmilesToAtoms/node-meta.json
+    - nodes/GeoOpt/SmilesToAtoms_1/atoms.h5
+    - nodes/GeoOpt/SmilesToAtoms_1/molecule.png
+    - nodes/GeoOpt/SmilesToAtoms_1/node-meta.json
+    params:
+    - GeoOpt_Packmol
+    outs:
+    - nodes/GeoOpt/Packmol/atoms.h5
+    - nodes/GeoOpt/Packmol/packmol
+    metrics:
+    - nodes/GeoOpt/Packmol/node-meta.json:
+        cache: false
+  GeoOpt_Packmol_1:
+    cmd: zntrack run ipsuite.nodes.Packmol --name GeoOpt_Packmol_1
+    deps:
+    - nodes/GeoOpt/Packmol/atoms.h5
+    - nodes/GeoOpt/Packmol/node-meta.json
+    - nodes/GeoOpt/Packmol/packmol
+    params:
+    - GeoOpt_Packmol_1
+    outs:
+    - nodes/GeoOpt/Packmol_1/atoms.h5
+    - nodes/GeoOpt/Packmol_1/packmol
+    metrics:
+    - nodes/GeoOpt/Packmol_1/node-meta.json:
+        cache: false
+  GeoOpt_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name GeoOpt_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/GeoOpt/Packmol_1/atoms.h5
+    - nodes/GeoOpt/Packmol_1/node-meta.json
+    - nodes/GeoOpt/Packmol_1/packmol
+    params:
+    - config/cp2k.yaml:
+    outs:
+    - nodes/GeoOpt/CP2KSinglePoint/atoms.h5
+    - nodes/GeoOpt/CP2KSinglePoint/cp2k
+    metrics:
+    - nodes/GeoOpt/CP2KSinglePoint/node-meta.json:
+        cache: false
+  GeoOpt_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name GeoOpt_ASEGeoOpt
+    deps:
+    - nodes/GeoOpt/CP2KSinglePoint/atoms.h5
+    - nodes/GeoOpt/CP2KSinglePoint/cp2k
+    - nodes/GeoOpt/CP2KSinglePoint/node-meta.json
+    - nodes/GeoOpt/Packmol_1/atoms.h5
+    - nodes/GeoOpt/Packmol_1/node-meta.json
+    - nodes/GeoOpt/Packmol_1/packmol
+    params:
+    - GeoOpt_ASEGeoOpt
+    outs:
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+    metrics:
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json:
+        cache: false

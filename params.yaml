@@ -1,0 +1,36 @@
+GeoOpt_ASEGeoOpt:
+    data_id: 0
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.1
+GeoOpt_Packmol:
+    box: null
+    count:
+    - 1
+    - 1
+    data_ids: null
+    density: 1210
+    tolerance: 2.0
+GeoOpt_Packmol_1:
+    box: null
+    count:
+    - 10
+    data_ids: null
+    density: 1210
+    tolerance: 2.0
+GeoOpt_SmilesToAtoms:
+    cell: null
+    optimizer: UFF
+    seed: 1234
+    smiles: CCCCN1C=C[N+](=C1)C
+GeoOpt_SmilesToAtoms_1:
+    cell: null
+    optimizer: UFF
+    seed: 1234
+    smiles: '[B-](F)(F)(F)F'
