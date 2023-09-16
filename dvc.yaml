@@ -26,6 +26,28 @@ plots:
     y: val_loss
     y_label: validation loss
 stages:
+  AL0_model_EnsembleModel:
+    cmd: zntrack run ipsuite.nodes.EnsembleModel --name AL0_model_EnsembleModel
+    deps:
+    - nodes/initial_model/MLModel/apax_model
+    - nodes/initial_model/MLModel/log.csv
+    - nodes/initial_model/MLModel/metrics.json
+    - nodes/initial_model/MLModel/node-meta.json
+    - nodes/initial_model/MLModel/train.log
+    - nodes/initial_model/MLModel/train_atoms.extxyz
+    - nodes/initial_model/MLModel/val_atoms.extxyz
+    - nodes/initial_model/MLModel_1/apax_model
+    - nodes/initial_model/MLModel_1/log.csv
+    - nodes/initial_model/MLModel_1/metrics.json
+    - nodes/initial_model/MLModel_1/node-meta.json
+    - nodes/initial_model/MLModel_1/train.log
+    - nodes/initial_model/MLModel_1/train_atoms.extxyz
+    - nodes/initial_model/MLModel_1/val_atoms.extxyz
+    metrics:
+    - nodes/AL0/model/EnsembleModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL0/model/EnsembleModel/uuid.json
   AL0_model_MLModel:
     cmd: zntrack run ipsuite.nodes.Apax --name AL0_model_MLModel
     deps:
@@ -641,15 +663,10 @@ stages:
   initial_model_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name initial_model_Prediction
     deps:
-    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
-    - nodes/bootstrap/CP2KSinglePoint/cp2k
-    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
-    - nodes/bootstrap/CP2KSinglePoint_1/atoms.h5
-    - nodes/bootstrap/CP2KSinglePoint_1/cp2k
-    - nodes/bootstrap/CP2KSinglePoint_1/node-meta.json
-    - nodes/bootstrap/CP2KSinglePoint_2/atoms.h5
-    - nodes/bootstrap/CP2KSinglePoint_2/cp2k
-    - nodes/bootstrap/CP2KSinglePoint_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
     - nodes/initial_model/EnsembleModel/node-meta.json
     - nodes/initial_model/EnsembleModel/uuid.json
     metrics:
@@ -682,25 +699,48 @@ stages:
     - nodes/initial_model/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/initial_model/PredictionMetrics/stress_df.csv
     - nodes/initial_model/PredictionMetrics/stress_hydrostatic_df.csv
-  AL0_model_EnsembleModel:
-    cmd: zntrack run ipsuite.nodes.EnsembleModel --name AL0_model_EnsembleModel
+  metrics_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name metrics_Prediction
     deps:
-    - nodes/initial_model/MLModel/apax_model
-    - nodes/initial_model/MLModel/log.csv
-    - nodes/initial_model/MLModel/metrics.json
-    - nodes/initial_model/MLModel/node-meta.json
-    - nodes/initial_model/MLModel/train.log
-    - nodes/initial_model/MLModel/train_atoms.extxyz
-    - nodes/initial_model/MLModel/val_atoms.extxyz
-    - nodes/initial_model/MLModel_1/apax_model
-    - nodes/initial_model/MLModel_1/log.csv
-    - nodes/initial_model/MLModel_1/metrics.json
-    - nodes/initial_model/MLModel_1/node-meta.json
-    - nodes/initial_model/MLModel_1/train.log
-    - nodes/initial_model/MLModel_1/train_atoms.extxyz
-    - nodes/initial_model/MLModel_1/val_atoms.extxyz
-    outs:
+    - nodes/AL0/model/EnsembleModel/node-meta.json
     - nodes/AL0/model/EnsembleModel/uuid.json
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    outs:
+    - nodes/metrics/Prediction/atoms.h5
     metrics:
-    - nodes/AL0/model/EnsembleModel/node-meta.json:
+    - nodes/metrics/Prediction/node-meta.json:
+        cache: false
+  metrics_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name metrics_PredictionMetrics
+    deps:
+    - nodes/metrics/Prediction/atoms.h5
+    - nodes/metrics/Prediction/node-meta.json
+    outs:
+    - nodes/metrics/PredictionMetrics/energy_df.csv
+    - nodes/metrics/PredictionMetrics/forces_df.csv
+    - nodes/metrics/PredictionMetrics/plots
+    - nodes/metrics/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/metrics/PredictionMetrics/stress_df.csv
+    - nodes/metrics/PredictionMetrics/stress_hydrostatic_df.csv
+    metrics:
+    - nodes/metrics/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/metrics/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/metrics/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/metrics/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/metrics/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/metrics/PredictionMetrics/stress.json:
         cache: false

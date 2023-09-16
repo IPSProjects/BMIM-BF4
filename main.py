@@ -109,7 +109,7 @@ with project.group("initial_model"):
 
     seed_model = ips.models.EnsembleModel(models=[seed_model_1, seed_model_2])
 
-    prediction = ips.analysis.Prediction(data=data, model=seed_model)
+    prediction = ips.analysis.Prediction(data=validation_data, model=seed_model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
 
@@ -218,6 +218,11 @@ with project.group("AL0", "model") as al0model:
         config="config/initial_model_2.yaml",
     )
 
-    seed_model = ips.models.EnsembleModel(models=[seed_model_1, seed_model_2])
+    model = ips.models.EnsembleModel(models=[seed_model_1, seed_model_2])
 
-project.build(nodes=[al0model])
+with project.group("metrics") as metrics:
+    prediction = ips.analysis.Prediction(data=validation_data, model=model)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
+
+
+project.build()
