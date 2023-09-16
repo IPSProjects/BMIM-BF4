@@ -29,20 +29,20 @@ stages:
   AL0_model_EnsembleModel:
     cmd: zntrack run ipsuite.nodes.EnsembleModel --name AL0_model_EnsembleModel
     deps:
-    - nodes/initial_model/MLModel/apax_model
-    - nodes/initial_model/MLModel/log.csv
-    - nodes/initial_model/MLModel/metrics.json
-    - nodes/initial_model/MLModel/node-meta.json
-    - nodes/initial_model/MLModel/train.log
-    - nodes/initial_model/MLModel/train_atoms.extxyz
-    - nodes/initial_model/MLModel/val_atoms.extxyz
-    - nodes/initial_model/MLModel_1/apax_model
-    - nodes/initial_model/MLModel_1/log.csv
-    - nodes/initial_model/MLModel_1/metrics.json
-    - nodes/initial_model/MLModel_1/node-meta.json
-    - nodes/initial_model/MLModel_1/train.log
-    - nodes/initial_model/MLModel_1/train_atoms.extxyz
-    - nodes/initial_model/MLModel_1/val_atoms.extxyz
+    - nodes/AL0/model/MLModel/apax_model
+    - nodes/AL0/model/MLModel/log.csv
+    - nodes/AL0/model/MLModel/metrics.json
+    - nodes/AL0/model/MLModel/node-meta.json
+    - nodes/AL0/model/MLModel/train.log
+    - nodes/AL0/model/MLModel/train_atoms.extxyz
+    - nodes/AL0/model/MLModel/val_atoms.extxyz
+    - nodes/AL0/model/MLModel_1/apax_model
+    - nodes/AL0/model/MLModel_1/log.csv
+    - nodes/AL0/model/MLModel_1/metrics.json
+    - nodes/AL0/model/MLModel_1/node-meta.json
+    - nodes/AL0/model/MLModel_1/train.log
+    - nodes/AL0/model/MLModel_1/train_atoms.extxyz
+    - nodes/AL0/model/MLModel_1/val_atoms.extxyz
     metrics:
     - nodes/AL0/model/EnsembleModel/node-meta.json:
         cache: false
@@ -714,23 +714,16 @@ stages:
     - nodes/initial_model/ConfigurationSelection/selected_configurations.json
     - nodes/initial_model/ConfigurationSelection_2/node-meta.json
     - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
-    outs:
-    - nodes/metrics/Prediction/atoms.h5
     metrics:
     - nodes/metrics/Prediction/node-meta.json:
         cache: false
+    outs:
+    - nodes/metrics/Prediction/atoms.h5
   metrics_PredictionMetrics:
     cmd: zntrack run ipsuite.nodes.PredictionMetrics --name metrics_PredictionMetrics
     deps:
     - nodes/metrics/Prediction/atoms.h5
     - nodes/metrics/Prediction/node-meta.json
-    outs:
-    - nodes/metrics/PredictionMetrics/energy_df.csv
-    - nodes/metrics/PredictionMetrics/forces_df.csv
-    - nodes/metrics/PredictionMetrics/plots
-    - nodes/metrics/PredictionMetrics/stress_deviatoric_df.csv
-    - nodes/metrics/PredictionMetrics/stress_df.csv
-    - nodes/metrics/PredictionMetrics/stress_hydrostatic_df.csv
     metrics:
     - nodes/metrics/PredictionMetrics/deviat_stress.json:
         cache: false
@@ -744,3 +737,10 @@ stages:
         cache: false
     - nodes/metrics/PredictionMetrics/stress.json:
         cache: false
+    outs:
+    - nodes/metrics/PredictionMetrics/energy_df.csv
+    - nodes/metrics/PredictionMetrics/forces_df.csv
+    - nodes/metrics/PredictionMetrics/plots
+    - nodes/metrics/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/metrics/PredictionMetrics/stress_df.csv
+    - nodes/metrics/PredictionMetrics/stress_hydrostatic_df.csv

@@ -96,20 +96,20 @@ with project.group("initial_model"):
         train_data_bootstrap.excluded_atoms + train_data_geoopt.excluded_atoms
     )
 
-    seed_model_1 = ips.models.Apax(
+    model_1 = ips.models.Apax(
         data=train_data,
         validation_data=validation_data,
         config="config/initial_model_1.yaml",
     )
-    seed_model_2 = ips.models.Apax(
+    model_2 = ips.models.Apax(
         data=train_data,
         validation_data=validation_data,
         config="config/initial_model_2.yaml",
     )
 
-    seed_model = ips.models.EnsembleModel(models=[seed_model_1, seed_model_2])
+    model = ips.models.EnsembleModel(models=[model_1, model_2])
 
-    prediction = ips.analysis.Prediction(data=validation_data, model=seed_model)
+    prediction = ips.analysis.Prediction(data=validation_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
 
@@ -123,102 +123,111 @@ uncertainty_check = ips.analysis.ThresholdCheck(
 
 models = []
 
-with project.group("AL0", "train") as al0train:
-    md = ips.calculators.ASEMD(
-        data=geopt.atoms,
-        data_id=-1,
-        model=seed_model,
-        thermostat=thermostat,
-        checker_list=[uncertainty_check],
-        steps=50000,
-        sampling_rate=1,
-    )
+for loop in range(1):
+    with project.group(f"AL{loop}", "train") as altrain:
+        md = ips.calculators.ASEMD(
+            data=geopt.atoms,
+            data_id=-1,
+            model=model,
+            thermostat=thermostat,
+            checker_list=[uncertainty_check],
+            steps=50000,
+            sampling_rate=1,
+        )
 
-    model_geopt = ips.calculators.ASEGeoOpt(
-        model=seed_model,
-        data=md.atoms,
-        data_id=-5,
-        optimizer="BFGS",
-        run_kwargs={"fmax": 1.0},
-        checker_list=[uncertainty_check],
-    )
+        model_geopt = ips.calculators.ASEGeoOpt(
+            model=model,
+            data=md.atoms,
+            data_id=-5,
+            optimizer="BFGS",
+            run_kwargs={"fmax": 1.0},
+            checker_list=[uncertainty_check],
+        )
 
-    ref_geopt = ips.calculators.ASEGeoOpt(
-        model=cp2k_rotate,  # better restart wavefunction
-        data=model_geopt.atoms,
-        data_id=-1,
-        optimizer="BFGS",
-        run_kwargs={"fmax": 2.0},
-    )
+        ref_geopt = ips.calculators.ASEGeoOpt(
+            model=cp2k_rotate,  # better restart wavefunction
+            data=model_geopt.atoms,
+            data_id=-1,
+            optimizer="BFGS",
+            run_kwargs={"fmax": 2.0},
+        )
 
-    md_selection = ips.configuration_selection.IndexSelection(data=md.atoms, indices=slice(0, -5))
-    confs = ips.configuration_selection.RandomSelection(data=md_selection.atoms, n_configurations=10)
+        md_selection = ips.configuration_selection.IndexSelection(
+            data=md.atoms, indices=slice(0, -5)
+        )
+        confs = ips.configuration_selection.RandomSelection(
+            data=md_selection.atoms, n_configurations=10
+        )
 
-    cp2k = ips.calculators.CP2KSinglePoint(
-        data=confs.atoms,
-        cp2k_params="config/cp2k.yaml",
-        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
-        cp2k_shell=cp2k_shell,
-    )
+        cp2k = ips.calculators.CP2KSinglePoint(
+            data=confs.atoms,
+            cp2k_params="config/cp2k.yaml",
+            cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+            cp2k_shell=cp2k_shell,
+        )
 
-    train_data += cp2k.atoms
-    train_data += ref_geopt.atoms
+        train_data += cp2k.atoms
+        train_data += ref_geopt.atoms
 
-with project.group("AL0", "test") as al0test:
-    md = ips.calculators.ASEMD(
-        data=geopt.atoms,
-        data_id=-10,  # slightly different start configuration
-        model=seed_model,
-        thermostat=thermostat,
-        checker_list=[uncertainty_check],
-        steps=50000,
-        sampling_rate=1,
-    )
+    with project.group(f"AL{loop}", "test") as altest:
+        md = ips.calculators.ASEMD(
+            data=geopt.atoms,
+            data_id=-10,  # slightly different start configuration
+            model=model,
+            thermostat=thermostat,
+            checker_list=[uncertainty_check],
+            steps=50000,
+            sampling_rate=1,
+        )
 
-    model_geopt = ips.calculators.ASEGeoOpt(
-        model=seed_model,
-        data=md.atoms,
-        data_id=-5,
-        optimizer="BFGS",
-        run_kwargs={"fmax": 1.0},
-        checker_list=[uncertainty_check],
-    )
+        model_geopt = ips.calculators.ASEGeoOpt(
+            model=model,
+            data=md.atoms,
+            data_id=-5,
+            optimizer="BFGS",
+            run_kwargs={"fmax": 1.0},
+            checker_list=[uncertainty_check],
+        )
 
-    ref_geopt = ips.calculators.ASEGeoOpt(
-        model=cp2k_rotate,  # better restart wavefunction
-        data=model_geopt.atoms,
-        data_id=-1,
-        optimizer="BFGS",
-        run_kwargs={"fmax": 2.0},
-    )
+        ref_geopt = ips.calculators.ASEGeoOpt(
+            model=cp2k_rotate,  # better restart wavefunction
+            data=model_geopt.atoms,
+            data_id=-1,
+            optimizer="BFGS",
+            run_kwargs={"fmax": 2.0},
+        )
 
-    md_selection = ips.configuration_selection.IndexSelection(data=md.atoms, indices=slice(0, -5))
-    confs = ips.configuration_selection.RandomSelection(data=md_selection.atoms, n_configurations=3)
+        md_selection = ips.configuration_selection.IndexSelection(
+            data=md.atoms, indices=slice(0, -5)
+        )
+        confs = ips.configuration_selection.RandomSelection(
+            data=md_selection.atoms, n_configurations=3
+        )
 
-    cp2k = ips.calculators.CP2KSinglePoint(
-        data=confs.atoms,
-        cp2k_params="config/cp2k.yaml",
-        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
-        cp2k_shell=cp2k_shell,
-    )
+        cp2k = ips.calculators.CP2KSinglePoint(
+            data=confs.atoms,
+            cp2k_params="config/cp2k.yaml",
+            cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+            cp2k_shell=cp2k_shell,
+        )
 
-    validation_data += ref_geopt.atoms
-    validation_data += cp2k.atoms
+        validation_data += ref_geopt.atoms
+        validation_data += cp2k.atoms
 
+    with project.group(f"AL{loop}", "model") as almodel:
+        model_1 = ips.models.Apax(
+            data=train_data,
+            validation_data=validation_data,
+            config="config/initial_model_1.yaml",
+        )
+        model_2 = ips.models.Apax(
+            data=train_data,
+            validation_data=validation_data,
+            config="config/initial_model_2.yaml",
+        )
 
-with project.group("AL0", "model") as al0model:
-    model_1 = ips.models.Apax(
-        data=train_data,
-        validation_data=validation_data,
-        config="config/initial_model_1.yaml",
-    )
-    model_2 = ips.models.Apax(
-        data=train_data,
-        validation_data=validation_data,
-        config="config/initial_model_2.yaml",
-    )
+        model = ips.models.EnsembleModel(models=[model_1, model_2])
 
-    model = ips.models.EnsembleModel(models=[seed_model_1, seed_model_2])
 
 with project.group("metrics") as metrics:
     prediction = ips.analysis.Prediction(data=validation_data, model=model)

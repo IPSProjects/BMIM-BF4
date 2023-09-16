@@ -1765,7 +1765,7 @@
                         "value": {
                             "module": "ipsuite.nodes",
                             "cls": "Apax",
-                            "name": "initial_model_MLModel",
+                            "name": "AL0_model_MLModel",
                             "remote": null,
                             "rev": null
                         }
@@ -1782,7 +1782,7 @@
                         "value": {
                             "module": "ipsuite.nodes",
                             "cls": "Apax",
-                            "name": "initial_model_MLModel_1",
+                            "name": "AL0_model_MLModel_1",
                             "remote": null,
                             "rev": null
                         }
