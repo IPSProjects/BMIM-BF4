@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --partition=cpu-multi
-#SBATCH --ntasks=32
+#SBATCH --ntasks=16
 #SBATCH --cpus-per-task=8
-#SBATCH --time=08:00:00
+#SBATCH --time=02:00:00
 #SBATCH --mem=32gb
 
 source ~/.bashrc

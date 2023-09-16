@@ -1195,3 +1195,1257 @@ stages:
       hash: md5
       md5: 47ae64d7456bddffebde67e6230d5fe3
       size: 38
+  AL0_train_ASEMD_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL0_train_ASEMD_checker_list_0
+      --meta-only
+    params:
+      params.yaml:
+        AL0_train_ASEMD_checker_list_0:
+          larger_only: true
+          max_std:
+          max_value: 2.0
+          minimum_window_size: 1
+          value: energy_uncertainty
+          window_size: 500
+      zntrack.json:
+        AL0_train_ASEMD.checker_list:
+        - _type: zntrack.Node
+          value:
+            module: ipsuite.nodes
+            cls: ThresholdCheck
+            name: AL0_train_ASEMD_checker_list_0
+            remote:
+            rev:
+    outs:
+    - path: nodes/AL0/train/AL0_train_ASEMD_checker_list_0/node-meta.json
+      hash: md5
+      md5: 8e0c8ccf557c2868a87fcf0501c1b8b6
+      size: 48
+  AL0_train_ASEMD_thermostat:
+    cmd: zntrack run ipsuite.nodes.LangevinThermostat --name AL0_train_ASEMD_thermostat
+      --meta-only
+    params:
+      params.yaml:
+        AL0_train_ASEMD_thermostat:
+          friction: 0.01
+          temperature: 298.15
+          time_step: 0.5
+      zntrack.json:
+        AL0_train_ASEMD.thermostat:
+          _type: zntrack.Node
+          value:
+            module: ipsuite.nodes
+            cls: LangevinThermostat
+            name: AL0_train_ASEMD_thermostat
+            remote:
+            rev:
+    outs:
+    - path: nodes/AL0/train/AL0_train_ASEMD_thermostat/node-meta.json
+      hash: md5
+      md5: e3035b065dc167e642c3bdef20ecd2fb
+      size: 48
+  AL0_train_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name AL0_train_ASEMD
+    deps:
+    - path: nodes/AL0/train/AL0_train_ASEMD_checker_list_0/node-meta.json
+      hash: md5
+      md5: 8e0c8ccf557c2868a87fcf0501c1b8b6
+      size: 48
+    - path: nodes/AL0/train/AL0_train_ASEMD_thermostat/node-meta.json
+      hash: md5
+      md5: e3035b065dc167e642c3bdef20ecd2fb
+      size: 48
+    - path: nodes/GeoOpt/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 015e047451eb78b79b9bab2aae26601c.dir
+      size: 61473654
+      nfiles: 7
+    - path: nodes/GeoOpt/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: a59e7ac1bcf7332d67b46e6e1a266769
+      size: 48
+    - path: nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: e6b9d42af4b89a4b223c285c4a098198
+      size: 4115992
+    - path: nodes/initial_model/EnsembleModel/node-meta.json
+      hash: md5
+      md5: a34841eb263dd1dad9a50a7f018b54cf
+      size: 48
+    - path: nodes/initial_model/EnsembleModel/uuid.json
+      hash: md5
+      md5: 47ae64d7456bddffebde67e6230d5fe3
+      size: 38
+    params:
+      params.yaml:
+        AL0_train_ASEMD:
+          data_id: -1
+          dump_rate: 1000
+          init_temperature:
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          steps: 50000
+    outs:
+    - path: nodes/AL0/train/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: da19e3ee07d30f75eee644a5a65a4ea3
+      size: 916434
+    - path: nodes/AL0/train/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/AL0/train/ASEMD/node-meta.json
+      hash: md5
+      md5: eb90d959b5d7cb68f429e17163b047c3
+      size: 48
+    - path: nodes/AL0/train/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/AL0/train/ASEMD/trajectory.h5
+      hash: md5
+      md5: fc8b9ba838989d9a04eefbd95ab15bdc
+      size: 470790288
+    - path: nodes/AL0/train/ASEMD/velocities_cache.json
+      hash: md5
+      md5: 3fc98701e26a3b59c46f2508c4ec45c4
+      size: 9822
+  AL0_test_ASEMD_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL0_test_ASEMD_checker_list_0
+      --meta-only
+    params:
+      params.yaml:
+        AL0_test_ASEMD_checker_list_0:
+          larger_only: true
+          max_std:
+          max_value: 2.0
+          minimum_window_size: 1
+          value: energy_uncertainty
+          window_size: 500
+      zntrack.json:
+        AL0_test_ASEMD.checker_list:
+        - _type: zntrack.Node
+          value:
+            module: ipsuite.nodes
+            cls: ThresholdCheck
+            name: AL0_test_ASEMD_checker_list_0
+            remote:
+            rev:
+    outs:
+    - path: nodes/AL0/test/AL0_test_ASEMD_checker_list_0/node-meta.json
+      hash: md5
+      md5: 283e72900642ab0f97a260dcd4e97e90
+      size: 48
+  AL0_test_ASEMD_thermostat:
+    cmd: zntrack run ipsuite.nodes.LangevinThermostat --name AL0_test_ASEMD_thermostat
+      --meta-only
+    params:
+      params.yaml:
+        AL0_test_ASEMD_thermostat:
+          friction: 0.01
+          temperature: 298.15
+          time_step: 0.5
+      zntrack.json:
+        AL0_test_ASEMD.thermostat:
+          _type: zntrack.Node
+          value:
+            module: ipsuite.nodes
+            cls: LangevinThermostat
+            name: AL0_test_ASEMD_thermostat
+            remote:
+            rev:
+    outs:
+    - path: nodes/AL0/test/AL0_test_ASEMD_thermostat/node-meta.json
+      hash: md5
+      md5: 17e0261cf2d846a8c6da7a0a022b2624
+      size: 48
+  AL0_test_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name AL0_test_ASEMD
+    deps:
+    - path: nodes/AL0/test/AL0_test_ASEMD_checker_list_0/node-meta.json
+      hash: md5
+      md5: 283e72900642ab0f97a260dcd4e97e90
+      size: 48
+    - path: nodes/AL0/test/AL0_test_ASEMD_thermostat/node-meta.json
+      hash: md5
+      md5: 17e0261cf2d846a8c6da7a0a022b2624
+      size: 48
+    - path: nodes/GeoOpt/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 015e047451eb78b79b9bab2aae26601c.dir
+      size: 61473654
+      nfiles: 7
+    - path: nodes/GeoOpt/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: a59e7ac1bcf7332d67b46e6e1a266769
+      size: 48
+    - path: nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: e6b9d42af4b89a4b223c285c4a098198
+      size: 4115992
+    - path: nodes/initial_model/EnsembleModel/node-meta.json
+      hash: md5
+      md5: a34841eb263dd1dad9a50a7f018b54cf
+      size: 48
+    - path: nodes/initial_model/EnsembleModel/uuid.json
+      hash: md5
+      md5: 47ae64d7456bddffebde67e6230d5fe3
+      size: 38
+    params:
+      params.yaml:
+        AL0_test_ASEMD:
+          data_id: -10
+          dump_rate: 1000
+          init_temperature:
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          steps: 50000
+    outs:
+    - path: nodes/AL0/test/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 2ad435650f938e4b1ffbb47a18400032
+      size: 710537
+    - path: nodes/AL0/test/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/AL0/test/ASEMD/node-meta.json
+      hash: md5
+      md5: 10ac67bada96569eab7f52152cbbb25c
+      size: 48
+    - path: nodes/AL0/test/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/AL0/test/ASEMD/trajectory.h5
+      hash: md5
+      md5: aae445ebbe662499c9253d8a3f54ab5c
+      size: 366985304
+    - path: nodes/AL0/test/ASEMD/velocities_cache.json
+      hash: md5
+      md5: 3bf19782f3cfd7dcac58ac6aea7e36ea
+      size: 9822
+  AL0_train_ASEGeoOpt_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL0_train_ASEGeoOpt_checker_list_0
+      --meta-only
+    params:
+      params.yaml:
+        AL0_train_ASEGeoOpt_checker_list_0:
+          larger_only: true
+          max_std:
+          max_value: 2.0
+          minimum_window_size: 1
+          value: energy_uncertainty
+          window_size: 500
+      zntrack.json:
+        AL0_train_ASEGeoOpt.checker_list:
+        - _type: zntrack.Node
+          value:
+            module: ipsuite.nodes
+            cls: ThresholdCheck
+            name: AL0_train_ASEGeoOpt_checker_list_0
+            remote:
+            rev:
+    outs:
+    - path: nodes/AL0/train/AL0_train_ASEGeoOpt_checker_list_0/node-meta.json
+      hash: md5
+      md5: 9979edfe9e9a6b4d0573e81da4ca6159
+      size: 48
+  AL0_train_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL0_train_ASEGeoOpt
+    deps:
+    - path: nodes/AL0/train/AL0_train_ASEGeoOpt_checker_list_0/node-meta.json
+      hash: md5
+      md5: 9979edfe9e9a6b4d0573e81da4ca6159
+      size: 48
+    - path: nodes/AL0/train/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: da19e3ee07d30f75eee644a5a65a4ea3
+      size: 916434
+    - path: nodes/AL0/train/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/AL0/train/ASEMD/node-meta.json
+      hash: md5
+      md5: eb90d959b5d7cb68f429e17163b047c3
+      size: 48
+    - path: nodes/AL0/train/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/AL0/train/ASEMD/trajectory.h5
+      hash: md5
+      md5: fc8b9ba838989d9a04eefbd95ab15bdc
+      size: 470790288
+    - path: nodes/AL0/train/ASEMD/velocities_cache.json
+      hash: md5
+      md5: 3fc98701e26a3b59c46f2508c4ec45c4
+      size: 9822
+    - path: nodes/initial_model/EnsembleModel/node-meta.json
+      hash: md5
+      md5: a34841eb263dd1dad9a50a7f018b54cf
+      size: 48
+    - path: nodes/initial_model/EnsembleModel/uuid.json
+      hash: md5
+      md5: 47ae64d7456bddffebde67e6230d5fe3
+      size: 38
+    params:
+      params.yaml:
+        AL0_train_ASEGeoOpt:
+          data_id: -5
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: BFGS
+          repeat:
+          - 1
+          - 1
+          - 1
+          run_kwargs:
+            fmax: 1.0
+    outs:
+    - path: nodes/AL0/train/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/AL0/train/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 3cfa716dc00f40a0fb0650a79cec196b
+      size: 48
+    - path: nodes/AL0/train/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: ff5abd0f150ee3a44bb3aa92f1e078c6
+      size: 180056
+  AL0_test_ASEGeoOpt_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL0_test_ASEGeoOpt_checker_list_0
+      --meta-only
+    params:
+      params.yaml:
+        AL0_test_ASEGeoOpt_checker_list_0:
+          larger_only: true
+          max_std:
+          max_value: 2.0
+          minimum_window_size: 1
+          value: energy_uncertainty
+          window_size: 500
+      zntrack.json:
+        AL0_test_ASEGeoOpt.checker_list:
+        - _type: zntrack.Node
+          value:
+            module: ipsuite.nodes
+            cls: ThresholdCheck
+            name: AL0_test_ASEGeoOpt_checker_list_0
+            remote:
+            rev:
+    outs:
+    - path: nodes/AL0/test/AL0_test_ASEGeoOpt_checker_list_0/node-meta.json
+      hash: md5
+      md5: 04674ca8da0980a90886cd5d508ce8b4
+      size: 48
+  AL0_test_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL0_test_ASEGeoOpt
+    deps:
+    - path: nodes/AL0/test/AL0_test_ASEGeoOpt_checker_list_0/node-meta.json
+      hash: md5
+      md5: 04674ca8da0980a90886cd5d508ce8b4
+      size: 48
+    - path: nodes/AL0/test/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 2ad435650f938e4b1ffbb47a18400032
+      size: 710537
+    - path: nodes/AL0/test/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/AL0/test/ASEMD/node-meta.json
+      hash: md5
+      md5: 10ac67bada96569eab7f52152cbbb25c
+      size: 48
+    - path: nodes/AL0/test/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/AL0/test/ASEMD/trajectory.h5
+      hash: md5
+      md5: aae445ebbe662499c9253d8a3f54ab5c
+      size: 366985304
+    - path: nodes/AL0/test/ASEMD/velocities_cache.json
+      hash: md5
+      md5: 3bf19782f3cfd7dcac58ac6aea7e36ea
+      size: 9822
+    - path: nodes/initial_model/EnsembleModel/node-meta.json
+      hash: md5
+      md5: a34841eb263dd1dad9a50a7f018b54cf
+      size: 48
+    - path: nodes/initial_model/EnsembleModel/uuid.json
+      hash: md5
+      md5: 47ae64d7456bddffebde67e6230d5fe3
+      size: 38
+    params:
+      params.yaml:
+        AL0_test_ASEGeoOpt:
+          data_id: -5
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: BFGS
+          repeat:
+          - 1
+          - 1
+          - 1
+          run_kwargs:
+            fmax: 1.0
+    outs:
+    - path: nodes/AL0/test/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/AL0/test/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 275a6d877eb8daa6b866388203a8fced
+      size: 48
+    - path: nodes/AL0/test/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: e1f11295d40d29d6ca84a87829c7c702
+      size: 180056
+  AL0_train_ASEGeoOpt_1:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL0_train_ASEGeoOpt_1
+    deps:
+    - path: nodes/AL0/train/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/AL0/train/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 3cfa716dc00f40a0fb0650a79cec196b
+      size: 48
+    - path: nodes/AL0/train/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: ff5abd0f150ee3a44bb3aa92f1e078c6
+      size: 180056
+    - path: nodes/bootstrap/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 6b51edbd4fdc5b5b5a7dd7347b84c777
+      size: 294552
+    - path: nodes/bootstrap/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 9d22247dc48a67efc79ed1feb03d182b.dir
+      size: 13133120
+      nfiles: 3
+    - path: nodes/bootstrap/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 21f69e8f72b080a5f3db1fba976fb2ce
+      size: 48
+    params:
+      params.yaml:
+        AL0_train_ASEGeoOpt_1:
+          data_id: -1
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: BFGS
+          repeat:
+          - 1
+          - 1
+          - 1
+          run_kwargs:
+            fmax: 2.0
+    outs:
+    - path: nodes/AL0/train/ASEGeoOpt_1/model_outs
+      hash: md5
+      md5: 702e59e22f0729d44a4dcc2c7f449c49.dir
+      size: 49049347
+      nfiles: 7
+    - path: nodes/AL0/train/ASEGeoOpt_1/node-meta.json
+      hash: md5
+      md5: fb6d45fbdaf20c4ac8e13e2923c27de3
+      size: 48
+    - path: nodes/AL0/train/ASEGeoOpt_1/trajectory.h5
+      hash: md5
+      md5: 71f294f66c99551a1117b1103fcc9cdd
+      size: 187232
+  AL0_test_ASEGeoOpt_1:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL0_test_ASEGeoOpt_1
+    deps:
+    - path: nodes/AL0/test/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/AL0/test/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 275a6d877eb8daa6b866388203a8fced
+      size: 48
+    - path: nodes/AL0/test/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: e1f11295d40d29d6ca84a87829c7c702
+      size: 180056
+    - path: nodes/bootstrap/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 6b51edbd4fdc5b5b5a7dd7347b84c777
+      size: 294552
+    - path: nodes/bootstrap/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 9d22247dc48a67efc79ed1feb03d182b.dir
+      size: 13133120
+      nfiles: 3
+    - path: nodes/bootstrap/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 21f69e8f72b080a5f3db1fba976fb2ce
+      size: 48
+    params:
+      params.yaml:
+        AL0_test_ASEGeoOpt_1:
+          data_id: -1
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: BFGS
+          repeat:
+          - 1
+          - 1
+          - 1
+          run_kwargs:
+            fmax: 2.0
+    outs:
+    - path: nodes/AL0/test/ASEGeoOpt_1/model_outs
+      hash: md5
+      md5: f62bf48d802d2100c897085005e8aed6.dir
+      size: 48996076
+      nfiles: 7
+    - path: nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+      hash: md5
+      md5: 2c6e1a4537056a61e05d9b30e4090ce7
+      size: 48
+    - path: nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+      hash: md5
+      md5: 37c4f19132464752251185257efac9e2
+      size: 141632
+  AL0_train_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AL0_train_ConfigurationSelection
+    deps:
+    - path: nodes/AL0/train/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: da19e3ee07d30f75eee644a5a65a4ea3
+      size: 916434
+    - path: nodes/AL0/train/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/AL0/train/ASEMD/node-meta.json
+      hash: md5
+      md5: eb90d959b5d7cb68f429e17163b047c3
+      size: 48
+    - path: nodes/AL0/train/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/AL0/train/ASEMD/trajectory.h5
+      hash: md5
+      md5: fc8b9ba838989d9a04eefbd95ab15bdc
+      size: 470790288
+    - path: nodes/AL0/train/ASEMD/velocities_cache.json
+      hash: md5
+      md5: 3fc98701e26a3b59c46f2508c4ec45c4
+      size: 9822
+    params:
+      params.yaml:
+        AL0_train_ConfigurationSelection:
+          indices:
+            _type: slice
+            value:
+              start: 0
+              step:
+              stop: -5
+    outs:
+    - path: nodes/AL0/train/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 7dc9591b333098a17f6edd7f1733b4ca
+      size: 48
+    - path: nodes/AL0/train/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 2459c7fe5b49578fb10bf5ea3de3a2cc
+      size: 209413
+  AL0_train_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name AL0_train_ConfigurationSelection_1
+    deps:
+    - path: nodes/AL0/train/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 7dc9591b333098a17f6edd7f1733b4ca
+      size: 48
+    - path: nodes/AL0/train/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 2459c7fe5b49578fb10bf5ea3de3a2cc
+      size: 209413
+    params:
+      params.yaml:
+        AL0_train_ConfigurationSelection_1:
+          n_configurations: 10
+          seed: 1234
+    outs:
+    - path: nodes/AL0/train/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: 7b431314bc6acf4052dc6a7a934abb3b
+      size: 48
+    - path: nodes/AL0/train/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: 554b9984aa5ad4b871c83b2cecbd38b5
+      size: 183
+  AL0_train_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AL0_train_CP2KSinglePoint
+    deps:
+    - path: GTH_BASIS_SETS
+      hash: md5
+      md5: 518e733a7344699cf0b4192bb97eb6a3
+      size: 119403
+    - path: GTH_POTENTIALS
+      hash: md5
+      md5: 3a35b03b26b8ba5cf6c1d849dba11f15
+      size: 128982
+    - path: dftd3.dat
+      hash: md5
+      md5: 88745bcc951a4bcdccc4d6bcfa78d105
+      size: 1959318
+    - path: nodes/AL0/train/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: 7b431314bc6acf4052dc6a7a934abb3b
+      size: 48
+    - path: nodes/AL0/train/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: 554b9984aa5ad4b871c83b2cecbd38b5
+      size: 183
+    params:
+      config/cp2k.yaml:
+        force_eval:
+          method: quickstep
+          DFT:
+            mgrid:
+              cutoff: 800
+              rel_cutoff: 60
+              ngrids: 5
+            QS:
+              eps_filter_matrix: 0.0
+              eps_pgf_orb: 0.0001
+            SCF:
+              scf_guess: restart
+              max_scf: 100
+              eps_scf: 1e-06
+              OT:
+                minimizer: diis
+                preconditioner: full_single_inverse
+              outer_scf:
+                max_scf: 100
+                eps_scf: 1e-06
+              print:
+                restart:
+                  each:
+                    QS_SCF: 0
+            XC:
+              xc_functional:
+                becke97:
+                  scale_c: 1.0
+                  scale_x: 1.0
+              vdw_potential:
+                pair_potential:
+                  type: dftd3(bj)
+                  parameter_file_name: dftd3.dat
+                  reference_functional: B97-3c
+                  r_cutoff: 7.93766
+                  calculate_c9_term: true
+                  short_range_correction: true
+                potential_type: pair_potential
+            charge: 0
+            basis_set_file_name: GTH_BASIS_SETS
+            potential_file_name: GTH_POTENTIALS
+          subsys:
+            kind:
+              N:
+                basis_set: TZVP-GTH-q5
+                potential: GTH-PBE-q5
+              C:
+                basis_set: TZVP-GTH-q4
+                potential: GTH-PBE-q4
+              H:
+                basis_set: TZVP-GTH-q1
+                potential: GTH-PBE-q1
+              B:
+                basis_set: TZVP-GTH-q3
+                potential: GTH-PBE-q3
+              F:
+                basis_set: TZVP-GTH-q7
+                potential: GTH-PBE-q7
+    outs:
+    - path: nodes/AL0/train/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 2afe3eacbc16ae103eba5c58096bc0cc
+      size: 286856
+    - path: nodes/AL0/train/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 92dcd60c10df6d03e9ba9f6f7c630fca.dir
+      size: 12901959
+      nfiles: 3
+    - path: nodes/AL0/train/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 94d30fe7d19466437975a9c9e66cb5d4
+      size: 48
+  AL0_test_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AL0_test_ConfigurationSelection
+    deps:
+    - path: nodes/AL0/test/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 2ad435650f938e4b1ffbb47a18400032
+      size: 710537
+    - path: nodes/AL0/test/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/AL0/test/ASEMD/node-meta.json
+      hash: md5
+      md5: 10ac67bada96569eab7f52152cbbb25c
+      size: 48
+    - path: nodes/AL0/test/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/AL0/test/ASEMD/trajectory.h5
+      hash: md5
+      md5: aae445ebbe662499c9253d8a3f54ab5c
+      size: 366985304
+    - path: nodes/AL0/test/ASEMD/velocities_cache.json
+      hash: md5
+      md5: 3bf19782f3cfd7dcac58ac6aea7e36ea
+      size: 9822
+    params:
+      params.yaml:
+        AL0_test_ConfigurationSelection:
+          indices:
+            _type: slice
+            value:
+              start: 0
+              step:
+              stop: -5
+    outs:
+    - path: nodes/AL0/test/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 5d577d4c923c187cd6c5a6353a339767
+      size: 48
+    - path: nodes/AL0/test/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 6d4814a5737ebca2d14fd31d1c2fb026
+      size: 160453
+  AL0_test_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name AL0_test_ConfigurationSelection_1
+    deps:
+    - path: nodes/AL0/test/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 5d577d4c923c187cd6c5a6353a339767
+      size: 48
+    - path: nodes/AL0/test/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 6d4814a5737ebca2d14fd31d1c2fb026
+      size: 160453
+    params:
+      params.yaml:
+        AL0_test_ConfigurationSelection_1:
+          n_configurations: 3
+          seed: 1234
+    outs:
+    - path: nodes/AL0/test/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: 1d4a75c6cb5dc880a0c5644d43601145
+      size: 48
+    - path: nodes/AL0/test/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: 010fc6998135921cfd922c009fa70877
+      size: 81
+  AL0_test_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AL0_test_CP2KSinglePoint
+    deps:
+    - path: GTH_BASIS_SETS
+      hash: md5
+      md5: 518e733a7344699cf0b4192bb97eb6a3
+      size: 119403
+    - path: GTH_POTENTIALS
+      hash: md5
+      md5: 3a35b03b26b8ba5cf6c1d849dba11f15
+      size: 128982
+    - path: dftd3.dat
+      hash: md5
+      md5: 88745bcc951a4bcdccc4d6bcfa78d105
+      size: 1959318
+    - path: nodes/AL0/test/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: 1d4a75c6cb5dc880a0c5644d43601145
+      size: 48
+    - path: nodes/AL0/test/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: 010fc6998135921cfd922c009fa70877
+      size: 81
+    params:
+      config/cp2k.yaml:
+        force_eval:
+          method: quickstep
+          DFT:
+            mgrid:
+              cutoff: 800
+              rel_cutoff: 60
+              ngrids: 5
+            QS:
+              eps_filter_matrix: 0.0
+              eps_pgf_orb: 0.0001
+            SCF:
+              scf_guess: restart
+              max_scf: 100
+              eps_scf: 1e-06
+              OT:
+                minimizer: diis
+                preconditioner: full_single_inverse
+              outer_scf:
+                max_scf: 100
+                eps_scf: 1e-06
+              print:
+                restart:
+                  each:
+                    QS_SCF: 0
+            XC:
+              xc_functional:
+                becke97:
+                  scale_c: 1.0
+                  scale_x: 1.0
+              vdw_potential:
+                pair_potential:
+                  type: dftd3(bj)
+                  parameter_file_name: dftd3.dat
+                  reference_functional: B97-3c
+                  r_cutoff: 7.93766
+                  calculate_c9_term: true
+                  short_range_correction: true
+                potential_type: pair_potential
+            charge: 0
+            basis_set_file_name: GTH_BASIS_SETS
+            potential_file_name: GTH_POTENTIALS
+          subsys:
+            kind:
+              N:
+                basis_set: TZVP-GTH-q5
+                potential: GTH-PBE-q5
+              C:
+                basis_set: TZVP-GTH-q4
+                potential: GTH-PBE-q4
+              H:
+                basis_set: TZVP-GTH-q1
+                potential: GTH-PBE-q1
+              B:
+                basis_set: TZVP-GTH-q3
+                potential: GTH-PBE-q3
+              F:
+                basis_set: TZVP-GTH-q7
+                potential: GTH-PBE-q7
+    outs:
+    - path: nodes/AL0/test/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 4c7c1139dc04a44cb8273ef5e5e93758
+      size: 117904
+    - path: nodes/AL0/test/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 6e96b0d6731b2295e2aba050fb626ebf.dir
+      size: 12491194
+      nfiles: 3
+    - path: nodes/AL0/test/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: e65517275179ea613d9376e94b1ba731
+      size: 48
+  AL0_model_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name AL0_model_MLModel
+    deps:
+    - path: nodes/AL0/test/ASEGeoOpt_1/model_outs
+      hash: md5
+      md5: f62bf48d802d2100c897085005e8aed6.dir
+      size: 48996076
+      nfiles: 7
+    - path: nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+      hash: md5
+      md5: 2c6e1a4537056a61e05d9b30e4090ce7
+      size: 48
+    - path: nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+      hash: md5
+      md5: 37c4f19132464752251185257efac9e2
+      size: 141632
+    - path: nodes/AL0/test/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 4c7c1139dc04a44cb8273ef5e5e93758
+      size: 117904
+    - path: nodes/AL0/test/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 6e96b0d6731b2295e2aba050fb626ebf.dir
+      size: 12491194
+      nfiles: 3
+    - path: nodes/AL0/test/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: e65517275179ea613d9376e94b1ba731
+      size: 48
+    - path: nodes/AL0/train/ASEGeoOpt_1/model_outs
+      hash: md5
+      md5: 702e59e22f0729d44a4dcc2c7f449c49.dir
+      size: 49049347
+      nfiles: 7
+    - path: nodes/AL0/train/ASEGeoOpt_1/node-meta.json
+      hash: md5
+      md5: fb6d45fbdaf20c4ac8e13e2923c27de3
+      size: 48
+    - path: nodes/AL0/train/ASEGeoOpt_1/trajectory.h5
+      hash: md5
+      md5: 71f294f66c99551a1117b1103fcc9cdd
+      size: 187232
+    - path: nodes/AL0/train/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 2afe3eacbc16ae103eba5c58096bc0cc
+      size: 286856
+    - path: nodes/AL0/train/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 92dcd60c10df6d03e9ba9f6f7c630fca.dir
+      size: 12901959
+      nfiles: 3
+    - path: nodes/AL0/train/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 94d30fe7d19466437975a9c9e66cb5d4
+      size: 48
+    - path: nodes/initial_model/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 4903573d40347407d0abcceafa53cc35
+      size: 48
+    - path: nodes/initial_model/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 0e52047c41344dc03f7a6409562acf8f
+      size: 470
+    - path: nodes/initial_model/ConfigurationSelection_2/node-meta.json
+      hash: md5
+      md5: 63f9b94fcde07b20429772bee0365246
+      size: 48
+    - path: nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+      hash: md5
+      md5: e832a44568788af9150f1c31ad6d6199
+      size: 666
+    params:
+      params.yaml:
+        AL0_model_MLModel:
+          jax_enable_x64: true
+          use_energy: true
+          use_forces: true
+          use_stresses: false
+      config/initial_model_1.yaml:
+        data:
+          batch_size: 8
+          scale_method: per_element_force_rms_scale
+          shift_method: per_element_regression_shift
+          shift_options:
+            energy_regularisation: 1.0
+          valid_batch_size: 100
+        loss:
+        - name: energy
+        - name: forces
+          weight: 4.0
+        - name: stress
+          weight: 0.2
+        metrics:
+        - name: energy
+          reductions:
+          - mae
+        - name: forces
+          reductions:
+          - mae
+        - name: stress
+          reductions:
+          - mae
+        model:
+          n_basis: 7
+          n_radial: 5
+          nn:
+          - 512
+          - 512
+          r_max: 5.5
+          r_min: 0.7
+          b_init: zeros
+          emb_init: uniform
+          calc_stress: true
+          use_zbl: true
+          descriptor_dtype: fp32
+          readout_dtype: fp32
+          scale_shift_dtype: fp32
+        n_epochs: 2048
+        optimizer:
+          opt_name: adam
+          emb_lr: 0.01
+          nn_lr: 0.005
+          scale_lr: 0.001
+          shift_lr: 0.05
+          zbl_lr: 0.001
+        seed: 1
+    outs:
+    - path: nodes/AL0/model/MLModel/apax_model
+      hash: md5
+      md5: e56315d371b2615e4f6b30968a90f98b.dir
+      size: 42276780
+      nfiles: 5
+    - path: nodes/AL0/model/MLModel/log.csv
+      hash: md5
+      md5: 4eef3d6a52acb120412eeb8d52e795b2
+      size: 364950
+    - path: nodes/AL0/model/MLModel/metrics.json
+      hash: md5
+      md5: 9101c2187a0e4fb127e65921f45d5767
+      size: 392
+    - path: nodes/AL0/model/MLModel/node-meta.json
+      hash: md5
+      md5: 803ed524ef04a44ce0f4bba7a4448189
+      size: 48
+    - path: nodes/AL0/model/MLModel/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/AL0/model/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: 02979ef1168fa6a96f075f6ffcb892fc
+      size: 3259212
+    - path: nodes/AL0/model/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 40fefb899d4719e1701cde64f73b5a93
+      size: 6517164
+  AL0_model_MLModel_1:
+    cmd: zntrack run ipsuite.nodes.Apax --name AL0_model_MLModel_1
+    deps:
+    - path: nodes/AL0/test/ASEGeoOpt_1/model_outs
+      hash: md5
+      md5: f62bf48d802d2100c897085005e8aed6.dir
+      size: 48996076
+      nfiles: 7
+    - path: nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+      hash: md5
+      md5: 2c6e1a4537056a61e05d9b30e4090ce7
+      size: 48
+    - path: nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+      hash: md5
+      md5: 37c4f19132464752251185257efac9e2
+      size: 141632
+    - path: nodes/AL0/test/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 4c7c1139dc04a44cb8273ef5e5e93758
+      size: 117904
+    - path: nodes/AL0/test/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 6e96b0d6731b2295e2aba050fb626ebf.dir
+      size: 12491194
+      nfiles: 3
+    - path: nodes/AL0/test/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: e65517275179ea613d9376e94b1ba731
+      size: 48
+    - path: nodes/AL0/train/ASEGeoOpt_1/model_outs
+      hash: md5
+      md5: 702e59e22f0729d44a4dcc2c7f449c49.dir
+      size: 49049347
+      nfiles: 7
+    - path: nodes/AL0/train/ASEGeoOpt_1/node-meta.json
+      hash: md5
+      md5: fb6d45fbdaf20c4ac8e13e2923c27de3
+      size: 48
+    - path: nodes/AL0/train/ASEGeoOpt_1/trajectory.h5
+      hash: md5
+      md5: 71f294f66c99551a1117b1103fcc9cdd
+      size: 187232
+    - path: nodes/AL0/train/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 2afe3eacbc16ae103eba5c58096bc0cc
+      size: 286856
+    - path: nodes/AL0/train/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 92dcd60c10df6d03e9ba9f6f7c630fca.dir
+      size: 12901959
+      nfiles: 3
+    - path: nodes/AL0/train/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 94d30fe7d19466437975a9c9e66cb5d4
+      size: 48
+    - path: nodes/initial_model/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 4903573d40347407d0abcceafa53cc35
+      size: 48
+    - path: nodes/initial_model/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 0e52047c41344dc03f7a6409562acf8f
+      size: 470
+    - path: nodes/initial_model/ConfigurationSelection_2/node-meta.json
+      hash: md5
+      md5: 63f9b94fcde07b20429772bee0365246
+      size: 48
+    - path: nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+      hash: md5
+      md5: e832a44568788af9150f1c31ad6d6199
+      size: 666
+    params:
+      params.yaml:
+        AL0_model_MLModel_1:
+          jax_enable_x64: true
+          use_energy: true
+          use_forces: true
+          use_stresses: false
+      config/initial_model_2.yaml:
+        data:
+          batch_size: 8
+          scale_method: per_element_force_rms_scale
+          shift_method: per_element_regression_shift
+          shift_options:
+            energy_regularisation: 1.0
+          valid_batch_size: 100
+        loss:
+        - name: energy
+        - name: forces
+          weight: 4.0
+        - name: stress
+          weight: 0.2
+        metrics:
+        - name: energy
+          reductions:
+          - mae
+        - name: forces
+          reductions:
+          - mae
+        - name: stress
+          reductions:
+          - mae
+        model:
+          n_basis: 7
+          n_radial: 5
+          nn:
+          - 512
+          - 512
+          r_max: 5.5
+          r_min: 0.7
+          b_init: zeros
+          emb_init: uniform
+          calc_stress: true
+          use_zbl: true
+          descriptor_dtype: fp32
+          readout_dtype: fp32
+          scale_shift_dtype: fp32
+        n_epochs: 2048
+        optimizer:
+          opt_name: adam
+          emb_lr: 0.01
+          nn_lr: 0.005
+          scale_lr: 0.001
+          shift_lr: 0.05
+          zbl_lr: 0.001
+        seed: 2
+    outs:
+    - path: nodes/AL0/model/MLModel_1/apax_model
+      hash: md5
+      md5: 9a844ac35539d951ffe82cfbd9d70506.dir
+      size: 42276786
+      nfiles: 5
+    - path: nodes/AL0/model/MLModel_1/log.csv
+      hash: md5
+      md5: 990caa1494af15b3294395c3a494c300
+      size: 364812
+    - path: nodes/AL0/model/MLModel_1/metrics.json
+      hash: md5
+      md5: 75d638aae2fb98beabc99ce452e03b24
+      size: 387
+    - path: nodes/AL0/model/MLModel_1/node-meta.json
+      hash: md5
+      md5: db279e13f9917492dd2b83f30ca2e596
+      size: 48
+    - path: nodes/AL0/model/MLModel_1/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/AL0/model/MLModel_1/train_atoms.extxyz
+      hash: md5
+      md5: 02979ef1168fa6a96f075f6ffcb892fc
+      size: 3259212
+    - path: nodes/AL0/model/MLModel_1/val_atoms.extxyz
+      hash: md5
+      md5: 40fefb899d4719e1701cde64f73b5a93
+      size: 6517164
+  AL0_model_EnsembleModel:
+    cmd: zntrack run ipsuite.nodes.EnsembleModel --name AL0_model_EnsembleModel
+    deps:
+    - path: nodes/initial_model/MLModel/apax_model
+      hash: md5
+      md5: ed48f44f5f32259cac4743115b947f68.dir
+      size: 42276792
+      nfiles: 5
+    - path: nodes/initial_model/MLModel/log.csv
+      hash: md5
+      md5: bdb361bca63b3042a57ca1cc67ef6bbc
+      size: 365585
+    - path: nodes/initial_model/MLModel/metrics.json
+      hash: md5
+      md5: 2f9106623fe967028cb4e33399ca7278
+      size: 391
+    - path: nodes/initial_model/MLModel/node-meta.json
+      hash: md5
+      md5: a5a481c866f2cdc6f8f12f2436bf7e01
+      size: 48
+    - path: nodes/initial_model/MLModel/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/initial_model/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: da7cd37e140a7a8eeea42a28a42ab508
+      size: 2551190
+    - path: nodes/initial_model/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 4ee1b7da5e2c22b0efce8b4b4c0a0f1b
+      size: 6186736
+    - path: nodes/initial_model/MLModel_1/apax_model
+      hash: md5
+      md5: 95f8ac6f221e86bd50a90f241a7f83c4.dir
+      size: 42276798
+      nfiles: 5
+    - path: nodes/initial_model/MLModel_1/log.csv
+      hash: md5
+      md5: e4c3e539666ea24d35e9f1c1f9b00399
+      size: 365593
+    - path: nodes/initial_model/MLModel_1/metrics.json
+      hash: md5
+      md5: 61ee25d17639bc76b0997256b8166dd7
+      size: 391
+    - path: nodes/initial_model/MLModel_1/node-meta.json
+      hash: md5
+      md5: 82b4b6b17d70bd162c91a60c04c8ed77
+      size: 48
+    - path: nodes/initial_model/MLModel_1/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/initial_model/MLModel_1/train_atoms.extxyz
+      hash: md5
+      md5: da7cd37e140a7a8eeea42a28a42ab508
+      size: 2551190
+    - path: nodes/initial_model/MLModel_1/val_atoms.extxyz
+      hash: md5
+      md5: 4ee1b7da5e2c22b0efce8b4b4c0a0f1b
+      size: 6186736
+    outs:
+    - path: nodes/AL0/model/EnsembleModel/node-meta.json
+      hash: md5
+      md5: 7dd205701a82689cadff02fcadc0a47c
+      size: 48
+    - path: nodes/AL0/model/EnsembleModel/uuid.json
+      hash: md5
+      md5: 203db80803d7af44da609c1f48c73dfb
+      size: 38

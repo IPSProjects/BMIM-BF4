@@ -11,7 +11,353 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
+- nodes/AL0/train/ASEMD/metrics_dict.csv: {}
+- nodes/AL0/test/ASEMD/metrics_dict.csv: {}
+- nodes/AL0/model/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/AL0/model/MLModel_1/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
 stages:
+  AL0_model_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name AL0_model_MLModel
+    deps:
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/model_outs
+    - nodes/AL0/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/train/CP2KSinglePoint/cp2k
+    - nodes/AL0/train/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/AL0/model/MLModel/metrics.json:
+        cache: false
+    - nodes/AL0/model/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL0/model/MLModel/apax_model
+    - nodes/AL0/model/MLModel/log.csv
+    - nodes/AL0/model/MLModel/train.log
+    - nodes/AL0/model/MLModel/train_atoms.extxyz
+    - nodes/AL0/model/MLModel/val_atoms.extxyz
+    params:
+    - AL0_model_MLModel
+    - config/initial_model_1.yaml:
+  AL0_model_MLModel_1:
+    cmd: zntrack run ipsuite.nodes.Apax --name AL0_model_MLModel_1
+    deps:
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/model_outs
+    - nodes/AL0/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/train/CP2KSinglePoint/cp2k
+    - nodes/AL0/train/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/AL0/model/MLModel_1/metrics.json:
+        cache: false
+    - nodes/AL0/model/MLModel_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL0/model/MLModel_1/apax_model
+    - nodes/AL0/model/MLModel_1/log.csv
+    - nodes/AL0/model/MLModel_1/train.log
+    - nodes/AL0/model/MLModel_1/train_atoms.extxyz
+    - nodes/AL0/model/MLModel_1/val_atoms.extxyz
+    params:
+    - AL0_model_MLModel_1
+    - config/initial_model_2.yaml:
+  AL0_test_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL0_test_ASEGeoOpt
+    deps:
+    - nodes/AL0/test/AL0_test_ASEGeoOpt_checker_list_0/node-meta.json
+    - nodes/AL0/test/ASEMD/metrics_dict.csv
+    - nodes/AL0/test/ASEMD/model
+    - nodes/AL0/test/ASEMD/node-meta.json
+    - nodes/AL0/test/ASEMD/steps_before_stopping.json
+    - nodes/AL0/test/ASEMD/trajectory.h5
+    - nodes/AL0/test/ASEMD/velocities_cache.json
+    - nodes/initial_model/EnsembleModel/node-meta.json
+    - nodes/initial_model/EnsembleModel/uuid.json
+    metrics:
+    - nodes/AL0/test/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL0/test/ASEGeoOpt/model_outs
+    - nodes/AL0/test/ASEGeoOpt/trajectory.h5
+    params:
+    - AL0_test_ASEGeoOpt
+  AL0_test_ASEGeoOpt_1:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL0_test_ASEGeoOpt_1
+    deps:
+    - nodes/AL0/test/ASEGeoOpt/model_outs
+    - nodes/AL0/test/ASEGeoOpt/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt/trajectory.h5
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    params:
+    - AL0_test_ASEGeoOpt_1
+  AL0_test_ASEGeoOpt_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL0_test_ASEGeoOpt_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL0/test/AL0_test_ASEGeoOpt_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL0_test_ASEGeoOpt_checker_list_0
+    - zntrack.json:
+      - AL0_test_ASEGeoOpt.checker_list
+  AL0_test_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name AL0_test_ASEMD
+    deps:
+    - nodes/AL0/test/AL0_test_ASEMD_checker_list_0/node-meta.json
+    - nodes/AL0/test/AL0_test_ASEMD_thermostat/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+    - nodes/initial_model/EnsembleModel/node-meta.json
+    - nodes/initial_model/EnsembleModel/uuid.json
+    metrics:
+    - nodes/AL0/test/ASEMD/node-meta.json:
+        cache: false
+    - nodes/AL0/test/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/AL0/test/ASEMD/metrics_dict.csv
+    - nodes/AL0/test/ASEMD/model
+    - nodes/AL0/test/ASEMD/trajectory.h5
+    - nodes/AL0/test/ASEMD/velocities_cache.json
+    params:
+    - AL0_test_ASEMD
+  AL0_test_ASEMD_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL0_test_ASEMD_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL0/test/AL0_test_ASEMD_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL0_test_ASEMD_checker_list_0
+    - zntrack.json:
+      - AL0_test_ASEMD.checker_list
+  AL0_test_ASEMD_thermostat:
+    cmd: zntrack run ipsuite.nodes.LangevinThermostat --name AL0_test_ASEMD_thermostat
+      --meta-only
+    metrics:
+    - nodes/AL0/test/AL0_test_ASEMD_thermostat/node-meta.json:
+        cache: false
+    params:
+    - AL0_test_ASEMD_thermostat
+    - zntrack.json:
+      - AL0_test_ASEMD.thermostat
+  AL0_test_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AL0_test_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/AL0/test/ConfigurationSelection_1/node-meta.json
+    - nodes/AL0/test/ConfigurationSelection_1/selected_configurations.json
+    metrics:
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
+  AL0_test_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AL0_test_ConfigurationSelection
+    deps:
+    - nodes/AL0/test/ASEMD/metrics_dict.csv
+    - nodes/AL0/test/ASEMD/model
+    - nodes/AL0/test/ASEMD/node-meta.json
+    - nodes/AL0/test/ASEMD/steps_before_stopping.json
+    - nodes/AL0/test/ASEMD/trajectory.h5
+    - nodes/AL0/test/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL0/test/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL0/test/ConfigurationSelection/selected_configurations.json
+    params:
+    - AL0_test_ConfigurationSelection
+  AL0_test_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name AL0_test_ConfigurationSelection_1
+    deps:
+    - nodes/AL0/test/ConfigurationSelection/node-meta.json
+    - nodes/AL0/test/ConfigurationSelection/selected_configurations.json
+    metrics:
+    - nodes/AL0/test/ConfigurationSelection_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL0/test/ConfigurationSelection_1/selected_configurations.json
+    params:
+    - AL0_test_ConfigurationSelection_1
+  AL0_train_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL0_train_ASEGeoOpt
+    deps:
+    - nodes/AL0/train/AL0_train_ASEGeoOpt_checker_list_0/node-meta.json
+    - nodes/AL0/train/ASEMD/metrics_dict.csv
+    - nodes/AL0/train/ASEMD/model
+    - nodes/AL0/train/ASEMD/node-meta.json
+    - nodes/AL0/train/ASEMD/steps_before_stopping.json
+    - nodes/AL0/train/ASEMD/trajectory.h5
+    - nodes/AL0/train/ASEMD/velocities_cache.json
+    - nodes/initial_model/EnsembleModel/node-meta.json
+    - nodes/initial_model/EnsembleModel/uuid.json
+    metrics:
+    - nodes/AL0/train/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL0/train/ASEGeoOpt/model_outs
+    - nodes/AL0/train/ASEGeoOpt/trajectory.h5
+    params:
+    - AL0_train_ASEGeoOpt
+  AL0_train_ASEGeoOpt_1:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL0_train_ASEGeoOpt_1
+    deps:
+    - nodes/AL0/train/ASEGeoOpt/model_outs
+    - nodes/AL0/train/ASEGeoOpt/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt/trajectory.h5
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/AL0/train/ASEGeoOpt_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL0/train/ASEGeoOpt_1/model_outs
+    - nodes/AL0/train/ASEGeoOpt_1/trajectory.h5
+    params:
+    - AL0_train_ASEGeoOpt_1
+  AL0_train_ASEGeoOpt_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL0_train_ASEGeoOpt_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL0/train/AL0_train_ASEGeoOpt_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL0_train_ASEGeoOpt_checker_list_0
+    - zntrack.json:
+      - AL0_train_ASEGeoOpt.checker_list
+  AL0_train_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name AL0_train_ASEMD
+    deps:
+    - nodes/AL0/train/AL0_train_ASEMD_checker_list_0/node-meta.json
+    - nodes/AL0/train/AL0_train_ASEMD_thermostat/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+    - nodes/initial_model/EnsembleModel/node-meta.json
+    - nodes/initial_model/EnsembleModel/uuid.json
+    metrics:
+    - nodes/AL0/train/ASEMD/node-meta.json:
+        cache: false
+    - nodes/AL0/train/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/AL0/train/ASEMD/metrics_dict.csv
+    - nodes/AL0/train/ASEMD/model
+    - nodes/AL0/train/ASEMD/trajectory.h5
+    - nodes/AL0/train/ASEMD/velocities_cache.json
+    params:
+    - AL0_train_ASEMD
+  AL0_train_ASEMD_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL0_train_ASEMD_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL0/train/AL0_train_ASEMD_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL0_train_ASEMD_checker_list_0
+    - zntrack.json:
+      - AL0_train_ASEMD.checker_list
+  AL0_train_ASEMD_thermostat:
+    cmd: zntrack run ipsuite.nodes.LangevinThermostat --name AL0_train_ASEMD_thermostat
+      --meta-only
+    metrics:
+    - nodes/AL0/train/AL0_train_ASEMD_thermostat/node-meta.json:
+        cache: false
+    params:
+    - AL0_train_ASEMD_thermostat
+    - zntrack.json:
+      - AL0_train_ASEMD.thermostat
+  AL0_train_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AL0_train_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/AL0/train/ConfigurationSelection_1/node-meta.json
+    - nodes/AL0/train/ConfigurationSelection_1/selected_configurations.json
+    metrics:
+    - nodes/AL0/train/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL0/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/train/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
+  AL0_train_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AL0_train_ConfigurationSelection
+    deps:
+    - nodes/AL0/train/ASEMD/metrics_dict.csv
+    - nodes/AL0/train/ASEMD/model
+    - nodes/AL0/train/ASEMD/node-meta.json
+    - nodes/AL0/train/ASEMD/steps_before_stopping.json
+    - nodes/AL0/train/ASEMD/trajectory.h5
+    - nodes/AL0/train/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL0/train/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL0/train/ConfigurationSelection/selected_configurations.json
+    params:
+    - AL0_train_ConfigurationSelection
+  AL0_train_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name AL0_train_ConfigurationSelection_1
+    deps:
+    - nodes/AL0/train/ConfigurationSelection/node-meta.json
+    - nodes/AL0/train/ConfigurationSelection/selected_configurations.json
+    metrics:
+    - nodes/AL0/train/ConfigurationSelection_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL0/train/ConfigurationSelection_1/selected_configurations.json
+    params:
+    - AL0_train_ConfigurationSelection_1
   GeoOpt_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name GeoOpt_ASEGeoOpt
     deps:
@@ -228,6 +574,28 @@ stages:
     - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
     params:
     - initial_model_ConfigurationSelection_2
+  initial_model_EnsembleModel:
+    cmd: zntrack run ipsuite.nodes.EnsembleModel --name initial_model_EnsembleModel
+    deps:
+    - nodes/initial_model/MLModel/apax_model
+    - nodes/initial_model/MLModel/log.csv
+    - nodes/initial_model/MLModel/metrics.json
+    - nodes/initial_model/MLModel/node-meta.json
+    - nodes/initial_model/MLModel/train.log
+    - nodes/initial_model/MLModel/train_atoms.extxyz
+    - nodes/initial_model/MLModel/val_atoms.extxyz
+    - nodes/initial_model/MLModel_1/apax_model
+    - nodes/initial_model/MLModel_1/log.csv
+    - nodes/initial_model/MLModel_1/metrics.json
+    - nodes/initial_model/MLModel_1/node-meta.json
+    - nodes/initial_model/MLModel_1/train.log
+    - nodes/initial_model/MLModel_1/train_atoms.extxyz
+    - nodes/initial_model/MLModel_1/val_atoms.extxyz
+    metrics:
+    - nodes/initial_model/EnsembleModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/initial_model/EnsembleModel/uuid.json
   initial_model_MLModel:
     cmd: zntrack run ipsuite.nodes.Apax --name initial_model_MLModel
     deps:
@@ -314,8 +682,8 @@ stages:
     - nodes/initial_model/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/initial_model/PredictionMetrics/stress_df.csv
     - nodes/initial_model/PredictionMetrics/stress_hydrostatic_df.csv
-  initial_model_EnsembleModel:
-    cmd: zntrack run ipsuite.nodes.EnsembleModel --name initial_model_EnsembleModel
+  AL0_model_EnsembleModel:
+    cmd: zntrack run ipsuite.nodes.EnsembleModel --name AL0_model_EnsembleModel
     deps:
     - nodes/initial_model/MLModel/apax_model
     - nodes/initial_model/MLModel/log.csv
@@ -332,7 +700,7 @@ stages:
     - nodes/initial_model/MLModel_1/train_atoms.extxyz
     - nodes/initial_model/MLModel_1/val_atoms.extxyz
     outs:
-    - nodes/initial_model/EnsembleModel/uuid.json
+    - nodes/AL0/model/EnsembleModel/uuid.json
     metrics:
-    - nodes/initial_model/EnsembleModel/node-meta.json:
+    - nodes/AL0/model/EnsembleModel/node-meta.json:
         cache: false
