@@ -128,6 +128,526 @@ AL0_train_ConfigurationSelection:
 AL0_train_ConfigurationSelection_1:
     n_configurations: 10
     seed: 1234
+AL1_model_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+AL1_model_MLModel_1:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+AL1_test_ASEGeoOpt:
+    data_id: -5
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 1.0
+AL1_test_ASEGeoOpt_1:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 2.0
+AL1_test_ASEGeoOpt_checker_list_0:
+    larger_only: true
+    max_std: null
+    max_value: 2.0
+    minimum_window_size: 1
+    value: energy_uncertainty
+    window_size: 500
+AL1_test_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    init_temperature: null
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    steps: 50000
+AL1_test_ASEMD_checker_list_0:
+    larger_only: true
+    max_std: null
+    max_value: 2.0
+    minimum_window_size: 1
+    value: energy_uncertainty
+    window_size: 500
+AL1_test_ASEMD_thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+AL1_test_ConfigurationSelection:
+    indices:
+        _type: slice
+        value:
+            start: 0
+            step: null
+            stop: -5
+AL1_test_ConfigurationSelection_1:
+    n_configurations: 3
+    seed: 1234
+AL1_train_ASEGeoOpt:
+    data_id: -5
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 1.0
+AL1_train_ASEGeoOpt_1:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 2.0
+AL1_train_ASEGeoOpt_checker_list_0:
+    larger_only: true
+    max_std: null
+    max_value: 2.0
+    minimum_window_size: 1
+    value: energy_uncertainty
+    window_size: 500
+AL1_train_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    init_temperature: null
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    steps: 50000
+AL1_train_ASEMD_checker_list_0:
+    larger_only: true
+    max_std: null
+    max_value: 2.0
+    minimum_window_size: 1
+    value: energy_uncertainty
+    window_size: 500
+AL1_train_ASEMD_thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+AL1_train_ConfigurationSelection:
+    indices:
+        _type: slice
+        value:
+            start: 0
+            step: null
+            stop: -5
+AL1_train_ConfigurationSelection_1:
+    n_configurations: 10
+    seed: 1234
+AL2_model_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+AL2_model_MLModel_1:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+AL2_test_ASEGeoOpt:
+    data_id: -5
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 1.0
+AL2_test_ASEGeoOpt_1:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 2.0
+AL2_test_ASEGeoOpt_checker_list_0:
+    larger_only: true
+    max_std: null
+    max_value: 2.0
+    minimum_window_size: 1
+    value: energy_uncertainty
+    window_size: 500
+AL2_test_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    init_temperature: null
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    steps: 50000
+AL2_test_ASEMD_checker_list_0:
+    larger_only: true
+    max_std: null
+    max_value: 2.0
+    minimum_window_size: 1
+    value: energy_uncertainty
+    window_size: 500
+AL2_test_ASEMD_thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+AL2_test_ConfigurationSelection:
+    indices:
+        _type: slice
+        value:
+            start: 0
+            step: null
+            stop: -5
+AL2_test_ConfigurationSelection_1:
+    n_configurations: 3
+    seed: 1234
+AL2_train_ASEGeoOpt:
+    data_id: -5
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 1.0
+AL2_train_ASEGeoOpt_1:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 2.0
+AL2_train_ASEGeoOpt_checker_list_0:
+    larger_only: true
+    max_std: null
+    max_value: 2.0
+    minimum_window_size: 1
+    value: energy_uncertainty
+    window_size: 500
+AL2_train_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    init_temperature: null
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    steps: 50000
+AL2_train_ASEMD_checker_list_0:
+    larger_only: true
+    max_std: null
+    max_value: 2.0
+    minimum_window_size: 1
+    value: energy_uncertainty
+    window_size: 500
+AL2_train_ASEMD_thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+AL2_train_ConfigurationSelection:
+    indices:
+        _type: slice
+        value:
+            start: 0
+            step: null
+            stop: -5
+AL2_train_ConfigurationSelection_1:
+    n_configurations: 10
+    seed: 1234
+AL3_model_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+AL3_model_MLModel_1:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+AL3_test_ASEGeoOpt:
+    data_id: -5
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 1.0
+AL3_test_ASEGeoOpt_1:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 2.0
+AL3_test_ASEGeoOpt_checker_list_0:
+    larger_only: true
+    max_std: null
+    max_value: 2.0
+    minimum_window_size: 1
+    value: energy_uncertainty
+    window_size: 500
+AL3_test_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    init_temperature: null
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    steps: 50000
+AL3_test_ASEMD_checker_list_0:
+    larger_only: true
+    max_std: null
+    max_value: 2.0
+    minimum_window_size: 1
+    value: energy_uncertainty
+    window_size: 500
+AL3_test_ASEMD_thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+AL3_test_ConfigurationSelection:
+    indices:
+        _type: slice
+        value:
+            start: 0
+            step: null
+            stop: -5
+AL3_test_ConfigurationSelection_1:
+    n_configurations: 3
+    seed: 1234
+AL3_train_ASEGeoOpt:
+    data_id: -5
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 1.0
+AL3_train_ASEGeoOpt_1:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 2.0
+AL3_train_ASEGeoOpt_checker_list_0:
+    larger_only: true
+    max_std: null
+    max_value: 2.0
+    minimum_window_size: 1
+    value: energy_uncertainty
+    window_size: 500
+AL3_train_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    init_temperature: null
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    steps: 50000
+AL3_train_ASEMD_checker_list_0:
+    larger_only: true
+    max_std: null
+    max_value: 2.0
+    minimum_window_size: 1
+    value: energy_uncertainty
+    window_size: 500
+AL3_train_ASEMD_thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+AL3_train_ConfigurationSelection:
+    indices:
+        _type: slice
+        value:
+            start: 0
+            step: null
+            stop: -5
+AL3_train_ConfigurationSelection_1:
+    n_configurations: 10
+    seed: 1234
+AL4_model_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+AL4_model_MLModel_1:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+AL4_test_ASEGeoOpt:
+    data_id: -5
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 1.0
+AL4_test_ASEGeoOpt_1:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 2.0
+AL4_test_ASEGeoOpt_checker_list_0:
+    larger_only: true
+    max_std: null
+    max_value: 2.0
+    minimum_window_size: 1
+    value: energy_uncertainty
+    window_size: 500
+AL4_test_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    init_temperature: null
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    steps: 50000
+AL4_test_ASEMD_checker_list_0:
+    larger_only: true
+    max_std: null
+    max_value: 2.0
+    minimum_window_size: 1
+    value: energy_uncertainty
+    window_size: 500
+AL4_test_ASEMD_thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+AL4_test_ConfigurationSelection:
+    indices:
+        _type: slice
+        value:
+            start: 0
+            step: null
+            stop: -5
+AL4_test_ConfigurationSelection_1:
+    n_configurations: 3
+    seed: 1234
+AL4_train_ASEGeoOpt:
+    data_id: -5
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 1.0
+AL4_train_ASEGeoOpt_1:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 2.0
+AL4_train_ASEGeoOpt_checker_list_0:
+    larger_only: true
+    max_std: null
+    max_value: 2.0
+    minimum_window_size: 1
+    value: energy_uncertainty
+    window_size: 500
+AL4_train_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    init_temperature: null
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    steps: 50000
+AL4_train_ASEMD_checker_list_0:
+    larger_only: true
+    max_std: null
+    max_value: 2.0
+    minimum_window_size: 1
+    value: energy_uncertainty
+    window_size: 500
+AL4_train_ASEMD_thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+AL4_train_ConfigurationSelection:
+    indices:
+        _type: slice
+        value:
+            start: 0
+            step: null
+            stop: -5
+AL4_train_ConfigurationSelection_1:
+    n_configurations: 10
+    seed: 1234
 GeoOpt_ASEGeoOpt:
     data_id: 0
     dump_rate: 1000

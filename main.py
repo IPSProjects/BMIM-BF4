@@ -1,7 +1,7 @@
 import ipsuite as ips
 
 project = ips.Project(automatic_node_names=True)
-cp2k_shell = "mpirun -n 16 cp2k_shell.psmp"
+cp2k_shell = "mpirun -n 8 cp2k_shell.psmp"
 
 with project.group("GeoOpt"):
     cation = ips.configuration_generation.SmilesToAtoms("CCCCN1C=C[N+](=C1)C")
@@ -123,10 +123,10 @@ uncertainty_check = ips.analysis.ThresholdCheck(
 
 models = []
 
-for loop in range(1):
+for loop in range(5):
     with project.group(f"AL{loop}", "train") as altrain:
         md = ips.calculators.ASEMD(
-            data=geopt.atoms,
+            data=geopt.atoms if loop == 0 else ref_geopt_train.atoms,
             data_id=-1,
             model=model,
             thermostat=thermostat,
@@ -144,7 +144,7 @@ for loop in range(1):
             checker_list=[uncertainty_check],
         )
 
-        ref_geopt = ips.calculators.ASEGeoOpt(
+        ref_geopt_train = ips.calculators.ASEGeoOpt(
             model=cp2k_rotate,  # better restart wavefunction
             data=model_geopt.atoms,
             data_id=-1,
@@ -167,12 +167,12 @@ for loop in range(1):
         )
 
         train_data += cp2k.atoms
-        train_data += ref_geopt.atoms
+        train_data += ref_geopt_train.atoms
 
     with project.group(f"AL{loop}", "test") as altest:
         md = ips.calculators.ASEMD(
-            data=geopt.atoms,
-            data_id=-10,  # slightly different start configuration
+            data=geopt.atoms if loop == 0 else ref_geopt_test.atoms,
+            data_id=-10 if loop == 0 else -1,  # slightly different start configuration
             model=model,
             thermostat=thermostat,
             checker_list=[uncertainty_check],
@@ -189,7 +189,7 @@ for loop in range(1):
             checker_list=[uncertainty_check],
         )
 
-        ref_geopt = ips.calculators.ASEGeoOpt(
+        ref_geopt_test = ips.calculators.ASEGeoOpt(
             model=cp2k_rotate,  # better restart wavefunction
             data=model_geopt.atoms,
             data_id=-1,
@@ -211,7 +211,7 @@ for loop in range(1):
             cp2k_shell=cp2k_shell,
         )
 
-        validation_data += ref_geopt.atoms
+        validation_data += ref_geopt_test.atoms
         validation_data += cp2k.atoms
 
     with project.group(f"AL{loop}", "model") as almodel:
