@@ -11,8 +11,6 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
-- nodes/AL0/train/ASEMD/metrics_dict.csv: {}
-- nodes/AL0/test/ASEMD/metrics_dict.csv: {}
 - nodes/AL0/model/MLModel/log.csv:
     template: dvc_plots/templates/y_log.json
     x: epoch
@@ -37,8 +35,6 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
-- nodes/AL1/test/ASEMD/metrics_dict.csv: {}
-- nodes/AL1/train/ASEMD/metrics_dict.csv: {}
 - nodes/AL2/model/MLModel/log.csv:
     template: dvc_plots/templates/y_log.json
     x: epoch
@@ -75,12 +71,66 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
-- nodes/AL2/test/ASEMD/metrics_dict.csv: {}
-- nodes/AL2/train/ASEMD/metrics_dict.csv: {}
-- nodes/AL3/test/ASEMD/metrics_dict.csv: {}
-- nodes/AL3/train/ASEMD/metrics_dict.csv: {}
-- nodes/AL4/test/ASEMD/metrics_dict.csv: {}
-- nodes/AL4/train/ASEMD/metrics_dict.csv: {}
+- nodes/AL5/model/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/AL5/model/MLModel_1/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/AL6/model/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/AL6/model/MLModel_1/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/AL7/model/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/AL7/model/MLModel_1/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/AL8/model/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/AL8/model/MLModel_1/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/AL9/model/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/AL9/model/MLModel_1/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
 stages:
   AL0_model_EnsembleModel:
     cmd: zntrack run ipsuite.nodes.EnsembleModel --name AL0_model_EnsembleModel
@@ -136,7 +186,7 @@ stages:
     - nodes/AL0/model/MLModel/val_atoms.extxyz
     params:
     - AL0_model_MLModel
-    - config/initial_model_1.yaml: null
+    - config/initial_model_1.yaml:
   AL0_model_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name AL0_model_MLModel_1
     deps:
@@ -169,7 +219,7 @@ stages:
     - nodes/AL0/model/MLModel_1/val_atoms.extxyz
     params:
     - AL0_model_MLModel_1
-    - config/initial_model_2.yaml: null
+    - config/initial_model_2.yaml:
   AL0_test_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL0_test_ASEGeoOpt
     deps:
@@ -274,7 +324,7 @@ stages:
     - nodes/AL0/test/CP2KSinglePoint/atoms.h5
     - nodes/AL0/test/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   AL0_test_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL0_test_ConfigurationSelection
     deps:
@@ -407,7 +457,7 @@ stages:
     - nodes/AL0/train/CP2KSinglePoint/atoms.h5
     - nodes/AL0/train/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   AL0_train_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL0_train_ConfigurationSelection
     deps:
@@ -502,7 +552,7 @@ stages:
     - nodes/AL1/model/MLModel/val_atoms.extxyz
     params:
     - AL1_model_MLModel
-    - config/initial_model_1.yaml: null
+    - config/initial_model_1.yaml:
   AL1_model_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name AL1_model_MLModel_1
     deps:
@@ -547,7 +597,7 @@ stages:
     - nodes/AL1/model/MLModel_1/val_atoms.extxyz
     params:
     - AL1_model_MLModel_1
-    - config/initial_model_2.yaml: null
+    - config/initial_model_2.yaml:
   AL1_test_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL1_test_ASEGeoOpt
     deps:
@@ -652,7 +702,7 @@ stages:
     - nodes/AL1/test/CP2KSinglePoint/atoms.h5
     - nodes/AL1/test/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   AL1_test_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL1_test_ConfigurationSelection
     deps:
@@ -785,7 +835,7 @@ stages:
     - nodes/AL1/train/CP2KSinglePoint/atoms.h5
     - nodes/AL1/train/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   AL1_train_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL1_train_ConfigurationSelection
     deps:
@@ -892,7 +942,7 @@ stages:
     - nodes/AL2/model/MLModel/val_atoms.extxyz
     params:
     - AL2_model_MLModel
-    - config/initial_model_1.yaml: null
+    - config/initial_model_1.yaml:
   AL2_model_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name AL2_model_MLModel_1
     deps:
@@ -949,7 +999,7 @@ stages:
     - nodes/AL2/model/MLModel_1/val_atoms.extxyz
     params:
     - AL2_model_MLModel_1
-    - config/initial_model_2.yaml: null
+    - config/initial_model_2.yaml:
   AL2_test_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL2_test_ASEGeoOpt
     deps:
@@ -1054,7 +1104,7 @@ stages:
     - nodes/AL2/test/CP2KSinglePoint/atoms.h5
     - nodes/AL2/test/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   AL2_test_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL2_test_ConfigurationSelection
     deps:
@@ -1187,7 +1237,7 @@ stages:
     - nodes/AL2/train/CP2KSinglePoint/atoms.h5
     - nodes/AL2/train/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   AL2_train_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL2_train_ConfigurationSelection
     deps:
@@ -1306,7 +1356,7 @@ stages:
     - nodes/AL3/model/MLModel/val_atoms.extxyz
     params:
     - AL3_model_MLModel
-    - config/initial_model_1.yaml: null
+    - config/initial_model_1.yaml:
   AL3_model_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name AL3_model_MLModel_1
     deps:
@@ -1375,7 +1425,7 @@ stages:
     - nodes/AL3/model/MLModel_1/val_atoms.extxyz
     params:
     - AL3_model_MLModel_1
-    - config/initial_model_2.yaml: null
+    - config/initial_model_2.yaml:
   AL3_test_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL3_test_ASEGeoOpt
     deps:
@@ -1480,7 +1530,7 @@ stages:
     - nodes/AL3/test/CP2KSinglePoint/atoms.h5
     - nodes/AL3/test/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   AL3_test_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL3_test_ConfigurationSelection
     deps:
@@ -1613,7 +1663,7 @@ stages:
     - nodes/AL3/train/CP2KSinglePoint/atoms.h5
     - nodes/AL3/train/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   AL3_train_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL3_train_ConfigurationSelection
     deps:
@@ -1744,7 +1794,7 @@ stages:
     - nodes/AL4/model/MLModel/val_atoms.extxyz
     params:
     - AL4_model_MLModel
-    - config/initial_model_1.yaml: null
+    - config/initial_model_1.yaml:
   AL4_model_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name AL4_model_MLModel_1
     deps:
@@ -1825,7 +1875,7 @@ stages:
     - nodes/AL4/model/MLModel_1/val_atoms.extxyz
     params:
     - AL4_model_MLModel_1
-    - config/initial_model_2.yaml: null
+    - config/initial_model_2.yaml:
   AL4_test_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL4_test_ASEGeoOpt
     deps:
@@ -1930,7 +1980,7 @@ stages:
     - nodes/AL4/test/CP2KSinglePoint/atoms.h5
     - nodes/AL4/test/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   AL4_test_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL4_test_ConfigurationSelection
     deps:
@@ -2063,7 +2113,7 @@ stages:
     - nodes/AL4/train/CP2KSinglePoint/atoms.h5
     - nodes/AL4/train/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   AL4_train_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL4_train_ConfigurationSelection
     deps:
@@ -2092,6 +2142,2814 @@ stages:
     - nodes/AL4/train/ConfigurationSelection_1/selected_configurations.json
     params:
     - AL4_train_ConfigurationSelection_1
+  AL5_model_EnsembleModel:
+    cmd: zntrack run ipsuite.nodes.EnsembleModel --name AL5_model_EnsembleModel
+    deps:
+    - nodes/AL5/model/MLModel/apax_model
+    - nodes/AL5/model/MLModel/log.csv
+    - nodes/AL5/model/MLModel/metrics.json
+    - nodes/AL5/model/MLModel/node-meta.json
+    - nodes/AL5/model/MLModel/train.log
+    - nodes/AL5/model/MLModel/train_atoms.extxyz
+    - nodes/AL5/model/MLModel/val_atoms.extxyz
+    - nodes/AL5/model/MLModel_1/apax_model
+    - nodes/AL5/model/MLModel_1/log.csv
+    - nodes/AL5/model/MLModel_1/metrics.json
+    - nodes/AL5/model/MLModel_1/node-meta.json
+    - nodes/AL5/model/MLModel_1/train.log
+    - nodes/AL5/model/MLModel_1/train_atoms.extxyz
+    - nodes/AL5/model/MLModel_1/val_atoms.extxyz
+    metrics:
+    - nodes/AL5/model/EnsembleModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL5/model/EnsembleModel/uuid.json
+  AL5_model_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name AL5_model_MLModel
+    deps:
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/model_outs
+    - nodes/AL0/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/train/CP2KSinglePoint/cp2k
+    - nodes/AL0/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/model_outs
+    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/test/CP2KSinglePoint/cp2k
+    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/model_outs
+    - nodes/AL1/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/train/CP2KSinglePoint/cp2k
+    - nodes/AL1/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/model_outs
+    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/test/CP2KSinglePoint/cp2k
+    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/model_outs
+    - nodes/AL2/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/train/CP2KSinglePoint/cp2k
+    - nodes/AL2/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/model_outs
+    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/test/CP2KSinglePoint/cp2k
+    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/model_outs
+    - nodes/AL3/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/train/CP2KSinglePoint/cp2k
+    - nodes/AL3/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/model_outs
+    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/test/CP2KSinglePoint/cp2k
+    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/model_outs
+    - nodes/AL4/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/train/CP2KSinglePoint/cp2k
+    - nodes/AL4/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/model_outs
+    - nodes/AL5/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/test/CP2KSinglePoint/cp2k
+    - nodes/AL5/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/model_outs
+    - nodes/AL5/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/train/CP2KSinglePoint/cp2k
+    - nodes/AL5/train/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/AL5/model/MLModel/metrics.json:
+        cache: false
+    - nodes/AL5/model/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL5/model/MLModel/apax_model
+    - nodes/AL5/model/MLModel/log.csv
+    - nodes/AL5/model/MLModel/train.log
+    - nodes/AL5/model/MLModel/train_atoms.extxyz
+    - nodes/AL5/model/MLModel/val_atoms.extxyz
+    params:
+    - AL5_model_MLModel
+    - config/initial_model_1.yaml:
+  AL5_model_MLModel_1:
+    cmd: zntrack run ipsuite.nodes.Apax --name AL5_model_MLModel_1
+    deps:
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/model_outs
+    - nodes/AL0/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/train/CP2KSinglePoint/cp2k
+    - nodes/AL0/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/model_outs
+    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/test/CP2KSinglePoint/cp2k
+    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/model_outs
+    - nodes/AL1/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/train/CP2KSinglePoint/cp2k
+    - nodes/AL1/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/model_outs
+    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/test/CP2KSinglePoint/cp2k
+    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/model_outs
+    - nodes/AL2/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/train/CP2KSinglePoint/cp2k
+    - nodes/AL2/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/model_outs
+    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/test/CP2KSinglePoint/cp2k
+    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/model_outs
+    - nodes/AL3/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/train/CP2KSinglePoint/cp2k
+    - nodes/AL3/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/model_outs
+    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/test/CP2KSinglePoint/cp2k
+    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/model_outs
+    - nodes/AL4/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/train/CP2KSinglePoint/cp2k
+    - nodes/AL4/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/model_outs
+    - nodes/AL5/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/test/CP2KSinglePoint/cp2k
+    - nodes/AL5/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/model_outs
+    - nodes/AL5/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/train/CP2KSinglePoint/cp2k
+    - nodes/AL5/train/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/AL5/model/MLModel_1/metrics.json:
+        cache: false
+    - nodes/AL5/model/MLModel_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL5/model/MLModel_1/apax_model
+    - nodes/AL5/model/MLModel_1/log.csv
+    - nodes/AL5/model/MLModel_1/train.log
+    - nodes/AL5/model/MLModel_1/train_atoms.extxyz
+    - nodes/AL5/model/MLModel_1/val_atoms.extxyz
+    params:
+    - AL5_model_MLModel_1
+    - config/initial_model_2.yaml:
+  AL5_test_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL5_test_ASEGeoOpt
+    deps:
+    - nodes/AL4/model/EnsembleModel/node-meta.json
+    - nodes/AL4/model/EnsembleModel/uuid.json
+    - nodes/AL5/test/AL5_test_ASEGeoOpt_checker_list_0/node-meta.json
+    - nodes/AL5/test/ASEMD/metrics_dict.csv
+    - nodes/AL5/test/ASEMD/model
+    - nodes/AL5/test/ASEMD/node-meta.json
+    - nodes/AL5/test/ASEMD/steps_before_stopping.json
+    - nodes/AL5/test/ASEMD/trajectory.h5
+    - nodes/AL5/test/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL5/test/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL5/test/ASEGeoOpt/model_outs
+    - nodes/AL5/test/ASEGeoOpt/trajectory.h5
+    params:
+    - AL5_test_ASEGeoOpt
+  AL5_test_ASEGeoOpt_1:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL5_test_ASEGeoOpt_1
+    deps:
+    - nodes/AL5/test/ASEGeoOpt/model_outs
+    - nodes/AL5/test/ASEGeoOpt/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt/trajectory.h5
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/AL5/test/ASEGeoOpt_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL5/test/ASEGeoOpt_1/model_outs
+    - nodes/AL5/test/ASEGeoOpt_1/trajectory.h5
+    params:
+    - AL5_test_ASEGeoOpt_1
+  AL5_test_ASEGeoOpt_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL5_test_ASEGeoOpt_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL5/test/AL5_test_ASEGeoOpt_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL5_test_ASEGeoOpt_checker_list_0
+    - zntrack.json:
+      - AL5_test_ASEGeoOpt.checker_list
+  AL5_test_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name AL5_test_ASEMD
+    deps:
+    - nodes/AL4/model/EnsembleModel/node-meta.json
+    - nodes/AL4/model/EnsembleModel/uuid.json
+    - nodes/AL4/test/ASEGeoOpt_1/model_outs
+    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/test/AL5_test_ASEMD_checker_list_0/node-meta.json
+    - nodes/AL5/test/AL5_test_ASEMD_modifier_0/node-meta.json
+    - nodes/AL5/test/AL5_test_ASEMD_modifier_1/node-meta.json
+    - nodes/AL5/test/AL5_test_ASEMD_thermostat/node-meta.json
+    metrics:
+    - nodes/AL5/test/ASEMD/node-meta.json:
+        cache: false
+    - nodes/AL5/test/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/AL5/test/ASEMD/metrics_dict.csv
+    - nodes/AL5/test/ASEMD/model
+    - nodes/AL5/test/ASEMD/trajectory.h5
+    - nodes/AL5/test/ASEMD/velocities_cache.json
+    params:
+    - AL5_test_ASEMD
+  AL5_test_ASEMD_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL5_test_ASEMD_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL5/test/AL5_test_ASEMD_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL5_test_ASEMD_checker_list_0
+    - zntrack.json:
+      - AL5_test_ASEMD.checker_list
+  AL5_test_ASEMD_modifier_0:
+    cmd: zntrack run ipsuite.nodes.TemperatureOscillatingRampModifier --name AL5_test_ASEMD_modifier_0
+      --meta-only
+    metrics:
+    - nodes/AL5/test/AL5_test_ASEMD_modifier_0/node-meta.json:
+        cache: false
+    params:
+    - AL5_test_ASEMD_modifier_0
+    - zntrack.json:
+      - AL5_test_ASEMD.modifier
+  AL5_test_ASEMD_modifier_1:
+    cmd: zntrack run ipsuite.nodes.BoxOscillatingRampModifier --name AL5_test_ASEMD_modifier_1
+      --meta-only
+    metrics:
+    - nodes/AL5/test/AL5_test_ASEMD_modifier_1/node-meta.json:
+        cache: false
+    params:
+    - AL5_test_ASEMD_modifier_1
+    - zntrack.json:
+      - AL5_test_ASEMD.modifier
+  AL5_test_ASEMD_thermostat:
+    cmd: zntrack run ipsuite.nodes.LangevinThermostat --name AL5_test_ASEMD_thermostat
+      --meta-only
+    metrics:
+    - nodes/AL5/test/AL5_test_ASEMD_thermostat/node-meta.json:
+        cache: false
+    params:
+    - AL5_test_ASEMD_thermostat
+    - zntrack.json:
+      - AL5_test_ASEMD.thermostat
+  AL5_test_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AL5_test_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/AL5/test/ConfigurationSelection_1/node-meta.json
+    - nodes/AL5/test/ConfigurationSelection_1/selected_configurations.json
+    metrics:
+    - nodes/AL5/test/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL5/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/test/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
+  AL5_test_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AL5_test_ConfigurationSelection
+    deps:
+    - nodes/AL5/test/ASEMD/metrics_dict.csv
+    - nodes/AL5/test/ASEMD/model
+    - nodes/AL5/test/ASEMD/node-meta.json
+    - nodes/AL5/test/ASEMD/steps_before_stopping.json
+    - nodes/AL5/test/ASEMD/trajectory.h5
+    - nodes/AL5/test/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL5/test/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL5/test/ConfigurationSelection/selected_configurations.json
+    params:
+    - AL5_test_ConfigurationSelection
+  AL5_test_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name AL5_test_ConfigurationSelection_1
+    deps:
+    - nodes/AL5/test/ConfigurationSelection/node-meta.json
+    - nodes/AL5/test/ConfigurationSelection/selected_configurations.json
+    metrics:
+    - nodes/AL5/test/ConfigurationSelection_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL5/test/ConfigurationSelection_1/selected_configurations.json
+    params:
+    - AL5_test_ConfigurationSelection_1
+  AL5_train_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL5_train_ASEGeoOpt
+    deps:
+    - nodes/AL4/model/EnsembleModel/node-meta.json
+    - nodes/AL4/model/EnsembleModel/uuid.json
+    - nodes/AL5/train/AL5_train_ASEGeoOpt_checker_list_0/node-meta.json
+    - nodes/AL5/train/ASEMD/metrics_dict.csv
+    - nodes/AL5/train/ASEMD/model
+    - nodes/AL5/train/ASEMD/node-meta.json
+    - nodes/AL5/train/ASEMD/steps_before_stopping.json
+    - nodes/AL5/train/ASEMD/trajectory.h5
+    - nodes/AL5/train/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL5/train/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL5/train/ASEGeoOpt/model_outs
+    - nodes/AL5/train/ASEGeoOpt/trajectory.h5
+    params:
+    - AL5_train_ASEGeoOpt
+  AL5_train_ASEGeoOpt_1:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL5_train_ASEGeoOpt_1
+    deps:
+    - nodes/AL5/train/ASEGeoOpt/model_outs
+    - nodes/AL5/train/ASEGeoOpt/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt/trajectory.h5
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/AL5/train/ASEGeoOpt_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL5/train/ASEGeoOpt_1/model_outs
+    - nodes/AL5/train/ASEGeoOpt_1/trajectory.h5
+    params:
+    - AL5_train_ASEGeoOpt_1
+  AL5_train_ASEGeoOpt_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL5_train_ASEGeoOpt_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL5/train/AL5_train_ASEGeoOpt_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL5_train_ASEGeoOpt_checker_list_0
+    - zntrack.json:
+      - AL5_train_ASEGeoOpt.checker_list
+  AL5_train_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name AL5_train_ASEMD
+    deps:
+    - nodes/AL4/model/EnsembleModel/node-meta.json
+    - nodes/AL4/model/EnsembleModel/uuid.json
+    - nodes/AL4/train/ASEGeoOpt_1/model_outs
+    - nodes/AL4/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/train/AL5_train_ASEMD_checker_list_0/node-meta.json
+    - nodes/AL5/train/AL5_train_ASEMD_modifier_0/node-meta.json
+    - nodes/AL5/train/AL5_train_ASEMD_modifier_1/node-meta.json
+    - nodes/AL5/train/AL5_train_ASEMD_thermostat/node-meta.json
+    metrics:
+    - nodes/AL5/train/ASEMD/node-meta.json:
+        cache: false
+    - nodes/AL5/train/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/AL5/train/ASEMD/metrics_dict.csv
+    - nodes/AL5/train/ASEMD/model
+    - nodes/AL5/train/ASEMD/trajectory.h5
+    - nodes/AL5/train/ASEMD/velocities_cache.json
+    params:
+    - AL5_train_ASEMD
+  AL5_train_ASEMD_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL5_train_ASEMD_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL5/train/AL5_train_ASEMD_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL5_train_ASEMD_checker_list_0
+    - zntrack.json:
+      - AL5_train_ASEMD.checker_list
+  AL5_train_ASEMD_modifier_0:
+    cmd: zntrack run ipsuite.nodes.TemperatureOscillatingRampModifier --name AL5_train_ASEMD_modifier_0
+      --meta-only
+    metrics:
+    - nodes/AL5/train/AL5_train_ASEMD_modifier_0/node-meta.json:
+        cache: false
+    params:
+    - AL5_train_ASEMD_modifier_0
+    - zntrack.json:
+      - AL5_train_ASEMD.modifier
+  AL5_train_ASEMD_modifier_1:
+    cmd: zntrack run ipsuite.nodes.BoxOscillatingRampModifier --name AL5_train_ASEMD_modifier_1
+      --meta-only
+    metrics:
+    - nodes/AL5/train/AL5_train_ASEMD_modifier_1/node-meta.json:
+        cache: false
+    params:
+    - AL5_train_ASEMD_modifier_1
+    - zntrack.json:
+      - AL5_train_ASEMD.modifier
+  AL5_train_ASEMD_thermostat:
+    cmd: zntrack run ipsuite.nodes.LangevinThermostat --name AL5_train_ASEMD_thermostat
+      --meta-only
+    metrics:
+    - nodes/AL5/train/AL5_train_ASEMD_thermostat/node-meta.json:
+        cache: false
+    params:
+    - AL5_train_ASEMD_thermostat
+    - zntrack.json:
+      - AL5_train_ASEMD.thermostat
+  AL5_train_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AL5_train_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/AL5/train/ConfigurationSelection_1/node-meta.json
+    - nodes/AL5/train/ConfigurationSelection_1/selected_configurations.json
+    metrics:
+    - nodes/AL5/train/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL5/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/train/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
+  AL5_train_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AL5_train_ConfigurationSelection
+    deps:
+    - nodes/AL5/train/ASEMD/metrics_dict.csv
+    - nodes/AL5/train/ASEMD/model
+    - nodes/AL5/train/ASEMD/node-meta.json
+    - nodes/AL5/train/ASEMD/steps_before_stopping.json
+    - nodes/AL5/train/ASEMD/trajectory.h5
+    - nodes/AL5/train/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL5/train/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL5/train/ConfigurationSelection/selected_configurations.json
+    params:
+    - AL5_train_ConfigurationSelection
+  AL5_train_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name AL5_train_ConfigurationSelection_1
+    deps:
+    - nodes/AL5/train/ConfigurationSelection/node-meta.json
+    - nodes/AL5/train/ConfigurationSelection/selected_configurations.json
+    metrics:
+    - nodes/AL5/train/ConfigurationSelection_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL5/train/ConfigurationSelection_1/selected_configurations.json
+    params:
+    - AL5_train_ConfigurationSelection_1
+  AL6_model_EnsembleModel:
+    cmd: zntrack run ipsuite.nodes.EnsembleModel --name AL6_model_EnsembleModel
+    deps:
+    - nodes/AL6/model/MLModel/apax_model
+    - nodes/AL6/model/MLModel/log.csv
+    - nodes/AL6/model/MLModel/metrics.json
+    - nodes/AL6/model/MLModel/node-meta.json
+    - nodes/AL6/model/MLModel/train.log
+    - nodes/AL6/model/MLModel/train_atoms.extxyz
+    - nodes/AL6/model/MLModel/val_atoms.extxyz
+    - nodes/AL6/model/MLModel_1/apax_model
+    - nodes/AL6/model/MLModel_1/log.csv
+    - nodes/AL6/model/MLModel_1/metrics.json
+    - nodes/AL6/model/MLModel_1/node-meta.json
+    - nodes/AL6/model/MLModel_1/train.log
+    - nodes/AL6/model/MLModel_1/train_atoms.extxyz
+    - nodes/AL6/model/MLModel_1/val_atoms.extxyz
+    metrics:
+    - nodes/AL6/model/EnsembleModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL6/model/EnsembleModel/uuid.json
+  AL6_model_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name AL6_model_MLModel
+    deps:
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/model_outs
+    - nodes/AL0/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/train/CP2KSinglePoint/cp2k
+    - nodes/AL0/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/model_outs
+    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/test/CP2KSinglePoint/cp2k
+    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/model_outs
+    - nodes/AL1/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/train/CP2KSinglePoint/cp2k
+    - nodes/AL1/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/model_outs
+    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/test/CP2KSinglePoint/cp2k
+    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/model_outs
+    - nodes/AL2/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/train/CP2KSinglePoint/cp2k
+    - nodes/AL2/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/model_outs
+    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/test/CP2KSinglePoint/cp2k
+    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/model_outs
+    - nodes/AL3/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/train/CP2KSinglePoint/cp2k
+    - nodes/AL3/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/model_outs
+    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/test/CP2KSinglePoint/cp2k
+    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/model_outs
+    - nodes/AL4/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/train/CP2KSinglePoint/cp2k
+    - nodes/AL4/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/model_outs
+    - nodes/AL5/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/test/CP2KSinglePoint/cp2k
+    - nodes/AL5/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/model_outs
+    - nodes/AL5/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/train/CP2KSinglePoint/cp2k
+    - nodes/AL5/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/model_outs
+    - nodes/AL6/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/test/CP2KSinglePoint/cp2k
+    - nodes/AL6/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt_1/model_outs
+    - nodes/AL6/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/train/CP2KSinglePoint/cp2k
+    - nodes/AL6/train/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/AL6/model/MLModel/metrics.json:
+        cache: false
+    - nodes/AL6/model/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL6/model/MLModel/apax_model
+    - nodes/AL6/model/MLModel/log.csv
+    - nodes/AL6/model/MLModel/train.log
+    - nodes/AL6/model/MLModel/train_atoms.extxyz
+    - nodes/AL6/model/MLModel/val_atoms.extxyz
+    params:
+    - AL6_model_MLModel
+    - config/initial_model_1.yaml:
+  AL6_model_MLModel_1:
+    cmd: zntrack run ipsuite.nodes.Apax --name AL6_model_MLModel_1
+    deps:
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/model_outs
+    - nodes/AL0/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/train/CP2KSinglePoint/cp2k
+    - nodes/AL0/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/model_outs
+    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/test/CP2KSinglePoint/cp2k
+    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/model_outs
+    - nodes/AL1/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/train/CP2KSinglePoint/cp2k
+    - nodes/AL1/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/model_outs
+    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/test/CP2KSinglePoint/cp2k
+    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/model_outs
+    - nodes/AL2/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/train/CP2KSinglePoint/cp2k
+    - nodes/AL2/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/model_outs
+    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/test/CP2KSinglePoint/cp2k
+    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/model_outs
+    - nodes/AL3/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/train/CP2KSinglePoint/cp2k
+    - nodes/AL3/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/model_outs
+    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/test/CP2KSinglePoint/cp2k
+    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/model_outs
+    - nodes/AL4/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/train/CP2KSinglePoint/cp2k
+    - nodes/AL4/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/model_outs
+    - nodes/AL5/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/test/CP2KSinglePoint/cp2k
+    - nodes/AL5/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/model_outs
+    - nodes/AL5/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/train/CP2KSinglePoint/cp2k
+    - nodes/AL5/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/model_outs
+    - nodes/AL6/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/test/CP2KSinglePoint/cp2k
+    - nodes/AL6/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt_1/model_outs
+    - nodes/AL6/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/train/CP2KSinglePoint/cp2k
+    - nodes/AL6/train/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/AL6/model/MLModel_1/metrics.json:
+        cache: false
+    - nodes/AL6/model/MLModel_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL6/model/MLModel_1/apax_model
+    - nodes/AL6/model/MLModel_1/log.csv
+    - nodes/AL6/model/MLModel_1/train.log
+    - nodes/AL6/model/MLModel_1/train_atoms.extxyz
+    - nodes/AL6/model/MLModel_1/val_atoms.extxyz
+    params:
+    - AL6_model_MLModel_1
+    - config/initial_model_2.yaml:
+  AL6_test_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL6_test_ASEGeoOpt
+    deps:
+    - nodes/AL5/model/EnsembleModel/node-meta.json
+    - nodes/AL5/model/EnsembleModel/uuid.json
+    - nodes/AL6/test/AL6_test_ASEGeoOpt_checker_list_0/node-meta.json
+    - nodes/AL6/test/ASEMD/metrics_dict.csv
+    - nodes/AL6/test/ASEMD/model
+    - nodes/AL6/test/ASEMD/node-meta.json
+    - nodes/AL6/test/ASEMD/steps_before_stopping.json
+    - nodes/AL6/test/ASEMD/trajectory.h5
+    - nodes/AL6/test/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL6/test/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL6/test/ASEGeoOpt/model_outs
+    - nodes/AL6/test/ASEGeoOpt/trajectory.h5
+    params:
+    - AL6_test_ASEGeoOpt
+  AL6_test_ASEGeoOpt_1:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL6_test_ASEGeoOpt_1
+    deps:
+    - nodes/AL6/test/ASEGeoOpt/model_outs
+    - nodes/AL6/test/ASEGeoOpt/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt/trajectory.h5
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/AL6/test/ASEGeoOpt_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL6/test/ASEGeoOpt_1/model_outs
+    - nodes/AL6/test/ASEGeoOpt_1/trajectory.h5
+    params:
+    - AL6_test_ASEGeoOpt_1
+  AL6_test_ASEGeoOpt_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL6_test_ASEGeoOpt_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL6/test/AL6_test_ASEGeoOpt_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL6_test_ASEGeoOpt_checker_list_0
+    - zntrack.json:
+      - AL6_test_ASEGeoOpt.checker_list
+  AL6_test_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name AL6_test_ASEMD
+    deps:
+    - nodes/AL5/model/EnsembleModel/node-meta.json
+    - nodes/AL5/model/EnsembleModel/uuid.json
+    - nodes/AL5/test/ASEGeoOpt_1/model_outs
+    - nodes/AL5/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/test/AL6_test_ASEMD_checker_list_0/node-meta.json
+    - nodes/AL6/test/AL6_test_ASEMD_modifier_0/node-meta.json
+    - nodes/AL6/test/AL6_test_ASEMD_modifier_1/node-meta.json
+    - nodes/AL6/test/AL6_test_ASEMD_thermostat/node-meta.json
+    metrics:
+    - nodes/AL6/test/ASEMD/node-meta.json:
+        cache: false
+    - nodes/AL6/test/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/AL6/test/ASEMD/metrics_dict.csv
+    - nodes/AL6/test/ASEMD/model
+    - nodes/AL6/test/ASEMD/trajectory.h5
+    - nodes/AL6/test/ASEMD/velocities_cache.json
+    params:
+    - AL6_test_ASEMD
+  AL6_test_ASEMD_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL6_test_ASEMD_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL6/test/AL6_test_ASEMD_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL6_test_ASEMD_checker_list_0
+    - zntrack.json:
+      - AL6_test_ASEMD.checker_list
+  AL6_test_ASEMD_modifier_0:
+    cmd: zntrack run ipsuite.nodes.TemperatureOscillatingRampModifier --name AL6_test_ASEMD_modifier_0
+      --meta-only
+    metrics:
+    - nodes/AL6/test/AL6_test_ASEMD_modifier_0/node-meta.json:
+        cache: false
+    params:
+    - AL6_test_ASEMD_modifier_0
+    - zntrack.json:
+      - AL6_test_ASEMD.modifier
+  AL6_test_ASEMD_modifier_1:
+    cmd: zntrack run ipsuite.nodes.BoxOscillatingRampModifier --name AL6_test_ASEMD_modifier_1
+      --meta-only
+    metrics:
+    - nodes/AL6/test/AL6_test_ASEMD_modifier_1/node-meta.json:
+        cache: false
+    params:
+    - AL6_test_ASEMD_modifier_1
+    - zntrack.json:
+      - AL6_test_ASEMD.modifier
+  AL6_test_ASEMD_thermostat:
+    cmd: zntrack run ipsuite.nodes.LangevinThermostat --name AL6_test_ASEMD_thermostat
+      --meta-only
+    metrics:
+    - nodes/AL6/test/AL6_test_ASEMD_thermostat/node-meta.json:
+        cache: false
+    params:
+    - AL6_test_ASEMD_thermostat
+    - zntrack.json:
+      - AL6_test_ASEMD.thermostat
+  AL6_test_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AL6_test_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/AL6/test/ConfigurationSelection_1/node-meta.json
+    - nodes/AL6/test/ConfigurationSelection_1/selected_configurations.json
+    metrics:
+    - nodes/AL6/test/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL6/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/test/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
+  AL6_test_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AL6_test_ConfigurationSelection
+    deps:
+    - nodes/AL6/test/ASEMD/metrics_dict.csv
+    - nodes/AL6/test/ASEMD/model
+    - nodes/AL6/test/ASEMD/node-meta.json
+    - nodes/AL6/test/ASEMD/steps_before_stopping.json
+    - nodes/AL6/test/ASEMD/trajectory.h5
+    - nodes/AL6/test/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL6/test/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL6/test/ConfigurationSelection/selected_configurations.json
+    params:
+    - AL6_test_ConfigurationSelection
+  AL6_test_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name AL6_test_ConfigurationSelection_1
+    deps:
+    - nodes/AL6/test/ConfigurationSelection/node-meta.json
+    - nodes/AL6/test/ConfigurationSelection/selected_configurations.json
+    metrics:
+    - nodes/AL6/test/ConfigurationSelection_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL6/test/ConfigurationSelection_1/selected_configurations.json
+    params:
+    - AL6_test_ConfigurationSelection_1
+  AL6_train_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL6_train_ASEGeoOpt
+    deps:
+    - nodes/AL5/model/EnsembleModel/node-meta.json
+    - nodes/AL5/model/EnsembleModel/uuid.json
+    - nodes/AL6/train/AL6_train_ASEGeoOpt_checker_list_0/node-meta.json
+    - nodes/AL6/train/ASEMD/metrics_dict.csv
+    - nodes/AL6/train/ASEMD/model
+    - nodes/AL6/train/ASEMD/node-meta.json
+    - nodes/AL6/train/ASEMD/steps_before_stopping.json
+    - nodes/AL6/train/ASEMD/trajectory.h5
+    - nodes/AL6/train/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL6/train/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL6/train/ASEGeoOpt/model_outs
+    - nodes/AL6/train/ASEGeoOpt/trajectory.h5
+    params:
+    - AL6_train_ASEGeoOpt
+  AL6_train_ASEGeoOpt_1:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL6_train_ASEGeoOpt_1
+    deps:
+    - nodes/AL6/train/ASEGeoOpt/model_outs
+    - nodes/AL6/train/ASEGeoOpt/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt/trajectory.h5
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/AL6/train/ASEGeoOpt_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL6/train/ASEGeoOpt_1/model_outs
+    - nodes/AL6/train/ASEGeoOpt_1/trajectory.h5
+    params:
+    - AL6_train_ASEGeoOpt_1
+  AL6_train_ASEGeoOpt_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL6_train_ASEGeoOpt_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL6/train/AL6_train_ASEGeoOpt_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL6_train_ASEGeoOpt_checker_list_0
+    - zntrack.json:
+      - AL6_train_ASEGeoOpt.checker_list
+  AL6_train_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name AL6_train_ASEMD
+    deps:
+    - nodes/AL5/model/EnsembleModel/node-meta.json
+    - nodes/AL5/model/EnsembleModel/uuid.json
+    - nodes/AL5/train/ASEGeoOpt_1/model_outs
+    - nodes/AL5/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/train/AL6_train_ASEMD_checker_list_0/node-meta.json
+    - nodes/AL6/train/AL6_train_ASEMD_modifier_0/node-meta.json
+    - nodes/AL6/train/AL6_train_ASEMD_modifier_1/node-meta.json
+    - nodes/AL6/train/AL6_train_ASEMD_thermostat/node-meta.json
+    metrics:
+    - nodes/AL6/train/ASEMD/node-meta.json:
+        cache: false
+    - nodes/AL6/train/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/AL6/train/ASEMD/metrics_dict.csv
+    - nodes/AL6/train/ASEMD/model
+    - nodes/AL6/train/ASEMD/trajectory.h5
+    - nodes/AL6/train/ASEMD/velocities_cache.json
+    params:
+    - AL6_train_ASEMD
+  AL6_train_ASEMD_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL6_train_ASEMD_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL6/train/AL6_train_ASEMD_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL6_train_ASEMD_checker_list_0
+    - zntrack.json:
+      - AL6_train_ASEMD.checker_list
+  AL6_train_ASEMD_modifier_0:
+    cmd: zntrack run ipsuite.nodes.TemperatureOscillatingRampModifier --name AL6_train_ASEMD_modifier_0
+      --meta-only
+    metrics:
+    - nodes/AL6/train/AL6_train_ASEMD_modifier_0/node-meta.json:
+        cache: false
+    params:
+    - AL6_train_ASEMD_modifier_0
+    - zntrack.json:
+      - AL6_train_ASEMD.modifier
+  AL6_train_ASEMD_modifier_1:
+    cmd: zntrack run ipsuite.nodes.BoxOscillatingRampModifier --name AL6_train_ASEMD_modifier_1
+      --meta-only
+    metrics:
+    - nodes/AL6/train/AL6_train_ASEMD_modifier_1/node-meta.json:
+        cache: false
+    params:
+    - AL6_train_ASEMD_modifier_1
+    - zntrack.json:
+      - AL6_train_ASEMD.modifier
+  AL6_train_ASEMD_thermostat:
+    cmd: zntrack run ipsuite.nodes.LangevinThermostat --name AL6_train_ASEMD_thermostat
+      --meta-only
+    metrics:
+    - nodes/AL6/train/AL6_train_ASEMD_thermostat/node-meta.json:
+        cache: false
+    params:
+    - AL6_train_ASEMD_thermostat
+    - zntrack.json:
+      - AL6_train_ASEMD.thermostat
+  AL6_train_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AL6_train_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/AL6/train/ConfigurationSelection_1/node-meta.json
+    - nodes/AL6/train/ConfigurationSelection_1/selected_configurations.json
+    metrics:
+    - nodes/AL6/train/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL6/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/train/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
+  AL6_train_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AL6_train_ConfigurationSelection
+    deps:
+    - nodes/AL6/train/ASEMD/metrics_dict.csv
+    - nodes/AL6/train/ASEMD/model
+    - nodes/AL6/train/ASEMD/node-meta.json
+    - nodes/AL6/train/ASEMD/steps_before_stopping.json
+    - nodes/AL6/train/ASEMD/trajectory.h5
+    - nodes/AL6/train/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL6/train/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL6/train/ConfigurationSelection/selected_configurations.json
+    params:
+    - AL6_train_ConfigurationSelection
+  AL6_train_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name AL6_train_ConfigurationSelection_1
+    deps:
+    - nodes/AL6/train/ConfigurationSelection/node-meta.json
+    - nodes/AL6/train/ConfigurationSelection/selected_configurations.json
+    metrics:
+    - nodes/AL6/train/ConfigurationSelection_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL6/train/ConfigurationSelection_1/selected_configurations.json
+    params:
+    - AL6_train_ConfigurationSelection_1
+  AL7_model_EnsembleModel:
+    cmd: zntrack run ipsuite.nodes.EnsembleModel --name AL7_model_EnsembleModel
+    deps:
+    - nodes/AL7/model/MLModel/apax_model
+    - nodes/AL7/model/MLModel/log.csv
+    - nodes/AL7/model/MLModel/metrics.json
+    - nodes/AL7/model/MLModel/node-meta.json
+    - nodes/AL7/model/MLModel/train.log
+    - nodes/AL7/model/MLModel/train_atoms.extxyz
+    - nodes/AL7/model/MLModel/val_atoms.extxyz
+    - nodes/AL7/model/MLModel_1/apax_model
+    - nodes/AL7/model/MLModel_1/log.csv
+    - nodes/AL7/model/MLModel_1/metrics.json
+    - nodes/AL7/model/MLModel_1/node-meta.json
+    - nodes/AL7/model/MLModel_1/train.log
+    - nodes/AL7/model/MLModel_1/train_atoms.extxyz
+    - nodes/AL7/model/MLModel_1/val_atoms.extxyz
+    metrics:
+    - nodes/AL7/model/EnsembleModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL7/model/EnsembleModel/uuid.json
+  AL7_model_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name AL7_model_MLModel
+    deps:
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/model_outs
+    - nodes/AL0/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/train/CP2KSinglePoint/cp2k
+    - nodes/AL0/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/model_outs
+    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/test/CP2KSinglePoint/cp2k
+    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/model_outs
+    - nodes/AL1/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/train/CP2KSinglePoint/cp2k
+    - nodes/AL1/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/model_outs
+    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/test/CP2KSinglePoint/cp2k
+    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/model_outs
+    - nodes/AL2/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/train/CP2KSinglePoint/cp2k
+    - nodes/AL2/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/model_outs
+    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/test/CP2KSinglePoint/cp2k
+    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/model_outs
+    - nodes/AL3/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/train/CP2KSinglePoint/cp2k
+    - nodes/AL3/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/model_outs
+    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/test/CP2KSinglePoint/cp2k
+    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/model_outs
+    - nodes/AL4/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/train/CP2KSinglePoint/cp2k
+    - nodes/AL4/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/model_outs
+    - nodes/AL5/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/test/CP2KSinglePoint/cp2k
+    - nodes/AL5/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/model_outs
+    - nodes/AL5/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/train/CP2KSinglePoint/cp2k
+    - nodes/AL5/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/model_outs
+    - nodes/AL6/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/test/CP2KSinglePoint/cp2k
+    - nodes/AL6/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt_1/model_outs
+    - nodes/AL6/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/train/CP2KSinglePoint/cp2k
+    - nodes/AL6/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL7/test/ASEGeoOpt_1/model_outs
+    - nodes/AL7/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL7/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL7/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL7/test/CP2KSinglePoint/cp2k
+    - nodes/AL7/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL7/train/ASEGeoOpt_1/model_outs
+    - nodes/AL7/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL7/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL7/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL7/train/CP2KSinglePoint/cp2k
+    - nodes/AL7/train/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/AL7/model/MLModel/metrics.json:
+        cache: false
+    - nodes/AL7/model/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL7/model/MLModel/apax_model
+    - nodes/AL7/model/MLModel/log.csv
+    - nodes/AL7/model/MLModel/train.log
+    - nodes/AL7/model/MLModel/train_atoms.extxyz
+    - nodes/AL7/model/MLModel/val_atoms.extxyz
+    params:
+    - AL7_model_MLModel
+    - config/initial_model_1.yaml:
+  AL7_model_MLModel_1:
+    cmd: zntrack run ipsuite.nodes.Apax --name AL7_model_MLModel_1
+    deps:
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/model_outs
+    - nodes/AL0/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/train/CP2KSinglePoint/cp2k
+    - nodes/AL0/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/model_outs
+    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/test/CP2KSinglePoint/cp2k
+    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/model_outs
+    - nodes/AL1/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/train/CP2KSinglePoint/cp2k
+    - nodes/AL1/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/model_outs
+    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/test/CP2KSinglePoint/cp2k
+    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/model_outs
+    - nodes/AL2/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/train/CP2KSinglePoint/cp2k
+    - nodes/AL2/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/model_outs
+    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/test/CP2KSinglePoint/cp2k
+    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/model_outs
+    - nodes/AL3/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/train/CP2KSinglePoint/cp2k
+    - nodes/AL3/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/model_outs
+    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/test/CP2KSinglePoint/cp2k
+    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/model_outs
+    - nodes/AL4/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/train/CP2KSinglePoint/cp2k
+    - nodes/AL4/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/model_outs
+    - nodes/AL5/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/test/CP2KSinglePoint/cp2k
+    - nodes/AL5/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/model_outs
+    - nodes/AL5/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/train/CP2KSinglePoint/cp2k
+    - nodes/AL5/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/model_outs
+    - nodes/AL6/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/test/CP2KSinglePoint/cp2k
+    - nodes/AL6/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt_1/model_outs
+    - nodes/AL6/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/train/CP2KSinglePoint/cp2k
+    - nodes/AL6/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL7/test/ASEGeoOpt_1/model_outs
+    - nodes/AL7/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL7/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL7/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL7/test/CP2KSinglePoint/cp2k
+    - nodes/AL7/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL7/train/ASEGeoOpt_1/model_outs
+    - nodes/AL7/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL7/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL7/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL7/train/CP2KSinglePoint/cp2k
+    - nodes/AL7/train/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/AL7/model/MLModel_1/metrics.json:
+        cache: false
+    - nodes/AL7/model/MLModel_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL7/model/MLModel_1/apax_model
+    - nodes/AL7/model/MLModel_1/log.csv
+    - nodes/AL7/model/MLModel_1/train.log
+    - nodes/AL7/model/MLModel_1/train_atoms.extxyz
+    - nodes/AL7/model/MLModel_1/val_atoms.extxyz
+    params:
+    - AL7_model_MLModel_1
+    - config/initial_model_2.yaml:
+  AL7_test_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL7_test_ASEGeoOpt
+    deps:
+    - nodes/AL6/model/EnsembleModel/node-meta.json
+    - nodes/AL6/model/EnsembleModel/uuid.json
+    - nodes/AL7/test/AL7_test_ASEGeoOpt_checker_list_0/node-meta.json
+    - nodes/AL7/test/ASEMD/metrics_dict.csv
+    - nodes/AL7/test/ASEMD/model
+    - nodes/AL7/test/ASEMD/node-meta.json
+    - nodes/AL7/test/ASEMD/steps_before_stopping.json
+    - nodes/AL7/test/ASEMD/trajectory.h5
+    - nodes/AL7/test/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL7/test/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL7/test/ASEGeoOpt/model_outs
+    - nodes/AL7/test/ASEGeoOpt/trajectory.h5
+    params:
+    - AL7_test_ASEGeoOpt
+  AL7_test_ASEGeoOpt_1:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL7_test_ASEGeoOpt_1
+    deps:
+    - nodes/AL7/test/ASEGeoOpt/model_outs
+    - nodes/AL7/test/ASEGeoOpt/node-meta.json
+    - nodes/AL7/test/ASEGeoOpt/trajectory.h5
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/AL7/test/ASEGeoOpt_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL7/test/ASEGeoOpt_1/model_outs
+    - nodes/AL7/test/ASEGeoOpt_1/trajectory.h5
+    params:
+    - AL7_test_ASEGeoOpt_1
+  AL7_test_ASEGeoOpt_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL7_test_ASEGeoOpt_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL7/test/AL7_test_ASEGeoOpt_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL7_test_ASEGeoOpt_checker_list_0
+    - zntrack.json:
+      - AL7_test_ASEGeoOpt.checker_list
+  AL7_test_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name AL7_test_ASEMD
+    deps:
+    - nodes/AL6/model/EnsembleModel/node-meta.json
+    - nodes/AL6/model/EnsembleModel/uuid.json
+    - nodes/AL6/test/ASEGeoOpt_1/model_outs
+    - nodes/AL6/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL7/test/AL7_test_ASEMD_checker_list_0/node-meta.json
+    - nodes/AL7/test/AL7_test_ASEMD_modifier_0/node-meta.json
+    - nodes/AL7/test/AL7_test_ASEMD_modifier_1/node-meta.json
+    - nodes/AL7/test/AL7_test_ASEMD_thermostat/node-meta.json
+    metrics:
+    - nodes/AL7/test/ASEMD/node-meta.json:
+        cache: false
+    - nodes/AL7/test/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/AL7/test/ASEMD/metrics_dict.csv
+    - nodes/AL7/test/ASEMD/model
+    - nodes/AL7/test/ASEMD/trajectory.h5
+    - nodes/AL7/test/ASEMD/velocities_cache.json
+    params:
+    - AL7_test_ASEMD
+  AL7_test_ASEMD_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL7_test_ASEMD_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL7/test/AL7_test_ASEMD_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL7_test_ASEMD_checker_list_0
+    - zntrack.json:
+      - AL7_test_ASEMD.checker_list
+  AL7_test_ASEMD_modifier_0:
+    cmd: zntrack run ipsuite.nodes.TemperatureOscillatingRampModifier --name AL7_test_ASEMD_modifier_0
+      --meta-only
+    metrics:
+    - nodes/AL7/test/AL7_test_ASEMD_modifier_0/node-meta.json:
+        cache: false
+    params:
+    - AL7_test_ASEMD_modifier_0
+    - zntrack.json:
+      - AL7_test_ASEMD.modifier
+  AL7_test_ASEMD_modifier_1:
+    cmd: zntrack run ipsuite.nodes.BoxOscillatingRampModifier --name AL7_test_ASEMD_modifier_1
+      --meta-only
+    metrics:
+    - nodes/AL7/test/AL7_test_ASEMD_modifier_1/node-meta.json:
+        cache: false
+    params:
+    - AL7_test_ASEMD_modifier_1
+    - zntrack.json:
+      - AL7_test_ASEMD.modifier
+  AL7_test_ASEMD_thermostat:
+    cmd: zntrack run ipsuite.nodes.LangevinThermostat --name AL7_test_ASEMD_thermostat
+      --meta-only
+    metrics:
+    - nodes/AL7/test/AL7_test_ASEMD_thermostat/node-meta.json:
+        cache: false
+    params:
+    - AL7_test_ASEMD_thermostat
+    - zntrack.json:
+      - AL7_test_ASEMD.thermostat
+  AL7_test_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AL7_test_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/AL7/test/ConfigurationSelection_1/node-meta.json
+    - nodes/AL7/test/ConfigurationSelection_1/selected_configurations.json
+    metrics:
+    - nodes/AL7/test/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL7/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL7/test/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
+  AL7_test_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AL7_test_ConfigurationSelection
+    deps:
+    - nodes/AL7/test/ASEMD/metrics_dict.csv
+    - nodes/AL7/test/ASEMD/model
+    - nodes/AL7/test/ASEMD/node-meta.json
+    - nodes/AL7/test/ASEMD/steps_before_stopping.json
+    - nodes/AL7/test/ASEMD/trajectory.h5
+    - nodes/AL7/test/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL7/test/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL7/test/ConfigurationSelection/selected_configurations.json
+    params:
+    - AL7_test_ConfigurationSelection
+  AL7_test_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name AL7_test_ConfigurationSelection_1
+    deps:
+    - nodes/AL7/test/ConfigurationSelection/node-meta.json
+    - nodes/AL7/test/ConfigurationSelection/selected_configurations.json
+    metrics:
+    - nodes/AL7/test/ConfigurationSelection_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL7/test/ConfigurationSelection_1/selected_configurations.json
+    params:
+    - AL7_test_ConfigurationSelection_1
+  AL7_train_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL7_train_ASEGeoOpt
+    deps:
+    - nodes/AL6/model/EnsembleModel/node-meta.json
+    - nodes/AL6/model/EnsembleModel/uuid.json
+    - nodes/AL7/train/AL7_train_ASEGeoOpt_checker_list_0/node-meta.json
+    - nodes/AL7/train/ASEMD/metrics_dict.csv
+    - nodes/AL7/train/ASEMD/model
+    - nodes/AL7/train/ASEMD/node-meta.json
+    - nodes/AL7/train/ASEMD/steps_before_stopping.json
+    - nodes/AL7/train/ASEMD/trajectory.h5
+    - nodes/AL7/train/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL7/train/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL7/train/ASEGeoOpt/model_outs
+    - nodes/AL7/train/ASEGeoOpt/trajectory.h5
+    params:
+    - AL7_train_ASEGeoOpt
+  AL7_train_ASEGeoOpt_1:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL7_train_ASEGeoOpt_1
+    deps:
+    - nodes/AL7/train/ASEGeoOpt/model_outs
+    - nodes/AL7/train/ASEGeoOpt/node-meta.json
+    - nodes/AL7/train/ASEGeoOpt/trajectory.h5
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/AL7/train/ASEGeoOpt_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL7/train/ASEGeoOpt_1/model_outs
+    - nodes/AL7/train/ASEGeoOpt_1/trajectory.h5
+    params:
+    - AL7_train_ASEGeoOpt_1
+  AL7_train_ASEGeoOpt_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL7_train_ASEGeoOpt_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL7/train/AL7_train_ASEGeoOpt_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL7_train_ASEGeoOpt_checker_list_0
+    - zntrack.json:
+      - AL7_train_ASEGeoOpt.checker_list
+  AL7_train_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name AL7_train_ASEMD
+    deps:
+    - nodes/AL6/model/EnsembleModel/node-meta.json
+    - nodes/AL6/model/EnsembleModel/uuid.json
+    - nodes/AL6/train/ASEGeoOpt_1/model_outs
+    - nodes/AL6/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL7/train/AL7_train_ASEMD_checker_list_0/node-meta.json
+    - nodes/AL7/train/AL7_train_ASEMD_modifier_0/node-meta.json
+    - nodes/AL7/train/AL7_train_ASEMD_modifier_1/node-meta.json
+    - nodes/AL7/train/AL7_train_ASEMD_thermostat/node-meta.json
+    metrics:
+    - nodes/AL7/train/ASEMD/node-meta.json:
+        cache: false
+    - nodes/AL7/train/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/AL7/train/ASEMD/metrics_dict.csv
+    - nodes/AL7/train/ASEMD/model
+    - nodes/AL7/train/ASEMD/trajectory.h5
+    - nodes/AL7/train/ASEMD/velocities_cache.json
+    params:
+    - AL7_train_ASEMD
+  AL7_train_ASEMD_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL7_train_ASEMD_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL7/train/AL7_train_ASEMD_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL7_train_ASEMD_checker_list_0
+    - zntrack.json:
+      - AL7_train_ASEMD.checker_list
+  AL7_train_ASEMD_modifier_0:
+    cmd: zntrack run ipsuite.nodes.TemperatureOscillatingRampModifier --name AL7_train_ASEMD_modifier_0
+      --meta-only
+    metrics:
+    - nodes/AL7/train/AL7_train_ASEMD_modifier_0/node-meta.json:
+        cache: false
+    params:
+    - AL7_train_ASEMD_modifier_0
+    - zntrack.json:
+      - AL7_train_ASEMD.modifier
+  AL7_train_ASEMD_modifier_1:
+    cmd: zntrack run ipsuite.nodes.BoxOscillatingRampModifier --name AL7_train_ASEMD_modifier_1
+      --meta-only
+    metrics:
+    - nodes/AL7/train/AL7_train_ASEMD_modifier_1/node-meta.json:
+        cache: false
+    params:
+    - AL7_train_ASEMD_modifier_1
+    - zntrack.json:
+      - AL7_train_ASEMD.modifier
+  AL7_train_ASEMD_thermostat:
+    cmd: zntrack run ipsuite.nodes.LangevinThermostat --name AL7_train_ASEMD_thermostat
+      --meta-only
+    metrics:
+    - nodes/AL7/train/AL7_train_ASEMD_thermostat/node-meta.json:
+        cache: false
+    params:
+    - AL7_train_ASEMD_thermostat
+    - zntrack.json:
+      - AL7_train_ASEMD.thermostat
+  AL7_train_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AL7_train_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/AL7/train/ConfigurationSelection_1/node-meta.json
+    - nodes/AL7/train/ConfigurationSelection_1/selected_configurations.json
+    metrics:
+    - nodes/AL7/train/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL7/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL7/train/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
+  AL7_train_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AL7_train_ConfigurationSelection
+    deps:
+    - nodes/AL7/train/ASEMD/metrics_dict.csv
+    - nodes/AL7/train/ASEMD/model
+    - nodes/AL7/train/ASEMD/node-meta.json
+    - nodes/AL7/train/ASEMD/steps_before_stopping.json
+    - nodes/AL7/train/ASEMD/trajectory.h5
+    - nodes/AL7/train/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL7/train/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL7/train/ConfigurationSelection/selected_configurations.json
+    params:
+    - AL7_train_ConfigurationSelection
+  AL7_train_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name AL7_train_ConfigurationSelection_1
+    deps:
+    - nodes/AL7/train/ConfigurationSelection/node-meta.json
+    - nodes/AL7/train/ConfigurationSelection/selected_configurations.json
+    metrics:
+    - nodes/AL7/train/ConfigurationSelection_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL7/train/ConfigurationSelection_1/selected_configurations.json
+    params:
+    - AL7_train_ConfigurationSelection_1
+  AL8_model_EnsembleModel:
+    cmd: zntrack run ipsuite.nodes.EnsembleModel --name AL8_model_EnsembleModel
+    deps:
+    - nodes/AL8/model/MLModel/apax_model
+    - nodes/AL8/model/MLModel/log.csv
+    - nodes/AL8/model/MLModel/metrics.json
+    - nodes/AL8/model/MLModel/node-meta.json
+    - nodes/AL8/model/MLModel/train.log
+    - nodes/AL8/model/MLModel/train_atoms.extxyz
+    - nodes/AL8/model/MLModel/val_atoms.extxyz
+    - nodes/AL8/model/MLModel_1/apax_model
+    - nodes/AL8/model/MLModel_1/log.csv
+    - nodes/AL8/model/MLModel_1/metrics.json
+    - nodes/AL8/model/MLModel_1/node-meta.json
+    - nodes/AL8/model/MLModel_1/train.log
+    - nodes/AL8/model/MLModel_1/train_atoms.extxyz
+    - nodes/AL8/model/MLModel_1/val_atoms.extxyz
+    metrics:
+    - nodes/AL8/model/EnsembleModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL8/model/EnsembleModel/uuid.json
+  AL8_model_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name AL8_model_MLModel
+    deps:
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/model_outs
+    - nodes/AL0/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/train/CP2KSinglePoint/cp2k
+    - nodes/AL0/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/model_outs
+    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/test/CP2KSinglePoint/cp2k
+    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/model_outs
+    - nodes/AL1/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/train/CP2KSinglePoint/cp2k
+    - nodes/AL1/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/model_outs
+    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/test/CP2KSinglePoint/cp2k
+    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/model_outs
+    - nodes/AL2/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/train/CP2KSinglePoint/cp2k
+    - nodes/AL2/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/model_outs
+    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/test/CP2KSinglePoint/cp2k
+    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/model_outs
+    - nodes/AL3/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/train/CP2KSinglePoint/cp2k
+    - nodes/AL3/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/model_outs
+    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/test/CP2KSinglePoint/cp2k
+    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/model_outs
+    - nodes/AL4/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/train/CP2KSinglePoint/cp2k
+    - nodes/AL4/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/model_outs
+    - nodes/AL5/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/test/CP2KSinglePoint/cp2k
+    - nodes/AL5/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/model_outs
+    - nodes/AL5/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/train/CP2KSinglePoint/cp2k
+    - nodes/AL5/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/model_outs
+    - nodes/AL6/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/test/CP2KSinglePoint/cp2k
+    - nodes/AL6/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt_1/model_outs
+    - nodes/AL6/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/train/CP2KSinglePoint/cp2k
+    - nodes/AL6/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL7/test/ASEGeoOpt_1/model_outs
+    - nodes/AL7/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL7/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL7/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL7/test/CP2KSinglePoint/cp2k
+    - nodes/AL7/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL7/train/ASEGeoOpt_1/model_outs
+    - nodes/AL7/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL7/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL7/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL7/train/CP2KSinglePoint/cp2k
+    - nodes/AL7/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL8/test/ASEGeoOpt_1/model_outs
+    - nodes/AL8/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL8/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL8/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL8/test/CP2KSinglePoint/cp2k
+    - nodes/AL8/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL8/train/ASEGeoOpt_1/model_outs
+    - nodes/AL8/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL8/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL8/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL8/train/CP2KSinglePoint/cp2k
+    - nodes/AL8/train/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/AL8/model/MLModel/metrics.json:
+        cache: false
+    - nodes/AL8/model/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL8/model/MLModel/apax_model
+    - nodes/AL8/model/MLModel/log.csv
+    - nodes/AL8/model/MLModel/train.log
+    - nodes/AL8/model/MLModel/train_atoms.extxyz
+    - nodes/AL8/model/MLModel/val_atoms.extxyz
+    params:
+    - AL8_model_MLModel
+    - config/initial_model_1.yaml:
+  AL8_model_MLModel_1:
+    cmd: zntrack run ipsuite.nodes.Apax --name AL8_model_MLModel_1
+    deps:
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/model_outs
+    - nodes/AL0/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/train/CP2KSinglePoint/cp2k
+    - nodes/AL0/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/model_outs
+    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/test/CP2KSinglePoint/cp2k
+    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/model_outs
+    - nodes/AL1/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/train/CP2KSinglePoint/cp2k
+    - nodes/AL1/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/model_outs
+    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/test/CP2KSinglePoint/cp2k
+    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/model_outs
+    - nodes/AL2/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/train/CP2KSinglePoint/cp2k
+    - nodes/AL2/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/model_outs
+    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/test/CP2KSinglePoint/cp2k
+    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/model_outs
+    - nodes/AL3/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/train/CP2KSinglePoint/cp2k
+    - nodes/AL3/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/model_outs
+    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/test/CP2KSinglePoint/cp2k
+    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/model_outs
+    - nodes/AL4/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/train/CP2KSinglePoint/cp2k
+    - nodes/AL4/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/model_outs
+    - nodes/AL5/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/test/CP2KSinglePoint/cp2k
+    - nodes/AL5/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/model_outs
+    - nodes/AL5/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/train/CP2KSinglePoint/cp2k
+    - nodes/AL5/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/model_outs
+    - nodes/AL6/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/test/CP2KSinglePoint/cp2k
+    - nodes/AL6/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt_1/model_outs
+    - nodes/AL6/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/train/CP2KSinglePoint/cp2k
+    - nodes/AL6/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL7/test/ASEGeoOpt_1/model_outs
+    - nodes/AL7/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL7/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL7/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL7/test/CP2KSinglePoint/cp2k
+    - nodes/AL7/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL7/train/ASEGeoOpt_1/model_outs
+    - nodes/AL7/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL7/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL7/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL7/train/CP2KSinglePoint/cp2k
+    - nodes/AL7/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL8/test/ASEGeoOpt_1/model_outs
+    - nodes/AL8/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL8/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL8/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL8/test/CP2KSinglePoint/cp2k
+    - nodes/AL8/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL8/train/ASEGeoOpt_1/model_outs
+    - nodes/AL8/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL8/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL8/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL8/train/CP2KSinglePoint/cp2k
+    - nodes/AL8/train/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/AL8/model/MLModel_1/metrics.json:
+        cache: false
+    - nodes/AL8/model/MLModel_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL8/model/MLModel_1/apax_model
+    - nodes/AL8/model/MLModel_1/log.csv
+    - nodes/AL8/model/MLModel_1/train.log
+    - nodes/AL8/model/MLModel_1/train_atoms.extxyz
+    - nodes/AL8/model/MLModel_1/val_atoms.extxyz
+    params:
+    - AL8_model_MLModel_1
+    - config/initial_model_2.yaml:
+  AL8_test_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL8_test_ASEGeoOpt
+    deps:
+    - nodes/AL7/model/EnsembleModel/node-meta.json
+    - nodes/AL7/model/EnsembleModel/uuid.json
+    - nodes/AL8/test/AL8_test_ASEGeoOpt_checker_list_0/node-meta.json
+    - nodes/AL8/test/ASEMD/metrics_dict.csv
+    - nodes/AL8/test/ASEMD/model
+    - nodes/AL8/test/ASEMD/node-meta.json
+    - nodes/AL8/test/ASEMD/steps_before_stopping.json
+    - nodes/AL8/test/ASEMD/trajectory.h5
+    - nodes/AL8/test/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL8/test/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL8/test/ASEGeoOpt/model_outs
+    - nodes/AL8/test/ASEGeoOpt/trajectory.h5
+    params:
+    - AL8_test_ASEGeoOpt
+  AL8_test_ASEGeoOpt_1:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL8_test_ASEGeoOpt_1
+    deps:
+    - nodes/AL8/test/ASEGeoOpt/model_outs
+    - nodes/AL8/test/ASEGeoOpt/node-meta.json
+    - nodes/AL8/test/ASEGeoOpt/trajectory.h5
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/AL8/test/ASEGeoOpt_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL8/test/ASEGeoOpt_1/model_outs
+    - nodes/AL8/test/ASEGeoOpt_1/trajectory.h5
+    params:
+    - AL8_test_ASEGeoOpt_1
+  AL8_test_ASEGeoOpt_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL8_test_ASEGeoOpt_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL8/test/AL8_test_ASEGeoOpt_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL8_test_ASEGeoOpt_checker_list_0
+    - zntrack.json:
+      - AL8_test_ASEGeoOpt.checker_list
+  AL8_test_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name AL8_test_ASEMD
+    deps:
+    - nodes/AL7/model/EnsembleModel/node-meta.json
+    - nodes/AL7/model/EnsembleModel/uuid.json
+    - nodes/AL7/test/ASEGeoOpt_1/model_outs
+    - nodes/AL7/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL7/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL8/test/AL8_test_ASEMD_checker_list_0/node-meta.json
+    - nodes/AL8/test/AL8_test_ASEMD_modifier_0/node-meta.json
+    - nodes/AL8/test/AL8_test_ASEMD_modifier_1/node-meta.json
+    - nodes/AL8/test/AL8_test_ASEMD_thermostat/node-meta.json
+    metrics:
+    - nodes/AL8/test/ASEMD/node-meta.json:
+        cache: false
+    - nodes/AL8/test/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/AL8/test/ASEMD/metrics_dict.csv
+    - nodes/AL8/test/ASEMD/model
+    - nodes/AL8/test/ASEMD/trajectory.h5
+    - nodes/AL8/test/ASEMD/velocities_cache.json
+    params:
+    - AL8_test_ASEMD
+  AL8_test_ASEMD_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL8_test_ASEMD_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL8/test/AL8_test_ASEMD_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL8_test_ASEMD_checker_list_0
+    - zntrack.json:
+      - AL8_test_ASEMD.checker_list
+  AL8_test_ASEMD_modifier_0:
+    cmd: zntrack run ipsuite.nodes.TemperatureOscillatingRampModifier --name AL8_test_ASEMD_modifier_0
+      --meta-only
+    metrics:
+    - nodes/AL8/test/AL8_test_ASEMD_modifier_0/node-meta.json:
+        cache: false
+    params:
+    - AL8_test_ASEMD_modifier_0
+    - zntrack.json:
+      - AL8_test_ASEMD.modifier
+  AL8_test_ASEMD_modifier_1:
+    cmd: zntrack run ipsuite.nodes.BoxOscillatingRampModifier --name AL8_test_ASEMD_modifier_1
+      --meta-only
+    metrics:
+    - nodes/AL8/test/AL8_test_ASEMD_modifier_1/node-meta.json:
+        cache: false
+    params:
+    - AL8_test_ASEMD_modifier_1
+    - zntrack.json:
+      - AL8_test_ASEMD.modifier
+  AL8_test_ASEMD_thermostat:
+    cmd: zntrack run ipsuite.nodes.LangevinThermostat --name AL8_test_ASEMD_thermostat
+      --meta-only
+    metrics:
+    - nodes/AL8/test/AL8_test_ASEMD_thermostat/node-meta.json:
+        cache: false
+    params:
+    - AL8_test_ASEMD_thermostat
+    - zntrack.json:
+      - AL8_test_ASEMD.thermostat
+  AL8_test_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AL8_test_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/AL8/test/ConfigurationSelection_1/node-meta.json
+    - nodes/AL8/test/ConfigurationSelection_1/selected_configurations.json
+    metrics:
+    - nodes/AL8/test/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL8/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL8/test/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
+  AL8_test_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AL8_test_ConfigurationSelection
+    deps:
+    - nodes/AL8/test/ASEMD/metrics_dict.csv
+    - nodes/AL8/test/ASEMD/model
+    - nodes/AL8/test/ASEMD/node-meta.json
+    - nodes/AL8/test/ASEMD/steps_before_stopping.json
+    - nodes/AL8/test/ASEMD/trajectory.h5
+    - nodes/AL8/test/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL8/test/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL8/test/ConfigurationSelection/selected_configurations.json
+    params:
+    - AL8_test_ConfigurationSelection
+  AL8_test_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name AL8_test_ConfigurationSelection_1
+    deps:
+    - nodes/AL8/test/ConfigurationSelection/node-meta.json
+    - nodes/AL8/test/ConfigurationSelection/selected_configurations.json
+    metrics:
+    - nodes/AL8/test/ConfigurationSelection_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL8/test/ConfigurationSelection_1/selected_configurations.json
+    params:
+    - AL8_test_ConfigurationSelection_1
+  AL8_train_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL8_train_ASEGeoOpt
+    deps:
+    - nodes/AL7/model/EnsembleModel/node-meta.json
+    - nodes/AL7/model/EnsembleModel/uuid.json
+    - nodes/AL8/train/AL8_train_ASEGeoOpt_checker_list_0/node-meta.json
+    - nodes/AL8/train/ASEMD/metrics_dict.csv
+    - nodes/AL8/train/ASEMD/model
+    - nodes/AL8/train/ASEMD/node-meta.json
+    - nodes/AL8/train/ASEMD/steps_before_stopping.json
+    - nodes/AL8/train/ASEMD/trajectory.h5
+    - nodes/AL8/train/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL8/train/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL8/train/ASEGeoOpt/model_outs
+    - nodes/AL8/train/ASEGeoOpt/trajectory.h5
+    params:
+    - AL8_train_ASEGeoOpt
+  AL8_train_ASEGeoOpt_1:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL8_train_ASEGeoOpt_1
+    deps:
+    - nodes/AL8/train/ASEGeoOpt/model_outs
+    - nodes/AL8/train/ASEGeoOpt/node-meta.json
+    - nodes/AL8/train/ASEGeoOpt/trajectory.h5
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/AL8/train/ASEGeoOpt_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL8/train/ASEGeoOpt_1/model_outs
+    - nodes/AL8/train/ASEGeoOpt_1/trajectory.h5
+    params:
+    - AL8_train_ASEGeoOpt_1
+  AL8_train_ASEGeoOpt_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL8_train_ASEGeoOpt_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL8/train/AL8_train_ASEGeoOpt_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL8_train_ASEGeoOpt_checker_list_0
+    - zntrack.json:
+      - AL8_train_ASEGeoOpt.checker_list
+  AL8_train_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name AL8_train_ASEMD
+    deps:
+    - nodes/AL7/model/EnsembleModel/node-meta.json
+    - nodes/AL7/model/EnsembleModel/uuid.json
+    - nodes/AL7/train/ASEGeoOpt_1/model_outs
+    - nodes/AL7/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL7/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL8/train/AL8_train_ASEMD_checker_list_0/node-meta.json
+    - nodes/AL8/train/AL8_train_ASEMD_modifier_0/node-meta.json
+    - nodes/AL8/train/AL8_train_ASEMD_modifier_1/node-meta.json
+    - nodes/AL8/train/AL8_train_ASEMD_thermostat/node-meta.json
+    metrics:
+    - nodes/AL8/train/ASEMD/node-meta.json:
+        cache: false
+    - nodes/AL8/train/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/AL8/train/ASEMD/metrics_dict.csv
+    - nodes/AL8/train/ASEMD/model
+    - nodes/AL8/train/ASEMD/trajectory.h5
+    - nodes/AL8/train/ASEMD/velocities_cache.json
+    params:
+    - AL8_train_ASEMD
+  AL8_train_ASEMD_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL8_train_ASEMD_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL8/train/AL8_train_ASEMD_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL8_train_ASEMD_checker_list_0
+    - zntrack.json:
+      - AL8_train_ASEMD.checker_list
+  AL8_train_ASEMD_modifier_0:
+    cmd: zntrack run ipsuite.nodes.TemperatureOscillatingRampModifier --name AL8_train_ASEMD_modifier_0
+      --meta-only
+    metrics:
+    - nodes/AL8/train/AL8_train_ASEMD_modifier_0/node-meta.json:
+        cache: false
+    params:
+    - AL8_train_ASEMD_modifier_0
+    - zntrack.json:
+      - AL8_train_ASEMD.modifier
+  AL8_train_ASEMD_modifier_1:
+    cmd: zntrack run ipsuite.nodes.BoxOscillatingRampModifier --name AL8_train_ASEMD_modifier_1
+      --meta-only
+    metrics:
+    - nodes/AL8/train/AL8_train_ASEMD_modifier_1/node-meta.json:
+        cache: false
+    params:
+    - AL8_train_ASEMD_modifier_1
+    - zntrack.json:
+      - AL8_train_ASEMD.modifier
+  AL8_train_ASEMD_thermostat:
+    cmd: zntrack run ipsuite.nodes.LangevinThermostat --name AL8_train_ASEMD_thermostat
+      --meta-only
+    metrics:
+    - nodes/AL8/train/AL8_train_ASEMD_thermostat/node-meta.json:
+        cache: false
+    params:
+    - AL8_train_ASEMD_thermostat
+    - zntrack.json:
+      - AL8_train_ASEMD.thermostat
+  AL8_train_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AL8_train_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/AL8/train/ConfigurationSelection_1/node-meta.json
+    - nodes/AL8/train/ConfigurationSelection_1/selected_configurations.json
+    metrics:
+    - nodes/AL8/train/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL8/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL8/train/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
+  AL8_train_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AL8_train_ConfigurationSelection
+    deps:
+    - nodes/AL8/train/ASEMD/metrics_dict.csv
+    - nodes/AL8/train/ASEMD/model
+    - nodes/AL8/train/ASEMD/node-meta.json
+    - nodes/AL8/train/ASEMD/steps_before_stopping.json
+    - nodes/AL8/train/ASEMD/trajectory.h5
+    - nodes/AL8/train/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL8/train/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL8/train/ConfigurationSelection/selected_configurations.json
+    params:
+    - AL8_train_ConfigurationSelection
+  AL8_train_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name AL8_train_ConfigurationSelection_1
+    deps:
+    - nodes/AL8/train/ConfigurationSelection/node-meta.json
+    - nodes/AL8/train/ConfigurationSelection/selected_configurations.json
+    metrics:
+    - nodes/AL8/train/ConfigurationSelection_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL8/train/ConfigurationSelection_1/selected_configurations.json
+    params:
+    - AL8_train_ConfigurationSelection_1
+  AL9_model_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name AL9_model_MLModel
+    deps:
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/model_outs
+    - nodes/AL0/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/train/CP2KSinglePoint/cp2k
+    - nodes/AL0/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/model_outs
+    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/test/CP2KSinglePoint/cp2k
+    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/model_outs
+    - nodes/AL1/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/train/CP2KSinglePoint/cp2k
+    - nodes/AL1/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/model_outs
+    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/test/CP2KSinglePoint/cp2k
+    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/model_outs
+    - nodes/AL2/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/train/CP2KSinglePoint/cp2k
+    - nodes/AL2/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/model_outs
+    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/test/CP2KSinglePoint/cp2k
+    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/model_outs
+    - nodes/AL3/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/train/CP2KSinglePoint/cp2k
+    - nodes/AL3/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/model_outs
+    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/test/CP2KSinglePoint/cp2k
+    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/model_outs
+    - nodes/AL4/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/train/CP2KSinglePoint/cp2k
+    - nodes/AL4/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/model_outs
+    - nodes/AL5/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/test/CP2KSinglePoint/cp2k
+    - nodes/AL5/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/model_outs
+    - nodes/AL5/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/train/CP2KSinglePoint/cp2k
+    - nodes/AL5/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/model_outs
+    - nodes/AL6/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/test/CP2KSinglePoint/cp2k
+    - nodes/AL6/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt_1/model_outs
+    - nodes/AL6/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/train/CP2KSinglePoint/cp2k
+    - nodes/AL6/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL7/test/ASEGeoOpt_1/model_outs
+    - nodes/AL7/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL7/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL7/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL7/test/CP2KSinglePoint/cp2k
+    - nodes/AL7/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL7/train/ASEGeoOpt_1/model_outs
+    - nodes/AL7/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL7/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL7/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL7/train/CP2KSinglePoint/cp2k
+    - nodes/AL7/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL8/test/ASEGeoOpt_1/model_outs
+    - nodes/AL8/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL8/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL8/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL8/test/CP2KSinglePoint/cp2k
+    - nodes/AL8/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL8/train/ASEGeoOpt_1/model_outs
+    - nodes/AL8/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL8/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL8/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL8/train/CP2KSinglePoint/cp2k
+    - nodes/AL8/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL9/test/ASEGeoOpt_1/model_outs
+    - nodes/AL9/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL9/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL9/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL9/test/CP2KSinglePoint/cp2k
+    - nodes/AL9/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL9/train/ASEGeoOpt_1/model_outs
+    - nodes/AL9/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL9/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL9/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL9/train/CP2KSinglePoint/cp2k
+    - nodes/AL9/train/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/AL9/model/MLModel/metrics.json:
+        cache: false
+    - nodes/AL9/model/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL9/model/MLModel/apax_model
+    - nodes/AL9/model/MLModel/log.csv
+    - nodes/AL9/model/MLModel/train.log
+    - nodes/AL9/model/MLModel/train_atoms.extxyz
+    - nodes/AL9/model/MLModel/val_atoms.extxyz
+    params:
+    - AL9_model_MLModel
+    - config/initial_model_1.yaml:
+  AL9_model_MLModel_1:
+    cmd: zntrack run ipsuite.nodes.Apax --name AL9_model_MLModel_1
+    deps:
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/model_outs
+    - nodes/AL0/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/train/CP2KSinglePoint/cp2k
+    - nodes/AL0/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/model_outs
+    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/test/CP2KSinglePoint/cp2k
+    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/model_outs
+    - nodes/AL1/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/train/CP2KSinglePoint/cp2k
+    - nodes/AL1/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/model_outs
+    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/test/CP2KSinglePoint/cp2k
+    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/model_outs
+    - nodes/AL2/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/train/CP2KSinglePoint/cp2k
+    - nodes/AL2/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/model_outs
+    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/test/CP2KSinglePoint/cp2k
+    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/model_outs
+    - nodes/AL3/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/train/CP2KSinglePoint/cp2k
+    - nodes/AL3/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/model_outs
+    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/test/CP2KSinglePoint/cp2k
+    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/model_outs
+    - nodes/AL4/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/train/CP2KSinglePoint/cp2k
+    - nodes/AL4/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/model_outs
+    - nodes/AL5/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/test/CP2KSinglePoint/cp2k
+    - nodes/AL5/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/model_outs
+    - nodes/AL5/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/train/CP2KSinglePoint/cp2k
+    - nodes/AL5/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/model_outs
+    - nodes/AL6/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/test/CP2KSinglePoint/cp2k
+    - nodes/AL6/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt_1/model_outs
+    - nodes/AL6/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/train/CP2KSinglePoint/cp2k
+    - nodes/AL6/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL7/test/ASEGeoOpt_1/model_outs
+    - nodes/AL7/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL7/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL7/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL7/test/CP2KSinglePoint/cp2k
+    - nodes/AL7/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL7/train/ASEGeoOpt_1/model_outs
+    - nodes/AL7/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL7/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL7/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL7/train/CP2KSinglePoint/cp2k
+    - nodes/AL7/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL8/test/ASEGeoOpt_1/model_outs
+    - nodes/AL8/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL8/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL8/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL8/test/CP2KSinglePoint/cp2k
+    - nodes/AL8/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL8/train/ASEGeoOpt_1/model_outs
+    - nodes/AL8/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL8/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL8/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL8/train/CP2KSinglePoint/cp2k
+    - nodes/AL8/train/CP2KSinglePoint/node-meta.json
+    - nodes/AL9/test/ASEGeoOpt_1/model_outs
+    - nodes/AL9/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL9/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL9/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL9/test/CP2KSinglePoint/cp2k
+    - nodes/AL9/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL9/train/ASEGeoOpt_1/model_outs
+    - nodes/AL9/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL9/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL9/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL9/train/CP2KSinglePoint/cp2k
+    - nodes/AL9/train/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/AL9/model/MLModel_1/metrics.json:
+        cache: false
+    - nodes/AL9/model/MLModel_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL9/model/MLModel_1/apax_model
+    - nodes/AL9/model/MLModel_1/log.csv
+    - nodes/AL9/model/MLModel_1/train.log
+    - nodes/AL9/model/MLModel_1/train_atoms.extxyz
+    - nodes/AL9/model/MLModel_1/val_atoms.extxyz
+    params:
+    - AL9_model_MLModel_1
+    - config/initial_model_2.yaml:
+  AL9_test_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL9_test_ASEGeoOpt
+    deps:
+    - nodes/AL8/model/EnsembleModel/node-meta.json
+    - nodes/AL8/model/EnsembleModel/uuid.json
+    - nodes/AL9/test/AL9_test_ASEGeoOpt_checker_list_0/node-meta.json
+    - nodes/AL9/test/ASEMD/metrics_dict.csv
+    - nodes/AL9/test/ASEMD/model
+    - nodes/AL9/test/ASEMD/node-meta.json
+    - nodes/AL9/test/ASEMD/steps_before_stopping.json
+    - nodes/AL9/test/ASEMD/trajectory.h5
+    - nodes/AL9/test/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL9/test/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL9/test/ASEGeoOpt/model_outs
+    - nodes/AL9/test/ASEGeoOpt/trajectory.h5
+    params:
+    - AL9_test_ASEGeoOpt
+  AL9_test_ASEGeoOpt_1:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL9_test_ASEGeoOpt_1
+    deps:
+    - nodes/AL9/test/ASEGeoOpt/model_outs
+    - nodes/AL9/test/ASEGeoOpt/node-meta.json
+    - nodes/AL9/test/ASEGeoOpt/trajectory.h5
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/AL9/test/ASEGeoOpt_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL9/test/ASEGeoOpt_1/model_outs
+    - nodes/AL9/test/ASEGeoOpt_1/trajectory.h5
+    params:
+    - AL9_test_ASEGeoOpt_1
+  AL9_test_ASEGeoOpt_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL9_test_ASEGeoOpt_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL9/test/AL9_test_ASEGeoOpt_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL9_test_ASEGeoOpt_checker_list_0
+    - zntrack.json:
+      - AL9_test_ASEGeoOpt.checker_list
+  AL9_test_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name AL9_test_ASEMD
+    deps:
+    - nodes/AL8/model/EnsembleModel/node-meta.json
+    - nodes/AL8/model/EnsembleModel/uuid.json
+    - nodes/AL8/test/ASEGeoOpt_1/model_outs
+    - nodes/AL8/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL8/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL9/test/AL9_test_ASEMD_checker_list_0/node-meta.json
+    - nodes/AL9/test/AL9_test_ASEMD_modifier_0/node-meta.json
+    - nodes/AL9/test/AL9_test_ASEMD_modifier_1/node-meta.json
+    - nodes/AL9/test/AL9_test_ASEMD_thermostat/node-meta.json
+    metrics:
+    - nodes/AL9/test/ASEMD/node-meta.json:
+        cache: false
+    - nodes/AL9/test/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/AL9/test/ASEMD/metrics_dict.csv
+    - nodes/AL9/test/ASEMD/model
+    - nodes/AL9/test/ASEMD/trajectory.h5
+    - nodes/AL9/test/ASEMD/velocities_cache.json
+    params:
+    - AL9_test_ASEMD
+  AL9_test_ASEMD_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL9_test_ASEMD_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL9/test/AL9_test_ASEMD_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL9_test_ASEMD_checker_list_0
+    - zntrack.json:
+      - AL9_test_ASEMD.checker_list
+  AL9_test_ASEMD_modifier_0:
+    cmd: zntrack run ipsuite.nodes.TemperatureOscillatingRampModifier --name AL9_test_ASEMD_modifier_0
+      --meta-only
+    metrics:
+    - nodes/AL9/test/AL9_test_ASEMD_modifier_0/node-meta.json:
+        cache: false
+    params:
+    - AL9_test_ASEMD_modifier_0
+    - zntrack.json:
+      - AL9_test_ASEMD.modifier
+  AL9_test_ASEMD_modifier_1:
+    cmd: zntrack run ipsuite.nodes.BoxOscillatingRampModifier --name AL9_test_ASEMD_modifier_1
+      --meta-only
+    metrics:
+    - nodes/AL9/test/AL9_test_ASEMD_modifier_1/node-meta.json:
+        cache: false
+    params:
+    - AL9_test_ASEMD_modifier_1
+    - zntrack.json:
+      - AL9_test_ASEMD.modifier
+  AL9_test_ASEMD_thermostat:
+    cmd: zntrack run ipsuite.nodes.LangevinThermostat --name AL9_test_ASEMD_thermostat
+      --meta-only
+    metrics:
+    - nodes/AL9/test/AL9_test_ASEMD_thermostat/node-meta.json:
+        cache: false
+    params:
+    - AL9_test_ASEMD_thermostat
+    - zntrack.json:
+      - AL9_test_ASEMD.thermostat
+  AL9_test_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AL9_test_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/AL9/test/ConfigurationSelection_1/node-meta.json
+    - nodes/AL9/test/ConfigurationSelection_1/selected_configurations.json
+    metrics:
+    - nodes/AL9/test/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL9/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL9/test/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
+  AL9_test_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AL9_test_ConfigurationSelection
+    deps:
+    - nodes/AL9/test/ASEMD/metrics_dict.csv
+    - nodes/AL9/test/ASEMD/model
+    - nodes/AL9/test/ASEMD/node-meta.json
+    - nodes/AL9/test/ASEMD/steps_before_stopping.json
+    - nodes/AL9/test/ASEMD/trajectory.h5
+    - nodes/AL9/test/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL9/test/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL9/test/ConfigurationSelection/selected_configurations.json
+    params:
+    - AL9_test_ConfigurationSelection
+  AL9_test_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name AL9_test_ConfigurationSelection_1
+    deps:
+    - nodes/AL9/test/ConfigurationSelection/node-meta.json
+    - nodes/AL9/test/ConfigurationSelection/selected_configurations.json
+    metrics:
+    - nodes/AL9/test/ConfigurationSelection_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL9/test/ConfigurationSelection_1/selected_configurations.json
+    params:
+    - AL9_test_ConfigurationSelection_1
+  AL9_train_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL9_train_ASEGeoOpt
+    deps:
+    - nodes/AL8/model/EnsembleModel/node-meta.json
+    - nodes/AL8/model/EnsembleModel/uuid.json
+    - nodes/AL9/train/AL9_train_ASEGeoOpt_checker_list_0/node-meta.json
+    - nodes/AL9/train/ASEMD/metrics_dict.csv
+    - nodes/AL9/train/ASEMD/model
+    - nodes/AL9/train/ASEMD/node-meta.json
+    - nodes/AL9/train/ASEMD/steps_before_stopping.json
+    - nodes/AL9/train/ASEMD/trajectory.h5
+    - nodes/AL9/train/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL9/train/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL9/train/ASEGeoOpt/model_outs
+    - nodes/AL9/train/ASEGeoOpt/trajectory.h5
+    params:
+    - AL9_train_ASEGeoOpt
+  AL9_train_ASEGeoOpt_1:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL9_train_ASEGeoOpt_1
+    deps:
+    - nodes/AL9/train/ASEGeoOpt/model_outs
+    - nodes/AL9/train/ASEGeoOpt/node-meta.json
+    - nodes/AL9/train/ASEGeoOpt/trajectory.h5
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/AL9/train/ASEGeoOpt_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL9/train/ASEGeoOpt_1/model_outs
+    - nodes/AL9/train/ASEGeoOpt_1/trajectory.h5
+    params:
+    - AL9_train_ASEGeoOpt_1
+  AL9_train_ASEGeoOpt_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL9_train_ASEGeoOpt_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL9/train/AL9_train_ASEGeoOpt_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL9_train_ASEGeoOpt_checker_list_0
+    - zntrack.json:
+      - AL9_train_ASEGeoOpt.checker_list
+  AL9_train_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name AL9_train_ASEMD
+    deps:
+    - nodes/AL8/model/EnsembleModel/node-meta.json
+    - nodes/AL8/model/EnsembleModel/uuid.json
+    - nodes/AL8/train/ASEGeoOpt_1/model_outs
+    - nodes/AL8/train/ASEGeoOpt_1/node-meta.json
+    - nodes/AL8/train/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL9/train/AL9_train_ASEMD_checker_list_0/node-meta.json
+    - nodes/AL9/train/AL9_train_ASEMD_modifier_0/node-meta.json
+    - nodes/AL9/train/AL9_train_ASEMD_modifier_1/node-meta.json
+    - nodes/AL9/train/AL9_train_ASEMD_thermostat/node-meta.json
+    metrics:
+    - nodes/AL9/train/ASEMD/node-meta.json:
+        cache: false
+    - nodes/AL9/train/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/AL9/train/ASEMD/metrics_dict.csv
+    - nodes/AL9/train/ASEMD/model
+    - nodes/AL9/train/ASEMD/trajectory.h5
+    - nodes/AL9/train/ASEMD/velocities_cache.json
+    params:
+    - AL9_train_ASEMD
+  AL9_train_ASEMD_checker_list_0:
+    cmd: zntrack run ipsuite.nodes.ThresholdCheck --name AL9_train_ASEMD_checker_list_0
+      --meta-only
+    metrics:
+    - nodes/AL9/train/AL9_train_ASEMD_checker_list_0/node-meta.json:
+        cache: false
+    params:
+    - AL9_train_ASEMD_checker_list_0
+    - zntrack.json:
+      - AL9_train_ASEMD.checker_list
+  AL9_train_ASEMD_modifier_0:
+    cmd: zntrack run ipsuite.nodes.TemperatureOscillatingRampModifier --name AL9_train_ASEMD_modifier_0
+      --meta-only
+    metrics:
+    - nodes/AL9/train/AL9_train_ASEMD_modifier_0/node-meta.json:
+        cache: false
+    params:
+    - AL9_train_ASEMD_modifier_0
+    - zntrack.json:
+      - AL9_train_ASEMD.modifier
+  AL9_train_ASEMD_modifier_1:
+    cmd: zntrack run ipsuite.nodes.BoxOscillatingRampModifier --name AL9_train_ASEMD_modifier_1
+      --meta-only
+    metrics:
+    - nodes/AL9/train/AL9_train_ASEMD_modifier_1/node-meta.json:
+        cache: false
+    params:
+    - AL9_train_ASEMD_modifier_1
+    - zntrack.json:
+      - AL9_train_ASEMD.modifier
+  AL9_train_ASEMD_thermostat:
+    cmd: zntrack run ipsuite.nodes.LangevinThermostat --name AL9_train_ASEMD_thermostat
+      --meta-only
+    metrics:
+    - nodes/AL9/train/AL9_train_ASEMD_thermostat/node-meta.json:
+        cache: false
+    params:
+    - AL9_train_ASEMD_thermostat
+    - zntrack.json:
+      - AL9_train_ASEMD.thermostat
+  AL9_train_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AL9_train_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/AL9/train/ConfigurationSelection_1/node-meta.json
+    - nodes/AL9/train/ConfigurationSelection_1/selected_configurations.json
+    metrics:
+    - nodes/AL9/train/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL9/train/CP2KSinglePoint/atoms.h5
+    - nodes/AL9/train/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
+  AL9_train_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AL9_train_ConfigurationSelection
+    deps:
+    - nodes/AL9/train/ASEMD/metrics_dict.csv
+    - nodes/AL9/train/ASEMD/model
+    - nodes/AL9/train/ASEMD/node-meta.json
+    - nodes/AL9/train/ASEMD/steps_before_stopping.json
+    - nodes/AL9/train/ASEMD/trajectory.h5
+    - nodes/AL9/train/ASEMD/velocities_cache.json
+    metrics:
+    - nodes/AL9/train/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL9/train/ConfigurationSelection/selected_configurations.json
+    params:
+    - AL9_train_ConfigurationSelection
+  AL9_train_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name AL9_train_ConfigurationSelection_1
+    deps:
+    - nodes/AL9/train/ConfigurationSelection/node-meta.json
+    - nodes/AL9/train/ConfigurationSelection/selected_configurations.json
+    metrics:
+    - nodes/AL9/train/ConfigurationSelection_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL9/train/ConfigurationSelection_1/selected_configurations.json
+    params:
+    - AL9_train_ConfigurationSelection_1
   GeoOpt_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name GeoOpt_ASEGeoOpt
     deps:
@@ -2125,7 +4983,7 @@ stages:
     - nodes/GeoOpt/CP2KSinglePoint/atoms.h5
     - nodes/GeoOpt/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   GeoOpt_Packmol:
     cmd: zntrack run ipsuite.nodes.Packmol --name GeoOpt_Packmol
     deps:
@@ -2192,7 +5050,7 @@ stages:
     - nodes/bootstrap/CP2KSinglePoint/atoms.h5
     - nodes/bootstrap/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   bootstrap_CP2KSinglePoint_1:
     cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name bootstrap_CP2KSinglePoint_1
     deps:
@@ -2208,7 +5066,7 @@ stages:
     - nodes/bootstrap/CP2KSinglePoint_1/atoms.h5
     - nodes/bootstrap/CP2KSinglePoint_1/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   bootstrap_CP2KSinglePoint_2:
     cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name bootstrap_CP2KSinglePoint_2
     deps:
@@ -2224,7 +5082,7 @@ stages:
     - nodes/bootstrap/CP2KSinglePoint_2/atoms.h5
     - nodes/bootstrap/CP2KSinglePoint_2/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   bootstrap_RattleAtoms:
     cmd: zntrack run ipsuite.nodes.RattleAtoms --name bootstrap_RattleAtoms
     deps:
@@ -2350,7 +5208,7 @@ stages:
     - nodes/initial_model/MLModel/val_atoms.extxyz
     params:
     - initial_model_MLModel
-    - config/initial_model_1.yaml: null
+    - config/initial_model_1.yaml:
   initial_model_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name initial_model_MLModel_1
     deps:
@@ -2371,7 +5229,7 @@ stages:
     - nodes/initial_model/MLModel_1/val_atoms.extxyz
     params:
     - initial_model_MLModel_1
-    - config/initial_model_2.yaml: null
+    - config/initial_model_2.yaml:
   initial_model_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name initial_model_Prediction
     deps:
@@ -2411,6 +5269,28 @@ stages:
     - nodes/initial_model/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/initial_model/PredictionMetrics/stress_df.csv
     - nodes/initial_model/PredictionMetrics/stress_hydrostatic_df.csv
+  AL9_model_EnsembleModel:
+    cmd: zntrack run ipsuite.nodes.EnsembleModel --name AL9_model_EnsembleModel
+    deps:
+    - nodes/AL9/model/MLModel/apax_model
+    - nodes/AL9/model/MLModel/log.csv
+    - nodes/AL9/model/MLModel/metrics.json
+    - nodes/AL9/model/MLModel/node-meta.json
+    - nodes/AL9/model/MLModel/train.log
+    - nodes/AL9/model/MLModel/train_atoms.extxyz
+    - nodes/AL9/model/MLModel/val_atoms.extxyz
+    - nodes/AL9/model/MLModel_1/apax_model
+    - nodes/AL9/model/MLModel_1/log.csv
+    - nodes/AL9/model/MLModel_1/metrics.json
+    - nodes/AL9/model/MLModel_1/node-meta.json
+    - nodes/AL9/model/MLModel_1/train.log
+    - nodes/AL9/model/MLModel_1/train_atoms.extxyz
+    - nodes/AL9/model/MLModel_1/val_atoms.extxyz
+    outs:
+    - nodes/AL9/model/EnsembleModel/uuid.json
+    metrics:
+    - nodes/AL9/model/EnsembleModel/node-meta.json:
+        cache: false
   metrics_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name metrics_Prediction
     deps:
@@ -2438,28 +5318,65 @@ stages:
     - nodes/AL3/test/CP2KSinglePoint/atoms.h5
     - nodes/AL3/test/CP2KSinglePoint/cp2k
     - nodes/AL3/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL4/model/EnsembleModel/node-meta.json
-    - nodes/AL4/model/EnsembleModel/uuid.json
     - nodes/AL4/test/ASEGeoOpt_1/model_outs
     - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
     - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
     - nodes/AL4/test/CP2KSinglePoint/atoms.h5
     - nodes/AL4/test/CP2KSinglePoint/cp2k
     - nodes/AL4/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/model_outs
+    - nodes/AL5/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL5/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL5/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL5/test/CP2KSinglePoint/cp2k
+    - nodes/AL5/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/model_outs
+    - nodes/AL6/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL6/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL6/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL6/test/CP2KSinglePoint/cp2k
+    - nodes/AL6/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL7/test/ASEGeoOpt_1/model_outs
+    - nodes/AL7/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL7/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL7/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL7/test/CP2KSinglePoint/cp2k
+    - nodes/AL7/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL8/test/ASEGeoOpt_1/model_outs
+    - nodes/AL8/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL8/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL8/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL8/test/CP2KSinglePoint/cp2k
+    - nodes/AL8/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL9/model/EnsembleModel/node-meta.json
+    - nodes/AL9/model/EnsembleModel/uuid.json
+    - nodes/AL9/test/ASEGeoOpt_1/model_outs
+    - nodes/AL9/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL9/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL9/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL9/test/CP2KSinglePoint/cp2k
+    - nodes/AL9/test/CP2KSinglePoint/node-meta.json
     - nodes/initial_model/ConfigurationSelection/node-meta.json
     - nodes/initial_model/ConfigurationSelection/selected_configurations.json
     - nodes/initial_model/ConfigurationSelection_2/node-meta.json
     - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    outs:
+    - nodes/metrics/Prediction/atoms.h5
     metrics:
     - nodes/metrics/Prediction/node-meta.json:
         cache: false
-    outs:
-    - nodes/metrics/Prediction/atoms.h5
   metrics_PredictionMetrics:
     cmd: zntrack run ipsuite.nodes.PredictionMetrics --name metrics_PredictionMetrics
     deps:
     - nodes/metrics/Prediction/atoms.h5
     - nodes/metrics/Prediction/node-meta.json
+    outs:
+    - nodes/metrics/PredictionMetrics/energy_df.csv
+    - nodes/metrics/PredictionMetrics/forces_df.csv
+    - nodes/metrics/PredictionMetrics/plots
+    - nodes/metrics/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/metrics/PredictionMetrics/stress_df.csv
+    - nodes/metrics/PredictionMetrics/stress_hydrostatic_df.csv
     metrics:
     - nodes/metrics/PredictionMetrics/deviat_stress.json:
         cache: false
@@ -2473,10 +5390,3 @@ stages:
         cache: false
     - nodes/metrics/PredictionMetrics/stress.json:
         cache: false
-    outs:
-    - nodes/metrics/PredictionMetrics/energy_df.csv
-    - nodes/metrics/PredictionMetrics/forces_df.csv
-    - nodes/metrics/PredictionMetrics/plots
-    - nodes/metrics/PredictionMetrics/stress_deviatoric_df.csv
-    - nodes/metrics/PredictionMetrics/stress_df.csv
-    - nodes/metrics/PredictionMetrics/stress_hydrostatic_df.csv
