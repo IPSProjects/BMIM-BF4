@@ -25,6 +25,7 @@ force_eval:
     XC:
       xc_functional:
         becke97:
+          parametrization: B97-3c
           scale_c: 1.0
           scale_x: 1.0
       vdw_potential:
