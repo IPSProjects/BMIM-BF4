@@ -1,10 +1,10 @@
 #!/bin/bash
 #SBATCH --partition=single
 #SBATCH --ntasks=8
-#SBATCH --cpus-per-task=8
-#SBATCH --time=48:00:00
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
 #SBATCH --gres=gpu:1
-#SBATCH --mem=32gb
+#SBATCH --mem=16gb
 
 source ~/.bashrc
 
@@ -13,7 +13,5 @@ export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
 module load compiler/gnu
 module load mpi/openmpi
 conda activate ips_apax
-
-python main.py
 
 dvc repro
