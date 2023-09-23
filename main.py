@@ -353,4 +353,47 @@ with project.group("metrics") as metrics:
     prediction = ips.analysis.Prediction(data=validation_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
-project.build()
+
+locality_constraints = {}
+for atom_type in ["N", "C", "H", "F"]:
+    locality_constraints[atom_type] = []
+    for radius in [1, 2, 3, 4, 5, 6, 7, 8, 9]:
+        locality_constraints[atom_type].append(
+            ips.calculators.FixedSphereConstraint(
+                atom_id=0, radius=radius, atom_type=atom_type
+            )
+        )
+
+locality_groups = []
+for atom_type in locality_constraints:
+    with project.group("locality", atom_type) as group:
+        locality_groups.append(group)
+        md_list = []
+        dft_list = []
+        for constraint in locality_constraints[atom_type]:
+            md = ips.calculators.ASEMD(
+                    data=geopt.atoms,
+                    data_id=-1,
+                    model=model,
+                    thermostat=thermostat,
+                    checker_list=[uncertainty_check],
+                    constraint_list=[constraint],
+                    steps=7000,
+                    sampling_rate=1000,
+                )
+            md_list.append(md)
+
+            cp2k = ips.calculators.CP2KSinglePoint(
+                data=md.atoms,
+                cp2k_params="config/cp2k.yaml",
+                cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+                cp2k_shell=cp2k_shell,
+            )
+            dft_list.append(cp2k)
+        
+        analysis = ips.analysis.AnalyseSingleForceSensitivity(
+            data=dft_list,
+            sim_list=md_list,
+        )
+
+project.build(nodes=locality_groups)
