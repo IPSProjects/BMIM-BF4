@@ -237,3 +237,199 @@ stages:
       hash: md5
       md5: 020f6e24a11ed4bca846115312b5f248
       size: 3573832
+  bootstrap_RotateMolecules:
+    cmd: zntrack run ipsuite.nodes.RotateMolecules --name bootstrap_RotateMolecules
+    deps:
+    - path: nodes/GeoOpt/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 877c356e0ce5e57bb4dbb5f23b699638.dir
+      size: 59474596
+      nfiles: 7
+    - path: nodes/GeoOpt/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: be92de904a391879729d2142017b06c0
+      size: 48
+    - path: nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 020f6e24a11ed4bca846115312b5f248
+      size: 3573832
+    params:
+      params.yaml:
+        bootstrap_RotateMolecules:
+          data_id: -1
+          include_original: false
+          maximum: 0.17452777777777778
+          n_configurations: 15
+          seed: 1
+      config/cp2k.yaml:
+        force_eval:
+          method: quickstep
+          DFT:
+            mgrid:
+              cutoff: 800
+              rel_cutoff: 60
+              ngrids: 5
+            QS:
+              eps_filter_matrix: 0.0
+              eps_pgf_orb: 0.0001
+            SCF:
+              scf_guess: restart
+              max_scf: 100
+              eps_scf: 1e-06
+              OT:
+                minimizer: diis
+                preconditioner: full_single_inverse
+              outer_scf:
+                max_scf: 100
+                eps_scf: 1e-06
+              print:
+                restart:
+                  each:
+                    QS_SCF: 0
+            XC:
+              xc_functional:
+                becke97:
+                  parametrization: B97-3c
+                  scale_c: 1.0
+                  scale_x: 1.0
+              vdw_potential:
+                pair_potential:
+                  type: dftd3(bj)
+                  parameter_file_name: dftd3.dat
+                  reference_functional: B97-3c
+                  r_cutoff: 7.93766
+                  calculate_c9_term: true
+                  short_range_correction: true
+                potential_type: pair_potential
+            charge: 0
+            basis_set_file_name: GTH_BASIS_SETS
+            potential_file_name: GTH_POTENTIALS
+          subsys:
+            kind:
+              N:
+                basis_set: TZVP-GTH-q5
+                potential: GTH-PBE-q5
+              C:
+                basis_set: TZVP-GTH-q4
+                potential: GTH-PBE-q4
+              H:
+                basis_set: TZVP-GTH-q1
+                potential: GTH-PBE-q1
+              B:
+                basis_set: TZVP-GTH-q3
+                potential: GTH-PBE-q3
+              F:
+                basis_set: TZVP-GTH-q7
+                potential: GTH-PBE-q7
+    outs:
+    - path: nodes/bootstrap/RotateMolecules/atoms.h5
+      hash: md5
+      md5: f9604072eb26e16d8a18e1f1f4c8a4ab
+      size: 393280
+    - path: nodes/bootstrap/RotateMolecules/model_outs
+      hash: md5
+      md5: 58099d79ef026b4e56fb64133052c9a5.dir
+      size: 49651966
+      nfiles: 7
+    - path: nodes/bootstrap/RotateMolecules/node-meta.json
+      hash: md5
+      md5: 64251291557aa7522acfe32920681d5f
+      size: 48
+  bootstrap_TranslateMolecules:
+    cmd: zntrack run ipsuite.nodes.TranslateMolecules --name bootstrap_TranslateMolecules
+    deps:
+    - path: nodes/GeoOpt/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 877c356e0ce5e57bb4dbb5f23b699638.dir
+      size: 59474596
+      nfiles: 7
+    - path: nodes/GeoOpt/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: be92de904a391879729d2142017b06c0
+      size: 48
+    - path: nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 020f6e24a11ed4bca846115312b5f248
+      size: 3573832
+    params:
+      params.yaml:
+        bootstrap_TranslateMolecules:
+          data_id: -1
+          include_original: false
+          maximum: 0.3
+          n_configurations: 15
+          seed: 1
+      config/cp2k.yaml:
+        force_eval:
+          method: quickstep
+          DFT:
+            mgrid:
+              cutoff: 800
+              rel_cutoff: 60
+              ngrids: 5
+            QS:
+              eps_filter_matrix: 0.0
+              eps_pgf_orb: 0.0001
+            SCF:
+              scf_guess: restart
+              max_scf: 100
+              eps_scf: 1e-06
+              OT:
+                minimizer: diis
+                preconditioner: full_single_inverse
+              outer_scf:
+                max_scf: 100
+                eps_scf: 1e-06
+              print:
+                restart:
+                  each:
+                    QS_SCF: 0
+            XC:
+              xc_functional:
+                becke97:
+                  parametrization: B97-3c
+                  scale_c: 1.0
+                  scale_x: 1.0
+              vdw_potential:
+                pair_potential:
+                  type: dftd3(bj)
+                  parameter_file_name: dftd3.dat
+                  reference_functional: B97-3c
+                  r_cutoff: 7.93766
+                  calculate_c9_term: true
+                  short_range_correction: true
+                potential_type: pair_potential
+            charge: 0
+            basis_set_file_name: GTH_BASIS_SETS
+            potential_file_name: GTH_POTENTIALS
+          subsys:
+            kind:
+              N:
+                basis_set: TZVP-GTH-q5
+                potential: GTH-PBE-q5
+              C:
+                basis_set: TZVP-GTH-q4
+                potential: GTH-PBE-q4
+              H:
+                basis_set: TZVP-GTH-q1
+                potential: GTH-PBE-q1
+              B:
+                basis_set: TZVP-GTH-q3
+                potential: GTH-PBE-q3
+              F:
+                basis_set: TZVP-GTH-q7
+                potential: GTH-PBE-q7
+    outs:
+    - path: nodes/bootstrap/TranslateMolecules/atoms.h5
+      hash: md5
+      md5: 06b4d04494b2a28057dd938eac662e02
+      size: 393280
+    - path: nodes/bootstrap/TranslateMolecules/model_outs
+      hash: md5
+      md5: a121d69e62bfa54bbbf3d3186a6ad167.dir
+      size: 49648652
+      nfiles: 7
+    - path: nodes/bootstrap/TranslateMolecules/node-meta.json
+      hash: md5
+      md5: 50a231419100550954e2ed0226a5c662
+      size: 48

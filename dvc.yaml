@@ -65,3 +65,33 @@ stages:
     metrics:
     - nodes/GeoOpt/ASEGeoOpt/node-meta.json:
         cache: false
+  bootstrap_RotateMolecules:
+    cmd: zntrack run ipsuite.nodes.RotateMolecules --name bootstrap_RotateMolecules
+    deps:
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+    params:
+    - bootstrap_RotateMolecules
+    - config/cp2k.yaml:
+    outs:
+    - nodes/bootstrap/RotateMolecules/atoms.h5
+    - nodes/bootstrap/RotateMolecules/model_outs
+    metrics:
+    - nodes/bootstrap/RotateMolecules/node-meta.json:
+        cache: false
+  bootstrap_TranslateMolecules:
+    cmd: zntrack run ipsuite.nodes.TranslateMolecules --name bootstrap_TranslateMolecules
+    deps:
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+    params:
+    - bootstrap_TranslateMolecules
+    - config/cp2k.yaml:
+    outs:
+    - nodes/bootstrap/TranslateMolecules/atoms.h5
+    - nodes/bootstrap/TranslateMolecules/model_outs
+    metrics:
+    - nodes/bootstrap/TranslateMolecules/node-meta.json:
+        cache: false

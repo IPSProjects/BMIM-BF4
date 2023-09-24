@@ -24,11 +24,31 @@ with project.group("GeoOpt"):
         density=1210,
     )
 
-    geopt = ips.calculators.ASEGeoOpt(
+    geo_opt = ips.calculators.ASEGeoOpt(
         model=cp2k,
         data=structure.atoms,
         optimizer="BFGS",
         run_kwargs={"fmax": 0.1},
+    )
+
+with project.group("bootstrap"):
+    rotate = ips.bootstrap.RotateMolecules(
+        data=geo_opt.atoms,
+        data_id=-1,
+        n_configurations=15,
+        maximum=10 * 3.1415 / 180,  # deg max rotation
+        include_original=False,
+        seed=1,
+        model=cp2k,
+    )
+    translate = ips.bootstrap.TranslateMolecules(
+        data=geo_opt.atoms,
+        data_id=-1,
+        n_configurations=15,
+        maximum=0.3,  # Ang max molecular displacement
+        include_original=False,
+        seed=1,
+        model=cp2k,
     )
 
 
