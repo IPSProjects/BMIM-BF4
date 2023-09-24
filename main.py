@@ -8,6 +8,8 @@ cp2k = ips.calculators.CP2KSinglePoint(
     cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
 )
 
+mapping = ips.geometry.BarycenterMapping(data=None)
+
 with project.group("GeoOpt"):
     cation = ips.configuration_generation.SmilesToAtoms("CCCCN1C=C[N+](=C1)C")
     anion = ips.configuration_generation.SmilesToAtoms("[B-](F)(F)(F)F")
@@ -51,5 +53,14 @@ with project.group("bootstrap"):
         model=cp2k,
     )
 
+    volume_scan = ips.analysis.BoxScale(
+        data=geo_opt.atoms,
+        mapping=mapping,
+        model=cp2k,
+        start=0.9,
+        stop=1.5,
+        num=30,
+        data_id=-1,
+    )
 
 project.build()

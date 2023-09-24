@@ -433,3 +433,110 @@ stages:
       hash: md5
       md5: 50a231419100550954e2ed0226a5c662
       size: 48
+  bootstrap_BoxScale:
+    cmd: zntrack run ipsuite.nodes.BoxScale --name bootstrap_BoxScale
+    deps:
+    - path: nodes/GeoOpt/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 877c356e0ce5e57bb4dbb5f23b699638.dir
+      size: 59474596
+      nfiles: 7
+    - path: nodes/GeoOpt/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: be92de904a391879729d2142017b06c0
+      size: 48
+    - path: nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 020f6e24a11ed4bca846115312b5f248
+      size: 3573832
+    params:
+      params.yaml:
+        bootstrap_BoxScale:
+          data_id: -1
+          num: 30
+          start: 0.9
+          stop: 1.5
+        bootstrap_BoxScale+mapping:
+          frozen: false
+      config/cp2k.yaml:
+        force_eval:
+          method: quickstep
+          DFT:
+            mgrid:
+              cutoff: 800
+              rel_cutoff: 60
+              ngrids: 5
+            QS:
+              eps_filter_matrix: 0.0
+              eps_pgf_orb: 0.0001
+            SCF:
+              scf_guess: restart
+              max_scf: 100
+              eps_scf: 1e-06
+              OT:
+                minimizer: diis
+                preconditioner: full_single_inverse
+              outer_scf:
+                max_scf: 100
+                eps_scf: 1e-06
+              print:
+                restart:
+                  each:
+                    QS_SCF: 0
+            XC:
+              xc_functional:
+                becke97:
+                  parametrization: B97-3c
+                  scale_c: 1.0
+                  scale_x: 1.0
+              vdw_potential:
+                pair_potential:
+                  type: dftd3(bj)
+                  parameter_file_name: dftd3.dat
+                  reference_functional: B97-3c
+                  r_cutoff: 7.93766
+                  calculate_c9_term: true
+                  short_range_correction: true
+                potential_type: pair_potential
+            charge: 0
+            basis_set_file_name: GTH_BASIS_SETS
+            potential_file_name: GTH_POTENTIALS
+          subsys:
+            kind:
+              N:
+                basis_set: TZVP-GTH-q5
+                potential: GTH-PBE-q5
+              C:
+                basis_set: TZVP-GTH-q4
+                potential: GTH-PBE-q4
+              H:
+                basis_set: TZVP-GTH-q1
+                potential: GTH-PBE-q1
+              B:
+                basis_set: TZVP-GTH-q3
+                potential: GTH-PBE-q3
+              F:
+                basis_set: TZVP-GTH-q7
+                potential: GTH-PBE-q7
+    outs:
+    - path: nodes/bootstrap/BoxScale/atoms.h5
+      hash: md5
+      md5: a65dd069e1d08ad791c1743fd607e956
+      size: 741040
+    - path: nodes/bootstrap/BoxScale/energies.csv
+      hash: md5
+      md5: 9aadd0b6ebc436ca46f5c5d6e52b8b1a
+      size: 1126
+    - path: nodes/bootstrap/BoxScale/energy.png
+      hash: md5
+      md5: c47a3579ce237e04eb67abf99da29ebe
+      size: 26476
+    - path: nodes/bootstrap/BoxScale/model
+      hash: md5
+      md5: dab64b1b0acb22772c0d3dd5786be473.dir
+      size: 50950265
+      nfiles: 7
+    - path: nodes/bootstrap/BoxScale/node-meta.json
+      hash: md5
+      md5: 33e39d6494d0cfdad274a2dad4383ff8
+      size: 48
