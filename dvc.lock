@@ -455,7 +455,7 @@ stages:
           data_id: -1
           num: 30
           start: 0.9
-          stop: 1.5
+          stop: 2.0
         bootstrap_BoxScale+mapping:
           frozen: false
       config/cp2k.yaml:
@@ -521,22 +521,22 @@ stages:
     outs:
     - path: nodes/bootstrap/BoxScale/atoms.h5
       hash: md5
-      md5: a65dd069e1d08ad791c1743fd607e956
+      md5: 505d12034023842d29b5dcd5946d2a8e
       size: 741040
     - path: nodes/bootstrap/BoxScale/energies.csv
       hash: md5
-      md5: 9aadd0b6ebc436ca46f5c5d6e52b8b1a
-      size: 1126
+      md5: 237a3f67d79b8dffd635575247940bac
+      size: 1127
     - path: nodes/bootstrap/BoxScale/energy.png
       hash: md5
-      md5: c47a3579ce237e04eb67abf99da29ebe
-      size: 26476
+      md5: a688574e7a591dc5f269e95cfe49f2e7
+      size: 27043
     - path: nodes/bootstrap/BoxScale/model
       hash: md5
-      md5: dab64b1b0acb22772c0d3dd5786be473.dir
-      size: 50950265
+      md5: 75f7022676b061895bbbc5d484d534cf.dir
+      size: 50957231
       nfiles: 7
     - path: nodes/bootstrap/BoxScale/node-meta.json
       hash: md5
-      md5: 33e39d6494d0cfdad274a2dad4383ff8
+      md5: 039858444b52fd4460970848e6c0ee45
       size: 48

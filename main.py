@@ -58,7 +58,7 @@ with project.group("bootstrap"):
         mapping=mapping,
         model=cp2k,
         start=0.9,
-        stop=1.5,
+        stop=2.0,
         num=30,
         data_id=-1,
     )
