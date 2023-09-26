@@ -211,10 +211,128 @@ for loop in range(5):
         model = ips.models.ApaxEnsemble(models=[model_1, model_2])
         models.append(model)
 
-for loop in range(5):
+box_oszillator = ips.calculators.BoxOscillatingRampModifier(
+    end_cell=14.5839,
+    cell_amplitude=1,
+    num_oscillations=3,
+)
+
+temperature_oszillator = ips.calculators.TemperatureOscillatingRampModifier(
+    end_temperature=500,
+    start_temperature=270,
+    num_oscillations=10,
+    temperature_amplitude=150,
+)
+
+for loop in range(5, 15):
+    with project.group(f"AL{loop}", "train") as altrain:
+        md = ips.calculators.ASEMD(
+            data=ref_geopt_train.atoms,
+            modifier=[box_oszillator, temperature_oszillator],
+            data_id=-1,
+            model=model,
+            thermostat=thermostat,
+            checker_list=[uncertainty_check],
+            steps=100000,
+            sampling_rate=1,
+        )
+
+        model_geopt = ips.calculators.ASEGeoOpt(
+            model=model,
+            data=md.atoms,
+            data_id=-5,
+            optimizer="BFGS",
+            run_kwargs={"fmax": 0.5},
+            checker_list=[uncertainty_check],
+        )
+
+        ref_geopt_train = ips.calculators.ASEGeoOpt(
+            model=cp2k,
+            data=model_geopt.atoms,
+            data_id=-1,
+            optimizer="BFGS",
+            run_kwargs={"fmax": 0.5},
+        )
+
+        md_selection = ips.configuration_selection.IndexSelection(
+            data=md.atoms, indices=slice(0, -1)
+        )
+        confs = ips.configuration_selection.ThresholdSelection(
+            data=md_selection.atoms, n_configurations=15, min_distance=10
+        )
+
+        cp2k_train = ips.calculators.CP2KSinglePoint(
+            data=confs.atoms,
+            cp2k_params="config/cp2k.yaml",
+            cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+        )
+
+        train_data += cp2k_train.atoms
+        train_data += ref_geopt_train.atoms
+
+    with project.group(f"AL{loop}", "test") as altest:
+        md = ips.calculators.ASEMD(
+            data=ref_geopt_test.atoms,
+            data_id=-1,
+            modifier=[box_oszillator, temperature_oszillator],
+            model=model,
+            thermostat=thermostat,
+            checker_list=[uncertainty_check],
+            steps=100000,
+            sampling_rate=1,
+        )
+
+        model_geopt = ips.calculators.ASEGeoOpt(
+            model=model,
+            data=md.atoms,
+            data_id=-5,
+            optimizer="BFGS",
+            run_kwargs={"fmax": 0.5},
+            checker_list=[uncertainty_check],
+        )
+
+        ref_geopt_test = ips.calculators.ASEGeoOpt(
+            model=cp2k,  # better restart wavefunction
+            data=model_geopt.atoms,
+            data_id=-1,
+            optimizer="BFGS",
+            run_kwargs={"fmax": 0.5},
+        )
+
+        md_selection = ips.configuration_selection.IndexSelection(
+            data=md.atoms, indices=slice(0, -1)
+        )
+        confs = ips.configuration_selection.ThresholdSelection(
+            data=md_selection.atoms, n_configurations=5, min_distance=10
+        )
+
+        cp2k_test = ips.calculators.CP2KSinglePoint(
+            data=confs.atoms,
+            cp2k_params="config/cp2k.yaml",
+            cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+        )
+
+        validation_data += ref_geopt_test.atoms
+        validation_data += cp2k_test.atoms
+
+    with project.group(f"AL{loop}", "model") as almodel:
+        model_1 = ips.models.Apax(
+            data=train_data,
+            validation_data=validation_data,
+            config="config/initial_model_1.yaml",
+        )
+        model_2 = ips.models.Apax(
+            data=train_data,
+            validation_data=validation_data,
+            config="config/initial_model_2.yaml",
+        )
+
+        model = ips.models.ApaxEnsemble(models=[model_1, model_2])
+        models.append(model)
+
+for loop in range(15):
     with project.group(f"AL{loop}", "metrics"):
         prediction = ips.analysis.Prediction(data=validation_data, model=models[loop])
         metrics = ips.analysis.PredictionMetrics(data=prediction)
-
 
 project.build()
