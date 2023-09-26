@@ -76,7 +76,85 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
+- nodes/AL0/test/ASEMD/metrics_dict.csv: {}
+- nodes/AL0/train/ASEMD/metrics_dict.csv: {}
+- nodes/AL1/test/ASEMD/metrics_dict.csv: {}
+- nodes/AL1/train/ASEMD/metrics_dict.csv: {}
+- nodes/AL2/test/ASEMD/metrics_dict.csv: {}
+- nodes/AL2/train/ASEMD/metrics_dict.csv: {}
+- nodes/AL3/test/ASEMD/metrics_dict.csv: {}
+- nodes/AL3/train/ASEMD/metrics_dict.csv: {}
+- nodes/AL4/test/ASEMD/metrics_dict.csv: {}
+- nodes/AL4/train/ASEMD/metrics_dict.csv: {}
 stages:
+  AL0_metrics_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name AL0_metrics_Prediction
+    deps:
+    - nodes/AL0/model/ApaxEnsemble/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/model_outs
+    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/test/CP2KSinglePoint/cp2k
+    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/model_outs
+    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/test/CP2KSinglePoint/cp2k
+    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/model_outs
+    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/test/CP2KSinglePoint/cp2k
+    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/model_outs
+    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/test/CP2KSinglePoint/cp2k
+    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/AL0/metrics/Prediction/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL0/metrics/Prediction/atoms.h5
+  AL0_metrics_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name AL0_metrics_PredictionMetrics
+    deps:
+    - nodes/AL0/metrics/Prediction/atoms.h5
+    - nodes/AL0/metrics/Prediction/node-meta.json
+    metrics:
+    - nodes/AL0/metrics/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/AL0/metrics/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/AL0/metrics/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/AL0/metrics/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/AL0/metrics/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/AL0/metrics/PredictionMetrics/stress.json:
+        cache: false
+    outs:
+    - nodes/AL0/metrics/PredictionMetrics/energy_df.csv
+    - nodes/AL0/metrics/PredictionMetrics/forces_df.csv
+    - nodes/AL0/metrics/PredictionMetrics/plots
+    - nodes/AL0/metrics/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/AL0/metrics/PredictionMetrics/stress_df.csv
+    - nodes/AL0/metrics/PredictionMetrics/stress_hydrostatic_df.csv
   AL0_model_ApaxEnsemble:
     cmd: zntrack run ipsuite.nodes.ApaxEnsemble --name AL0_model_ApaxEnsemble
     deps:
@@ -129,7 +207,7 @@ stages:
     - nodes/AL0/model/MLModel/val_atoms.extxyz
     params:
     - AL0_model_MLModel
-    - config/initial_model_1.yaml:
+    - config/initial_model_1.yaml: null
   AL0_model_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name AL0_model_MLModel_1
     deps:
@@ -162,7 +240,7 @@ stages:
     - nodes/AL0/model/MLModel_1/val_atoms.extxyz
     params:
     - AL0_model_MLModel_1
-    - config/initial_model_2.yaml:
+    - config/initial_model_2.yaml: null
   AL0_test_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL0_test_ASEGeoOpt
     deps:
@@ -195,7 +273,7 @@ stages:
     - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
     params:
     - AL0_test_ASEGeoOpt_1
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL0_test_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name AL0_test_ASEMD
     deps:
@@ -231,7 +309,7 @@ stages:
     - nodes/AL0/test/CP2KSinglePoint/atoms.h5
     - nodes/AL0/test/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL0_test_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL0_test_ConfigurationSelection
     deps:
@@ -291,7 +369,7 @@ stages:
     - nodes/AL0/train/ASEGeoOpt_1/trajectory.h5
     params:
     - AL0_train_ASEGeoOpt_1
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL0_train_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name AL0_train_ASEMD
     deps:
@@ -327,7 +405,7 @@ stages:
     - nodes/AL0/train/CP2KSinglePoint/atoms.h5
     - nodes/AL0/train/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL0_train_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL0_train_ConfigurationSelection
     deps:
@@ -355,6 +433,74 @@ stages:
     - nodes/AL0/train/ConfigurationSelection_1/selected_configurations.json
     params:
     - AL0_train_ConfigurationSelection_1
+  AL1_metrics_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name AL1_metrics_Prediction
+    deps:
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/model/ApaxEnsemble/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/model_outs
+    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/test/CP2KSinglePoint/cp2k
+    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/model_outs
+    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/test/CP2KSinglePoint/cp2k
+    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/model_outs
+    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/test/CP2KSinglePoint/cp2k
+    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/model_outs
+    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/test/CP2KSinglePoint/cp2k
+    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/AL1/metrics/Prediction/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL1/metrics/Prediction/atoms.h5
+  AL1_metrics_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name AL1_metrics_PredictionMetrics
+    deps:
+    - nodes/AL1/metrics/Prediction/atoms.h5
+    - nodes/AL1/metrics/Prediction/node-meta.json
+    metrics:
+    - nodes/AL1/metrics/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/AL1/metrics/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/AL1/metrics/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/AL1/metrics/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/AL1/metrics/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/AL1/metrics/PredictionMetrics/stress.json:
+        cache: false
+    outs:
+    - nodes/AL1/metrics/PredictionMetrics/energy_df.csv
+    - nodes/AL1/metrics/PredictionMetrics/forces_df.csv
+    - nodes/AL1/metrics/PredictionMetrics/plots
+    - nodes/AL1/metrics/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/AL1/metrics/PredictionMetrics/stress_df.csv
+    - nodes/AL1/metrics/PredictionMetrics/stress_hydrostatic_df.csv
   AL1_model_ApaxEnsemble:
     cmd: zntrack run ipsuite.nodes.ApaxEnsemble --name AL1_model_ApaxEnsemble
     deps:
@@ -419,7 +565,7 @@ stages:
     - nodes/AL1/model/MLModel/val_atoms.extxyz
     params:
     - AL1_model_MLModel
-    - config/initial_model_1.yaml:
+    - config/initial_model_1.yaml: null
   AL1_model_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name AL1_model_MLModel_1
     deps:
@@ -464,7 +610,7 @@ stages:
     - nodes/AL1/model/MLModel_1/val_atoms.extxyz
     params:
     - AL1_model_MLModel_1
-    - config/initial_model_2.yaml:
+    - config/initial_model_2.yaml: null
   AL1_test_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL1_test_ASEGeoOpt
     deps:
@@ -497,7 +643,7 @@ stages:
     - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
     params:
     - AL1_test_ASEGeoOpt_1
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL1_test_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name AL1_test_ASEMD
     deps:
@@ -533,7 +679,7 @@ stages:
     - nodes/AL1/test/CP2KSinglePoint/atoms.h5
     - nodes/AL1/test/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL1_test_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL1_test_ConfigurationSelection
     deps:
@@ -593,7 +739,7 @@ stages:
     - nodes/AL1/train/ASEGeoOpt_1/trajectory.h5
     params:
     - AL1_train_ASEGeoOpt_1
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL1_train_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name AL1_train_ASEMD
     deps:
@@ -629,7 +775,7 @@ stages:
     - nodes/AL1/train/CP2KSinglePoint/atoms.h5
     - nodes/AL1/train/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL1_train_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL1_train_ConfigurationSelection
     deps:
@@ -657,6 +803,74 @@ stages:
     - nodes/AL1/train/ConfigurationSelection_1/selected_configurations.json
     params:
     - AL1_train_ConfigurationSelection_1
+  AL2_metrics_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name AL2_metrics_Prediction
+    deps:
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/model_outs
+    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/test/CP2KSinglePoint/cp2k
+    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/model/ApaxEnsemble/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/model_outs
+    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/test/CP2KSinglePoint/cp2k
+    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/model_outs
+    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/test/CP2KSinglePoint/cp2k
+    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/model_outs
+    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/test/CP2KSinglePoint/cp2k
+    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/AL2/metrics/Prediction/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL2/metrics/Prediction/atoms.h5
+  AL2_metrics_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name AL2_metrics_PredictionMetrics
+    deps:
+    - nodes/AL2/metrics/Prediction/atoms.h5
+    - nodes/AL2/metrics/Prediction/node-meta.json
+    metrics:
+    - nodes/AL2/metrics/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/AL2/metrics/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/AL2/metrics/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/AL2/metrics/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/AL2/metrics/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/AL2/metrics/PredictionMetrics/stress.json:
+        cache: false
+    outs:
+    - nodes/AL2/metrics/PredictionMetrics/energy_df.csv
+    - nodes/AL2/metrics/PredictionMetrics/forces_df.csv
+    - nodes/AL2/metrics/PredictionMetrics/plots
+    - nodes/AL2/metrics/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/AL2/metrics/PredictionMetrics/stress_df.csv
+    - nodes/AL2/metrics/PredictionMetrics/stress_hydrostatic_df.csv
   AL2_model_ApaxEnsemble:
     cmd: zntrack run ipsuite.nodes.ApaxEnsemble --name AL2_model_ApaxEnsemble
     deps:
@@ -733,7 +947,7 @@ stages:
     - nodes/AL2/model/MLModel/val_atoms.extxyz
     params:
     - AL2_model_MLModel
-    - config/initial_model_1.yaml:
+    - config/initial_model_1.yaml: null
   AL2_model_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name AL2_model_MLModel_1
     deps:
@@ -790,7 +1004,7 @@ stages:
     - nodes/AL2/model/MLModel_1/val_atoms.extxyz
     params:
     - AL2_model_MLModel_1
-    - config/initial_model_2.yaml:
+    - config/initial_model_2.yaml: null
   AL2_test_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL2_test_ASEGeoOpt
     deps:
@@ -823,7 +1037,7 @@ stages:
     - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
     params:
     - AL2_test_ASEGeoOpt_1
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL2_test_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name AL2_test_ASEMD
     deps:
@@ -859,7 +1073,7 @@ stages:
     - nodes/AL2/test/CP2KSinglePoint/atoms.h5
     - nodes/AL2/test/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL2_test_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL2_test_ConfigurationSelection
     deps:
@@ -919,7 +1133,7 @@ stages:
     - nodes/AL2/train/ASEGeoOpt_1/trajectory.h5
     params:
     - AL2_train_ASEGeoOpt_1
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL2_train_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name AL2_train_ASEMD
     deps:
@@ -955,7 +1169,7 @@ stages:
     - nodes/AL2/train/CP2KSinglePoint/atoms.h5
     - nodes/AL2/train/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL2_train_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL2_train_ConfigurationSelection
     deps:
@@ -983,6 +1197,74 @@ stages:
     - nodes/AL2/train/ConfigurationSelection_1/selected_configurations.json
     params:
     - AL2_train_ConfigurationSelection_1
+  AL3_metrics_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name AL3_metrics_Prediction
+    deps:
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/model_outs
+    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/test/CP2KSinglePoint/cp2k
+    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/model_outs
+    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/test/CP2KSinglePoint/cp2k
+    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/model/ApaxEnsemble/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/model_outs
+    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/test/CP2KSinglePoint/cp2k
+    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/model_outs
+    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/test/CP2KSinglePoint/cp2k
+    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/AL3/metrics/Prediction/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL3/metrics/Prediction/atoms.h5
+  AL3_metrics_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name AL3_metrics_PredictionMetrics
+    deps:
+    - nodes/AL3/metrics/Prediction/atoms.h5
+    - nodes/AL3/metrics/Prediction/node-meta.json
+    metrics:
+    - nodes/AL3/metrics/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/AL3/metrics/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/AL3/metrics/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/AL3/metrics/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/AL3/metrics/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/AL3/metrics/PredictionMetrics/stress.json:
+        cache: false
+    outs:
+    - nodes/AL3/metrics/PredictionMetrics/energy_df.csv
+    - nodes/AL3/metrics/PredictionMetrics/forces_df.csv
+    - nodes/AL3/metrics/PredictionMetrics/plots
+    - nodes/AL3/metrics/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/AL3/metrics/PredictionMetrics/stress_df.csv
+    - nodes/AL3/metrics/PredictionMetrics/stress_hydrostatic_df.csv
   AL3_model_ApaxEnsemble:
     cmd: zntrack run ipsuite.nodes.ApaxEnsemble --name AL3_model_ApaxEnsemble
     deps:
@@ -1071,7 +1353,7 @@ stages:
     - nodes/AL3/model/MLModel/val_atoms.extxyz
     params:
     - AL3_model_MLModel
-    - config/initial_model_1.yaml:
+    - config/initial_model_1.yaml: null
   AL3_model_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name AL3_model_MLModel_1
     deps:
@@ -1140,7 +1422,7 @@ stages:
     - nodes/AL3/model/MLModel_1/val_atoms.extxyz
     params:
     - AL3_model_MLModel_1
-    - config/initial_model_2.yaml:
+    - config/initial_model_2.yaml: null
   AL3_test_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL3_test_ASEGeoOpt
     deps:
@@ -1173,7 +1455,7 @@ stages:
     - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
     params:
     - AL3_test_ASEGeoOpt_1
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL3_test_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name AL3_test_ASEMD
     deps:
@@ -1209,7 +1491,7 @@ stages:
     - nodes/AL3/test/CP2KSinglePoint/atoms.h5
     - nodes/AL3/test/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL3_test_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL3_test_ConfigurationSelection
     deps:
@@ -1269,7 +1551,7 @@ stages:
     - nodes/AL3/train/ASEGeoOpt_1/trajectory.h5
     params:
     - AL3_train_ASEGeoOpt_1
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL3_train_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name AL3_train_ASEMD
     deps:
@@ -1305,7 +1587,7 @@ stages:
     - nodes/AL3/train/CP2KSinglePoint/atoms.h5
     - nodes/AL3/train/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL3_train_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL3_train_ConfigurationSelection
     deps:
@@ -1333,6 +1615,94 @@ stages:
     - nodes/AL3/train/ConfigurationSelection_1/selected_configurations.json
     params:
     - AL3_train_ConfigurationSelection_1
+  AL4_metrics_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name AL4_metrics_Prediction
+    deps:
+    - nodes/AL0/test/ASEGeoOpt_1/model_outs
+    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL0/test/CP2KSinglePoint/cp2k
+    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/model_outs
+    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL1/test/CP2KSinglePoint/cp2k
+    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/model_outs
+    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL2/test/CP2KSinglePoint/cp2k
+    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/model_outs
+    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL3/test/CP2KSinglePoint/cp2k
+    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
+    - nodes/AL4/model/ApaxEnsemble/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/model_outs
+    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
+    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
+    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
+    - nodes/AL4/test/CP2KSinglePoint/cp2k
+    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/node-meta.json
+    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
+    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
+    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
+    metrics:
+    - nodes/AL4/metrics/Prediction/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AL4/metrics/Prediction/atoms.h5
+  AL4_metrics_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name AL4_metrics_PredictionMetrics
+    deps:
+    - nodes/AL4/metrics/Prediction/atoms.h5
+    - nodes/AL4/metrics/Prediction/node-meta.json
+    metrics:
+    - nodes/AL4/metrics/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/AL4/metrics/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/AL4/metrics/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/AL4/metrics/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/AL4/metrics/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/AL4/metrics/PredictionMetrics/stress.json:
+        cache: false
+    outs:
+    - nodes/AL4/metrics/PredictionMetrics/energy_df.csv
+    - nodes/AL4/metrics/PredictionMetrics/forces_df.csv
+    - nodes/AL4/metrics/PredictionMetrics/plots
+    - nodes/AL4/metrics/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/AL4/metrics/PredictionMetrics/stress_df.csv
+    - nodes/AL4/metrics/PredictionMetrics/stress_hydrostatic_df.csv
+  AL4_model_ApaxEnsemble:
+    cmd: zntrack run ipsuite.nodes.ApaxEnsemble --name AL4_model_ApaxEnsemble
+    deps:
+    - nodes/AL4/model/MLModel/apax_model
+    - nodes/AL4/model/MLModel/log.csv
+    - nodes/AL4/model/MLModel/metrics.json
+    - nodes/AL4/model/MLModel/node-meta.json
+    - nodes/AL4/model/MLModel/train.log
+    - nodes/AL4/model/MLModel/train_atoms.extxyz
+    - nodes/AL4/model/MLModel/val_atoms.extxyz
+    - nodes/AL4/model/MLModel_1/apax_model
+    - nodes/AL4/model/MLModel_1/log.csv
+    - nodes/AL4/model/MLModel_1/metrics.json
+    - nodes/AL4/model/MLModel_1/node-meta.json
+    - nodes/AL4/model/MLModel_1/train.log
+    - nodes/AL4/model/MLModel_1/train_atoms.extxyz
+    - nodes/AL4/model/MLModel_1/val_atoms.extxyz
+    metrics:
+    - nodes/AL4/model/ApaxEnsemble/node-meta.json:
+        cache: false
   AL4_model_MLModel:
     cmd: zntrack run ipsuite.nodes.Apax --name AL4_model_MLModel
     deps:
@@ -1413,7 +1783,7 @@ stages:
     - nodes/AL4/model/MLModel/val_atoms.extxyz
     params:
     - AL4_model_MLModel
-    - config/initial_model_1.yaml:
+    - config/initial_model_1.yaml: null
   AL4_model_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name AL4_model_MLModel_1
     deps:
@@ -1494,7 +1864,7 @@ stages:
     - nodes/AL4/model/MLModel_1/val_atoms.extxyz
     params:
     - AL4_model_MLModel_1
-    - config/initial_model_2.yaml:
+    - config/initial_model_2.yaml: null
   AL4_test_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name AL4_test_ASEGeoOpt
     deps:
@@ -1527,7 +1897,7 @@ stages:
     - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
     params:
     - AL4_test_ASEGeoOpt_1
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL4_test_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name AL4_test_ASEMD
     deps:
@@ -1563,7 +1933,7 @@ stages:
     - nodes/AL4/test/CP2KSinglePoint/atoms.h5
     - nodes/AL4/test/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL4_test_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL4_test_ConfigurationSelection
     deps:
@@ -1623,7 +1993,7 @@ stages:
     - nodes/AL4/train/ASEGeoOpt_1/trajectory.h5
     params:
     - AL4_train_ASEGeoOpt_1
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL4_train_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name AL4_train_ASEMD
     deps:
@@ -1659,7 +2029,7 @@ stages:
     - nodes/AL4/train/CP2KSinglePoint/atoms.h5
     - nodes/AL4/train/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   AL4_train_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AL4_train_ConfigurationSelection
     deps:
@@ -1701,7 +2071,7 @@ stages:
     - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
     params:
     - GeoOpt_ASEGeoOpt
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   GeoOpt_Packmol:
     cmd: zntrack run ipsuite.nodes.Packmol --name GeoOpt_Packmol
     deps:
@@ -1770,7 +2140,7 @@ stages:
     params:
     - bootstrap_BoxScale
     - bootstrap_BoxScale+mapping
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   bootstrap_RotateMolecules:
     cmd: zntrack run ipsuite.nodes.RotateMolecules --name bootstrap_RotateMolecules
     deps:
@@ -1785,7 +2155,7 @@ stages:
     - nodes/bootstrap/RotateMolecules/model_outs
     params:
     - bootstrap_RotateMolecules
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   bootstrap_TranslateMolecules:
     cmd: zntrack run ipsuite.nodes.TranslateMolecules --name bootstrap_TranslateMolecules
     deps:
@@ -1800,7 +2170,7 @@ stages:
     - nodes/bootstrap/TranslateMolecules/model_outs
     params:
     - bootstrap_TranslateMolecules
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   initial_model_ApaxEnsemble:
     cmd: zntrack run ipsuite.nodes.ApaxEnsemble --name initial_model_ApaxEnsemble
     deps:
@@ -1909,7 +2279,7 @@ stages:
     - nodes/initial_model/MLModel/val_atoms.extxyz
     params:
     - initial_model_MLModel
-    - config/initial_model_1.yaml:
+    - config/initial_model_1.yaml: null
   initial_model_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name initial_model_MLModel_1
     deps:
@@ -1930,7 +2300,7 @@ stages:
     - nodes/initial_model/MLModel_1/val_atoms.extxyz
     params:
     - initial_model_MLModel_1
-    - config/initial_model_2.yaml:
+    - config/initial_model_2.yaml: null
   initial_model_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name initial_model_Prediction
     deps:
@@ -1969,363 +2339,3 @@ stages:
     - nodes/initial_model/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/initial_model/PredictionMetrics/stress_df.csv
     - nodes/initial_model/PredictionMetrics/stress_hydrostatic_df.csv
-  AL4_model_ApaxEnsemble:
-    cmd: zntrack run ipsuite.nodes.ApaxEnsemble --name AL4_model_ApaxEnsemble
-    deps:
-    - nodes/AL4/model/MLModel/apax_model
-    - nodes/AL4/model/MLModel/log.csv
-    - nodes/AL4/model/MLModel/metrics.json
-    - nodes/AL4/model/MLModel/node-meta.json
-    - nodes/AL4/model/MLModel/train.log
-    - nodes/AL4/model/MLModel/train_atoms.extxyz
-    - nodes/AL4/model/MLModel/val_atoms.extxyz
-    - nodes/AL4/model/MLModel_1/apax_model
-    - nodes/AL4/model/MLModel_1/log.csv
-    - nodes/AL4/model/MLModel_1/metrics.json
-    - nodes/AL4/model/MLModel_1/node-meta.json
-    - nodes/AL4/model/MLModel_1/train.log
-    - nodes/AL4/model/MLModel_1/train_atoms.extxyz
-    - nodes/AL4/model/MLModel_1/val_atoms.extxyz
-    metrics:
-    - nodes/AL4/model/ApaxEnsemble/node-meta.json:
-        cache: false
-  AL0_metrics_Prediction:
-    cmd: zntrack run ipsuite.nodes.Prediction --name AL0_metrics_Prediction
-    deps:
-    - nodes/AL0/model/ApaxEnsemble/node-meta.json
-    - nodes/AL0/test/ASEGeoOpt_1/model_outs
-    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL0/test/CP2KSinglePoint/cp2k
-    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL1/test/ASEGeoOpt_1/model_outs
-    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL1/test/CP2KSinglePoint/cp2k
-    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL2/test/ASEGeoOpt_1/model_outs
-    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL2/test/CP2KSinglePoint/cp2k
-    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL3/test/ASEGeoOpt_1/model_outs
-    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL3/test/CP2KSinglePoint/cp2k
-    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL4/test/ASEGeoOpt_1/model_outs
-    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL4/test/CP2KSinglePoint/cp2k
-    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
-    - nodes/initial_model/ConfigurationSelection/node-meta.json
-    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
-    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
-    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
-    outs:
-    - nodes/AL0/metrics/Prediction/atoms.h5
-    metrics:
-    - nodes/AL0/metrics/Prediction/node-meta.json:
-        cache: false
-  AL0_metrics_PredictionMetrics:
-    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name AL0_metrics_PredictionMetrics
-    deps:
-    - nodes/AL0/metrics/Prediction/atoms.h5
-    - nodes/AL0/metrics/Prediction/node-meta.json
-    outs:
-    - nodes/AL0/metrics/PredictionMetrics/energy_df.csv
-    - nodes/AL0/metrics/PredictionMetrics/forces_df.csv
-    - nodes/AL0/metrics/PredictionMetrics/plots
-    - nodes/AL0/metrics/PredictionMetrics/stress_deviatoric_df.csv
-    - nodes/AL0/metrics/PredictionMetrics/stress_df.csv
-    - nodes/AL0/metrics/PredictionMetrics/stress_hydrostatic_df.csv
-    metrics:
-    - nodes/AL0/metrics/PredictionMetrics/deviat_stress.json:
-        cache: false
-    - nodes/AL0/metrics/PredictionMetrics/energy.json:
-        cache: false
-    - nodes/AL0/metrics/PredictionMetrics/forces.json:
-        cache: false
-    - nodes/AL0/metrics/PredictionMetrics/hydro_stress.json:
-        cache: false
-    - nodes/AL0/metrics/PredictionMetrics/node-meta.json:
-        cache: false
-    - nodes/AL0/metrics/PredictionMetrics/stress.json:
-        cache: false
-  AL1_metrics_Prediction:
-    cmd: zntrack run ipsuite.nodes.Prediction --name AL1_metrics_Prediction
-    deps:
-    - nodes/AL0/test/ASEGeoOpt_1/model_outs
-    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL0/test/CP2KSinglePoint/cp2k
-    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL1/model/ApaxEnsemble/node-meta.json
-    - nodes/AL1/test/ASEGeoOpt_1/model_outs
-    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL1/test/CP2KSinglePoint/cp2k
-    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL2/test/ASEGeoOpt_1/model_outs
-    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL2/test/CP2KSinglePoint/cp2k
-    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL3/test/ASEGeoOpt_1/model_outs
-    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL3/test/CP2KSinglePoint/cp2k
-    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL4/test/ASEGeoOpt_1/model_outs
-    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL4/test/CP2KSinglePoint/cp2k
-    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
-    - nodes/initial_model/ConfigurationSelection/node-meta.json
-    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
-    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
-    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
-    outs:
-    - nodes/AL1/metrics/Prediction/atoms.h5
-    metrics:
-    - nodes/AL1/metrics/Prediction/node-meta.json:
-        cache: false
-  AL1_metrics_PredictionMetrics:
-    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name AL1_metrics_PredictionMetrics
-    deps:
-    - nodes/AL1/metrics/Prediction/atoms.h5
-    - nodes/AL1/metrics/Prediction/node-meta.json
-    outs:
-    - nodes/AL1/metrics/PredictionMetrics/energy_df.csv
-    - nodes/AL1/metrics/PredictionMetrics/forces_df.csv
-    - nodes/AL1/metrics/PredictionMetrics/plots
-    - nodes/AL1/metrics/PredictionMetrics/stress_deviatoric_df.csv
-    - nodes/AL1/metrics/PredictionMetrics/stress_df.csv
-    - nodes/AL1/metrics/PredictionMetrics/stress_hydrostatic_df.csv
-    metrics:
-    - nodes/AL1/metrics/PredictionMetrics/deviat_stress.json:
-        cache: false
-    - nodes/AL1/metrics/PredictionMetrics/energy.json:
-        cache: false
-    - nodes/AL1/metrics/PredictionMetrics/forces.json:
-        cache: false
-    - nodes/AL1/metrics/PredictionMetrics/hydro_stress.json:
-        cache: false
-    - nodes/AL1/metrics/PredictionMetrics/node-meta.json:
-        cache: false
-    - nodes/AL1/metrics/PredictionMetrics/stress.json:
-        cache: false
-  AL2_metrics_Prediction:
-    cmd: zntrack run ipsuite.nodes.Prediction --name AL2_metrics_Prediction
-    deps:
-    - nodes/AL0/test/ASEGeoOpt_1/model_outs
-    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL0/test/CP2KSinglePoint/cp2k
-    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL1/test/ASEGeoOpt_1/model_outs
-    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL1/test/CP2KSinglePoint/cp2k
-    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL2/model/ApaxEnsemble/node-meta.json
-    - nodes/AL2/test/ASEGeoOpt_1/model_outs
-    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL2/test/CP2KSinglePoint/cp2k
-    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL3/test/ASEGeoOpt_1/model_outs
-    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL3/test/CP2KSinglePoint/cp2k
-    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL4/test/ASEGeoOpt_1/model_outs
-    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL4/test/CP2KSinglePoint/cp2k
-    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
-    - nodes/initial_model/ConfigurationSelection/node-meta.json
-    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
-    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
-    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
-    outs:
-    - nodes/AL2/metrics/Prediction/atoms.h5
-    metrics:
-    - nodes/AL2/metrics/Prediction/node-meta.json:
-        cache: false
-  AL2_metrics_PredictionMetrics:
-    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name AL2_metrics_PredictionMetrics
-    deps:
-    - nodes/AL2/metrics/Prediction/atoms.h5
-    - nodes/AL2/metrics/Prediction/node-meta.json
-    outs:
-    - nodes/AL2/metrics/PredictionMetrics/energy_df.csv
-    - nodes/AL2/metrics/PredictionMetrics/forces_df.csv
-    - nodes/AL2/metrics/PredictionMetrics/plots
-    - nodes/AL2/metrics/PredictionMetrics/stress_deviatoric_df.csv
-    - nodes/AL2/metrics/PredictionMetrics/stress_df.csv
-    - nodes/AL2/metrics/PredictionMetrics/stress_hydrostatic_df.csv
-    metrics:
-    - nodes/AL2/metrics/PredictionMetrics/deviat_stress.json:
-        cache: false
-    - nodes/AL2/metrics/PredictionMetrics/energy.json:
-        cache: false
-    - nodes/AL2/metrics/PredictionMetrics/forces.json:
-        cache: false
-    - nodes/AL2/metrics/PredictionMetrics/hydro_stress.json:
-        cache: false
-    - nodes/AL2/metrics/PredictionMetrics/node-meta.json:
-        cache: false
-    - nodes/AL2/metrics/PredictionMetrics/stress.json:
-        cache: false
-  AL3_metrics_Prediction:
-    cmd: zntrack run ipsuite.nodes.Prediction --name AL3_metrics_Prediction
-    deps:
-    - nodes/AL0/test/ASEGeoOpt_1/model_outs
-    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL0/test/CP2KSinglePoint/cp2k
-    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL1/test/ASEGeoOpt_1/model_outs
-    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL1/test/CP2KSinglePoint/cp2k
-    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL2/test/ASEGeoOpt_1/model_outs
-    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL2/test/CP2KSinglePoint/cp2k
-    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL3/model/ApaxEnsemble/node-meta.json
-    - nodes/AL3/test/ASEGeoOpt_1/model_outs
-    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL3/test/CP2KSinglePoint/cp2k
-    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL4/test/ASEGeoOpt_1/model_outs
-    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL4/test/CP2KSinglePoint/cp2k
-    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
-    - nodes/initial_model/ConfigurationSelection/node-meta.json
-    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
-    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
-    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
-    outs:
-    - nodes/AL3/metrics/Prediction/atoms.h5
-    metrics:
-    - nodes/AL3/metrics/Prediction/node-meta.json:
-        cache: false
-  AL3_metrics_PredictionMetrics:
-    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name AL3_metrics_PredictionMetrics
-    deps:
-    - nodes/AL3/metrics/Prediction/atoms.h5
-    - nodes/AL3/metrics/Prediction/node-meta.json
-    outs:
-    - nodes/AL3/metrics/PredictionMetrics/energy_df.csv
-    - nodes/AL3/metrics/PredictionMetrics/forces_df.csv
-    - nodes/AL3/metrics/PredictionMetrics/plots
-    - nodes/AL3/metrics/PredictionMetrics/stress_deviatoric_df.csv
-    - nodes/AL3/metrics/PredictionMetrics/stress_df.csv
-    - nodes/AL3/metrics/PredictionMetrics/stress_hydrostatic_df.csv
-    metrics:
-    - nodes/AL3/metrics/PredictionMetrics/deviat_stress.json:
-        cache: false
-    - nodes/AL3/metrics/PredictionMetrics/energy.json:
-        cache: false
-    - nodes/AL3/metrics/PredictionMetrics/forces.json:
-        cache: false
-    - nodes/AL3/metrics/PredictionMetrics/hydro_stress.json:
-        cache: false
-    - nodes/AL3/metrics/PredictionMetrics/node-meta.json:
-        cache: false
-    - nodes/AL3/metrics/PredictionMetrics/stress.json:
-        cache: false
-  AL4_metrics_Prediction:
-    cmd: zntrack run ipsuite.nodes.Prediction --name AL4_metrics_Prediction
-    deps:
-    - nodes/AL0/test/ASEGeoOpt_1/model_outs
-    - nodes/AL0/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL0/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL0/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL0/test/CP2KSinglePoint/cp2k
-    - nodes/AL0/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL1/test/ASEGeoOpt_1/model_outs
-    - nodes/AL1/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL1/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL1/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL1/test/CP2KSinglePoint/cp2k
-    - nodes/AL1/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL2/test/ASEGeoOpt_1/model_outs
-    - nodes/AL2/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL2/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL2/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL2/test/CP2KSinglePoint/cp2k
-    - nodes/AL2/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL3/test/ASEGeoOpt_1/model_outs
-    - nodes/AL3/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL3/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL3/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL3/test/CP2KSinglePoint/cp2k
-    - nodes/AL3/test/CP2KSinglePoint/node-meta.json
-    - nodes/AL4/model/ApaxEnsemble/node-meta.json
-    - nodes/AL4/test/ASEGeoOpt_1/model_outs
-    - nodes/AL4/test/ASEGeoOpt_1/node-meta.json
-    - nodes/AL4/test/ASEGeoOpt_1/trajectory.h5
-    - nodes/AL4/test/CP2KSinglePoint/atoms.h5
-    - nodes/AL4/test/CP2KSinglePoint/cp2k
-    - nodes/AL4/test/CP2KSinglePoint/node-meta.json
-    - nodes/initial_model/ConfigurationSelection/node-meta.json
-    - nodes/initial_model/ConfigurationSelection/selected_configurations.json
-    - nodes/initial_model/ConfigurationSelection_2/node-meta.json
-    - nodes/initial_model/ConfigurationSelection_2/selected_configurations.json
-    outs:
-    - nodes/AL4/metrics/Prediction/atoms.h5
-    metrics:
-    - nodes/AL4/metrics/Prediction/node-meta.json:
-        cache: false
-  AL4_metrics_PredictionMetrics:
-    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name AL4_metrics_PredictionMetrics
-    deps:
-    - nodes/AL4/metrics/Prediction/atoms.h5
-    - nodes/AL4/metrics/Prediction/node-meta.json
-    outs:
-    - nodes/AL4/metrics/PredictionMetrics/energy_df.csv
-    - nodes/AL4/metrics/PredictionMetrics/forces_df.csv
-    - nodes/AL4/metrics/PredictionMetrics/plots
-    - nodes/AL4/metrics/PredictionMetrics/stress_deviatoric_df.csv
-    - nodes/AL4/metrics/PredictionMetrics/stress_df.csv
-    - nodes/AL4/metrics/PredictionMetrics/stress_hydrostatic_df.csv
-    metrics:
-    - nodes/AL4/metrics/PredictionMetrics/deviat_stress.json:
-        cache: false
-    - nodes/AL4/metrics/PredictionMetrics/energy.json:
-        cache: false
-    - nodes/AL4/metrics/PredictionMetrics/forces.json:
-        cache: false
-    - nodes/AL4/metrics/PredictionMetrics/hydro_stress.json:
-        cache: false
-    - nodes/AL4/metrics/PredictionMetrics/node-meta.json:
-        cache: false
-    - nodes/AL4/metrics/PredictionMetrics/stress.json:
-        cache: false
