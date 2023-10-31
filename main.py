@@ -57,7 +57,7 @@ with project.group("ML0") as grp:
         )
     
     model = ips.models.Apax(
-            data=mmk_selection.atoms,
+            data=mmk_selection.atoms + seed_configs.atoms,
             validation_data=mmk_selection.excluded_atoms,
             config="config/initial_model_1.yaml"
         )

@@ -265,19 +265,38 @@
     "ML0_MLModel": {
         "config": "config/initial_model_1.yaml",
         "data": {
-            "_type": "znflow.Connection",
+            "_type": "znflow.CombinedConnections",
             "value": {
-                "instance": {
-                    "_type": "zntrack.Node",
-                    "value": {
-                        "module": "ipsuite.nodes",
-                        "cls": "KernelSelection",
-                        "name": "ML0_MMK",
-                        "remote": null,
-                        "rev": null
+                "connections": [
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "KernelSelection",
+                                "name": "ML0_MMK",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "RandomSelection",
+                                "name": "ML0_seed",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
                     }
-                },
-                "attribute": "atoms",
+                ],
                 "item": null
             }
         },

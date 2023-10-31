@@ -21,7 +21,7 @@ stages:
     - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
     params:
     - GeoOpt_ASEGeoOpt
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   GeoOpt_Packmol:
     cmd: zntrack run ipsuite.nodes.Packmol --name GeoOpt_Packmol
     deps:
@@ -80,6 +80,9 @@ stages:
     - nodes/ML0/MMK/node-meta.json
     - nodes/ML0/MMK/selected_configurations.json
     - nodes/ML0/MMK/selection.png
+    - nodes/ML0/seed/node-meta.json
+    - nodes/ML0/seed/selected_configurations.json
+    - nodes/ML0/seed/selection.png
     metrics:
     - nodes/ML0/MLModel/metrics.json:
         cache: false
@@ -93,7 +96,7 @@ stages:
     - nodes/ML0/MLModel/val_atoms.extxyz
     params:
     - ML0_MLModel
-    - config/initial_model_1.yaml: null
+    - config/initial_model_1.yaml:
   ML0_MMK:
     cmd: zntrack run ipsuite.nodes.KernelSelection --name ML0_MMK
     deps:
