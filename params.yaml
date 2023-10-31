@@ -57,4 +57,4 @@ ML0_MMK+kernel:
       weighting:
 ML0_seed:
   n_configurations: 1
-  seed: 3
+  seed: 1
