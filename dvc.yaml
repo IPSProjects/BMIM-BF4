@@ -21,7 +21,7 @@ stages:
     - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
     params:
     - GeoOpt_ASEGeoOpt
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   GeoOpt_Packmol:
     cmd: zntrack run ipsuite.nodes.Packmol --name GeoOpt_Packmol
     deps:
@@ -93,7 +93,7 @@ stages:
     - nodes/ML0/MLModel/val_atoms.extxyz
     params:
     - ML0_MLModel
-    - config/initial_model_1.yaml:
+    - config/initial_model_1.yaml: null
   ML0_MMK:
     cmd: zntrack run ipsuite.nodes.KernelSelection --name ML0_MMK
     deps:
@@ -113,20 +113,6 @@ stages:
     params:
     - ML0_MMK
     - ML0_MMK+kernel
-  ML0_seed:
-    cmd: zntrack run ipsuite.nodes.RandomSelection --name ML0_seed
-    deps:
-    - nodes/GeoOpt/ASEGeoOpt/model_outs
-    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
-    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
-    metrics:
-    - nodes/ML0/seed/node-meta.json:
-        cache: false
-    outs:
-    - nodes/ML0/seed/selected_configurations.json
-    - nodes/ML0/seed/selection.png
-    params:
-    - ML0_seed
   ML0_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML0_Prediction
     deps:
@@ -141,23 +127,16 @@ stages:
     - nodes/ML0/MMK/node-meta.json
     - nodes/ML0/MMK/selected_configurations.json
     - nodes/ML0/MMK/selection.png
-    outs:
-    - nodes/ML0/Prediction/atoms.h5
     metrics:
     - nodes/ML0/Prediction/node-meta.json:
         cache: false
+    outs:
+    - nodes/ML0/Prediction/atoms.h5
   ML0_PredictionMetrics:
     cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML0_PredictionMetrics
     deps:
     - nodes/ML0/Prediction/atoms.h5
     - nodes/ML0/Prediction/node-meta.json
-    outs:
-    - nodes/ML0/PredictionMetrics/energy_df.csv
-    - nodes/ML0/PredictionMetrics/forces_df.csv
-    - nodes/ML0/PredictionMetrics/plots
-    - nodes/ML0/PredictionMetrics/stress_deviatoric_df.csv
-    - nodes/ML0/PredictionMetrics/stress_df.csv
-    - nodes/ML0/PredictionMetrics/stress_hydrostatic_df.csv
     metrics:
     - nodes/ML0/PredictionMetrics/deviat_stress.json:
         cache: false
@@ -171,3 +150,24 @@ stages:
         cache: false
     - nodes/ML0/PredictionMetrics/stress.json:
         cache: false
+    outs:
+    - nodes/ML0/PredictionMetrics/energy_df.csv
+    - nodes/ML0/PredictionMetrics/forces_df.csv
+    - nodes/ML0/PredictionMetrics/plots
+    - nodes/ML0/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/ML0/PredictionMetrics/stress_df.csv
+    - nodes/ML0/PredictionMetrics/stress_hydrostatic_df.csv
+  ML0_seed:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name ML0_seed
+    deps:
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+    metrics:
+    - nodes/ML0/seed/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML0/seed/selected_configurations.json
+    - nodes/ML0/seed/selection.png
+    params:
+    - ML0_seed
