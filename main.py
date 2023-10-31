@@ -33,4 +33,38 @@ with project.group("GeoOpt"):
         run_kwargs={"fmax": 0.1},
     )
 
-project.build()
+mmk_kernel = ips.configuration_comparison.MMKernel(
+        use_jit=True,
+        soap={
+            "r_cut": 6.0,
+            "n_max": 7,
+            "l_max": 5,
+            "sigma": 0.5,
+        },
+    )
+
+with project.group("ML0") as grp:
+    seed_configs = ips.configuration_selection.RandomSelection(
+            data=geo_opt.atoms, n_configurations=1, seed=42, name="seed"
+        )
+    mmk_selection = ips.configuration_selection.KernelSelection(
+            correlation_time=1,
+            n_configurations=15,
+            kernel=mmk_kernel,
+            initial_configurations=seed_configs.atoms,
+            data=geo_opt.atoms,
+            name="MMK",
+        )
+    
+    model = ips.models.Apax(
+            data=mmk_selection.atoms,
+            validation_data=mmk_selection.excluded_atoms,
+            config="config/initial_model_1.yaml"
+        )
+    
+    prediction = ips.analysis.Prediction(model=model, data=mmk_selection.excluded_atoms)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
+    
+
+
+project.build(nodes=[grp])
