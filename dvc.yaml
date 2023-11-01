@@ -1,5 +1,4 @@
 plots:
-- nodes/ML0_MMK+kernel/similarities.csv: {}
 - nodes/ML0/MLModel/log.csv:
     template: dvc_plots/templates/y_log.json
     x: epoch
@@ -76,10 +75,6 @@ stages:
   ML0_MLModel:
     cmd: zntrack run ipsuite.nodes.Apax --name ML0_MLModel
     deps:
-    - nodes/ML0/MMK/kernel_results.json
-    - nodes/ML0/MMK/node-meta.json
-    - nodes/ML0/MMK/selected_configurations.json
-    - nodes/ML0/MMK/selection.png
     - nodes/ML0/seed/node-meta.json
     - nodes/ML0/seed/selected_configurations.json
     - nodes/ML0/seed/selection.png
@@ -97,25 +92,6 @@ stages:
     params:
     - ML0_MLModel
     - config/initial_model_1.yaml:
-  ML0_MMK:
-    cmd: zntrack run ipsuite.nodes.KernelSelection --name ML0_MMK
-    deps:
-    - nodes/GeoOpt/ASEGeoOpt/model_outs
-    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
-    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
-    - nodes/ML0/seed/node-meta.json
-    - nodes/ML0/seed/selected_configurations.json
-    - nodes/ML0/seed/selection.png
-    metrics:
-    - nodes/ML0/MMK/node-meta.json:
-        cache: false
-    outs:
-    - nodes/ML0/MMK/kernel_results.json
-    - nodes/ML0/MMK/selected_configurations.json
-    - nodes/ML0/MMK/selection.png
-    params:
-    - ML0_MMK
-    - ML0_MMK+kernel
   ML0_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML0_Prediction
     deps:
@@ -126,10 +102,9 @@ stages:
     - nodes/ML0/MLModel/train.log
     - nodes/ML0/MLModel/train_atoms.extxyz
     - nodes/ML0/MLModel/val_atoms.extxyz
-    - nodes/ML0/MMK/kernel_results.json
-    - nodes/ML0/MMK/node-meta.json
-    - nodes/ML0/MMK/selected_configurations.json
-    - nodes/ML0/MMK/selection.png
+    - nodes/ML0/seed/node-meta.json
+    - nodes/ML0/seed/selected_configurations.json
+    - nodes/ML0/seed/selection.png
     metrics:
     - nodes/ML0/Prediction/node-meta.json:
         cache: false
