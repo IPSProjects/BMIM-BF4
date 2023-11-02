@@ -45,18 +45,29 @@ mmk_kernel = ips.configuration_comparison.MMKernel(
 
 with project.group("ML0") as grp:
     seed_configs = ips.configuration_selection.RandomSelection(
-            data=geo_opt.atoms, n_configurations=16, seed=1, name="seed"
+            data=geo_opt.atoms, n_configurations=1, seed=42, name="seed"
         )
-
+    mmk_selection = ips.configuration_selection.KernelSelection(
+            correlation_time=1,
+            n_configurations=15,
+            kernel=mmk_kernel,
+            initial_configurations=seed_configs.atoms,
+            data=geo_opt.atoms,
+            name="MMK",
+        )
+    
     model = ips.models.Apax(
-            data=seed_configs.atoms,
-            validation_data=seed_configs.excluded_atoms,
+            data=mmk_selection.atoms + seed_configs.atoms,
+            validation_data=mmk_selection.excluded_atoms,
             config="config/initial_model_1.yaml"
         )
     
-    prediction = ips.analysis.Prediction(model=model, data=seed_configs.excluded_atoms)
+    prediction = ips.analysis.Prediction(model=model, data=mmk_selection.excluded_atoms)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
     
 
 
-project.build()
+# project.build(nodes=[grp])
+
+mmk_selection.load()
+mmk_selection.plot_kernel()

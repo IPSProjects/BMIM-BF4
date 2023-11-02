@@ -194,9 +194,34 @@
             "value": "nodes/ML0/seed"
         }
     },
-    "ML0_MLModel": {
-        "config": "config/initial_model_1.yaml",
+    "ML0_MMK": {
         "data": {
+            "GeoOpt_ASEGeoOpt": {
+                "_type": "znflow.Connection",
+                "value": {
+                    "instance": {
+                        "_type": "zntrack.Node",
+                        "value": {
+                            "module": "ipsuite.nodes",
+                            "cls": "ASEGeoOpt",
+                            "name": "GeoOpt_ASEGeoOpt",
+                            "remote": null,
+                            "rev": null
+                        }
+                    },
+                    "attribute": "atoms",
+                    "item": null
+                }
+            }
+        },
+        "data_file": null,
+        "exclude": null,
+        "exclude_configurations": null,
+        "img_selection": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/selection.png"
+        },
+        "initial_configurations": {
             "_type": "znflow.Connection",
             "value": {
                 "instance": {
@@ -210,6 +235,68 @@
                     }
                 },
                 "attribute": "atoms",
+                "item": null
+            }
+        },
+        "kernel": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "MMKernel",
+                "name": "ML0_MMK+kernel",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML0/MMK"
+        }
+    },
+    "ML0_MMK+kernel": {
+        "analyte": null,
+        "reference": null,
+        "use_jit": true,
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML0_MMK+kernel"
+        }
+    },
+    "ML0_MLModel": {
+        "config": "config/initial_model_1.yaml",
+        "data": {
+            "_type": "znflow.CombinedConnections",
+            "value": {
+                "connections": [
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "KernelSelection",
+                                "name": "ML0_MMK",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "RandomSelection",
+                                "name": "ML0_seed",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    }
+                ],
                 "item": null
             }
         },
@@ -237,8 +324,8 @@
                     "_type": "zntrack.Node",
                     "value": {
                         "module": "ipsuite.nodes",
-                        "cls": "RandomSelection",
-                        "name": "ML0_seed",
+                        "cls": "KernelSelection",
+                        "name": "ML0_MMK",
                         "remote": null,
                         "rev": null
                     }
@@ -264,8 +351,8 @@
                     "_type": "zntrack.Node",
                     "value": {
                         "module": "ipsuite.nodes",
-                        "cls": "RandomSelection",
-                        "name": "ML0_seed",
+                        "cls": "KernelSelection",
+                        "name": "ML0_MMK",
                         "remote": null,
                         "rev": null
                     }
