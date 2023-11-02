@@ -39,22 +39,5 @@ ML0_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
-ML0_MMK:
-    correlation_time: 1
-    n_configurations: 30
-    points_per_cycle: 1
-    seed: 1234
-ML0_MMK+kernel:
-    soap:
-        _type: soap_parameter_dataclass
-        value:
-            l_max: 5
-            n_jobs: -1
-            n_max: 7
-            r_cut: 6.0
-            rbf: gto
-            sigma: 0.5
-            weighting: null
 ML0_seed:
-    n_configurations: 1
-    seed: 3
+    n_configurations: 17
