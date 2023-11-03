@@ -162,7 +162,7 @@
             "value": "nodes/GeoOpt_ASEGeoOpt+model"
         }
     },
-    "ML0_seed": {
+    "ML0_MMK": {
         "data": {
             "GeoOpt_ASEGeoOpt": {
                 "_type": "znflow.Connection",
@@ -189,9 +189,29 @@
             "_type": "pathlib.Path",
             "value": "$nwd$/selection.png"
         },
+        "initial_configurations": null,
+        "kernel": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "MMKernel",
+                "name": "ML0_MMK+kernel",
+                "remote": null,
+                "rev": null
+            }
+        },
         "nwd": {
             "_type": "pathlib.Path",
-            "value": "nodes/ML0/seed"
+            "value": "nodes/ML0/MMK"
+        }
+    },
+    "ML0_MMK+kernel": {
+        "analyte": null,
+        "reference": null,
+        "use_jit": true,
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML0_MMK+kernel"
         }
     },
     "ML0_MLModel": {
@@ -203,8 +223,8 @@
                     "_type": "zntrack.Node",
                     "value": {
                         "module": "ipsuite.nodes",
-                        "cls": "UniformTemporalSelection",
-                        "name": "ML0_seed",
+                        "cls": "KernelSelection",
+                        "name": "ML0_MMK",
                         "remote": null,
                         "rev": null
                     }
@@ -237,8 +257,8 @@
                     "_type": "zntrack.Node",
                     "value": {
                         "module": "ipsuite.nodes",
-                        "cls": "UniformTemporalSelection",
-                        "name": "ML0_seed",
+                        "cls": "KernelSelection",
+                        "name": "ML0_MMK",
                         "remote": null,
                         "rev": null
                     }
@@ -264,8 +284,8 @@
                     "_type": "zntrack.Node",
                     "value": {
                         "module": "ipsuite.nodes",
-                        "cls": "UniformTemporalSelection",
-                        "name": "ML0_seed",
+                        "cls": "KernelSelection",
+                        "name": "ML0_MMK",
                         "remote": null,
                         "rev": null
                     }
