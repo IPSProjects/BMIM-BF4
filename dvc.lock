@@ -9483,7 +9483,7 @@ stages:
       size: 3573832
     - path: nodes/ML0/ApaxEnsemble/node-meta.json
       hash: md5
-      md5: 2383ba0417e53b63827f2e3928ba1c79
+      md5: 2a510ece0159e312140cf3f730ffa387
       size: 48
     params:
       params.yaml:
@@ -9496,13 +9496,13 @@ stages:
           - 1
           - 1
           sampling_rate: 1
+          seed: 42
           steps: 50000
           use_momenta: false
-          seed: 42
         MD_ASEMD+checker_list+0:
           larger_only: false
           max_std:
-          max_value: 1.5
+          max_value: 2.0
           minimum_window_size: 1
           value: forces
           window_size: 500
@@ -9513,8 +9513,8 @@ stages:
     outs:
     - path: nodes/MD/ASEMD/metrics_dict.csv
       hash: md5
-      md5: 3f956dcf40bdb1750a286b15cbbe1fd6
-      size: 582
+      md5: c00b68c8c5d1bd9a921e0dc7dcc5e62a
+      size: 5281
     - path: nodes/MD/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -9522,16 +9522,16 @@ stages:
       nfiles: 1
     - path: nodes/MD/ASEMD/node-meta.json
       hash: md5
-      md5: fb4869a48e856872cbad681a281f0673
+      md5: 300a4e022223642223d3e991d73a1f15
       size: 48
     - path: nodes/MD/ASEMD/steps_before_stopping.json
       hash: md5
-      md5: c9f0f895fb98ab9159f51fd0297e236d
-      size: 1
+      md5: 93db85ed909c13838ff95ccfa94cebd9
+      size: 2
     - path: nodes/MD/ASEMD/trajectory.h5
       hash: md5
-      md5: 317618525a09114bbb1d3f1a7153a1ef
-      size: 465824
+      md5: 7f42fc7efce240f7683a79dc7395805f
+      size: 2818080
   bootstrap_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.KernelSelection --name bootstrap_ConfigurationSelection
     deps:
@@ -9704,3 +9704,93 @@ stages:
       hash: md5
       md5: 2121fcea77352b02a309a3c629fefd0f
       size: 48
+  MD_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.KernelSelection --name MD_ConfigurationSelection
+    deps:
+    - path: nodes/MD/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: c00b68c8c5d1bd9a921e0dc7dcc5e62a
+      size: 5281
+    - path: nodes/MD/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/MD/ASEMD/node-meta.json
+      hash: md5
+      md5: 300a4e022223642223d3e991d73a1f15
+      size: 48
+    - path: nodes/MD/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 93db85ed909c13838ff95ccfa94cebd9
+      size: 2
+    - path: nodes/MD/ASEMD/trajectory.h5
+      hash: md5
+      md5: 7f42fc7efce240f7683a79dc7395805f
+      size: 2818080
+    - path: nodes/ML0/MMK/kernel_results.json
+      hash: md5
+      md5: fd8b302c09ec3b4d4ab5c8e2d497aa01
+      size: 84190
+    - path: nodes/ML0/MMK/node-meta.json
+      hash: md5
+      md5: 10976a9477855bede04c548050de016f
+      size: 48
+    - path: nodes/ML0/MMK/selected_configurations.json
+      hash: md5
+      md5: 06bee1605873454f484ddcd018e37cdd
+      size: 226
+    - path: nodes/ML0/MMK/selection.png
+      hash: md5
+      md5: 46f8d19899cfee380ab414d776b9285c
+      size: 21069
+    - path: nodes/bootstrap/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 8a5125276fd57e830082495dc83f5948
+      size: 887312
+    - path: nodes/bootstrap/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: f66940e3a9c5352179c84deeb781b378.dir
+      size: 15017322
+      nfiles: 3
+    - path: nodes/bootstrap/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 2121fcea77352b02a309a3c629fefd0f
+      size: 48
+    params:
+      params.yaml:
+        MD_ConfigurationSelection:
+          correlation_time: 1
+          n_configurations: 20
+          points_per_cycle: 1
+          seed: 1234
+          threshold: 0.99
+        MD_ConfigurationSelection+kernel:
+          memory: 1000
+          soap:
+            _type: soap_parameter_dataclass
+            value:
+              l_max: 5
+              n_jobs: -1
+              n_max: 7
+              r_cut: 6.0
+              rbf: gto
+              sigma: 0.5
+              weighting:
+    outs:
+    - path: nodes/MD/ConfigurationSelection/kernel_results.json
+      hash: md5
+      md5: 5acbf00d6adaff844c2587387b2c97b6
+      size: 12194
+    - path: nodes/MD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 6915de11ab54a4174558ff3461503f27
+      size: 48
+    - path: nodes/MD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 8e08ec00592995f6a8d411a92923f4ad
+      size: 86
+    - path: nodes/MD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: bb3788c8753ada2362aed1190a7c5df0
+      size: 23271

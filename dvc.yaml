@@ -11,6 +11,8 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
+- nodes/MD/ASEMD/metrics_dict.csv: {}
+- nodes/MD_ConfigurationSelection+kernel/similarities.csv: {}
 stages:
   GeoOpt_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name GeoOpt_ASEGeoOpt
@@ -78,6 +80,51 @@ stages:
     - nodes/GeoOpt/SmilesToAtoms_1/molecule.png
     params:
     - GeoOpt_SmilesToAtoms_1
+  MD_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name MD_ASEMD
+    deps:
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+    - nodes/ML0/ApaxEnsemble/node-meta.json
+    metrics:
+    - nodes/MD/ASEMD/node-meta.json:
+        cache: false
+    - nodes/MD/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/MD/ASEMD/metrics_dict.csv
+    - nodes/MD/ASEMD/model
+    - nodes/MD/ASEMD/trajectory.h5
+    params:
+    - MD_ASEMD
+    - MD_ASEMD+checker_list+0
+    - MD_ASEMD+thermostat
+  MD_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.KernelSelection --name MD_ConfigurationSelection
+    deps:
+    - nodes/MD/ASEMD/metrics_dict.csv
+    - nodes/MD/ASEMD/model
+    - nodes/MD/ASEMD/node-meta.json
+    - nodes/MD/ASEMD/steps_before_stopping.json
+    - nodes/MD/ASEMD/trajectory.h5
+    - nodes/ML0/MMK/kernel_results.json
+    - nodes/ML0/MMK/node-meta.json
+    - nodes/ML0/MMK/selected_configurations.json
+    - nodes/ML0/MMK/selection.png
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/MD/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/MD/ConfigurationSelection/kernel_results.json
+    - nodes/MD/ConfigurationSelection/selected_configurations.json
+    - nodes/MD/ConfigurationSelection/selection.png
+    params:
+    - MD_ConfigurationSelection
+    - MD_ConfigurationSelection+kernel
   ML0_ApaxEnsemble:
     cmd: zntrack run ipsuite.nodes.ApaxEnsemble --name ML0_ApaxEnsemble
     deps:
@@ -265,3 +312,21 @@ stages:
     - nodes/bootstrap/TranslateMolecules/model_outs
     params:
     - bootstrap_TranslateMolecules
+  MD_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name MD_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/MD/ConfigurationSelection/kernel_results.json
+    - nodes/MD/ConfigurationSelection/node-meta.json
+    - nodes/MD/ConfigurationSelection/selected_configurations.json
+    - nodes/MD/ConfigurationSelection/selection.png
+    params:
+    - config/cp2k.yaml:
+    outs:
+    - nodes/MD/CP2KSinglePoint/atoms.h5
+    - nodes/MD/CP2KSinglePoint/cp2k
+    metrics:
+    - nodes/MD/CP2KSinglePoint/node-meta.json:
+        cache: false

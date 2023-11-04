@@ -105,22 +105,38 @@ with project.group("ML0") as grp:
     prediction = ips.analysis.Prediction(model=model, data=mmk_selection.excluded_atoms)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
-# thermostat = ips.calculators.LangevinThermostat(
-#     temperature=298.15, friction=0.01, time_step=0.5
-# )
+thermostat = ips.calculators.LangevinThermostat(
+    temperature=298.15, friction=0.01, time_step=0.5
+)
 
-# threshold = ips.nodes.ThresholdCheck(
-#         value="forces",
-#         max_value=0.5,
-#     )
-# with project.group("MD") as md_grp:
-#     md = ips.calculators.ASEMD(
-#                 data=geo_opt.atoms,
-#                 data_id=-1,
-#                 model=model,
-#                 thermostat=thermostat,
-#                 checker_list=[threshold],
-#                 steps=50000,
-#                 sampling_rate=1,
-#             )
+threshold = ips.nodes.ThresholdCheck(
+        value="forces",
+        max_value=2.0,
+    )
+with project.group("MD") as md_grp:
+    md = ips.calculators.ASEMD(
+                data=geo_opt.atoms,
+                data_id=-1,
+                model=model,
+                thermostat=thermostat,
+                checker_list=[threshold],
+                steps=50000,
+                sampling_rate=1,
+            )
+
+    mmk_selection = ips.configuration_selection.KernelSelection(
+            correlation_time=1,
+            n_configurations=20,
+            kernel=mmk_kernel,
+            data=md.atoms,
+            initial_configurations=training_data,
+            threshold=0.99,
+        )
+
+    cp2k = ips.calculators.CP2KSinglePoint(
+        data=mmk_selection.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+    )
+
 project.build()
