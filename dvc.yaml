@@ -5,7 +5,12 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
-- nodes/ML0_MMK+kernel/similarities.csv: {}
+- nodes/ML0/MLModel_1/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
 stages:
   GeoOpt_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name GeoOpt_ASEGeoOpt
@@ -21,7 +26,7 @@ stages:
     - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
     params:
     - GeoOpt_ASEGeoOpt
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   GeoOpt_Packmol:
     cmd: zntrack run ipsuite.nodes.Packmol --name GeoOpt_Packmol
     deps:
@@ -93,7 +98,28 @@ stages:
     - nodes/ML0/MLModel/val_atoms.extxyz
     params:
     - ML0_MLModel
-    - config/initial_model_1.yaml: null
+    - config/initial_model_1.yaml:
+  ML0_MLModel_1:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML0_MLModel_1
+    deps:
+    - nodes/ML0/MMK/kernel_results.json
+    - nodes/ML0/MMK/node-meta.json
+    - nodes/ML0/MMK/selected_configurations.json
+    - nodes/ML0/MMK/selection.png
+    metrics:
+    - nodes/ML0/MLModel_1/metrics.json:
+        cache: false
+    - nodes/ML0/MLModel_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML0/MLModel_1/apax_model
+    - nodes/ML0/MLModel_1/log.csv
+    - nodes/ML0/MLModel_1/train.log
+    - nodes/ML0/MLModel_1/train_atoms.extxyz
+    - nodes/ML0/MLModel_1/val_atoms.extxyz
+    params:
+    - ML0_MLModel_1
+    - config/initial_model_2.yaml:
   ML0_MMK:
     cmd: zntrack run ipsuite.nodes.KernelSelection --name ML0_MMK
     deps:
@@ -110,8 +136,55 @@ stages:
     params:
     - ML0_MMK
     - ML0_MMK+kernel
-  ML0_Prediction:
-    cmd: zntrack run ipsuite.nodes.Prediction --name ML0_Prediction
+  bootstrap_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.KernelSelection --name bootstrap_ConfigurationSelection
+    deps:
+    - nodes/bootstrap/RotateMolecules/atoms.h5
+    - nodes/bootstrap/RotateMolecules/model_outs
+    - nodes/bootstrap/RotateMolecules/node-meta.json
+    - nodes/bootstrap/TranslateMolecules/atoms.h5
+    - nodes/bootstrap/TranslateMolecules/model_outs
+    - nodes/bootstrap/TranslateMolecules/node-meta.json
+    metrics:
+    - nodes/bootstrap/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/bootstrap/ConfigurationSelection/kernel_results.json
+    - nodes/bootstrap/ConfigurationSelection/selected_configurations.json
+    - nodes/bootstrap/ConfigurationSelection/selection.png
+    params:
+    - bootstrap_ConfigurationSelection
+    - bootstrap_ConfigurationSelection+kernel
+  bootstrap_RotateMolecules:
+    cmd: zntrack run ipsuite.nodes.RotateMolecules --name bootstrap_RotateMolecules
+    deps:
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+    metrics:
+    - nodes/bootstrap/RotateMolecules/node-meta.json:
+        cache: false
+    outs:
+    - nodes/bootstrap/RotateMolecules/atoms.h5
+    - nodes/bootstrap/RotateMolecules/model_outs
+    params:
+    - bootstrap_RotateMolecules
+  bootstrap_TranslateMolecules:
+    cmd: zntrack run ipsuite.nodes.TranslateMolecules --name bootstrap_TranslateMolecules
+    deps:
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+    metrics:
+    - nodes/bootstrap/TranslateMolecules/node-meta.json:
+        cache: false
+    outs:
+    - nodes/bootstrap/TranslateMolecules/atoms.h5
+    - nodes/bootstrap/TranslateMolecules/model_outs
+    params:
+    - bootstrap_TranslateMolecules
+  ML0_ApaxEnsemble:
+    cmd: zntrack run ipsuite.nodes.ApaxEnsemble --name ML0_ApaxEnsemble
     deps:
     - nodes/ML0/MLModel/apax_model
     - nodes/ML0/MLModel/log.csv
@@ -120,20 +193,41 @@ stages:
     - nodes/ML0/MLModel/train.log
     - nodes/ML0/MLModel/train_atoms.extxyz
     - nodes/ML0/MLModel/val_atoms.extxyz
+    - nodes/ML0/MLModel_1/apax_model
+    - nodes/ML0/MLModel_1/log.csv
+    - nodes/ML0/MLModel_1/metrics.json
+    - nodes/ML0/MLModel_1/node-meta.json
+    - nodes/ML0/MLModel_1/train.log
+    - nodes/ML0/MLModel_1/train_atoms.extxyz
+    - nodes/ML0/MLModel_1/val_atoms.extxyz
+    metrics:
+    - nodes/ML0/ApaxEnsemble/node-meta.json:
+        cache: false
+  ML0_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML0_Prediction
+    deps:
+    - nodes/ML0/ApaxEnsemble/node-meta.json
     - nodes/ML0/MMK/kernel_results.json
     - nodes/ML0/MMK/node-meta.json
     - nodes/ML0/MMK/selected_configurations.json
     - nodes/ML0/MMK/selection.png
+    outs:
+    - nodes/ML0/Prediction/atoms.h5
     metrics:
     - nodes/ML0/Prediction/node-meta.json:
         cache: false
-    outs:
-    - nodes/ML0/Prediction/atoms.h5
   ML0_PredictionMetrics:
     cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML0_PredictionMetrics
     deps:
     - nodes/ML0/Prediction/atoms.h5
     - nodes/ML0/Prediction/node-meta.json
+    outs:
+    - nodes/ML0/PredictionMetrics/energy_df.csv
+    - nodes/ML0/PredictionMetrics/forces_df.csv
+    - nodes/ML0/PredictionMetrics/plots
+    - nodes/ML0/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/ML0/PredictionMetrics/stress_df.csv
+    - nodes/ML0/PredictionMetrics/stress_hydrostatic_df.csv
     metrics:
     - nodes/ML0/PredictionMetrics/deviat_stress.json:
         cache: false
@@ -147,10 +241,3 @@ stages:
         cache: false
     - nodes/ML0/PredictionMetrics/stress.json:
         cache: false
-    outs:
-    - nodes/ML0/PredictionMetrics/energy_df.csv
-    - nodes/ML0/PredictionMetrics/forces_df.csv
-    - nodes/ML0/PredictionMetrics/plots
-    - nodes/ML0/PredictionMetrics/stress_deviatoric_df.csv
-    - nodes/ML0/PredictionMetrics/stress_df.csv
-    - nodes/ML0/PredictionMetrics/stress_hydrostatic_df.csv

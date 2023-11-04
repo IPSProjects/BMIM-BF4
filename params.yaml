@@ -39,11 +39,16 @@ ML0_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+ML0_MLModel_1:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 ML0_MMK:
     correlation_time: 1
-    n_configurations: 50
+    n_configurations: 20
     points_per_cycle: 1
-    seed: 2
+    seed: 1234
     threshold: 0.99
 ML0_MMK+kernel:
     memory: 1000
@@ -57,3 +62,33 @@ ML0_MMK+kernel:
             rbf: gto
             sigma: 0.5
             weighting: null
+bootstrap_ConfigurationSelection:
+    correlation_time: 1
+    n_configurations: 50
+    points_per_cycle: 1
+    seed: 1234
+    threshold: 0.99
+bootstrap_ConfigurationSelection+kernel:
+    memory: 1000
+    soap:
+        _type: soap_parameter_dataclass
+        value:
+            l_max: 5
+            n_jobs: -1
+            n_max: 7
+            r_cut: 6.0
+            rbf: gto
+            sigma: 0.5
+            weighting: null
+bootstrap_RotateMolecules:
+    data_id: -1
+    include_original: false
+    maximum: 0.17452777777777778
+    n_configurations: 500
+    seed: 1
+bootstrap_TranslateMolecules:
+    data_id: -1
+    include_original: false
+    maximum: 0.2
+    n_configurations: 500
+    seed: 1

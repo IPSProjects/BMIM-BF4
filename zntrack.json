@@ -162,6 +162,133 @@
             "value": "nodes/GeoOpt_ASEGeoOpt+model"
         }
     },
+    "bootstrap_RotateMolecules": {
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "ASEGeoOpt",
+                        "name": "GeoOpt_ASEGeoOpt",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": null,
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model_outs"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/bootstrap/RotateMolecules"
+        }
+    },
+    "bootstrap_TranslateMolecules": {
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "ASEGeoOpt",
+                        "name": "GeoOpt_ASEGeoOpt",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": null,
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model_outs"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/bootstrap/TranslateMolecules"
+        }
+    },
+    "bootstrap_ConfigurationSelection": {
+        "data": {
+            "bootstrap_RotateMolecules": {
+                "_type": "znflow.Connection",
+                "value": {
+                    "instance": {
+                        "_type": "zntrack.Node",
+                        "value": {
+                            "module": "ipsuite.nodes",
+                            "cls": "RotateMolecules",
+                            "name": "bootstrap_RotateMolecules",
+                            "remote": null,
+                            "rev": null
+                        }
+                    },
+                    "attribute": "atoms",
+                    "item": null
+                }
+            },
+            "bootstrap_TranslateMolecules": {
+                "_type": "znflow.Connection",
+                "value": {
+                    "instance": {
+                        "_type": "zntrack.Node",
+                        "value": {
+                            "module": "ipsuite.nodes",
+                            "cls": "TranslateMolecules",
+                            "name": "bootstrap_TranslateMolecules",
+                            "remote": null,
+                            "rev": null
+                        }
+                    },
+                    "attribute": "atoms",
+                    "item": null
+                }
+            }
+        },
+        "data_file": null,
+        "exclude": null,
+        "exclude_configurations": null,
+        "img_selection": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/selection.png"
+        },
+        "initial_configurations": null,
+        "kernel": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "MMKernel",
+                "name": "bootstrap_ConfigurationSelection+kernel",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/bootstrap/ConfigurationSelection"
+        }
+    },
+    "bootstrap_ConfigurationSelection+kernel": {
+        "analyte": null,
+        "reference": null,
+        "use_jit": true,
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/bootstrap_ConfigurationSelection+kernel"
+        }
+    },
     "ML0_MMK": {
         "data": {
             "GeoOpt_ASEGeoOpt": {
@@ -276,6 +403,110 @@
             "value": "nodes/ML0/MLModel"
         }
     },
+    "ML0_MLModel_1": {
+        "config": "config/initial_model_2.yaml",
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "KernelSelection",
+                        "name": "ML0_MMK",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "metrics_epoch": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/log.csv"
+        },
+        "model": null,
+        "model_directory": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/apax_model"
+        },
+        "train_data_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/train_atoms.extxyz"
+        },
+        "train_log_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/train.log"
+        },
+        "validation_data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "KernelSelection",
+                        "name": "ML0_MMK",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "excluded_atoms",
+                "item": null
+            }
+        },
+        "validation_data_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/val_atoms.extxyz"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML0/MLModel_1"
+        }
+    },
+    "ML0_ApaxEnsemble": {
+        "models": [
+            {
+                "_type": "znflow.Connection",
+                "value": {
+                    "instance": {
+                        "_type": "zntrack.Node",
+                        "value": {
+                            "module": "ipsuite.nodes",
+                            "cls": "Apax",
+                            "name": "ML0_MLModel",
+                            "remote": null,
+                            "rev": null
+                        }
+                    },
+                    "attribute": null,
+                    "item": null
+                }
+            },
+            {
+                "_type": "znflow.Connection",
+                "value": {
+                    "instance": {
+                        "_type": "zntrack.Node",
+                        "value": {
+                            "module": "ipsuite.nodes",
+                            "cls": "Apax",
+                            "name": "ML0_MLModel_1",
+                            "remote": null,
+                            "rev": null
+                        }
+                    },
+                    "attribute": null,
+                    "item": null
+                }
+            }
+        ],
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML0/ApaxEnsemble"
+        }
+    },
     "ML0_Prediction": {
         "data": {
             "_type": "znflow.Connection",
@@ -302,8 +533,8 @@
                     "_type": "zntrack.Node",
                     "value": {
                         "module": "ipsuite.nodes",
-                        "cls": "Apax",
-                        "name": "ML0_MLModel",
+                        "cls": "ApaxEnsemble",
+                        "name": "ML0_ApaxEnsemble",
                         "remote": null,
                         "rev": null
                     }

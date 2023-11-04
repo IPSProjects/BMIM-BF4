@@ -43,25 +43,76 @@ mmk_kernel = ips.configuration_comparison.MMKernel(
         },
     )
 
-with project.group("ML0") as grp:
+with project.group("bootstrap"):
+    rotate = ips.bootstrap.RotateMolecules(
+        data=geo_opt.atoms,
+        data_id=-1,
+        n_configurations=500,
+        maximum=10 * 3.1415 / 180,  # deg max rotation
+        include_original=False,
+        seed=1,
+    )
+    translate = ips.bootstrap.TranslateMolecules(
+        data=geo_opt.atoms,
+        data_id=-1,
+        n_configurations=500,
+        maximum=0.2,  # Ang max molecular displacement
+        include_original=False,
+        seed=1,
+    )
+
     mmk_selection = ips.configuration_selection.KernelSelection(
             correlation_time=1,
             n_configurations=50,
-            threshold=0.997,
+            kernel=mmk_kernel,
+            data=rotate.atoms + translate.atoms,
+            threshold=0.99,
+        )
+
+
+with project.group("ML0") as grp:
+    mmk_selection = ips.configuration_selection.KernelSelection(
+            correlation_time=1,
+            n_configurations=20,
             kernel=mmk_kernel,
             data=geo_opt.atoms,
             name="MMK",
+            threshold=0.99,
         )
     
-    model = ips.models.Apax(
+    model1 = ips.models.Apax(
             data=mmk_selection.atoms,
             validation_data=mmk_selection.excluded_atoms,
             config="config/initial_model_1.yaml"
         )
     
+    model2 = ips.models.Apax(
+            data=mmk_selection.atoms,
+            validation_data=mmk_selection.excluded_atoms,
+            config="config/initial_model_2.yaml"
+        )
+
+    model = ips.models.ApaxEnsemble(models=[model1, model2])
+
     prediction = ips.analysis.Prediction(model=model, data=mmk_selection.excluded_atoms)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
-    
 
+# thermostat = ips.calculators.LangevinThermostat(
+#     temperature=298.15, friction=0.01, time_step=0.5
+# )
 
+# threshold = ips.nodes.ThresholdCheck(
+#         value="forces",
+#         max_value=0.5,
+#     )
+# with project.group("MD") as md_grp:
+#     md = ips.calculators.ASEMD(
+#                 data=geo_opt.atoms,
+#                 data_id=-1,
+#                 model=model,
+#                 thermostat=thermostat,
+#                 checker_list=[threshold],
+#                 steps=50000,
+#                 sampling_rate=1,
+#             )
 project.build()
