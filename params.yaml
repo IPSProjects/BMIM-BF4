@@ -34,6 +34,47 @@ GeoOpt_SmilesToAtoms_1:
     optimizer: UFF
     seed: 1234
     smiles: '[B-](F)(F)(F)F'
+MD1_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 50000
+    use_momenta: false
+MD1_ASEMD+checker_list+0:
+    larger_only: false
+    max_std: null
+    max_value: 3.0
+    minimum_window_size: 1
+    value: forces
+    window_size: 500
+MD1_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+MD1_ConfigurationSelection:
+    correlation_time: 1
+    n_configurations: 20
+    points_per_cycle: 1
+    seed: 1234
+    threshold: 0.999
+MD1_ConfigurationSelection+kernel:
+    memory: 1000
+    soap:
+        _type: soap_parameter_dataclass
+        value:
+            l_max: 5
+            n_jobs: -1
+            n_max: 7
+            r_cut: 6.0
+            rbf: gto
+            sigma: 0.5
+            weighting: null
 MD_ASEMD:
     data_id: -1
     dump_rate: 1000
@@ -92,6 +133,34 @@ ML0_MMK:
     seed: 1234
     threshold: 0.99
 ML0_MMK+kernel:
+    memory: 1000
+    soap:
+        _type: soap_parameter_dataclass
+        value:
+            l_max: 5
+            n_jobs: -1
+            n_max: 7
+            r_cut: 6.0
+            rbf: gto
+            sigma: 0.5
+            weighting: null
+ML1_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML1_MLModel_1:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML1_MMK:
+    correlation_time: 1
+    n_configurations: 20
+    points_per_cycle: 1
+    seed: 1234
+    threshold: 0.99
+ML1_MMK+kernel:
     memory: 1000
     soap:
         _type: soap_parameter_dataclass

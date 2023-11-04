@@ -11,8 +11,20 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
-- nodes/MD/ASEMD/metrics_dict.csv: {}
-- nodes/MD_ConfigurationSelection+kernel/similarities.csv: {}
+- nodes/ML1/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/ML1/MLModel_1/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/MD1/ASEMD/metrics_dict.csv: {}
+- nodes/MD1_ConfigurationSelection+kernel/similarities.csv: {}
 stages:
   GeoOpt_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name GeoOpt_ASEGeoOpt
@@ -80,6 +92,54 @@ stages:
     - nodes/GeoOpt/SmilesToAtoms_1/molecule.png
     params:
     - GeoOpt_SmilesToAtoms_1
+  MD1_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name MD1_ASEMD
+    deps:
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+    - nodes/ML1/ApaxEnsemble/node-meta.json
+    metrics:
+    - nodes/MD1/ASEMD/node-meta.json:
+        cache: false
+    - nodes/MD1/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/MD1/ASEMD/metrics_dict.csv
+    - nodes/MD1/ASEMD/model
+    - nodes/MD1/ASEMD/trajectory.h5
+    params:
+    - MD1_ASEMD
+    - MD1_ASEMD+checker_list+0
+    - MD1_ASEMD+thermostat
+  MD1_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.KernelSelection --name MD1_ConfigurationSelection
+    deps:
+    - nodes/MD/CP2KSinglePoint/atoms.h5
+    - nodes/MD/CP2KSinglePoint/cp2k
+    - nodes/MD/CP2KSinglePoint/node-meta.json
+    - nodes/MD1/ASEMD/metrics_dict.csv
+    - nodes/MD1/ASEMD/model
+    - nodes/MD1/ASEMD/node-meta.json
+    - nodes/MD1/ASEMD/steps_before_stopping.json
+    - nodes/MD1/ASEMD/trajectory.h5
+    - nodes/ML0/MMK/kernel_results.json
+    - nodes/ML0/MMK/node-meta.json
+    - nodes/ML0/MMK/selected_configurations.json
+    - nodes/ML0/MMK/selection.png
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/MD1/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/MD1/ConfigurationSelection/kernel_results.json
+    - nodes/MD1/ConfigurationSelection/selected_configurations.json
+    - nodes/MD1/ConfigurationSelection/selection.png
+    params:
+    - MD1_ConfigurationSelection
+    - MD1_ConfigurationSelection+kernel
   MD_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name MD_ASEMD
     deps:
@@ -100,6 +160,24 @@ stages:
     - MD_ASEMD
     - MD_ASEMD+checker_list+0
     - MD_ASEMD+thermostat
+  MD_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name MD_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/MD/ConfigurationSelection/kernel_results.json
+    - nodes/MD/ConfigurationSelection/node-meta.json
+    - nodes/MD/ConfigurationSelection/selected_configurations.json
+    - nodes/MD/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/MD/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/MD/CP2KSinglePoint/atoms.h5
+    - nodes/MD/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
   MD_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.KernelSelection --name MD_ConfigurationSelection
     deps:
@@ -247,6 +325,118 @@ stages:
     - nodes/ML0/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/ML0/PredictionMetrics/stress_df.csv
     - nodes/ML0/PredictionMetrics/stress_hydrostatic_df.csv
+  ML1_ApaxEnsemble:
+    cmd: zntrack run ipsuite.nodes.ApaxEnsemble --name ML1_ApaxEnsemble
+    deps:
+    - nodes/ML1/MLModel/apax_model
+    - nodes/ML1/MLModel/log.csv
+    - nodes/ML1/MLModel/metrics.json
+    - nodes/ML1/MLModel/node-meta.json
+    - nodes/ML1/MLModel/train.log
+    - nodes/ML1/MLModel/train_atoms.extxyz
+    - nodes/ML1/MLModel/val_atoms.extxyz
+    - nodes/ML1/MLModel_1/apax_model
+    - nodes/ML1/MLModel_1/log.csv
+    - nodes/ML1/MLModel_1/metrics.json
+    - nodes/ML1/MLModel_1/node-meta.json
+    - nodes/ML1/MLModel_1/train.log
+    - nodes/ML1/MLModel_1/train_atoms.extxyz
+    - nodes/ML1/MLModel_1/val_atoms.extxyz
+    metrics:
+    - nodes/ML1/ApaxEnsemble/node-meta.json:
+        cache: false
+  ML1_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML1_MLModel
+    deps:
+    - nodes/MD/CP2KSinglePoint/atoms.h5
+    - nodes/MD/CP2KSinglePoint/cp2k
+    - nodes/MD/CP2KSinglePoint/node-meta.json
+    - nodes/ML0/MMK/kernel_results.json
+    - nodes/ML0/MMK/node-meta.json
+    - nodes/ML0/MMK/selected_configurations.json
+    - nodes/ML0/MMK/selection.png
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/ML1/MLModel/metrics.json:
+        cache: false
+    - nodes/ML1/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML1/MLModel/apax_model
+    - nodes/ML1/MLModel/log.csv
+    - nodes/ML1/MLModel/train.log
+    - nodes/ML1/MLModel/train_atoms.extxyz
+    - nodes/ML1/MLModel/val_atoms.extxyz
+    params:
+    - ML1_MLModel
+    - config/initial_model_1.yaml:
+  ML1_MLModel_1:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML1_MLModel_1
+    deps:
+    - nodes/MD/CP2KSinglePoint/atoms.h5
+    - nodes/MD/CP2KSinglePoint/cp2k
+    - nodes/MD/CP2KSinglePoint/node-meta.json
+    - nodes/ML0/MMK/kernel_results.json
+    - nodes/ML0/MMK/node-meta.json
+    - nodes/ML0/MMK/selected_configurations.json
+    - nodes/ML0/MMK/selection.png
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/ML1/MLModel_1/metrics.json:
+        cache: false
+    - nodes/ML1/MLModel_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML1/MLModel_1/apax_model
+    - nodes/ML1/MLModel_1/log.csv
+    - nodes/ML1/MLModel_1/train.log
+    - nodes/ML1/MLModel_1/train_atoms.extxyz
+    - nodes/ML1/MLModel_1/val_atoms.extxyz
+    params:
+    - ML1_MLModel_1
+    - config/initial_model_2.yaml:
+  ML1_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML1_Prediction
+    deps:
+    - nodes/ML0/MMK/kernel_results.json
+    - nodes/ML0/MMK/node-meta.json
+    - nodes/ML0/MMK/selected_configurations.json
+    - nodes/ML0/MMK/selection.png
+    - nodes/ML1/ApaxEnsemble/node-meta.json
+    metrics:
+    - nodes/ML1/Prediction/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML1/Prediction/atoms.h5
+  ML1_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML1_PredictionMetrics
+    deps:
+    - nodes/ML1/Prediction/atoms.h5
+    - nodes/ML1/Prediction/node-meta.json
+    metrics:
+    - nodes/ML1/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/ML1/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/ML1/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/ML1/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/ML1/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/ML1/PredictionMetrics/stress.json:
+        cache: false
+    outs:
+    - nodes/ML1/PredictionMetrics/energy_df.csv
+    - nodes/ML1/PredictionMetrics/forces_df.csv
+    - nodes/ML1/PredictionMetrics/plots
+    - nodes/ML1/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/ML1/PredictionMetrics/stress_df.csv
+    - nodes/ML1/PredictionMetrics/stress_hydrostatic_df.csv
   bootstrap_CP2KSinglePoint:
     cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name bootstrap_CP2KSinglePoint
     deps:
@@ -312,21 +502,21 @@ stages:
     - nodes/bootstrap/TranslateMolecules/model_outs
     params:
     - bootstrap_TranslateMolecules
-  MD_CP2KSinglePoint:
-    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name MD_CP2KSinglePoint
+  MD1_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name MD1_CP2KSinglePoint
     deps:
     - GTH_BASIS_SETS
     - GTH_POTENTIALS
     - dftd3.dat
-    - nodes/MD/ConfigurationSelection/kernel_results.json
-    - nodes/MD/ConfigurationSelection/node-meta.json
-    - nodes/MD/ConfigurationSelection/selected_configurations.json
-    - nodes/MD/ConfigurationSelection/selection.png
+    - nodes/MD1/ConfigurationSelection/kernel_results.json
+    - nodes/MD1/ConfigurationSelection/node-meta.json
+    - nodes/MD1/ConfigurationSelection/selected_configurations.json
+    - nodes/MD1/ConfigurationSelection/selection.png
     params:
     - config/cp2k.yaml:
     outs:
-    - nodes/MD/CP2KSinglePoint/atoms.h5
-    - nodes/MD/CP2KSinglePoint/cp2k
+    - nodes/MD1/CP2KSinglePoint/atoms.h5
+    - nodes/MD1/CP2KSinglePoint/cp2k
     metrics:
-    - nodes/MD/CP2KSinglePoint/node-meta.json:
+    - nodes/MD1/CP2KSinglePoint/node-meta.json:
         cache: false

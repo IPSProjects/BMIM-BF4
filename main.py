@@ -124,7 +124,7 @@ with project.group("MD") as md_grp:
                 sampling_rate=1,
             )
 
-    mmk_selection = ips.configuration_selection.KernelSelection(
+    selection = ips.configuration_selection.KernelSelection(
             correlation_time=1,
             n_configurations=20,
             kernel=mmk_kernel,
@@ -134,9 +134,62 @@ with project.group("MD") as md_grp:
         )
 
     cp2k = ips.calculators.CP2KSinglePoint(
-        data=mmk_selection.atoms,
+        data=selection.atoms,
         cp2k_params="config/cp2k.yaml",
         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
     )
 
-project.build()
+    training_data += cp2k.atoms
+
+with project.group("ML1") as grp:
+    model1 = ips.models.Apax(
+            data=training_data,
+            validation_data=mmk_selection.excluded_atoms,
+            config="config/initial_model_1.yaml"
+        )
+    
+    model2 = ips.models.Apax(
+            data=training_data,
+            validation_data=mmk_selection.excluded_atoms,
+            config="config/initial_model_2.yaml"
+        )
+
+    model = ips.models.ApaxEnsemble(models=[model1, model2])
+
+    prediction = ips.analysis.Prediction(model=model, data=mmk_selection.excluded_atoms)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
+
+threshold = ips.nodes.ThresholdCheck(
+        value="forces",
+        max_value=3.0,
+    )
+
+with project.group("MD1") as md_grp:
+    md = ips.calculators.ASEMD(
+                data=geo_opt.atoms,
+                data_id=-1,
+                model=model,
+                thermostat=thermostat,
+                checker_list=[threshold],
+                steps=50000,
+                sampling_rate=1,
+            )
+
+    selection = ips.configuration_selection.KernelSelection(
+            correlation_time=1,
+            n_configurations=20,
+            kernel=mmk_kernel,
+            data=md.atoms,
+            initial_configurations=training_data,
+            threshold=0.999,
+        )
+
+    cp2k = ips.calculators.CP2KSinglePoint(
+        data=selection.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+    )
+
+    training_data += cp2k.atoms
+
+project.build(nodes=[md_grp])
