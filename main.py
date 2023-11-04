@@ -69,6 +69,12 @@ with project.group("bootstrap"):
             threshold=0.99,
         )
 
+    cp2k = ips.calculators.CP2KSinglePoint(
+        data=mmk_selection.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+    )
+
 
 with project.group("ML0") as grp:
     mmk_selection = ips.configuration_selection.KernelSelection(

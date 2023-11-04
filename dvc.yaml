@@ -78,6 +78,26 @@ stages:
     - nodes/GeoOpt/SmilesToAtoms_1/molecule.png
     params:
     - GeoOpt_SmilesToAtoms_1
+  ML0_ApaxEnsemble:
+    cmd: zntrack run ipsuite.nodes.ApaxEnsemble --name ML0_ApaxEnsemble
+    deps:
+    - nodes/ML0/MLModel/apax_model
+    - nodes/ML0/MLModel/log.csv
+    - nodes/ML0/MLModel/metrics.json
+    - nodes/ML0/MLModel/node-meta.json
+    - nodes/ML0/MLModel/train.log
+    - nodes/ML0/MLModel/train_atoms.extxyz
+    - nodes/ML0/MLModel/val_atoms.extxyz
+    - nodes/ML0/MLModel_1/apax_model
+    - nodes/ML0/MLModel_1/log.csv
+    - nodes/ML0/MLModel_1/metrics.json
+    - nodes/ML0/MLModel_1/node-meta.json
+    - nodes/ML0/MLModel_1/train.log
+    - nodes/ML0/MLModel_1/train_atoms.extxyz
+    - nodes/ML0/MLModel_1/val_atoms.extxyz
+    metrics:
+    - nodes/ML0/ApaxEnsemble/node-meta.json:
+        cache: false
   ML0_MLModel:
     cmd: zntrack run ipsuite.nodes.Apax --name ML0_MLModel
     deps:
@@ -136,6 +156,62 @@ stages:
     params:
     - ML0_MMK
     - ML0_MMK+kernel
+  ML0_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML0_Prediction
+    deps:
+    - nodes/ML0/ApaxEnsemble/node-meta.json
+    - nodes/ML0/MMK/kernel_results.json
+    - nodes/ML0/MMK/node-meta.json
+    - nodes/ML0/MMK/selected_configurations.json
+    - nodes/ML0/MMK/selection.png
+    metrics:
+    - nodes/ML0/Prediction/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML0/Prediction/atoms.h5
+  ML0_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML0_PredictionMetrics
+    deps:
+    - nodes/ML0/Prediction/atoms.h5
+    - nodes/ML0/Prediction/node-meta.json
+    metrics:
+    - nodes/ML0/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/ML0/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/ML0/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/ML0/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/ML0/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/ML0/PredictionMetrics/stress.json:
+        cache: false
+    outs:
+    - nodes/ML0/PredictionMetrics/energy_df.csv
+    - nodes/ML0/PredictionMetrics/forces_df.csv
+    - nodes/ML0/PredictionMetrics/plots
+    - nodes/ML0/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/ML0/PredictionMetrics/stress_df.csv
+    - nodes/ML0/PredictionMetrics/stress_hydrostatic_df.csv
+  bootstrap_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name bootstrap_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/bootstrap/ConfigurationSelection/kernel_results.json
+    - nodes/bootstrap/ConfigurationSelection/node-meta.json
+    - nodes/bootstrap/ConfigurationSelection/selected_configurations.json
+    - nodes/bootstrap/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
   bootstrap_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.KernelSelection --name bootstrap_ConfigurationSelection
     deps:
@@ -183,61 +259,3 @@ stages:
     - nodes/bootstrap/TranslateMolecules/model_outs
     params:
     - bootstrap_TranslateMolecules
-  ML0_ApaxEnsemble:
-    cmd: zntrack run ipsuite.nodes.ApaxEnsemble --name ML0_ApaxEnsemble
-    deps:
-    - nodes/ML0/MLModel/apax_model
-    - nodes/ML0/MLModel/log.csv
-    - nodes/ML0/MLModel/metrics.json
-    - nodes/ML0/MLModel/node-meta.json
-    - nodes/ML0/MLModel/train.log
-    - nodes/ML0/MLModel/train_atoms.extxyz
-    - nodes/ML0/MLModel/val_atoms.extxyz
-    - nodes/ML0/MLModel_1/apax_model
-    - nodes/ML0/MLModel_1/log.csv
-    - nodes/ML0/MLModel_1/metrics.json
-    - nodes/ML0/MLModel_1/node-meta.json
-    - nodes/ML0/MLModel_1/train.log
-    - nodes/ML0/MLModel_1/train_atoms.extxyz
-    - nodes/ML0/MLModel_1/val_atoms.extxyz
-    metrics:
-    - nodes/ML0/ApaxEnsemble/node-meta.json:
-        cache: false
-  ML0_Prediction:
-    cmd: zntrack run ipsuite.nodes.Prediction --name ML0_Prediction
-    deps:
-    - nodes/ML0/ApaxEnsemble/node-meta.json
-    - nodes/ML0/MMK/kernel_results.json
-    - nodes/ML0/MMK/node-meta.json
-    - nodes/ML0/MMK/selected_configurations.json
-    - nodes/ML0/MMK/selection.png
-    outs:
-    - nodes/ML0/Prediction/atoms.h5
-    metrics:
-    - nodes/ML0/Prediction/node-meta.json:
-        cache: false
-  ML0_PredictionMetrics:
-    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML0_PredictionMetrics
-    deps:
-    - nodes/ML0/Prediction/atoms.h5
-    - nodes/ML0/Prediction/node-meta.json
-    outs:
-    - nodes/ML0/PredictionMetrics/energy_df.csv
-    - nodes/ML0/PredictionMetrics/forces_df.csv
-    - nodes/ML0/PredictionMetrics/plots
-    - nodes/ML0/PredictionMetrics/stress_deviatoric_df.csv
-    - nodes/ML0/PredictionMetrics/stress_df.csv
-    - nodes/ML0/PredictionMetrics/stress_hydrostatic_df.csv
-    metrics:
-    - nodes/ML0/PredictionMetrics/deviat_stress.json:
-        cache: false
-    - nodes/ML0/PredictionMetrics/energy.json:
-        cache: false
-    - nodes/ML0/PredictionMetrics/forces.json:
-        cache: false
-    - nodes/ML0/PredictionMetrics/hydro_stress.json:
-        cache: false
-    - nodes/ML0/PredictionMetrics/node-meta.json:
-        cache: false
-    - nodes/ML0/PredictionMetrics/stress.json:
-        cache: false
