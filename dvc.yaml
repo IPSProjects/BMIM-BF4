@@ -105,6 +105,9 @@ stages:
     - nodes/ML0/MMK/node-meta.json
     - nodes/ML0/MMK/selected_configurations.json
     - nodes/ML0/MMK/selection.png
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
     metrics:
     - nodes/ML0/MLModel/metrics.json:
         cache: false
@@ -126,6 +129,9 @@ stages:
     - nodes/ML0/MMK/node-meta.json
     - nodes/ML0/MMK/selected_configurations.json
     - nodes/ML0/MMK/selection.png
+    - nodes/bootstrap/CP2KSinglePoint/atoms.h5
+    - nodes/bootstrap/CP2KSinglePoint/cp2k
+    - nodes/bootstrap/CP2KSinglePoint/node-meta.json
     metrics:
     - nodes/ML0/MLModel_1/metrics.json:
         cache: false

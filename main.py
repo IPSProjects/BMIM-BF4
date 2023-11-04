@@ -86,14 +86,16 @@ with project.group("ML0") as grp:
             threshold=0.99,
         )
     
+    training_data = mmk_selection.atoms + cp2k.atoms
+    
     model1 = ips.models.Apax(
-            data=mmk_selection.atoms,
+            data=training_data,
             validation_data=mmk_selection.excluded_atoms,
             config="config/initial_model_1.yaml"
         )
     
     model2 = ips.models.Apax(
-            data=mmk_selection.atoms,
+            data=training_data,
             validation_data=mmk_selection.excluded_atoms,
             config="config/initial_model_2.yaml"
         )
