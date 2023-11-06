@@ -5,7 +5,7 @@ stages:
     deps:
     - path: data/nvt_eq.xyz
       hash: md5
-      md5: 281a3c8dab874e253e9b977f67cf349f
+      md5: 38a194ced93c33e023a9eca895cf9d3b
       size: 32692338
     params:
       params.yaml:
@@ -14,11 +14,11 @@ stages:
     outs:
     - path: nodes/classical/AddData/atoms.h5
       hash: md5
-      md5: e643fe36113fa372e86ec7bc82e2ae9f
+      md5: 4b28c7c0a6ae386fce15e8c814259378
       size: 19874075
     - path: nodes/classical/AddData/node-meta.json
       hash: md5
-      md5: 7cbcf3eacba8178354dc1ffc84193c62
+      md5: a3ec905526ea1f0df38ba4002406001c
       size: 48
   classical_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.KernelSelection --name classical_ConfigurationSelection

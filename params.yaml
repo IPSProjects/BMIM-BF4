@@ -1,20 +1,2 @@
 classical_AddData:
     lines_to_read: null
-classical_ConfigurationSelection:
-    correlation_time: 1
-    n_configurations: 50
-    points_per_cycle: 1
-    seed: 1234
-    threshold: null
-classical_ConfigurationSelection+kernel:
-    memory: 1000
-    soap:
-        _type: soap_parameter_dataclass
-        value:
-            l_max: 5
-            n_jobs: -1
-            n_max: 7
-            r_cut: 6.0
-            rbf: gto
-            sigma: 0.5
-            weighting: null

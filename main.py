@@ -14,16 +14,16 @@ mmk_kernel = ips.configuration_comparison.MMKernel(
 
 with project.group("classical"):
     data = ips.AddData("data/nvt_eq.xyz")
-    mmk_selection = ips.configuration_selection.KernelSelection(
-        correlation_time=1,
-        n_configurations=50,
-        kernel=mmk_kernel,
-        data=data.atoms,
-        threshold=None,
-    )
+    # mmk_selection = ips.configuration_selection.KernelSelection(
+    #     correlation_time=1,
+    #     n_configurations=50,
+    #     kernel=mmk_kernel,
+    #     data=data.atoms,
+    #     threshold=None,
+    # )
 
     cp2k = ips.calculators.CP2KSinglePoint(
-        data=mmk_selection.atoms,
+        data=data.atoms,
         cp2k_params="config/cp2k.yaml",
         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
     )
