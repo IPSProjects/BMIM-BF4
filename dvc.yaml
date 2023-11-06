@@ -1,0 +1,29 @@
+plots:
+- nodes/classical_ConfigurationSelection+kernel/similarities.csv: {}
+stages:
+  classical_AddData:
+    cmd: zntrack run ipsuite.nodes.AddData --name classical_AddData
+    deps:
+    - data/nvt_eq.xyz
+    metrics:
+    - nodes/classical/AddData/node-meta.json:
+        cache: false
+    outs:
+    - nodes/classical/AddData/atoms.h5
+    params:
+    - classical_AddData
+  classical_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.KernelSelection --name classical_ConfigurationSelection
+    deps:
+    - nodes/classical/AddData/atoms.h5
+    - nodes/classical/AddData/node-meta.json
+    metrics:
+    - nodes/classical/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/classical/ConfigurationSelection/kernel_results.json
+    - nodes/classical/ConfigurationSelection/selected_configurations.json
+    - nodes/classical/ConfigurationSelection/selection.png
+    params:
+    - classical_ConfigurationSelection
+    - classical_ConfigurationSelection+kernel

@@ -1,0 +1,61 @@
+{
+    "classical_AddData": {
+        "file": "data/nvt_eq.xyz",
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/classical/AddData"
+        }
+    },
+    "classical_ConfigurationSelection": {
+        "data": {
+            "classical_AddData": {
+                "_type": "znflow.Connection",
+                "value": {
+                    "instance": {
+                        "_type": "zntrack.Node",
+                        "value": {
+                            "module": "ipsuite.nodes",
+                            "cls": "AddData",
+                            "name": "classical_AddData",
+                            "remote": null,
+                            "rev": null
+                        }
+                    },
+                    "attribute": "atoms",
+                    "item": null
+                }
+            }
+        },
+        "data_file": null,
+        "exclude": null,
+        "exclude_configurations": null,
+        "img_selection": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/selection.png"
+        },
+        "initial_configurations": null,
+        "kernel": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "MMKernel",
+                "name": "classical_ConfigurationSelection+kernel",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/classical/ConfigurationSelection"
+        }
+    },
+    "classical_ConfigurationSelection+kernel": {
+        "analyte": null,
+        "reference": null,
+        "use_jit": true,
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/classical_ConfigurationSelection+kernel"
+        }
+    }
+}

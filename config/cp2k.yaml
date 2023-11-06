@@ -1,0 +1,59 @@
+force_eval:
+  method: quickstep
+  DFT:
+    mgrid:
+      cutoff: 800
+      rel_cutoff: 60
+      ngrids: 5
+    QS: 
+      eps_filter_matrix: 0.0
+      eps_pgf_orb: 0.0001
+    SCF:
+      scf_guess: restart
+      max_scf: 100
+      eps_scf: 1e-06
+      OT:
+        minimizer: diis
+        preconditioner: full_single_inverse
+      outer_scf:
+        max_scf: 100
+        eps_scf: 1e-06
+      print:
+        restart:
+          each:
+            QS_SCF: 0
+    XC:
+      xc_functional:
+        becke97:
+          parametrization: B97-3c
+          scale_c: 1.0
+          scale_x: 1.0
+      vdw_potential:
+        pair_potential:
+          type: dftd3(bj)
+          parameter_file_name: dftd3.dat
+          reference_functional: B97-3c
+          r_cutoff: 7.93766
+          calculate_c9_term: true
+          short_range_correction: true
+        potential_type: pair_potential
+    charge: 0
+    basis_set_file_name: GTH_BASIS_SETS
+    potential_file_name: GTH_POTENTIALS
+  subsys:
+    kind:
+      N:
+        basis_set: TZVP-GTH-q5
+        potential: GTH-PBE-q5
+      C:
+        basis_set: TZVP-GTH-q4
+        potential: GTH-PBE-q4
+      H:
+        basis_set: TZVP-GTH-q1
+        potential: GTH-PBE-q1
+      B:
+        basis_set: TZVP-GTH-q3
+        potential: GTH-PBE-q3
+      F:
+        basis_set: TZVP-GTH-q7
+        potential: GTH-PBE-q7
