@@ -27,3 +27,21 @@ stages:
     params:
     - classical_ConfigurationSelection
     - classical_ConfigurationSelection+kernel
+  classical_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name classical_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/classical/ConfigurationSelection/kernel_results.json
+    - nodes/classical/ConfigurationSelection/node-meta.json
+    - nodes/classical/ConfigurationSelection/selected_configurations.json
+    - nodes/classical/ConfigurationSelection/selection.png
+    params:
+    - config/cp2k.yaml:
+    outs:
+    - nodes/classical/CP2KSinglePoint/atoms.h5
+    - nodes/classical/CP2KSinglePoint/cp2k
+    metrics:
+    - nodes/classical/CP2KSinglePoint/node-meta.json:
+        cache: false
