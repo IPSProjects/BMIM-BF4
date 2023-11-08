@@ -2,15 +2,15 @@ import ipsuite as ips
 
 project = ips.Project(automatic_node_names=True)
 
-mmk_kernel = ips.configuration_comparison.MMKernel(
-        use_jit=True,
-        soap={
-            "r_cut": 6.0,
-            "n_max": 7,
-            "l_max": 5,
-            "sigma": 0.5,
-        },
-    )
+# mmk_kernel = ips.configuration_comparison.MMKernel(
+#         use_jit=True,
+#         soap={
+#             "r_cut": 6.0,
+#             "n_max": 7,
+#             "l_max": 5,
+#             "sigma": 0.5,
+#         },
+#     )
 
 with project.group("classical"):
     data = ips.AddData("data/nvt_eq.xyz")
