@@ -3,6 +3,14 @@ import ipsuite as ips
 project = ips.Project(automatic_node_names=True)
 
 
+thermostat = ips.calculators.LangevinThermostat(
+    temperature=298.15, friction=0.01, time_step=0.5
+)
+
+uncertainty_check = ips.analysis.ThresholdCheck(
+    value="forces_uncertainty", max_value=2.0, larger_only=True
+)
+
 with project.group("classical"):
     data = ips.AddData("data/nvt_eq.xyz")
     cp2k = ips.calculators.CP2KSinglePoint(
@@ -15,16 +23,40 @@ with project.group("classical"):
     train_data = train_data_selection.atoms
     test_data = train_data_selection.excluded_atoms
 
-with project.group("final"):
-    model = ips.models.Apax(
+with project.group("ML0"):
+    model1 = ips.models.Apax(
         data=train_data,
         validation_data=test_data,
         config="config/initial_model_1.yaml",
     )
+    model2 = ips.models.Apax(
+        data=train_data,
+        validation_data=test_data,
+        config="config/initial_model_2.yaml",
+    )
+    model = ips.models.ApaxEnsemble(models=[model1, model2])
     predictions = ips.analysis.Prediction(model=model, data=test_data)
     metrics = ips.analysis.PredictionMetrics(data=predictions)
 
-    
+# with project:
+
+#     geo_opt = ips.calculators.ASEGeoOpt(
+#         model=model,
+#         data=data.atoms,
+#         optimizer="FIRE",
+#         run_kwargs={"fmax": 0.1},
+#     )
+
+#     md = ips.calculators.ASEMD(
+#                 data=geo_opt.atoms,
+#                 data_id=-1,
+#                 model=model,
+#                 thermostat=thermostat,
+#                 checker_list=[uncertainty_check],
+#                 steps=50000,
+#                 sampling_rate=1,
+#             )
+
 project.build()
 
 # cp2k = ips.calculators.CP2KSinglePoint(
@@ -139,15 +171,15 @@ project.build()
 #         max_value=2.0,
 #     )
 # with project.group("MD") as md_grp:
-#     md = ips.calculators.ASEMD(
-#                 data=geo_opt.atoms,
-#                 data_id=-1,
-#                 model=model,
-#                 thermostat=thermostat,
-#                 checker_list=[threshold],
-#                 steps=50000,
-#                 sampling_rate=1,
-#             )
+    # md = ips.calculators.ASEMD(
+    #             data=geo_opt.atoms,
+    #             data_id=-1,
+    #             model=model,
+    #             thermostat=thermostat,
+    #             checker_list=[threshold],
+    #             steps=50000,
+    #             sampling_rate=1,
+    #         )
 
 #     selection = ips.configuration_selection.KernelSelection(
 #             correlation_time=1,

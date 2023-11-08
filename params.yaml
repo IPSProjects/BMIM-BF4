@@ -1,10 +1,15 @@
+ML0_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML0_MLModel_1:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 classical_AddData:
     lines_to_read: null
 classical_ConfigurationSelection:
     n_configurations: 1000
     seed: 1234
-final_MLModel:
-    jax_enable_x64: true
-    use_energy: true
-    use_forces: true
-    use_stresses: false
