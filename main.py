@@ -2,31 +2,28 @@ import ipsuite as ips
 
 project = ips.Project(automatic_node_names=True)
 
-# mmk_kernel = ips.configuration_comparison.MMKernel(
-#         use_jit=True,
-#         soap={
-#             "r_cut": 6.0,
-#             "n_max": 7,
-#             "l_max": 5,
-#             "sigma": 0.5,
-#         },
-#     )
 
 with project.group("classical"):
     data = ips.AddData("data/nvt_eq.xyz")
-    # mmk_selection = ips.configuration_selection.KernelSelection(
-    #     correlation_time=1,
-    #     n_configurations=50,
-    #     kernel=mmk_kernel,
-    #     data=data.atoms,
-    #     threshold=None,
-    # )
-
     cp2k = ips.calculators.CP2KSinglePoint(
         data=data.atoms,
         cp2k_params="config/cp2k.yaml",
         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
     )
+
+    train_data_selection = ips.configuration_selection.RandomSelection(cp2k.atoms, n_configurations=1000)
+    train_data = train_data_selection.atoms
+    test_data = train_data_selection.excluded_atoms
+
+with project.group("final"):
+    model = ips.models.Apax(
+        data=train_data,
+        validation_data=test_data,
+        config="config/initial_model_1.yaml",
+    )
+    predictions = ips.analysis.Prediction(model=model, data=test_data)
+    metrics = ips.analysis.PredictionMetrics(data=predictions)
+
     
 project.build()
 

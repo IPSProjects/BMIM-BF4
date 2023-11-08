@@ -1,15 +1,22 @@
+plots:
+- nodes/final/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
 stages:
   classical_AddData:
     cmd: zntrack run ipsuite.nodes.AddData --name classical_AddData
     deps:
     - data/nvt_eq.xyz
-    params:
-    - classical_AddData
-    outs:
-    - nodes/classical/AddData/atoms.h5
     metrics:
     - nodes/classical/AddData/node-meta.json:
         cache: false
+    outs:
+    - nodes/classical/AddData/atoms.h5
+    params:
+    - classical_AddData
   classical_CP2KSinglePoint:
     cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name classical_CP2KSinglePoint
     deps:
@@ -18,11 +25,88 @@ stages:
     - dftd3.dat
     - nodes/classical/AddData/atoms.h5
     - nodes/classical/AddData/node-meta.json
-    params:
-    - config/cp2k.yaml:
+    metrics:
+    - nodes/classical/CP2KSinglePoint/node-meta.json:
+        cache: false
     outs:
     - nodes/classical/CP2KSinglePoint/atoms.h5
     - nodes/classical/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
+  classical_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name classical_ConfigurationSelection
+    deps:
+    - nodes/classical/CP2KSinglePoint/atoms.h5
+    - nodes/classical/CP2KSinglePoint/cp2k
+    - nodes/classical/CP2KSinglePoint/node-meta.json
     metrics:
-    - nodes/classical/CP2KSinglePoint/node-meta.json:
+    - nodes/classical/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/classical/ConfigurationSelection/selected_configurations.json
+    - nodes/classical/ConfigurationSelection/selection.png
+    params:
+    - classical_ConfigurationSelection
+  final_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name final_MLModel
+    deps:
+    - nodes/classical/ConfigurationSelection/node-meta.json
+    - nodes/classical/ConfigurationSelection/selected_configurations.json
+    - nodes/classical/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/final/MLModel/metrics.json:
+        cache: false
+    - nodes/final/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/final/MLModel/apax_model
+    - nodes/final/MLModel/log.csv
+    - nodes/final/MLModel/train.log
+    - nodes/final/MLModel/train_atoms.extxyz
+    - nodes/final/MLModel/val_atoms.extxyz
+    params:
+    - final_MLModel
+    - config/initial_model_1.yaml:
+  final_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name final_Prediction
+    deps:
+    - nodes/classical/ConfigurationSelection/node-meta.json
+    - nodes/classical/ConfigurationSelection/selected_configurations.json
+    - nodes/classical/ConfigurationSelection/selection.png
+    - nodes/final/MLModel/apax_model
+    - nodes/final/MLModel/log.csv
+    - nodes/final/MLModel/metrics.json
+    - nodes/final/MLModel/node-meta.json
+    - nodes/final/MLModel/train.log
+    - nodes/final/MLModel/train_atoms.extxyz
+    - nodes/final/MLModel/val_atoms.extxyz
+    outs:
+    - nodes/final/Prediction/atoms.h5
+    metrics:
+    - nodes/final/Prediction/node-meta.json:
+        cache: false
+  final_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name final_PredictionMetrics
+    deps:
+    - nodes/final/Prediction/atoms.h5
+    - nodes/final/Prediction/node-meta.json
+    outs:
+    - nodes/final/PredictionMetrics/energy_df.csv
+    - nodes/final/PredictionMetrics/forces_df.csv
+    - nodes/final/PredictionMetrics/plots
+    - nodes/final/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/final/PredictionMetrics/stress_df.csv
+    - nodes/final/PredictionMetrics/stress_hydrostatic_df.csv
+    metrics:
+    - nodes/final/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/final/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/final/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/final/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/final/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/final/PredictionMetrics/stress.json:
         cache: false
