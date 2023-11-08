@@ -8,7 +8,7 @@ thermostat = ips.calculators.LangevinThermostat(
 )
 
 uncertainty_check = ips.analysis.ThresholdCheck(
-    value="forces_uncertainty", max_value=2.0, larger_only=True
+    value="forces_uncertainty", max_value=0.5, larger_only=True
 )
 
 with project.group("classical"):
@@ -19,7 +19,9 @@ with project.group("classical"):
         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
     )
 
-    train_data_selection = ips.configuration_selection.RandomSelection(cp2k.atoms, n_configurations=1000)
+    train_data_selection = ips.configuration_selection.RandomSelection(
+        cp2k.atoms, n_configurations=1000
+    )
     train_data = train_data_selection.atoms
     test_data = train_data_selection.excluded_atoms
 
@@ -38,24 +40,30 @@ with project.group("ML0"):
     predictions = ips.analysis.Prediction(model=model, data=test_data)
     metrics = ips.analysis.PredictionMetrics(data=predictions)
 
-# with project:
+    md = ips.calculators.ASEMD(
+        data=data.atoms,
+        data_id=-1,
+        model=model,
+        thermostat=thermostat,
+        checker_list=[uncertainty_check],
+        steps=50000,
+        sampling_rate=1,
+    )
 
-#     geo_opt = ips.calculators.ASEGeoOpt(
-#         model=model,
-#         data=data.atoms,
-#         optimizer="FIRE",
-#         run_kwargs={"fmax": 0.1},
-#     )
+    selection = ips.configuration_selection.ThresholdSelection(
+        data=md.atoms,
+        key="forces_uncertainty",
+        n_configurations=20,
+        dim_reduction="max",
+        reduction_axis=(1, 2),
+        min_distance=5,
+    )
 
-#     md = ips.calculators.ASEMD(
-#                 data=geo_opt.atoms,
-#                 data_id=-1,
-#                 model=model,
-#                 thermostat=thermostat,
-#                 checker_list=[uncertainty_check],
-#                 steps=50000,
-#                 sampling_rate=1,
-#             )
+    cp2k = ips.calculators.CP2KSinglePoint(
+        data=selection.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+    )
 
 project.build()
 
@@ -142,15 +150,15 @@ project.build()
 #             name="MMK",
 #             threshold=0.995,
 #         )
-    
+
 #     training_data = mmk_selection.atoms + cp2k.atoms
-    
+
 #     model1 = ips.models.Apax(
 #             data=training_data,
 #             validation_data=mmk_selection.excluded_atoms,
 #             config="config/initial_model_1.yaml"
 #         )
-    
+
 #     model2 = ips.models.Apax(
 #             data=training_data,
 #             validation_data=mmk_selection.excluded_atoms,
@@ -171,15 +179,15 @@ project.build()
 #         max_value=2.0,
 #     )
 # with project.group("MD") as md_grp:
-    # md = ips.calculators.ASEMD(
-    #             data=geo_opt.atoms,
-    #             data_id=-1,
-    #             model=model,
-    #             thermostat=thermostat,
-    #             checker_list=[threshold],
-    #             steps=50000,
-    #             sampling_rate=1,
-    #         )
+# md = ips.calculators.ASEMD(
+#             data=geo_opt.atoms,
+#             data_id=-1,
+#             model=model,
+#             thermostat=thermostat,
+#             checker_list=[threshold],
+#             steps=50000,
+#             sampling_rate=1,
+#         )
 
 #     selection = ips.configuration_selection.KernelSelection(
 #             correlation_time=1,

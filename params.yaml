@@ -1,3 +1,37 @@
+ML0_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 50000
+    use_momenta: false
+    wrap: false
+ML0_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML0_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+ML0_ConfigurationSelection:
+    dim_reduction: max
+    key: forces_uncertainty
+    min_distance: 5
+    n_configurations: 20
+    reduction_axis:
+    - 1
+    - 2
+    reference: energy
+    threshold: null
 ML0_MLModel:
     jax_enable_x64: true
     use_energy: true

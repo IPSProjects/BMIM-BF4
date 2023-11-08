@@ -978,8 +978,8 @@ stages:
     deps:
     - path: nodes/ML0/MLModel/apax_model
       hash: md5
-      md5: a026ad04032da577e1a1e4cb6e36ae37.dir
-      size: 42263349
+      md5: 41acd66266af6737d50c81c77354c724.dir
+      size: 42263343
       nfiles: 5
     - path: nodes/ML0/MLModel/log.csv
       hash: md5
@@ -1007,8 +1007,8 @@ stages:
       size: 31917877
     - path: nodes/ML0/MLModel_1/apax_model
       hash: md5
-      md5: c2814a1e99e230d08348d0ffd0829e12.dir
-      size: 42263355
+      md5: 7611d2e3549accf46909e22201cbaebe.dir
+      size: 42263349
       nfiles: 5
     - path: nodes/ML0/MLModel_1/log.csv
       hash: md5
@@ -1112,8 +1112,8 @@ stages:
     outs:
     - path: nodes/ML0/MLModel_1/apax_model
       hash: md5
-      md5: c2814a1e99e230d08348d0ffd0829e12.dir
-      size: 42263355
+      md5: 7611d2e3549accf46909e22201cbaebe.dir
+      size: 42263349
       nfiles: 5
     - path: nodes/ML0/MLModel_1/log.csv
       hash: md5
@@ -1212,8 +1212,8 @@ stages:
     outs:
     - path: nodes/ML0/MLModel/apax_model
       hash: md5
-      md5: a026ad04032da577e1a1e4cb6e36ae37.dir
-      size: 42263349
+      md5: 41acd66266af6737d50c81c77354c724.dir
+      size: 42263343
       nfiles: 5
     - path: nodes/ML0/MLModel/log.csv
       hash: md5
@@ -1239,3 +1239,115 @@ stages:
       hash: md5
       md5: 5fab82872f3ac9d026d04f51f722ad34
       size: 31917877
+  ML0_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML0_ASEMD
+    deps:
+    - path: nodes/ML0/ApaxEnsemble/node-meta.json
+      hash: md5
+      md5: 2c156e4a3c7dcde93ed09da94be1dee8
+      size: 48
+    - path: nodes/classical/AddData/atoms.h5
+      hash: md5
+      md5: 4b28c7c0a6ae386fce15e8c814259378
+      size: 19874075
+    - path: nodes/classical/AddData/node-meta.json
+      hash: md5
+      md5: e875cc934db72ea4d2b9d3be558e88d1
+      size: 48
+    params:
+      params.yaml:
+        ML0_ASEMD:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 50000
+          use_momenta: false
+          wrap: false
+        ML0_ASEMD+checker_list+0:
+          larger_only: true
+          max_std:
+          max_value: 0.5
+          minimum_window_size: 1
+          value: forces_uncertainty
+          window_size: 500
+        ML0_ASEMD+thermostat:
+          friction: 0.01
+          temperature: 298.15
+          time_step: 0.5
+    outs:
+    - path: nodes/ML0/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 67a78bea623d38ebc171d3e114a3b966
+      size: 15686
+    - path: nodes/ML0/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML0/ASEMD/node-meta.json
+      hash: md5
+      md5: 571d906f7d60047f8388340fb38963a3
+      size: 48
+    - path: nodes/ML0/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: c24cd76e1ce41366a4bbe8a49b02a028
+      size: 3
+    - path: nodes/ML0/ASEMD/trajectory.h5
+      hash: md5
+      md5: d4e068159a61f62624956d14d94ca965
+      size: 8120928
+  ML0_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.ThresholdSelection --name ML0_ConfigurationSelection
+    deps:
+    - path: nodes/ML0/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 67a78bea623d38ebc171d3e114a3b966
+      size: 15686
+    - path: nodes/ML0/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML0/ASEMD/node-meta.json
+      hash: md5
+      md5: 571d906f7d60047f8388340fb38963a3
+      size: 48
+    - path: nodes/ML0/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: c24cd76e1ce41366a4bbe8a49b02a028
+      size: 3
+    - path: nodes/ML0/ASEMD/trajectory.h5
+      hash: md5
+      md5: d4e068159a61f62624956d14d94ca965
+      size: 8120928
+    params:
+      params.yaml:
+        ML0_ConfigurationSelection:
+          dim_reduction: max
+          key: forces_uncertainty
+          min_distance: 5
+          n_configurations: 20
+          reduction_axis:
+          - 1
+          - 2
+          reference: energy
+          threshold:
+    outs:
+    - path: nodes/ML0/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 01c0cdcb3a5297fb8f2a63c4ad43c8d4
+      size: 48
+    - path: nodes/ML0/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 7620fa997ac26d2e1a715ef94cf22488
+      size: 283
+    - path: nodes/ML0/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 2a278f8a3a121c54ba42c8df5960ba09
+      size: 30524
