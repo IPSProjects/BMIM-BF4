@@ -65,6 +65,50 @@ with project.group("ML0"):
         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
     )
 
+    train_data += cp2k.atoms
+
+with project.group("ML1"):
+    model1 = ips.models.Apax(
+        data=train_data,
+        validation_data=test_data,
+        config="config/initial_model_1.yaml",
+    )
+    model2 = ips.models.Apax(
+        data=train_data,
+        validation_data=test_data,
+        config="config/initial_model_2.yaml",
+    )
+    model = ips.models.ApaxEnsemble(models=[model1, model2])
+    predictions = ips.analysis.Prediction(model=model, data=test_data)
+    metrics = ips.analysis.PredictionMetrics(data=predictions)
+
+    md = ips.calculators.ASEMD(
+        data=data.atoms,
+        data_id=-1,
+        model=model,
+        thermostat=thermostat,
+        checker_list=[uncertainty_check],
+        steps=50000,
+        sampling_rate=1,
+    )
+
+    selection = ips.configuration_selection.ThresholdSelection(
+        data=md.atoms,
+        key="forces_uncertainty",
+        n_configurations=20,
+        dim_reduction="max",
+        reduction_axis=(1, 2),
+        min_distance=5,
+    )
+
+    cp2k = ips.calculators.CP2KSinglePoint(
+        data=selection.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+    )
+
+    train_data += cp2k.atoms
+
 project.build()
 
 # cp2k = ips.calculators.CP2KSinglePoint(
