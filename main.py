@@ -193,6 +193,30 @@ with project.group("ML3"):
 
     train_data += cp2k.atoms
 
+with project.group("GeoOpt"):
+    cation = ips.configuration_generation.SmilesToAtoms("CCCCN1C=C[N+](=C1)C")
+    anion = ips.configuration_generation.SmilesToAtoms("[B-](F)(F)(F)F")
+
+    single_structure = ips.configuration_generation.Packmol(
+        data=[cation.atoms, anion.atoms],
+        count=[1, 1],
+        density=1210,  # 293 K
+    )
+
+    structure = ips.configuration_generation.Packmol(
+        data=[single_structure.atoms],
+        count=[2],
+        density=1210,
+    )
+
+    geo_opt = ips.calculators.ASEGeoOpt(
+        model=model,
+        data=structure.atoms,
+        dump_rate=100,
+        optimizer="FIRE",
+        run_kwargs={"fmax": 0.1},
+    )
+
 project.build()
 
 # cp2k = ips.calculators.CP2KSinglePoint(
@@ -203,28 +227,7 @@ project.build()
 
 # mapping = ips.geometry.BarycenterMapping(data=None)
 
-# with project.group("GeoOpt"):
-#     cation = ips.configuration_generation.SmilesToAtoms("CCCCN1C=C[N+](=C1)C")
-#     anion = ips.configuration_generation.SmilesToAtoms("[B-](F)(F)(F)F")
 
-#     single_structure = ips.configuration_generation.Packmol(
-#         data=[cation.atoms, anion.atoms],
-#         count=[1, 1],
-#         density=1210,  # 293 K
-#     )
-
-#     structure = ips.configuration_generation.Packmol(
-#         data=[single_structure.atoms],
-#         count=[10],
-#         density=1210,
-#     )
-
-#     geo_opt = ips.calculators.ASEGeoOpt(
-#         model=cp2k,
-#         data=structure.atoms,
-#         optimizer="BFGS",
-#         run_kwargs={"fmax": 0.1},
-#     )
 
 # mmk_kernel = ips.configuration_comparison.MMKernel(
 #         use_jit=True,

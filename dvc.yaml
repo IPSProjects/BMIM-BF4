@@ -11,7 +11,6 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
-- nodes/ML0/ASEMD/metrics_dict.csv: {}
 - nodes/ML1/MLModel/log.csv:
     template: dvc_plots/templates/y_log.json
     x: epoch
@@ -24,7 +23,6 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
-- nodes/ML1/ASEMD/metrics_dict.csv: {}
 - nodes/ML2/MLModel/log.csv:
     template: dvc_plots/templates/y_log.json
     x: epoch
@@ -37,7 +35,6 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
-- nodes/ML2/ASEMD/metrics_dict.csv: {}
 - nodes/ML3/MLModel/log.csv:
     template: dvc_plots/templates/y_log.json
     x: epoch
@@ -50,7 +47,6 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
-- nodes/ML3/ASEMD/metrics_dict.csv: {}
 stages:
   ML0_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name ML0_ASEMD
@@ -520,64 +516,6 @@ stages:
     - nodes/ML2/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/ML2/PredictionMetrics/stress_df.csv
     - nodes/ML2/PredictionMetrics/stress_hydrostatic_df.csv
-  ML3_ASEMD:
-    cmd: zntrack run ipsuite.nodes.ASEMD --name ML3_ASEMD
-    deps:
-    - nodes/ML2/ASEMD/metrics_dict.csv
-    - nodes/ML2/ASEMD/model
-    - nodes/ML2/ASEMD/node-meta.json
-    - nodes/ML2/ASEMD/steps_before_stopping.json
-    - nodes/ML2/ASEMD/trajectory.h5
-    - nodes/ML3/ApaxEnsemble/node-meta.json
-    metrics:
-    - nodes/ML3/ASEMD/node-meta.json:
-        cache: false
-    - nodes/ML3/ASEMD/steps_before_stopping.json:
-        cache: false
-    outs:
-    - nodes/ML3/ASEMD/metrics_dict.csv
-    - nodes/ML3/ASEMD/model
-    - nodes/ML3/ASEMD/trajectory.h5
-    params:
-    - ML3_ASEMD
-    - ML3_ASEMD+checker_list+0
-    - ML3_ASEMD+thermostat
-  ML3_ApaxEnsemble:
-    cmd: zntrack run ipsuite.nodes.ApaxEnsemble --name ML3_ApaxEnsemble
-    deps:
-    - nodes/ML3/MLModel/apax_model
-    - nodes/ML3/MLModel/log.csv
-    - nodes/ML3/MLModel/metrics.json
-    - nodes/ML3/MLModel/node-meta.json
-    - nodes/ML3/MLModel/train.log
-    - nodes/ML3/MLModel/train_atoms.extxyz
-    - nodes/ML3/MLModel/val_atoms.extxyz
-    - nodes/ML3/MLModel_1/apax_model
-    - nodes/ML3/MLModel_1/log.csv
-    - nodes/ML3/MLModel_1/metrics.json
-    - nodes/ML3/MLModel_1/node-meta.json
-    - nodes/ML3/MLModel_1/train.log
-    - nodes/ML3/MLModel_1/train_atoms.extxyz
-    - nodes/ML3/MLModel_1/val_atoms.extxyz
-    metrics:
-    - nodes/ML3/ApaxEnsemble/node-meta.json:
-        cache: false
-  ML3_ConfigurationSelection:
-    cmd: zntrack run ipsuite.nodes.ThresholdSelection --name ML3_ConfigurationSelection
-    deps:
-    - nodes/ML3/ASEMD/metrics_dict.csv
-    - nodes/ML3/ASEMD/model
-    - nodes/ML3/ASEMD/node-meta.json
-    - nodes/ML3/ASEMD/steps_before_stopping.json
-    - nodes/ML3/ASEMD/trajectory.h5
-    metrics:
-    - nodes/ML3/ConfigurationSelection/node-meta.json:
-        cache: false
-    outs:
-    - nodes/ML3/ConfigurationSelection/selected_configurations.json
-    - nodes/ML3/ConfigurationSelection/selection.png
-    params:
-    - ML3_ConfigurationSelection
   ML3_MLModel:
     cmd: zntrack run ipsuite.nodes.Apax --name ML3_MLModel
     deps:
@@ -636,43 +574,6 @@ stages:
     params:
     - ML3_MLModel_1
     - config/initial_model_2.yaml:
-  ML3_Prediction:
-    cmd: zntrack run ipsuite.nodes.Prediction --name ML3_Prediction
-    deps:
-    - nodes/ML3/ApaxEnsemble/node-meta.json
-    - nodes/classical/ConfigurationSelection/node-meta.json
-    - nodes/classical/ConfigurationSelection/selected_configurations.json
-    - nodes/classical/ConfigurationSelection/selection.png
-    metrics:
-    - nodes/ML3/Prediction/node-meta.json:
-        cache: false
-    outs:
-    - nodes/ML3/Prediction/atoms.h5
-  ML3_PredictionMetrics:
-    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML3_PredictionMetrics
-    deps:
-    - nodes/ML3/Prediction/atoms.h5
-    - nodes/ML3/Prediction/node-meta.json
-    metrics:
-    - nodes/ML3/PredictionMetrics/deviat_stress.json:
-        cache: false
-    - nodes/ML3/PredictionMetrics/energy.json:
-        cache: false
-    - nodes/ML3/PredictionMetrics/forces.json:
-        cache: false
-    - nodes/ML3/PredictionMetrics/hydro_stress.json:
-        cache: false
-    - nodes/ML3/PredictionMetrics/node-meta.json:
-        cache: false
-    - nodes/ML3/PredictionMetrics/stress.json:
-        cache: false
-    outs:
-    - nodes/ML3/PredictionMetrics/energy_df.csv
-    - nodes/ML3/PredictionMetrics/forces_df.csv
-    - nodes/ML3/PredictionMetrics/plots
-    - nodes/ML3/PredictionMetrics/stress_deviatoric_df.csv
-    - nodes/ML3/PredictionMetrics/stress_df.csv
-    - nodes/ML3/PredictionMetrics/stress_hydrostatic_df.csv
   classical_AddData:
     cmd: zntrack run ipsuite.nodes.AddData --name classical_AddData
     deps:
@@ -714,6 +615,101 @@ stages:
     - nodes/classical/ConfigurationSelection/selection.png
     params:
     - classical_ConfigurationSelection
+  ML3_ApaxEnsemble:
+    cmd: zntrack run ipsuite.nodes.ApaxEnsemble --name ML3_ApaxEnsemble
+    deps:
+    - nodes/ML3/MLModel/apax_model
+    - nodes/ML3/MLModel/log.csv
+    - nodes/ML3/MLModel/metrics.json
+    - nodes/ML3/MLModel/node-meta.json
+    - nodes/ML3/MLModel/train.log
+    - nodes/ML3/MLModel/train_atoms.extxyz
+    - nodes/ML3/MLModel/val_atoms.extxyz
+    - nodes/ML3/MLModel_1/apax_model
+    - nodes/ML3/MLModel_1/log.csv
+    - nodes/ML3/MLModel_1/metrics.json
+    - nodes/ML3/MLModel_1/node-meta.json
+    - nodes/ML3/MLModel_1/train.log
+    - nodes/ML3/MLModel_1/train_atoms.extxyz
+    - nodes/ML3/MLModel_1/val_atoms.extxyz
+    metrics:
+    - nodes/ML3/ApaxEnsemble/node-meta.json:
+        cache: false
+  ML3_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML3_Prediction
+    deps:
+    - nodes/ML3/ApaxEnsemble/node-meta.json
+    - nodes/classical/ConfigurationSelection/node-meta.json
+    - nodes/classical/ConfigurationSelection/selected_configurations.json
+    - nodes/classical/ConfigurationSelection/selection.png
+    outs:
+    - nodes/ML3/Prediction/atoms.h5
+    metrics:
+    - nodes/ML3/Prediction/node-meta.json:
+        cache: false
+  ML3_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML3_PredictionMetrics
+    deps:
+    - nodes/ML3/Prediction/atoms.h5
+    - nodes/ML3/Prediction/node-meta.json
+    outs:
+    - nodes/ML3/PredictionMetrics/energy_df.csv
+    - nodes/ML3/PredictionMetrics/forces_df.csv
+    - nodes/ML3/PredictionMetrics/plots
+    - nodes/ML3/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/ML3/PredictionMetrics/stress_df.csv
+    - nodes/ML3/PredictionMetrics/stress_hydrostatic_df.csv
+    metrics:
+    - nodes/ML3/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/ML3/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/ML3/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/ML3/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/ML3/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/ML3/PredictionMetrics/stress.json:
+        cache: false
+  ML3_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML3_ASEMD
+    deps:
+    - nodes/ML2/ASEMD/metrics_dict.csv
+    - nodes/ML2/ASEMD/model
+    - nodes/ML2/ASEMD/node-meta.json
+    - nodes/ML2/ASEMD/steps_before_stopping.json
+    - nodes/ML2/ASEMD/trajectory.h5
+    - nodes/ML3/ApaxEnsemble/node-meta.json
+    params:
+    - ML3_ASEMD
+    - ML3_ASEMD+checker_list+0
+    - ML3_ASEMD+thermostat
+    outs:
+    - nodes/ML3/ASEMD/metrics_dict.csv
+    - nodes/ML3/ASEMD/model
+    - nodes/ML3/ASEMD/trajectory.h5
+    metrics:
+    - nodes/ML3/ASEMD/node-meta.json:
+        cache: false
+    - nodes/ML3/ASEMD/steps_before_stopping.json:
+        cache: false
+  ML3_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.ThresholdSelection --name ML3_ConfigurationSelection
+    deps:
+    - nodes/ML3/ASEMD/metrics_dict.csv
+    - nodes/ML3/ASEMD/model
+    - nodes/ML3/ASEMD/node-meta.json
+    - nodes/ML3/ASEMD/steps_before_stopping.json
+    - nodes/ML3/ASEMD/trajectory.h5
+    params:
+    - ML3_ConfigurationSelection
+    outs:
+    - nodes/ML3/ConfigurationSelection/selected_configurations.json
+    - nodes/ML3/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/ML3/ConfigurationSelection/node-meta.json:
+        cache: false
   ML3_CP2KSinglePoint:
     cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML3_CP2KSinglePoint
     deps:
@@ -730,4 +726,70 @@ stages:
     - nodes/ML3/CP2KSinglePoint/cp2k
     metrics:
     - nodes/ML3/CP2KSinglePoint/node-meta.json:
+        cache: false
+  GeoOpt_SmilesToAtoms:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name GeoOpt_SmilesToAtoms
+    params:
+    - GeoOpt_SmilesToAtoms
+    outs:
+    - nodes/GeoOpt/SmilesToAtoms/atoms.h5
+    - nodes/GeoOpt/SmilesToAtoms/molecule.png
+    metrics:
+    - nodes/GeoOpt/SmilesToAtoms/node-meta.json:
+        cache: false
+  GeoOpt_SmilesToAtoms_1:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name GeoOpt_SmilesToAtoms_1
+    params:
+    - GeoOpt_SmilesToAtoms_1
+    outs:
+    - nodes/GeoOpt/SmilesToAtoms_1/atoms.h5
+    - nodes/GeoOpt/SmilesToAtoms_1/molecule.png
+    metrics:
+    - nodes/GeoOpt/SmilesToAtoms_1/node-meta.json:
+        cache: false
+  GeoOpt_Packmol:
+    cmd: zntrack run ipsuite.nodes.Packmol --name GeoOpt_Packmol
+    deps:
+    - nodes/GeoOpt/SmilesToAtoms/atoms.h5
+    - nodes/GeoOpt/SmilesToAtoms/molecule.png
+    - nodes/GeoOpt/SmilesToAtoms/node-meta.json
+    - nodes/GeoOpt/SmilesToAtoms_1/atoms.h5
+    - nodes/GeoOpt/SmilesToAtoms_1/molecule.png
+    - nodes/GeoOpt/SmilesToAtoms_1/node-meta.json
+    params:
+    - GeoOpt_Packmol
+    outs:
+    - nodes/GeoOpt/Packmol/atoms.h5
+    - nodes/GeoOpt/Packmol/packmol
+    metrics:
+    - nodes/GeoOpt/Packmol/node-meta.json:
+        cache: false
+  GeoOpt_Packmol_1:
+    cmd: zntrack run ipsuite.nodes.Packmol --name GeoOpt_Packmol_1
+    deps:
+    - nodes/GeoOpt/Packmol/atoms.h5
+    - nodes/GeoOpt/Packmol/node-meta.json
+    - nodes/GeoOpt/Packmol/packmol
+    params:
+    - GeoOpt_Packmol_1
+    outs:
+    - nodes/GeoOpt/Packmol_1/atoms.h5
+    - nodes/GeoOpt/Packmol_1/packmol
+    metrics:
+    - nodes/GeoOpt/Packmol_1/node-meta.json:
+        cache: false
+  GeoOpt_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name GeoOpt_ASEGeoOpt
+    deps:
+    - nodes/GeoOpt/Packmol_1/atoms.h5
+    - nodes/GeoOpt/Packmol_1/node-meta.json
+    - nodes/GeoOpt/Packmol_1/packmol
+    - nodes/ML3/ApaxEnsemble/node-meta.json
+    params:
+    - GeoOpt_ASEGeoOpt
+    outs:
+    - nodes/GeoOpt/ASEGeoOpt/model_outs
+    - nodes/GeoOpt/ASEGeoOpt/trajectory.h5
+    metrics:
+    - nodes/GeoOpt/ASEGeoOpt/node-meta.json:
         cache: false
