@@ -3494,3 +3494,155 @@ stages:
       hash: md5
       md5: 5fab82872f3ac9d026d04f51f722ad34
       size: 31917877
+  ML4_MLModel_1:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML4_MLModel_1
+    deps:
+    - path: nodes/ML0/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 6aa87b0fff0dd78314ce2bbccd4a6aaa
+      size: 528216
+    - path: nodes/ML0/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 90db53c70a38cdf305b21afdcc6abe85.dir
+      size: 13399739
+      nfiles: 3
+    - path: nodes/ML0/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: aec258218cb2ffe9bdc5604d65a10601
+      size: 48
+    - path: nodes/ML1/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 81bd7e094641037072bc39253a091102
+      size: 528216
+    - path: nodes/ML1/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 5d929e400624bbb2a855b93275a8e606.dir
+      size: 13401284
+      nfiles: 3
+    - path: nodes/ML1/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: d193c7f3d7adc04e52e280c9f3b037d9
+      size: 48
+    - path: nodes/ML2/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: cf2daa39276f6bc4ff0097bf35c806ab
+      size: 1252296
+    - path: nodes/ML2/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: f8af732df6d5935b852871cd2dd7c554.dir
+      size: 15041774
+      nfiles: 3
+    - path: nodes/ML2/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 4981e428a16bdf6a96225a6f083f5acf
+      size: 48
+    - path: nodes/ML3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 30a548360e1e55556e49f2cba1e09edd
+      size: 1252296
+    - path: nodes/ML3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 25c2021b7d0bb98b812b4a568d8cb323.dir
+      size: 15034087
+      nfiles: 3
+    - path: nodes/ML3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 12d5ab831a9ad98d1988ed4d0a19c9be
+      size: 48
+    - path: nodes/classical/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 5b74c0c06b9ae3e1a5cc5369dadd5309
+      size: 48
+    - path: nodes/classical/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: afce37868d81f40b08ad4ba6c68222f5
+      size: 13485
+    - path: nodes/classical/ConfigurationSelection/selection.png
+      hash: md5
+      md5: bb69658e118dfa06a7aa1844fbb30105
+      size: 35869
+    params:
+      params.yaml:
+        ML4_MLModel_1:
+          jax_enable_x64: true
+          use_energy: true
+          use_forces: true
+          use_stresses: false
+      config/initial_model_2.yaml:
+        data:
+          batch_size: 8
+          scale_method: per_element_force_rms_scale
+          shift_method: per_element_regression_shift
+          shift_options:
+            energy_regularisation: 1.0
+          valid_batch_size: 100
+        loss:
+        - name: energy
+        - name: forces
+          weight: 4.0
+        - name: stress
+          weight: 0.2
+        metrics:
+        - name: energy
+          reductions:
+          - mae
+        - name: forces
+          reductions:
+          - mae
+        - name: stress
+          reductions:
+          - mae
+        model:
+          n_basis: 7
+          n_radial: 5
+          nn:
+          - 512
+          - 512
+          r_max: 5.5
+          r_min: 0.7
+          b_init: zeros
+          emb_init: uniform
+          calc_stress: true
+          use_zbl: true
+          descriptor_dtype: fp32
+          readout_dtype: fp32
+          scale_shift_dtype: fp32
+        n_epochs: 2048
+        optimizer:
+          opt_name: adam
+          emb_lr: 0.01
+          nn_lr: 0.005
+          scale_lr: 0.001
+          shift_lr: 0.05
+          zbl_lr: 0.001
+        seed: 2
+    outs:
+    - path: nodes/ML4/MLModel_1/apax_model
+      hash: md5
+      md5: 8846bb2dc7ba86ee45d633f6a02a2439.dir
+      size: 42264512
+      nfiles: 5
+    - path: nodes/ML4/MLModel_1/log.csv
+      hash: md5
+      md5: 9bf8bbcaa767bcd6386f26462f9918af
+      size: 364331
+    - path: nodes/ML4/MLModel_1/metrics.json
+      hash: md5
+      md5: 0947ef12f9247b4ada09556b5c81ad61
+      size: 389
+    - path: nodes/ML4/MLModel_1/node-meta.json
+      hash: md5
+      md5: 7ade17ff2cceee224dde0c7e79750210
+      size: 48
+    - path: nodes/ML4/MLModel_1/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/ML4/MLModel_1/train_atoms.extxyz
+      hash: md5
+      md5: e91c0c73796b03043e0d5e8da3521303
+      size: 38493845
+    - path: nodes/ML4/MLModel_1/val_atoms.extxyz
+      hash: md5
+      md5: 5fab82872f3ac9d026d04f51f722ad34
+      size: 31917877
