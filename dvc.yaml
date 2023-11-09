@@ -37,6 +37,7 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
+- nodes/ML2/ASEMD/metrics_dict.csv: {}
 stages:
   ML0_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name ML0_ASEMD
@@ -342,6 +343,64 @@ stages:
     - nodes/ML1/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/ML1/PredictionMetrics/stress_df.csv
     - nodes/ML1/PredictionMetrics/stress_hydrostatic_df.csv
+  ML2_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML2_ASEMD
+    deps:
+    - nodes/ML1/ASEMD/metrics_dict.csv
+    - nodes/ML1/ASEMD/model
+    - nodes/ML1/ASEMD/node-meta.json
+    - nodes/ML1/ASEMD/steps_before_stopping.json
+    - nodes/ML1/ASEMD/trajectory.h5
+    - nodes/ML2/ApaxEnsemble/node-meta.json
+    metrics:
+    - nodes/ML2/ASEMD/node-meta.json:
+        cache: false
+    - nodes/ML2/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML2/ASEMD/metrics_dict.csv
+    - nodes/ML2/ASEMD/model
+    - nodes/ML2/ASEMD/trajectory.h5
+    params:
+    - ML2_ASEMD
+    - ML2_ASEMD+checker_list+0
+    - ML2_ASEMD+thermostat
+  ML2_ApaxEnsemble:
+    cmd: zntrack run ipsuite.nodes.ApaxEnsemble --name ML2_ApaxEnsemble
+    deps:
+    - nodes/ML2/MLModel/apax_model
+    - nodes/ML2/MLModel/log.csv
+    - nodes/ML2/MLModel/metrics.json
+    - nodes/ML2/MLModel/node-meta.json
+    - nodes/ML2/MLModel/train.log
+    - nodes/ML2/MLModel/train_atoms.extxyz
+    - nodes/ML2/MLModel/val_atoms.extxyz
+    - nodes/ML2/MLModel_1/apax_model
+    - nodes/ML2/MLModel_1/log.csv
+    - nodes/ML2/MLModel_1/metrics.json
+    - nodes/ML2/MLModel_1/node-meta.json
+    - nodes/ML2/MLModel_1/train.log
+    - nodes/ML2/MLModel_1/train_atoms.extxyz
+    - nodes/ML2/MLModel_1/val_atoms.extxyz
+    metrics:
+    - nodes/ML2/ApaxEnsemble/node-meta.json:
+        cache: false
+  ML2_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.ThresholdSelection --name ML2_ConfigurationSelection
+    deps:
+    - nodes/ML2/ASEMD/metrics_dict.csv
+    - nodes/ML2/ASEMD/model
+    - nodes/ML2/ASEMD/node-meta.json
+    - nodes/ML2/ASEMD/steps_before_stopping.json
+    - nodes/ML2/ASEMD/trajectory.h5
+    metrics:
+    - nodes/ML2/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML2/ConfigurationSelection/selected_configurations.json
+    - nodes/ML2/ConfigurationSelection/selection.png
+    params:
+    - ML2_ConfigurationSelection
   ML2_MLModel:
     cmd: zntrack run ipsuite.nodes.Apax --name ML2_MLModel
     deps:
@@ -394,6 +453,43 @@ stages:
     params:
     - ML2_MLModel_1
     - config/initial_model_2.yaml:
+  ML2_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML2_Prediction
+    deps:
+    - nodes/ML2/ApaxEnsemble/node-meta.json
+    - nodes/classical/ConfigurationSelection/node-meta.json
+    - nodes/classical/ConfigurationSelection/selected_configurations.json
+    - nodes/classical/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/ML2/Prediction/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML2/Prediction/atoms.h5
+  ML2_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML2_PredictionMetrics
+    deps:
+    - nodes/ML2/Prediction/atoms.h5
+    - nodes/ML2/Prediction/node-meta.json
+    metrics:
+    - nodes/ML2/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/ML2/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/ML2/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/ML2/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/ML2/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/ML2/PredictionMetrics/stress.json:
+        cache: false
+    outs:
+    - nodes/ML2/PredictionMetrics/energy_df.csv
+    - nodes/ML2/PredictionMetrics/forces_df.csv
+    - nodes/ML2/PredictionMetrics/plots
+    - nodes/ML2/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/ML2/PredictionMetrics/stress_df.csv
+    - nodes/ML2/PredictionMetrics/stress_hydrostatic_df.csv
   classical_AddData:
     cmd: zntrack run ipsuite.nodes.AddData --name classical_AddData
     deps:
@@ -435,79 +531,20 @@ stages:
     - nodes/classical/ConfigurationSelection/selection.png
     params:
     - classical_ConfigurationSelection
-  ML2_ApaxEnsemble:
-    cmd: zntrack run ipsuite.nodes.ApaxEnsemble --name ML2_ApaxEnsemble
+  ML2_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML2_CP2KSinglePoint
     deps:
-    - nodes/ML2/MLModel/apax_model
-    - nodes/ML2/MLModel/log.csv
-    - nodes/ML2/MLModel/metrics.json
-    - nodes/ML2/MLModel/node-meta.json
-    - nodes/ML2/MLModel/train.log
-    - nodes/ML2/MLModel/train_atoms.extxyz
-    - nodes/ML2/MLModel/val_atoms.extxyz
-    - nodes/ML2/MLModel_1/apax_model
-    - nodes/ML2/MLModel_1/log.csv
-    - nodes/ML2/MLModel_1/metrics.json
-    - nodes/ML2/MLModel_1/node-meta.json
-    - nodes/ML2/MLModel_1/train.log
-    - nodes/ML2/MLModel_1/train_atoms.extxyz
-    - nodes/ML2/MLModel_1/val_atoms.extxyz
-    metrics:
-    - nodes/ML2/ApaxEnsemble/node-meta.json:
-        cache: false
-  ML2_Prediction:
-    cmd: zntrack run ipsuite.nodes.Prediction --name ML2_Prediction
-    deps:
-    - nodes/ML2/ApaxEnsemble/node-meta.json
-    - nodes/classical/ConfigurationSelection/node-meta.json
-    - nodes/classical/ConfigurationSelection/selected_configurations.json
-    - nodes/classical/ConfigurationSelection/selection.png
-    outs:
-    - nodes/ML2/Prediction/atoms.h5
-    metrics:
-    - nodes/ML2/Prediction/node-meta.json:
-        cache: false
-  ML2_PredictionMetrics:
-    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML2_PredictionMetrics
-    deps:
-    - nodes/ML2/Prediction/atoms.h5
-    - nodes/ML2/Prediction/node-meta.json
-    outs:
-    - nodes/ML2/PredictionMetrics/energy_df.csv
-    - nodes/ML2/PredictionMetrics/forces_df.csv
-    - nodes/ML2/PredictionMetrics/plots
-    - nodes/ML2/PredictionMetrics/stress_deviatoric_df.csv
-    - nodes/ML2/PredictionMetrics/stress_df.csv
-    - nodes/ML2/PredictionMetrics/stress_hydrostatic_df.csv
-    metrics:
-    - nodes/ML2/PredictionMetrics/deviat_stress.json:
-        cache: false
-    - nodes/ML2/PredictionMetrics/energy.json:
-        cache: false
-    - nodes/ML2/PredictionMetrics/forces.json:
-        cache: false
-    - nodes/ML2/PredictionMetrics/hydro_stress.json:
-        cache: false
-    - nodes/ML2/PredictionMetrics/node-meta.json:
-        cache: false
-    - nodes/ML2/PredictionMetrics/stress.json:
-        cache: false
-  ML2_ASEMD:
-    cmd: zntrack run ipsuite.nodes.ASEMD --name ML2_ASEMD
-    deps:
-    - nodes/ML2/ApaxEnsemble/node-meta.json
-    - nodes/classical/AddData/atoms.h5
-    - nodes/classical/AddData/node-meta.json
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/ML2/ConfigurationSelection/node-meta.json
+    - nodes/ML2/ConfigurationSelection/selected_configurations.json
+    - nodes/ML2/ConfigurationSelection/selection.png
     params:
-    - ML2_ASEMD
-    - ML2_ASEMD+checker_list+0
-    - ML2_ASEMD+thermostat
+    - config/cp2k.yaml:
     outs:
-    - nodes/ML2/ASEMD/metrics_dict.csv
-    - nodes/ML2/ASEMD/model
-    - nodes/ML2/ASEMD/trajectory.h5
+    - nodes/ML2/CP2KSinglePoint/atoms.h5
+    - nodes/ML2/CP2KSinglePoint/cp2k
     metrics:
-    - nodes/ML2/ASEMD/node-meta.json:
-        cache: false
-    - nodes/ML2/ASEMD/steps_before_stopping.json:
+    - nodes/ML2/CP2KSinglePoint/node-meta.json:
         cache: false

@@ -110,6 +110,16 @@ ML2_ASEMD+thermostat:
     friction: 0.01
     temperature: 298.15
     time_step: 0.5
+ML2_ConfigurationSelection:
+    dim_reduction: max
+    key: forces_uncertainty
+    min_distance: 50
+    n_configurations: 50
+    reduction_axis:
+    - 1
+    - 2
+    reference: energy
+    threshold: null
 ML2_MLModel:
     jax_enable_x64: true
     use_energy: true

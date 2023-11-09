@@ -1288,8 +1288,8 @@
                     "_type": "zntrack.Node",
                     "value": {
                         "module": "ipsuite.nodes",
-                        "cls": "AddData",
-                        "name": "classical_AddData",
+                        "cls": "ASEMD",
+                        "name": "ML1_ASEMD",
                         "remote": null,
                         "rev": null
                     }
@@ -1344,6 +1344,79 @@
         "nwd": {
             "_type": "pathlib.Path",
             "value": "nodes/ML2_ASEMD+thermostat"
+        }
+    },
+    "ML2_ConfigurationSelection": {
+        "data": {
+            "ML2_ASEMD": {
+                "_type": "znflow.Connection",
+                "value": {
+                    "instance": {
+                        "_type": "zntrack.Node",
+                        "value": {
+                            "module": "ipsuite.nodes",
+                            "cls": "ASEMD",
+                            "name": "ML2_ASEMD",
+                            "remote": null,
+                            "rev": null
+                        }
+                    },
+                    "attribute": "atoms",
+                    "item": null
+                }
+            }
+        },
+        "data_file": null,
+        "exclude": null,
+        "exclude_configurations": null,
+        "img_selection": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/selection.png"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML2/ConfigurationSelection"
+        }
+    },
+    "ML2_CP2KSinglePoint": {
+        "cp2k_directory": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/cp2k"
+        },
+        "cp2k_files": [
+            "GTH_BASIS_SETS",
+            "GTH_POTENTIALS",
+            "dftd3.dat"
+        ],
+        "cp2k_params": "config/cp2k.yaml",
+        "cp2k_shell": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "ThresholdSelection",
+                        "name": "ML2_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "output_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/atoms.h5"
+        },
+        "wfn_restart_file": null,
+        "wfn_restart_node": null,
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML2/CP2KSinglePoint"
         }
     }
 }
