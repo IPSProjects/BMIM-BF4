@@ -45,11 +45,16 @@ with project.group("classical"):
         data=prediction
     )
 
-    # train_data_selection = ips.configuration_selection.RandomSelection(
-    #     cp2k.atoms, n_configurations=1000
-    # )
-    # train_data = train_data_selection.atoms
-    # test_data = train_data_selection.excluded_atoms
+with project.group("ML0"):
+     md = ips.calculators.ASEMD(
+        data=data.atoms,
+        data_id=-1,
+        model=model,
+        thermostat=thermostat,
+        checker_list=[uncertainty_check],
+        steps=50000,
+        sampling_rate=1,
+    )
 
 
 

@@ -1246,10 +1246,6 @@ stages:
   ML0_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name ML0_ASEMD
     deps:
-    - path: nodes/ML0/ApaxEnsemble/node-meta.json
-      hash: md5
-      md5: 2c156e4a3c7dcde93ed09da94be1dee8
-      size: 48
     - path: nodes/classical/AddData/atoms.h5
       hash: md5
       md5: 4b28c7c0a6ae386fce15e8c814259378
@@ -1258,6 +1254,35 @@ stages:
       hash: md5
       md5: e875cc934db72ea4d2b9d3be558e88d1
       size: 48
+    - path: nodes/classical/MLModel/apax_model
+      hash: md5
+      md5: 059b13f99ad96868b58ed034c157b92a.dir
+      size: 84500135
+      nfiles: 5
+    - path: nodes/classical/MLModel/log.csv
+      hash: md5
+      md5: ba4f66f88e0da88369ea83e7296880a7
+      size: 88283
+    - path: nodes/classical/MLModel/metrics.json
+      hash: md5
+      md5: 6840152d7a2644b9a454aea3773a5521
+      size: 387
+    - path: nodes/classical/MLModel/node-meta.json
+      hash: md5
+      md5: c6aee5160d37895bb9d7c6c9702261b6
+      size: 48
+    - path: nodes/classical/MLModel/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/classical/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: deae4c1cdc1253d7c14c0fe386aae298
+      size: 31885950
+    - path: nodes/classical/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 8ed7ac53707fc52a4929cd12770b4b16
+      size: 3188600
     params:
       params.yaml:
         ML0_ASEMD:
@@ -1287,8 +1312,8 @@ stages:
     outs:
     - path: nodes/ML0/ASEMD/metrics_dict.csv
       hash: md5
-      md5: 67a78bea623d38ebc171d3e114a3b966
-      size: 15686
+      md5: fb17386d2600df0463f44a06680d020d
+      size: 1135552
     - path: nodes/ML0/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -1296,16 +1321,16 @@ stages:
       nfiles: 1
     - path: nodes/ML0/ASEMD/node-meta.json
       hash: md5
-      md5: 571d906f7d60047f8388340fb38963a3
+      md5: fb2ae9673d3b83fab0880b4d13bd7c5f
       size: 48
     - path: nodes/ML0/ASEMD/steps_before_stopping.json
       hash: md5
-      md5: c24cd76e1ce41366a4bbe8a49b02a028
-      size: 3
+      md5: 1766fff4851ac9c11f3200477fb8cc76
+      size: 5
     - path: nodes/ML0/ASEMD/trajectory.h5
       hash: md5
-      md5: d4e068159a61f62624956d14d94ca965
-      size: 8120928
+      md5: abade204daa63ba8469aee491c8306f6
+      size: 575882672
   ML0_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.ThresholdSelection --name ML0_ConfigurationSelection
     deps:

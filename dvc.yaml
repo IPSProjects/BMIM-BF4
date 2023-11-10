@@ -5,7 +5,33 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
+- nodes/ML0/ASEMD/metrics_dict.csv: {}
 stages:
+  ML0_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML0_ASEMD
+    deps:
+    - nodes/classical/AddData/atoms.h5
+    - nodes/classical/AddData/node-meta.json
+    - nodes/classical/MLModel/apax_model
+    - nodes/classical/MLModel/log.csv
+    - nodes/classical/MLModel/metrics.json
+    - nodes/classical/MLModel/node-meta.json
+    - nodes/classical/MLModel/train.log
+    - nodes/classical/MLModel/train_atoms.extxyz
+    - nodes/classical/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/ML0/ASEMD/node-meta.json:
+        cache: false
+    - nodes/ML0/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML0/ASEMD/metrics_dict.csv
+    - nodes/ML0/ASEMD/model
+    - nodes/ML0/ASEMD/trajectory.h5
+    params:
+    - ML0_ASEMD
+    - ML0_ASEMD+checker_list+0
+    - ML0_ASEMD+thermostat
   classical_AddData:
     cmd: zntrack run ipsuite.nodes.AddData --name classical_AddData
     deps:
@@ -32,7 +58,7 @@ stages:
     - nodes/classical/CP2KSinglePoint/atoms.h5
     - nodes/classical/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml:
+    - config/cp2k.yaml: null
   classical_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.RandomSelection --name classical_ConfigurationSelection
     deps:
@@ -97,7 +123,7 @@ stages:
     - nodes/classical/MLModel/val_atoms.extxyz
     params:
     - classical_MLModel
-    - config/initial_model.yaml:
+    - config/initial_model.yaml: null
   classical_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name classical_Prediction
     deps:
@@ -111,23 +137,16 @@ stages:
     - nodes/classical/MLModel/train.log
     - nodes/classical/MLModel/train_atoms.extxyz
     - nodes/classical/MLModel/val_atoms.extxyz
-    outs:
-    - nodes/classical/Prediction/atoms.h5
     metrics:
     - nodes/classical/Prediction/node-meta.json:
         cache: false
+    outs:
+    - nodes/classical/Prediction/atoms.h5
   classical_PredictionMetrics:
     cmd: zntrack run ipsuite.nodes.PredictionMetrics --name classical_PredictionMetrics
     deps:
     - nodes/classical/Prediction/atoms.h5
     - nodes/classical/Prediction/node-meta.json
-    outs:
-    - nodes/classical/PredictionMetrics/energy_df.csv
-    - nodes/classical/PredictionMetrics/forces_df.csv
-    - nodes/classical/PredictionMetrics/plots
-    - nodes/classical/PredictionMetrics/stress_deviatoric_df.csv
-    - nodes/classical/PredictionMetrics/stress_df.csv
-    - nodes/classical/PredictionMetrics/stress_hydrostatic_df.csv
     metrics:
     - nodes/classical/PredictionMetrics/deviat_stress.json:
         cache: false
@@ -141,3 +160,10 @@ stages:
         cache: false
     - nodes/classical/PredictionMetrics/stress.json:
         cache: false
+    outs:
+    - nodes/classical/PredictionMetrics/energy_df.csv
+    - nodes/classical/PredictionMetrics/forces_df.csv
+    - nodes/classical/PredictionMetrics/plots
+    - nodes/classical/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/classical/PredictionMetrics/stress_df.csv
+    - nodes/classical/PredictionMetrics/stress_hydrostatic_df.csv
