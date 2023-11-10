@@ -1,22 +1,52 @@
 {
-    "AddData": {
-        "file": "data/BMIM_BF4_400_00K.extxyz",
+    "classical_SmilesToAtoms": {
+        "image": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/molecule.png"
+        },
         "nwd": {
             "_type": "pathlib.Path",
-            "value": "nodes/AddData"
+            "value": "nodes/classical/SmilesToAtoms"
         }
     },
-    "ConfigurationSelection": {
-        "data": {
-            "AddData": {
+    "classical_SmilesToAtoms_1": {
+        "image": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/molecule.png"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/classical/SmilesToAtoms_1"
+        }
+    },
+    "classical_Packmol": {
+        "data": [
+            {
                 "_type": "znflow.Connection",
                 "value": {
                     "instance": {
                         "_type": "zntrack.Node",
                         "value": {
                             "module": "ipsuite.nodes",
-                            "cls": "AddData",
-                            "name": "AddData",
+                            "cls": "SmilesToAtoms",
+                            "name": "classical_SmilesToAtoms",
+                            "remote": null,
+                            "rev": null
+                        }
+                    },
+                    "attribute": "atoms",
+                    "item": null
+                }
+            },
+            {
+                "_type": "znflow.Connection",
+                "value": {
+                    "instance": {
+                        "_type": "zntrack.Node",
+                        "value": {
+                            "module": "ipsuite.nodes",
+                            "cls": "SmilesToAtoms",
+                            "name": "classical_SmilesToAtoms_1",
                             "remote": null,
                             "rev": null
                         }
@@ -25,27 +55,47 @@
                     "item": null
                 }
             }
+        ],
+        "structures": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/packmol"
         },
-        "data_file": null,
-        "exclude": null,
-        "exclude_configurations": null,
         "nwd": {
             "_type": "pathlib.Path",
-            "value": "nodes/ConfigurationSelection"
+            "value": "nodes/classical/Packmol"
         }
     },
-    "CP2KSinglePoint": {
-        "cp2k_directory": {
-            "_type": "pathlib.Path",
-            "value": "$nwd$/cp2k"
-        },
-        "cp2k_files": [
-            "GTH_BASIS_SETS",
-            "GTH_POTENTIALS",
-            "dftd3.dat"
+    "classical_Packmol_1": {
+        "data": [
+            {
+                "_type": "znflow.Connection",
+                "value": {
+                    "instance": {
+                        "_type": "zntrack.Node",
+                        "value": {
+                            "module": "ipsuite.nodes",
+                            "cls": "Packmol",
+                            "name": "classical_Packmol",
+                            "remote": null,
+                            "rev": null
+                        }
+                    },
+                    "attribute": "atoms",
+                    "item": null
+                }
+            }
         ],
-        "cp2k_params": "config/cp2k.yaml",
-        "cp2k_shell": "mpirun -n 32 cp2k_shell.psmp",
+        "structures": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/packmol"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/classical/Packmol_1"
+        }
+    },
+    "classical_ASEGeoOpt": {
+        "checker_list": null,
         "data": {
             "_type": "znflow.Connection",
             "value": {
@@ -53,8 +103,8 @@
                     "_type": "zntrack.Node",
                     "value": {
                         "module": "ipsuite.nodes",
-                        "cls": "RandomSelection",
-                        "name": "ConfigurationSelection",
+                        "cls": "Packmol",
+                        "name": "classical_Packmol_1",
                         "remote": null,
                         "rev": null
                     }
@@ -64,15 +114,102 @@
             }
         },
         "data_file": null,
-        "output_file": {
-            "_type": "pathlib.Path",
-            "value": "$nwd$/atoms.h5"
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "macemodels",
+                        "cls": "LoadModel",
+                        "name": "SPICE_pro_neut_E0",
+                        "remote": "/ssd/fzills/IPS/MACE_DFT/MACE_neutral_cleaned_DFT_E0",
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
         },
-        "wfn_restart_file": null,
-        "wfn_restart_node": null,
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model_outs"
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
         "nwd": {
             "_type": "pathlib.Path",
-            "value": "nodes/CP2KSinglePoint"
+            "value": "nodes/classical/ASEGeoOpt"
+        }
+    },
+    "classical_ASEMD": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "ASEGeoOpt",
+                        "name": "classical_ASEGeoOpt",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "macemodels",
+                        "cls": "LoadModel",
+                        "name": "SPICE_pro_neut_E0",
+                        "remote": "/ssd/fzills/IPS/MACE_DFT/MACE_neutral_cleaned_DFT_E0",
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "classical_ASEMD+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/classical/ASEMD"
+        }
+    },
+    "classical_ASEMD+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/classical_ASEMD+thermostat"
         }
     }
 }

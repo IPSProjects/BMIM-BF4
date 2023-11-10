@@ -1,16 +1,45 @@
 import ipsuite as ips
+import zntrack
 
 project = ips.Project(automatic_node_names=True)
-cp2k_shell = "mpirun -n 32 cp2k_shell.psmp"
 
-with project:
-    data = ips.data_loading.AddData("data/BMIM_BF4_400_00K.extxyz")
-    confs = ips.configuration_selection.RandomSelection(data=data.atoms, n_configurations=10)
-    cp2k = ips.calculators.CP2KSinglePoint(
-        data=confs.atoms,
-        cp2k_params="config/cp2k.yaml",
-        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
-        cp2k_shell=cp2k_shell,
+model = zntrack.from_rev(
+    "SPICE_pro_neut_E0", remote="/ssd/fzills/IPS/MACE_DFT/MACE_neutral_cleaned_DFT_E0"
+)
+
+thermostat = ips.calculators.LangevinThermostat(
+    temperature=298.15, friction=0.01, time_step=0.5
+)
+
+with project.group("classical"):
+    cation = ips.configuration_generation.SmilesToAtoms("CCCCN1C=C[N+](=C1)C")
+    anion = ips.configuration_generation.SmilesToAtoms("C(=[N-])=NC#N")
+
+    single_structure = ips.configuration_generation.Packmol(
+        data=[cation.atoms, anion.atoms],
+        count=[1, 1],
+        density=1060,
+    )
+
+    structure = ips.configuration_generation.Packmol(
+        data=[single_structure.atoms],
+        count=[10],
+        density=1060,
+    )
+    geopt = ips.calculators.ASEGeoOpt(
+        model=model,
+        data=structure.atoms,
+        optimizer="BFGS",
+        run_kwargs={"fmax": 0.1},
+    )
+
+    md = ips.calculators.ASEMD(
+        data=geopt.atoms,
+        data_id=-1,
+        model=model,
+        thermostat=thermostat,
+        steps=100,
+        sampling_rate=1,
     )
 
 project.build()

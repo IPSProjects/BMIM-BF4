@@ -1,0 +1,12 @@
+md5: 3e43d930f64d1600723354c034e56bf2
+frozen: true
+deps:
+- path: nodes/SPICE_sm_inv_neut_E0_swa/node-meta.json
+  repo:
+    url: /ssd/fzills/IPS/MACE_DFT/MACE_neutral_cleaned_DFT_E0
+    rev_lock: 5be09d7911da5438c1600ed1466c2a6471a7fa4a
+outs:
+- md5: c581d3422c87a21f1bfaaef9d8394064
+  size: 48
+  hash: md5
+  path: e1fb56c3-bcea-4037-bd8a-2c92f46b19b4.json

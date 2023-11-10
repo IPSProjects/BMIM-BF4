@@ -1,0 +1,12 @@
+md5: e394fece7b10039c4476843fec15c08e
+frozen: true
+deps:
+- path: nodes/SPICE_pro_neut_E0/node-meta.json
+  repo:
+    url: /ssd/fzills/IPS/MACE_DFT/MACE_neutral_cleaned_DFT_E0
+    rev_lock: 5be09d7911da5438c1600ed1466c2a6471a7fa4a
+outs:
+- md5: 1c157c98ad65cc27d4d4ca5f0cb86e00
+  size: 48
+  hash: md5
+  path: 3398129b-a5e2-4708-94f1-3bdf887956c4.json

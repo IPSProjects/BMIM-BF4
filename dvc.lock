@@ -154,3 +154,265 @@ stages:
       hash: md5
       md5: 411c76c34a1f52a25df68726ff1d0231
       size: 48
+  classical_AddData:
+    cmd: zntrack run ipsuite.nodes.AddData --name classical_AddData
+    deps:
+    - path: data/nvt_eq.xyz
+      hash: md5
+      md5: 38a194ced93c33e023a9eca895cf9d3b
+      size: 32692338
+    params:
+      params.yaml:
+        classical_AddData:
+          lines_to_read:
+    outs:
+    - path: nodes/classical/AddData/atoms.h5
+      hash: md5
+      md5: 4b28c7c0a6ae386fce15e8c814259378
+      size: 19874075
+    - path: nodes/classical/AddData/node-meta.json
+      hash: md5
+      md5: 302d5623bfdd291971e124b700028733
+      size: 48
+  classical_SmilesToAtoms:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name classical_SmilesToAtoms
+    params:
+      params.yaml:
+        classical_SmilesToAtoms:
+          cell:
+          optimizer: UFF
+          seed: 1234
+          smiles: CCCCN1C=C[N+](=C1)C
+    outs:
+    - path: nodes/classical/SmilesToAtoms/atoms.h5
+      hash: md5
+      md5: 744f94e60270ed284980820ff3038f19
+      size: 27968
+    - path: nodes/classical/SmilesToAtoms/molecule.png
+      hash: md5
+      md5: a9e6627ebd24d022ae34219e921b7e5f
+      size: 7818
+    - path: nodes/classical/SmilesToAtoms/node-meta.json
+      hash: md5
+      md5: f06cf8bb745b8cddae10c614ab6901bd
+      size: 48
+  classical_SmilesToAtoms_1:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name classical_SmilesToAtoms_1
+    params:
+      params.yaml:
+        classical_SmilesToAtoms_1:
+          cell:
+          optimizer: UFF
+          seed: 1234
+          smiles: C(=[N-])=NC#N
+    outs:
+    - path: nodes/classical/SmilesToAtoms_1/atoms.h5
+      hash: md5
+      md5: 773ee8361df1607328caa30050d1a2ad
+      size: 27968
+    - path: nodes/classical/SmilesToAtoms_1/molecule.png
+      hash: md5
+      md5: b69da770135b5b73efaa0db98f3860d2
+      size: 6389
+    - path: nodes/classical/SmilesToAtoms_1/node-meta.json
+      hash: md5
+      md5: d23a80bc3e54887e269980d81244cc75
+      size: 48
+  classical_Packmol:
+    cmd: zntrack run ipsuite.nodes.Packmol --name classical_Packmol
+    deps:
+    - path: nodes/classical/SmilesToAtoms/atoms.h5
+      hash: md5
+      md5: 744f94e60270ed284980820ff3038f19
+      size: 27968
+    - path: nodes/classical/SmilesToAtoms/molecule.png
+      hash: md5
+      md5: a9e6627ebd24d022ae34219e921b7e5f
+      size: 7818
+    - path: nodes/classical/SmilesToAtoms/node-meta.json
+      hash: md5
+      md5: f06cf8bb745b8cddae10c614ab6901bd
+      size: 48
+    - path: nodes/classical/SmilesToAtoms_1/atoms.h5
+      hash: md5
+      md5: 773ee8361df1607328caa30050d1a2ad
+      size: 27968
+    - path: nodes/classical/SmilesToAtoms_1/molecule.png
+      hash: md5
+      md5: b69da770135b5b73efaa0db98f3860d2
+      size: 6389
+    - path: nodes/classical/SmilesToAtoms_1/node-meta.json
+      hash: md5
+      md5: d23a80bc3e54887e269980d81244cc75
+      size: 48
+    params:
+      params.yaml:
+        classical_Packmol:
+          box:
+          count:
+          - 1
+          - 1
+          data_ids:
+          density: 1060
+          tolerance: 2.0
+    outs:
+    - path: nodes/classical/Packmol/atoms.h5
+      hash: md5
+      md5: bed492636a7b58a4a4d1e266cc249a86
+      size: 27968
+    - path: nodes/classical/Packmol/node-meta.json
+      hash: md5
+      md5: 1c60e08052511d5eae5f1c250e63005f
+      size: 48
+    - path: nodes/classical/Packmol/packmol
+      hash: md5
+      md5: 5844aa8fb1bb7d9f22f7d5566728d6cf.dir
+      size: 3841
+      nfiles: 4
+  classical_Packmol_1:
+    cmd: zntrack run ipsuite.nodes.Packmol --name classical_Packmol_1
+    deps:
+    - path: nodes/classical/Packmol/atoms.h5
+      hash: md5
+      md5: bed492636a7b58a4a4d1e266cc249a86
+      size: 27968
+    - path: nodes/classical/Packmol/node-meta.json
+      hash: md5
+      md5: 1c60e08052511d5eae5f1c250e63005f
+      size: 48
+    - path: nodes/classical/Packmol/packmol
+      hash: md5
+      md5: 5844aa8fb1bb7d9f22f7d5566728d6cf.dir
+      size: 3841
+      nfiles: 4
+    params:
+      params.yaml:
+        classical_Packmol_1:
+          box:
+          count:
+          - 10
+          data_ids:
+          density: 1060
+          tolerance: 2.0
+    outs:
+    - path: nodes/classical/Packmol_1/atoms.h5
+      hash: md5
+      md5: 0ef185cbac7be35b878becdf635dae20
+      size: 37568
+    - path: nodes/classical/Packmol_1/node-meta.json
+      hash: md5
+      md5: 96d859bbc470a8b5fdc6f445e46a7e44
+      size: 48
+    - path: nodes/classical/Packmol_1/packmol
+      hash: md5
+      md5: c27f97c7a55b06b465cac06a698c09ee.dir
+      size: 18859
+      nfiles: 3
+  classical_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name classical_ASEGeoOpt
+    deps:
+    - path: external/3398129b-a5e2-4708-94f1-3bdf887956c4.json
+      hash: md5
+      md5: 1c157c98ad65cc27d4d4ca5f0cb86e00
+      size: 48
+    - path: nodes/classical/Packmol_1/atoms.h5
+      hash: md5
+      md5: 0ef185cbac7be35b878becdf635dae20
+      size: 37568
+    - path: nodes/classical/Packmol_1/node-meta.json
+      hash: md5
+      md5: 96d859bbc470a8b5fdc6f445e46a7e44
+      size: 48
+    - path: nodes/classical/Packmol_1/packmol
+      hash: md5
+      md5: c27f97c7a55b06b465cac06a698c09ee.dir
+      size: 18859
+      nfiles: 3
+    params:
+      params.yaml:
+        classical_ASEGeoOpt:
+          data_id: 0
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: BFGS
+          repeat:
+          - 1
+          - 1
+          - 1
+          run_kwargs:
+            fmax: 0.1
+    outs:
+    - path: nodes/classical/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/classical/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: b4b1251982efea7db131b9a2e7feff2d
+      size: 48
+    - path: nodes/classical/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 5f14f5ec913ce09a1bbbec4b7fd77118
+      size: 3167800
+  classical_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name classical_ASEMD
+    deps:
+    - path: external/3398129b-a5e2-4708-94f1-3bdf887956c4.json
+      hash: md5
+      md5: 1c157c98ad65cc27d4d4ca5f0cb86e00
+      size: 48
+    - path: nodes/classical/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/classical/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: b4b1251982efea7db131b9a2e7feff2d
+      size: 48
+    - path: nodes/classical/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 5f14f5ec913ce09a1bbbec4b7fd77118
+      size: 3167800
+    params:
+      params.yaml:
+        classical_ASEMD:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 100
+          use_momenta: false
+          wrap: false
+        classical_ASEMD+thermostat:
+          friction: 0.01
+          temperature: 298.15
+          time_step: 0.5
+    outs:
+    - path: nodes/classical/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: c99c501917520dade9485474a344fcce
+      size: 4071
+    - path: nodes/classical/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/classical/ASEMD/node-meta.json
+      hash: md5
+      md5: b2e0f757482d6d045dc43c04438b2e12
+      size: 48
+    - path: nodes/classical/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/classical/ASEMD/trajectory.h5
+      hash: md5
+      md5: aefdfa94e4f69b2d92c45bf01c1125dd
+      size: 2457632

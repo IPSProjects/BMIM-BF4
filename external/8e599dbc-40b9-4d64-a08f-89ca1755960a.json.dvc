@@ -1,0 +1,12 @@
+md5: 05f12e8a3065e48dfc3d399efdc2ac5d
+frozen: true
+deps:
+- path: nodes/SPICE_Mini_for_Gen_swa/node-meta.json
+  repo:
+    url: /ssd/fzills/IPS/MACE_DFT/MACE_neutral_cleaned_DFT_E0
+    rev_lock: 5be09d7911da5438c1600ed1466c2a6471a7fa4a
+outs:
+- md5: 629a9d6235a5d0a3c974d17cab4f9265
+  size: 48
+  hash: md5
+  path: 8e599dbc-40b9-4d64-a08f-89ca1755960a.json

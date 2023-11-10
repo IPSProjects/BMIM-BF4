@@ -1,40 +1,88 @@
+plots:
+- nodes/classical/ASEMD/metrics_dict.csv: {}
 stages:
-  AddData:
-    cmd: zntrack run ipsuite.nodes.AddData --name AddData
+  classical_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name classical_ASEGeoOpt
     deps:
-    - data/BMIM_BF4_400_00K.extxyz
-    params:
-    - AddData
-    outs:
-    - nodes/AddData/atoms.h5
+    - external/3398129b-a5e2-4708-94f1-3bdf887956c4.json
+    - nodes/classical/Packmol_1/atoms.h5
+    - nodes/classical/Packmol_1/node-meta.json
+    - nodes/classical/Packmol_1/packmol
     metrics:
-    - nodes/AddData/node-meta.json:
+    - nodes/classical/ASEGeoOpt/node-meta.json:
         cache: false
-  ConfigurationSelection:
-    cmd: zntrack run ipsuite.nodes.RandomSelection --name ConfigurationSelection
+    outs:
+    - nodes/classical/ASEGeoOpt/model_outs
+    - nodes/classical/ASEGeoOpt/trajectory.h5
+    params:
+    - classical_ASEGeoOpt
+  classical_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name classical_ASEMD
     deps:
-    - nodes/AddData/atoms.h5
-    - nodes/AddData/node-meta.json
-    params:
-    - ConfigurationSelection
-    outs:
-    - nodes/ConfigurationSelection/selected_configurations.json
+    - external/3398129b-a5e2-4708-94f1-3bdf887956c4.json
+    - nodes/classical/ASEGeoOpt/model_outs
+    - nodes/classical/ASEGeoOpt/node-meta.json
+    - nodes/classical/ASEGeoOpt/trajectory.h5
     metrics:
-    - nodes/ConfigurationSelection/node-meta.json:
+    - nodes/classical/ASEMD/node-meta.json:
         cache: false
-  CP2KSinglePoint:
-    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name CP2KSinglePoint
+    - nodes/classical/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/classical/ASEMD/metrics_dict.csv
+    - nodes/classical/ASEMD/model
+    - nodes/classical/ASEMD/trajectory.h5
+    params:
+    - classical_ASEMD
+    - classical_ASEMD+thermostat
+  classical_Packmol:
+    cmd: zntrack run ipsuite.nodes.Packmol --name classical_Packmol
     deps:
-    - GTH_BASIS_SETS
-    - GTH_POTENTIALS
-    - dftd3.dat
-    - nodes/ConfigurationSelection/node-meta.json
-    - nodes/ConfigurationSelection/selected_configurations.json
-    params:
-    - config/cp2k.yaml:
-    outs:
-    - nodes/CP2KSinglePoint/atoms.h5
-    - nodes/CP2KSinglePoint/cp2k
+    - nodes/classical/SmilesToAtoms/atoms.h5
+    - nodes/classical/SmilesToAtoms/molecule.png
+    - nodes/classical/SmilesToAtoms/node-meta.json
+    - nodes/classical/SmilesToAtoms_1/atoms.h5
+    - nodes/classical/SmilesToAtoms_1/molecule.png
+    - nodes/classical/SmilesToAtoms_1/node-meta.json
     metrics:
-    - nodes/CP2KSinglePoint/node-meta.json:
+    - nodes/classical/Packmol/node-meta.json:
         cache: false
+    outs:
+    - nodes/classical/Packmol/atoms.h5
+    - nodes/classical/Packmol/packmol
+    params:
+    - classical_Packmol
+  classical_Packmol_1:
+    cmd: zntrack run ipsuite.nodes.Packmol --name classical_Packmol_1
+    deps:
+    - nodes/classical/Packmol/atoms.h5
+    - nodes/classical/Packmol/node-meta.json
+    - nodes/classical/Packmol/packmol
+    metrics:
+    - nodes/classical/Packmol_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/classical/Packmol_1/atoms.h5
+    - nodes/classical/Packmol_1/packmol
+    params:
+    - classical_Packmol_1
+  classical_SmilesToAtoms:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name classical_SmilesToAtoms
+    metrics:
+    - nodes/classical/SmilesToAtoms/node-meta.json:
+        cache: false
+    outs:
+    - nodes/classical/SmilesToAtoms/atoms.h5
+    - nodes/classical/SmilesToAtoms/molecule.png
+    params:
+    - classical_SmilesToAtoms
+  classical_SmilesToAtoms_1:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name classical_SmilesToAtoms_1
+    metrics:
+    - nodes/classical/SmilesToAtoms_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/classical/SmilesToAtoms_1/atoms.h5
+    - nodes/classical/SmilesToAtoms_1/molecule.png
+    params:
+    - classical_SmilesToAtoms_1

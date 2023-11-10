@@ -1,5 +1,53 @@
-AddData:
-    lines_to_read: null
-ConfigurationSelection:
-    n_configurations: 10
+classical_ASEGeoOpt:
+    data_id: 0
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.1
+classical_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 100
+    use_momenta: false
+    wrap: false
+classical_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+classical_Packmol:
+    box: null
+    count:
+    - 1
+    - 1
+    data_ids: null
+    density: 1060
+    tolerance: 2.0
+classical_Packmol_1:
+    box: null
+    count:
+    - 10
+    data_ids: null
+    density: 1060
+    tolerance: 2.0
+classical_SmilesToAtoms:
+    cell: null
+    optimizer: UFF
     seed: 1234
+    smiles: CCCCN1C=C[N+](=C1)C
+classical_SmilesToAtoms_1:
+    cell: null
+    optimizer: UFF
+    seed: 1234
+    smiles: C(=[N-])=NC#N
