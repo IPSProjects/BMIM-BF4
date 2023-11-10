@@ -77,10 +77,9 @@ with project.group("ML0"):
     train_data += cp2k.atoms
 
     model = ips.models.Apax(
-        model=model,
         data=train_data,
         validation_data=validation_data.atoms,
-        config="config/tl_model.yaml",
+        config="config/initial_model.yaml",
     )
 
     prediction = ips.analysis.Prediction(data=test_data, model=model)
