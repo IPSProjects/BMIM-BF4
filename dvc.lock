@@ -23,18 +23,17 @@ stages:
   classical_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.RandomSelection --name classical_ConfigurationSelection
     deps:
-    - path: nodes/classical/CP2KSinglePoint/atoms.h5
+    - path: nodes/classical/FilterOutlier/filtered_indices.json
       hash: md5
-      md5: 5517ee8f3037feee90b76352280cc493
-      size: 34653576
-    - path: nodes/classical/CP2KSinglePoint/cp2k
+      md5: ca15d82dd94cdebcd4f2ee7229a1fc81
+      size: 28
+    - path: nodes/classical/FilterOutlier/histogram.png
       hash: md5
-      md5: 55489bae96a408ea6302c59d719d3ed0.dir
-      size: 138230425
-      nfiles: 3
-    - path: nodes/classical/CP2KSinglePoint/node-meta.json
+      md5: 9af8e55abe654af2487b7c2905c7def4
+      size: 26534
+    - path: nodes/classical/FilterOutlier/node-meta.json
       hash: md5
-      md5: 54f69e1283b47e06e239ee0dc1deb23e
+      md5: 218fd50cf426a933b2ed360ac97a315c
       size: 48
     params:
       params.yaml:
@@ -44,16 +43,16 @@ stages:
     outs:
     - path: nodes/classical/ConfigurationSelection/node-meta.json
       hash: md5
-      md5: 5b74c0c06b9ae3e1a5cc5369dadd5309
+      md5: 59f02c5348ec5c3848f89bc50192072a
       size: 48
     - path: nodes/classical/ConfigurationSelection/selected_configurations.json
       hash: md5
-      md5: afce37868d81f40b08ad4ba6c68222f5
-      size: 13485
+      md5: 9b3a7c5497c8a9b48616bffe8992e8e9
+      size: 13482
     - path: nodes/classical/ConfigurationSelection/selection.png
       hash: md5
-      md5: bb69658e118dfa06a7aa1844fbb30105
-      size: 35869
+      md5: 16034e26e826980dcfa1c11c008c84de
+      size: 49966
   classical_CP2KSinglePoint:
     cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name classical_CP2KSinglePoint
     deps:
@@ -1034,10 +1033,15 @@ stages:
       hash: md5
       md5: 5fab82872f3ac9d026d04f51f722ad34
       size: 31917877
+    params:
+      params.yaml:
+        ML0_ApaxEnsemble:
+          nl_skin: 0.5
+          transformations:
     outs:
     - path: nodes/ML0/ApaxEnsemble/node-meta.json
       hash: md5
-      md5: 2c156e4a3c7dcde93ed09da94be1dee8
+      md5: 80c4de273583d4f5c0128c3f7c2bd875
       size: 48
   ML0_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name ML0_MLModel_1
@@ -4638,3 +4642,338 @@ stages:
       hash: md5
       md5: 6074b5c227dfdc460252ed514f1943d4
       size: 39566
+  classical_EnergyHistogram:
+    cmd: zntrack run ipsuite.nodes.EnergyHistogram --name classical_EnergyHistogram
+    deps:
+    - path: nodes/classical/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 5517ee8f3037feee90b76352280cc493
+      size: 34653576
+    - path: nodes/classical/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 55489bae96a408ea6302c59d719d3ed0.dir
+      size: 138230425
+      nfiles: 3
+    - path: nodes/classical/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 54f69e1283b47e06e239ee0dc1deb23e
+      size: 48
+    params:
+      params.yaml:
+        classical_EnergyHistogram:
+          bins: 100
+          x_lim:
+          y_lim:
+    outs:
+    - path: nodes/classical/EnergyHistogram/labels_df.csv
+      hash: md5
+      md5: a8af642285ac7e5b8e66821d1ec241bd
+      size: 2456
+    - path: nodes/classical/EnergyHistogram/metrics.json
+      hash: md5
+      md5: b4203f6f69c2d44b4f11133c2888b03b
+      size: 123
+    - path: nodes/classical/EnergyHistogram/node-meta.json
+      hash: md5
+      md5: 334aa6762fdf8111381225e01b4510c2
+      size: 48
+    - path: nodes/classical/EnergyHistogram/plots
+      hash: md5
+      md5: 21dff44cf9f433be0247ded3a79567c2.dir
+      size: 15894
+      nfiles: 1
+  classical_FilterOutlier:
+    cmd: zntrack run ipsuite.nodes.FilterOutlier --name classical_FilterOutlier
+    deps:
+    - path: nodes/classical/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 5517ee8f3037feee90b76352280cc493
+      size: 34653576
+    - path: nodes/classical/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 55489bae96a408ea6302c59d719d3ed0.dir
+      size: 138230425
+      nfiles: 3
+    - path: nodes/classical/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 54f69e1283b47e06e239ee0dc1deb23e
+      size: 48
+    params:
+      params.yaml:
+        classical_FilterOutlier:
+          direction: both
+          key: energy
+          threshold: 3
+    outs:
+    - path: nodes/classical/FilterOutlier/filtered_indices.json
+      hash: md5
+      md5: ca15d82dd94cdebcd4f2ee7229a1fc81
+      size: 28
+    - path: nodes/classical/FilterOutlier/histogram.png
+      hash: md5
+      md5: 9af8e55abe654af2487b7c2905c7def4
+      size: 26534
+    - path: nodes/classical/FilterOutlier/node-meta.json
+      hash: md5
+      md5: 218fd50cf426a933b2ed360ac97a315c
+      size: 48
+  classical_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name classical_ConfigurationSelection_1
+    deps:
+    - path: nodes/classical/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 59f02c5348ec5c3848f89bc50192072a
+      size: 48
+    - path: nodes/classical/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 9b3a7c5497c8a9b48616bffe8992e8e9
+      size: 13482
+    - path: nodes/classical/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 16034e26e826980dcfa1c11c008c84de
+      size: 49966
+    params:
+      params.yaml:
+        classical_ConfigurationSelection_1:
+          n_configurations: 100
+          seed: 1234
+    outs:
+    - path: nodes/classical/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: 7bc67738fbe026a93153a6fe655a1e8a
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: 9ab7dba592092c86996a2b2878a7ec04
+      size: 1343
+    - path: nodes/classical/ConfigurationSelection_1/selection.png
+      hash: md5
+      md5: 5d9ed4c2550362594cae8beb08312b73
+      size: 50555
+  classical_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name classical_MLModel
+    deps:
+    - path: nodes/classical/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 59f02c5348ec5c3848f89bc50192072a
+      size: 48
+    - path: nodes/classical/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 9b3a7c5497c8a9b48616bffe8992e8e9
+      size: 13482
+    - path: nodes/classical/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 16034e26e826980dcfa1c11c008c84de
+      size: 49966
+    - path: nodes/classical/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: 7bc67738fbe026a93153a6fe655a1e8a
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: 9ab7dba592092c86996a2b2878a7ec04
+      size: 1343
+    - path: nodes/classical/ConfigurationSelection_1/selection.png
+      hash: md5
+      md5: 5d9ed4c2550362594cae8beb08312b73
+      size: 50555
+    params:
+      params.yaml:
+        classical_MLModel:
+          jax_enable_x64: true
+          use_energy: true
+          use_forces: true
+          use_stresses: false
+      config/initial_model.yaml:
+        data:
+          batch_size: 8
+          scale_method: per_element_force_rms_scale
+          shift_method: per_element_regression_shift
+          shift_options:
+            energy_regularisation: 1.0
+          valid_batch_size: 100
+        loss:
+        - name: energy
+        - name: forces
+          weight: 4.0
+        - name: stress
+          weight: 0.2
+        metrics:
+        - name: energy
+          reductions:
+          - mae
+        - name: forces
+          reductions:
+          - mae
+        - name: stress
+          reductions:
+          - mae
+        model:
+          n_basis: 7
+          n_radial: 5
+          nn:
+          - 512
+          - 512
+          r_max: 5.5
+          r_min: 0.7
+          b_init: zeros
+          emb_init: uniform
+          calc_stress: true
+          use_zbl: true
+          descriptor_dtype: fp32
+          readout_dtype: fp32
+          scale_shift_dtype: fp32
+        n_epochs: 500
+        n_models: 2
+        optimizer:
+          opt_name: adam
+          emb_lr: 0.01
+          nn_lr: 0.005
+          scale_lr: 0.001
+          shift_lr: 0.05
+          zbl_lr: 0.001
+        seed: 1
+    outs:
+    - path: nodes/classical/MLModel/apax_model
+      hash: md5
+      md5: 059b13f99ad96868b58ed034c157b92a.dir
+      size: 84500135
+      nfiles: 5
+    - path: nodes/classical/MLModel/log.csv
+      hash: md5
+      md5: ba4f66f88e0da88369ea83e7296880a7
+      size: 88283
+    - path: nodes/classical/MLModel/metrics.json
+      hash: md5
+      md5: 6840152d7a2644b9a454aea3773a5521
+      size: 387
+    - path: nodes/classical/MLModel/node-meta.json
+      hash: md5
+      md5: c6aee5160d37895bb9d7c6c9702261b6
+      size: 48
+    - path: nodes/classical/MLModel/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/classical/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: deae4c1cdc1253d7c14c0fe386aae298
+      size: 31885950
+    - path: nodes/classical/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 8ed7ac53707fc52a4929cd12770b4b16
+      size: 3188600
+  classical_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name classical_Prediction
+    deps:
+    - path: nodes/classical/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: 7bc67738fbe026a93153a6fe655a1e8a
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: 9ab7dba592092c86996a2b2878a7ec04
+      size: 1343
+    - path: nodes/classical/ConfigurationSelection_1/selection.png
+      hash: md5
+      md5: 5d9ed4c2550362594cae8beb08312b73
+      size: 50555
+    - path: nodes/classical/MLModel/apax_model
+      hash: md5
+      md5: 059b13f99ad96868b58ed034c157b92a.dir
+      size: 84500135
+      nfiles: 5
+    - path: nodes/classical/MLModel/log.csv
+      hash: md5
+      md5: ba4f66f88e0da88369ea83e7296880a7
+      size: 88283
+    - path: nodes/classical/MLModel/metrics.json
+      hash: md5
+      md5: 6840152d7a2644b9a454aea3773a5521
+      size: 387
+    - path: nodes/classical/MLModel/node-meta.json
+      hash: md5
+      md5: c6aee5160d37895bb9d7c6c9702261b6
+      size: 48
+    - path: nodes/classical/MLModel/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/classical/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: deae4c1cdc1253d7c14c0fe386aae298
+      size: 31885950
+    - path: nodes/classical/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 8ed7ac53707fc52a4929cd12770b4b16
+      size: 3188600
+    outs:
+    - path: nodes/classical/Prediction/atoms.h5
+      hash: md5
+      md5: ecd556f737e77652a54377c96842bc3e
+      size: 22396558
+    - path: nodes/classical/Prediction/node-meta.json
+      hash: md5
+      md5: fd87eee19668f44dc48177e56d065893
+      size: 48
+  classical_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name classical_PredictionMetrics
+    deps:
+    - path: nodes/classical/Prediction/atoms.h5
+      hash: md5
+      md5: ecd556f737e77652a54377c96842bc3e
+      size: 22396558
+    - path: nodes/classical/Prediction/node-meta.json
+      hash: md5
+      md5: fd87eee19668f44dc48177e56d065893
+      size: 48
+    outs:
+    - path: nodes/classical/PredictionMetrics/deviat_stress.json
+      hash: md5
+      md5: c37eea26fc23135880412da9989faa12
+      size: 209
+    - path: nodes/classical/PredictionMetrics/energy.json
+      hash: md5
+      md5: d32e78b427be981f01e666a470400ba9
+      size: 195
+    - path: nodes/classical/PredictionMetrics/energy_df.csv
+      hash: md5
+      md5: f6d9fbbe947e28cb97a499cf55b08a43
+      size: 38406
+    - path: nodes/classical/PredictionMetrics/forces.json
+      hash: md5
+      md5: f0b9159f06bb76ae42e89b29972d557a
+      size: 189
+    - path: nodes/classical/PredictionMetrics/forces_df.csv
+      hash: md5
+      md5: 84c58b35388815d05c7a1de7520d1de8
+      size: 40781662
+    - path: nodes/classical/PredictionMetrics/hydro_stress.json
+      hash: md5
+      md5: 665dfcaf364c40b18994fafd2930d993
+      size: 205
+    - path: nodes/classical/PredictionMetrics/node-meta.json
+      hash: md5
+      md5: dc0b2a22789df1d519d7910ec71d3301
+      size: 48
+    - path: nodes/classical/PredictionMetrics/plots
+      hash: md5
+      md5: 53cc06cad1892d90daf5fb1825267936.dir
+      size: 393971
+      nfiles: 5
+    - path: nodes/classical/PredictionMetrics/stress.json
+      hash: md5
+      md5: d98fcea9d34e92fae61dd7535d4a5f25
+      size: 208
+    - path: nodes/classical/PredictionMetrics/stress_deviatoric_df.csv
+      hash: md5
+      md5: 7f5fd2ee9d6bb501e064b2e8e4213760
+      size: 382444
+    - path: nodes/classical/PredictionMetrics/stress_df.csv
+      hash: md5
+      md5: 1048bb6048b2c753016ab126b320056b
+      size: 374161
+    - path: nodes/classical/PredictionMetrics/stress_hydrostatic_df.csv
+      hash: md5
+      md5: abe1f7af0f07c720c6db7b674dc6195b
+      size: 42313
