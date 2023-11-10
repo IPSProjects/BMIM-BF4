@@ -1447,16 +1447,16 @@ stages:
       size: 1959318
     - path: nodes/ML0/ConfigurationSelection/node-meta.json
       hash: md5
-      md5: 01c0cdcb3a5297fb8f2a63c4ad43c8d4
+      md5: 7cf8d3bf2a8d9f39e9340a8e1dbf3ff9
       size: 48
     - path: nodes/ML0/ConfigurationSelection/selected_configurations.json
       hash: md5
-      md5: 7620fa997ac26d2e1a715ef94cf22488
-      size: 283
+      md5: 885bc07b8c25fb386516e563d901293b
+      size: 687
     - path: nodes/ML0/ConfigurationSelection/selection.png
       hash: md5
-      md5: 2a278f8a3a121c54ba42c8df5960ba09
-      size: 30524
+      md5: 57b942b9c3c6575d4a7f8703225c4472
+      size: 32259
     params:
       config/cp2k.yaml:
         force_eval:
@@ -1521,16 +1521,16 @@ stages:
     outs:
     - path: nodes/ML0/CP2KSinglePoint/atoms.h5
       hash: md5
-      md5: 6aa87b0fff0dd78314ce2bbccd4a6aaa
-      size: 528216
+      md5: 9ac963678adf4c911d72d66797d9dc74
+      size: 1252296
     - path: nodes/ML0/CP2KSinglePoint/cp2k
       hash: md5
-      md5: 90db53c70a38cdf305b21afdcc6abe85.dir
-      size: 13399739
+      md5: f42d94f1ca1fb525ef8a7be01d96f5af.dir
+      size: 15064155
       nfiles: 3
     - path: nodes/ML0/CP2KSinglePoint/node-meta.json
       hash: md5
-      md5: aec258218cb2ffe9bdc5604d65a10601
+      md5: da7dbcbb8d0fb4372cc5a3e00e906fde
       size: 48
   ML1_MLModel:
     cmd: zntrack run ipsuite.nodes.Apax --name ML1_MLModel

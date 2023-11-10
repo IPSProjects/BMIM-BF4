@@ -12,6 +12,6 @@ export IPSUITE_CP2K_SHELL="mpirun -n ${SLURM_NTASKS} cp2k_shell.psmp"
 
 module load compiler/gnu
 module load mpi/openmpi
-conda activate ips_apax
+conda activate ips_jax
 
 dvc repro
