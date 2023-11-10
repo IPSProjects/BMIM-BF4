@@ -7,6 +7,29 @@ plots:
     y_label: validation loss
 - nodes/ML0/ASEMD/metrics_dict.csv: {}
 stages:
+  ML0_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML0_ASEGeoOpt
+    deps:
+    - nodes/ML0/ASEMD/metrics_dict.csv
+    - nodes/ML0/ASEMD/model
+    - nodes/ML0/ASEMD/node-meta.json
+    - nodes/ML0/ASEMD/steps_before_stopping.json
+    - nodes/ML0/ASEMD/trajectory.h5
+    - nodes/classical/MLModel/apax_model
+    - nodes/classical/MLModel/log.csv
+    - nodes/classical/MLModel/metrics.json
+    - nodes/classical/MLModel/node-meta.json
+    - nodes/classical/MLModel/train.log
+    - nodes/classical/MLModel/train_atoms.extxyz
+    - nodes/classical/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/ML0/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML0/ASEGeoOpt/model_outs
+    - nodes/ML0/ASEGeoOpt/trajectory.h5
+    params:
+    - ML0_ASEGeoOpt
   ML0_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name ML0_ASEMD
     deps:
@@ -32,6 +55,35 @@ stages:
     - ML0_ASEMD
     - ML0_ASEMD+checker_list+0
     - ML0_ASEMD+thermostat
+  ML0_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML0_ConfigurationSelection
+    deps:
+    - nodes/ML0/ASEGeoOpt/model_outs
+    - nodes/ML0/ASEGeoOpt/node-meta.json
+    - nodes/ML0/ASEGeoOpt/trajectory.h5
+    - nodes/ML0/ASEMD/metrics_dict.csv
+    - nodes/ML0/ASEMD/model
+    - nodes/ML0/ASEMD/node-meta.json
+    - nodes/ML0/ASEMD/steps_before_stopping.json
+    - nodes/ML0/ASEMD/trajectory.h5
+    - nodes/classical/ConfigurationSelection/node-meta.json
+    - nodes/classical/ConfigurationSelection/selected_configurations.json
+    - nodes/classical/ConfigurationSelection/selection.png
+    - nodes/classical/MLModel/apax_model
+    - nodes/classical/MLModel/log.csv
+    - nodes/classical/MLModel/metrics.json
+    - nodes/classical/MLModel/node-meta.json
+    - nodes/classical/MLModel/train.log
+    - nodes/classical/MLModel/train_atoms.extxyz
+    - nodes/classical/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/ML0/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML0/ConfigurationSelection/selected_configurations.json
+    - nodes/ML0/ConfigurationSelection/selection.png
+    params:
+    - ML0_ConfigurationSelection
   classical_AddData:
     cmd: zntrack run ipsuite.nodes.AddData --name classical_AddData
     deps:
@@ -58,7 +110,7 @@ stages:
     - nodes/classical/CP2KSinglePoint/atoms.h5
     - nodes/classical/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   classical_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.RandomSelection --name classical_ConfigurationSelection
     deps:
@@ -123,7 +175,7 @@ stages:
     - nodes/classical/MLModel/val_atoms.extxyz
     params:
     - classical_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   classical_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name classical_Prediction
     deps:
@@ -167,3 +219,20 @@ stages:
     - nodes/classical/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/classical/PredictionMetrics/stress_df.csv
     - nodes/classical/PredictionMetrics/stress_hydrostatic_df.csv
+  ML0_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML0_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/ML0/ConfigurationSelection/node-meta.json
+    - nodes/ML0/ConfigurationSelection/selected_configurations.json
+    - nodes/ML0/ConfigurationSelection/selection.png
+    params:
+    - config/cp2k.yaml:
+    outs:
+    - nodes/ML0/CP2KSinglePoint/atoms.h5
+    - nodes/ML0/CP2KSinglePoint/cp2k
+    metrics:
+    - nodes/ML0/CP2KSinglePoint/node-meta.json:
+        cache: false
