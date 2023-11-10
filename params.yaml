@@ -39,6 +39,14 @@ ML0_ConfigurationSelection:
         name: ll_grad
     n_configurations: 50
     selection_method: max_dist
+ML0_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML0_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
 ML0_MLModel:
     jax_enable_x64: true
     use_energy: true
@@ -85,6 +93,19 @@ ML1_ConfigurationSelection:
         name: ll_grad
     n_configurations: 50
     selection_method: max_dist
+ML1_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML1_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML1_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 classical_AddData:
     lines_to_read: null
 classical_ConfigurationSelection:
@@ -93,10 +114,18 @@ classical_ConfigurationSelection:
 classical_ConfigurationSelection_1:
     n_configurations: 100
     seed: 1234
+classical_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
 classical_FilterOutlier:
     direction: both
     key: energy
     threshold: 3
+classical_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
 classical_MLModel:
     jax_enable_x64: true
     use_energy: true
