@@ -133,7 +133,7 @@ stages:
     - nodes/ML0/CP2KSinglePoint/atoms.h5
     - nodes/ML0/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML0_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.ThresholdSelection --name ML0_ConfigurationSelection
     deps:
@@ -169,7 +169,7 @@ stages:
     - nodes/ML0/MLModel/val_atoms.extxyz
     params:
     - ML0_MLModel
-    - config/initial_model_1.yaml: null
+    - config/initial_model_1.yaml:
   ML0_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name ML0_MLModel_1
     deps:
@@ -189,7 +189,7 @@ stages:
     - nodes/ML0/MLModel_1/val_atoms.extxyz
     params:
     - ML0_MLModel_1
-    - config/initial_model_2.yaml: null
+    - config/initial_model_2.yaml:
   ML0_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML0_Prediction
     deps:
@@ -282,7 +282,7 @@ stages:
     - nodes/ML1/CP2KSinglePoint/atoms.h5
     - nodes/ML1/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML1_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.ThresholdSelection --name ML1_ConfigurationSelection
     deps:
@@ -321,7 +321,7 @@ stages:
     - nodes/ML1/MLModel/val_atoms.extxyz
     params:
     - ML1_MLModel
-    - config/initial_model_1.yaml: null
+    - config/initial_model_1.yaml:
   ML1_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name ML1_MLModel_1
     deps:
@@ -344,7 +344,7 @@ stages:
     - nodes/ML1/MLModel_1/val_atoms.extxyz
     params:
     - ML1_MLModel_1
-    - config/initial_model_2.yaml: null
+    - config/initial_model_2.yaml:
   ML1_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML1_Prediction
     deps:
@@ -440,7 +440,7 @@ stages:
     - nodes/ML2/CP2KSinglePoint/atoms.h5
     - nodes/ML2/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML2_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.ThresholdSelection --name ML2_ConfigurationSelection
     deps:
@@ -482,7 +482,7 @@ stages:
     - nodes/ML2/MLModel/val_atoms.extxyz
     params:
     - ML2_MLModel
-    - config/initial_model_1.yaml: null
+    - config/initial_model_1.yaml:
   ML2_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name ML2_MLModel_1
     deps:
@@ -508,7 +508,7 @@ stages:
     - nodes/ML2/MLModel_1/val_atoms.extxyz
     params:
     - ML2_MLModel_1
-    - config/initial_model_2.yaml: null
+    - config/initial_model_2.yaml:
   ML2_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML2_Prediction
     deps:
@@ -604,7 +604,7 @@ stages:
     - nodes/ML3/CP2KSinglePoint/atoms.h5
     - nodes/ML3/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML3_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.ThresholdSelection --name ML3_ConfigurationSelection
     deps:
@@ -649,7 +649,7 @@ stages:
     - nodes/ML3/MLModel/val_atoms.extxyz
     params:
     - ML3_MLModel
-    - config/initial_model_1.yaml: null
+    - config/initial_model_1.yaml:
   ML3_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name ML3_MLModel_1
     deps:
@@ -678,7 +678,7 @@ stages:
     - nodes/ML3/MLModel_1/val_atoms.extxyz
     params:
     - ML3_MLModel_1
-    - config/initial_model_2.yaml: null
+    - config/initial_model_2.yaml:
   ML3_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML3_Prediction
     deps:
@@ -774,7 +774,7 @@ stages:
     - nodes/ML4/CP2KSinglePoint/atoms.h5
     - nodes/ML4/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML4_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.ThresholdSelection --name ML4_ConfigurationSelection
     deps:
@@ -822,7 +822,7 @@ stages:
     - nodes/ML4/MLModel/val_atoms.extxyz
     params:
     - ML4_MLModel
-    - config/initial_model_1.yaml: null
+    - config/initial_model_1.yaml:
   ML4_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name ML4_MLModel_1
     deps:
@@ -854,7 +854,7 @@ stages:
     - nodes/ML4/MLModel_1/val_atoms.extxyz
     params:
     - ML4_MLModel_1
-    - config/initial_model_2.yaml: null
+    - config/initial_model_2.yaml:
   ML4_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML4_Prediction
     deps:
@@ -984,7 +984,7 @@ stages:
     - nodes/ML5/MLModel/val_atoms.extxyz
     params:
     - ML5_MLModel
-    - config/initial_model_1.yaml: null
+    - config/initial_model_1.yaml:
   ML5_MLModel_1:
     cmd: zntrack run ipsuite.nodes.Apax --name ML5_MLModel_1
     deps:
@@ -1019,7 +1019,7 @@ stages:
     - nodes/ML5/MLModel_1/val_atoms.extxyz
     params:
     - ML5_MLModel_1
-    - config/initial_model_2.yaml: null
+    - config/initial_model_2.yaml:
   ML5_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML5_Prediction
     deps:
@@ -1083,7 +1083,7 @@ stages:
     - nodes/classical/CP2KSinglePoint/atoms.h5
     - nodes/classical/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   classical_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.RandomSelection --name classical_ConfigurationSelection
     deps:
@@ -1098,3 +1098,20 @@ stages:
     - nodes/classical/ConfigurationSelection/selection.png
     params:
     - classical_ConfigurationSelection
+  ML5_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML5_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/ML5/ConfigurationSelection/node-meta.json
+    - nodes/ML5/ConfigurationSelection/selected_configurations.json
+    - nodes/ML5/ConfigurationSelection/selection.png
+    params:
+    - config/cp2k.yaml:
+    outs:
+    - nodes/ML5/CP2KSinglePoint/atoms.h5
+    - nodes/ML5/CP2KSinglePoint/cp2k
+    metrics:
+    - nodes/ML5/CP2KSinglePoint/node-meta.json:
+        cache: false
