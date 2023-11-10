@@ -44,6 +44,47 @@ ML0_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+ML1_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.01
+ML1_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 50000
+    use_momenta: false
+    wrap: false
+ML1_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML1_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+ML1_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 50
+    selection_method: max_dist
 classical_AddData:
     lines_to_read: null
 classical_ConfigurationSelection:

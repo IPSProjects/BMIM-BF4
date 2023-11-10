@@ -85,4 +85,40 @@ with project.group("ML0"):
     prediction = ips.analysis.Prediction(data=test_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
+
+with project.group("ML1"):
+    md = ips.calculators.ASEMD(
+        data=geo_opt.atoms,
+        data_id=-1,
+        model=model,
+        thermostat=thermostat,
+        checker_list=[uncertainty_check],
+        steps=50000,
+        sampling_rate=10,
+    )
+
+    geo_opt = ips.calculators.ASEGeoOpt(
+        model=model,
+        data=md.atoms,
+        data_id=-1,
+        optimizer="FIRE",
+        run_kwargs={"fmax": 0.01},
+    )
+
+    kernel_selection = ips.models.apax.BatchKernelSelection(
+        data=md.atoms + geo_opt.atoms,
+        train_data=train_data,
+        models=model,
+        n_configurations=50,
+        processing_batch_size=4,
+    )
+
+    cp2k = ips.calculators.CP2KSinglePoint(
+        data=kernel_selection.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+    )
+
+    train_data += cp2k.atoms
+
 project.build()
