@@ -39,6 +39,11 @@ ML0_ConfigurationSelection:
         name: ll_grad
     n_configurations: 50
     selection_method: max_dist
+ML0_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 classical_AddData:
     lines_to_read: null
 classical_ConfigurationSelection:
