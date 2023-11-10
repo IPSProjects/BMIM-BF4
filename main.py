@@ -235,6 +235,41 @@ with project.group("ML4"):
 
     train_data += cp2k.atoms
 
+
+with project.group("ML5"):
+    model1 = ips.models.Apax(
+        data=train_data,
+        validation_data=test_data,
+        config="config/initial_model_1.yaml",
+    )
+    model2 = ips.models.Apax(
+        data=train_data,
+        validation_data=test_data,
+        config="config/initial_model_2.yaml",
+    )
+    model = ips.models.ApaxEnsemble(models=[model1, model2])
+    predictions = ips.analysis.Prediction(model=model, data=test_data)
+    metrics = ips.analysis.PredictionMetrics(data=predictions)
+
+    md = ips.calculators.ASEMD(
+        data=md.atoms,
+        data_id=-1,
+        model=model,
+        thermostat=thermostat,
+        checker_list=[uncertainty_check],
+        steps=50000,
+        sampling_rate=1,
+    )
+
+    selection = ips.configuration_selection.ThresholdSelection(
+        data=md.atoms,
+        key="forces_uncertainty",
+        n_configurations=50,
+        dim_reduction="max",
+        reduction_axis=(1, 2),
+        min_distance=50,
+    )
+
 project.build()
 
 # cp2k = ips.calculators.CP2KSinglePoint(

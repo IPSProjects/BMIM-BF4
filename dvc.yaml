@@ -64,6 +64,18 @@ plots:
     y: val_loss
     y_label: validation loss
 - nodes/ML4/ASEMD/metrics_dict.csv: {}
+- nodes/ML5/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/ML5/MLModel_1/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
 stages:
   ML0_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name ML0_ASEMD
@@ -745,6 +757,23 @@ stages:
     metrics:
     - nodes/ML4/ApaxEnsemble/node-meta.json:
         cache: false
+  ML4_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML4_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/ML4/ConfigurationSelection/node-meta.json
+    - nodes/ML4/ConfigurationSelection/selected_configurations.json
+    - nodes/ML4/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/ML4/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML4/CP2KSinglePoint/atoms.h5
+    - nodes/ML4/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
   ML4_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.ThresholdSelection --name ML4_ConfigurationSelection
     deps:
@@ -862,6 +891,76 @@ stages:
     - nodes/ML4/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/ML4/PredictionMetrics/stress_df.csv
     - nodes/ML4/PredictionMetrics/stress_hydrostatic_df.csv
+  ML5_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML5_MLModel
+    deps:
+    - nodes/ML0/CP2KSinglePoint/atoms.h5
+    - nodes/ML0/CP2KSinglePoint/cp2k
+    - nodes/ML0/CP2KSinglePoint/node-meta.json
+    - nodes/ML1/CP2KSinglePoint/atoms.h5
+    - nodes/ML1/CP2KSinglePoint/cp2k
+    - nodes/ML1/CP2KSinglePoint/node-meta.json
+    - nodes/ML2/CP2KSinglePoint/atoms.h5
+    - nodes/ML2/CP2KSinglePoint/cp2k
+    - nodes/ML2/CP2KSinglePoint/node-meta.json
+    - nodes/ML3/CP2KSinglePoint/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/cp2k
+    - nodes/ML3/CP2KSinglePoint/node-meta.json
+    - nodes/ML4/CP2KSinglePoint/atoms.h5
+    - nodes/ML4/CP2KSinglePoint/cp2k
+    - nodes/ML4/CP2KSinglePoint/node-meta.json
+    - nodes/classical/ConfigurationSelection/node-meta.json
+    - nodes/classical/ConfigurationSelection/selected_configurations.json
+    - nodes/classical/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/ML5/MLModel/metrics.json:
+        cache: false
+    - nodes/ML5/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML5/MLModel/apax_model
+    - nodes/ML5/MLModel/log.csv
+    - nodes/ML5/MLModel/train.log
+    - nodes/ML5/MLModel/train_atoms.extxyz
+    - nodes/ML5/MLModel/val_atoms.extxyz
+    params:
+    - ML5_MLModel
+    - config/initial_model_1.yaml:
+  ML5_MLModel_1:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML5_MLModel_1
+    deps:
+    - nodes/ML0/CP2KSinglePoint/atoms.h5
+    - nodes/ML0/CP2KSinglePoint/cp2k
+    - nodes/ML0/CP2KSinglePoint/node-meta.json
+    - nodes/ML1/CP2KSinglePoint/atoms.h5
+    - nodes/ML1/CP2KSinglePoint/cp2k
+    - nodes/ML1/CP2KSinglePoint/node-meta.json
+    - nodes/ML2/CP2KSinglePoint/atoms.h5
+    - nodes/ML2/CP2KSinglePoint/cp2k
+    - nodes/ML2/CP2KSinglePoint/node-meta.json
+    - nodes/ML3/CP2KSinglePoint/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/cp2k
+    - nodes/ML3/CP2KSinglePoint/node-meta.json
+    - nodes/ML4/CP2KSinglePoint/atoms.h5
+    - nodes/ML4/CP2KSinglePoint/cp2k
+    - nodes/ML4/CP2KSinglePoint/node-meta.json
+    - nodes/classical/ConfigurationSelection/node-meta.json
+    - nodes/classical/ConfigurationSelection/selected_configurations.json
+    - nodes/classical/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/ML5/MLModel_1/metrics.json:
+        cache: false
+    - nodes/ML5/MLModel_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML5/MLModel_1/apax_model
+    - nodes/ML5/MLModel_1/log.csv
+    - nodes/ML5/MLModel_1/train.log
+    - nodes/ML5/MLModel_1/train_atoms.extxyz
+    - nodes/ML5/MLModel_1/val_atoms.extxyz
+    params:
+    - ML5_MLModel_1
+    - config/initial_model_2.yaml:
   classical_AddData:
     cmd: zntrack run ipsuite.nodes.AddData --name classical_AddData
     deps:
@@ -903,20 +1002,98 @@ stages:
     - nodes/classical/ConfigurationSelection/selection.png
     params:
     - classical_ConfigurationSelection
-  ML4_CP2KSinglePoint:
-    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML4_CP2KSinglePoint
+  ML5_ApaxEnsemble:
+    cmd: zntrack run ipsuite.nodes.ApaxEnsemble --name ML5_ApaxEnsemble
     deps:
-    - GTH_BASIS_SETS
-    - GTH_POTENTIALS
-    - dftd3.dat
-    - nodes/ML4/ConfigurationSelection/node-meta.json
-    - nodes/ML4/ConfigurationSelection/selected_configurations.json
-    - nodes/ML4/ConfigurationSelection/selection.png
-    params:
-    - config/cp2k.yaml:
-    outs:
-    - nodes/ML4/CP2KSinglePoint/atoms.h5
-    - nodes/ML4/CP2KSinglePoint/cp2k
+    - nodes/ML5/MLModel/apax_model
+    - nodes/ML5/MLModel/log.csv
+    - nodes/ML5/MLModel/metrics.json
+    - nodes/ML5/MLModel/node-meta.json
+    - nodes/ML5/MLModel/train.log
+    - nodes/ML5/MLModel/train_atoms.extxyz
+    - nodes/ML5/MLModel/val_atoms.extxyz
+    - nodes/ML5/MLModel_1/apax_model
+    - nodes/ML5/MLModel_1/log.csv
+    - nodes/ML5/MLModel_1/metrics.json
+    - nodes/ML5/MLModel_1/node-meta.json
+    - nodes/ML5/MLModel_1/train.log
+    - nodes/ML5/MLModel_1/train_atoms.extxyz
+    - nodes/ML5/MLModel_1/val_atoms.extxyz
     metrics:
-    - nodes/ML4/CP2KSinglePoint/node-meta.json:
+    - nodes/ML5/ApaxEnsemble/node-meta.json:
+        cache: false
+  ML5_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML5_Prediction
+    deps:
+    - nodes/ML5/ApaxEnsemble/node-meta.json
+    - nodes/classical/ConfigurationSelection/node-meta.json
+    - nodes/classical/ConfigurationSelection/selected_configurations.json
+    - nodes/classical/ConfigurationSelection/selection.png
+    outs:
+    - nodes/ML5/Prediction/atoms.h5
+    metrics:
+    - nodes/ML5/Prediction/node-meta.json:
+        cache: false
+  ML5_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML5_PredictionMetrics
+    deps:
+    - nodes/ML5/Prediction/atoms.h5
+    - nodes/ML5/Prediction/node-meta.json
+    outs:
+    - nodes/ML5/PredictionMetrics/energy_df.csv
+    - nodes/ML5/PredictionMetrics/forces_df.csv
+    - nodes/ML5/PredictionMetrics/plots
+    - nodes/ML5/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/ML5/PredictionMetrics/stress_df.csv
+    - nodes/ML5/PredictionMetrics/stress_hydrostatic_df.csv
+    metrics:
+    - nodes/ML5/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/ML5/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/ML5/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/ML5/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/ML5/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/ML5/PredictionMetrics/stress.json:
+        cache: false
+  ML5_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML5_ASEMD
+    deps:
+    - nodes/ML4/ASEMD/metrics_dict.csv
+    - nodes/ML4/ASEMD/model
+    - nodes/ML4/ASEMD/node-meta.json
+    - nodes/ML4/ASEMD/steps_before_stopping.json
+    - nodes/ML4/ASEMD/trajectory.h5
+    - nodes/ML5/ApaxEnsemble/node-meta.json
+    params:
+    - ML5_ASEMD
+    - ML5_ASEMD+checker_list+0
+    - ML5_ASEMD+thermostat
+    outs:
+    - nodes/ML5/ASEMD/metrics_dict.csv
+    - nodes/ML5/ASEMD/model
+    - nodes/ML5/ASEMD/trajectory.h5
+    metrics:
+    - nodes/ML5/ASEMD/node-meta.json:
+        cache: false
+    - nodes/ML5/ASEMD/steps_before_stopping.json:
+        cache: false
+  ML5_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.ThresholdSelection --name ML5_ConfigurationSelection
+    deps:
+    - nodes/ML5/ASEMD/metrics_dict.csv
+    - nodes/ML5/ASEMD/model
+    - nodes/ML5/ASEMD/node-meta.json
+    - nodes/ML5/ASEMD/steps_before_stopping.json
+    - nodes/ML5/ASEMD/trajectory.h5
+    params:
+    - ML5_ConfigurationSelection
+    outs:
+    - nodes/ML5/ConfigurationSelection/selected_configurations.json
+    - nodes/ML5/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/ML5/ConfigurationSelection/node-meta.json:
         cache: false
