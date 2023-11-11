@@ -140,8 +140,8 @@ with project.group("ML1"):
 # Starting Ramps
 
 temperature_oszillator = ips.calculators.TemperatureOscillatingRampModifier(
-    end_temperature=500, # decomp ~ 290
-    start_temperature=230, # melting -75
+    end_temperature=500,  # decomp ~ 290
+    start_temperature=230,  # melting -75
     num_oscillations=10,
     temperature_amplitude=150,
 )
@@ -261,6 +261,28 @@ with project.group("ML3"):
         optimizer="BFGS",
         run_kwargs={"fmax": 0.1},
     )
-    
+
+    kernel_selection = ips.models.apax.BatchKernelSelection(
+        data=geo_opt.atoms,
+        train_data=train_data,
+        models=model,
+        n_configurations=10,
+        processing_batch_size=4,
+    )
+
+    train_data += kernel_selection.atoms
+
+    ips.analysis.EnergyHistogram(data=train_data, bins=100)
+    ips.analysis.ForcesHistogram(data=train_data)
+
+    model = ips.models.Apax(
+        data=train_data,
+        validation_data=validation_data.atoms,
+        config="config/initial_model.yaml",
+    )
+
+    prediction = ips.analysis.Prediction(data=test_data, model=model)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
+
 
 project.build()
