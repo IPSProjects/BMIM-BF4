@@ -169,6 +169,25 @@ ML2_ConfigurationSelection:
         name: ll_grad
     n_configurations: 50
     selection_method: max_dist
+ML2_ConfigurationSelection_1:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 10
+    selection_method: max_dist
+ML2_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML2_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML2_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 classical_AddData:
     lines_to_read: null
 classical_ConfigurationSelection:

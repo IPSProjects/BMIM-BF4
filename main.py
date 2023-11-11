@@ -185,6 +185,8 @@ with project.group("ML2"):
         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
     )
 
+    train_data += cp2k.atoms
+
     geo_opt = ips.calculators.ASEGeoOpt(
         model=cp2k,
         data=md.atoms,
@@ -192,6 +194,28 @@ with project.group("ML2"):
         optimizer="BFGS",
         run_kwargs={"fmax": 0.1},
     )
+
+    kernel_selection = ips.models.apax.BatchKernelSelection(
+        data=geo_opt.atoms,
+        train_data=train_data,
+        models=model,
+        n_configurations=10,
+        processing_batch_size=4,
+    )
+
+    train_data += kernel_selection.atoms
+
+    ips.analysis.EnergyHistogram(data=train_data, bins=100)
+    ips.analysis.ForcesHistogram(data=train_data)
+
+    model = ips.models.Apax(
+        data=train_data,
+        validation_data=validation_data.atoms,
+        config="config/initial_model.yaml",
+    )
+
+    prediction = ips.analysis.Prediction(data=test_data, model=model)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
 
     
 
