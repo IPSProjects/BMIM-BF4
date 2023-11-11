@@ -43,6 +43,7 @@ plots:
     y_label: validation loss
 - nodes/ML3/EnergyHistogram/labels_df.csv: {}
 - nodes/ML3/ForcesHistogram/labels_df.csv: {}
+- nodes/ML4/ASEMD/metrics_dict.csv: {}
 stages:
   ML0_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML0_ASEGeoOpt
@@ -1067,6 +1068,104 @@ stages:
     - nodes/ML3/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/ML3/PredictionMetrics/stress_df.csv
     - nodes/ML3/PredictionMetrics/stress_hydrostatic_df.csv
+  ML4_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML4_ASEGeoOpt
+    deps:
+    - nodes/ML3/MLModel/apax_model
+    - nodes/ML3/MLModel/log.csv
+    - nodes/ML3/MLModel/metrics.json
+    - nodes/ML3/MLModel/node-meta.json
+    - nodes/ML3/MLModel/train.log
+    - nodes/ML3/MLModel/train_atoms.extxyz
+    - nodes/ML3/MLModel/val_atoms.extxyz
+    - nodes/ML4/ASEMD/metrics_dict.csv
+    - nodes/ML4/ASEMD/model
+    - nodes/ML4/ASEMD/node-meta.json
+    - nodes/ML4/ASEMD/steps_before_stopping.json
+    - nodes/ML4/ASEMD/trajectory.h5
+    metrics:
+    - nodes/ML4/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML4/ASEGeoOpt/model_outs
+    - nodes/ML4/ASEGeoOpt/trajectory.h5
+    params:
+    - ML4_ASEGeoOpt
+  ML4_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML4_ASEMD
+    deps:
+    - nodes/ML3/ASEGeoOpt_1/model_outs
+    - nodes/ML3/ASEGeoOpt_1/node-meta.json
+    - nodes/ML3/ASEGeoOpt_1/trajectory.h5
+    - nodes/ML3/MLModel/apax_model
+    - nodes/ML3/MLModel/log.csv
+    - nodes/ML3/MLModel/metrics.json
+    - nodes/ML3/MLModel/node-meta.json
+    - nodes/ML3/MLModel/train.log
+    - nodes/ML3/MLModel/train_atoms.extxyz
+    - nodes/ML3/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/ML4/ASEMD/node-meta.json:
+        cache: false
+    - nodes/ML4/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML4/ASEMD/metrics_dict.csv
+    - nodes/ML4/ASEMD/model
+    - nodes/ML4/ASEMD/trajectory.h5
+    params:
+    - ML4_ASEMD
+    - ML4_ASEMD+checker_list+0
+    - ML4_ASEMD+modifier+0
+    - ML4_ASEMD+modifier+1
+    - ML4_ASEMD+thermostat
+  ML4_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML4_ConfigurationSelection
+    deps:
+    - nodes/ML0/CP2KSinglePoint/atoms.h5
+    - nodes/ML0/CP2KSinglePoint/cp2k
+    - nodes/ML0/CP2KSinglePoint/node-meta.json
+    - nodes/ML1/CP2KSinglePoint/atoms.h5
+    - nodes/ML1/CP2KSinglePoint/cp2k
+    - nodes/ML1/CP2KSinglePoint/node-meta.json
+    - nodes/ML2/CP2KSinglePoint/atoms.h5
+    - nodes/ML2/CP2KSinglePoint/cp2k
+    - nodes/ML2/CP2KSinglePoint/node-meta.json
+    - nodes/ML2/ConfigurationSelection_1/node-meta.json
+    - nodes/ML2/ConfigurationSelection_1/selected_configurations.json
+    - nodes/ML2/ConfigurationSelection_1/selection.png
+    - nodes/ML3/CP2KSinglePoint/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/cp2k
+    - nodes/ML3/CP2KSinglePoint/node-meta.json
+    - nodes/ML3/ConfigurationSelection_1/node-meta.json
+    - nodes/ML3/ConfigurationSelection_1/selected_configurations.json
+    - nodes/ML3/ConfigurationSelection_1/selection.png
+    - nodes/ML3/MLModel/apax_model
+    - nodes/ML3/MLModel/log.csv
+    - nodes/ML3/MLModel/metrics.json
+    - nodes/ML3/MLModel/node-meta.json
+    - nodes/ML3/MLModel/train.log
+    - nodes/ML3/MLModel/train_atoms.extxyz
+    - nodes/ML3/MLModel/val_atoms.extxyz
+    - nodes/ML4/ASEGeoOpt/model_outs
+    - nodes/ML4/ASEGeoOpt/node-meta.json
+    - nodes/ML4/ASEGeoOpt/trajectory.h5
+    - nodes/ML4/ASEMD/metrics_dict.csv
+    - nodes/ML4/ASEMD/model
+    - nodes/ML4/ASEMD/node-meta.json
+    - nodes/ML4/ASEMD/steps_before_stopping.json
+    - nodes/ML4/ASEMD/trajectory.h5
+    - nodes/classical/ConfigurationSelection/node-meta.json
+    - nodes/classical/ConfigurationSelection/selected_configurations.json
+    - nodes/classical/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/ML4/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML4/ConfigurationSelection/selected_configurations.json
+    - nodes/ML4/ConfigurationSelection/selection.png
+    params:
+    - ML4_ConfigurationSelection
   classical_AddData:
     cmd: zntrack run ipsuite.nodes.AddData --name classical_AddData
     deps:

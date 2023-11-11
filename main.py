@@ -284,5 +284,32 @@ with project.group("ML3"):
     prediction = ips.analysis.Prediction(data=test_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
+with project.group("ML4") as ml4:
+    md = ips.calculators.ASEMD(
+        data=geo_opt.atoms,
+        data_id=-1,
+        model=model,
+        thermostat=thermostat,
+        modifier=[temperature_oszillator, eq_box_oszillator],
+        checker_list=[uncertainty_check],
+        steps=50000,
+        sampling_rate=10,
+    )
 
-project.build()
+    geo_opt = ips.calculators.ASEGeoOpt(
+        model=model,
+        data=md.atoms,
+        data_id=-1,
+        optimizer="FIRE",
+        run_kwargs={"fmax": 0.01},
+    )
+
+    kernel_selection = ips.models.apax.BatchKernelSelection(
+        data=md.atoms + geo_opt.atoms,
+        train_data=train_data,
+        models=model,
+        n_configurations=50,
+        processing_batch_size=4,
+    )
+
+project.build(nodes=[ml4])
