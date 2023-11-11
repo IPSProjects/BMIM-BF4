@@ -281,6 +281,17 @@ ML4_ASEGeoOpt:
     - 1
     run_kwargs:
         fmax: 0.01
+ML4_ASEGeoOpt_1:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: BFGS
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.1
 ML4_ASEMD:
     data_id: -1
     dump_rate: 1000

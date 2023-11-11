@@ -312,4 +312,20 @@ with project.group("ML4") as ml4:
         processing_batch_size=4,
     )
 
+    cp2k = ips.calculators.CP2KSinglePoint(
+        data=kernel_selection.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+    )
+
+    train_data += cp2k.atoms
+
+    geo_opt = ips.calculators.ASEGeoOpt(
+        model=cp2k,
+        data=md.atoms,
+        data_id=-1,
+        optimizer="BFGS",
+        run_kwargs={"fmax": 0.1},
+    )
+
 project.build(nodes=[ml4])
