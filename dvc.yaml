@@ -34,6 +34,7 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
+- nodes/ML3/ASEMD/metrics_dict.csv: {}
 stages:
   ML0_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML0_ASEGeoOpt
@@ -696,6 +697,141 @@ stages:
     params:
     - ML2_MLModel
     - config/initial_model.yaml:
+  ML2_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML2_Prediction
+    deps:
+    - nodes/ML2/MLModel/apax_model
+    - nodes/ML2/MLModel/log.csv
+    - nodes/ML2/MLModel/metrics.json
+    - nodes/ML2/MLModel/node-meta.json
+    - nodes/ML2/MLModel/train.log
+    - nodes/ML2/MLModel/train_atoms.extxyz
+    - nodes/ML2/MLModel/val_atoms.extxyz
+    - nodes/classical/ConfigurationSelection_1/node-meta.json
+    - nodes/classical/ConfigurationSelection_1/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_1/selection.png
+    metrics:
+    - nodes/ML2/Prediction/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML2/Prediction/atoms.h5
+  ML2_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML2_PredictionMetrics
+    deps:
+    - nodes/ML2/Prediction/atoms.h5
+    - nodes/ML2/Prediction/node-meta.json
+    metrics:
+    - nodes/ML2/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/ML2/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/ML2/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/ML2/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/ML2/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/ML2/PredictionMetrics/stress.json:
+        cache: false
+    outs:
+    - nodes/ML2/PredictionMetrics/energy_df.csv
+    - nodes/ML2/PredictionMetrics/forces_df.csv
+    - nodes/ML2/PredictionMetrics/plots
+    - nodes/ML2/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/ML2/PredictionMetrics/stress_df.csv
+    - nodes/ML2/PredictionMetrics/stress_hydrostatic_df.csv
+  ML3_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML3_ASEGeoOpt
+    deps:
+    - nodes/ML2/MLModel/apax_model
+    - nodes/ML2/MLModel/log.csv
+    - nodes/ML2/MLModel/metrics.json
+    - nodes/ML2/MLModel/node-meta.json
+    - nodes/ML2/MLModel/train.log
+    - nodes/ML2/MLModel/train_atoms.extxyz
+    - nodes/ML2/MLModel/val_atoms.extxyz
+    - nodes/ML3/ASEMD/metrics_dict.csv
+    - nodes/ML3/ASEMD/model
+    - nodes/ML3/ASEMD/node-meta.json
+    - nodes/ML3/ASEMD/steps_before_stopping.json
+    - nodes/ML3/ASEMD/trajectory.h5
+    metrics:
+    - nodes/ML3/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML3/ASEGeoOpt/model_outs
+    - nodes/ML3/ASEGeoOpt/trajectory.h5
+    params:
+    - ML3_ASEGeoOpt
+  ML3_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML3_ASEMD
+    deps:
+    - nodes/ML2/ASEGeoOpt_1/model_outs
+    - nodes/ML2/ASEGeoOpt_1/node-meta.json
+    - nodes/ML2/ASEGeoOpt_1/trajectory.h5
+    - nodes/ML2/MLModel/apax_model
+    - nodes/ML2/MLModel/log.csv
+    - nodes/ML2/MLModel/metrics.json
+    - nodes/ML2/MLModel/node-meta.json
+    - nodes/ML2/MLModel/train.log
+    - nodes/ML2/MLModel/train_atoms.extxyz
+    - nodes/ML2/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/ML3/ASEMD/node-meta.json:
+        cache: false
+    - nodes/ML3/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML3/ASEMD/metrics_dict.csv
+    - nodes/ML3/ASEMD/model
+    - nodes/ML3/ASEMD/trajectory.h5
+    params:
+    - ML3_ASEMD
+    - ML3_ASEMD+checker_list+0
+    - ML3_ASEMD+modifier+0
+    - ML3_ASEMD+modifier+1
+    - ML3_ASEMD+thermostat
+  ML3_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML3_ConfigurationSelection
+    deps:
+    - nodes/ML0/CP2KSinglePoint/atoms.h5
+    - nodes/ML0/CP2KSinglePoint/cp2k
+    - nodes/ML0/CP2KSinglePoint/node-meta.json
+    - nodes/ML1/CP2KSinglePoint/atoms.h5
+    - nodes/ML1/CP2KSinglePoint/cp2k
+    - nodes/ML1/CP2KSinglePoint/node-meta.json
+    - nodes/ML2/CP2KSinglePoint/atoms.h5
+    - nodes/ML2/CP2KSinglePoint/cp2k
+    - nodes/ML2/CP2KSinglePoint/node-meta.json
+    - nodes/ML2/ConfigurationSelection_1/node-meta.json
+    - nodes/ML2/ConfigurationSelection_1/selected_configurations.json
+    - nodes/ML2/ConfigurationSelection_1/selection.png
+    - nodes/ML2/MLModel/apax_model
+    - nodes/ML2/MLModel/log.csv
+    - nodes/ML2/MLModel/metrics.json
+    - nodes/ML2/MLModel/node-meta.json
+    - nodes/ML2/MLModel/train.log
+    - nodes/ML2/MLModel/train_atoms.extxyz
+    - nodes/ML2/MLModel/val_atoms.extxyz
+    - nodes/ML3/ASEGeoOpt/model_outs
+    - nodes/ML3/ASEGeoOpt/node-meta.json
+    - nodes/ML3/ASEGeoOpt/trajectory.h5
+    - nodes/ML3/ASEMD/metrics_dict.csv
+    - nodes/ML3/ASEMD/model
+    - nodes/ML3/ASEMD/node-meta.json
+    - nodes/ML3/ASEMD/steps_before_stopping.json
+    - nodes/ML3/ASEMD/trajectory.h5
+    - nodes/classical/ConfigurationSelection/node-meta.json
+    - nodes/classical/ConfigurationSelection/selected_configurations.json
+    - nodes/classical/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/ML3/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML3/ConfigurationSelection/selected_configurations.json
+    - nodes/ML3/ConfigurationSelection/selection.png
+    params:
+    - ML3_ConfigurationSelection
   classical_AddData:
     cmd: zntrack run ipsuite.nodes.AddData --name classical_AddData
     deps:
@@ -863,46 +999,39 @@ stages:
     - nodes/classical/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/classical/PredictionMetrics/stress_df.csv
     - nodes/classical/PredictionMetrics/stress_hydrostatic_df.csv
-  ML2_Prediction:
-    cmd: zntrack run ipsuite.nodes.Prediction --name ML2_Prediction
+  ML3_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML3_CP2KSinglePoint
     deps:
-    - nodes/ML2/MLModel/apax_model
-    - nodes/ML2/MLModel/log.csv
-    - nodes/ML2/MLModel/metrics.json
-    - nodes/ML2/MLModel/node-meta.json
-    - nodes/ML2/MLModel/train.log
-    - nodes/ML2/MLModel/train_atoms.extxyz
-    - nodes/ML2/MLModel/val_atoms.extxyz
-    - nodes/classical/ConfigurationSelection_1/node-meta.json
-    - nodes/classical/ConfigurationSelection_1/selected_configurations.json
-    - nodes/classical/ConfigurationSelection_1/selection.png
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/ML3/ConfigurationSelection/node-meta.json
+    - nodes/ML3/ConfigurationSelection/selected_configurations.json
+    - nodes/ML3/ConfigurationSelection/selection.png
+    params:
+    - config/cp2k.yaml:
     outs:
-    - nodes/ML2/Prediction/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/cp2k
     metrics:
-    - nodes/ML2/Prediction/node-meta.json:
+    - nodes/ML3/CP2KSinglePoint/node-meta.json:
         cache: false
-  ML2_PredictionMetrics:
-    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML2_PredictionMetrics
+  ML3_ASEGeoOpt_1:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML3_ASEGeoOpt_1
     deps:
-    - nodes/ML2/Prediction/atoms.h5
-    - nodes/ML2/Prediction/node-meta.json
+    - nodes/ML3/ASEMD/metrics_dict.csv
+    - nodes/ML3/ASEMD/model
+    - nodes/ML3/ASEMD/node-meta.json
+    - nodes/ML3/ASEMD/steps_before_stopping.json
+    - nodes/ML3/ASEMD/trajectory.h5
+    - nodes/ML3/CP2KSinglePoint/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/cp2k
+    - nodes/ML3/CP2KSinglePoint/node-meta.json
+    params:
+    - ML3_ASEGeoOpt_1
     outs:
-    - nodes/ML2/PredictionMetrics/energy_df.csv
-    - nodes/ML2/PredictionMetrics/forces_df.csv
-    - nodes/ML2/PredictionMetrics/plots
-    - nodes/ML2/PredictionMetrics/stress_deviatoric_df.csv
-    - nodes/ML2/PredictionMetrics/stress_df.csv
-    - nodes/ML2/PredictionMetrics/stress_hydrostatic_df.csv
+    - nodes/ML3/ASEGeoOpt_1/model_outs
+    - nodes/ML3/ASEGeoOpt_1/trajectory.h5
     metrics:
-    - nodes/ML2/PredictionMetrics/deviat_stress.json:
-        cache: false
-    - nodes/ML2/PredictionMetrics/energy.json:
-        cache: false
-    - nodes/ML2/PredictionMetrics/forces.json:
-        cache: false
-    - nodes/ML2/PredictionMetrics/hydro_stress.json:
-        cache: false
-    - nodes/ML2/PredictionMetrics/node-meta.json:
-        cache: false
-    - nodes/ML2/PredictionMetrics/stress.json:
+    - nodes/ML3/ASEGeoOpt_1/node-meta.json:
         cache: false
