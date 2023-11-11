@@ -1,14 +1,3 @@
-ML0_ASEGeoOpt:
-    data_id: -1
-    dump_rate: 1000
-    init_kwargs: {}
-    optimizer: FIRE
-    repeat:
-    - 1
-    - 1
-    - 1
-    run_kwargs:
-        fmax: 0.01
 ML0_ASEMD:
     data_id: -1
     dump_rate: 1000
@@ -52,18 +41,7 @@ ML0_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
-ML1_ASEGeoOpt:
-    data_id: -1
-    dump_rate: 1000
-    init_kwargs: {}
-    optimizer: FIRE
-    repeat:
-    - 1
-    - 1
-    - 1
-    run_kwargs:
-        fmax: 0.01
-ML1_ASEMD:
+classical_ASEMD:
     data_id: -1
     dump_rate: 1000
     pop_last: false
@@ -76,288 +54,26 @@ ML1_ASEMD:
     steps: 50000
     use_momenta: false
     wrap: false
-ML1_ASEMD+checker_list+0:
+classical_ASEMD+checker_list+0:
     larger_only: true
     max_std: null
     max_value: 0.5
     minimum_window_size: 1
     value: forces_uncertainty
     window_size: 500
-ML1_ASEMD+thermostat:
+classical_ASEMD+thermostat:
     friction: 0.01
     temperature: 298.15
     time_step: 0.5
-ML1_ConfigurationSelection:
-    base_feature_map:
-        layer_name: dense_2
-        name: ll_grad
-    n_configurations: 50
-    selection_method: max_dist
-ML1_EnergyHistogram:
-    bins: 100
-    x_lim: null
-    y_lim: null
-ML1_ForcesHistogram:
-    bins: null
-    x_lim: null
-    y_lim: null
-ML1_MLModel:
-    jax_enable_x64: true
-    use_energy: true
-    use_forces: true
-    use_stresses: false
-ML2_ASEGeoOpt:
-    data_id: -1
-    dump_rate: 1000
-    init_kwargs: {}
-    optimizer: FIRE
-    repeat:
-    - 1
-    - 1
-    - 1
-    run_kwargs:
-        fmax: 0.01
-ML2_ASEGeoOpt_1:
-    data_id: -1
-    dump_rate: 1000
-    init_kwargs: {}
-    optimizer: BFGS
-    repeat:
-    - 1
-    - 1
-    - 1
-    run_kwargs:
-        fmax: 0.1
-ML2_ASEMD:
-    data_id: -1
-    dump_rate: 1000
-    pop_last: false
-    repeat:
-    - 1
-    - 1
-    - 1
-    sampling_rate: 10
-    seed: 42
-    steps: 50000
-    use_momenta: false
-    wrap: false
-ML2_ASEMD+checker_list+0:
-    larger_only: true
-    max_std: null
-    max_value: 0.5
-    minimum_window_size: 1
-    value: forces_uncertainty
-    window_size: 500
-ML2_ASEMD+modifier+0:
-    end_temperature: 500
-    interval: 1
-    num_oscillations: 10
-    start_temperature: 230
-    temperature_amplitude: 150
-ML2_ASEMD+modifier+1:
-    cell_amplitude: 1
-    end_cell: 14.58
-    interval: 1
-    num_oscillations: 3
-ML2_ASEMD+thermostat:
-    friction: 0.01
-    temperature: 298.15
-    time_step: 0.5
-ML2_ConfigurationSelection:
-    base_feature_map:
-        layer_name: dense_2
-        name: ll_grad
-    n_configurations: 50
-    selection_method: max_dist
-ML2_ConfigurationSelection_1:
-    base_feature_map:
-        layer_name: dense_2
-        name: ll_grad
-    n_configurations: 10
-    selection_method: max_dist
-ML2_EnergyHistogram:
-    bins: 100
-    x_lim: null
-    y_lim: null
-ML2_ForcesHistogram:
-    bins: null
-    x_lim: null
-    y_lim: null
-ML2_MLModel:
-    jax_enable_x64: true
-    use_energy: true
-    use_forces: true
-    use_stresses: false
-ML3_ASEGeoOpt:
-    data_id: -1
-    dump_rate: 1000
-    init_kwargs: {}
-    optimizer: FIRE
-    repeat:
-    - 1
-    - 1
-    - 1
-    run_kwargs:
-        fmax: 0.01
-ML3_ASEGeoOpt_1:
-    data_id: -1
-    dump_rate: 1000
-    init_kwargs: {}
-    optimizer: BFGS
-    repeat:
-    - 1
-    - 1
-    - 1
-    run_kwargs:
-        fmax: 0.1
-ML3_ASEMD:
-    data_id: -1
-    dump_rate: 1000
-    pop_last: false
-    repeat:
-    - 1
-    - 1
-    - 1
-    sampling_rate: 10
-    seed: 42
-    steps: 50000
-    use_momenta: false
-    wrap: false
-ML3_ASEMD+checker_list+0:
-    larger_only: true
-    max_std: null
-    max_value: 0.5
-    minimum_window_size: 1
-    value: forces_uncertainty
-    window_size: 500
-ML3_ASEMD+modifier+0:
-    end_temperature: 500
-    interval: 1
-    num_oscillations: 10
-    start_temperature: 230
-    temperature_amplitude: 150
-ML3_ASEMD+modifier+1:
-    cell_amplitude: 1
-    end_cell: 14.58
-    interval: 1
-    num_oscillations: 3
-ML3_ASEMD+thermostat:
-    friction: 0.01
-    temperature: 298.15
-    time_step: 0.5
-ML3_ConfigurationSelection:
-    base_feature_map:
-        layer_name: dense_2
-        name: ll_grad
-    n_configurations: 50
-    selection_method: max_dist
-ML3_ConfigurationSelection_1:
-    base_feature_map:
-        layer_name: dense_2
-        name: ll_grad
-    n_configurations: 10
-    selection_method: max_dist
-ML3_EnergyHistogram:
-    bins: 100
-    x_lim: null
-    y_lim: null
-ML3_ForcesHistogram:
-    bins: null
-    x_lim: null
-    y_lim: null
-ML3_MLModel:
-    jax_enable_x64: true
-    use_energy: true
-    use_forces: true
-    use_stresses: false
-ML4_ASEGeoOpt:
-    data_id: -1
-    dump_rate: 1000
-    init_kwargs: {}
-    optimizer: FIRE
-    repeat:
-    - 1
-    - 1
-    - 1
-    run_kwargs:
-        fmax: 0.01
-ML4_ASEGeoOpt_1:
-    data_id: -1
-    dump_rate: 1000
-    init_kwargs: {}
-    optimizer: BFGS
-    repeat:
-    - 1
-    - 1
-    - 1
-    run_kwargs:
-        fmax: 0.1
-ML4_ASEMD:
-    data_id: -1
-    dump_rate: 1000
-    pop_last: false
-    repeat:
-    - 1
-    - 1
-    - 1
-    sampling_rate: 10
-    seed: 42
-    steps: 50000
-    use_momenta: false
-    wrap: false
-ML4_ASEMD+checker_list+0:
-    larger_only: true
-    max_std: null
-    max_value: 0.5
-    minimum_window_size: 1
-    value: forces_uncertainty
-    window_size: 500
-ML4_ASEMD+modifier+0:
-    end_temperature: 500
-    interval: 1
-    num_oscillations: 10
-    start_temperature: 230
-    temperature_amplitude: 150
-ML4_ASEMD+modifier+1:
-    cell_amplitude: 1
-    end_cell: 14.58
-    interval: 1
-    num_oscillations: 3
-ML4_ASEMD+thermostat:
-    friction: 0.01
-    temperature: 298.15
-    time_step: 0.5
-ML4_ConfigurationSelection:
-    base_feature_map:
-        layer_name: dense_2
-        name: ll_grad
-    n_configurations: 50
-    selection_method: max_dist
-ML4_ConfigurationSelection_1:
-    base_feature_map:
-        layer_name: dense_2
-        name: ll_grad
-    n_configurations: 10
-    selection_method: max_dist
-ML4_EnergyHistogram:
-    bins: 100
-    x_lim: null
-    y_lim: null
-ML4_ForcesHistogram:
-    bins: null
-    x_lim: null
-    y_lim: null
-ML4_MLModel:
-    jax_enable_x64: true
-    use_energy: true
-    use_forces: true
-    use_stresses: false
 classical_AddData:
     lines_to_read: null
 classical_ConfigurationSelection:
-    n_configurations: 1000
+    n_configurations: 500
     seed: 1234
 classical_ConfigurationSelection_1:
+    n_configurations: 100
+    seed: 1234
+classical_ConfigurationSelection_2:
     n_configurations: 100
     seed: 1234
 classical_EnergyHistogram:

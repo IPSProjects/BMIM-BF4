@@ -1,12 +1,12 @@
 {
     "epoch": 499.0,
-    "epoch_time": 6.054719924926758,
-    "train_energy_mae": 0.111841911878706,
-    "train_forces_mae": 0.052991171302353,
-    "train_loss": 0.1031453426636956,
-    "train_stress_mae": 9.016743452790568,
-    "val_energy_mae": 0.1087682388275425,
-    "val_forces_mae": 0.0532484164701802,
-    "val_loss": 0.1041570440988102,
-    "val_stress_mae": 9.181478447493353
+    "epoch_time": 0.7995693683624268,
+    "train_energy_mae": 0.2099118783764879,
+    "train_forces_mae": 0.0785170946674545,
+    "train_loss": 0.1699974045936226,
+    "train_stress_mae": 9.698592699183042,
+    "val_energy_mae": 0.1927189072707551,
+    "val_forces_mae": 0.0798704623791991,
+    "val_loss": 0.1767597371864613,
+    "val_stress_mae": 9.191698938081643
 }
