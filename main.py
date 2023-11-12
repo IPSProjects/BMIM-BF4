@@ -122,40 +122,54 @@ with project.group("ML1"):
     ips.analysis.EnergyHistogram(data=train_data, bins=100)
     ips.analysis.ForcesHistogram(data=train_data)
 
+for idx in range(2, 4):
+    with project.group(f"ML{idx}"):
+        md = ips.calculators.ASEMD(
+            data=geo_opt.atoms,
+            data_id=-1,
+            model=model,
+            thermostat=thermostat,
+            checker_list=[uncertainty_check],
+            steps=50000,
+            sampling_rate=10,
+        )
 
-with project.group("ML2"):
-    md = ips.calculators.ASEMD(
-        data=geo_opt.atoms,
-        data_id=-1,
-        model=model,
-        thermostat=thermostat,
-        checker_list=[uncertainty_check],
-        steps=50000,
-        sampling_rate=10,
-    )
+        geo_opt = ips.calculators.ASEGeoOpt(
+            model=model,
+            data=md.atoms,
+            data_id=-1,
+            optimizer="FIRE",
+            run_kwargs={"fmax": 0.5},
+        )
 
-    geo_opt = ips.calculators.ASEGeoOpt(
-        model=model,
-        data=md.atoms,
-        data_id=-1,
-        optimizer="FIRE",
-        run_kwargs={"fmax": 0.5},
-    )
+        kernel_selection = ips.models.apax.BatchKernelSelection(
+            data=md.atoms + geo_opt.atoms,
+            train_data=train_data,
+            models=model,
+            n_configurations=50,
+            processing_batch_size=4,
+        )
 
-    kernel_selection = ips.models.apax.BatchKernelSelection(
-        data=md.atoms + geo_opt.atoms,
-        train_data=train_data,
-        models=model,
-        n_configurations=50,
-        processing_batch_size=4,
-    )
-    
-    cp2k = ips.calculators.CP2KSinglePoint(
-        data=kernel_selection.atoms,
-        cp2k_params="config/cp2k.yaml",
-        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
-    )
+        cp2k = ips.calculators.CP2KSinglePoint(
+            data=kernel_selection.atoms,
+            cp2k_params="config/cp2k.yaml",
+            cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+        )
 
-    train_data += cp2k.atoms
+        train_data += cp2k.atoms
+
+        if idx > 2:
+            break
+
+        model = ips.models.Apax(
+            data=train_data,
+            validation_data=validation_data.atoms,
+            config="config/initial_model.yaml",
+        )
+
+        prediction = ips.analysis.Prediction(data=test_data, model=model)
+        metrics = ips.analysis.PredictionMetrics(data=prediction)
+        ips.analysis.EnergyHistogram(data=train_data, bins=100)
+        ips.analysis.ForcesHistogram(data=train_data)
 
 project.build()
