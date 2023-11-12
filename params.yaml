@@ -26,7 +26,7 @@ ML0_ConfigurationSelection:
     base_feature_map:
         layer_name: dense_2
         name: ll_grad
-    n_configurations: 50
+    n_configurations: 200
     selection_method: max_dist
 ML0_EnergyHistogram:
     bins: 100
@@ -74,7 +74,7 @@ classical_ConfigurationSelection_1:
     n_configurations: 100
     seed: 1234
 classical_ConfigurationSelection_2:
-    n_configurations: 100
+    n_configurations: 200
     seed: 1234
 classical_EnergyHistogram:
     bins: 100
