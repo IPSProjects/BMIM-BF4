@@ -59,7 +59,7 @@ with project.group("ML0"):
         data=train_data.excluded_atoms,
         train_data=train_data.atoms,
         models=model,
-        n_configurations=50,
+        n_configurations=400,
         processing_batch_size=4,
     )
 
@@ -76,6 +76,7 @@ with project.group("ML0"):
     ips.analysis.EnergyHistogram(data=train_data, bins=100)
     ips.analysis.ForcesHistogram(data=train_data)
 
+with project.group("ML1"):
     md = ips.calculators.ASEMD(
         data=data.atoms,
         data_id=-1,

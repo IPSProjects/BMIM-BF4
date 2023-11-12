@@ -11,38 +11,8 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
-- nodes/ML0/ASEMD/metrics_dict.csv: {}
-- nodes/ML0/EnergyHistogram/labels_df.csv: {}
-- nodes/ML0/ForcesHistogram/labels_df.csv: {}
-- nodes/classical/ASEMD/metrics_dict.csv: {}
-- nodes/classical/EnergyHistogram/labels_df.csv: {}
-- nodes/classical/ForcesHistogram/labels_df.csv: {}
+- nodes/ML1/ASEMD/metrics_dict.csv: {}
 stages:
-  ML0_ASEMD:
-    cmd: zntrack run ipsuite.nodes.ASEMD --name ML0_ASEMD
-    deps:
-    - nodes/ML0/MLModel/apax_model
-    - nodes/ML0/MLModel/log.csv
-    - nodes/ML0/MLModel/metrics.json
-    - nodes/ML0/MLModel/node-meta.json
-    - nodes/ML0/MLModel/train.log
-    - nodes/ML0/MLModel/train_atoms.extxyz
-    - nodes/ML0/MLModel/val_atoms.extxyz
-    - nodes/classical/AddData/atoms.h5
-    - nodes/classical/AddData/node-meta.json
-    metrics:
-    - nodes/ML0/ASEMD/node-meta.json:
-        cache: false
-    - nodes/ML0/ASEMD/steps_before_stopping.json:
-        cache: false
-    outs:
-    - nodes/ML0/ASEMD/metrics_dict.csv
-    - nodes/ML0/ASEMD/model
-    - nodes/ML0/ASEMD/trajectory.h5
-    params:
-    - ML0_ASEMD
-    - ML0_ASEMD+checker_list+0
-    - ML0_ASEMD+thermostat
   ML0_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML0_ConfigurationSelection
     deps:
@@ -171,6 +141,31 @@ stages:
     - nodes/ML0/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/ML0/PredictionMetrics/stress_df.csv
     - nodes/ML0/PredictionMetrics/stress_hydrostatic_df.csv
+  ML1_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML1_ASEMD
+    deps:
+    - nodes/ML0/MLModel/apax_model
+    - nodes/ML0/MLModel/log.csv
+    - nodes/ML0/MLModel/metrics.json
+    - nodes/ML0/MLModel/node-meta.json
+    - nodes/ML0/MLModel/train.log
+    - nodes/ML0/MLModel/train_atoms.extxyz
+    - nodes/ML0/MLModel/val_atoms.extxyz
+    - nodes/classical/AddData/atoms.h5
+    - nodes/classical/AddData/node-meta.json
+    metrics:
+    - nodes/ML1/ASEMD/node-meta.json:
+        cache: false
+    - nodes/ML1/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML1/ASEMD/metrics_dict.csv
+    - nodes/ML1/ASEMD/model
+    - nodes/ML1/ASEMD/trajectory.h5
+    params:
+    - ML1_ASEMD
+    - ML1_ASEMD+checker_list+0
+    - ML1_ASEMD+thermostat
   classical_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name classical_ASEMD
     deps:

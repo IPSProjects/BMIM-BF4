@@ -790,20 +790,20 @@
             "value": "nodes/ML0/ForcesHistogram"
         }
     },
-    "ML0_ASEMD+checker_list+0": {
+    "ML1_ASEMD+checker_list+0": {
         "nwd": {
             "_type": "pathlib.Path",
-            "value": "nodes/ML0_ASEMD+checker_list+0"
+            "value": "nodes/ML1_ASEMD+checker_list+0"
         }
     },
-    "ML0_ASEMD": {
+    "ML1_ASEMD": {
         "checker_list": [
             {
                 "_type": "zntrack.Node",
                 "value": {
                     "module": "ipsuite.nodes",
                     "cls": "ThresholdCheck",
-                    "name": "ML0_ASEMD+checker_list+0",
+                    "name": "ML1_ASEMD+checker_list+0",
                     "remote": null,
                     "rev": null
                 }
@@ -855,7 +855,7 @@
             "value": {
                 "module": "ipsuite.nodes",
                 "cls": "LangevinThermostat",
-                "name": "ML0_ASEMD+thermostat",
+                "name": "ML1_ASEMD+thermostat",
                 "remote": null,
                 "rev": null
             }
@@ -866,13 +866,13 @@
         },
         "nwd": {
             "_type": "pathlib.Path",
-            "value": "nodes/ML0/ASEMD"
+            "value": "nodes/ML1/ASEMD"
         }
     },
-    "ML0_ASEMD+thermostat": {
+    "ML1_ASEMD+thermostat": {
         "nwd": {
             "_type": "pathlib.Path",
-            "value": "nodes/ML0_ASEMD+thermostat"
+            "value": "nodes/ML1_ASEMD+thermostat"
         }
     }
 }
