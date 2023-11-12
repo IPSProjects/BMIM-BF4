@@ -97,7 +97,7 @@ stages:
     - nodes/ML0/MLModel/val_atoms.extxyz
     params:
     - ML0_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   ML0_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML0_Prediction
     deps:
@@ -141,6 +141,29 @@ stages:
     - nodes/ML0/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/ML0/PredictionMetrics/stress_df.csv
     - nodes/ML0/PredictionMetrics/stress_hydrostatic_df.csv
+  ML1_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML1_ASEGeoOpt
+    deps:
+    - nodes/ML0/MLModel/apax_model
+    - nodes/ML0/MLModel/log.csv
+    - nodes/ML0/MLModel/metrics.json
+    - nodes/ML0/MLModel/node-meta.json
+    - nodes/ML0/MLModel/train.log
+    - nodes/ML0/MLModel/train_atoms.extxyz
+    - nodes/ML0/MLModel/val_atoms.extxyz
+    - nodes/ML1/ASEMD/metrics_dict.csv
+    - nodes/ML1/ASEMD/model
+    - nodes/ML1/ASEMD/node-meta.json
+    - nodes/ML1/ASEMD/steps_before_stopping.json
+    - nodes/ML1/ASEMD/trajectory.h5
+    metrics:
+    - nodes/ML1/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML1/ASEGeoOpt/model_outs
+    - nodes/ML1/ASEGeoOpt/trajectory.h5
+    params:
+    - ML1_ASEGeoOpt
   ML1_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name ML1_ASEMD
     deps:
@@ -166,6 +189,38 @@ stages:
     - ML1_ASEMD
     - ML1_ASEMD+checker_list+0
     - ML1_ASEMD+thermostat
+  ML1_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML1_ConfigurationSelection
+    deps:
+    - nodes/ML0/ConfigurationSelection/node-meta.json
+    - nodes/ML0/ConfigurationSelection/selected_configurations.json
+    - nodes/ML0/ConfigurationSelection/selection.png
+    - nodes/ML0/MLModel/apax_model
+    - nodes/ML0/MLModel/log.csv
+    - nodes/ML0/MLModel/metrics.json
+    - nodes/ML0/MLModel/node-meta.json
+    - nodes/ML0/MLModel/train.log
+    - nodes/ML0/MLModel/train_atoms.extxyz
+    - nodes/ML0/MLModel/val_atoms.extxyz
+    - nodes/ML1/ASEGeoOpt/model_outs
+    - nodes/ML1/ASEGeoOpt/node-meta.json
+    - nodes/ML1/ASEGeoOpt/trajectory.h5
+    - nodes/ML1/ASEMD/metrics_dict.csv
+    - nodes/ML1/ASEMD/model
+    - nodes/ML1/ASEMD/node-meta.json
+    - nodes/ML1/ASEMD/steps_before_stopping.json
+    - nodes/ML1/ASEMD/trajectory.h5
+    - nodes/classical/ConfigurationSelection_2/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_2/selection.png
+    metrics:
+    - nodes/ML1/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML1/ConfigurationSelection/selected_configurations.json
+    - nodes/ML1/ConfigurationSelection/selection.png
+    params:
+    - ML1_ConfigurationSelection
   classical_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name classical_ASEMD
     deps:
@@ -217,7 +272,7 @@ stages:
     - nodes/classical/CP2KSinglePoint/atoms.h5
     - nodes/classical/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   classical_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.RandomSelection --name classical_ConfigurationSelection
     deps:
@@ -328,7 +383,7 @@ stages:
     - nodes/classical/MLModel/val_atoms.extxyz
     params:
     - classical_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   classical_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name classical_Prediction
     deps:
@@ -372,3 +427,20 @@ stages:
     - nodes/classical/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/classical/PredictionMetrics/stress_df.csv
     - nodes/classical/PredictionMetrics/stress_hydrostatic_df.csv
+  ML1_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML1_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/ML1/ConfigurationSelection/node-meta.json
+    - nodes/ML1/ConfigurationSelection/selected_configurations.json
+    - nodes/ML1/ConfigurationSelection/selection.png
+    params:
+    - config/cp2k.yaml:
+    outs:
+    - nodes/ML1/CP2KSinglePoint/atoms.h5
+    - nodes/ML1/CP2KSinglePoint/cp2k
+    metrics:
+    - nodes/ML1/CP2KSinglePoint/node-meta.json:
+        cache: false
