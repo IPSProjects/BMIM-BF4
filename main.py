@@ -150,8 +150,7 @@ for idx in range(2, 5):
             processing_batch_size=4,
         )
 
-        if idx > 3:
-            break
+
 
         cp2k = ips.calculators.CP2KSinglePoint(
             data=kernel_selection.atoms,
@@ -160,6 +159,8 @@ for idx in range(2, 5):
         )
 
         train_data += cp2k.atoms
+        if idx > 3:
+            break
 
         model = ips.models.Apax(
             data=train_data,
