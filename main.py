@@ -122,7 +122,7 @@ with project.group("ML1"):
     ips.analysis.EnergyHistogram(data=train_data, bins=100)
     ips.analysis.ForcesHistogram(data=train_data)
 
-for idx in range(2, 4):
+for idx in range(2, 5):
     with project.group(f"ML{idx}"):
         md = ips.calculators.ASEMD(
             data=geo_opt.atoms,
@@ -150,6 +150,9 @@ for idx in range(2, 4):
             processing_batch_size=4,
         )
 
+        if idx > 3:
+            break
+
         cp2k = ips.calculators.CP2KSinglePoint(
             data=kernel_selection.atoms,
             cp2k_params="config/cp2k.yaml",
@@ -157,9 +160,6 @@ for idx in range(2, 4):
         )
 
         train_data += cp2k.atoms
-
-        if idx > 2:
-            break
 
         model = ips.models.Apax(
             data=train_data,
