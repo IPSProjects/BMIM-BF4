@@ -10334,3 +10334,383 @@ stages:
       md5: 3265e36ddaefe1a7fbe77a5bbc8726c9.dir
       size: 31257
       nfiles: 1
+  ML8_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML8_ASEMD
+    deps:
+    - path: nodes/ML7/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML7/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 36c36683be3a8943894f99215f8c7a09
+      size: 48
+    - path: nodes/ML7/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 7ce43bd30f85bcaa286ace2228e8c918
+      size: 1202272
+    - path: nodes/ML7/MLModel/apax_model
+      hash: md5
+      md5: 35f2b34394d6833f3d9fa9ba100f66a9.dir
+      size: 84500117
+      nfiles: 5
+    - path: nodes/ML7/MLModel/log.csv
+      hash: md5
+      md5: 66839588fd86825a70a98b619ba99520
+      size: 88237
+    - path: nodes/ML7/MLModel/metrics.json
+      hash: md5
+      md5: 44facb0202c1f88c87e1eb4ac6b3e27d
+      size: 388
+    - path: nodes/ML7/MLModel/node-meta.json
+      hash: md5
+      md5: cbe8f6a14765b6da826360e366ef5043
+      size: 48
+    - path: nodes/ML7/MLModel/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/ML7/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: a3d39576f56f8bb5ae363fd3335db22b
+      size: 32463063
+    - path: nodes/ML7/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    params:
+      params.yaml:
+        ML8_ASEMD:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 10
+          seed: 42
+          steps: 50000
+          use_momenta: false
+          wrap: false
+        ML8_ASEMD+checker_list+0:
+          larger_only: true
+          max_std:
+          max_value: 0.5
+          minimum_window_size: 1
+          value: forces_uncertainty
+          window_size: 500
+        ML8_ASEMD+modifier+0:
+          cell_amplitude: 1
+          end_cell: 14.58
+          interval: 1
+          num_oscillations: 3
+        ML8_ASEMD+thermostat:
+          friction: 0.01
+          temperature: 298.15
+          time_step: 0.5
+    outs:
+    - path: nodes/ML8/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 9614804dbc86abf6abab31f9c62ffaa0
+      size: 83213
+    - path: nodes/ML8/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML8/ASEMD/node-meta.json
+      hash: md5
+      md5: 352fa3515e32ba2de997d9ac4459e7b4
+      size: 48
+    - path: nodes/ML8/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 30fad467b7363d55fa24b3398fdef557
+      size: 5
+    - path: nodes/ML8/ASEMD/trajectory.h5
+      hash: md5
+      md5: 5e848d505e9a37adc6e169c37a86b43c
+      size: 44128256
+  ML8_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML8_ASEGeoOpt
+    deps:
+    - path: nodes/ML7/MLModel/apax_model
+      hash: md5
+      md5: 35f2b34394d6833f3d9fa9ba100f66a9.dir
+      size: 84500117
+      nfiles: 5
+    - path: nodes/ML7/MLModel/log.csv
+      hash: md5
+      md5: 66839588fd86825a70a98b619ba99520
+      size: 88237
+    - path: nodes/ML7/MLModel/metrics.json
+      hash: md5
+      md5: 44facb0202c1f88c87e1eb4ac6b3e27d
+      size: 388
+    - path: nodes/ML7/MLModel/node-meta.json
+      hash: md5
+      md5: cbe8f6a14765b6da826360e366ef5043
+      size: 48
+    - path: nodes/ML7/MLModel/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/ML7/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: a3d39576f56f8bb5ae363fd3335db22b
+      size: 32463063
+    - path: nodes/ML7/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/ML8/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 9614804dbc86abf6abab31f9c62ffaa0
+      size: 83213
+    - path: nodes/ML8/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML8/ASEMD/node-meta.json
+      hash: md5
+      md5: 352fa3515e32ba2de997d9ac4459e7b4
+      size: 48
+    - path: nodes/ML8/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 30fad467b7363d55fa24b3398fdef557
+      size: 5
+    - path: nodes/ML8/ASEMD/trajectory.h5
+      hash: md5
+      md5: 5e848d505e9a37adc6e169c37a86b43c
+      size: 44128256
+    params:
+      params.yaml:
+        ML8_ASEGeoOpt:
+          data_id: -1
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: FIRE
+          repeat:
+          - 1
+          - 1
+          - 1
+          run_kwargs:
+            fmax: 0.5
+    outs:
+    - path: nodes/ML8/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML8/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: e74f5b34ecf1ddde1159aaa37eff82a0
+      size: 48
+    - path: nodes/ML8/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: d87f6fa8ec766ba69526f891bbbe672b
+      size: 1039072
+  ML8_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML8_ConfigurationSelection
+    deps:
+    - path: nodes/ML0/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: c63ec9a3ee741eda364299fba9d1f33c
+      size: 48
+    - path: nodes/ML0/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 2fe1ff3445c4d109b873252ee738fb21
+      size: 5298
+    - path: nodes/ML0/ConfigurationSelection/selection.png
+      hash: md5
+      md5: e69b22105f551142c8c5f216f6195135
+      size: 67448
+    - path: nodes/ML1/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 1a7a68f83340406aa1164f42bae049eb
+      size: 1252296
+    - path: nodes/ML1/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 85b8556d44d8ef6eea20d5ed509dd3ad.dir
+      size: 15159470
+      nfiles: 3
+    - path: nodes/ML1/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: a874fce5c1681ffb680d7bee5dfccf97
+      size: 48
+    - path: nodes/ML2/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7815747b6ed20c4c40ac55f96582c905
+      size: 1252296
+    - path: nodes/ML2/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a2fa20de295ec81ef85ca747acf80cef.dir
+      size: 15040654
+      nfiles: 3
+    - path: nodes/ML2/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 943e3651080de64d3f8748845f22d90c
+      size: 48
+    - path: nodes/ML3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 472469d827b217f516d213d1c8192c48
+      size: 1252296
+    - path: nodes/ML3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 3d64d0775e0af7dc2fa2ba0a643e282d.dir
+      size: 15157532
+      nfiles: 3
+    - path: nodes/ML3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 9c99e20c53a88bfb023e4557c1ec087e
+      size: 48
+    - path: nodes/ML4/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 3a96da47e636a768335927069d3bb2c9
+      size: 1252296
+    - path: nodes/ML4/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 75c1c61f3f294f7db6a04a3979e73002.dir
+      size: 15155125
+      nfiles: 3
+    - path: nodes/ML4/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 29bfef9d2ff8d00dac6354848914ab56
+      size: 48
+    - path: nodes/ML5/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 0cffdeb327580b9f09bd993b10797bbe
+      size: 1252296
+    - path: nodes/ML5/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: ab4116cfea96fbe3fa79f717d468123f.dir
+      size: 15161772
+      nfiles: 3
+    - path: nodes/ML5/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 83c1cb4e6797a87d2cc8d25e511a4473
+      size: 48
+    - path: nodes/ML6/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7021fdd18e93577f77aa1c56dec15cb1
+      size: 1252296
+    - path: nodes/ML6/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 695f7bf01bd8e0b3ae0b609cf54fd0c9.dir
+      size: 15190298
+      nfiles: 3
+    - path: nodes/ML6/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: fd5ef226d805b90e5fe1b00002986d89
+      size: 48
+    - path: nodes/ML7/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: e65f5dadd39b986f8a4704feeb93868f
+      size: 1252296
+    - path: nodes/ML7/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 50ba9212a3e1d4dfbccf2f26d5d6f217.dir
+      size: 15187689
+      nfiles: 3
+    - path: nodes/ML7/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 3a327fd3c0d6b1041528835eeab23a44
+      size: 48
+    - path: nodes/ML7/MLModel/apax_model
+      hash: md5
+      md5: 35f2b34394d6833f3d9fa9ba100f66a9.dir
+      size: 84500117
+      nfiles: 5
+    - path: nodes/ML7/MLModel/log.csv
+      hash: md5
+      md5: 66839588fd86825a70a98b619ba99520
+      size: 88237
+    - path: nodes/ML7/MLModel/metrics.json
+      hash: md5
+      md5: 44facb0202c1f88c87e1eb4ac6b3e27d
+      size: 388
+    - path: nodes/ML7/MLModel/node-meta.json
+      hash: md5
+      md5: cbe8f6a14765b6da826360e366ef5043
+      size: 48
+    - path: nodes/ML7/MLModel/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/ML7/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: a3d39576f56f8bb5ae363fd3335db22b
+      size: 32463063
+    - path: nodes/ML7/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/ML8/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML8/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: e74f5b34ecf1ddde1159aaa37eff82a0
+      size: 48
+    - path: nodes/ML8/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: d87f6fa8ec766ba69526f891bbbe672b
+      size: 1039072
+    - path: nodes/ML8/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 9614804dbc86abf6abab31f9c62ffaa0
+      size: 83213
+    - path: nodes/ML8/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML8/ASEMD/node-meta.json
+      hash: md5
+      md5: 352fa3515e32ba2de997d9ac4459e7b4
+      size: 48
+    - path: nodes/ML8/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 30fad467b7363d55fa24b3398fdef557
+      size: 5
+    - path: nodes/ML8/ASEMD/trajectory.h5
+      hash: md5
+      md5: 5e848d505e9a37adc6e169c37a86b43c
+      size: 44128256
+    - path: nodes/classical/ConfigurationSelection_2/node-meta.json
+      hash: md5
+      md5: c96f98e7ac534af9e7177c90e44ba98c
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_2/selected_configurations.json
+      hash: md5
+      md5: 49b8c065ebe4796d8c84ac92ab42648f
+      size: 1381
+    - path: nodes/classical/ConfigurationSelection_2/selection.png
+      hash: md5
+      md5: 8afeba13916f368f55bd5c2626f11a65
+      size: 43456
+    params:
+      params.yaml:
+        ML8_ConfigurationSelection:
+          base_feature_map:
+            layer_name: dense_2
+            name: ll_grad
+          n_configurations: 50
+          selection_method: max_dist
+    outs:
+    - path: nodes/ML8/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: d7dd57181f7bf857887568be990c2a61
+      size: 48
+    - path: nodes/ML8/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 59dae9f449cd272a7f849f9b85c3a635
+      size: 713
+    - path: nodes/ML8/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 8489a9f245f774a8479b6a3af33a3a75
+      size: 38407
