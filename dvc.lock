@@ -9618,3 +9618,105 @@ stages:
       hash: md5
       md5: 3a7b019d3e62b7f6e1905b5cfa987614
       size: 38206
+  ML7_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML7_CP2KSinglePoint
+    deps:
+    - path: GTH_BASIS_SETS
+      hash: md5
+      md5: 518e733a7344699cf0b4192bb97eb6a3
+      size: 119403
+    - path: GTH_POTENTIALS
+      hash: md5
+      md5: 3a35b03b26b8ba5cf6c1d849dba11f15
+      size: 128982
+    - path: dftd3.dat
+      hash: md5
+      md5: 88745bcc951a4bcdccc4d6bcfa78d105
+      size: 1959318
+    - path: nodes/ML7/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: bf9252bde8e154b9cd7b2b281598d4b1
+      size: 48
+    - path: nodes/ML7/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 76c2572910ec144cfedf941fa15c2d1b
+      size: 751
+    - path: nodes/ML7/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3a7b019d3e62b7f6e1905b5cfa987614
+      size: 38206
+    params:
+      config/cp2k.yaml:
+        force_eval:
+          method: quickstep
+          DFT:
+            mgrid:
+              cutoff: 800
+              rel_cutoff: 60
+              ngrids: 5
+            QS:
+              eps_filter_matrix: 0.0
+              eps_pgf_orb: 0.0001
+            SCF:
+              scf_guess: restart
+              max_scf: 100
+              eps_scf: 1e-06
+              OT:
+                minimizer: diis
+                preconditioner: full_single_inverse
+              outer_scf:
+                max_scf: 100
+                eps_scf: 1e-06
+              print:
+                restart:
+                  each:
+                    QS_SCF: 0
+            XC:
+              xc_functional:
+                becke97:
+                  parametrization: B97-3c
+                  scale_c: 1.0
+                  scale_x: 1.0
+              vdw_potential:
+                pair_potential:
+                  type: dftd3(bj)
+                  parameter_file_name: dftd3.dat
+                  reference_functional: B97-3c
+                  r_cutoff: 7.93766
+                  calculate_c9_term: true
+                  short_range_correction: true
+                potential_type: pair_potential
+            charge: 0
+            basis_set_file_name: GTH_BASIS_SETS
+            potential_file_name: GTH_POTENTIALS
+          subsys:
+            kind:
+              N:
+                basis_set: TZVP-GTH-q5
+                potential: GTH-PBE-q5
+              C:
+                basis_set: TZVP-GTH-q4
+                potential: GTH-PBE-q4
+              H:
+                basis_set: TZVP-GTH-q1
+                potential: GTH-PBE-q1
+              B:
+                basis_set: TZVP-GTH-q3
+                potential: GTH-PBE-q3
+              F:
+                basis_set: TZVP-GTH-q7
+                potential: GTH-PBE-q7
+    outs:
+    - path: nodes/ML7/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: e65f5dadd39b986f8a4704feeb93868f
+      size: 1252296
+    - path: nodes/ML7/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 50ba9212a3e1d4dfbccf2f26d5d6f217.dir
+      size: 15187689
+      nfiles: 3
+    - path: nodes/ML7/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 3a327fd3c0d6b1041528835eeab23a44
+      size: 48
