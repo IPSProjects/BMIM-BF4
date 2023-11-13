@@ -83,6 +83,7 @@ plots:
     y_label: validation loss
 - nodes/ML8/EnergyHistogram/labels_df.csv: {}
 - nodes/ML8/ForcesHistogram/labels_df.csv: {}
+- nodes/ML9/ASEMD/metrics_dict.csv: {}
 stages:
   ML0_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML0_ConfigurationSelection
@@ -2263,6 +2264,129 @@ stages:
     - nodes/ML8/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/ML8/PredictionMetrics/stress_df.csv
     - nodes/ML8/PredictionMetrics/stress_hydrostatic_df.csv
+  ML9_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML9_ASEGeoOpt
+    deps:
+    - nodes/ML8/MLModel/apax_model
+    - nodes/ML8/MLModel/log.csv
+    - nodes/ML8/MLModel/metrics.json
+    - nodes/ML8/MLModel/node-meta.json
+    - nodes/ML8/MLModel/train.log
+    - nodes/ML8/MLModel/train_atoms.extxyz
+    - nodes/ML8/MLModel/val_atoms.extxyz
+    - nodes/ML9/ASEMD/metrics_dict.csv
+    - nodes/ML9/ASEMD/model
+    - nodes/ML9/ASEMD/node-meta.json
+    - nodes/ML9/ASEMD/steps_before_stopping.json
+    - nodes/ML9/ASEMD/trajectory.h5
+    metrics:
+    - nodes/ML9/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML9/ASEGeoOpt/model_outs
+    - nodes/ML9/ASEGeoOpt/trajectory.h5
+    params:
+    - ML9_ASEGeoOpt
+  ML9_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML9_ASEMD
+    deps:
+    - nodes/ML8/ASEGeoOpt/model_outs
+    - nodes/ML8/ASEGeoOpt/node-meta.json
+    - nodes/ML8/ASEGeoOpt/trajectory.h5
+    - nodes/ML8/MLModel/apax_model
+    - nodes/ML8/MLModel/log.csv
+    - nodes/ML8/MLModel/metrics.json
+    - nodes/ML8/MLModel/node-meta.json
+    - nodes/ML8/MLModel/train.log
+    - nodes/ML8/MLModel/train_atoms.extxyz
+    - nodes/ML8/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/ML9/ASEMD/node-meta.json:
+        cache: false
+    - nodes/ML9/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML9/ASEMD/metrics_dict.csv
+    - nodes/ML9/ASEMD/model
+    - nodes/ML9/ASEMD/trajectory.h5
+    params:
+    - ML9_ASEMD
+    - ML9_ASEMD+checker_list+0
+    - ML9_ASEMD+modifier+0
+    - ML9_ASEMD+thermostat
+  ML9_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML9_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/ML9/ConfigurationSelection/node-meta.json
+    - nodes/ML9/ConfigurationSelection/selected_configurations.json
+    - nodes/ML9/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/ML9/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML9/CP2KSinglePoint/atoms.h5
+    - nodes/ML9/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml: null
+  ML9_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML9_ConfigurationSelection
+    deps:
+    - nodes/ML0/ConfigurationSelection/node-meta.json
+    - nodes/ML0/ConfigurationSelection/selected_configurations.json
+    - nodes/ML0/ConfigurationSelection/selection.png
+    - nodes/ML1/CP2KSinglePoint/atoms.h5
+    - nodes/ML1/CP2KSinglePoint/cp2k
+    - nodes/ML1/CP2KSinglePoint/node-meta.json
+    - nodes/ML2/CP2KSinglePoint/atoms.h5
+    - nodes/ML2/CP2KSinglePoint/cp2k
+    - nodes/ML2/CP2KSinglePoint/node-meta.json
+    - nodes/ML3/CP2KSinglePoint/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/cp2k
+    - nodes/ML3/CP2KSinglePoint/node-meta.json
+    - nodes/ML4/CP2KSinglePoint/atoms.h5
+    - nodes/ML4/CP2KSinglePoint/cp2k
+    - nodes/ML4/CP2KSinglePoint/node-meta.json
+    - nodes/ML5/CP2KSinglePoint/atoms.h5
+    - nodes/ML5/CP2KSinglePoint/cp2k
+    - nodes/ML5/CP2KSinglePoint/node-meta.json
+    - nodes/ML6/CP2KSinglePoint/atoms.h5
+    - nodes/ML6/CP2KSinglePoint/cp2k
+    - nodes/ML6/CP2KSinglePoint/node-meta.json
+    - nodes/ML7/CP2KSinglePoint/atoms.h5
+    - nodes/ML7/CP2KSinglePoint/cp2k
+    - nodes/ML7/CP2KSinglePoint/node-meta.json
+    - nodes/ML8/CP2KSinglePoint/atoms.h5
+    - nodes/ML8/CP2KSinglePoint/cp2k
+    - nodes/ML8/CP2KSinglePoint/node-meta.json
+    - nodes/ML8/MLModel/apax_model
+    - nodes/ML8/MLModel/log.csv
+    - nodes/ML8/MLModel/metrics.json
+    - nodes/ML8/MLModel/node-meta.json
+    - nodes/ML8/MLModel/train.log
+    - nodes/ML8/MLModel/train_atoms.extxyz
+    - nodes/ML8/MLModel/val_atoms.extxyz
+    - nodes/ML9/ASEGeoOpt/model_outs
+    - nodes/ML9/ASEGeoOpt/node-meta.json
+    - nodes/ML9/ASEGeoOpt/trajectory.h5
+    - nodes/ML9/ASEMD/metrics_dict.csv
+    - nodes/ML9/ASEMD/model
+    - nodes/ML9/ASEMD/node-meta.json
+    - nodes/ML9/ASEMD/steps_before_stopping.json
+    - nodes/ML9/ASEMD/trajectory.h5
+    - nodes/classical/ConfigurationSelection_2/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_2/selection.png
+    metrics:
+    - nodes/ML9/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML9/ConfigurationSelection/selected_configurations.json
+    - nodes/ML9/ConfigurationSelection/selection.png
+    params:
+    - ML9_ConfigurationSelection
   classical_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name classical_ASEMD
     deps:

@@ -235,7 +235,7 @@ eq_box_oszillator = ips.calculators.BoxOscillatingRampModifier(
     num_oscillations=3,
 )
 
-for idx in range(8, 9):
+for idx in range(8, 10):
     with project.group(f"ML{idx}") as grp:
         md = ips.calculators.ASEMD(
             data=geo_opt.atoms,
@@ -270,6 +270,9 @@ for idx in range(8, 9):
         )
 
         train_data += cp2k.atoms
+
+        if idx > 8:
+            break
 
         model = ips.models.Apax(
             data=train_data,
