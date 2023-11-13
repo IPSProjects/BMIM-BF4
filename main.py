@@ -179,7 +179,7 @@ temperature_oszillator = ips.calculators.TemperatureOscillatingRampModifier(
 )
 
 
-for idx in range(5, 7):
+for idx in range(5, 8):
     with project.group(f"ML{idx}") as grp:
         md = ips.calculators.ASEMD(
             data=geo_opt.atoms,
@@ -207,6 +207,7 @@ for idx in range(5, 7):
             processing_batch_size=4,
         )
 
+
         cp2k = ips.calculators.CP2KSinglePoint(
             data=kernel_selection.atoms,
             cp2k_params="config/cp2k.yaml",
@@ -214,6 +215,9 @@ for idx in range(5, 7):
         )
 
         train_data += cp2k.atoms
+
+        if idx > 6:
+            break
 
         model = ips.models.Apax(
             data=train_data,
