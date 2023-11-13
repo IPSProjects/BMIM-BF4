@@ -340,6 +340,19 @@ ML6_ConfigurationSelection:
         name: ll_grad
     n_configurations: 50
     selection_method: max_dist
+ML6_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML6_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML6_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 classical_ASEMD:
     data_id: -1
     dump_rate: 1000

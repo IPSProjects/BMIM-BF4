@@ -214,10 +214,6 @@ for idx in range(5, 7):
         )
 
         train_data += cp2k.atoms
-        
-        if idx > 5:
-            break
-
 
         model = ips.models.Apax(
             data=train_data,
@@ -231,4 +227,4 @@ for idx in range(5, 7):
         ips.analysis.ForcesHistogram(data=train_data)
 
 
-project.build()
+project.build(nodes=[grp])
