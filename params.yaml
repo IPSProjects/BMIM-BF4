@@ -449,6 +449,7 @@ ML8_ASEMD+modifier+0:
     end_cell: 14.58
     interval: 1
     num_oscillations: 3
+    num_ramp_oscillations: null
 ML8_ASEMD+thermostat:
     friction: 0.01
     temperature: 298.15
@@ -508,6 +509,7 @@ ML9_ASEMD+modifier+0:
     end_cell: 14.58
     interval: 1
     num_oscillations: 3
+    num_ramp_oscillations: 0.5
 ML9_ASEMD+thermostat:
     friction: 0.01
     temperature: 298.15

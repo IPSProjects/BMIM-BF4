@@ -285,4 +285,6 @@ for idx in range(8, 10):
         ips.analysis.EnergyHistogram(data=train_data, bins=100)
         ips.analysis.ForcesHistogram(data=train_data)
 
-project.build(nodes=[grp])
+    eq_box_oszillator.num_ramp_oscillations = 0.5
+
+project.build()
