@@ -159,8 +159,8 @@ for idx in range(2, 5):
         )
 
         train_data += cp2k.atoms
-        if idx > 3:
-            break
+        # if idx > 3:
+        #     break
 
         model = ips.models.Apax(
             data=train_data,
