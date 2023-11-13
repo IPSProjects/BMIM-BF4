@@ -216,9 +216,6 @@ for idx in range(5, 8):
 
         train_data += cp2k.atoms
 
-        if idx > 6:
-            break
-
         model = ips.models.Apax(
             data=train_data,
             validation_data=validation_data.atoms,
