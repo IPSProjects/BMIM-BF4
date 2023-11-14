@@ -14895,3 +14895,287 @@ stages:
       hash: md5
       md5: ebf6e5f4240e51323487dba8f3609dff
       size: 23481
+  ML11_MultiPack_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML11_MultiPack_ASEGeoOpt
+    deps:
+    - path: nodes/ML11_MultiPack/MLModel/apax_model
+      hash: md5
+      md5: 7bd46fb71cecdff2240691825b4c65f0.dir
+      size: 84500150
+      nfiles: 5
+    - path: nodes/ML11_MultiPack/MLModel/log.csv
+      hash: md5
+      md5: 9348ccb7b02625b3cec5e4b705d8aa24
+      size: 88240
+    - path: nodes/ML11_MultiPack/MLModel/metrics.json
+      hash: md5
+      md5: 5b3a5e3298cf8b85ee47477ab150b8c4
+      size: 389
+    - path: nodes/ML11_MultiPack/MLModel/node-meta.json
+      hash: md5
+      md5: fe10223f99e39a2819c7804056d155ff
+      size: 48
+    - path: nodes/ML11_MultiPack/MLModel/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/ML11_MultiPack/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: 5c6e14f23cb72fcf72c69a899021e25d
+      size: 40180646
+    - path: nodes/ML11_MultiPack/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/ML11_MultiPack/MultiPackmol_1/atoms.h5
+      hash: md5
+      md5: 11169393c4a079f6f77a3828b04f2968
+      size: 267968
+    - path: nodes/ML11_MultiPack/MultiPackmol_1/node-meta.json
+      hash: md5
+      md5: baf17158148ec12f52b668b3700831b5
+      size: 48
+    - path: nodes/ML11_MultiPack/MultiPackmol_1/packmol
+      hash: md5
+      md5: 76e91c069ed4efd07a338f8ef9eef143.dir
+      size: 711217
+      nfiles: 240
+    params:
+      params.yaml:
+        ML11_MultiPack_ASEGeoOpt:
+          data_id: -1
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: FIRE
+          repeat:
+          - 2
+          - 2
+          - 2
+          run_kwargs:
+            fmax: 0.5
+    outs:
+    - path: nodes/ML11_MultiPack/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML11_MultiPack/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: fc072e4675f3b2b597461cb9c04d2895
+      size: 48
+    - path: nodes/ML11_MultiPack/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: ecff2b06c97df7498b452c05ebd44f40
+      size: 7757272
+  depl_MultiPackmol:
+    cmd: zntrack run ipsuite.nodes.MultiPackmol --name depl_MultiPackmol
+    deps:
+    - path: nodes/ML11_MultiPack/MultiPackmol/atoms.h5
+      hash: md5
+      md5: 90b2668020a84c8facf8158598fa4693
+      size: 282368
+    - path: nodes/ML11_MultiPack/MultiPackmol/node-meta.json
+      hash: md5
+      md5: d0e23ddeb8149003d098b3042fcdc521
+      size: 48
+    - path: nodes/ML11_MultiPack/MultiPackmol/packmol
+      hash: md5
+      md5: fd0965d65b3abf5287e0cc378f8e2044.dir
+      size: 810287
+      nfiles: 800
+    params:
+      params.yaml:
+        depl_MultiPackmol:
+          box:
+          count:
+          - 10
+          density: 900
+          n_configurations: 1
+          pbc: true
+          seed: 42
+          tolerance: 2.0
+    outs:
+    - path: nodes/depl/MultiPackmol/atoms.h5
+      hash: md5
+      md5: 3c7532e818326c0a504a91240deae74a
+      size: 37568
+    - path: nodes/depl/MultiPackmol/node-meta.json
+      hash: md5
+      md5: a91c117763c21cbf8954ca6bf860aabb
+      size: 48
+    - path: nodes/depl/MultiPackmol/packmol
+      hash: md5
+      md5: 4f1a52fa63283bd986cdd630e26e09e3.dir
+      size: 352102
+      nfiles: 202
+  depl_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name depl_ASEGeoOpt
+    deps:
+    - path: nodes/ML11_MultiPack/MLModel/apax_model
+      hash: md5
+      md5: 7bd46fb71cecdff2240691825b4c65f0.dir
+      size: 84500150
+      nfiles: 5
+    - path: nodes/ML11_MultiPack/MLModel/log.csv
+      hash: md5
+      md5: 9348ccb7b02625b3cec5e4b705d8aa24
+      size: 88240
+    - path: nodes/ML11_MultiPack/MLModel/metrics.json
+      hash: md5
+      md5: 5b3a5e3298cf8b85ee47477ab150b8c4
+      size: 389
+    - path: nodes/ML11_MultiPack/MLModel/node-meta.json
+      hash: md5
+      md5: fe10223f99e39a2819c7804056d155ff
+      size: 48
+    - path: nodes/ML11_MultiPack/MLModel/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/ML11_MultiPack/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: 5c6e14f23cb72fcf72c69a899021e25d
+      size: 40180646
+    - path: nodes/ML11_MultiPack/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/depl/MultiPackmol/atoms.h5
+      hash: md5
+      md5: 3c7532e818326c0a504a91240deae74a
+      size: 37568
+    - path: nodes/depl/MultiPackmol/node-meta.json
+      hash: md5
+      md5: a91c117763c21cbf8954ca6bf860aabb
+      size: 48
+    - path: nodes/depl/MultiPackmol/packmol
+      hash: md5
+      md5: 4f1a52fa63283bd986cdd630e26e09e3.dir
+      size: 352102
+      nfiles: 202
+    params:
+      params.yaml:
+        depl_ASEGeoOpt:
+          data_id: -1
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: FIRE
+          repeat:
+          - 1
+          - 1
+          - 1
+          run_kwargs:
+            fmax: 0.05
+    outs:
+    - path: nodes/depl/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/depl/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 97ea6a34d7970faf064223c751e5f734
+      size: 48
+    - path: nodes/depl/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 1570083c5b7fa6c7b9e40cf42ee9430a
+      size: 4116904
+  depl_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name depl_ASEMD
+    deps:
+    - path: nodes/ML11_MultiPack/MLModel/apax_model
+      hash: md5
+      md5: 7bd46fb71cecdff2240691825b4c65f0.dir
+      size: 84500150
+      nfiles: 5
+    - path: nodes/ML11_MultiPack/MLModel/log.csv
+      hash: md5
+      md5: 9348ccb7b02625b3cec5e4b705d8aa24
+      size: 88240
+    - path: nodes/ML11_MultiPack/MLModel/metrics.json
+      hash: md5
+      md5: 5b3a5e3298cf8b85ee47477ab150b8c4
+      size: 389
+    - path: nodes/ML11_MultiPack/MLModel/node-meta.json
+      hash: md5
+      md5: fe10223f99e39a2819c7804056d155ff
+      size: 48
+    - path: nodes/ML11_MultiPack/MLModel/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/ML11_MultiPack/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: 5c6e14f23cb72fcf72c69a899021e25d
+      size: 40180646
+    - path: nodes/ML11_MultiPack/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/depl/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/depl/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 97ea6a34d7970faf064223c751e5f734
+      size: 48
+    - path: nodes/depl/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 1570083c5b7fa6c7b9e40cf42ee9430a
+      size: 4116904
+    params:
+      params.yaml:
+        depl_ASEMD:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 10
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        depl_ASEMD+checker_list+0:
+          larger_only: true
+          max_std:
+          max_value: 0.5
+          minimum_window_size: 1
+          value: forces_uncertainty
+          window_size: 500
+        depl_ASEMD+modifier+0:
+          cell_amplitude: 0
+          end_cell: 14.58
+          interval: 1
+          num_oscillations: 0.5
+          num_ramp_oscillations:
+        depl_ASEMD+thermostat:
+          friction: 0.01
+          temperature: 298.15
+          time_step: 0.5
+    outs:
+    - path: nodes/depl/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: bf902b73710f95469ffac9da58462f74
+      size: 31088
+    - path: nodes/depl/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/depl/ASEMD/node-meta.json
+      hash: md5
+      md5: feba9486154c0c8258fdf804c6930ac7
+      size: 48
+    - path: nodes/depl/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/depl/ASEMD/trajectory.h5
+      hash: md5
+      md5: 1bf7c4c9258e731704bc7966ebe4f617
+      size: 16168416

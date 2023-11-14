@@ -77,6 +77,17 @@ ML10_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+ML11_MultiPack_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 2
+    - 2
+    - 2
+    run_kwargs:
+        fmax: 0.5
 ML11_MultiPack_EnergyHistogram:
     bins: 100
     x_lim: null
@@ -689,3 +700,57 @@ classical_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+depl_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.05
+depl_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+depl_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+depl_ASEMD+modifier+0:
+    cell_amplitude: 0
+    end_cell: 14.58
+    interval: 1
+    num_oscillations: 0.5
+    num_ramp_oscillations: null
+depl_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+depl_ApaxJaxMD:
+    data_id: -1
+    md_parameter: null
+    repeat: null
+depl_MultiPackmol:
+    box: null
+    count:
+    - 10
+    density: 900
+    n_configurations: 1
+    pbc: true
+    seed: 42
+    tolerance: 2.0

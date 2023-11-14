@@ -321,4 +321,53 @@ with project.group(f"ML11_MultiPack") as grp_ml11:
     ips.analysis.EnergyHistogram(data=train_data, bins=100)
     ips.analysis.ForcesHistogram(data=train_data)
 
-project.build(nodes=[grp, grp_ml11])
+    geo_opt = ips.calculators.ASEGeoOpt(
+            model=model,
+            data=structure.atoms,
+            data_id=-1,
+            optimizer="FIRE",
+            run_kwargs={"fmax": 0.5},
+        )
+    
+
+eq_box_oszillator = ips.calculators.BoxOscillatingRampModifier(
+    end_cell=14.58,
+    cell_amplitude=0,
+    num_oscillations=0.5,
+)
+
+with project.group("depl") as depl:
+    structure = ips.configuration_generation.MultiPackmol(
+        data=[single_structure.atoms],
+        count=[10],
+        density=900,
+        n_configurations=1,
+    )
+    geo_opt = ips.calculators.ASEGeoOpt(
+            model=model,
+            data=structure.atoms,
+            data_id=-1,
+            optimizer="FIRE",
+            run_kwargs={"fmax": 0.05},
+        )
+
+    md = ips.calculators.ASEMD(
+            data=geo_opt.atoms,
+            data_id=-1,
+            model=model,
+            thermostat=thermostat,
+            modifier=[eq_box_oszillator],
+            checker_list=[uncertainty_check],
+            steps=5000,
+            sampling_rate=10,
+        )
+
+    jax_md = ips.calculators.ApaxJaxMD(
+            model=model,
+            data=md.atoms,
+            data_id=-1,
+            md_parameter_file="config/jax_md.yaml",
+        )
+
+
+project.build(nodes=[depl])
