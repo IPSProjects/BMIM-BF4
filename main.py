@@ -287,4 +287,29 @@ for idx in range(8, 11):
 
     eq_box_oszillator.num_ramp_oscillations = 0.5
 
-project.build(nodes=[grp])
+
+with project.group(f"ML11_MultiPack") as grp_ml11:
+    cation = ips.configuration_generation.SmilesToConformers(smiles="CCCCN1C=C[N+](=C1)C", numConfs=200)
+    anion = ips.configuration_generation.SmilesToConformers(smiles="[B-](F)(F)(F)F", numConfs=200)
+    single_structure = ips.configuration_generation.MultiPackmol(
+        data=[cation.atoms, anion.atoms],
+        count=[1, 1],
+        density=1210,
+        pbc=False,
+        n_configurations=200,
+    )
+
+    structure = ips.configuration_generation.MultiPackmol(
+        data=[single_structure.atoms],
+        count=[10],
+        density=900,
+        n_configurations=20,
+    )
+
+    cp2k = ips.calculators.CP2KSinglePoint(
+            data=structure.atoms,
+            cp2k_params="config/cp2k.yaml",
+            cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+        )
+
+project.build(nodes=[grp_ml11])

@@ -13065,3 +13065,127 @@ stages:
       hash: md5
       md5: aee981ee16f7295e7d010393e113bcde
       size: 39162
+  ML11_MultiPack_SmilesToConformers_1:
+    cmd: zntrack run ipsuite.nodes.SmilesToConformers --name ML11_MultiPack_SmilesToConformers_1
+    params:
+      params.yaml:
+        ML11_MultiPack_SmilesToConformers_1:
+          cell: 100
+          maxAttempts: 1000
+          numConfs: 200
+          seed: 42
+          smiles: '[B-](F)(F)(F)F'
+    outs:
+    - path: nodes/ML11_MultiPack/SmilesToConformers_1/atoms.h5
+      hash: md5
+      md5: c28971f816e99521bbf6e1abce81b4ff
+      size: 74368
+    - path: nodes/ML11_MultiPack/SmilesToConformers_1/node-meta.json
+      hash: md5
+      md5: ec47383044e991b20813b58ed743699f
+      size: 48
+  ML11_MultiPack_SmilesToConformers:
+    cmd: zntrack run ipsuite.nodes.SmilesToConformers --name ML11_MultiPack_SmilesToConformers
+    params:
+      params.yaml:
+        ML11_MultiPack_SmilesToConformers:
+          cell: 100
+          maxAttempts: 1000
+          numConfs: 200
+          seed: 42
+          smiles: CCCCN1C=C[N+](=C1)C
+    outs:
+    - path: nodes/ML11_MultiPack/SmilesToConformers/atoms.h5
+      hash: md5
+      md5: 8d63d14048163fe682f5d93882699407
+      size: 250368
+    - path: nodes/ML11_MultiPack/SmilesToConformers/node-meta.json
+      hash: md5
+      md5: bd2c52bddd5931abe6584a77402f8c6c
+      size: 48
+  ML11_MultiPack_MultiPackmol:
+    cmd: zntrack run ipsuite.nodes.MultiPackmol --name ML11_MultiPack_MultiPackmol
+    deps:
+    - path: nodes/ML11_MultiPack/SmilesToConformers/atoms.h5
+      hash: md5
+      md5: 8d63d14048163fe682f5d93882699407
+      size: 250368
+    - path: nodes/ML11_MultiPack/SmilesToConformers/node-meta.json
+      hash: md5
+      md5: bd2c52bddd5931abe6584a77402f8c6c
+      size: 48
+    - path: nodes/ML11_MultiPack/SmilesToConformers_1/atoms.h5
+      hash: md5
+      md5: c28971f816e99521bbf6e1abce81b4ff
+      size: 74368
+    - path: nodes/ML11_MultiPack/SmilesToConformers_1/node-meta.json
+      hash: md5
+      md5: ec47383044e991b20813b58ed743699f
+      size: 48
+    params:
+      params.yaml:
+        ML11_MultiPack_MultiPackmol:
+          box:
+          count:
+          - 1
+          - 1
+          density: 1210
+          n_configurations: 200
+          pbc: false
+          seed: 42
+          tolerance: 2.0
+    outs:
+    - path: nodes/ML11_MultiPack/MultiPackmol/atoms.h5
+      hash: md5
+      md5: 90b2668020a84c8facf8158598fa4693
+      size: 282368
+    - path: nodes/ML11_MultiPack/MultiPackmol/node-meta.json
+      hash: md5
+      md5: d0e23ddeb8149003d098b3042fcdc521
+      size: 48
+    - path: nodes/ML11_MultiPack/MultiPackmol/packmol
+      hash: md5
+      md5: fd0965d65b3abf5287e0cc378f8e2044.dir
+      size: 810287
+      nfiles: 800
+  ML11_MultiPack_MultiPackmol_1:
+    cmd: zntrack run ipsuite.nodes.MultiPackmol --name ML11_MultiPack_MultiPackmol_1
+    deps:
+    - path: nodes/ML11_MultiPack/MultiPackmol/atoms.h5
+      hash: md5
+      md5: 90b2668020a84c8facf8158598fa4693
+      size: 282368
+    - path: nodes/ML11_MultiPack/MultiPackmol/node-meta.json
+      hash: md5
+      md5: d0e23ddeb8149003d098b3042fcdc521
+      size: 48
+    - path: nodes/ML11_MultiPack/MultiPackmol/packmol
+      hash: md5
+      md5: fd0965d65b3abf5287e0cc378f8e2044.dir
+      size: 810287
+      nfiles: 800
+    params:
+      params.yaml:
+        ML11_MultiPack_MultiPackmol_1:
+          box:
+          count:
+          - 10
+          density: 900
+          n_configurations: 20
+          pbc: true
+          seed: 42
+          tolerance: 2.0
+    outs:
+    - path: nodes/ML11_MultiPack/MultiPackmol_1/atoms.h5
+      hash: md5
+      md5: 11169393c4a079f6f77a3828b04f2968
+      size: 267968
+    - path: nodes/ML11_MultiPack/MultiPackmol_1/node-meta.json
+      hash: md5
+      md5: baf17158148ec12f52b668b3700831b5
+      size: 48
+    - path: nodes/ML11_MultiPack/MultiPackmol_1/packmol
+      hash: md5
+      md5: 76e91c069ed4efd07a338f8ef9eef143.dir
+      size: 711217
+      nfiles: 240

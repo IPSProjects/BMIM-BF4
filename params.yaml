@@ -64,6 +64,37 @@ ML10_ConfigurationSelection:
         name: ll_grad
     n_configurations: 50
     selection_method: max_dist
+ML11_MultiPack_MultiPackmol:
+    box: null
+    count:
+    - 1
+    - 1
+    density: 1210
+    n_configurations: 200
+    pbc: false
+    seed: 42
+    tolerance: 2.0
+ML11_MultiPack_MultiPackmol_1:
+    box: null
+    count:
+    - 10
+    density: 900
+    n_configurations: 20
+    pbc: true
+    seed: 42
+    tolerance: 2.0
+ML11_MultiPack_SmilesToConformers:
+    cell: 100
+    maxAttempts: 1000
+    numConfs: 200
+    seed: 42
+    smiles: CCCCN1C=C[N+](=C1)C
+ML11_MultiPack_SmilesToConformers_1:
+    cell: 100
+    maxAttempts: 1000
+    numConfs: 200
+    seed: 42
+    smiles: '[B-](F)(F)(F)F'
 ML1_ASEGeoOpt:
     data_id: -1
     dump_rate: 1000
