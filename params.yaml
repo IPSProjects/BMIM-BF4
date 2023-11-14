@@ -64,6 +64,32 @@ ML10_ConfigurationSelection:
         name: ll_grad
     n_configurations: 50
     selection_method: max_dist
+ML10_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML10_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML10_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML11_MultiPack_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML11_MultiPack_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML11_MultiPack_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 ML11_MultiPack_MultiPackmol:
     box: null
     count:

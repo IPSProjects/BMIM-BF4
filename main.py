@@ -271,9 +271,6 @@ for idx in range(8, 11):
 
         train_data += cp2k.atoms
 
-        if idx > 9:
-            break
-
         model = ips.models.Apax(
             data=train_data,
             validation_data=validation_data.atoms,
@@ -311,5 +308,17 @@ with project.group(f"ML11_MultiPack") as grp_ml11:
             cp2k_params="config/cp2k.yaml",
             cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
         )
+    train_data += cp2k.atoms
+    
+    model = ips.models.Apax(
+            data=train_data,
+            validation_data=validation_data.atoms,
+            config="config/initial_model.yaml",
+        )
 
-project.build(nodes=[grp_ml11])
+    prediction = ips.analysis.Prediction(data=test_data, model=model)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
+    ips.analysis.EnergyHistogram(data=train_data, bins=100)
+    ips.analysis.ForcesHistogram(data=train_data)
+
+project.build(nodes=[grp, grp_ml11])

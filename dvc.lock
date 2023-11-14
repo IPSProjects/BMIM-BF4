@@ -13394,3 +13394,1504 @@ stages:
       hash: md5
       md5: 56022e78bbb05c34a46f9b442fc54aa9
       size: 48
+  ML10_EnergyHistogram:
+    cmd: zntrack run ipsuite.nodes.EnergyHistogram --name ML10_EnergyHistogram
+    deps:
+    - path: nodes/ML0/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: c63ec9a3ee741eda364299fba9d1f33c
+      size: 48
+    - path: nodes/ML0/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 2fe1ff3445c4d109b873252ee738fb21
+      size: 5298
+    - path: nodes/ML0/ConfigurationSelection/selection.png
+      hash: md5
+      md5: e69b22105f551142c8c5f216f6195135
+      size: 67448
+    - path: nodes/ML1/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 1a7a68f83340406aa1164f42bae049eb
+      size: 1252296
+    - path: nodes/ML1/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 85b8556d44d8ef6eea20d5ed509dd3ad.dir
+      size: 15159470
+      nfiles: 3
+    - path: nodes/ML1/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: a874fce5c1681ffb680d7bee5dfccf97
+      size: 48
+    - path: nodes/ML10/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: cc04f8c6d047a5cb46fcf5e8b4c5dc8e
+      size: 1252296
+    - path: nodes/ML10/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 0be17c2c2559a4981cd2ea7cf21ed123.dir
+      size: 15691448
+      nfiles: 3
+    - path: nodes/ML10/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: abb5bfd72fb523275af2b02374a3744e
+      size: 48
+    - path: nodes/ML2/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7815747b6ed20c4c40ac55f96582c905
+      size: 1252296
+    - path: nodes/ML2/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a2fa20de295ec81ef85ca747acf80cef.dir
+      size: 15040654
+      nfiles: 3
+    - path: nodes/ML2/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 943e3651080de64d3f8748845f22d90c
+      size: 48
+    - path: nodes/ML3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 472469d827b217f516d213d1c8192c48
+      size: 1252296
+    - path: nodes/ML3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 3d64d0775e0af7dc2fa2ba0a643e282d.dir
+      size: 15157532
+      nfiles: 3
+    - path: nodes/ML3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 9c99e20c53a88bfb023e4557c1ec087e
+      size: 48
+    - path: nodes/ML4/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 3a96da47e636a768335927069d3bb2c9
+      size: 1252296
+    - path: nodes/ML4/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 75c1c61f3f294f7db6a04a3979e73002.dir
+      size: 15155125
+      nfiles: 3
+    - path: nodes/ML4/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 29bfef9d2ff8d00dac6354848914ab56
+      size: 48
+    - path: nodes/ML5/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 0cffdeb327580b9f09bd993b10797bbe
+      size: 1252296
+    - path: nodes/ML5/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: ab4116cfea96fbe3fa79f717d468123f.dir
+      size: 15161772
+      nfiles: 3
+    - path: nodes/ML5/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 83c1cb4e6797a87d2cc8d25e511a4473
+      size: 48
+    - path: nodes/ML6/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7021fdd18e93577f77aa1c56dec15cb1
+      size: 1252296
+    - path: nodes/ML6/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 695f7bf01bd8e0b3ae0b609cf54fd0c9.dir
+      size: 15190298
+      nfiles: 3
+    - path: nodes/ML6/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: fd5ef226d805b90e5fe1b00002986d89
+      size: 48
+    - path: nodes/ML7/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: e65f5dadd39b986f8a4704feeb93868f
+      size: 1252296
+    - path: nodes/ML7/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 50ba9212a3e1d4dfbccf2f26d5d6f217.dir
+      size: 15187689
+      nfiles: 3
+    - path: nodes/ML7/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 3a327fd3c0d6b1041528835eeab23a44
+      size: 48
+    - path: nodes/ML8/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 4a29c6e83bc4e70e51172b960831e57f
+      size: 1252296
+    - path: nodes/ML8/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 8ecd912fd843544ee76add7302b3556a.dir
+      size: 15614026
+      nfiles: 3
+    - path: nodes/ML8/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 4bb36a404075377f06bbfdf0a1fdf192
+      size: 48
+    - path: nodes/ML9/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 13742b3182554275e5bb17bb6d1d2f2e
+      size: 1252296
+    - path: nodes/ML9/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 4a5940fef000e02305243caadc1fb621.dir
+      size: 15671796
+      nfiles: 3
+    - path: nodes/ML9/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 164cbaaba263937b65d9e7827d44474d
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_2/node-meta.json
+      hash: md5
+      md5: c96f98e7ac534af9e7177c90e44ba98c
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_2/selected_configurations.json
+      hash: md5
+      md5: 49b8c065ebe4796d8c84ac92ab42648f
+      size: 1381
+    - path: nodes/classical/ConfigurationSelection_2/selection.png
+      hash: md5
+      md5: 8afeba13916f368f55bd5c2626f11a65
+      size: 43456
+    params:
+      params.yaml:
+        ML10_EnergyHistogram:
+          bins: 100
+          x_lim:
+          y_lim:
+    outs:
+    - path: nodes/ML10/EnergyHistogram/labels_df.csv
+      hash: md5
+      md5: 713d22d577553b65c09eb52da18e7054
+      size: 2441
+    - path: nodes/ML10/EnergyHistogram/metrics.json
+      hash: md5
+      md5: 38e75b638f15e4b82259420a78b426ba
+      size: 122
+    - path: nodes/ML10/EnergyHistogram/node-meta.json
+      hash: md5
+      md5: ac7dcad9b8b0d586bf96fbc51d304bf2
+      size: 48
+    - path: nodes/ML10/EnergyHistogram/plots
+      hash: md5
+      md5: 55e3459b2be951d26e354734787f7c5a.dir
+      size: 15385
+      nfiles: 1
+  ML10_ForcesHistogram:
+    cmd: zntrack run ipsuite.nodes.ForcesHistogram --name ML10_ForcesHistogram
+    deps:
+    - path: nodes/ML0/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: c63ec9a3ee741eda364299fba9d1f33c
+      size: 48
+    - path: nodes/ML0/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 2fe1ff3445c4d109b873252ee738fb21
+      size: 5298
+    - path: nodes/ML0/ConfigurationSelection/selection.png
+      hash: md5
+      md5: e69b22105f551142c8c5f216f6195135
+      size: 67448
+    - path: nodes/ML1/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 1a7a68f83340406aa1164f42bae049eb
+      size: 1252296
+    - path: nodes/ML1/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 85b8556d44d8ef6eea20d5ed509dd3ad.dir
+      size: 15159470
+      nfiles: 3
+    - path: nodes/ML1/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: a874fce5c1681ffb680d7bee5dfccf97
+      size: 48
+    - path: nodes/ML10/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: cc04f8c6d047a5cb46fcf5e8b4c5dc8e
+      size: 1252296
+    - path: nodes/ML10/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 0be17c2c2559a4981cd2ea7cf21ed123.dir
+      size: 15691448
+      nfiles: 3
+    - path: nodes/ML10/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: abb5bfd72fb523275af2b02374a3744e
+      size: 48
+    - path: nodes/ML2/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7815747b6ed20c4c40ac55f96582c905
+      size: 1252296
+    - path: nodes/ML2/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a2fa20de295ec81ef85ca747acf80cef.dir
+      size: 15040654
+      nfiles: 3
+    - path: nodes/ML2/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 943e3651080de64d3f8748845f22d90c
+      size: 48
+    - path: nodes/ML3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 472469d827b217f516d213d1c8192c48
+      size: 1252296
+    - path: nodes/ML3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 3d64d0775e0af7dc2fa2ba0a643e282d.dir
+      size: 15157532
+      nfiles: 3
+    - path: nodes/ML3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 9c99e20c53a88bfb023e4557c1ec087e
+      size: 48
+    - path: nodes/ML4/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 3a96da47e636a768335927069d3bb2c9
+      size: 1252296
+    - path: nodes/ML4/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 75c1c61f3f294f7db6a04a3979e73002.dir
+      size: 15155125
+      nfiles: 3
+    - path: nodes/ML4/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 29bfef9d2ff8d00dac6354848914ab56
+      size: 48
+    - path: nodes/ML5/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 0cffdeb327580b9f09bd993b10797bbe
+      size: 1252296
+    - path: nodes/ML5/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: ab4116cfea96fbe3fa79f717d468123f.dir
+      size: 15161772
+      nfiles: 3
+    - path: nodes/ML5/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 83c1cb4e6797a87d2cc8d25e511a4473
+      size: 48
+    - path: nodes/ML6/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7021fdd18e93577f77aa1c56dec15cb1
+      size: 1252296
+    - path: nodes/ML6/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 695f7bf01bd8e0b3ae0b609cf54fd0c9.dir
+      size: 15190298
+      nfiles: 3
+    - path: nodes/ML6/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: fd5ef226d805b90e5fe1b00002986d89
+      size: 48
+    - path: nodes/ML7/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: e65f5dadd39b986f8a4704feeb93868f
+      size: 1252296
+    - path: nodes/ML7/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 50ba9212a3e1d4dfbccf2f26d5d6f217.dir
+      size: 15187689
+      nfiles: 3
+    - path: nodes/ML7/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 3a327fd3c0d6b1041528835eeab23a44
+      size: 48
+    - path: nodes/ML8/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 4a29c6e83bc4e70e51172b960831e57f
+      size: 1252296
+    - path: nodes/ML8/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 8ecd912fd843544ee76add7302b3556a.dir
+      size: 15614026
+      nfiles: 3
+    - path: nodes/ML8/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 4bb36a404075377f06bbfdf0a1fdf192
+      size: 48
+    - path: nodes/ML9/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 13742b3182554275e5bb17bb6d1d2f2e
+      size: 1252296
+    - path: nodes/ML9/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 4a5940fef000e02305243caadc1fb621.dir
+      size: 15671796
+      nfiles: 3
+    - path: nodes/ML9/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 164cbaaba263937b65d9e7827d44474d
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_2/node-meta.json
+      hash: md5
+      md5: c96f98e7ac534af9e7177c90e44ba98c
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_2/selected_configurations.json
+      hash: md5
+      md5: 49b8c065ebe4796d8c84ac92ab42648f
+      size: 1381
+    - path: nodes/classical/ConfigurationSelection_2/selection.png
+      hash: md5
+      md5: 8afeba13916f368f55bd5c2626f11a65
+      size: 43456
+    params:
+      params.yaml:
+        ML10_ForcesHistogram:
+          bins:
+          x_lim:
+          y_lim:
+    outs:
+    - path: nodes/ML10/ForcesHistogram/labels_df.csv
+      hash: md5
+      md5: 09326baed8837b71d881faa0883f6aa3
+      size: 77092
+    - path: nodes/ML10/ForcesHistogram/metrics.json
+      hash: md5
+      md5: 27e963a2b1bfccc0efd0bd7d7e21baa6
+      size: 129
+    - path: nodes/ML10/ForcesHistogram/node-meta.json
+      hash: md5
+      md5: 5877f29a4661da31f14b41195d0238d8
+      size: 48
+    - path: nodes/ML10/ForcesHistogram/plots
+      hash: md5
+      md5: 6a25337e9d0dd3a3fae82e3ce26d1c99.dir
+      size: 31590
+      nfiles: 1
+  ML10_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML10_MLModel
+    deps:
+    - path: nodes/ML0/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: c63ec9a3ee741eda364299fba9d1f33c
+      size: 48
+    - path: nodes/ML0/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 2fe1ff3445c4d109b873252ee738fb21
+      size: 5298
+    - path: nodes/ML0/ConfigurationSelection/selection.png
+      hash: md5
+      md5: e69b22105f551142c8c5f216f6195135
+      size: 67448
+    - path: nodes/ML1/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 1a7a68f83340406aa1164f42bae049eb
+      size: 1252296
+    - path: nodes/ML1/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 85b8556d44d8ef6eea20d5ed509dd3ad.dir
+      size: 15159470
+      nfiles: 3
+    - path: nodes/ML1/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: a874fce5c1681ffb680d7bee5dfccf97
+      size: 48
+    - path: nodes/ML10/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: cc04f8c6d047a5cb46fcf5e8b4c5dc8e
+      size: 1252296
+    - path: nodes/ML10/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 0be17c2c2559a4981cd2ea7cf21ed123.dir
+      size: 15691448
+      nfiles: 3
+    - path: nodes/ML10/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: abb5bfd72fb523275af2b02374a3744e
+      size: 48
+    - path: nodes/ML2/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7815747b6ed20c4c40ac55f96582c905
+      size: 1252296
+    - path: nodes/ML2/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a2fa20de295ec81ef85ca747acf80cef.dir
+      size: 15040654
+      nfiles: 3
+    - path: nodes/ML2/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 943e3651080de64d3f8748845f22d90c
+      size: 48
+    - path: nodes/ML3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 472469d827b217f516d213d1c8192c48
+      size: 1252296
+    - path: nodes/ML3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 3d64d0775e0af7dc2fa2ba0a643e282d.dir
+      size: 15157532
+      nfiles: 3
+    - path: nodes/ML3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 9c99e20c53a88bfb023e4557c1ec087e
+      size: 48
+    - path: nodes/ML4/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 3a96da47e636a768335927069d3bb2c9
+      size: 1252296
+    - path: nodes/ML4/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 75c1c61f3f294f7db6a04a3979e73002.dir
+      size: 15155125
+      nfiles: 3
+    - path: nodes/ML4/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 29bfef9d2ff8d00dac6354848914ab56
+      size: 48
+    - path: nodes/ML5/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 0cffdeb327580b9f09bd993b10797bbe
+      size: 1252296
+    - path: nodes/ML5/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: ab4116cfea96fbe3fa79f717d468123f.dir
+      size: 15161772
+      nfiles: 3
+    - path: nodes/ML5/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 83c1cb4e6797a87d2cc8d25e511a4473
+      size: 48
+    - path: nodes/ML6/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7021fdd18e93577f77aa1c56dec15cb1
+      size: 1252296
+    - path: nodes/ML6/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 695f7bf01bd8e0b3ae0b609cf54fd0c9.dir
+      size: 15190298
+      nfiles: 3
+    - path: nodes/ML6/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: fd5ef226d805b90e5fe1b00002986d89
+      size: 48
+    - path: nodes/ML7/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: e65f5dadd39b986f8a4704feeb93868f
+      size: 1252296
+    - path: nodes/ML7/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 50ba9212a3e1d4dfbccf2f26d5d6f217.dir
+      size: 15187689
+      nfiles: 3
+    - path: nodes/ML7/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 3a327fd3c0d6b1041528835eeab23a44
+      size: 48
+    - path: nodes/ML8/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 4a29c6e83bc4e70e51172b960831e57f
+      size: 1252296
+    - path: nodes/ML8/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 8ecd912fd843544ee76add7302b3556a.dir
+      size: 15614026
+      nfiles: 3
+    - path: nodes/ML8/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 4bb36a404075377f06bbfdf0a1fdf192
+      size: 48
+    - path: nodes/ML9/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 13742b3182554275e5bb17bb6d1d2f2e
+      size: 1252296
+    - path: nodes/ML9/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 4a5940fef000e02305243caadc1fb621.dir
+      size: 15671796
+      nfiles: 3
+    - path: nodes/ML9/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 164cbaaba263937b65d9e7827d44474d
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: 214a8afd08f14201c2d2d7a5004d646e
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: b574b1f0ff57372a517d7eeb93ace532
+      size: 1380
+    - path: nodes/classical/ConfigurationSelection_1/selection.png
+      hash: md5
+      md5: 740759b3fb81dc973f8979ae133161f9
+      size: 43329
+    - path: nodes/classical/ConfigurationSelection_2/node-meta.json
+      hash: md5
+      md5: c96f98e7ac534af9e7177c90e44ba98c
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_2/selected_configurations.json
+      hash: md5
+      md5: 49b8c065ebe4796d8c84ac92ab42648f
+      size: 1381
+    - path: nodes/classical/ConfigurationSelection_2/selection.png
+      hash: md5
+      md5: 8afeba13916f368f55bd5c2626f11a65
+      size: 43456
+    params:
+      params.yaml:
+        ML10_MLModel:
+          jax_enable_x64: true
+          use_energy: true
+          use_forces: true
+          use_stresses: false
+      config/initial_model.yaml:
+        data:
+          batch_size: 8
+          scale_method: per_element_force_rms_scale
+          shift_method: per_element_regression_shift
+          shift_options:
+            energy_regularisation: 1.0
+          valid_batch_size: 100
+        loss:
+        - name: energy
+        - name: forces
+          weight: 4.0
+        - name: stress
+          weight: 0.2
+        metrics:
+        - name: energy
+          reductions:
+          - mae
+        - name: forces
+          reductions:
+          - mae
+        - name: stress
+          reductions:
+          - mae
+        model:
+          n_basis: 7
+          n_radial: 5
+          nn:
+          - 512
+          - 512
+          r_max: 5.5
+          r_min: 0.7
+          b_init: zeros
+          emb_init: uniform
+          calc_stress: true
+          use_zbl: true
+          descriptor_dtype: fp32
+          readout_dtype: fp32
+          scale_shift_dtype: fp32
+        n_epochs: 500
+        n_models: 2
+        optimizer:
+          opt_name: adam
+          emb_lr: 0.01
+          nn_lr: 0.005
+          scale_lr: 0.001
+          shift_lr: 0.05
+          zbl_lr: 0.001
+        seed: 1
+    outs:
+    - path: nodes/ML10/MLModel/apax_model
+      hash: md5
+      md5: 6f3d8a2796e5234eead4d52c7b6a53d6.dir
+      size: 84500120
+      nfiles: 5
+    - path: nodes/ML10/MLModel/log.csv
+      hash: md5
+      md5: ddeb5c8e1d91005fdcd8dd2febbb0826
+      size: 88221
+    - path: nodes/ML10/MLModel/metrics.json
+      hash: md5
+      md5: 51c7f6a871eb59d1e2682c58fde3a183
+      size: 388
+    - path: nodes/ML10/MLModel/node-meta.json
+      hash: md5
+      md5: 1f0f421cb1a14a6657aa1a40f666dde0
+      size: 48
+    - path: nodes/ML10/MLModel/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/ML10/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: 26d7e4536daabae05e4008c822934ced
+      size: 39542908
+    - path: nodes/ML10/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+  ML10_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML10_Prediction
+    deps:
+    - path: nodes/ML10/MLModel/apax_model
+      hash: md5
+      md5: 6f3d8a2796e5234eead4d52c7b6a53d6.dir
+      size: 84500120
+      nfiles: 5
+    - path: nodes/ML10/MLModel/log.csv
+      hash: md5
+      md5: ddeb5c8e1d91005fdcd8dd2febbb0826
+      size: 88221
+    - path: nodes/ML10/MLModel/metrics.json
+      hash: md5
+      md5: 51c7f6a871eb59d1e2682c58fde3a183
+      size: 388
+    - path: nodes/ML10/MLModel/node-meta.json
+      hash: md5
+      md5: 1f0f421cb1a14a6657aa1a40f666dde0
+      size: 48
+    - path: nodes/ML10/MLModel/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/ML10/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: 26d7e4536daabae05e4008c822934ced
+      size: 39542908
+    - path: nodes/ML10/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/classical/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: f36b219c74c9d91264436d43a2205fcf
+      size: 48
+    - path: nodes/classical/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 16197186b92aa023fd00cc3ac5f38582
+      size: 6763
+    - path: nodes/classical/ConfigurationSelection/selection.png
+      hash: md5
+      md5: af3a478f4fd3c8624841f79c50568cfe
+      size: 44259
+    outs:
+    - path: nodes/ML10/Prediction/atoms.h5
+      hash: md5
+      md5: 22df98c9cddd1bbfc90e52cd3d4e8c84
+      size: 12478688
+    - path: nodes/ML10/Prediction/node-meta.json
+      hash: md5
+      md5: 77e9a611d235b0ff7f08938d6f0452fb
+      size: 48
+  ML10_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML10_PredictionMetrics
+    deps:
+    - path: nodes/ML10/Prediction/atoms.h5
+      hash: md5
+      md5: 22df98c9cddd1bbfc90e52cd3d4e8c84
+      size: 12478688
+    - path: nodes/ML10/Prediction/node-meta.json
+      hash: md5
+      md5: 77e9a611d235b0ff7f08938d6f0452fb
+      size: 48
+    outs:
+    - path: nodes/ML10/PredictionMetrics/deviat_stress.json
+      hash: md5
+      md5: 793b14cb8c14c4f54550b4983b2155d7
+      size: 211
+    - path: nodes/ML10/PredictionMetrics/energy.json
+      hash: md5
+      md5: a93d24ebe63cdaeef5973e2d049da75a
+      size: 194
+    - path: nodes/ML10/PredictionMetrics/energy_df.csv
+      hash: md5
+      md5: 561f4d3643f4a52732d2d41e4cff1362
+      size: 21319
+    - path: nodes/ML10/PredictionMetrics/forces.json
+      hash: md5
+      md5: 842d9ee5fc3f2a5507b48fe69c7dd254
+      size: 189
+    - path: nodes/ML10/PredictionMetrics/forces_df.csv
+      hash: md5
+      md5: ef0257ee956bb2957e920adf9e288485
+      size: 22660579
+    - path: nodes/ML10/PredictionMetrics/hydro_stress.json
+      hash: md5
+      md5: 5cf42ef43e8b5ed4b5dda900958b60be
+      size: 205
+    - path: nodes/ML10/PredictionMetrics/node-meta.json
+      hash: md5
+      md5: f35059b4c0917fa7ad907d9662713645
+      size: 48
+    - path: nodes/ML10/PredictionMetrics/plots
+      hash: md5
+      md5: 2592b06bd771fa4b84eeccfd95feb46a.dir
+      size: 375876
+      nfiles: 5
+    - path: nodes/ML10/PredictionMetrics/stress.json
+      hash: md5
+      md5: 889698be4b71ca3235773a26970a6387
+      size: 208
+    - path: nodes/ML10/PredictionMetrics/stress_deviatoric_df.csv
+      hash: md5
+      md5: c2e3b63a385ddc97cba3444a15a4eb0b
+      size: 212162
+    - path: nodes/ML10/PredictionMetrics/stress_df.csv
+      hash: md5
+      md5: b905fcd3eefb92ce6c1a48899cea144b
+      size: 207605
+    - path: nodes/ML10/PredictionMetrics/stress_hydrostatic_df.csv
+      hash: md5
+      md5: cf94766ea042695ccc6dba296543f352
+      size: 23487
+  ML11_MultiPack_EnergyHistogram:
+    cmd: zntrack run ipsuite.nodes.EnergyHistogram --name ML11_MultiPack_EnergyHistogram
+    deps:
+    - path: nodes/ML0/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: c63ec9a3ee741eda364299fba9d1f33c
+      size: 48
+    - path: nodes/ML0/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 2fe1ff3445c4d109b873252ee738fb21
+      size: 5298
+    - path: nodes/ML0/ConfigurationSelection/selection.png
+      hash: md5
+      md5: e69b22105f551142c8c5f216f6195135
+      size: 67448
+    - path: nodes/ML1/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 1a7a68f83340406aa1164f42bae049eb
+      size: 1252296
+    - path: nodes/ML1/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 85b8556d44d8ef6eea20d5ed509dd3ad.dir
+      size: 15159470
+      nfiles: 3
+    - path: nodes/ML1/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: a874fce5c1681ffb680d7bee5dfccf97
+      size: 48
+    - path: nodes/ML10/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: cc04f8c6d047a5cb46fcf5e8b4c5dc8e
+      size: 1252296
+    - path: nodes/ML10/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 0be17c2c2559a4981cd2ea7cf21ed123.dir
+      size: 15691448
+      nfiles: 3
+    - path: nodes/ML10/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: abb5bfd72fb523275af2b02374a3744e
+      size: 48
+    - path: nodes/ML11_MultiPack/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 4acf2a8e643244dbe723a5f8c7689798
+      size: 379232
+    - path: nodes/ML11_MultiPack/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 8a2da0d10b09ea5d5eb00d568ae6fe44.dir
+      size: 13588720
+      nfiles: 3
+    - path: nodes/ML11_MultiPack/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 56022e78bbb05c34a46f9b442fc54aa9
+      size: 48
+    - path: nodes/ML2/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7815747b6ed20c4c40ac55f96582c905
+      size: 1252296
+    - path: nodes/ML2/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a2fa20de295ec81ef85ca747acf80cef.dir
+      size: 15040654
+      nfiles: 3
+    - path: nodes/ML2/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 943e3651080de64d3f8748845f22d90c
+      size: 48
+    - path: nodes/ML3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 472469d827b217f516d213d1c8192c48
+      size: 1252296
+    - path: nodes/ML3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 3d64d0775e0af7dc2fa2ba0a643e282d.dir
+      size: 15157532
+      nfiles: 3
+    - path: nodes/ML3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 9c99e20c53a88bfb023e4557c1ec087e
+      size: 48
+    - path: nodes/ML4/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 3a96da47e636a768335927069d3bb2c9
+      size: 1252296
+    - path: nodes/ML4/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 75c1c61f3f294f7db6a04a3979e73002.dir
+      size: 15155125
+      nfiles: 3
+    - path: nodes/ML4/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 29bfef9d2ff8d00dac6354848914ab56
+      size: 48
+    - path: nodes/ML5/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 0cffdeb327580b9f09bd993b10797bbe
+      size: 1252296
+    - path: nodes/ML5/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: ab4116cfea96fbe3fa79f717d468123f.dir
+      size: 15161772
+      nfiles: 3
+    - path: nodes/ML5/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 83c1cb4e6797a87d2cc8d25e511a4473
+      size: 48
+    - path: nodes/ML6/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7021fdd18e93577f77aa1c56dec15cb1
+      size: 1252296
+    - path: nodes/ML6/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 695f7bf01bd8e0b3ae0b609cf54fd0c9.dir
+      size: 15190298
+      nfiles: 3
+    - path: nodes/ML6/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: fd5ef226d805b90e5fe1b00002986d89
+      size: 48
+    - path: nodes/ML7/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: e65f5dadd39b986f8a4704feeb93868f
+      size: 1252296
+    - path: nodes/ML7/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 50ba9212a3e1d4dfbccf2f26d5d6f217.dir
+      size: 15187689
+      nfiles: 3
+    - path: nodes/ML7/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 3a327fd3c0d6b1041528835eeab23a44
+      size: 48
+    - path: nodes/ML8/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 4a29c6e83bc4e70e51172b960831e57f
+      size: 1252296
+    - path: nodes/ML8/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 8ecd912fd843544ee76add7302b3556a.dir
+      size: 15614026
+      nfiles: 3
+    - path: nodes/ML8/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 4bb36a404075377f06bbfdf0a1fdf192
+      size: 48
+    - path: nodes/ML9/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 13742b3182554275e5bb17bb6d1d2f2e
+      size: 1252296
+    - path: nodes/ML9/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 4a5940fef000e02305243caadc1fb621.dir
+      size: 15671796
+      nfiles: 3
+    - path: nodes/ML9/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 164cbaaba263937b65d9e7827d44474d
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_2/node-meta.json
+      hash: md5
+      md5: c96f98e7ac534af9e7177c90e44ba98c
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_2/selected_configurations.json
+      hash: md5
+      md5: 49b8c065ebe4796d8c84ac92ab42648f
+      size: 1381
+    - path: nodes/classical/ConfigurationSelection_2/selection.png
+      hash: md5
+      md5: 8afeba13916f368f55bd5c2626f11a65
+      size: 43456
+    params:
+      params.yaml:
+        ML11_MultiPack_EnergyHistogram:
+          bins: 100
+          x_lim:
+          y_lim:
+    outs:
+    - path: nodes/ML11_MultiPack/EnergyHistogram/labels_df.csv
+      hash: md5
+      md5: ccf9ae71661f71d04956c9e45897c24d
+      size: 2422
+    - path: nodes/ML11_MultiPack/EnergyHistogram/metrics.json
+      hash: md5
+      md5: 16e4eec9a843659a7f066fa85da130b0
+      size: 122
+    - path: nodes/ML11_MultiPack/EnergyHistogram/node-meta.json
+      hash: md5
+      md5: 8f2b8d801c1dbd70d0bf58b15f5031d3
+      size: 48
+    - path: nodes/ML11_MultiPack/EnergyHistogram/plots
+      hash: md5
+      md5: b4d5111835bd32cdffd1e2de548656d4.dir
+      size: 16862
+      nfiles: 1
+  ML11_MultiPack_ForcesHistogram:
+    cmd: zntrack run ipsuite.nodes.ForcesHistogram --name ML11_MultiPack_ForcesHistogram
+    deps:
+    - path: nodes/ML0/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: c63ec9a3ee741eda364299fba9d1f33c
+      size: 48
+    - path: nodes/ML0/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 2fe1ff3445c4d109b873252ee738fb21
+      size: 5298
+    - path: nodes/ML0/ConfigurationSelection/selection.png
+      hash: md5
+      md5: e69b22105f551142c8c5f216f6195135
+      size: 67448
+    - path: nodes/ML1/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 1a7a68f83340406aa1164f42bae049eb
+      size: 1252296
+    - path: nodes/ML1/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 85b8556d44d8ef6eea20d5ed509dd3ad.dir
+      size: 15159470
+      nfiles: 3
+    - path: nodes/ML1/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: a874fce5c1681ffb680d7bee5dfccf97
+      size: 48
+    - path: nodes/ML10/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: cc04f8c6d047a5cb46fcf5e8b4c5dc8e
+      size: 1252296
+    - path: nodes/ML10/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 0be17c2c2559a4981cd2ea7cf21ed123.dir
+      size: 15691448
+      nfiles: 3
+    - path: nodes/ML10/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: abb5bfd72fb523275af2b02374a3744e
+      size: 48
+    - path: nodes/ML11_MultiPack/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 4acf2a8e643244dbe723a5f8c7689798
+      size: 379232
+    - path: nodes/ML11_MultiPack/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 8a2da0d10b09ea5d5eb00d568ae6fe44.dir
+      size: 13588720
+      nfiles: 3
+    - path: nodes/ML11_MultiPack/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 56022e78bbb05c34a46f9b442fc54aa9
+      size: 48
+    - path: nodes/ML2/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7815747b6ed20c4c40ac55f96582c905
+      size: 1252296
+    - path: nodes/ML2/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a2fa20de295ec81ef85ca747acf80cef.dir
+      size: 15040654
+      nfiles: 3
+    - path: nodes/ML2/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 943e3651080de64d3f8748845f22d90c
+      size: 48
+    - path: nodes/ML3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 472469d827b217f516d213d1c8192c48
+      size: 1252296
+    - path: nodes/ML3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 3d64d0775e0af7dc2fa2ba0a643e282d.dir
+      size: 15157532
+      nfiles: 3
+    - path: nodes/ML3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 9c99e20c53a88bfb023e4557c1ec087e
+      size: 48
+    - path: nodes/ML4/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 3a96da47e636a768335927069d3bb2c9
+      size: 1252296
+    - path: nodes/ML4/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 75c1c61f3f294f7db6a04a3979e73002.dir
+      size: 15155125
+      nfiles: 3
+    - path: nodes/ML4/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 29bfef9d2ff8d00dac6354848914ab56
+      size: 48
+    - path: nodes/ML5/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 0cffdeb327580b9f09bd993b10797bbe
+      size: 1252296
+    - path: nodes/ML5/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: ab4116cfea96fbe3fa79f717d468123f.dir
+      size: 15161772
+      nfiles: 3
+    - path: nodes/ML5/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 83c1cb4e6797a87d2cc8d25e511a4473
+      size: 48
+    - path: nodes/ML6/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7021fdd18e93577f77aa1c56dec15cb1
+      size: 1252296
+    - path: nodes/ML6/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 695f7bf01bd8e0b3ae0b609cf54fd0c9.dir
+      size: 15190298
+      nfiles: 3
+    - path: nodes/ML6/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: fd5ef226d805b90e5fe1b00002986d89
+      size: 48
+    - path: nodes/ML7/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: e65f5dadd39b986f8a4704feeb93868f
+      size: 1252296
+    - path: nodes/ML7/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 50ba9212a3e1d4dfbccf2f26d5d6f217.dir
+      size: 15187689
+      nfiles: 3
+    - path: nodes/ML7/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 3a327fd3c0d6b1041528835eeab23a44
+      size: 48
+    - path: nodes/ML8/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 4a29c6e83bc4e70e51172b960831e57f
+      size: 1252296
+    - path: nodes/ML8/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 8ecd912fd843544ee76add7302b3556a.dir
+      size: 15614026
+      nfiles: 3
+    - path: nodes/ML8/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 4bb36a404075377f06bbfdf0a1fdf192
+      size: 48
+    - path: nodes/ML9/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 13742b3182554275e5bb17bb6d1d2f2e
+      size: 1252296
+    - path: nodes/ML9/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 4a5940fef000e02305243caadc1fb621.dir
+      size: 15671796
+      nfiles: 3
+    - path: nodes/ML9/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 164cbaaba263937b65d9e7827d44474d
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_2/node-meta.json
+      hash: md5
+      md5: c96f98e7ac534af9e7177c90e44ba98c
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_2/selected_configurations.json
+      hash: md5
+      md5: 49b8c065ebe4796d8c84ac92ab42648f
+      size: 1381
+    - path: nodes/classical/ConfigurationSelection_2/selection.png
+      hash: md5
+      md5: 8afeba13916f368f55bd5c2626f11a65
+      size: 43456
+    params:
+      params.yaml:
+        ML11_MultiPack_ForcesHistogram:
+          bins:
+          x_lim:
+          y_lim:
+    outs:
+    - path: nodes/ML11_MultiPack/ForcesHistogram/labels_df.csv
+      hash: md5
+      md5: c0a42fa1f662f36de5898860d0614faa
+      size: 78625
+    - path: nodes/ML11_MultiPack/ForcesHistogram/metrics.json
+      hash: md5
+      md5: 7a797adbda90484dde4b4a5b15ba6fc6
+      size: 130
+    - path: nodes/ML11_MultiPack/ForcesHistogram/node-meta.json
+      hash: md5
+      md5: 9f393d679b5252a24cdd5c6ac32813ba
+      size: 48
+    - path: nodes/ML11_MultiPack/ForcesHistogram/plots
+      hash: md5
+      md5: 39c296b80d9964c83e3067b5e643b79e.dir
+      size: 32416
+      nfiles: 1
+  ML11_MultiPack_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML11_MultiPack_MLModel
+    deps:
+    - path: nodes/ML0/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: c63ec9a3ee741eda364299fba9d1f33c
+      size: 48
+    - path: nodes/ML0/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 2fe1ff3445c4d109b873252ee738fb21
+      size: 5298
+    - path: nodes/ML0/ConfigurationSelection/selection.png
+      hash: md5
+      md5: e69b22105f551142c8c5f216f6195135
+      size: 67448
+    - path: nodes/ML1/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 1a7a68f83340406aa1164f42bae049eb
+      size: 1252296
+    - path: nodes/ML1/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 85b8556d44d8ef6eea20d5ed509dd3ad.dir
+      size: 15159470
+      nfiles: 3
+    - path: nodes/ML1/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: a874fce5c1681ffb680d7bee5dfccf97
+      size: 48
+    - path: nodes/ML10/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: cc04f8c6d047a5cb46fcf5e8b4c5dc8e
+      size: 1252296
+    - path: nodes/ML10/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 0be17c2c2559a4981cd2ea7cf21ed123.dir
+      size: 15691448
+      nfiles: 3
+    - path: nodes/ML10/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: abb5bfd72fb523275af2b02374a3744e
+      size: 48
+    - path: nodes/ML11_MultiPack/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 4acf2a8e643244dbe723a5f8c7689798
+      size: 379232
+    - path: nodes/ML11_MultiPack/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 8a2da0d10b09ea5d5eb00d568ae6fe44.dir
+      size: 13588720
+      nfiles: 3
+    - path: nodes/ML11_MultiPack/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 56022e78bbb05c34a46f9b442fc54aa9
+      size: 48
+    - path: nodes/ML2/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7815747b6ed20c4c40ac55f96582c905
+      size: 1252296
+    - path: nodes/ML2/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a2fa20de295ec81ef85ca747acf80cef.dir
+      size: 15040654
+      nfiles: 3
+    - path: nodes/ML2/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 943e3651080de64d3f8748845f22d90c
+      size: 48
+    - path: nodes/ML3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 472469d827b217f516d213d1c8192c48
+      size: 1252296
+    - path: nodes/ML3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 3d64d0775e0af7dc2fa2ba0a643e282d.dir
+      size: 15157532
+      nfiles: 3
+    - path: nodes/ML3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 9c99e20c53a88bfb023e4557c1ec087e
+      size: 48
+    - path: nodes/ML4/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 3a96da47e636a768335927069d3bb2c9
+      size: 1252296
+    - path: nodes/ML4/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 75c1c61f3f294f7db6a04a3979e73002.dir
+      size: 15155125
+      nfiles: 3
+    - path: nodes/ML4/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 29bfef9d2ff8d00dac6354848914ab56
+      size: 48
+    - path: nodes/ML5/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 0cffdeb327580b9f09bd993b10797bbe
+      size: 1252296
+    - path: nodes/ML5/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: ab4116cfea96fbe3fa79f717d468123f.dir
+      size: 15161772
+      nfiles: 3
+    - path: nodes/ML5/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 83c1cb4e6797a87d2cc8d25e511a4473
+      size: 48
+    - path: nodes/ML6/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7021fdd18e93577f77aa1c56dec15cb1
+      size: 1252296
+    - path: nodes/ML6/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 695f7bf01bd8e0b3ae0b609cf54fd0c9.dir
+      size: 15190298
+      nfiles: 3
+    - path: nodes/ML6/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: fd5ef226d805b90e5fe1b00002986d89
+      size: 48
+    - path: nodes/ML7/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: e65f5dadd39b986f8a4704feeb93868f
+      size: 1252296
+    - path: nodes/ML7/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 50ba9212a3e1d4dfbccf2f26d5d6f217.dir
+      size: 15187689
+      nfiles: 3
+    - path: nodes/ML7/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 3a327fd3c0d6b1041528835eeab23a44
+      size: 48
+    - path: nodes/ML8/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 4a29c6e83bc4e70e51172b960831e57f
+      size: 1252296
+    - path: nodes/ML8/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 8ecd912fd843544ee76add7302b3556a.dir
+      size: 15614026
+      nfiles: 3
+    - path: nodes/ML8/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 4bb36a404075377f06bbfdf0a1fdf192
+      size: 48
+    - path: nodes/ML9/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 13742b3182554275e5bb17bb6d1d2f2e
+      size: 1252296
+    - path: nodes/ML9/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 4a5940fef000e02305243caadc1fb621.dir
+      size: 15671796
+      nfiles: 3
+    - path: nodes/ML9/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 164cbaaba263937b65d9e7827d44474d
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: 214a8afd08f14201c2d2d7a5004d646e
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: b574b1f0ff57372a517d7eeb93ace532
+      size: 1380
+    - path: nodes/classical/ConfigurationSelection_1/selection.png
+      hash: md5
+      md5: 740759b3fb81dc973f8979ae133161f9
+      size: 43329
+    - path: nodes/classical/ConfigurationSelection_2/node-meta.json
+      hash: md5
+      md5: c96f98e7ac534af9e7177c90e44ba98c
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_2/selected_configurations.json
+      hash: md5
+      md5: 49b8c065ebe4796d8c84ac92ab42648f
+      size: 1381
+    - path: nodes/classical/ConfigurationSelection_2/selection.png
+      hash: md5
+      md5: 8afeba13916f368f55bd5c2626f11a65
+      size: 43456
+    params:
+      params.yaml:
+        ML11_MultiPack_MLModel:
+          jax_enable_x64: true
+          use_energy: true
+          use_forces: true
+          use_stresses: false
+      config/initial_model.yaml:
+        data:
+          batch_size: 8
+          scale_method: per_element_force_rms_scale
+          shift_method: per_element_regression_shift
+          shift_options:
+            energy_regularisation: 1.0
+          valid_batch_size: 100
+        loss:
+        - name: energy
+        - name: forces
+          weight: 4.0
+        - name: stress
+          weight: 0.2
+        metrics:
+        - name: energy
+          reductions:
+          - mae
+        - name: forces
+          reductions:
+          - mae
+        - name: stress
+          reductions:
+          - mae
+        model:
+          n_basis: 7
+          n_radial: 5
+          nn:
+          - 512
+          - 512
+          r_max: 5.5
+          r_min: 0.7
+          b_init: zeros
+          emb_init: uniform
+          calc_stress: true
+          use_zbl: true
+          descriptor_dtype: fp32
+          readout_dtype: fp32
+          scale_shift_dtype: fp32
+        n_epochs: 500
+        n_models: 2
+        optimizer:
+          opt_name: adam
+          emb_lr: 0.01
+          nn_lr: 0.005
+          scale_lr: 0.001
+          shift_lr: 0.05
+          zbl_lr: 0.001
+        seed: 1
+    outs:
+    - path: nodes/ML11_MultiPack/MLModel/apax_model
+      hash: md5
+      md5: 7bd46fb71cecdff2240691825b4c65f0.dir
+      size: 84500150
+      nfiles: 5
+    - path: nodes/ML11_MultiPack/MLModel/log.csv
+      hash: md5
+      md5: 9348ccb7b02625b3cec5e4b705d8aa24
+      size: 88240
+    - path: nodes/ML11_MultiPack/MLModel/metrics.json
+      hash: md5
+      md5: 5b3a5e3298cf8b85ee47477ab150b8c4
+      size: 389
+    - path: nodes/ML11_MultiPack/MLModel/node-meta.json
+      hash: md5
+      md5: fe10223f99e39a2819c7804056d155ff
+      size: 48
+    - path: nodes/ML11_MultiPack/MLModel/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/ML11_MultiPack/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: 5c6e14f23cb72fcf72c69a899021e25d
+      size: 40180646
+    - path: nodes/ML11_MultiPack/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+  ML11_MultiPack_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML11_MultiPack_Prediction
+    deps:
+    - path: nodes/ML11_MultiPack/MLModel/apax_model
+      hash: md5
+      md5: 7bd46fb71cecdff2240691825b4c65f0.dir
+      size: 84500150
+      nfiles: 5
+    - path: nodes/ML11_MultiPack/MLModel/log.csv
+      hash: md5
+      md5: 9348ccb7b02625b3cec5e4b705d8aa24
+      size: 88240
+    - path: nodes/ML11_MultiPack/MLModel/metrics.json
+      hash: md5
+      md5: 5b3a5e3298cf8b85ee47477ab150b8c4
+      size: 389
+    - path: nodes/ML11_MultiPack/MLModel/node-meta.json
+      hash: md5
+      md5: fe10223f99e39a2819c7804056d155ff
+      size: 48
+    - path: nodes/ML11_MultiPack/MLModel/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/ML11_MultiPack/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: 5c6e14f23cb72fcf72c69a899021e25d
+      size: 40180646
+    - path: nodes/ML11_MultiPack/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/classical/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: f36b219c74c9d91264436d43a2205fcf
+      size: 48
+    - path: nodes/classical/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 16197186b92aa023fd00cc3ac5f38582
+      size: 6763
+    - path: nodes/classical/ConfigurationSelection/selection.png
+      hash: md5
+      md5: af3a478f4fd3c8624841f79c50568cfe
+      size: 44259
+    outs:
+    - path: nodes/ML11_MultiPack/Prediction/atoms.h5
+      hash: md5
+      md5: 0b10454f981cfc9e0a19890df2393096
+      size: 12478688
+    - path: nodes/ML11_MultiPack/Prediction/node-meta.json
+      hash: md5
+      md5: 8e8b642f8de42dfef6f5fc85382cee84
+      size: 48
+  ML11_MultiPack_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML11_MultiPack_PredictionMetrics
+    deps:
+    - path: nodes/ML11_MultiPack/Prediction/atoms.h5
+      hash: md5
+      md5: 0b10454f981cfc9e0a19890df2393096
+      size: 12478688
+    - path: nodes/ML11_MultiPack/Prediction/node-meta.json
+      hash: md5
+      md5: 8e8b642f8de42dfef6f5fc85382cee84
+      size: 48
+    outs:
+    - path: nodes/ML11_MultiPack/PredictionMetrics/deviat_stress.json
+      hash: md5
+      md5: 429f00cd9126c334db05e3194ac29fcf
+      size: 209
+    - path: nodes/ML11_MultiPack/PredictionMetrics/energy.json
+      hash: md5
+      md5: b0b9b3a7450a377e6b1dedb8fb0d752f
+      size: 195
+    - path: nodes/ML11_MultiPack/PredictionMetrics/energy_df.csv
+      hash: md5
+      md5: 4d3b88b3803f5a8656a2590048614cdf
+      size: 21341
+    - path: nodes/ML11_MultiPack/PredictionMetrics/forces.json
+      hash: md5
+      md5: aa8197cefb0a781e4c116951642ff640
+      size: 191
+    - path: nodes/ML11_MultiPack/PredictionMetrics/forces_df.csv
+      hash: md5
+      md5: 61df2aed2e9308ed28e809df18b6817b
+      size: 22660423
+    - path: nodes/ML11_MultiPack/PredictionMetrics/hydro_stress.json
+      hash: md5
+      md5: 29440cecc3c7130934cadce251319356
+      size: 206
+    - path: nodes/ML11_MultiPack/PredictionMetrics/node-meta.json
+      hash: md5
+      md5: 72e1b045763ccdaa59f45e8f8e4c0269
+      size: 48
+    - path: nodes/ML11_MultiPack/PredictionMetrics/plots
+      hash: md5
+      md5: 77308e5479cf17c5cc5480d4ed8e35b9.dir
+      size: 377304
+      nfiles: 5
+    - path: nodes/ML11_MultiPack/PredictionMetrics/stress.json
+      hash: md5
+      md5: f3a434c2911ba39e1e565dc728aee8d3
+      size: 208
+    - path: nodes/ML11_MultiPack/PredictionMetrics/stress_deviatoric_df.csv
+      hash: md5
+      md5: 9f7f81545bae06fa1b4706e3d9b54866
+      size: 212135
+    - path: nodes/ML11_MultiPack/PredictionMetrics/stress_df.csv
+      hash: md5
+      md5: cff680db6de42d8a9b6a08ba9f8f4574
+      size: 207535
+    - path: nodes/ML11_MultiPack/PredictionMetrics/stress_hydrostatic_df.csv
+      hash: md5
+      md5: ebf6e5f4240e51323487dba8f3609dff
+      size: 23481
