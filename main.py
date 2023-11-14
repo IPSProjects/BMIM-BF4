@@ -207,7 +207,6 @@ for idx in range(5, 8):
             processing_batch_size=4,
         )
 
-
         cp2k = ips.calculators.CP2KSinglePoint(
             data=kernel_selection.atoms,
             cp2k_params="config/cp2k.yaml",
@@ -226,7 +225,6 @@ for idx in range(5, 8):
         metrics = ips.analysis.PredictionMetrics(data=prediction)
         ips.analysis.EnergyHistogram(data=train_data, bins=100)
         ips.analysis.ForcesHistogram(data=train_data)
-
 
 
 eq_box_oszillator = ips.calculators.BoxOscillatingRampModifier(
@@ -286,8 +284,12 @@ for idx in range(8, 11):
 
 
 with project.group(f"ML11_MultiPack") as grp_ml11:
-    cation = ips.configuration_generation.SmilesToConformers(smiles="CCCCN1C=C[N+](=C1)C", numConfs=200)
-    anion = ips.configuration_generation.SmilesToConformers(smiles="[B-](F)(F)(F)F", numConfs=200)
+    cation = ips.configuration_generation.SmilesToConformers(
+        smiles="CCCCN1C=C[N+](=C1)C", numConfs=200
+    )
+    anion = ips.configuration_generation.SmilesToConformers(
+        smiles="[B-](F)(F)(F)F", numConfs=200
+    )
     single_structure = ips.configuration_generation.MultiPackmol(
         data=[cation.atoms, anion.atoms],
         count=[1, 1],
@@ -304,17 +306,17 @@ with project.group(f"ML11_MultiPack") as grp_ml11:
     )
 
     cp2k = ips.calculators.CP2KSinglePoint(
-            data=structure.atoms,
-            cp2k_params="config/cp2k.yaml",
-            cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
-        )
+        data=structure.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+    )
     train_data += cp2k.atoms
-    
+
     model = ips.models.Apax(
-            data=train_data,
-            validation_data=validation_data.atoms,
-            config="config/initial_model.yaml",
-        )
+        data=train_data,
+        validation_data=validation_data.atoms,
+        config="config/initial_model.yaml",
+    )
 
     prediction = ips.analysis.Prediction(data=test_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
@@ -323,50 +325,86 @@ with project.group(f"ML11_MultiPack") as grp_ml11:
 
 
 with project.group(f"ML12") as grp:
-        md = ips.calculators.ASEMD(
-            data=geo_opt.atoms,
-            data_id=-1,
-            model=model,
-            thermostat=thermostat,
-            modifier=[eq_box_oszillator, temperature_oszillator],
-            checker_list=[uncertainty_check],
-            steps=50000,
-            sampling_rate=10,
-        )
+    md = ips.calculators.ASEMD(
+        data=geo_opt.atoms,
+        data_id=-1,
+        model=model,
+        thermostat=thermostat,
+        modifier=[eq_box_oszillator, temperature_oszillator],
+        checker_list=[uncertainty_check],
+        steps=50000,
+        sampling_rate=10,
+    )
+    geo_opt = ips.calculators.ASEGeoOpt(
+        model=model,
+        data=md.atoms,
+        data_id=-1,
+        optimizer="FIRE",
+        run_kwargs={"fmax": 0.5},
+    )
+
+    kernel_selection = ips.models.apax.BatchKernelSelection(
+        data=md.atoms + geo_opt.atoms,
+        train_data=train_data,
+        models=model,
+        n_configurations=50,
+        processing_batch_size=4,
+    )
+
+    cp2k = ips.calculators.CP2KSinglePoint(
+        data=kernel_selection.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+    )
+
+    train_data += cp2k.atoms
+
+    model = ips.models.Apax(
+        data=train_data,
+        validation_data=validation_data.atoms,
+        config="config/initial_model.yaml",
+    )
+
+    prediction = ips.analysis.Prediction(data=test_data, model=model)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
+    ips.analysis.EnergyHistogram(data=train_data, bins=100)
+    ips.analysis.ForcesHistogram(data=train_data)
+
+
+mapping = ips.geometry.BarycenterMapping(data=None)
+
+with project.group(f"VS") as vs:
+    vs_list = []
+    for idx in range(5):
         geo_opt = ips.calculators.ASEGeoOpt(
             model=model,
-            data=md.atoms,
-            data_id=-1,
+            data=structure.atoms,
+            data_id=idx,
             optimizer="FIRE",
             run_kwargs={"fmax": 0.5},
         )
 
-        kernel_selection = ips.models.apax.BatchKernelSelection(
-            data=md.atoms + geo_opt.atoms,
-            train_data=train_data,
-            models=model,
-            n_configurations=50,
-            processing_batch_size=4,
+        volume_scan = ips.analysis.BoxScale(
+            data=geo_opt.atoms,
+            mapping=mapping,
+            model=model,
+            start=0.95,
+            stop=2.0,
+            num=100,
+            data_id=-1,
         )
 
-        cp2k = ips.calculators.CP2KSinglePoint(
-            data=kernel_selection.atoms,
-            cp2k_params="config/cp2k.yaml",
-            cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
-        )
+        vs_list.append(volume_scan.atoms)
 
-        # train_data += cp2k.atoms
+    selection = ips.configuration_selection.RandomSelection(
+        data=sum(vs_list, []),
+        n_configurations=50,
+    )
 
-        # model = ips.models.Apax(
-        #     data=train_data,
-        #     validation_data=validation_data.atoms,
-        #     config="config/initial_model.yaml",
-        # )
+    cp2k = ips.calculators.CP2KSinglePoint(
+        data=selection.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+    )
 
-        # prediction = ips.analysis.Prediction(data=test_data, model=model)
-        # metrics = ips.analysis.PredictionMetrics(data=prediction)
-        # ips.analysis.EnergyHistogram(data=train_data, bins=100)
-        # ips.analysis.ForcesHistogram(data=train_data)
-
-
-project.build(nodes=[grp])
+project.build(nodes=[grp, vs])

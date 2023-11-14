@@ -174,6 +174,19 @@ ML12_ConfigurationSelection:
         name: ll_grad
     n_configurations: 50
     selection_method: max_dist
+ML12_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML12_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML12_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 ML1_ASEGeoOpt:
     data_id: -1
     dump_rate: 1000
@@ -690,6 +703,99 @@ ML9_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+VS_ASEGeoOpt:
+    data_id: 0
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+VS_ASEGeoOpt_1:
+    data_id: 1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+VS_ASEGeoOpt_2:
+    data_id: 2
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+VS_ASEGeoOpt_3:
+    data_id: 3
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+VS_ASEGeoOpt_4:
+    data_id: 4
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+VS_BoxScale:
+    data_id: -1
+    num: 100
+    start: 0.9
+    stop: 2.0
+VS_BoxScale+mapping:
+    frozen: false
+VS_BoxScale_1:
+    data_id: -1
+    num: 100
+    start: 0.9
+    stop: 2.0
+VS_BoxScale_1+mapping:
+    frozen: false
+VS_BoxScale_2:
+    data_id: -1
+    num: 100
+    start: 0.9
+    stop: 2.0
+VS_BoxScale_2+mapping:
+    frozen: false
+VS_BoxScale_3:
+    data_id: -1
+    num: 100
+    start: 0.9
+    stop: 2.0
+VS_BoxScale_3+mapping:
+    frozen: false
+VS_BoxScale_4:
+    data_id: -1
+    num: 100
+    start: 0.9
+    stop: 2.0
+VS_BoxScale_4+mapping:
+    frozen: false
+VS_ConfigurationSelection:
+    n_configurations: 50
+    seed: 1234
 classical_ASEMD:
     data_id: -1
     dump_rate: 1000
