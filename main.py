@@ -271,8 +271,8 @@ for idx in range(8, 10):
 
         train_data += cp2k.atoms
 
-        if idx > 8:
-            break
+        # if idx > 8:
+        #     break
 
         model = ips.models.Apax(
             data=train_data,
@@ -287,4 +287,4 @@ for idx in range(8, 10):
 
     eq_box_oszillator.num_ramp_oscillations = 0.5
 
-project.build()
+project.build(nodes=[grp])

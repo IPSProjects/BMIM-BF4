@@ -84,6 +84,14 @@ plots:
 - nodes/ML8/EnergyHistogram/labels_df.csv: {}
 - nodes/ML8/ForcesHistogram/labels_df.csv: {}
 - nodes/ML9/ASEMD/metrics_dict.csv: {}
+- nodes/ML9/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/ML9/EnergyHistogram/labels_df.csv: {}
+- nodes/ML9/ForcesHistogram/labels_df.csv: {}
 stages:
   ML0_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML0_ConfigurationSelection
@@ -2387,6 +2395,194 @@ stages:
     - nodes/ML9/ConfigurationSelection/selection.png
     params:
     - ML9_ConfigurationSelection
+  ML9_EnergyHistogram:
+    cmd: zntrack run ipsuite.nodes.EnergyHistogram --name ML9_EnergyHistogram
+    deps:
+    - nodes/ML0/ConfigurationSelection/node-meta.json
+    - nodes/ML0/ConfigurationSelection/selected_configurations.json
+    - nodes/ML0/ConfigurationSelection/selection.png
+    - nodes/ML1/CP2KSinglePoint/atoms.h5
+    - nodes/ML1/CP2KSinglePoint/cp2k
+    - nodes/ML1/CP2KSinglePoint/node-meta.json
+    - nodes/ML2/CP2KSinglePoint/atoms.h5
+    - nodes/ML2/CP2KSinglePoint/cp2k
+    - nodes/ML2/CP2KSinglePoint/node-meta.json
+    - nodes/ML3/CP2KSinglePoint/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/cp2k
+    - nodes/ML3/CP2KSinglePoint/node-meta.json
+    - nodes/ML4/CP2KSinglePoint/atoms.h5
+    - nodes/ML4/CP2KSinglePoint/cp2k
+    - nodes/ML4/CP2KSinglePoint/node-meta.json
+    - nodes/ML5/CP2KSinglePoint/atoms.h5
+    - nodes/ML5/CP2KSinglePoint/cp2k
+    - nodes/ML5/CP2KSinglePoint/node-meta.json
+    - nodes/ML6/CP2KSinglePoint/atoms.h5
+    - nodes/ML6/CP2KSinglePoint/cp2k
+    - nodes/ML6/CP2KSinglePoint/node-meta.json
+    - nodes/ML7/CP2KSinglePoint/atoms.h5
+    - nodes/ML7/CP2KSinglePoint/cp2k
+    - nodes/ML7/CP2KSinglePoint/node-meta.json
+    - nodes/ML8/CP2KSinglePoint/atoms.h5
+    - nodes/ML8/CP2KSinglePoint/cp2k
+    - nodes/ML8/CP2KSinglePoint/node-meta.json
+    - nodes/ML9/CP2KSinglePoint/atoms.h5
+    - nodes/ML9/CP2KSinglePoint/cp2k
+    - nodes/ML9/CP2KSinglePoint/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_2/selection.png
+    metrics:
+    - nodes/ML9/EnergyHistogram/metrics.json:
+        cache: false
+    - nodes/ML9/EnergyHistogram/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML9/EnergyHistogram/labels_df.csv
+    - nodes/ML9/EnergyHistogram/plots
+    params:
+    - ML9_EnergyHistogram
+  ML9_ForcesHistogram:
+    cmd: zntrack run ipsuite.nodes.ForcesHistogram --name ML9_ForcesHistogram
+    deps:
+    - nodes/ML0/ConfigurationSelection/node-meta.json
+    - nodes/ML0/ConfigurationSelection/selected_configurations.json
+    - nodes/ML0/ConfigurationSelection/selection.png
+    - nodes/ML1/CP2KSinglePoint/atoms.h5
+    - nodes/ML1/CP2KSinglePoint/cp2k
+    - nodes/ML1/CP2KSinglePoint/node-meta.json
+    - nodes/ML2/CP2KSinglePoint/atoms.h5
+    - nodes/ML2/CP2KSinglePoint/cp2k
+    - nodes/ML2/CP2KSinglePoint/node-meta.json
+    - nodes/ML3/CP2KSinglePoint/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/cp2k
+    - nodes/ML3/CP2KSinglePoint/node-meta.json
+    - nodes/ML4/CP2KSinglePoint/atoms.h5
+    - nodes/ML4/CP2KSinglePoint/cp2k
+    - nodes/ML4/CP2KSinglePoint/node-meta.json
+    - nodes/ML5/CP2KSinglePoint/atoms.h5
+    - nodes/ML5/CP2KSinglePoint/cp2k
+    - nodes/ML5/CP2KSinglePoint/node-meta.json
+    - nodes/ML6/CP2KSinglePoint/atoms.h5
+    - nodes/ML6/CP2KSinglePoint/cp2k
+    - nodes/ML6/CP2KSinglePoint/node-meta.json
+    - nodes/ML7/CP2KSinglePoint/atoms.h5
+    - nodes/ML7/CP2KSinglePoint/cp2k
+    - nodes/ML7/CP2KSinglePoint/node-meta.json
+    - nodes/ML8/CP2KSinglePoint/atoms.h5
+    - nodes/ML8/CP2KSinglePoint/cp2k
+    - nodes/ML8/CP2KSinglePoint/node-meta.json
+    - nodes/ML9/CP2KSinglePoint/atoms.h5
+    - nodes/ML9/CP2KSinglePoint/cp2k
+    - nodes/ML9/CP2KSinglePoint/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_2/selection.png
+    metrics:
+    - nodes/ML9/ForcesHistogram/metrics.json:
+        cache: false
+    - nodes/ML9/ForcesHistogram/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML9/ForcesHistogram/labels_df.csv
+    - nodes/ML9/ForcesHistogram/plots
+    params:
+    - ML9_ForcesHistogram
+  ML9_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML9_MLModel
+    deps:
+    - nodes/ML0/ConfigurationSelection/node-meta.json
+    - nodes/ML0/ConfigurationSelection/selected_configurations.json
+    - nodes/ML0/ConfigurationSelection/selection.png
+    - nodes/ML1/CP2KSinglePoint/atoms.h5
+    - nodes/ML1/CP2KSinglePoint/cp2k
+    - nodes/ML1/CP2KSinglePoint/node-meta.json
+    - nodes/ML2/CP2KSinglePoint/atoms.h5
+    - nodes/ML2/CP2KSinglePoint/cp2k
+    - nodes/ML2/CP2KSinglePoint/node-meta.json
+    - nodes/ML3/CP2KSinglePoint/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/cp2k
+    - nodes/ML3/CP2KSinglePoint/node-meta.json
+    - nodes/ML4/CP2KSinglePoint/atoms.h5
+    - nodes/ML4/CP2KSinglePoint/cp2k
+    - nodes/ML4/CP2KSinglePoint/node-meta.json
+    - nodes/ML5/CP2KSinglePoint/atoms.h5
+    - nodes/ML5/CP2KSinglePoint/cp2k
+    - nodes/ML5/CP2KSinglePoint/node-meta.json
+    - nodes/ML6/CP2KSinglePoint/atoms.h5
+    - nodes/ML6/CP2KSinglePoint/cp2k
+    - nodes/ML6/CP2KSinglePoint/node-meta.json
+    - nodes/ML7/CP2KSinglePoint/atoms.h5
+    - nodes/ML7/CP2KSinglePoint/cp2k
+    - nodes/ML7/CP2KSinglePoint/node-meta.json
+    - nodes/ML8/CP2KSinglePoint/atoms.h5
+    - nodes/ML8/CP2KSinglePoint/cp2k
+    - nodes/ML8/CP2KSinglePoint/node-meta.json
+    - nodes/ML9/CP2KSinglePoint/atoms.h5
+    - nodes/ML9/CP2KSinglePoint/cp2k
+    - nodes/ML9/CP2KSinglePoint/node-meta.json
+    - nodes/classical/ConfigurationSelection_1/node-meta.json
+    - nodes/classical/ConfigurationSelection_1/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_1/selection.png
+    - nodes/classical/ConfigurationSelection_2/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_2/selection.png
+    metrics:
+    - nodes/ML9/MLModel/metrics.json:
+        cache: false
+    - nodes/ML9/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML9/MLModel/apax_model
+    - nodes/ML9/MLModel/log.csv
+    - nodes/ML9/MLModel/train.log
+    - nodes/ML9/MLModel/train_atoms.extxyz
+    - nodes/ML9/MLModel/val_atoms.extxyz
+    params:
+    - ML9_MLModel
+    - config/initial_model.yaml: null
+  ML9_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML9_Prediction
+    deps:
+    - nodes/ML9/MLModel/apax_model
+    - nodes/ML9/MLModel/log.csv
+    - nodes/ML9/MLModel/metrics.json
+    - nodes/ML9/MLModel/node-meta.json
+    - nodes/ML9/MLModel/train.log
+    - nodes/ML9/MLModel/train_atoms.extxyz
+    - nodes/ML9/MLModel/val_atoms.extxyz
+    - nodes/classical/ConfigurationSelection/node-meta.json
+    - nodes/classical/ConfigurationSelection/selected_configurations.json
+    - nodes/classical/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/ML9/Prediction/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML9/Prediction/atoms.h5
+  ML9_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML9_PredictionMetrics
+    deps:
+    - nodes/ML9/Prediction/atoms.h5
+    - nodes/ML9/Prediction/node-meta.json
+    metrics:
+    - nodes/ML9/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/ML9/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/ML9/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/ML9/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/ML9/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/ML9/PredictionMetrics/stress.json:
+        cache: false
+    outs:
+    - nodes/ML9/PredictionMetrics/energy_df.csv
+    - nodes/ML9/PredictionMetrics/forces_df.csv
+    - nodes/ML9/PredictionMetrics/plots
+    - nodes/ML9/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/ML9/PredictionMetrics/stress_df.csv
+    - nodes/ML9/PredictionMetrics/stress_hydrostatic_df.csv
   classical_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name classical_ASEMD
     deps:
