@@ -13189,3 +13189,208 @@ stages:
       md5: 76e91c069ed4efd07a338f8ef9eef143.dir
       size: 711217
       nfiles: 240
+  ML10_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML10_CP2KSinglePoint
+    deps:
+    - path: GTH_BASIS_SETS
+      hash: md5
+      md5: 518e733a7344699cf0b4192bb97eb6a3
+      size: 119403
+    - path: GTH_POTENTIALS
+      hash: md5
+      md5: 3a35b03b26b8ba5cf6c1d849dba11f15
+      size: 128982
+    - path: dftd3.dat
+      hash: md5
+      md5: 88745bcc951a4bcdccc4d6bcfa78d105
+      size: 1959318
+    - path: nodes/ML10/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 709674666b8ecfd8800aaf4e5f9eab6f
+      size: 48
+    - path: nodes/ML10/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: c44b92a548e28877bea3883301d898f1
+      size: 748
+    - path: nodes/ML10/ConfigurationSelection/selection.png
+      hash: md5
+      md5: aee981ee16f7295e7d010393e113bcde
+      size: 39162
+    params:
+      config/cp2k.yaml:
+        force_eval:
+          method: quickstep
+          DFT:
+            mgrid:
+              cutoff: 800
+              rel_cutoff: 60
+              ngrids: 5
+            QS:
+              eps_filter_matrix: 0.0
+              eps_pgf_orb: 0.0001
+            SCF:
+              scf_guess: restart
+              max_scf: 100
+              eps_scf: 1e-06
+              OT:
+                minimizer: diis
+                preconditioner: full_single_inverse
+              outer_scf:
+                max_scf: 100
+                eps_scf: 1e-06
+              print:
+                restart:
+                  each:
+                    QS_SCF: 0
+            XC:
+              xc_functional:
+                becke97:
+                  parametrization: B97-3c
+                  scale_c: 1.0
+                  scale_x: 1.0
+              vdw_potential:
+                pair_potential:
+                  type: dftd3(bj)
+                  parameter_file_name: dftd3.dat
+                  reference_functional: B97-3c
+                  r_cutoff: 7.93766
+                  calculate_c9_term: true
+                  short_range_correction: true
+                potential_type: pair_potential
+            charge: 0
+            basis_set_file_name: GTH_BASIS_SETS
+            potential_file_name: GTH_POTENTIALS
+          subsys:
+            kind:
+              N:
+                basis_set: TZVP-GTH-q5
+                potential: GTH-PBE-q5
+              C:
+                basis_set: TZVP-GTH-q4
+                potential: GTH-PBE-q4
+              H:
+                basis_set: TZVP-GTH-q1
+                potential: GTH-PBE-q1
+              B:
+                basis_set: TZVP-GTH-q3
+                potential: GTH-PBE-q3
+              F:
+                basis_set: TZVP-GTH-q7
+                potential: GTH-PBE-q7
+    outs:
+    - path: nodes/ML10/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: cc04f8c6d047a5cb46fcf5e8b4c5dc8e
+      size: 1252296
+    - path: nodes/ML10/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 0be17c2c2559a4981cd2ea7cf21ed123.dir
+      size: 15691448
+      nfiles: 3
+    - path: nodes/ML10/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: abb5bfd72fb523275af2b02374a3744e
+      size: 48
+  ML11_MultiPack_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML11_MultiPack_CP2KSinglePoint
+    deps:
+    - path: GTH_BASIS_SETS
+      hash: md5
+      md5: 518e733a7344699cf0b4192bb97eb6a3
+      size: 119403
+    - path: GTH_POTENTIALS
+      hash: md5
+      md5: 3a35b03b26b8ba5cf6c1d849dba11f15
+      size: 128982
+    - path: dftd3.dat
+      hash: md5
+      md5: 88745bcc951a4bcdccc4d6bcfa78d105
+      size: 1959318
+    - path: nodes/ML11_MultiPack/MultiPackmol_1/atoms.h5
+      hash: md5
+      md5: 11169393c4a079f6f77a3828b04f2968
+      size: 267968
+    - path: nodes/ML11_MultiPack/MultiPackmol_1/node-meta.json
+      hash: md5
+      md5: baf17158148ec12f52b668b3700831b5
+      size: 48
+    - path: nodes/ML11_MultiPack/MultiPackmol_1/packmol
+      hash: md5
+      md5: 76e91c069ed4efd07a338f8ef9eef143.dir
+      size: 711217
+      nfiles: 240
+    params:
+      config/cp2k.yaml:
+        force_eval:
+          method: quickstep
+          DFT:
+            mgrid:
+              cutoff: 800
+              rel_cutoff: 60
+              ngrids: 5
+            QS:
+              eps_filter_matrix: 0.0
+              eps_pgf_orb: 0.0001
+            SCF:
+              scf_guess: restart
+              max_scf: 100
+              eps_scf: 1e-06
+              OT:
+                minimizer: diis
+                preconditioner: full_single_inverse
+              outer_scf:
+                max_scf: 100
+                eps_scf: 1e-06
+              print:
+                restart:
+                  each:
+                    QS_SCF: 0
+            XC:
+              xc_functional:
+                becke97:
+                  parametrization: B97-3c
+                  scale_c: 1.0
+                  scale_x: 1.0
+              vdw_potential:
+                pair_potential:
+                  type: dftd3(bj)
+                  parameter_file_name: dftd3.dat
+                  reference_functional: B97-3c
+                  r_cutoff: 7.93766
+                  calculate_c9_term: true
+                  short_range_correction: true
+                potential_type: pair_potential
+            charge: 0
+            basis_set_file_name: GTH_BASIS_SETS
+            potential_file_name: GTH_POTENTIALS
+          subsys:
+            kind:
+              N:
+                basis_set: TZVP-GTH-q5
+                potential: GTH-PBE-q5
+              C:
+                basis_set: TZVP-GTH-q4
+                potential: GTH-PBE-q4
+              H:
+                basis_set: TZVP-GTH-q1
+                potential: GTH-PBE-q1
+              B:
+                basis_set: TZVP-GTH-q3
+                potential: GTH-PBE-q3
+              F:
+                basis_set: TZVP-GTH-q7
+                potential: GTH-PBE-q7
+    outs:
+    - path: nodes/ML11_MultiPack/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 4acf2a8e643244dbe723a5f8c7689798
+      size: 379232
+    - path: nodes/ML11_MultiPack/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 8a2da0d10b09ea5d5eb00d568ae6fe44.dir
+      size: 13588720
+      nfiles: 3
+    - path: nodes/ML11_MultiPack/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 56022e78bbb05c34a46f9b442fc54aa9
+      size: 48
