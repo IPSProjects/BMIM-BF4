@@ -450,13 +450,13 @@ with project.group("ML13") as grp:
         processing_batch_size=4,
     )
 
-    # cp2k = ips.calculators.CP2KSinglePoint(
-    #     data=kernel_selection.atoms,
-    #     cp2k_params="config/cp2k.yaml",
-    #     cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
-    # )
+    cp2k = ips.calculators.CP2KSinglePoint(
+        data=kernel_selection.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+    )
 
-    # train_data += cp2k.atoms
+    train_data += cp2k.atoms
 
     # model = ips.models.Apax(
     #     data=train_data,

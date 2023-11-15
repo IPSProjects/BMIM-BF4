@@ -18130,7 +18130,7 @@ stages:
           window_size: 500
         ML13_ASEMD+thermostat:
           pfactor: 54.27299976036698
-          pressure: 6.324209121801211e-07
+          pressure: 6.324209121801212e-07
           temperature: 300
           tetragonal_strain: true
           time_step: 1.0

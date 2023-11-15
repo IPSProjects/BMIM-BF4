@@ -4386,3 +4386,20 @@ stages:
     metrics:
     - nodes/ML13/ConfigurationSelection/node-meta.json:
         cache: false
+  ML13_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML13_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/ML13/ConfigurationSelection/node-meta.json
+    - nodes/ML13/ConfigurationSelection/selected_configurations.json
+    - nodes/ML13/ConfigurationSelection/selection.png
+    params:
+    - config/cp2k.yaml:
+    outs:
+    - nodes/ML13/CP2KSinglePoint/atoms.h5
+    - nodes/ML13/CP2KSinglePoint/cp2k
+    metrics:
+    - nodes/ML13/CP2KSinglePoint/node-meta.json:
+        cache: false
