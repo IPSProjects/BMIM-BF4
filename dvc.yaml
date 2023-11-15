@@ -167,6 +167,7 @@ plots:
     y_label: validation loss
 - nodes/ML14/EnergyHistogram/labels_df.csv: {}
 - nodes/ML14/ForcesHistogram/labels_df.csv: {}
+- nodes/ML15/ASEMD/metrics_dict.csv: {}
 stages:
   ML0_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML0_ConfigurationSelection
@@ -1816,6 +1817,109 @@ stages:
     - nodes/ML14/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/ML14/PredictionMetrics/stress_df.csv
     - nodes/ML14/PredictionMetrics/stress_hydrostatic_df.csv
+  ML15_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML15_ASEMD
+    deps:
+    - nodes/ML14/ASEMD/metrics_dict.csv
+    - nodes/ML14/ASEMD/model
+    - nodes/ML14/ASEMD/node-meta.json
+    - nodes/ML14/ASEMD/steps_before_stopping.json
+    - nodes/ML14/ASEMD/trajectory.h5
+    - nodes/ML14/MLModel/apax_model
+    - nodes/ML14/MLModel/log.csv
+    - nodes/ML14/MLModel/metrics.json
+    - nodes/ML14/MLModel/node-meta.json
+    - nodes/ML14/MLModel/train.log
+    - nodes/ML14/MLModel/train_atoms.extxyz
+    - nodes/ML14/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/ML15/ASEMD/node-meta.json:
+        cache: false
+    - nodes/ML15/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML15/ASEMD/metrics_dict.csv
+    - nodes/ML15/ASEMD/model
+    - nodes/ML15/ASEMD/trajectory.h5
+    params:
+    - ML15_ASEMD
+    - ML15_ASEMD+checker_list+0
+    - ML15_ASEMD+modifier+0
+    - ML15_ASEMD+thermostat
+  ML15_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML15_ConfigurationSelection
+    deps:
+    - nodes/ML0/ConfigurationSelection/node-meta.json
+    - nodes/ML0/ConfigurationSelection/selected_configurations.json
+    - nodes/ML0/ConfigurationSelection/selection.png
+    - nodes/ML1/CP2KSinglePoint/atoms.h5
+    - nodes/ML1/CP2KSinglePoint/cp2k
+    - nodes/ML1/CP2KSinglePoint/node-meta.json
+    - nodes/ML10/CP2KSinglePoint/atoms.h5
+    - nodes/ML10/CP2KSinglePoint/cp2k
+    - nodes/ML10/CP2KSinglePoint/node-meta.json
+    - nodes/ML11_MultiPack/CP2KSinglePoint/atoms.h5
+    - nodes/ML11_MultiPack/CP2KSinglePoint/cp2k
+    - nodes/ML11_MultiPack/CP2KSinglePoint/node-meta.json
+    - nodes/ML12/CP2KSinglePoint/atoms.h5
+    - nodes/ML12/CP2KSinglePoint/cp2k
+    - nodes/ML12/CP2KSinglePoint/node-meta.json
+    - nodes/ML13/CP2KSinglePoint/atoms.h5
+    - nodes/ML13/CP2KSinglePoint/cp2k
+    - nodes/ML13/CP2KSinglePoint/node-meta.json
+    - nodes/ML14/CP2KSinglePoint/atoms.h5
+    - nodes/ML14/CP2KSinglePoint/cp2k
+    - nodes/ML14/CP2KSinglePoint/node-meta.json
+    - nodes/ML14/MLModel/apax_model
+    - nodes/ML14/MLModel/log.csv
+    - nodes/ML14/MLModel/metrics.json
+    - nodes/ML14/MLModel/node-meta.json
+    - nodes/ML14/MLModel/train.log
+    - nodes/ML14/MLModel/train_atoms.extxyz
+    - nodes/ML14/MLModel/val_atoms.extxyz
+    - nodes/ML15/ASEMD/metrics_dict.csv
+    - nodes/ML15/ASEMD/model
+    - nodes/ML15/ASEMD/node-meta.json
+    - nodes/ML15/ASEMD/steps_before_stopping.json
+    - nodes/ML15/ASEMD/trajectory.h5
+    - nodes/ML2/CP2KSinglePoint/atoms.h5
+    - nodes/ML2/CP2KSinglePoint/cp2k
+    - nodes/ML2/CP2KSinglePoint/node-meta.json
+    - nodes/ML3/CP2KSinglePoint/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/cp2k
+    - nodes/ML3/CP2KSinglePoint/node-meta.json
+    - nodes/ML4/CP2KSinglePoint/atoms.h5
+    - nodes/ML4/CP2KSinglePoint/cp2k
+    - nodes/ML4/CP2KSinglePoint/node-meta.json
+    - nodes/ML5/CP2KSinglePoint/atoms.h5
+    - nodes/ML5/CP2KSinglePoint/cp2k
+    - nodes/ML5/CP2KSinglePoint/node-meta.json
+    - nodes/ML6/CP2KSinglePoint/atoms.h5
+    - nodes/ML6/CP2KSinglePoint/cp2k
+    - nodes/ML6/CP2KSinglePoint/node-meta.json
+    - nodes/ML7/CP2KSinglePoint/atoms.h5
+    - nodes/ML7/CP2KSinglePoint/cp2k
+    - nodes/ML7/CP2KSinglePoint/node-meta.json
+    - nodes/ML8/CP2KSinglePoint/atoms.h5
+    - nodes/ML8/CP2KSinglePoint/cp2k
+    - nodes/ML8/CP2KSinglePoint/node-meta.json
+    - nodes/ML9/CP2KSinglePoint/atoms.h5
+    - nodes/ML9/CP2KSinglePoint/cp2k
+    - nodes/ML9/CP2KSinglePoint/node-meta.json
+    - nodes/VS/CP2KSinglePoint/atoms.h5
+    - nodes/VS/CP2KSinglePoint/cp2k
+    - nodes/VS/CP2KSinglePoint/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_2/selection.png
+    metrics:
+    - nodes/ML15/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML15/ConfigurationSelection/selected_configurations.json
+    - nodes/ML15/ConfigurationSelection/selection.png
+    params:
+    - ML15_ConfigurationSelection
   ML1_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML1_ASEGeoOpt
     deps:

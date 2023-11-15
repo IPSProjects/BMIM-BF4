@@ -516,4 +516,24 @@ with project.group("ML14") as grp:
     ips.analysis.ForcesHistogram(data=train_data)
 
 
+with project.group("ML15") as grp:
+    md = ips.calculators.ASEMD(
+        data=md.atoms,
+        data_id=-1,
+        model=model,
+        modifier=[temperature_oszillator],
+        thermostat=thermostat,
+        checker_list=[uncertainty_check],
+        steps=100000,
+        sampling_rate=10,
+    )
+
+    kernel_selection = ips.models.apax.BatchKernelSelection(
+        data=md.atoms,
+        train_data=train_data,
+        models=model,
+        n_configurations=50,
+        processing_batch_size=4,
+    )
+
 project.build(nodes=[grp])
