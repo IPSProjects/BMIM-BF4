@@ -431,32 +431,32 @@ thermostat = ips.calculators.NPTThermostat(
         tetragonal_strain=True,
     )
 
-with project.group("ML13") as grp:
-    md = ips.calculators.ASEMD(
-        data=geo_opt.atoms,
-        data_id=-1,
-        model=model,
-        thermostat=thermostat,
-        checker_list=[uncertainty_check],
-        steps=100000,
-        sampling_rate=10,
-    )
+# with project.group("ML13") as grp:
+#     md = ips.calculators.ASEMD(
+#         data=geo_opt.atoms,
+#         data_id=-1,
+#         model=model,
+#         thermostat=thermostat,
+#         checker_list=[uncertainty_check],
+#         steps=100000,
+#         sampling_rate=10,
+#     )
 
-    kernel_selection = ips.models.apax.BatchKernelSelection(
-        data=md.atoms,
-        train_data=train_data,
-        models=model,
-        n_configurations=50,
-        processing_batch_size=4,
-    )
+#     kernel_selection = ips.models.apax.BatchKernelSelection(
+#         data=md.atoms,
+#         train_data=train_data,
+#         models=model,
+#         n_configurations=50,
+#         processing_batch_size=4,
+#     )
 
-    cp2k = ips.calculators.CP2KSinglePoint(
-        data=kernel_selection.atoms,
-        cp2k_params="config/cp2k.yaml",
-        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
-    )
+#     cp2k = ips.calculators.CP2KSinglePoint(
+#         data=kernel_selection.atoms,
+#         cp2k_params="config/cp2k.yaml",
+#         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+#     )
 
-    train_data += cp2k.atoms
+#     train_data += cp2k.atoms
 
     # model = ips.models.Apax(
     #     data=train_data,
@@ -469,5 +469,13 @@ with project.group("ML13") as grp:
     # ips.analysis.EnergyHistogram(data=train_data, bins=100)
     # ips.analysis.ForcesHistogram(data=train_data)
 
+with project.group("ML13X") as grp:
+    model = ips.models.Apax(
+        data=train_data,
+        validation_data=validation_data.atoms,
+        config="config/final_model.yaml",
+    )
+    prediction = ips.analysis.Prediction(data=test_data, model=model)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
 
 project.build(nodes=[grp])

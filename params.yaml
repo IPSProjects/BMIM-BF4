@@ -187,6 +187,11 @@ ML12_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+ML13X_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 ML13_ASEMD:
     data_id: -1
     dump_rate: 1000
