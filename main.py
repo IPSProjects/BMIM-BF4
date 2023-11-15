@@ -425,9 +425,9 @@ with project.group("VS") as vs:
 thermostat = ips.calculators.NPTThermostat(
         time_step=1.0,
         temperature=300,
-        pressure=6.324e-07# 1.01325 * units.bar,
-        ttime=2.4557# 25 * units.fs,
-        pfactor=54.273# (75 * units.fs) ** 2,
+        pressure=6.324e-07, # 1.01325 * units.bar,
+        ttime=2.4557, # 25 * units.fs,
+        pfactor=54.273, # (75 * units.fs) ** 2,
         tetragonal_strain=True,
     )
 
@@ -476,7 +476,7 @@ temperature_oszillator = ips.calculators.TemperatureOscillatingRampModifier(
     temperature_amplitude=150,
 )
 
-with project.group("ML14") as grp_ml14:
+with project.group("ML14") as grp:
     md = ips.calculators.ASEMD(
         data=geo_opt.atoms,
         data_id=-1,
@@ -496,13 +496,13 @@ with project.group("ML14") as grp_ml14:
         processing_batch_size=4,
     )
 
-    # cp2k = ips.calculators.CP2KSinglePoint(
-    #     data=kernel_selection.atoms,
-    #     cp2k_params="config/cp2k.yaml",
-    #     cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
-    # )
+    cp2k = ips.calculators.CP2KSinglePoint(
+        data=kernel_selection.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+    )
 
-    # train_data += cp2k.atoms
+    train_data += cp2k.atoms
 
     # model = ips.models.Apax(
     #     data=train_data,
@@ -516,4 +516,4 @@ with project.group("ML14") as grp_ml14:
     # ips.analysis.ForcesHistogram(data=train_data)
 
 
-project.build(nodes=[grp_ml13, grp_ml14])
+project.build(nodes=[grp])

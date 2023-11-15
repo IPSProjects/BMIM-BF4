@@ -252,12 +252,12 @@ ML14_ASEMD+modifier+0:
     start_temperature: 300
     temperature_amplitude: 150
 ML14_ASEMD+thermostat:
-    pfactor: 54.27299976036698
-    pressure: 6.324209121801212e-07
+    pfactor: 54.273
+    pressure: 6.324e-07
     temperature: 300
     tetragonal_strain: true
     time_step: 1.0
-    ttime: 2.455673697116016
+    ttime: 2.4557
 ML14_ConfigurationSelection:
     base_feature_map:
         layer_name: dense_2
