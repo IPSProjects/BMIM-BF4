@@ -1,4 +1,5 @@
 import ipsuite as ips
+from ase import units
 
 project = ips.Project(automatic_node_names=True)
 
@@ -421,4 +422,25 @@ with project.group("VS") as vs:
     ips.analysis.EnergyHistogram(data=train_data, bins=100)
     ips.analysis.ForcesHistogram(data=train_data)
 
-project.build(nodes=[vs])
+thermostat = ips.calculators.NPTThermostat(
+        time_step=1.0,
+        temperature=300,
+        pressure=1.01325 * units.bar,
+        ttime=25 * units.fs,
+        pfactor=(75 * units.fs) ** 2,
+        tetragonal_strain=True,
+    )
+
+with project.group("ML13") as grp:
+    md = ips.calculators.ASEMD(
+        data=geo_opt.atoms,
+        data_id=-1,
+        model=model,
+        thermostat=thermostat,
+        checker_list=[uncertainty_check],
+        steps=100000,
+        sampling_rate=10,
+    )
+
+
+project.build(nodes=[grp])

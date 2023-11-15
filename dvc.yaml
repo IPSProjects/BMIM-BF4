@@ -151,6 +151,7 @@ plots:
     y_label: validation loss
 - nodes/VS/EnergyHistogram/labels_df.csv: {}
 - nodes/VS/ForcesHistogram/labels_df.csv: {}
+- nodes/ML13/ASEMD/metrics_dict.csv: {}
 stages:
   ML0_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML0_ConfigurationSelection
@@ -1221,6 +1222,32 @@ stages:
     - nodes/ML12/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/ML12/PredictionMetrics/stress_df.csv
     - nodes/ML12/PredictionMetrics/stress_hydrostatic_df.csv
+  ML13_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML13_ASEMD
+    deps:
+    - nodes/VS/ASEGeoOpt_4/model_outs
+    - nodes/VS/ASEGeoOpt_4/node-meta.json
+    - nodes/VS/ASEGeoOpt_4/trajectory.h5
+    - nodes/VS/MLModel/apax_model
+    - nodes/VS/MLModel/log.csv
+    - nodes/VS/MLModel/metrics.json
+    - nodes/VS/MLModel/node-meta.json
+    - nodes/VS/MLModel/train.log
+    - nodes/VS/MLModel/train_atoms.extxyz
+    - nodes/VS/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/ML13/ASEMD/node-meta.json:
+        cache: false
+    - nodes/ML13/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML13/ASEMD/metrics_dict.csv
+    - nodes/ML13/ASEMD/model
+    - nodes/ML13/ASEMD/trajectory.h5
+    params:
+    - ML13_ASEMD
+    - ML13_ASEMD+checker_list+0
+    - ML13_ASEMD+thermostat
   ML1_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML1_ASEGeoOpt
     deps:
