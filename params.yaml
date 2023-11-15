@@ -208,18 +208,23 @@ ML13_ASEMD+checker_list+0:
     value: forces_uncertainty
     window_size: 500
 ML13_ASEMD+thermostat:
-    pfactor: 54.27299976036698
-    pressure: 6.324209121801212e-07
+    pfactor: 54.273
+    pressure: 6.324e-07
     temperature: 300
     tetragonal_strain: true
     time_step: 1.0
-    ttime: 2.455673697116016
+    ttime: 2.4557
 ML13_ConfigurationSelection:
     base_feature_map:
         layer_name: dense_2
         name: ll_grad
     n_configurations: 50
     selection_method: max_dist
+ML13_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 ML1_ASEGeoOpt:
     data_id: -1
     dump_rate: 1000
