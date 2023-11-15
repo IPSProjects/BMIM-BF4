@@ -373,7 +373,7 @@ with project.group(f"ML12") as grp:
 
 mapping = ips.geometry.BarycenterMapping(data=None)
 
-with project.group(f"VS") as vs:
+with project.group("VS") as vs:
     vs_list = []
     for idx in range(5):
         geo_opt = ips.calculators.ASEGeoOpt(
@@ -388,7 +388,7 @@ with project.group(f"VS") as vs:
             data=geo_opt.atoms,
             mapping=mapping,
             model=model,
-            start=0.95,
+            start=0.90,
             stop=2.0,
             num=100,
             data_id=-1,
@@ -407,4 +407,18 @@ with project.group(f"VS") as vs:
         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
     )
 
-project.build(nodes=[grp, vs])
+
+    train_data += cp2k.atoms
+
+    model = ips.models.Apax(
+        data=train_data,
+        validation_data=validation_data.atoms,
+        config="config/initial_model.yaml",
+    )
+
+    prediction = ips.analysis.Prediction(data=test_data, model=model)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
+    ips.analysis.EnergyHistogram(data=train_data, bins=100)
+    ips.analysis.ForcesHistogram(data=train_data)
+
+project.build(nodes=[vs])

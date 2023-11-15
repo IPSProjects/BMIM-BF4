@@ -796,6 +796,19 @@ VS_BoxScale_4+mapping:
 VS_ConfigurationSelection:
     n_configurations: 50
     seed: 1234
+VS_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+VS_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+VS_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 classical_ASEMD:
     data_id: -1
     dump_rate: 1000
