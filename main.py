@@ -425,13 +425,13 @@ with project.group("VS") as vs:
 thermostat = ips.calculators.NPTThermostat(
         time_step=1.0,
         temperature=300,
-        pressure=1.01325 * units.bar,
-        ttime=25 * units.fs,
-        pfactor=(75 * units.fs) ** 2,
+        pressure=6.324e-07# 1.01325 * units.bar,
+        ttime=2.4557# 25 * units.fs,
+        pfactor=54.273# (75 * units.fs) ** 2,
         tetragonal_strain=True,
     )
 
-with project.group("ML13") as grp:
+with project.group("ML13") as grp_ml13:
     md = ips.calculators.ASEMD(
         data=geo_opt.atoms,
         data_id=-1,
@@ -466,8 +466,54 @@ with project.group("ML13") as grp:
 
     prediction = ips.analysis.Prediction(data=test_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
+    ips.analysis.EnergyHistogram(data=train_data, bins=100)
+    ips.analysis.ForcesHistogram(data=train_data)
+
+temperature_oszillator = ips.calculators.TemperatureOscillatingRampModifier(
+    end_temperature=500,  # decomp ~ 290
+    start_temperature=300,  # melting -75
+    num_oscillations=10,
+    temperature_amplitude=150,
+)
+
+with project.group("ML14") as grp_ml14:
+    md = ips.calculators.ASEMD(
+        data=geo_opt.atoms,
+        data_id=-1,
+        model=model,
+        modifier=[temperature_oszillator],
+        thermostat=thermostat,
+        checker_list=[uncertainty_check],
+        steps=100000,
+        sampling_rate=10,
+    )
+
+    kernel_selection = ips.models.apax.BatchKernelSelection(
+        data=md.atoms,
+        train_data=train_data,
+        models=model,
+        n_configurations=50,
+        processing_batch_size=4,
+    )
+
+    # cp2k = ips.calculators.CP2KSinglePoint(
+    #     data=kernel_selection.atoms,
+    #     cp2k_params="config/cp2k.yaml",
+    #     cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+    # )
+
+    # train_data += cp2k.atoms
+
+    # model = ips.models.Apax(
+    #     data=train_data,
+    #     validation_data=validation_data.atoms,
+    #     config="config/initial_model.yaml",
+    # )
+
+    # prediction = ips.analysis.Prediction(data=test_data, model=model)
+    # metrics = ips.analysis.PredictionMetrics(data=prediction)
     # ips.analysis.EnergyHistogram(data=train_data, bins=100)
     # ips.analysis.ForcesHistogram(data=train_data)
 
 
-project.build(nodes=[model, prediction, metrics])
+project.build(nodes=[grp_ml13, grp_ml14])

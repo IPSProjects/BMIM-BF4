@@ -18947,3 +18947,105 @@ stages:
       hash: md5
       md5: b2eb86570bdabb019a79de8256f762fd
       size: 23514
+  ML14_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML14_ASEMD
+    deps:
+    - path: nodes/ML13/MLModel/apax_model
+      hash: md5
+      md5: 55b037a8a49ecf86134ff3683a44a2ec.dir
+      size: 84500120
+      nfiles: 5
+    - path: nodes/ML13/MLModel/log.csv
+      hash: md5
+      md5: 37145fc5387e76af991da573a18e3838
+      size: 88497
+    - path: nodes/ML13/MLModel/metrics.json
+      hash: md5
+      md5: b091a1f996aef85f9faea9e054ac4950
+      size: 389
+    - path: nodes/ML13/MLModel/node-meta.json
+      hash: md5
+      md5: 9b393e0586f8ed93890f0f0c1114b7db
+      size: 48
+    - path: nodes/ML13/MLModel/train.log
+      hash: md5
+      md5: 30b0a7c6fe3e4413f4a25a824acec52d
+      size: 19
+    - path: nodes/ML13/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: e274d4501a7ec0d32e8d1a3d6ed4fa8f
+      size: 46495134
+    - path: nodes/ML13/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/VS/ASEGeoOpt_4/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/VS/ASEGeoOpt_4/node-meta.json
+      hash: md5
+      md5: 42c6fbd4e4183a5cbcb3160734a02cf5
+      size: 48
+    - path: nodes/VS/ASEGeoOpt_4/trajectory.h5
+      hash: md5
+      md5: 2268c06d44ea3735575f4bee5082925e
+      size: 803688
+    params:
+      params.yaml:
+        ML14_ASEMD:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 10
+          seed: 42
+          steps: 100000
+          use_momenta: false
+          wrap: false
+        ML14_ASEMD+checker_list+0:
+          larger_only: true
+          max_std:
+          max_value: 0.5
+          minimum_window_size: 1
+          value: forces_uncertainty
+          window_size: 500
+        ML14_ASEMD+modifier+0:
+          end_temperature: 500
+          interval: 1
+          num_oscillations: 10
+          start_temperature: 300
+          temperature_amplitude: 150
+        ML14_ASEMD+thermostat:
+          pfactor: 54.27299976036698
+          pressure: 6.324209121801212e-07
+          temperature: 300
+          tetragonal_strain: true
+          time_step: 1.0
+          ttime: 2.455673697116016
+    outs:
+    - path: nodes/ML14/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 36d78d7d62872271c9089634ea9e0502
+      size: 628766
+    - path: nodes/ML14/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML14/ASEMD/node-meta.json
+      hash: md5
+      md5: 4b2a2a8b26688fb6d26e5e5abbb46ce3
+      size: 48
+    - path: nodes/ML14/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML14/ASEMD/trajectory.h5
+      hash: md5
+      md5: 3753c29cfd35f6248bff55982f054bf5
+      size: 320050944
