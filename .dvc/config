@@ -1,6 +1,5 @@
 [core]
     remote = origin
 ['remote "origin"']
-    url = s3://dvc/ipsprojects/MIM-BF4_new
-    endpointurl = https://minio.pythonf.net
-
+    url = s3://fabian.zills/dvc/ipsprojects/BMIM-BF4
+    endpointurl = https://minio.icp.uni-stuttgart.de
