@@ -168,6 +168,14 @@ plots:
 - nodes/ML14/EnergyHistogram/labels_df.csv: {}
 - nodes/ML14/ForcesHistogram/labels_df.csv: {}
 - nodes/ML15/ASEMD/metrics_dict.csv: {}
+- nodes/ML15/AnalyseDensity/density.png: {}
+- nodes/ML15/AnalyseDensity/results.csv: {}
+- nodes/depl/AnalyseDensity/density.png: {}
+- nodes/depl/ASEMD/metrics_dict.csv: {}
+- nodes/depl/AnalyseDensity/results.csv: {}
+- nodes/depl/AnalyseDensity_1/density.png: {}
+- nodes/depl/ASEMD_1/metrics_dict.csv: {}
+- nodes/depl/AnalyseDensity_1/results.csv: {}
 stages:
   ML0_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML0_ConfigurationSelection
@@ -1829,7 +1837,6 @@ stages:
     - nodes/ML14/MLModel/log.csv
     - nodes/ML14/MLModel/metrics.json
     - nodes/ML14/MLModel/node-meta.json
-    - nodes/ML14/MLModel/train.log
     - nodes/ML14/MLModel/train_atoms.extxyz
     - nodes/ML14/MLModel/val_atoms.extxyz
     metrics:
@@ -1846,6 +1853,24 @@ stages:
     - ML15_ASEMD+checker_list+0
     - ML15_ASEMD+modifier+0
     - ML15_ASEMD+thermostat
+  ML15_AnalyseDensity:
+    cmd: zntrack run ipsuite.nodes.AnalyseDensity --name ML15_AnalyseDensity
+    deps:
+    - nodes/ML15/ASEMD/metrics_dict.csv
+    - nodes/ML15/ASEMD/model
+    - nodes/ML15/ASEMD/node-meta.json
+    - nodes/ML15/ASEMD/steps_before_stopping.json
+    - nodes/ML15/ASEMD/trajectory.h5
+    metrics:
+    - nodes/ML15/AnalyseDensity/density.json:
+        cache: false
+    - nodes/ML15/AnalyseDensity/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML15/AnalyseDensity/density.png
+    - nodes/ML15/AnalyseDensity/results.csv
+    params:
+    - ML15_AnalyseDensity
   ML15_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML15_ConfigurationSelection
     deps:
@@ -1874,7 +1899,6 @@ stages:
     - nodes/ML14/MLModel/log.csv
     - nodes/ML14/MLModel/metrics.json
     - nodes/ML14/MLModel/node-meta.json
-    - nodes/ML14/MLModel/train.log
     - nodes/ML14/MLModel/train_atoms.extxyz
     - nodes/ML14/MLModel/val_atoms.extxyz
     - nodes/ML15/ASEMD/metrics_dict.csv
@@ -4990,3 +5014,163 @@ stages:
     - nodes/classical/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/classical/PredictionMetrics/stress_df.csv
     - nodes/classical/PredictionMetrics/stress_hydrostatic_df.csv
+  depl_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name depl_ASEGeoOpt
+    deps:
+    - nodes/ML14/MLModel/apax_model
+    - nodes/ML14/MLModel/log.csv
+    - nodes/ML14/MLModel/metrics.json
+    - nodes/ML14/MLModel/node-meta.json
+    - nodes/ML14/MLModel/train_atoms.extxyz
+    - nodes/ML14/MLModel/val_atoms.extxyz
+    - nodes/depl/Packmol_1/atoms.h5
+    - nodes/depl/Packmol_1/node-meta.json
+    - nodes/depl/Packmol_1/packmol
+    metrics:
+    - nodes/depl/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/depl/ASEGeoOpt/model_outs
+    - nodes/depl/ASEGeoOpt/trajectory.h5
+    params:
+    - depl_ASEGeoOpt
+  depl_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name depl_ASEMD
+    deps:
+    - nodes/ML14/MLModel/apax_model
+    - nodes/ML14/MLModel/log.csv
+    - nodes/ML14/MLModel/metrics.json
+    - nodes/ML14/MLModel/node-meta.json
+    - nodes/ML14/MLModel/train_atoms.extxyz
+    - nodes/ML14/MLModel/val_atoms.extxyz
+    - nodes/depl/ASEGeoOpt/model_outs
+    - nodes/depl/ASEGeoOpt/node-meta.json
+    - nodes/depl/ASEGeoOpt/trajectory.h5
+    metrics:
+    - nodes/depl/ASEMD/node-meta.json:
+        cache: false
+    - nodes/depl/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/depl/ASEMD/metrics_dict.csv
+    - nodes/depl/ASEMD/model
+    - nodes/depl/ASEMD/trajectory.h5
+    params:
+    - depl_ASEMD
+    - depl_ASEMD+checker_list+0
+    - depl_ASEMD+modifier+0
+    - depl_ASEMD+thermostat
+  depl_ASEMD_1:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name depl_ASEMD_1
+    deps:
+    - nodes/ML14/MLModel/apax_model
+    - nodes/ML14/MLModel/log.csv
+    - nodes/ML14/MLModel/metrics.json
+    - nodes/ML14/MLModel/node-meta.json
+    - nodes/ML14/MLModel/train_atoms.extxyz
+    - nodes/ML14/MLModel/val_atoms.extxyz
+    - nodes/depl/ASEMD/metrics_dict.csv
+    - nodes/depl/ASEMD/model
+    - nodes/depl/ASEMD/node-meta.json
+    - nodes/depl/ASEMD/steps_before_stopping.json
+    - nodes/depl/ASEMD/trajectory.h5
+    metrics:
+    - nodes/depl/ASEMD_1/node-meta.json:
+        cache: false
+    - nodes/depl/ASEMD_1/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/depl/ASEMD_1/metrics_dict.csv
+    - nodes/depl/ASEMD_1/model
+    - nodes/depl/ASEMD_1/trajectory.h5
+    params:
+    - depl_ASEMD_1
+    - depl_ASEMD_1+checker_list+0
+    - depl_ASEMD_1+thermostat
+  depl_AnalyseDensity:
+    cmd: zntrack run ipsuite.nodes.AnalyseDensity --name depl_AnalyseDensity
+    deps:
+    - nodes/depl/ASEMD/metrics_dict.csv
+    - nodes/depl/ASEMD/model
+    - nodes/depl/ASEMD/node-meta.json
+    - nodes/depl/ASEMD/steps_before_stopping.json
+    - nodes/depl/ASEMD/trajectory.h5
+    metrics:
+    - nodes/depl/AnalyseDensity/density.json:
+        cache: false
+    - nodes/depl/AnalyseDensity/node-meta.json:
+        cache: false
+    outs:
+    - nodes/depl/AnalyseDensity/density.png
+    - nodes/depl/AnalyseDensity/results.csv
+    params:
+    - depl_AnalyseDensity
+  depl_AnalyseDensity_1:
+    cmd: zntrack run ipsuite.nodes.AnalyseDensity --name depl_AnalyseDensity_1
+    deps:
+    - nodes/depl/ASEMD_1/metrics_dict.csv
+    - nodes/depl/ASEMD_1/model
+    - nodes/depl/ASEMD_1/node-meta.json
+    - nodes/depl/ASEMD_1/steps_before_stopping.json
+    - nodes/depl/ASEMD_1/trajectory.h5
+    metrics:
+    - nodes/depl/AnalyseDensity_1/density.json:
+        cache: false
+    - nodes/depl/AnalyseDensity_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/depl/AnalyseDensity_1/density.png
+    - nodes/depl/AnalyseDensity_1/results.csv
+    params:
+    - depl_AnalyseDensity_1
+  depl_Packmol:
+    cmd: zntrack run ipsuite.nodes.Packmol --name depl_Packmol
+    deps:
+    - nodes/depl/SmilesToAtoms/atoms.h5
+    - nodes/depl/SmilesToAtoms/molecule.png
+    - nodes/depl/SmilesToAtoms/node-meta.json
+    - nodes/depl/SmilesToAtoms_1/atoms.h5
+    - nodes/depl/SmilesToAtoms_1/molecule.png
+    - nodes/depl/SmilesToAtoms_1/node-meta.json
+    metrics:
+    - nodes/depl/Packmol/node-meta.json:
+        cache: false
+    outs:
+    - nodes/depl/Packmol/atoms.h5
+    - nodes/depl/Packmol/packmol
+    params:
+    - depl_Packmol
+  depl_Packmol_1:
+    cmd: zntrack run ipsuite.nodes.Packmol --name depl_Packmol_1
+    deps:
+    - nodes/depl/Packmol/atoms.h5
+    - nodes/depl/Packmol/node-meta.json
+    - nodes/depl/Packmol/packmol
+    metrics:
+    - nodes/depl/Packmol_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/depl/Packmol_1/atoms.h5
+    - nodes/depl/Packmol_1/packmol
+    params:
+    - depl_Packmol_1
+  depl_SmilesToAtoms:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name depl_SmilesToAtoms
+    metrics:
+    - nodes/depl/SmilesToAtoms/node-meta.json:
+        cache: false
+    outs:
+    - nodes/depl/SmilesToAtoms/atoms.h5
+    - nodes/depl/SmilesToAtoms/molecule.png
+    params:
+    - depl_SmilesToAtoms
+  depl_SmilesToAtoms_1:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name depl_SmilesToAtoms_1
+    metrics:
+    - nodes/depl/SmilesToAtoms_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/depl/SmilesToAtoms_1/atoms.h5
+    - nodes/depl/SmilesToAtoms_1/molecule.png
+    params:
+    - depl_SmilesToAtoms_1
