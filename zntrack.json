@@ -15948,8 +15948,8 @@
                     "_type": "zntrack.Node",
                     "value": {
                         "module": "ipsuite.nodes",
-                        "cls": "BatchKernelSelection",
-                        "name": "ML15_ConfigurationSelection",
+                        "cls": "UniformTemporalSelection",
+                        "name": "ML15_ConfigurationSelection_1",
                         "remote": null,
                         "rev": null
                     }
