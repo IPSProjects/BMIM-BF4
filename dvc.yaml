@@ -168,6 +168,8 @@ plots:
 - nodes/ML14/EnergyHistogram/labels_df.csv: {}
 - nodes/ML14/ForcesHistogram/labels_df.csv: {}
 - nodes/ML15/ASEMD/metrics_dict.csv: {}
+- nodes/dft_density/ASEMD/metrics_dict.csv: {}
+- nodes/dft_density/ASEMD_1/metrics_dict.csv: {}
 stages:
   ML0_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML0_ConfigurationSelection
@@ -253,7 +255,7 @@ stages:
     - nodes/ML0/MLModel/val_atoms.extxyz
     params:
     - ML0_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   ML0_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML0_Prediction
     deps:
@@ -363,7 +365,7 @@ stages:
     - nodes/ML10/CP2KSinglePoint/atoms.h5
     - nodes/ML10/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML10_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML10_ConfigurationSelection
     deps:
@@ -576,7 +578,7 @@ stages:
     - nodes/ML10/MLModel/val_atoms.extxyz
     params:
     - ML10_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   ML10_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML10_Prediction
     deps:
@@ -636,7 +638,7 @@ stages:
     - nodes/ML11_MultiPack/CP2KSinglePoint/atoms.h5
     - nodes/ML11_MultiPack/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML11_MultiPack_EnergyHistogram:
     cmd: zntrack run ipsuite.nodes.EnergyHistogram --name ML11_MultiPack_EnergyHistogram
     deps:
@@ -799,7 +801,7 @@ stages:
     - nodes/ML11_MultiPack/MLModel/val_atoms.extxyz
     params:
     - ML11_MultiPack_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   ML11_MultiPack_MultiPackmol:
     cmd: zntrack run ipsuite.nodes.MultiPackmol --name ML11_MultiPack_MultiPackmol
     deps:
@@ -957,7 +959,7 @@ stages:
     - nodes/ML12/CP2KSinglePoint/atoms.h5
     - nodes/ML12/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML12_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML12_ConfigurationSelection
     deps:
@@ -1194,7 +1196,7 @@ stages:
     - nodes/ML12/MLModel/val_atoms.extxyz
     params:
     - ML12_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   ML12_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML12_Prediction
     deps:
@@ -1280,7 +1282,7 @@ stages:
     - nodes/ML13/CP2KSinglePoint/atoms.h5
     - nodes/ML13/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML13_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML13_ConfigurationSelection
     deps:
@@ -1416,7 +1418,7 @@ stages:
     - nodes/ML13/MLModel/val_atoms.extxyz
     params:
     - ML13_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   ML13_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML13_Prediction
     deps:
@@ -1503,7 +1505,7 @@ stages:
     - nodes/ML14/CP2KSinglePoint/atoms.h5
     - nodes/ML14/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML14_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML14_ConfigurationSelection
     deps:
@@ -1773,7 +1775,7 @@ stages:
     - nodes/ML14/MLModel/val_atoms.extxyz
     params:
     - ML14_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   ML14_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML14_Prediction
     deps:
@@ -1984,7 +1986,7 @@ stages:
     - nodes/ML1/CP2KSinglePoint/atoms.h5
     - nodes/ML1/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML1_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML1_ConfigurationSelection
     deps:
@@ -2089,7 +2091,7 @@ stages:
     - nodes/ML1/MLModel/val_atoms.extxyz
     params:
     - ML1_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   ML1_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML1_Prediction
     deps:
@@ -2198,7 +2200,7 @@ stages:
     - nodes/ML2/CP2KSinglePoint/atoms.h5
     - nodes/ML2/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML2_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML2_ConfigurationSelection
     deps:
@@ -2315,7 +2317,7 @@ stages:
     - nodes/ML2/MLModel/val_atoms.extxyz
     params:
     - ML2_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   ML2_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML2_Prediction
     deps:
@@ -2424,7 +2426,7 @@ stages:
     - nodes/ML3/CP2KSinglePoint/atoms.h5
     - nodes/ML3/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML3_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML3_ConfigurationSelection
     deps:
@@ -2553,7 +2555,7 @@ stages:
     - nodes/ML3/MLModel/val_atoms.extxyz
     params:
     - ML3_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   ML3_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML3_Prediction
     deps:
@@ -2662,7 +2664,7 @@ stages:
     - nodes/ML4/CP2KSinglePoint/atoms.h5
     - nodes/ML4/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML4_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML4_ConfigurationSelection
     deps:
@@ -2803,7 +2805,7 @@ stages:
     - nodes/ML4/MLModel/val_atoms.extxyz
     params:
     - ML4_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   ML4_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML4_Prediction
     deps:
@@ -2913,7 +2915,7 @@ stages:
     - nodes/ML5/CP2KSinglePoint/atoms.h5
     - nodes/ML5/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML5_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML5_ConfigurationSelection
     deps:
@@ -3066,7 +3068,7 @@ stages:
     - nodes/ML5/MLModel/val_atoms.extxyz
     params:
     - ML5_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   ML5_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML5_Prediction
     deps:
@@ -3176,7 +3178,7 @@ stages:
     - nodes/ML6/CP2KSinglePoint/atoms.h5
     - nodes/ML6/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML6_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML6_ConfigurationSelection
     deps:
@@ -3341,7 +3343,7 @@ stages:
     - nodes/ML6/MLModel/val_atoms.extxyz
     params:
     - ML6_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   ML6_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML6_Prediction
     deps:
@@ -3451,7 +3453,7 @@ stages:
     - nodes/ML7/CP2KSinglePoint/atoms.h5
     - nodes/ML7/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML7_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML7_ConfigurationSelection
     deps:
@@ -3628,7 +3630,7 @@ stages:
     - nodes/ML7/MLModel/val_atoms.extxyz
     params:
     - ML7_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   ML7_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML7_Prediction
     deps:
@@ -3738,7 +3740,7 @@ stages:
     - nodes/ML8/CP2KSinglePoint/atoms.h5
     - nodes/ML8/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML8_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML8_ConfigurationSelection
     deps:
@@ -3927,7 +3929,7 @@ stages:
     - nodes/ML8/MLModel/val_atoms.extxyz
     params:
     - ML8_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   ML8_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML8_Prediction
     deps:
@@ -4037,7 +4039,7 @@ stages:
     - nodes/ML9/CP2KSinglePoint/atoms.h5
     - nodes/ML9/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   ML9_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML9_ConfigurationSelection
     deps:
@@ -4238,7 +4240,7 @@ stages:
     - nodes/ML9/MLModel/val_atoms.extxyz
     params:
     - ML9_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   ML9_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name ML9_Prediction
     deps:
@@ -4523,7 +4525,7 @@ stages:
     - nodes/VS/CP2KSinglePoint/atoms.h5
     - nodes/VS/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   VS_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.RandomSelection --name VS_ConfigurationSelection
     deps:
@@ -4740,7 +4742,7 @@ stages:
     - nodes/VS/MLModel/val_atoms.extxyz
     params:
     - VS_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   VS_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name VS_Prediction
     deps:
@@ -4835,7 +4837,7 @@ stages:
     - nodes/classical/CP2KSinglePoint/atoms.h5
     - nodes/classical/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   classical_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.RandomSelection --name classical_ConfigurationSelection
     deps:
@@ -4946,7 +4948,7 @@ stages:
     - nodes/classical/MLModel/val_atoms.extxyz
     params:
     - classical_MLModel
-    - config/initial_model.yaml: null
+    - config/initial_model.yaml:
   classical_Prediction:
     cmd: zntrack run ipsuite.nodes.Prediction --name classical_Prediction
     deps:
@@ -4990,3 +4992,111 @@ stages:
     - nodes/classical/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/classical/PredictionMetrics/stress_df.csv
     - nodes/classical/PredictionMetrics/stress_hydrostatic_df.csv
+  dft_density_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name dft_density_ASEGeoOpt
+    deps:
+    - nodes/ML14/MLModel/apax_model
+    - nodes/ML14/MLModel/log.csv
+    - nodes/ML14/MLModel/metrics.json
+    - nodes/ML14/MLModel/node-meta.json
+    - nodes/ML14/MLModel/train_atoms.extxyz
+    - nodes/ML14/MLModel/val_atoms.extxyz
+    - nodes/dft_density/MultiPackmol/atoms.h5
+    - nodes/dft_density/MultiPackmol/node-meta.json
+    - nodes/dft_density/MultiPackmol/packmol
+    metrics:
+    - nodes/dft_density/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/dft_density/ASEGeoOpt/model_outs
+    - nodes/dft_density/ASEGeoOpt/trajectory.h5
+    params:
+    - dft_density_ASEGeoOpt
+  dft_density_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name dft_density_ASEMD
+    deps:
+    - nodes/ML14/MLModel/apax_model
+    - nodes/ML14/MLModel/log.csv
+    - nodes/ML14/MLModel/metrics.json
+    - nodes/ML14/MLModel/node-meta.json
+    - nodes/ML14/MLModel/train_atoms.extxyz
+    - nodes/ML14/MLModel/val_atoms.extxyz
+    - nodes/dft_density/ASEGeoOpt/model_outs
+    - nodes/dft_density/ASEGeoOpt/node-meta.json
+    - nodes/dft_density/ASEGeoOpt/trajectory.h5
+    metrics:
+    - nodes/dft_density/ASEMD/node-meta.json:
+        cache: false
+    - nodes/dft_density/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/dft_density/ASEMD/metrics_dict.csv
+    - nodes/dft_density/ASEMD/model
+    - nodes/dft_density/ASEMD/trajectory.h5
+    params:
+    - dft_density_ASEMD
+    - dft_density_ASEMD+checker_list+0
+    - dft_density_ASEMD+modifier+0
+    - dft_density_ASEMD+thermostat
+  dft_density_ASEMD_1:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name dft_density_ASEMD_1
+    deps:
+    - nodes/ML14/MLModel/apax_model
+    - nodes/ML14/MLModel/log.csv
+    - nodes/ML14/MLModel/metrics.json
+    - nodes/ML14/MLModel/node-meta.json
+    - nodes/ML14/MLModel/train_atoms.extxyz
+    - nodes/ML14/MLModel/val_atoms.extxyz
+    - nodes/dft_density/ASEGeoOpt/model_outs
+    - nodes/dft_density/ASEGeoOpt/node-meta.json
+    - nodes/dft_density/ASEGeoOpt/trajectory.h5
+    metrics:
+    - nodes/dft_density/ASEMD_1/node-meta.json:
+        cache: false
+    - nodes/dft_density/ASEMD_1/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/dft_density/ASEMD_1/metrics_dict.csv
+    - nodes/dft_density/ASEMD_1/model
+    - nodes/dft_density/ASEMD_1/trajectory.h5
+    params:
+    - dft_density_ASEMD_1
+    - dft_density_ASEMD_1+checker_list+0
+    - dft_density_ASEMD_1+thermostat
+  dft_density_MultiPackmol:
+    cmd: zntrack run ipsuite.nodes.MultiPackmol --name dft_density_MultiPackmol
+    deps:
+    - nodes/ML11_MultiPack/MultiPackmol/atoms.h5
+    - nodes/ML11_MultiPack/MultiPackmol/node-meta.json
+    - nodes/ML11_MultiPack/MultiPackmol/packmol
+    metrics:
+    - nodes/dft_density/MultiPackmol/node-meta.json:
+        cache: false
+    outs:
+    - nodes/dft_density/MultiPackmol/atoms.h5
+    - nodes/dft_density/MultiPackmol/packmol
+    params:
+    - dft_density_MultiPackmol
+  dft_density_ASEMD_2:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name dft_density_ASEMD_2
+    deps:
+    - nodes/ML14/CP2KSinglePoint/atoms.h5
+    - nodes/ML14/CP2KSinglePoint/cp2k
+    - nodes/ML14/CP2KSinglePoint/node-meta.json
+    - nodes/dft_density/ASEMD_1/metrics_dict.csv
+    - nodes/dft_density/ASEMD_1/model
+    - nodes/dft_density/ASEMD_1/node-meta.json
+    - nodes/dft_density/ASEMD_1/steps_before_stopping.json
+    - nodes/dft_density/ASEMD_1/trajectory.h5
+    params:
+    - dft_density_ASEMD_2
+    - dft_density_ASEMD_2+thermostat
+    outs:
+    - nodes/dft_density/ASEMD_2/metrics_dict.csv
+    - nodes/dft_density/ASEMD_2/model
+    - nodes/dft_density/ASEMD_2/trajectory.h5
+    metrics:
+    - nodes/dft_density/ASEMD_2/node-meta.json:
+        cache: false
+    - nodes/dft_density/ASEMD_2/steps_before_stopping.json:
+        cache: false

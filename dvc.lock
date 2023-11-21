@@ -20760,3 +20760,295 @@ stages:
       hash: md5
       md5: 25e1639e453605fc606669964504b6dd
       size: 42026
+  dft_density_MultiPackmol:
+    cmd: zntrack run ipsuite.nodes.MultiPackmol --name dft_density_MultiPackmol
+    deps:
+    - path: nodes/ML11_MultiPack/MultiPackmol/atoms.h5
+      hash: md5
+      md5: 90b2668020a84c8facf8158598fa4693
+      size: 282368
+    - path: nodes/ML11_MultiPack/MultiPackmol/node-meta.json
+      hash: md5
+      md5: d0e23ddeb8149003d098b3042fcdc521
+      size: 48
+    - path: nodes/ML11_MultiPack/MultiPackmol/packmol
+      hash: md5
+      md5: fd0965d65b3abf5287e0cc378f8e2044.dir
+      size: 810287
+      nfiles: 800
+    params:
+      params.yaml:
+        dft_density_MultiPackmol:
+          box:
+          count:
+          - 10
+          density: 900
+          n_configurations: 1
+          pbc: true
+          seed: 42
+          tolerance: 2.0
+    outs:
+    - path: nodes/dft_density/MultiPackmol/atoms.h5
+      hash: md5
+      md5: e4dc596343936a57482ac564667dc98a
+      size: 37568
+    - path: nodes/dft_density/MultiPackmol/node-meta.json
+      hash: md5
+      md5: 3d941e275bbf0b9174ea74e8dcb9a8bc
+      size: 48
+    - path: nodes/dft_density/MultiPackmol/packmol
+      hash: md5
+      md5: 7428e5fb28eb0dcdc0184c3cce12cfda.dir
+      size: 352102
+      nfiles: 202
+  dft_density_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name dft_density_ASEGeoOpt
+    deps:
+    - path: nodes/ML14/MLModel/apax_model
+      hash: md5
+      md5: b4cc5cf470a8312ecca5ef92769caa8d.dir
+      size: 84500120
+      nfiles: 5
+    - path: nodes/ML14/MLModel/log.csv
+      hash: md5
+      md5: 4f300f3fad30abdb52e341a02b79810e
+      size: 88042
+    - path: nodes/ML14/MLModel/metrics.json
+      hash: md5
+      md5: 8c46a92ec7f899ed84259964f60067a4
+      size: 386
+    - path: nodes/ML14/MLModel/node-meta.json
+      hash: md5
+      md5: 6f4a3fe5f44d91a1e7bdb5cfcc71c1ba
+      size: 48
+    - path: nodes/ML14/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: c73f7ed92deedd952c59845bde00a0b0
+      size: 48855065
+    - path: nodes/ML14/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/dft_density/MultiPackmol/atoms.h5
+      hash: md5
+      md5: e4dc596343936a57482ac564667dc98a
+      size: 37568
+    - path: nodes/dft_density/MultiPackmol/node-meta.json
+      hash: md5
+      md5: 3d941e275bbf0b9174ea74e8dcb9a8bc
+      size: 48
+    - path: nodes/dft_density/MultiPackmol/packmol
+      hash: md5
+      md5: 7428e5fb28eb0dcdc0184c3cce12cfda.dir
+      size: 352102
+      nfiles: 202
+    params:
+      params.yaml:
+        dft_density_ASEGeoOpt:
+          data_id: -1
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: FIRE
+          repeat:
+          - 1
+          - 1
+          - 1
+          run_kwargs:
+            fmax: 0.5
+    outs:
+    - path: nodes/dft_density/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/dft_density/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 3586c3337303e8883ffe175bd9dd2254
+      size: 48
+    - path: nodes/dft_density/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 84afe4b5c13289818f66560f9c503fcc
+      size: 928488
+  dft_density_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name dft_density_ASEMD
+    deps:
+    - path: nodes/ML14/MLModel/apax_model
+      hash: md5
+      md5: b4cc5cf470a8312ecca5ef92769caa8d.dir
+      size: 84500120
+      nfiles: 5
+    - path: nodes/ML14/MLModel/log.csv
+      hash: md5
+      md5: 4f300f3fad30abdb52e341a02b79810e
+      size: 88042
+    - path: nodes/ML14/MLModel/metrics.json
+      hash: md5
+      md5: 8c46a92ec7f899ed84259964f60067a4
+      size: 386
+    - path: nodes/ML14/MLModel/node-meta.json
+      hash: md5
+      md5: 6f4a3fe5f44d91a1e7bdb5cfcc71c1ba
+      size: 48
+    - path: nodes/ML14/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: c73f7ed92deedd952c59845bde00a0b0
+      size: 48855065
+    - path: nodes/ML14/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/dft_density/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/dft_density/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 3586c3337303e8883ffe175bd9dd2254
+      size: 48
+    - path: nodes/dft_density/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 84afe4b5c13289818f66560f9c503fcc
+      size: 928488
+    params:
+      params.yaml:
+        dft_density_ASEMD:
+          compute_pressure: false
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 10
+          seed: 42
+          steps: 1000
+          use_momenta: false
+          wrap: false
+        dft_density_ASEMD+checker_list+0:
+          larger_only: true
+          max_std:
+          max_value: 0.5
+          minimum_window_size: 1
+          value: forces_uncertainty
+          window_size: 500
+        dft_density_ASEMD+modifier+0:
+          cell:
+          density: 1210
+        dft_density_ASEMD+thermostat:
+          friction: 0.01
+          temperature: 298.15
+          time_step: 0.5
+    outs:
+    - path: nodes/dft_density/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 923810b76fc4ada2ac6de1167b135334
+      size: 6129
+    - path: nodes/dft_density/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/dft_density/ASEMD/node-meta.json
+      hash: md5
+      md5: 072718d68607f33588cc67cf324f74db
+      size: 48
+    - path: nodes/dft_density/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/dft_density/ASEMD/trajectory.h5
+      hash: md5
+      md5: 89936c70ae50896c0d37d41d1f4f1628
+      size: 3194976
+  dft_density_ASEMD_1:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name dft_density_ASEMD_1
+    deps:
+    - path: nodes/ML14/MLModel/apax_model
+      hash: md5
+      md5: b4cc5cf470a8312ecca5ef92769caa8d.dir
+      size: 84500120
+      nfiles: 5
+    - path: nodes/ML14/MLModel/log.csv
+      hash: md5
+      md5: 4f300f3fad30abdb52e341a02b79810e
+      size: 88042
+    - path: nodes/ML14/MLModel/metrics.json
+      hash: md5
+      md5: 8c46a92ec7f899ed84259964f60067a4
+      size: 386
+    - path: nodes/ML14/MLModel/node-meta.json
+      hash: md5
+      md5: 6f4a3fe5f44d91a1e7bdb5cfcc71c1ba
+      size: 48
+    - path: nodes/ML14/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: c73f7ed92deedd952c59845bde00a0b0
+      size: 48855065
+    - path: nodes/ML14/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/dft_density/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/dft_density/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 3586c3337303e8883ffe175bd9dd2254
+      size: 48
+    - path: nodes/dft_density/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 84afe4b5c13289818f66560f9c503fcc
+      size: 928488
+    params:
+      params.yaml:
+        dft_density_ASEMD_1:
+          compute_pressure: true
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 10
+          seed: 42
+          steps: 10000
+          use_momenta: false
+          wrap: false
+        dft_density_ASEMD_1+checker_list+0:
+          larger_only: true
+          max_std:
+          max_value: 0.5
+          minimum_window_size: 1
+          value: forces_uncertainty
+          window_size: 500
+        dft_density_ASEMD_1+thermostat:
+          friction: 0.01
+          temperature: 298.15
+          time_step: 0.5
+    outs:
+    - path: nodes/dft_density/ASEMD_1/metrics_dict.csv
+      hash: md5
+      md5: ea3f938830718d26352310e288a69eb0
+      size: 80848
+    - path: nodes/dft_density/ASEMD_1/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/dft_density/ASEMD_1/node-meta.json
+      hash: md5
+      md5: 8a1e33c1706eab68ed03256d162ddcaa
+      size: 48
+    - path: nodes/dft_density/ASEMD_1/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/dft_density/ASEMD_1/trajectory.h5
+      hash: md5
+      md5: ce83b738c3a46d9af372c9c1403cbca6
+      size: 32069256

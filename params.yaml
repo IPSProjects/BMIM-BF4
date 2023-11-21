@@ -990,3 +990,94 @@ classical_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+dft_density_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+dft_density_ASEMD:
+    compute_pressure: false
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 1000
+    use_momenta: false
+    wrap: false
+dft_density_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+dft_density_ASEMD+modifier+0:
+    cell: null
+    density: 1210
+dft_density_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+dft_density_ASEMD_1:
+    compute_pressure: true
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 10000
+    use_momenta: false
+    wrap: false
+dft_density_ASEMD_1+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+dft_density_ASEMD_1+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+dft_density_ASEMD_2:
+    compute_pressure: true
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 10000
+    use_momenta: false
+    wrap: false
+dft_density_ASEMD_2+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+dft_density_MultiPackmol:
+    box: null
+    count:
+    - 10
+    density: 900
+    n_configurations: 1
+    pbc: true
+    seed: 42
+    tolerance: 2.0

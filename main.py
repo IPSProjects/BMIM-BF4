@@ -536,4 +536,60 @@ with project.group("ML15") as grp:
         processing_batch_size=4,
     )
 
-project.build(nodes=[grp])
+thermostat = ips.calculators.LangevinThermostat(
+    temperature=298.15, friction=0.01, time_step=0.5
+)
+
+ramp_density = ips.calculators.RescaleBoxModifier(
+    density=1210
+)
+
+with project.group("dft_density") as dft_density:
+    structure = ips.configuration_generation.MultiPackmol(
+        data=[single_structure.atoms],
+        count=[10],
+        density=900,
+        n_configurations=1,
+    )
+
+    geo_opt = ips.calculators.ASEGeoOpt(
+        model=model,
+        data=structure.atoms,
+        data_id=-1,
+        optimizer="FIRE",
+        run_kwargs={"fmax": 0.5},
+    )
+
+    density_md = ips.calculators.ASEMD(
+        data=geo_opt.atoms,
+        data_id=-1,
+        model=model,
+        modifier=[ramp_density],
+        thermostat=thermostat,
+        checker_list=[uncertainty_check],
+        steps=1000,
+        sampling_rate=10,
+    )
+
+    md = ips.calculators.ASEMD(
+        data=geo_opt.atoms,
+        data_id=-1,
+        model=model,
+        thermostat=thermostat,
+        checker_list=[uncertainty_check],
+        steps=10000,
+        sampling_rate=10,
+        compute_pressure=True,
+    )
+
+    dft_md = ips.calculators.ASEMD(
+        data=md.atoms,
+        data_id=-1,
+        model=cp2k,
+        thermostat=thermostat,
+        steps=10000,
+        sampling_rate=1,
+        compute_pressure=True,
+    )
+
+project.build(nodes=[dft_density])
