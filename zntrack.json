@@ -15613,5 +15613,361 @@
             "_type": "pathlib.Path",
             "value": "nodes/ML15/ConfigurationSelection"
         }
+    },
+    "ML15_MultiPackmol": {
+        "data": [
+            {
+                "_type": "znflow.Connection",
+                "value": {
+                    "instance": {
+                        "_type": "zntrack.Node",
+                        "value": {
+                            "module": "ipsuite.nodes",
+                            "cls": "MultiPackmol",
+                            "name": "ML11_MultiPack_MultiPackmol",
+                            "remote": null,
+                            "rev": null
+                        }
+                    },
+                    "attribute": "atoms",
+                    "item": null
+                }
+            }
+        ],
+        "structures": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/packmol"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML15/MultiPackmol"
+        }
+    },
+    "ML15_ASEGeoOpt": {
+        "checker_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "MultiPackmol",
+                        "name": "ML15_MultiPackmol",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "Apax",
+                        "name": "ML14_MLModel",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model_outs"
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML15/ASEGeoOpt"
+        }
+    },
+    "ML15_ASEMD_1+checker_list+0": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML15_ASEMD_1+checker_list+0"
+        }
+    },
+    "ML15_ASEMD_1": {
+        "checker_list": [
+            {
+                "_type": "zntrack.Node",
+                "value": {
+                    "module": "ipsuite.nodes",
+                    "cls": "ThresholdCheck",
+                    "name": "ML15_ASEMD_1+checker_list+0",
+                    "remote": null,
+                    "rev": null
+                }
+            }
+        ],
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "ASEGeoOpt",
+                        "name": "ML15_ASEGeoOpt",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "Apax",
+                        "name": "ML14_MLModel",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": [
+            {
+                "_type": "zntrack.Node",
+                "value": {
+                    "module": "ipsuite.nodes",
+                    "cls": "RescaleBoxModifier",
+                    "name": "ML15_ASEMD_1+modifier+0",
+                    "remote": null,
+                    "rev": null
+                }
+            }
+        ],
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "ML15_ASEMD_1+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML15/ASEMD_1"
+        }
+    },
+    "ML15_ASEMD_1+modifier+0": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML15_ASEMD_1+modifier+0"
+        }
+    },
+    "ML15_ASEMD_1+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML15_ASEMD_1+thermostat"
+        }
+    },
+    "ML15_ASEMD_2+checker_list+0": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML15_ASEMD_2+checker_list+0"
+        }
+    },
+    "ML15_ASEMD_2": {
+        "checker_list": [
+            {
+                "_type": "zntrack.Node",
+                "value": {
+                    "module": "ipsuite.nodes",
+                    "cls": "ThresholdCheck",
+                    "name": "ML15_ASEMD_2+checker_list+0",
+                    "remote": null,
+                    "rev": null
+                }
+            }
+        ],
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "ASEMD",
+                        "name": "ML15_ASEMD_1",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "Apax",
+                        "name": "ML14_MLModel",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": [
+            {
+                "_type": "zntrack.Node",
+                "value": {
+                    "module": "ipsuite.nodes",
+                    "cls": "TemperatureOscillatingRampModifier",
+                    "name": "ML15_ASEMD_2+modifier+0",
+                    "remote": null,
+                    "rev": null
+                }
+            }
+        ],
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "ML15_ASEMD_2+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML15/ASEMD_2"
+        }
+    },
+    "ML15_ASEMD_2+modifier+0": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML15_ASEMD_2+modifier+0"
+        }
+    },
+    "ML15_ASEMD_2+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML15_ASEMD_2+thermostat"
+        }
+    },
+    "ML15_ConfigurationSelection_1": {
+        "data": {
+            "ML15_ASEMD_2": {
+                "_type": "znflow.Connection",
+                "value": {
+                    "instance": {
+                        "_type": "zntrack.Node",
+                        "value": {
+                            "module": "ipsuite.nodes",
+                            "cls": "ASEMD",
+                            "name": "ML15_ASEMD_2",
+                            "remote": null,
+                            "rev": null
+                        }
+                    },
+                    "attribute": "atoms",
+                    "item": null
+                }
+            }
+        },
+        "data_file": null,
+        "exclude": null,
+        "exclude_configurations": null,
+        "img_selection": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/selection.png"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML15/ConfigurationSelection_1"
+        }
+    },
+    "ML15_CP2KSinglePoint": {
+        "cp2k_directory": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/cp2k"
+        },
+        "cp2k_files": [
+            "GTH_BASIS_SETS",
+            "GTH_POTENTIALS",
+            "dftd3.dat"
+        ],
+        "cp2k_params": "config/cp2k.yaml",
+        "cp2k_shell": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "BatchKernelSelection",
+                        "name": "ML15_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "output_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/atoms.h5"
+        },
+        "wfn_restart_file": null,
+        "wfn_restart_node": null,
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML15/CP2KSinglePoint"
+        }
     }
 }

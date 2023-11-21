@@ -277,6 +277,17 @@ ML14_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+ML15_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
 ML15_ASEMD:
     data_id: -1
     dump_rate: 1000
@@ -310,12 +321,80 @@ ML15_ASEMD+thermostat:
     tetragonal_strain: true
     time_step: 1.0
     ttime: 2.4557
+ML15_ASEMD_1:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 1000
+    use_momenta: false
+    wrap: false
+ML15_ASEMD_1+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML15_ASEMD_1+modifier+0:
+    cell: null
+    density: 1210
+ML15_ASEMD_1+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+ML15_ASEMD_2:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 100000
+    use_momenta: false
+    wrap: false
+ML15_ASEMD_2+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML15_ASEMD_2+modifier+0:
+    end_temperature: 500
+    interval: 1
+    num_oscillations: 10
+    start_temperature: 300
+    temperature_amplitude: 150
+ML15_ASEMD_2+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
 ML15_ConfigurationSelection:
     base_feature_map:
         layer_name: dense_2
         name: ll_grad
     n_configurations: 50
     selection_method: max_dist
+ML15_ConfigurationSelection_1:
+    n_configurations: 10
+ML15_MultiPackmol:
+    box: null
+    count:
+    - 30
+    density: 900
+    n_configurations: 1
+    pbc: true
+    seed: 42
+    tolerance: 2.0
 ML1_ASEGeoOpt:
     data_id: -1
     dump_rate: 1000

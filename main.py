@@ -536,4 +536,63 @@ with project.group("ML15") as grp:
         processing_batch_size=4,
     )
 
+
+ramp_density = ips.calculators.RescaleBoxModifier(
+    density=1210
+)
+
+thermostat = ips.calculators.LangevinThermostat(
+    temperature=298.15, friction=0.01, time_step=0.5
+)
+
+with project.group("ML15") as grp:
+    structure = ips.configuration_generation.MultiPackmol(
+        data=[single_structure.atoms],
+        count=[30],
+        density=900,
+        n_configurations=1,
+    )
+
+    geo_opt = ips.calculators.ASEGeoOpt(
+        model=model,
+        data=structure.atoms,
+        data_id=-1,
+        optimizer="FIRE",
+        run_kwargs={"fmax": 0.5},
+    )
+
+    density_md = ips.calculators.ASEMD(
+        data=geo_opt.atoms,
+        data_id=-1,
+        model=model,
+        modifier=[ramp_density],
+        checker_list=[uncertainty_check],
+        thermostat=thermostat,
+        steps=1000,
+        sampling_rate=10,
+    )
+
+
+    md = ips.calculators.ASEMD(
+        data=density_md.atoms,
+        data_id=-1,
+        model=model,
+        modifier=[temperature_oszillator],
+        thermostat=thermostat,
+        checker_list=[uncertainty_check],
+        steps=100_000,
+        sampling_rate=10,
+    )
+
+    selection = ips.configuration_selection.UniformTemporalSelection(
+        data=md.atoms,
+        n_configurations=10,
+    )
+
+    cp2k = ips.calculators.CP2KSinglePoint(
+        data=selection.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+    )
+
 project.build(nodes=[grp])
