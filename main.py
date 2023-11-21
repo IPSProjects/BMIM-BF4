@@ -604,11 +604,11 @@ with project.group("depl") as depl:
         model=model,
         thermostat=barostat,
         checker_list=[uncertainty_check],
-        steps=100000,
+        steps=250000,
         sampling_rate=10,
     )
 
-    ips.analysis.AnalyseDensity(npt_md.atoms)
+    ips.analysis.AnalyseDensity(npt_md.atoms, start=20000)
 
 
 project.build(nodes=[depl])

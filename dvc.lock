@@ -21211,7 +21211,7 @@ stages:
           - 1
           sampling_rate: 10
           seed: 42
-          steps: 100000
+          steps: 250000
           use_momenta: false
           wrap: false
         depl_ASEMD_1+checker_list+0:
@@ -21224,15 +21224,15 @@ stages:
         depl_ASEMD_1+thermostat:
           pfactor: 54.273
           pressure: 6.324e-07
-          temperature: 300
+          temperature: 270
           tetragonal_strain: true
           time_step: 1.0
           ttime: 2.4557
     outs:
     - path: nodes/depl/ASEMD_1/metrics_dict.csv
       hash: md5
-      md5: 7bc23e621795c2b0c4d4a907ab36c27e
-      size: 628785
+      md5: 207b1a9239131b2eb25b4cad03ba10a6
+      size: 1590661
     - path: nodes/depl/ASEMD_1/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -21240,7 +21240,7 @@ stages:
       nfiles: 1
     - path: nodes/depl/ASEMD_1/node-meta.json
       hash: md5
-      md5: 53457902c0049bfe730ea879c469e964
+      md5: ffa645fea3819c82abddf3001600d17e
       size: 48
     - path: nodes/depl/ASEMD_1/steps_before_stopping.json
       hash: md5
@@ -21248,15 +21248,15 @@ stages:
       size: 2
     - path: nodes/depl/ASEMD_1/trajectory.h5
       hash: md5
-      md5: 48f2ef023e38bbfb7f4112de172b0cce
-      size: 2205324792
+      md5: 53d0c7e7bd16aa288c709cd0da8e4310
+      size: 5506546992
   depl_AnalyseDensity_1:
     cmd: zntrack run ipsuite.nodes.AnalyseDensity --name depl_AnalyseDensity_1
     deps:
     - path: nodes/depl/ASEMD_1/metrics_dict.csv
       hash: md5
-      md5: 7bc23e621795c2b0c4d4a907ab36c27e
-      size: 628785
+      md5: 207b1a9239131b2eb25b4cad03ba10a6
+      size: 1590661
     - path: nodes/depl/ASEMD_1/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -21264,7 +21264,7 @@ stages:
       nfiles: 1
     - path: nodes/depl/ASEMD_1/node-meta.json
       hash: md5
-      md5: 53457902c0049bfe730ea879c469e964
+      md5: ffa645fea3819c82abddf3001600d17e
       size: 48
     - path: nodes/depl/ASEMD_1/steps_before_stopping.json
       hash: md5
@@ -21272,28 +21272,28 @@ stages:
       size: 2
     - path: nodes/depl/ASEMD_1/trajectory.h5
       hash: md5
-      md5: 48f2ef023e38bbfb7f4112de172b0cce
-      size: 2205324792
+      md5: 53d0c7e7bd16aa288c709cd0da8e4310
+      size: 5506546992
     params:
       params.yaml:
         depl_AnalyseDensity_1:
           end:
-          start: 0
+          start: 20000
           window: 1000
     outs:
     - path: nodes/depl/AnalyseDensity_1/density.json
       hash: md5
-      md5: 7e284adc58ac56f9a07456684bb81f09
-      size: 66
+      md5: 1078bcded0bc581dceaa3b3e44c85d5d
+      size: 68
     - path: nodes/depl/AnalyseDensity_1/density.png
       hash: md5
-      md5: 7ed311101e0e03c958bfc9629409fe68
-      size: 36265
+      md5: 6d1d83f16235183489877bae067ef816
+      size: 38588
     - path: nodes/depl/AnalyseDensity_1/node-meta.json
       hash: md5
-      md5: 357000d8cfabf47a681e1214f71bb58e
+      md5: 16e101d7a7b68b400f61dd3502344fce
       size: 48
     - path: nodes/depl/AnalyseDensity_1/results.csv
       hash: md5
-      md5: fee3cec4be38dab40914a479c75a988d
-      size: 227682
+      md5: 6510350b22409fa5349b969eb675562e
+      size: 594602

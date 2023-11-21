@@ -1042,7 +1042,7 @@ depl_ASEMD_1:
     - 1
     sampling_rate: 10
     seed: 42
-    steps: 100000
+    steps: 250000
     use_momenta: false
     wrap: false
 depl_ASEMD_1+checker_list+0:
@@ -1055,7 +1055,7 @@ depl_ASEMD_1+checker_list+0:
 depl_ASEMD_1+thermostat:
     pfactor: 54.273
     pressure: 6.324e-07
-    temperature: 300
+    temperature: 303.15
     tetragonal_strain: true
     time_step: 1.0
     ttime: 2.4557
@@ -1065,7 +1065,7 @@ depl_AnalyseDensity:
     window: 1000
 depl_AnalyseDensity_1:
     end: null
-    start: 0
+    start: 20000
     window: 1000
 depl_Packmol:
     box: null
