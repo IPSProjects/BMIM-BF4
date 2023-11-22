@@ -990,3 +990,129 @@ classical_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+pressure_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+pressure_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 1000
+    use_momenta: false
+    wrap: false
+pressure_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+pressure_ASEMD+modifier+0:
+    cell: null
+    density: 1130
+pressure_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+pressure_ASEMD_1:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 50000
+    use_momenta: false
+    wrap: false
+pressure_ASEMD_1+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+pressure_ASEMD_1+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+pressure_ASEMD_2:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 20000
+    use_momenta: false
+    wrap: false
+pressure_ASEMD_2+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+pressure_ASEMD_2+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+pressure_AnalyseDensity:
+    end: null
+    start: 0
+    window: 1000
+pressure_MultiPackmol:
+    box: null
+    count:
+    - 50
+    density: 900
+    n_configurations: 1
+    pbc: true
+    seed: 42
+    tolerance: 2.0
+pressure_Packmol:
+    box: null
+    count:
+    - 1
+    - 1
+    data_ids: null
+    density: 1210
+    pbc: false
+    tolerance: 2.0
+pressure_Packmol_1:
+    box: null
+    count:
+    - 70
+    data_ids: null
+    density: 900
+    pbc: true
+    tolerance: 2.0
+pressure_SmilesToAtoms:
+    cell: null
+    optimizer: UFF
+    seed: 1234
+    smiles: '[B-](F)(F)(F)F'
+pressure_SmilesToAtoms_1:
+    cell: null
+    optimizer: UFF
+    seed: 1234
+    smiles: CCCCN1C=C[N+](=C1)C

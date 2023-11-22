@@ -168,6 +168,11 @@ plots:
 - nodes/ML14/EnergyHistogram/labels_df.csv: {}
 - nodes/ML14/ForcesHistogram/labels_df.csv: {}
 - nodes/ML15/ASEMD/metrics_dict.csv: {}
+- nodes/pressure/ASEMD/metrics_dict.csv: {}
+- nodes/pressure/AnalyseDensity/density.png: {}
+- nodes/pressure/AnalyseDensity/results.csv: {}
+- nodes/pressure/ASEMD_1/metrics_dict.csv: {}
+- nodes/pressure/ASEMD_2/metrics_dict.csv: {}
 stages:
   ML0_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML0_ConfigurationSelection
@@ -4990,3 +4995,186 @@ stages:
     - nodes/classical/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/classical/PredictionMetrics/stress_df.csv
     - nodes/classical/PredictionMetrics/stress_hydrostatic_df.csv
+  pressure_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name pressure_ASEGeoOpt
+    deps:
+    - nodes/ML14/MLModel/apax_model
+    - nodes/ML14/MLModel/log.csv
+    - nodes/ML14/MLModel/metrics.json
+    - nodes/ML14/MLModel/node-meta.json
+    - nodes/ML14/MLModel/train_atoms.extxyz
+    - nodes/ML14/MLModel/val_atoms.extxyz
+    - nodes/pressure/Packmol_1/atoms.h5
+    - nodes/pressure/Packmol_1/node-meta.json
+    - nodes/pressure/Packmol_1/packmol
+    metrics:
+    - nodes/pressure/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/pressure/ASEGeoOpt/model_outs
+    - nodes/pressure/ASEGeoOpt/trajectory.h5
+    params:
+    - pressure_ASEGeoOpt
+  pressure_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name pressure_ASEMD
+    deps:
+    - nodes/ML14/MLModel/apax_model
+    - nodes/ML14/MLModel/log.csv
+    - nodes/ML14/MLModel/metrics.json
+    - nodes/ML14/MLModel/node-meta.json
+    - nodes/ML14/MLModel/train_atoms.extxyz
+    - nodes/ML14/MLModel/val_atoms.extxyz
+    - nodes/pressure/ASEGeoOpt/model_outs
+    - nodes/pressure/ASEGeoOpt/node-meta.json
+    - nodes/pressure/ASEGeoOpt/trajectory.h5
+    metrics:
+    - nodes/pressure/ASEMD/node-meta.json:
+        cache: false
+    - nodes/pressure/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/pressure/ASEMD/metrics_dict.csv
+    - nodes/pressure/ASEMD/model
+    - nodes/pressure/ASEMD/trajectory.h5
+    params:
+    - pressure_ASEMD
+    - pressure_ASEMD+checker_list+0
+    - pressure_ASEMD+modifier+0
+    - pressure_ASEMD+thermostat
+  pressure_ASEMD_1:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name pressure_ASEMD_1
+    deps:
+    - nodes/ML14/MLModel/apax_model
+    - nodes/ML14/MLModel/log.csv
+    - nodes/ML14/MLModel/metrics.json
+    - nodes/ML14/MLModel/node-meta.json
+    - nodes/ML14/MLModel/train_atoms.extxyz
+    - nodes/ML14/MLModel/val_atoms.extxyz
+    - nodes/pressure/ASEMD/metrics_dict.csv
+    - nodes/pressure/ASEMD/model
+    - nodes/pressure/ASEMD/node-meta.json
+    - nodes/pressure/ASEMD/steps_before_stopping.json
+    - nodes/pressure/ASEMD/trajectory.h5
+    metrics:
+    - nodes/pressure/ASEMD_1/node-meta.json:
+        cache: false
+    - nodes/pressure/ASEMD_1/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/pressure/ASEMD_1/metrics_dict.csv
+    - nodes/pressure/ASEMD_1/model
+    - nodes/pressure/ASEMD_1/trajectory.h5
+    params:
+    - pressure_ASEMD_1
+    - pressure_ASEMD_1+checker_list+0
+    - pressure_ASEMD_1+thermostat
+  pressure_ASEMD_2:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name pressure_ASEMD_2
+    deps:
+    - nodes/ML14/MLModel/apax_model
+    - nodes/ML14/MLModel/log.csv
+    - nodes/ML14/MLModel/metrics.json
+    - nodes/ML14/MLModel/node-meta.json
+    - nodes/ML14/MLModel/train_atoms.extxyz
+    - nodes/ML14/MLModel/val_atoms.extxyz
+    - nodes/pressure/ASEMD_1/metrics_dict.csv
+    - nodes/pressure/ASEMD_1/model
+    - nodes/pressure/ASEMD_1/node-meta.json
+    - nodes/pressure/ASEMD_1/steps_before_stopping.json
+    - nodes/pressure/ASEMD_1/trajectory.h5
+    metrics:
+    - nodes/pressure/ASEMD_2/node-meta.json:
+        cache: false
+    - nodes/pressure/ASEMD_2/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/pressure/ASEMD_2/metrics_dict.csv
+    - nodes/pressure/ASEMD_2/model
+    - nodes/pressure/ASEMD_2/trajectory.h5
+    params:
+    - pressure_ASEMD_2
+    - pressure_ASEMD_2+checker_list+0
+    - pressure_ASEMD_2+thermostat
+  pressure_AnalyseDensity:
+    cmd: zntrack run ipsuite.nodes.AnalyseDensity --name pressure_AnalyseDensity
+    deps:
+    - nodes/pressure/ASEMD/metrics_dict.csv
+    - nodes/pressure/ASEMD/model
+    - nodes/pressure/ASEMD/node-meta.json
+    - nodes/pressure/ASEMD/steps_before_stopping.json
+    - nodes/pressure/ASEMD/trajectory.h5
+    metrics:
+    - nodes/pressure/AnalyseDensity/density.json:
+        cache: false
+    - nodes/pressure/AnalyseDensity/node-meta.json:
+        cache: false
+    outs:
+    - nodes/pressure/AnalyseDensity/density.png
+    - nodes/pressure/AnalyseDensity/results.csv
+    params:
+    - pressure_AnalyseDensity
+  pressure_MultiPackmol:
+    cmd: zntrack run ipsuite.nodes.MultiPackmol --name pressure_MultiPackmol
+    deps:
+    - nodes/ML11_MultiPack/MultiPackmol/atoms.h5
+    - nodes/ML11_MultiPack/MultiPackmol/node-meta.json
+    - nodes/ML11_MultiPack/MultiPackmol/packmol
+    metrics:
+    - nodes/pressure/MultiPackmol/node-meta.json:
+        cache: false
+    outs:
+    - nodes/pressure/MultiPackmol/atoms.h5
+    - nodes/pressure/MultiPackmol/packmol
+    params:
+    - pressure_MultiPackmol
+  pressure_Packmol:
+    cmd: zntrack run ipsuite.nodes.Packmol --name pressure_Packmol
+    deps:
+    - nodes/pressure/SmilesToAtoms/atoms.h5
+    - nodes/pressure/SmilesToAtoms/molecule.png
+    - nodes/pressure/SmilesToAtoms/node-meta.json
+    - nodes/pressure/SmilesToAtoms_1/atoms.h5
+    - nodes/pressure/SmilesToAtoms_1/molecule.png
+    - nodes/pressure/SmilesToAtoms_1/node-meta.json
+    metrics:
+    - nodes/pressure/Packmol/node-meta.json:
+        cache: false
+    outs:
+    - nodes/pressure/Packmol/atoms.h5
+    - nodes/pressure/Packmol/packmol
+    params:
+    - pressure_Packmol
+  pressure_Packmol_1:
+    cmd: zntrack run ipsuite.nodes.Packmol --name pressure_Packmol_1
+    deps:
+    - nodes/pressure/Packmol/atoms.h5
+    - nodes/pressure/Packmol/node-meta.json
+    - nodes/pressure/Packmol/packmol
+    metrics:
+    - nodes/pressure/Packmol_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/pressure/Packmol_1/atoms.h5
+    - nodes/pressure/Packmol_1/packmol
+    params:
+    - pressure_Packmol_1
+  pressure_SmilesToAtoms:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name pressure_SmilesToAtoms
+    metrics:
+    - nodes/pressure/SmilesToAtoms/node-meta.json:
+        cache: false
+    outs:
+    - nodes/pressure/SmilesToAtoms/atoms.h5
+    - nodes/pressure/SmilesToAtoms/molecule.png
+    params:
+    - pressure_SmilesToAtoms
+  pressure_SmilesToAtoms_1:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name pressure_SmilesToAtoms_1
+    metrics:
+    - nodes/pressure/SmilesToAtoms_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/pressure/SmilesToAtoms_1/atoms.h5
+    - nodes/pressure/SmilesToAtoms_1/molecule.png
+    params:
+    - pressure_SmilesToAtoms_1
