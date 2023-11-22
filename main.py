@@ -536,4 +536,75 @@ with project.group("ML15") as grp:
         processing_batch_size=4,
     )
 
-project.build(nodes=[grp])
+
+ramp_density = ips.calculators.RescaleBoxModifier(
+    density=1210
+)
+
+thermostat = ips.calculators.LangevinThermostat(
+    temperature=298.15, friction=0.01, time_step=0.5
+)
+
+with project.group("pressure") as p:
+    anion = ips.configuration_generation.SmilesToAtoms(
+        smiles="[B-](F)(F)(F)F"
+    )
+    cation = ips.configuration_generation.SmilesToAtoms(
+        smiles="CCCCN1C=C[N+](=C1)C"
+    )
+
+    single_structure = ips.configuration_generation.Packmol(
+        data=[cation.atoms, anion.atoms],
+        count=[1, 1],
+        density=1210,
+        pbc=False,
+    )
+
+    structure = ips.configuration_generation.Packmol(
+        data=[single_structure.atoms],
+        count=[70],
+        density=900,
+    )
+
+    geo_opt = ips.calculators.ASEGeoOpt(
+        model=model,
+        data=structure.atoms,
+        data_id=-1,
+        optimizer="FIRE",
+        run_kwargs={"fmax": 0.5},
+    )
+
+    density_md = ips.calculators.ASEMD(
+        data=geo_opt.atoms,
+        data_id=-1,
+        model=model,
+        modifier=[ramp_density],
+        thermostat=thermostat,
+        checker_list=[uncertainty_check],
+        steps=1000,
+        sampling_rate=10,
+    )
+
+    ips.analysis.AnalyseDensity(density_md.atoms)
+
+    eq_md = ips.calculators.ASEMD(
+        data=density_md.atoms,
+        data_id=-1,
+        model=model,
+        thermostat=thermostat,
+        checker_list=[uncertainty_check],
+        steps=50_000,
+        sampling_rate=1,
+    )
+
+    md = ips.calculators.ASEMD(
+        data=eq_md.atoms,
+        data_id=-1,
+        model=model,
+        thermostat=thermostat,
+        checker_list=[uncertainty_check],
+        steps=20_000,
+        sampling_rate=1,
+    )
+
+project.build(nodes=[p])
