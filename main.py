@@ -525,4 +525,59 @@ with project.group("final") as final:
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
 
-project.build(nodes=[final])
+
+ramp_density = ips.calculators.RescaleBoxModifier(
+    density=1150
+)
+thermostat = ips.calculators.LangevinThermostat(
+    temperature=315, friction=0.01, time_step=0.5
+)
+# 10.1016/j.molliq.2006.08.023
+
+with project.group("depl") as depl:
+    anion = ips.configuration_generation.SmilesToAtoms(
+        smiles="[B-](F)(F)(F)F"
+    )
+    cation = ips.configuration_generation.SmilesToAtoms(
+        smiles="CCCCN1C=C[N+](=C1)C"
+    )
+
+    single_structure = ips.configuration_generation.Packmol(
+        data=[cation.atoms, anion.atoms],
+        count=[1, 1],
+        density=1210,
+        pbc=False,
+    )
+
+    structure = ips.configuration_generation.Packmol(
+        data=[single_structure.atoms],
+        count=[64],
+        density=900,
+    )
+
+    geo_opt = ips.calculators.ASEGeoOpt(
+        model=model,
+        data=structure.atoms,
+        data_id=-1,
+        optimizer="FIRE",
+        run_kwargs={"fmax": 0.5},
+    )
+
+    density_md = ips.calculators.ASEMD(
+        data=geo_opt.atoms,
+        data_id=-1,
+        model=model,
+        modifier=[ramp_density],
+        thermostat=thermostat,
+        steps=1000,
+        sampling_rate=10,
+    )
+
+    md = ips.calculators.ApaxJaxMD(
+        data=density_md.atoms,
+        data_id=-1,
+        model=model,
+        md_parameter_file="config/md.yaml",
+    )
+
+project.build(nodes=[depl])

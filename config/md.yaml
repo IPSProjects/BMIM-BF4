@@ -1,0 +1,9 @@
+ensemble:
+  name: nvt
+  dt: 0.5 # fs time step
+  temperature: 315 # K
+
+duration: 1_000_000 # fs
+n_inner: 1000 # compiled inner steps
+sampling_rate: 1  # dump interval
+dr_threshold: 0.5 # Neighborlist skin
