@@ -515,5 +515,12 @@ with project.group("ML14") as grp:
     ips.analysis.EnergyHistogram(data=train_data, bins=100)
     ips.analysis.ForcesHistogram(data=train_data)
 
+with project.group("final") as final:
+    model = ips.models.Apax(
+        data=train_data,
+        validation_data=validation_data.atoms,
+        config="config/final.yaml",
+    )
 
-project.build(nodes=[grp])
+
+project.build(nodes=[final])

@@ -951,3 +951,8 @@ classical_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+final_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
