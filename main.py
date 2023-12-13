@@ -524,5 +524,13 @@ with project.group("final") as final:
     prediction = ips.analysis.Prediction(data=test_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
+with project.group("final_ensemble") as final:
+    model = ips.models.Apax(
+        data=train_data,
+        validation_data=validation_data.atoms,
+        config="config/final_ensemble.yaml",
+    )
+    prediction = ips.analysis.Prediction(data=test_data, model=model)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
 
 project.build(nodes=[final])
