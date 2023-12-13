@@ -560,7 +560,7 @@ with project.group("depl") as depl:
         data=structure.atoms,
         data_id=-1,
         optimizer="FIRE",
-        run_kwargs={"fmax": 0.5},
+        run_kwargs={"fmax": 0.05},
     )
 
     density_md = ips.calculators.ASEMD(
@@ -569,7 +569,7 @@ with project.group("depl") as depl:
         model=model,
         modifier=[ramp_density],
         thermostat=thermostat,
-        steps=1000,
+        steps=10_000,
         sampling_rate=10,
     )
 
