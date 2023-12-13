@@ -5111,3 +5111,45 @@ stages:
     metrics:
     - nodes/ML15/ConfigurationSelection_1/node-meta.json:
         cache: false
+  ML15_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML15_Prediction
+    deps:
+    - nodes/ML14/MLModel/apax_model
+    - nodes/ML14/MLModel/log.csv
+    - nodes/ML14/MLModel/metrics.json
+    - nodes/ML14/MLModel/node-meta.json
+    - nodes/ML14/MLModel/train_atoms.extxyz
+    - nodes/ML14/MLModel/val_atoms.extxyz
+    - nodes/ML15/CP2KSinglePoint/atoms.h5
+    - nodes/ML15/CP2KSinglePoint/cp2k
+    - nodes/ML15/CP2KSinglePoint/node-meta.json
+    outs:
+    - nodes/ML15/Prediction/atoms.h5
+    metrics:
+    - nodes/ML15/Prediction/node-meta.json:
+        cache: false
+  ML15_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML15_PredictionMetrics
+    deps:
+    - nodes/ML15/Prediction/atoms.h5
+    - nodes/ML15/Prediction/node-meta.json
+    outs:
+    - nodes/ML15/PredictionMetrics/energy_df.csv
+    - nodes/ML15/PredictionMetrics/forces_df.csv
+    - nodes/ML15/PredictionMetrics/plots
+    - nodes/ML15/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/ML15/PredictionMetrics/stress_df.csv
+    - nodes/ML15/PredictionMetrics/stress_hydrostatic_df.csv
+    metrics:
+    - nodes/ML15/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/ML15/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/ML15/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/ML15/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/ML15/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/ML15/PredictionMetrics/stress.json:
+        cache: false

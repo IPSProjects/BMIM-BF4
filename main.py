@@ -595,4 +595,7 @@ with project.group("ML15") as grp:
         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
     )
 
+    eval = ips.analysis.Prediction(data=cp2k.atoms, model=model)
+    ips.analysis.PredictionMetrics(data=eval)
+
 project.build(nodes=[grp])
