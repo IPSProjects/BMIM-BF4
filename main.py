@@ -521,6 +521,8 @@ with project.group("final") as final:
         validation_data=validation_data.atoms,
         config="config/final.yaml",
     )
+    prediction = ips.analysis.Prediction(data=test_data, model=model)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
 
 
 project.build(nodes=[final])
