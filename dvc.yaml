@@ -5092,23 +5092,16 @@ stages:
     - nodes/final_ensemble/MLModel/node-meta.json
     - nodes/final_ensemble/MLModel/train_atoms.extxyz
     - nodes/final_ensemble/MLModel/val_atoms.extxyz
-    outs:
-    - nodes/final_ensemble/Prediction/atoms.h5
     metrics:
     - nodes/final_ensemble/Prediction/node-meta.json:
         cache: false
+    outs:
+    - nodes/final_ensemble/Prediction/atoms.h5
   final_ensemble_PredictionMetrics:
     cmd: zntrack run ipsuite.nodes.PredictionMetrics --name final_ensemble_PredictionMetrics
     deps:
     - nodes/final_ensemble/Prediction/atoms.h5
     - nodes/final_ensemble/Prediction/node-meta.json
-    outs:
-    - nodes/final_ensemble/PredictionMetrics/energy_df.csv
-    - nodes/final_ensemble/PredictionMetrics/forces_df.csv
-    - nodes/final_ensemble/PredictionMetrics/plots
-    - nodes/final_ensemble/PredictionMetrics/stress_deviatoric_df.csv
-    - nodes/final_ensemble/PredictionMetrics/stress_df.csv
-    - nodes/final_ensemble/PredictionMetrics/stress_hydrostatic_df.csv
     metrics:
     - nodes/final_ensemble/PredictionMetrics/deviat_stress.json:
         cache: false
@@ -5121,4 +5114,101 @@ stages:
     - nodes/final_ensemble/PredictionMetrics/node-meta.json:
         cache: false
     - nodes/final_ensemble/PredictionMetrics/stress.json:
+        cache: false
+    outs:
+    - nodes/final_ensemble/PredictionMetrics/energy_df.csv
+    - nodes/final_ensemble/PredictionMetrics/forces_df.csv
+    - nodes/final_ensemble/PredictionMetrics/plots
+    - nodes/final_ensemble/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/final_ensemble/PredictionMetrics/stress_df.csv
+    - nodes/final_ensemble/PredictionMetrics/stress_hydrostatic_df.csv
+  final_ensemble_Prediction_1:
+    cmd: zntrack run ipsuite.nodes.Prediction --name final_ensemble_Prediction_1
+    deps:
+    - nodes/ML0/ConfigurationSelection/node-meta.json
+    - nodes/ML0/ConfigurationSelection/selected_configurations.json
+    - nodes/ML0/ConfigurationSelection/selection.png
+    - nodes/ML1/CP2KSinglePoint/atoms.h5
+    - nodes/ML1/CP2KSinglePoint/cp2k
+    - nodes/ML1/CP2KSinglePoint/node-meta.json
+    - nodes/ML10/CP2KSinglePoint/atoms.h5
+    - nodes/ML10/CP2KSinglePoint/cp2k
+    - nodes/ML10/CP2KSinglePoint/node-meta.json
+    - nodes/ML11_MultiPack/CP2KSinglePoint/atoms.h5
+    - nodes/ML11_MultiPack/CP2KSinglePoint/cp2k
+    - nodes/ML11_MultiPack/CP2KSinglePoint/node-meta.json
+    - nodes/ML12/CP2KSinglePoint/atoms.h5
+    - nodes/ML12/CP2KSinglePoint/cp2k
+    - nodes/ML12/CP2KSinglePoint/node-meta.json
+    - nodes/ML13/CP2KSinglePoint/atoms.h5
+    - nodes/ML13/CP2KSinglePoint/cp2k
+    - nodes/ML13/CP2KSinglePoint/node-meta.json
+    - nodes/ML14/CP2KSinglePoint/atoms.h5
+    - nodes/ML14/CP2KSinglePoint/cp2k
+    - nodes/ML14/CP2KSinglePoint/node-meta.json
+    - nodes/ML2/CP2KSinglePoint/atoms.h5
+    - nodes/ML2/CP2KSinglePoint/cp2k
+    - nodes/ML2/CP2KSinglePoint/node-meta.json
+    - nodes/ML3/CP2KSinglePoint/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/cp2k
+    - nodes/ML3/CP2KSinglePoint/node-meta.json
+    - nodes/ML4/CP2KSinglePoint/atoms.h5
+    - nodes/ML4/CP2KSinglePoint/cp2k
+    - nodes/ML4/CP2KSinglePoint/node-meta.json
+    - nodes/ML5/CP2KSinglePoint/atoms.h5
+    - nodes/ML5/CP2KSinglePoint/cp2k
+    - nodes/ML5/CP2KSinglePoint/node-meta.json
+    - nodes/ML6/CP2KSinglePoint/atoms.h5
+    - nodes/ML6/CP2KSinglePoint/cp2k
+    - nodes/ML6/CP2KSinglePoint/node-meta.json
+    - nodes/ML7/CP2KSinglePoint/atoms.h5
+    - nodes/ML7/CP2KSinglePoint/cp2k
+    - nodes/ML7/CP2KSinglePoint/node-meta.json
+    - nodes/ML8/CP2KSinglePoint/atoms.h5
+    - nodes/ML8/CP2KSinglePoint/cp2k
+    - nodes/ML8/CP2KSinglePoint/node-meta.json
+    - nodes/ML9/CP2KSinglePoint/atoms.h5
+    - nodes/ML9/CP2KSinglePoint/cp2k
+    - nodes/ML9/CP2KSinglePoint/node-meta.json
+    - nodes/VS/CP2KSinglePoint/atoms.h5
+    - nodes/VS/CP2KSinglePoint/cp2k
+    - nodes/VS/CP2KSinglePoint/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_2/selection.png
+    - nodes/final_ensemble/MLModel/apax_model
+    - nodes/final_ensemble/MLModel/log.csv
+    - nodes/final_ensemble/MLModel/metrics.json
+    - nodes/final_ensemble/MLModel/node-meta.json
+    - nodes/final_ensemble/MLModel/train_atoms.extxyz
+    - nodes/final_ensemble/MLModel/val_atoms.extxyz
+    outs:
+    - nodes/final_ensemble/Prediction_1/atoms.h5
+    metrics:
+    - nodes/final_ensemble/Prediction_1/node-meta.json:
+        cache: false
+  final_ensemble_PredictionMetrics_1:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name final_ensemble_PredictionMetrics_1
+    deps:
+    - nodes/final_ensemble/Prediction_1/atoms.h5
+    - nodes/final_ensemble/Prediction_1/node-meta.json
+    outs:
+    - nodes/final_ensemble/PredictionMetrics_1/energy_df.csv
+    - nodes/final_ensemble/PredictionMetrics_1/forces_df.csv
+    - nodes/final_ensemble/PredictionMetrics_1/plots
+    - nodes/final_ensemble/PredictionMetrics_1/stress_deviatoric_df.csv
+    - nodes/final_ensemble/PredictionMetrics_1/stress_df.csv
+    - nodes/final_ensemble/PredictionMetrics_1/stress_hydrostatic_df.csv
+    metrics:
+    - nodes/final_ensemble/PredictionMetrics_1/deviat_stress.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/energy.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/forces.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/hydro_stress.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/node-meta.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/stress.json:
         cache: false

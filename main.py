@@ -533,4 +533,7 @@ with project.group("final_ensemble") as final:
     prediction = ips.analysis.Prediction(data=test_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
+    prediction = ips.analysis.Prediction(data=train_data, model=model)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
+
 project.build(nodes=[final])
