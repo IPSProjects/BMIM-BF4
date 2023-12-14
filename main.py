@@ -527,10 +527,10 @@ thermostat = ips.calculators.NPTThermostat(
     )
 
 temperature_oszillator = ips.calculators.TemperatureOscillatingRampModifier(
-    end_temperature=500,  # decomp ~ 290
-    start_temperature=250,  # melting -75
+    end_temperature=300,  # decomp ~ 290
+    start_temperature=200,  # melting -75
     num_oscillations=10,
-    temperature_amplitude=150,
+    temperature_amplitude=100,
 )
 
 with project.group("ML15") as grp:

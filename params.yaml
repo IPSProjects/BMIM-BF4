@@ -298,11 +298,11 @@ ML15_ASEMD+checker_list+0:
     value: forces_uncertainty
     window_size: 500
 ML15_ASEMD+modifier+0:
-    end_temperature: 500
+    end_temperature: 300
     interval: 1
     num_oscillations: 10
-    start_temperature: 250
-    temperature_amplitude: 150
+    start_temperature: 200
+    temperature_amplitude: 100
 ML15_ASEMD+thermostat:
     pfactor: 54.273
     pressure: 6.324e-07
