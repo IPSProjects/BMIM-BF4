@@ -310,6 +310,12 @@ ML15_ASEMD+thermostat:
     tetragonal_strain: true
     time_step: 1.0
     ttime: 2.4557
+ML15_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 100
+    selection_method: max_dist
 ML1_ASEGeoOpt:
     data_id: -1
     dump_rate: 1000
