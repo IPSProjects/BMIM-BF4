@@ -1828,6 +1828,34 @@ stages:
     - nodes/ML14/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/ML14/PredictionMetrics/stress_df.csv
     - nodes/ML14/PredictionMetrics/stress_hydrostatic_df.csv
+  ML15_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML15_ASEMD
+    deps:
+    - nodes/ML14/ASEMD/metrics_dict.csv
+    - nodes/ML14/ASEMD/model
+    - nodes/ML14/ASEMD/node-meta.json
+    - nodes/ML14/ASEMD/steps_before_stopping.json
+    - nodes/ML14/ASEMD/trajectory.h5
+    - nodes/ML14/MLModel/apax_model
+    - nodes/ML14/MLModel/log.csv
+    - nodes/ML14/MLModel/metrics.json
+    - nodes/ML14/MLModel/node-meta.json
+    - nodes/ML14/MLModel/train_atoms.extxyz
+    - nodes/ML14/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/ML15/ASEMD/node-meta.json:
+        cache: false
+    - nodes/ML15/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML15/ASEMD/metrics_dict.csv
+    - nodes/ML15/ASEMD/model
+    - nodes/ML15/ASEMD/trajectory.h5
+    params:
+    - ML15_ASEMD
+    - ML15_ASEMD+checker_list+0
+    - ML15_ASEMD+modifier+0
+    - ML15_ASEMD+thermostat
   ML1_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML1_ASEGeoOpt
     deps:
@@ -5122,6 +5150,31 @@ stages:
     - nodes/final_ensemble/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/final_ensemble/PredictionMetrics/stress_df.csv
     - nodes/final_ensemble/PredictionMetrics/stress_hydrostatic_df.csv
+  final_ensemble_PredictionMetrics_1:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name final_ensemble_PredictionMetrics_1
+    deps:
+    - nodes/final_ensemble/Prediction_1/atoms.h5
+    - nodes/final_ensemble/Prediction_1/node-meta.json
+    metrics:
+    - nodes/final_ensemble/PredictionMetrics_1/deviat_stress.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/energy.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/forces.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/hydro_stress.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/node-meta.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/stress.json:
+        cache: false
+    outs:
+    - nodes/final_ensemble/PredictionMetrics_1/energy_df.csv
+    - nodes/final_ensemble/PredictionMetrics_1/forces_df.csv
+    - nodes/final_ensemble/PredictionMetrics_1/plots
+    - nodes/final_ensemble/PredictionMetrics_1/stress_deviatoric_df.csv
+    - nodes/final_ensemble/PredictionMetrics_1/stress_df.csv
+    - nodes/final_ensemble/PredictionMetrics_1/stress_hydrostatic_df.csv
   final_ensemble_Prediction_1:
     cmd: zntrack run ipsuite.nodes.Prediction --name final_ensemble_Prediction_1
     deps:
@@ -5182,33 +5235,8 @@ stages:
     - nodes/final_ensemble/MLModel/node-meta.json
     - nodes/final_ensemble/MLModel/train_atoms.extxyz
     - nodes/final_ensemble/MLModel/val_atoms.extxyz
-    outs:
-    - nodes/final_ensemble/Prediction_1/atoms.h5
     metrics:
     - nodes/final_ensemble/Prediction_1/node-meta.json:
         cache: false
-  final_ensemble_PredictionMetrics_1:
-    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name final_ensemble_PredictionMetrics_1
-    deps:
-    - nodes/final_ensemble/Prediction_1/atoms.h5
-    - nodes/final_ensemble/Prediction_1/node-meta.json
     outs:
-    - nodes/final_ensemble/PredictionMetrics_1/energy_df.csv
-    - nodes/final_ensemble/PredictionMetrics_1/forces_df.csv
-    - nodes/final_ensemble/PredictionMetrics_1/plots
-    - nodes/final_ensemble/PredictionMetrics_1/stress_deviatoric_df.csv
-    - nodes/final_ensemble/PredictionMetrics_1/stress_df.csv
-    - nodes/final_ensemble/PredictionMetrics_1/stress_hydrostatic_df.csv
-    metrics:
-    - nodes/final_ensemble/PredictionMetrics_1/deviat_stress.json:
-        cache: false
-    - nodes/final_ensemble/PredictionMetrics_1/energy.json:
-        cache: false
-    - nodes/final_ensemble/PredictionMetrics_1/forces.json:
-        cache: false
-    - nodes/final_ensemble/PredictionMetrics_1/hydro_stress.json:
-        cache: false
-    - nodes/final_ensemble/PredictionMetrics_1/node-meta.json:
-        cache: false
-    - nodes/final_ensemble/PredictionMetrics_1/stress.json:
-        cache: false
+    - nodes/final_ensemble/Prediction_1/atoms.h5

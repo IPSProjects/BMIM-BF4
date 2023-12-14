@@ -515,6 +515,37 @@ with project.group("ML14") as grp:
     ips.analysis.EnergyHistogram(data=train_data, bins=100)
     ips.analysis.ForcesHistogram(data=train_data)
 
+
+
+thermostat = ips.calculators.NPTThermostat(
+        time_step=1.0,
+        temperature=300,
+        pressure=6.324e-07, # 1.01325 * units.bar,
+        ttime=2.4557, # 25 * units.fs,
+        pfactor=54.273, # (75 * units.fs) ** 2,
+        tetragonal_strain=True,
+    )
+
+temperature_oszillator = ips.calculators.TemperatureOscillatingRampModifier(
+    end_temperature=500,  # decomp ~ 290
+    start_temperature=250,  # melting -75
+    num_oscillations=10,
+    temperature_amplitude=150,
+)
+
+with project.group("ML15") as grp:
+    md = ips.calculators.ASEMD(
+        data=md.atoms,
+        data_id=-1,
+        model=model,
+        modifier=[temperature_oszillator],
+        thermostat=thermostat,
+        checker_list=[uncertainty_check],
+        steps=1000000,
+        sampling_rate=100,
+    )
+
+
 with project.group("final") as final:
     model = ips.models.Apax(
         data=train_data,
@@ -524,7 +555,7 @@ with project.group("final") as final:
     prediction = ips.analysis.Prediction(data=test_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
-with project.group("final_ensemble") as final:
+with project.group("final_ensemble") as final_ensemble:
     model = ips.models.Apax(
         data=train_data,
         validation_data=validation_data.atoms,
@@ -536,4 +567,4 @@ with project.group("final_ensemble") as final:
     prediction = ips.analysis.Prediction(data=train_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
-project.build(nodes=[final])
+project.build(nodes=[grp, final, final_ensemble])

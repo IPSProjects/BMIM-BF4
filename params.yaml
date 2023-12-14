@@ -277,6 +277,39 @@ ML14_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+ML15_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 100
+    seed: 42
+    steps: 1000000
+    use_momenta: false
+    wrap: false
+ML15_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML15_ASEMD+modifier+0:
+    end_temperature: 500
+    interval: 1
+    num_oscillations: 10
+    start_temperature: 250
+    temperature_amplitude: 150
+ML15_ASEMD+thermostat:
+    pfactor: 54.273
+    pressure: 6.324e-07
+    temperature: 300
+    tetragonal_strain: true
+    time_step: 1.0
+    ttime: 2.4557
 ML1_ASEGeoOpt:
     data_id: -1
     dump_rate: 1000
