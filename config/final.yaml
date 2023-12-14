@@ -33,7 +33,7 @@ model:
   nn:
   - 512
   - 512
-  r_max: 5.5
+  r_max: 6.0
   r_min: 0.7
 
   b_init: zeros
