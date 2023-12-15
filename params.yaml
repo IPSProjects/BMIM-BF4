@@ -316,6 +316,19 @@ ML15_ConfigurationSelection:
         name: ll_grad
     n_configurations: 100
     selection_method: max_dist
+ML15_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML15_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML15_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 ML1_ASEGeoOpt:
     data_id: -1
     dump_rate: 1000

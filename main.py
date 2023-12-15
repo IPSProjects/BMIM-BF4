@@ -559,6 +559,19 @@ with project.group("ML15") as grp:
         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
     )
 
+    train_data += cp2k.atoms
+
+    model = ips.models.Apax(
+        data=train_data,
+        validation_data=validation_data.atoms,
+        config="config/initial_model.yaml",
+    )
+
+    prediction = ips.analysis.Prediction(data=test_data, model=model)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
+    ips.analysis.EnergyHistogram(data=train_data, bins=100)
+    ips.analysis.ForcesHistogram(data=train_data)
+
 
 with project.group("final") as final:
     model = ips.models.Apax(
@@ -581,4 +594,4 @@ with project.group("final_ensemble") as final_ensemble:
     prediction = ips.analysis.Prediction(data=train_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
-project.build(nodes=[grp, final, final_ensemble])
+project.build(nodes=[grp, final, final_ensemble]) # 
