@@ -17692,5 +17692,288 @@
             "_type": "pathlib.Path",
             "value": "nodes/final_ensemble/PredictionMetrics_1"
         }
+    },
+    "wo_d3_CP2KSinglePoint": {
+        "cp2k_directory": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/cp2k"
+        },
+        "cp2k_files": [
+            "GTH_BASIS_SETS",
+            "GTH_POTENTIALS"
+        ],
+        "cp2k_params": "config/cp2k_wo_d3.yaml",
+        "cp2k_shell": null,
+        "data": {
+            "_type": "znflow.CombinedConnections",
+            "value": {
+                "connections": [
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "RandomSelection",
+                                "name": "classical_ConfigurationSelection_2",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "BatchKernelSelection",
+                                "name": "ML0_ConfigurationSelection",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "CP2KSinglePoint",
+                                "name": "ML1_CP2KSinglePoint",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "CP2KSinglePoint",
+                                "name": "ML2_CP2KSinglePoint",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "CP2KSinglePoint",
+                                "name": "ML3_CP2KSinglePoint",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "CP2KSinglePoint",
+                                "name": "ML4_CP2KSinglePoint",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "CP2KSinglePoint",
+                                "name": "ML5_CP2KSinglePoint",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "CP2KSinglePoint",
+                                "name": "ML6_CP2KSinglePoint",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "CP2KSinglePoint",
+                                "name": "ML7_CP2KSinglePoint",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "CP2KSinglePoint",
+                                "name": "ML8_CP2KSinglePoint",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "CP2KSinglePoint",
+                                "name": "ML9_CP2KSinglePoint",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "CP2KSinglePoint",
+                                "name": "ML10_CP2KSinglePoint",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "CP2KSinglePoint",
+                                "name": "ML11_MultiPack_CP2KSinglePoint",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "CP2KSinglePoint",
+                                "name": "ML12_CP2KSinglePoint",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "CP2KSinglePoint",
+                                "name": "VS_CP2KSinglePoint",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "CP2KSinglePoint",
+                                "name": "ML13_CP2KSinglePoint",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "CP2KSinglePoint",
+                                "name": "ML14_CP2KSinglePoint",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "CP2KSinglePoint",
+                                "name": "ML15_CP2KSinglePoint",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    }
+                ],
+                "item": null
+            }
+        },
+        "data_file": null,
+        "output_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/atoms.h5"
+        },
+        "wfn_restart_file": null,
+        "wfn_restart_node": null,
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/wo_d3/CP2KSinglePoint"
+        }
     }
 }

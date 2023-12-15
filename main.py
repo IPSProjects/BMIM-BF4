@@ -594,4 +594,12 @@ with project.group("final_ensemble") as final_ensemble:
     prediction = ips.analysis.Prediction(data=train_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
-project.build(nodes=[grp, final, final_ensemble]) # 
+with project.group("wo_d3") as wo_d3:
+    cp2k = ips.calculators.CP2KSinglePoint(
+        data=train_data,
+        cp2k_params="config/cp2k_wo_d3.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS"],
+    )
+
+
+project.build(nodes=[wo_d3]) # 
