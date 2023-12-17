@@ -1003,6 +1003,105 @@ classical_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+depl_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.05
+depl_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 10000
+    use_momenta: false
+    wrap: false
+depl_ASEMD+modifier+0:
+    cell: null
+    density: 1300
+depl_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 300
+    time_step: 0.5
+depl_ASEMD_1:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 10000
+    use_momenta: false
+    wrap: false
+depl_ASEMD_1+thermostat:
+    friction: 0.01
+    temperature: 300
+    time_step: 0.5
+depl_ASEMD_2:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 50000
+    use_momenta: false
+    wrap: false
+depl_ASEMD_2+thermostat:
+    pfactor: 54.273
+    pressure: 6.324e-07
+    temperature: 300
+    tetragonal_strain: true
+    time_step: 1.0
+    ttime: 2.4557
+depl_AnalyseDensity:
+    end: null
+    start: 0
+    window: 1000
+depl_Packmol:
+    box: null
+    count:
+    - 1
+    - 1
+    data_ids: null
+    density: 1210
+    pbc: false
+    tolerance: 2.0
+depl_Packmol_1:
+    box: null
+    count:
+    - 32
+    data_ids: null
+    density: 900
+    pbc: true
+    tolerance: 2.0
+depl_SmilesToAtoms:
+    cell: null
+    optimizer: UFF
+    seed: 1234
+    smiles: '[B-](F)(F)(F)F'
+depl_SmilesToAtoms_1:
+    cell: null
+    optimizer: UFF
+    seed: 1234
+    smiles: CCCCN1C=C[N+](=C1)C
 final_MLModel:
     use_energy: true
     use_forces: true

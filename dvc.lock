@@ -22795,3 +22795,506 @@ stages:
       hash: md5
       md5: eb4d5fab3c052c66ec5650b320d281fa
       size: 23511
+  depl_SmilesToAtoms:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name depl_SmilesToAtoms
+    params:
+      params.yaml:
+        depl_SmilesToAtoms:
+          cell:
+          optimizer: UFF
+          seed: 1234
+          smiles: '[B-](F)(F)(F)F'
+    outs:
+    - path: nodes/depl/SmilesToAtoms/atoms.h5
+      hash: md5
+      md5: 181a42114d5c08d6ac24e8ce30a8f82b
+      size: 27968
+    - path: nodes/depl/SmilesToAtoms/molecule.png
+      hash: md5
+      md5: f4d4f99183d79b889d60ffaf0d08a5a7
+      size: 2975
+    - path: nodes/depl/SmilesToAtoms/node-meta.json
+      hash: md5
+      md5: 5a244a5c7469a433de92fdfe4ceee2dd
+      size: 48
+  depl_SmilesToAtoms_1:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name depl_SmilesToAtoms_1
+    params:
+      params.yaml:
+        depl_SmilesToAtoms_1:
+          cell:
+          optimizer: UFF
+          seed: 1234
+          smiles: CCCCN1C=C[N+](=C1)C
+    outs:
+    - path: nodes/depl/SmilesToAtoms_1/atoms.h5
+      hash: md5
+      md5: 744f94e60270ed284980820ff3038f19
+      size: 27968
+    - path: nodes/depl/SmilesToAtoms_1/molecule.png
+      hash: md5
+      md5: a9e6627ebd24d022ae34219e921b7e5f
+      size: 7818
+    - path: nodes/depl/SmilesToAtoms_1/node-meta.json
+      hash: md5
+      md5: 91396f35ba991cd25ae6f5169a5c9d71
+      size: 48
+  depl_Packmol:
+    cmd: zntrack run ipsuite.nodes.Packmol --name depl_Packmol
+    deps:
+    - path: nodes/depl/SmilesToAtoms/atoms.h5
+      hash: md5
+      md5: 181a42114d5c08d6ac24e8ce30a8f82b
+      size: 27968
+    - path: nodes/depl/SmilesToAtoms/molecule.png
+      hash: md5
+      md5: f4d4f99183d79b889d60ffaf0d08a5a7
+      size: 2975
+    - path: nodes/depl/SmilesToAtoms/node-meta.json
+      hash: md5
+      md5: 5a244a5c7469a433de92fdfe4ceee2dd
+      size: 48
+    - path: nodes/depl/SmilesToAtoms_1/atoms.h5
+      hash: md5
+      md5: 744f94e60270ed284980820ff3038f19
+      size: 27968
+    - path: nodes/depl/SmilesToAtoms_1/molecule.png
+      hash: md5
+      md5: a9e6627ebd24d022ae34219e921b7e5f
+      size: 7818
+    - path: nodes/depl/SmilesToAtoms_1/node-meta.json
+      hash: md5
+      md5: 91396f35ba991cd25ae6f5169a5c9d71
+      size: 48
+    params:
+      params.yaml:
+        depl_Packmol:
+          box:
+          count:
+          - 1
+          - 1
+          data_ids:
+          density: 1210
+          pbc: false
+          tolerance: 2.0
+    outs:
+    - path: nodes/depl/Packmol/atoms.h5
+      hash: md5
+      md5: 2400ddfca5ec50ebe880626f190e0797
+      size: 27968
+    - path: nodes/depl/Packmol/node-meta.json
+      hash: md5
+      md5: 183c2b460f416178653dc0ea9b0a9fdd
+      size: 48
+    - path: nodes/depl/Packmol/packmol
+      hash: md5
+      md5: 9211f580932fa95a1d122b0e2be6699c.dir
+      size: 3841
+      nfiles: 4
+  depl_Packmol_1:
+    cmd: zntrack run ipsuite.nodes.Packmol --name depl_Packmol_1
+    deps:
+    - path: nodes/depl/Packmol/atoms.h5
+      hash: md5
+      md5: 2400ddfca5ec50ebe880626f190e0797
+      size: 27968
+    - path: nodes/depl/Packmol/node-meta.json
+      hash: md5
+      md5: 183c2b460f416178653dc0ea9b0a9fdd
+      size: 48
+    - path: nodes/depl/Packmol/packmol
+      hash: md5
+      md5: 9211f580932fa95a1d122b0e2be6699c.dir
+      size: 3841
+      nfiles: 4
+    params:
+      params.yaml:
+        depl_Packmol_1:
+          box:
+          count:
+          - 32
+          data_ids:
+          density: 900
+          pbc: true
+          tolerance: 2.0
+    outs:
+    - path: nodes/depl/Packmol_1/atoms.h5
+      hash: md5
+      md5: 80dfb7849c6eb8699d73f89538a954ed
+      size: 58688
+    - path: nodes/depl/Packmol_1/node-meta.json
+      hash: md5
+      md5: d5bba7573525324cbb15a83d9921e9cd
+      size: 48
+    - path: nodes/depl/Packmol_1/packmol
+      hash: md5
+      md5: 47d3e803210f655e9d56a52c37a21c34.dir
+      size: 55734
+      nfiles: 3
+  depl_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name depl_ASEGeoOpt
+    deps:
+    - path: nodes/depl/Packmol_1/atoms.h5
+      hash: md5
+      md5: 80dfb7849c6eb8699d73f89538a954ed
+      size: 58688
+    - path: nodes/depl/Packmol_1/node-meta.json
+      hash: md5
+      md5: d5bba7573525324cbb15a83d9921e9cd
+      size: 48
+    - path: nodes/depl/Packmol_1/packmol
+      hash: md5
+      md5: 47d3e803210f655e9d56a52c37a21c34.dir
+      size: 55734
+      nfiles: 3
+    - path: nodes/final/MLModel/model
+      hash: md5
+      md5: af366ec209a05622006e7ba597aad966.dir
+      size: 102150183
+      nfiles: 8
+    - path: nodes/final/MLModel/node-meta.json
+      hash: md5
+      md5: f9ad71cafe0c26b99a18e38c1288275f
+      size: 48
+    - path: nodes/final/MLModel/test-data.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/final/MLModel/train-data.extxyz
+      hash: md5
+      md5: 13108a5ed2cdfea1dd20d944258049dd
+      size: 53574955
+    - path: nodes/final/MLModel/training.csv
+      hash: md5
+      md5: 81083b9ca0115ac6182846e2e374815f
+      size: 257030
+    params:
+      params.yaml:
+        depl_ASEGeoOpt:
+          data_id: -1
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: FIRE
+          repeat:
+          - 1
+          - 1
+          - 1
+          run_kwargs:
+            fmax: 0.05
+    outs:
+    - path: nodes/depl/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/depl/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 9e73f76125648e15b01cb09702592f0e
+      size: 48
+    - path: nodes/depl/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: f321c40cf96234452b9a6198f23d4bfd
+      size: 32646392
+  depl_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name depl_ASEMD
+    deps:
+    - path: nodes/depl/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/depl/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 9e73f76125648e15b01cb09702592f0e
+      size: 48
+    - path: nodes/depl/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: f321c40cf96234452b9a6198f23d4bfd
+      size: 32646392
+    - path: nodes/final/MLModel/model
+      hash: md5
+      md5: af366ec209a05622006e7ba597aad966.dir
+      size: 102150183
+      nfiles: 8
+    - path: nodes/final/MLModel/node-meta.json
+      hash: md5
+      md5: f9ad71cafe0c26b99a18e38c1288275f
+      size: 48
+    - path: nodes/final/MLModel/test-data.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/final/MLModel/train-data.extxyz
+      hash: md5
+      md5: 13108a5ed2cdfea1dd20d944258049dd
+      size: 53574955
+    - path: nodes/final/MLModel/training.csv
+      hash: md5
+      md5: 81083b9ca0115ac6182846e2e374815f
+      size: 257030
+    params:
+      params.yaml:
+        depl_ASEMD:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 10
+          seed: 42
+          steps: 10000
+          use_momenta: false
+          wrap: false
+        depl_ASEMD+modifier+0:
+          cell:
+          density: 1300
+        depl_ASEMD+thermostat:
+          friction: 0.01
+          temperature: 300
+          time_step: 0.5
+    outs:
+    - path: nodes/depl/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: d277dc497005b9cbd257d6caad3bab96
+      size: 42018
+    - path: nodes/depl/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/depl/ASEMD/node-meta.json
+      hash: md5
+      md5: e79a7d5176fbda75718398eb29acd6d9
+      size: 48
+    - path: nodes/depl/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/depl/ASEMD/trajectory.h5
+      hash: md5
+      md5: e0c895f5821b5dc3192ffbc6700432b5
+      size: 85489952
+  depl_ASEMD_1:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name depl_ASEMD_1
+    deps:
+    - path: nodes/depl/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: d277dc497005b9cbd257d6caad3bab96
+      size: 42018
+    - path: nodes/depl/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/depl/ASEMD/node-meta.json
+      hash: md5
+      md5: e79a7d5176fbda75718398eb29acd6d9
+      size: 48
+    - path: nodes/depl/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/depl/ASEMD/trajectory.h5
+      hash: md5
+      md5: e0c895f5821b5dc3192ffbc6700432b5
+      size: 85489952
+    - path: nodes/final/MLModel/model
+      hash: md5
+      md5: af366ec209a05622006e7ba597aad966.dir
+      size: 102150183
+      nfiles: 8
+    - path: nodes/final/MLModel/node-meta.json
+      hash: md5
+      md5: f9ad71cafe0c26b99a18e38c1288275f
+      size: 48
+    - path: nodes/final/MLModel/test-data.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/final/MLModel/train-data.extxyz
+      hash: md5
+      md5: 13108a5ed2cdfea1dd20d944258049dd
+      size: 53574955
+    - path: nodes/final/MLModel/training.csv
+      hash: md5
+      md5: 81083b9ca0115ac6182846e2e374815f
+      size: 257030
+    params:
+      params.yaml:
+        depl_ASEMD_1:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 10
+          seed: 42
+          steps: 10000
+          use_momenta: false
+          wrap: false
+        depl_ASEMD_1+thermostat:
+          friction: 0.01
+          temperature: 300
+          time_step: 0.5
+    outs:
+    - path: nodes/depl/ASEMD_1/metrics_dict.csv
+      hash: md5
+      md5: 0a982e3a083e49deccb6a3d4343ed107
+      size: 41992
+    - path: nodes/depl/ASEMD_1/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/depl/ASEMD_1/node-meta.json
+      hash: md5
+      md5: 2120d43be4fe74094d018bbead3e8d0f
+      size: 48
+    - path: nodes/depl/ASEMD_1/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/depl/ASEMD_1/trajectory.h5
+      hash: md5
+      md5: 922ddc8626ea8ff2c85c5416b1108924
+      size: 85489952
+  depl_ASEMD_2:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name depl_ASEMD_2
+    deps:
+    - path: nodes/depl/ASEMD_1/metrics_dict.csv
+      hash: md5
+      md5: 0a982e3a083e49deccb6a3d4343ed107
+      size: 41992
+    - path: nodes/depl/ASEMD_1/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/depl/ASEMD_1/node-meta.json
+      hash: md5
+      md5: 2120d43be4fe74094d018bbead3e8d0f
+      size: 48
+    - path: nodes/depl/ASEMD_1/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/depl/ASEMD_1/trajectory.h5
+      hash: md5
+      md5: 922ddc8626ea8ff2c85c5416b1108924
+      size: 85489952
+    - path: nodes/final/MLModel/model
+      hash: md5
+      md5: af366ec209a05622006e7ba597aad966.dir
+      size: 102150183
+      nfiles: 8
+    - path: nodes/final/MLModel/node-meta.json
+      hash: md5
+      md5: f9ad71cafe0c26b99a18e38c1288275f
+      size: 48
+    - path: nodes/final/MLModel/test-data.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/final/MLModel/train-data.extxyz
+      hash: md5
+      md5: 13108a5ed2cdfea1dd20d944258049dd
+      size: 53574955
+    - path: nodes/final/MLModel/training.csv
+      hash: md5
+      md5: 81083b9ca0115ac6182846e2e374815f
+      size: 257030
+    params:
+      params.yaml:
+        depl_ASEMD_2:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 10
+          seed: 42
+          steps: 50000
+          use_momenta: false
+          wrap: false
+        depl_ASEMD_2+thermostat:
+          pfactor: 54.273
+          pressure: 6.324e-07
+          temperature: 300
+          tetragonal_strain: true
+          time_step: 1.0
+          ttime: 2.4557
+    outs:
+    - path: nodes/depl/ASEMD_2/metrics_dict.csv
+      hash: md5
+      md5: 6b3006d418f2b79c37c1ccd5e54092a0
+      size: 214172
+    - path: nodes/depl/ASEMD_2/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/depl/ASEMD_2/node-meta.json
+      hash: md5
+      md5: 27534270060f87fd666e1d14629d1a11
+      size: 48
+    - path: nodes/depl/ASEMD_2/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/depl/ASEMD_2/trajectory.h5
+      hash: md5
+      md5: 3d9798d2ae9687b4376f9e8e4654784c
+      size: 427235776
+  depl_AnalyseDensity:
+    cmd: zntrack run ipsuite.nodes.AnalyseDensity --name depl_AnalyseDensity
+    deps:
+    - path: nodes/depl/ASEMD_2/metrics_dict.csv
+      hash: md5
+      md5: 6b3006d418f2b79c37c1ccd5e54092a0
+      size: 214172
+    - path: nodes/depl/ASEMD_2/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/depl/ASEMD_2/node-meta.json
+      hash: md5
+      md5: 27534270060f87fd666e1d14629d1a11
+      size: 48
+    - path: nodes/depl/ASEMD_2/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/depl/ASEMD_2/trajectory.h5
+      hash: md5
+      md5: 3d9798d2ae9687b4376f9e8e4654784c
+      size: 427235776
+    params:
+      params.yaml:
+        depl_AnalyseDensity:
+          end:
+          start: 0
+          window: 1000
+    outs:
+    - path: nodes/depl/AnalyseDensity/density.json
+      hash: md5
+      md5: cbe50a6fc8b523d22a443a28db36ab66
+      size: 68
+    - path: nodes/depl/AnalyseDensity/density.png
+      hash: md5
+      md5: 6d83ee847dc2b7fa56ddfcd4260cf6fc
+      size: 42078
+    - path: nodes/depl/AnalyseDensity/node-meta.json
+      hash: md5
+      md5: 06c2d96ce0ba5d033b090f627d62161e
+      size: 48
+    - path: nodes/depl/AnalyseDensity/results.csv
+      hash: md5
+      md5: 81bbd3f10cb1c115c7672cd3bbfc1f2b
+      size: 117646
