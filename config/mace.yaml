@@ -1,0 +1,35 @@
+max_num_epochs: 2000
+default_dtype: float32
+
+E0s: average
+batch_size: 4
+
+# hidden_irreps: 128x0e + 128x1o
+# num_channels + maxL = hidden_irreps
+num_channels: 64
+max_L: 2
+correlation: 3
+r_max: 5.0
+forces_weight: 100
+stress_weight: 1.0
+
+clip_grad: 1.0
+
+# exponential moving average
+ema: true
+ema_decay: 0.99
+
+swa: true
+start_swa: 1000
+
+# early stopping patience with eval 2 -> 100 epochs
+# if patience, swa starts automatically
+patience: 20
+
+valid_batch_size: 6
+eval_interval: 1
+
+num_cutoff_basis: 5
+num_interactions: 2
+num_radial_basis: 8
+seed: 42

@@ -2,3 +2,7 @@
 /val_atoms.extxyz
 /apax_model
 /train_atoms.extxyz
+/model
+/test-data.extxyz
+/train-data.extxyz
+/training.csv

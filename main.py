@@ -574,24 +574,85 @@ with project.group("ML15") as grp:
 
 
 with project.group("final") as final:
-    model = ips.models.Apax(
-        data=train_data,
-        validation_data=validation_data.atoms,
-        config="config/final.yaml",
-    )
+    model = ips.models.MACE(config="config/mace.yaml", data=train_data, test_data=validation_data.atoms)
     prediction = ips.analysis.Prediction(data=test_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
-with project.group("final_ensemble") as final_ensemble:
-    model = ips.models.Apax(
-        data=train_data,
-        validation_data=validation_data.atoms,
-        config="config/final_ensemble.yaml",
-    )
-    prediction = ips.analysis.Prediction(data=test_data, model=model)
-    metrics = ips.analysis.PredictionMetrics(data=prediction)
 
-    prediction = ips.analysis.Prediction(data=train_data, model=model)
-    metrics = ips.analysis.PredictionMetrics(data=prediction)
+# ramp_density = ips.calculators.RescaleBoxModifier(
+#     density=1300
+# )
+# thermostat = ips.calculators.LangevinThermostat(
+#     temperature=300, friction=0.01, time_step=0.5
+# )
 
-project.build(nodes=[grp, final, final_ensemble]) # 
+# barostat = ips.calculators.NPTThermostat(
+#         time_step=1.0,
+#         temperature=300,
+#         pressure=6.324e-07, # 1.01325 * units.bar,
+#         ttime=2.4557, # 25 * units.fs,
+#         pfactor=54.273, # (75 * units.fs) ** 2,
+#         tetragonal_strain=True,
+#     )
+
+# with project.group("depl") as depl:
+#     anion = ips.configuration_generation.SmilesToAtoms(
+#         smiles="[B-](F)(F)(F)F"
+#     )
+#     cation = ips.configuration_generation.SmilesToAtoms(
+#         smiles="CCCCN1C=C[N+](=C1)C"
+#     )
+
+#     single_structure = ips.configuration_generation.Packmol(
+#         data=[cation.atoms, anion.atoms],
+#         count=[1, 1],
+#         density=1210,
+#         pbc=False,
+#     )
+
+#     structure = ips.configuration_generation.Packmol(
+#         data=[single_structure.atoms],
+#         count=[32],
+#         density=900,
+#     )
+
+#     geo_opt = ips.calculators.ASEGeoOpt(
+#         model=model,
+#         data=structure.atoms,
+#         data_id=-1,
+#         optimizer="FIRE",
+#         run_kwargs={"fmax": 0.05},
+#     )
+
+#     density_md = ips.calculators.ASEMD(
+#         data=geo_opt.atoms,
+#         data_id=-1,
+#         model=model,
+#         modifier=[ramp_density],
+#         thermostat=thermostat,
+#         steps=10_000,
+#         sampling_rate=10,
+#     )
+
+#     eq_md = ips.calculators.ASEMD(
+#         data=density_md.atoms,
+#         data_id=-1,
+#         model=model,
+#         thermostat=thermostat,
+#         steps=50_000,
+#         sampling_rate=10,
+#     )
+
+#     md = ips.calculators.ASEMD(
+#         data=eq_md.atoms,
+#         data_id=-1,
+#         model=model,
+#         thermostat=barostat,
+#         steps=500_000,
+#         sampling_rate=10,
+#     )
+
+#     ips.analysis.AnalyseDensity(data=md.atoms)
+
+
+project.build(nodes=[final]) # 
