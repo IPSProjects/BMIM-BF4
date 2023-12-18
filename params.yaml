@@ -1,0 +1,1119 @@
+ML0_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 400
+    selection_method: max_dist
+ML0_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML0_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML0_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML10_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML10_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 50000
+    use_momenta: false
+    wrap: false
+ML10_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML10_ASEMD+modifier+0:
+    cell_amplitude: 1
+    end_cell: 14.58
+    interval: 1
+    num_oscillations: 3
+    num_ramp_oscillations: 0.5
+ML10_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+ML10_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 50
+    selection_method: max_dist
+ML10_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML10_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML10_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML11_MultiPack_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML11_MultiPack_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML11_MultiPack_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML11_MultiPack_MultiPackmol:
+    box: null
+    count:
+    - 1
+    - 1
+    density: 1210
+    n_configurations: 200
+    pbc: false
+    seed: 42
+    tolerance: 2.0
+ML11_MultiPack_MultiPackmol_1:
+    box: null
+    count:
+    - 10
+    density: 900
+    n_configurations: 20
+    pbc: true
+    seed: 42
+    tolerance: 2.0
+ML11_MultiPack_SmilesToConformers:
+    cell: 100
+    maxAttempts: 1000
+    numConfs: 200
+    seed: 42
+    smiles: CCCCN1C=C[N+](=C1)C
+ML11_MultiPack_SmilesToConformers_1:
+    cell: 100
+    maxAttempts: 1000
+    numConfs: 200
+    seed: 42
+    smiles: '[B-](F)(F)(F)F'
+ML12_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML12_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 50000
+    use_momenta: false
+    wrap: false
+ML12_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML12_ASEMD+modifier+0:
+    cell_amplitude: 1
+    end_cell: 14.58
+    interval: 1
+    num_oscillations: 3
+    num_ramp_oscillations: 0.5
+ML12_ASEMD+modifier+1:
+    end_temperature: 500
+    interval: 1
+    num_oscillations: 10
+    start_temperature: 230
+    temperature_amplitude: 150
+ML12_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+ML12_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 50
+    selection_method: max_dist
+ML12_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML12_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML12_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML13_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 100000
+    use_momenta: false
+    wrap: false
+ML13_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML13_ASEMD+thermostat:
+    pfactor: 54.273
+    pressure: 6.324e-07
+    temperature: 300
+    tetragonal_strain: true
+    time_step: 1.0
+    ttime: 2.4557
+ML13_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 50
+    selection_method: max_dist
+ML13_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML14_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 100000
+    use_momenta: false
+    wrap: false
+ML14_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML14_ASEMD+modifier+0:
+    end_temperature: 500
+    interval: 1
+    num_oscillations: 10
+    start_temperature: 300
+    temperature_amplitude: 150
+ML14_ASEMD+thermostat:
+    pfactor: 54.273
+    pressure: 6.324e-07
+    temperature: 300
+    tetragonal_strain: true
+    time_step: 1.0
+    ttime: 2.4557
+ML14_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 50
+    selection_method: max_dist
+ML14_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML14_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML14_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML15_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 100
+    seed: 42
+    steps: 1000000
+    use_momenta: false
+    wrap: false
+ML15_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML15_ASEMD+modifier+0:
+    end_temperature: 300
+    interval: 1
+    num_oscillations: 10
+    start_temperature: 200
+    temperature_amplitude: 100
+ML15_ASEMD+thermostat:
+    pfactor: 54.273
+    pressure: 6.324e-07
+    temperature: 300
+    tetragonal_strain: true
+    time_step: 1.0
+    ttime: 2.4557
+ML15_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 100
+    selection_method: max_dist
+ML15_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML15_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML15_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML1_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML1_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 50000
+    use_momenta: false
+    wrap: false
+ML1_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML1_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+ML1_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 50
+    selection_method: max_dist
+ML1_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML1_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML1_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML2_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML2_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 50000
+    use_momenta: false
+    wrap: false
+ML2_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML2_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+ML2_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 50
+    selection_method: max_dist
+ML2_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML2_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML2_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML3_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML3_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 50000
+    use_momenta: false
+    wrap: false
+ML3_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML3_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+ML3_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 50
+    selection_method: max_dist
+ML3_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML3_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML3_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML4_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML4_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 50000
+    use_momenta: false
+    wrap: false
+ML4_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML4_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+ML4_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 50
+    selection_method: max_dist
+ML4_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML4_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML4_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML5_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML5_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 50000
+    use_momenta: false
+    wrap: false
+ML5_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML5_ASEMD+modifier+0:
+    end_temperature: 500
+    interval: 1
+    num_oscillations: 10
+    start_temperature: 230
+    temperature_amplitude: 150
+ML5_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+ML5_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 50
+    selection_method: max_dist
+ML5_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML5_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML5_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML6_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML6_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 50000
+    use_momenta: false
+    wrap: false
+ML6_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML6_ASEMD+modifier+0:
+    end_temperature: 500
+    interval: 1
+    num_oscillations: 10
+    start_temperature: 230
+    temperature_amplitude: 150
+ML6_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+ML6_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 50
+    selection_method: max_dist
+ML6_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML6_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML6_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML7_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML7_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 50000
+    use_momenta: false
+    wrap: false
+ML7_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML7_ASEMD+modifier+0:
+    end_temperature: 500
+    interval: 1
+    num_oscillations: 10
+    start_temperature: 230
+    temperature_amplitude: 150
+ML7_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+ML7_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 50
+    selection_method: max_dist
+ML7_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML7_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML7_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML8_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML8_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 50000
+    use_momenta: false
+    wrap: false
+ML8_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML8_ASEMD+modifier+0:
+    cell_amplitude: 1
+    end_cell: 14.58
+    interval: 1
+    num_oscillations: 3
+    num_ramp_oscillations: null
+ML8_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+ML8_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 50
+    selection_method: max_dist
+ML8_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML8_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML8_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML9_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML9_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 50000
+    use_momenta: false
+    wrap: false
+ML9_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML9_ASEMD+modifier+0:
+    cell_amplitude: 1
+    end_cell: 14.58
+    interval: 1
+    num_oscillations: 3
+    num_ramp_oscillations: 0.5
+ML9_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+ML9_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 50
+    selection_method: max_dist
+ML9_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML9_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML9_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+VS_ASEGeoOpt:
+    data_id: 0
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+VS_ASEGeoOpt_1:
+    data_id: 1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+VS_ASEGeoOpt_2:
+    data_id: 2
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+VS_ASEGeoOpt_3:
+    data_id: 3
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+VS_ASEGeoOpt_4:
+    data_id: 4
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+VS_BoxScale:
+    data_id: -1
+    num: 100
+    start: 0.9
+    stop: 2.0
+VS_BoxScale+mapping:
+    frozen: false
+VS_BoxScale_1:
+    data_id: -1
+    num: 100
+    start: 0.9
+    stop: 2.0
+VS_BoxScale_1+mapping:
+    frozen: false
+VS_BoxScale_2:
+    data_id: -1
+    num: 100
+    start: 0.9
+    stop: 2.0
+VS_BoxScale_2+mapping:
+    frozen: false
+VS_BoxScale_3:
+    data_id: -1
+    num: 100
+    start: 0.9
+    stop: 2.0
+VS_BoxScale_3+mapping:
+    frozen: false
+VS_BoxScale_4:
+    data_id: -1
+    num: 100
+    start: 0.9
+    stop: 2.0
+VS_BoxScale_4+mapping:
+    frozen: false
+VS_ConfigurationSelection:
+    n_configurations: 50
+    seed: 1234
+VS_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+VS_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+VS_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+classical_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 50000
+    use_momenta: false
+    wrap: false
+classical_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+classical_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+classical_AddData:
+    lines_to_read: null
+classical_ConfigurationSelection:
+    n_configurations: 500
+    seed: 1234
+classical_ConfigurationSelection_1:
+    n_configurations: 100
+    seed: 1234
+classical_ConfigurationSelection_2:
+    n_configurations: 100
+    seed: 1234
+classical_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+classical_FilterOutlier:
+    direction: both
+    key: energy
+    threshold: 3
+classical_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+classical_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+depl_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.05
+depl_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 10000
+    use_momenta: false
+    wrap: false
+depl_ASEMD+modifier+0:
+    cell: null
+    density: 1300
+depl_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 300
+    time_step: 0.5
+depl_ASEMD_1:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 10000
+    use_momenta: false
+    wrap: false
+depl_ASEMD_1+thermostat:
+    friction: 0.01
+    temperature: 300
+    time_step: 0.5
+depl_ASEMD_2:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 50000
+    use_momenta: false
+    wrap: false
+depl_ASEMD_2+thermostat:
+    pfactor: 54.273
+    pressure: 6.324e-07
+    temperature: 300
+    tetragonal_strain: true
+    time_step: 1.0
+    ttime: 2.4557
+depl_AnalyseDensity:
+    end: null
+    start: 0
+    window: 1000
+depl_Packmol:
+    box: null
+    count:
+    - 1
+    - 1
+    data_ids: null
+    density: 1210
+    pbc: false
+    tolerance: 2.0
+depl_Packmol_1:
+    box: null
+    count:
+    - 32
+    data_ids: null
+    density: 900
+    pbc: true
+    tolerance: 2.0
+depl_SmilesToAtoms:
+    cell: null
+    optimizer: UFF
+    seed: 1234
+    smiles: '[B-](F)(F)(F)F'
+depl_SmilesToAtoms_1:
+    cell: null
+    optimizer: UFF
+    seed: 1234
+    smiles: CCCCN1C=C[N+](=C1)C
+final_AddData:
+    lines_to_read: null
+final_ConfigurationSelection:
+    n_configurations: 450
+    seed: 1234
+final_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+final_ensemble_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false

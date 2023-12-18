@@ -1,0 +1,93 @@
+plots:
+- nodes/final/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+stages:
+  final_AddData:
+    cmd: zntrack run ipsuite.nodes.AddData --name final_AddData
+    deps:
+    - data/traj.xyz
+    metrics:
+    - nodes/final/AddData/node-meta.json:
+        cache: false
+    outs:
+    - nodes/final/AddData/atoms.h5
+    params:
+    - final_AddData
+  final_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name final_ConfigurationSelection
+    deps:
+    - nodes/final/AddData/atoms.h5
+    - nodes/final/AddData/node-meta.json
+    metrics:
+    - nodes/final/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/final/ConfigurationSelection/selected_configurations.json
+    - nodes/final/ConfigurationSelection/selection.png
+    params:
+    - final_ConfigurationSelection
+  final_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name final_MLModel
+    deps:
+    - nodes/final/ConfigurationSelection/node-meta.json
+    - nodes/final/ConfigurationSelection/selected_configurations.json
+    - nodes/final/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/final/MLModel/metrics.json:
+        cache: false
+    - nodes/final/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/final/MLModel/apax_model
+    - nodes/final/MLModel/log.csv
+    - nodes/final/MLModel/train_atoms.extxyz
+    - nodes/final/MLModel/val_atoms.extxyz
+    params:
+    - final_MLModel
+    - config/final.yaml:
+  final_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name final_Prediction
+    deps:
+    - nodes/final/ConfigurationSelection/node-meta.json
+    - nodes/final/ConfigurationSelection/selected_configurations.json
+    - nodes/final/ConfigurationSelection/selection.png
+    - nodes/final/MLModel/apax_model
+    - nodes/final/MLModel/log.csv
+    - nodes/final/MLModel/metrics.json
+    - nodes/final/MLModel/node-meta.json
+    - nodes/final/MLModel/train_atoms.extxyz
+    - nodes/final/MLModel/val_atoms.extxyz
+    outs:
+    - nodes/final/Prediction/atoms.h5
+    metrics:
+    - nodes/final/Prediction/node-meta.json:
+        cache: false
+  final_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name final_PredictionMetrics
+    deps:
+    - nodes/final/Prediction/atoms.h5
+    - nodes/final/Prediction/node-meta.json
+    outs:
+    - nodes/final/PredictionMetrics/energy_df.csv
+    - nodes/final/PredictionMetrics/forces_df.csv
+    - nodes/final/PredictionMetrics/plots
+    - nodes/final/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/final/PredictionMetrics/stress_df.csv
+    - nodes/final/PredictionMetrics/stress_hydrostatic_df.csv
+    metrics:
+    - nodes/final/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/final/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/final/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/final/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/final/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/final/PredictionMetrics/stress.json:
+        cache: false
