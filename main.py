@@ -601,5 +601,10 @@ with project.group("wo_d3") as wo_d3:
         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS"],
     )
 
+    model = ips.models.Apax(
+        data=cp2k.atoms,
+        validation_data=validation_data.atoms,
+        config="config/final.yaml",
+    )
 
 project.build(nodes=[wo_d3]) # 

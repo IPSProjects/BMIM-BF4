@@ -23139,3 +23139,113 @@ stages:
       hash: md5
       md5: 0527d6df4892c800317a43cb9556ec31
       size: 48
+  wo_d3_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name wo_d3_MLModel
+    deps:
+    - path: nodes/classical/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: 214a8afd08f14201c2d2d7a5004d646e
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: b574b1f0ff57372a517d7eeb93ace532
+      size: 1380
+    - path: nodes/classical/ConfigurationSelection_1/selection.png
+      hash: md5
+      md5: 740759b3fb81dc973f8979ae133161f9
+      size: 43329
+    - path: nodes/wo_d3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7cb51ad96cc293f6c81f5526b3f2b730
+      size: 28342384
+    - path: nodes/wo_d3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a0f4d8cb132406052b502f4992bbe6bc.dir
+      size: 96838998
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 0527d6df4892c800317a43cb9556ec31
+      size: 48
+    params:
+      params.yaml:
+        wo_d3_MLModel:
+          jax_enable_x64: true
+          use_energy: true
+          use_forces: true
+          use_stresses: false
+      config/final.yaml:
+        data:
+          batch_size: 8
+          scale_method: per_element_force_rms_scale
+          shift_method: per_element_regression_shift
+          shift_options:
+            energy_regularisation: 1.0
+          valid_batch_size: 100
+        loss:
+        - name: energy
+        - name: forces
+          weight: 4.0
+        - name: stress
+          weight: 0.2
+        metrics:
+        - name: energy
+          reductions:
+          - mae
+        - name: forces
+          reductions:
+          - mae
+        - name: stress
+          reductions:
+          - mae
+        model:
+          n_basis: 7
+          n_radial: 5
+          nn:
+          - 512
+          - 512
+          r_max: 5.5
+          r_min: 0.7
+          b_init: zeros
+          emb_init: uniform
+          calc_stress: true
+          use_zbl: true
+          descriptor_dtype: fp32
+          readout_dtype: fp32
+          scale_shift_dtype: fp32
+        n_epochs: 2000
+        n_models: 1
+        optimizer:
+          opt_name: adam
+          emb_lr: 0.01
+          nn_lr: 0.005
+          scale_lr: 0.001
+          shift_lr: 0.05
+          zbl_lr: 0.001
+        seed: 1
+    outs:
+    - path: nodes/wo_d3/MLModel/apax_model
+      hash: md5
+      md5: bbe2cc7d721458a10032a28859011297.dir
+      size: 42264510
+      nfiles: 6
+    - path: nodes/wo_d3/MLModel/log.csv
+      hash: md5
+      md5: a5710e0fc94f7ee75d8d8f6b378c3bb3
+      size: 352957
+    - path: nodes/wo_d3/MLModel/metrics.json
+      hash: md5
+      md5: 2dc65bde905ab177d8e29275fb5a3110
+      size: 389
+    - path: nodes/wo_d3/MLModel/node-meta.json
+      hash: md5
+      md5: 3a8af45e39753077b4118d0a708d7aa0
+      size: 48
+    - path: nodes/wo_d3/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: a82b6a68bedf20e5c03657fb0e99ad8f
+      size: 53573344
+    - path: nodes/wo_d3/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
