@@ -329,6 +329,49 @@ ML15_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+ML16_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML16_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 100
+    seed: 42
+    steps: 1000000
+    use_momenta: false
+    wrap: false
+ML16_ASEMD+thermostat:
+    pfactor: 54.273
+    pressure: 6.324e-07
+    temperature: 300
+    tetragonal_strain: true
+    time_step: 1.0
+    ttime: 2.4557
+ML16_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 5
+    selection_method: max_dist
+ML16_ConfigurationSelection_1:
+    n_configurations: 100
+    seed: 1234
+ML16_ConfigurationSelection_2:
+    n_configurations: 100
+    seed: 1234
 ML1_ASEGeoOpt:
     data_id: -1
     dump_rate: 1000
