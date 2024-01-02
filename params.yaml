@@ -1018,3 +1018,8 @@ wo_d3_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+wo_d3_model_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
