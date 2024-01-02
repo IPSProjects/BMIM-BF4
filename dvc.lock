@@ -23249,3 +23249,92 @@ stages:
       hash: md5
       md5: 9eda8d89a8543dc151afc20daa607205
       size: 3188610
+  wo_d3_CP2KSinglePoint_1:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name wo_d3_CP2KSinglePoint_1
+    deps:
+    - path: GTH_BASIS_SETS
+      hash: md5
+      md5: 518e733a7344699cf0b4192bb97eb6a3
+      size: 119403
+    - path: GTH_POTENTIALS
+      hash: md5
+      md5: 3a35b03b26b8ba5cf6c1d849dba11f15
+      size: 128982
+    - path: nodes/classical/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: 214a8afd08f14201c2d2d7a5004d646e
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: b574b1f0ff57372a517d7eeb93ace532
+      size: 1380
+    - path: nodes/classical/ConfigurationSelection_1/selection.png
+      hash: md5
+      md5: 740759b3fb81dc973f8979ae133161f9
+      size: 43329
+    params:
+      config/cp2k_wo_d3.yaml:
+        force_eval:
+          method: quickstep
+          DFT:
+            mgrid:
+              cutoff: 800
+              rel_cutoff: 60
+              ngrids: 5
+            QS:
+              eps_filter_matrix: 0.0
+              eps_pgf_orb: 0.0001
+            SCF:
+              scf_guess: restart
+              max_scf: 100
+              eps_scf: 1e-06
+              OT:
+                minimizer: diis
+                preconditioner: full_single_inverse
+              outer_scf:
+                max_scf: 100
+                eps_scf: 1e-06
+              print:
+                restart:
+                  each:
+                    QS_SCF: 0
+            XC:
+              xc_functional:
+                becke97:
+                  parametrization: B97-3c
+                  scale_c: 1.0
+                  scale_x: 1.0
+            charge: 0
+            basis_set_file_name: GTH_BASIS_SETS
+            potential_file_name: GTH_POTENTIALS
+          subsys:
+            kind:
+              N:
+                basis_set: TZVP-GTH-q5
+                potential: GTH-PBE-q5
+              C:
+                basis_set: TZVP-GTH-q4
+                potential: GTH-PBE-q4
+              H:
+                basis_set: TZVP-GTH-q1
+                potential: GTH-PBE-q1
+              B:
+                basis_set: TZVP-GTH-q3
+                potential: GTH-PBE-q3
+              F:
+                basis_set: TZVP-GTH-q7
+                potential: GTH-PBE-q7
+    outs:
+    - path: nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 6681e087c96c058bd2688696e975c8ab
+      size: 1773688
+    - path: nodes/wo_d3/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 39852c2c7a57e954338c31ab50e11c73.dir
+      size: 18606425
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: 9cb78e43deac945332b51759560fc78e
+      size: 48
