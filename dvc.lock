@@ -23449,3 +23449,314 @@ stages:
       hash: md5
       md5: 9e0f05173fe02f700cafc1e2a8ebd988
       size: 3188519
+  ML16_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML16_ASEGeoOpt
+    deps:
+    - path: nodes/ML15/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: c44bd1e5f2cb611ed00f6c66bedbf189
+      size: 633082
+    - path: nodes/ML15/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML15/ASEMD/node-meta.json
+      hash: md5
+      md5: e011e260a4c15e5acda1ef84cf9010f8
+      size: 48
+    - path: nodes/ML15/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML15/ASEMD/trajectory.h5
+      hash: md5
+      md5: c6c3b795dfe5fd7c8f514d2217dd884d
+      size: 320050944
+    - path: nodes/wo_d3_model/MLModel/apax_model
+      hash: md5
+      md5: 6da96b211c082ea7142b227108719db2.dir
+      size: 43083619
+      nfiles: 10
+    - path: nodes/wo_d3_model/MLModel/log.csv
+      hash: md5
+      md5: 50d946183c237edc7afb23b0493fa12b
+      size: 354567
+    - path: nodes/wo_d3_model/MLModel/metrics.json
+      hash: md5
+      md5: a91ca1072c9ad455b8e23222a45d2685
+      size: 387
+    - path: nodes/wo_d3_model/MLModel/node-meta.json
+      hash: md5
+      md5: b41e674b747e05f610deeb3dbcae5e0b
+      size: 48
+    - path: nodes/wo_d3_model/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: a82b6a68bedf20e5c03657fb0e99ad8f
+      size: 53573344
+    - path: nodes/wo_d3_model/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9e0f05173fe02f700cafc1e2a8ebd988
+      size: 3188519
+    params:
+      params.yaml:
+        ML16_ASEGeoOpt:
+          data_id: -1
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: FIRE
+          repeat:
+          - 1
+          - 1
+          - 1
+          run_kwargs:
+            fmax: 0.5
+    outs:
+    - path: nodes/ML16/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML16/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 11e75b717de88769e4699c8a5c152e24
+      size: 48
+    - path: nodes/ML16/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 003ae1741a48cf1c9a4350f2387bad54
+      size: 792536
+  ML16_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML16_ConfigurationSelection
+    deps:
+    - path: nodes/ML16/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML16/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 11e75b717de88769e4699c8a5c152e24
+      size: 48
+    - path: nodes/ML16/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 003ae1741a48cf1c9a4350f2387bad54
+      size: 792536
+    - path: nodes/wo_d3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7cb51ad96cc293f6c81f5526b3f2b730
+      size: 28342384
+    - path: nodes/wo_d3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a0f4d8cb132406052b502f4992bbe6bc.dir
+      size: 96838998
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 0527d6df4892c800317a43cb9556ec31
+      size: 48
+    - path: nodes/wo_d3_model/MLModel/apax_model
+      hash: md5
+      md5: 6da96b211c082ea7142b227108719db2.dir
+      size: 43083619
+      nfiles: 10
+    - path: nodes/wo_d3_model/MLModel/log.csv
+      hash: md5
+      md5: 50d946183c237edc7afb23b0493fa12b
+      size: 354567
+    - path: nodes/wo_d3_model/MLModel/metrics.json
+      hash: md5
+      md5: a91ca1072c9ad455b8e23222a45d2685
+      size: 387
+    - path: nodes/wo_d3_model/MLModel/node-meta.json
+      hash: md5
+      md5: b41e674b747e05f610deeb3dbcae5e0b
+      size: 48
+    - path: nodes/wo_d3_model/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: a82b6a68bedf20e5c03657fb0e99ad8f
+      size: 53573344
+    - path: nodes/wo_d3_model/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9e0f05173fe02f700cafc1e2a8ebd988
+      size: 3188519
+    params:
+      params.yaml:
+        ML16_ConfigurationSelection:
+          base_feature_map:
+            layer_name: dense_2
+            name: ll_grad
+          n_configurations: 5
+          selection_method: max_dist
+    outs:
+    - path: nodes/ML16/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: ab58fdfd366802731ef3eb978c714e18
+      size: 48
+    - path: nodes/ML16/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 69a4a071013e4db74950d950d37f7ea1
+      size: 89
+    - path: nodes/ML16/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 8235c76f0fd4ea254a694daff2e0a675
+      size: 19025
+  ML16_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML16_ASEMD
+    deps:
+    - path: nodes/ML16/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML16/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 11e75b717de88769e4699c8a5c152e24
+      size: 48
+    - path: nodes/ML16/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 003ae1741a48cf1c9a4350f2387bad54
+      size: 792536
+    - path: nodes/wo_d3_model/MLModel/apax_model
+      hash: md5
+      md5: 6da96b211c082ea7142b227108719db2.dir
+      size: 43083619
+      nfiles: 10
+    - path: nodes/wo_d3_model/MLModel/log.csv
+      hash: md5
+      md5: 50d946183c237edc7afb23b0493fa12b
+      size: 354567
+    - path: nodes/wo_d3_model/MLModel/metrics.json
+      hash: md5
+      md5: a91ca1072c9ad455b8e23222a45d2685
+      size: 387
+    - path: nodes/wo_d3_model/MLModel/node-meta.json
+      hash: md5
+      md5: b41e674b747e05f610deeb3dbcae5e0b
+      size: 48
+    - path: nodes/wo_d3_model/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: a82b6a68bedf20e5c03657fb0e99ad8f
+      size: 53573344
+    - path: nodes/wo_d3_model/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9e0f05173fe02f700cafc1e2a8ebd988
+      size: 3188519
+    params:
+      params.yaml:
+        ML16_ASEMD:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 100
+          seed: 42
+          steps: 1000000
+          use_momenta: false
+          wrap: false
+        ML16_ASEMD+thermostat:
+          pfactor: 54.273
+          pressure: 6.324e-07
+          temperature: 300
+          tetragonal_strain: true
+          time_step: 1.0
+          ttime: 2.4557
+    outs:
+    - path: nodes/ML16/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 1b4911bd4dbaf0d9220611daf971964b
+      size: 429491
+    - path: nodes/ML16/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML16/ASEMD/node-meta.json
+      hash: md5
+      md5: 39f3578373cdcba7d75ee80b637dc838
+      size: 48
+    - path: nodes/ML16/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML16/ASEMD/trajectory.h5
+      hash: md5
+      md5: 3ccb5e443a415ec0b13ff126c4dcd43c
+      size: 245582008
+  ML16_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name ML16_ConfigurationSelection_1
+    deps:
+    - path: nodes/ML16/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 1b4911bd4dbaf0d9220611daf971964b
+      size: 429491
+    - path: nodes/ML16/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML16/ASEMD/node-meta.json
+      hash: md5
+      md5: 39f3578373cdcba7d75ee80b637dc838
+      size: 48
+    - path: nodes/ML16/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML16/ASEMD/trajectory.h5
+      hash: md5
+      md5: 3ccb5e443a415ec0b13ff126c4dcd43c
+      size: 245582008
+    params:
+      params.yaml:
+        ML16_ConfigurationSelection_1:
+          n_configurations: 100
+          seed: 1234
+    outs:
+    - path: nodes/ML16/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: 240bc0f4b9daf635478253ffcfecaaa1
+      size: 48
+    - path: nodes/ML16/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: dc02ad44c46d4ce82078937cba88be0d
+      size: 1421
+    - path: nodes/ML16/ConfigurationSelection_1/selection.png
+      hash: md5
+      md5: 9f879cb0c184d7b26dd7ee6dfe6cff4e
+      size: 29906
+  ML16_ConfigurationSelection_2:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name ML16_ConfigurationSelection_2
+    deps:
+    - path: nodes/ML16/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: 240bc0f4b9daf635478253ffcfecaaa1
+      size: 48
+    - path: nodes/ML16/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: dc02ad44c46d4ce82078937cba88be0d
+      size: 1421
+    - path: nodes/ML16/ConfigurationSelection_1/selection.png
+      hash: md5
+      md5: 9f879cb0c184d7b26dd7ee6dfe6cff4e
+      size: 29906
+    params:
+      params.yaml:
+        ML16_ConfigurationSelection_2:
+          n_configurations: 100
+          seed: 1234
+    outs:
+    - path: nodes/ML16/ConfigurationSelection_2/node-meta.json
+      hash: md5
+      md5: 7c6ee540173d92507c3b2c7a6fdfaab6
+      size: 48
+    - path: nodes/ML16/ConfigurationSelection_2/selected_configurations.json
+      hash: md5
+      md5: cd9f65b39bf32a9cc156ca9fab69ee1f
+      size: 1440
+    - path: nodes/ML16/ConfigurationSelection_2/selection.png
+      hash: md5
+      md5: 9a237a9ac1e863fab4af2af85ac39c13
+      size: 30725

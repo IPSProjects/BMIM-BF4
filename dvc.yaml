@@ -206,6 +206,7 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
+- nodes/ML16/ASEMD/metrics_dict.csv: {}
 stages:
   ML0_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML0_ConfigurationSelection
@@ -2222,6 +2223,105 @@ stages:
     - nodes/ML15/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/ML15/PredictionMetrics/stress_df.csv
     - nodes/ML15/PredictionMetrics/stress_hydrostatic_df.csv
+  ML16_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML16_ASEGeoOpt
+    deps:
+    - nodes/ML15/ASEMD/metrics_dict.csv
+    - nodes/ML15/ASEMD/model
+    - nodes/ML15/ASEMD/node-meta.json
+    - nodes/ML15/ASEMD/steps_before_stopping.json
+    - nodes/ML15/ASEMD/trajectory.h5
+    - nodes/wo_d3_model/MLModel/apax_model
+    - nodes/wo_d3_model/MLModel/log.csv
+    - nodes/wo_d3_model/MLModel/metrics.json
+    - nodes/wo_d3_model/MLModel/node-meta.json
+    - nodes/wo_d3_model/MLModel/train_atoms.extxyz
+    - nodes/wo_d3_model/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/ML16/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML16/ASEGeoOpt/model_outs
+    - nodes/ML16/ASEGeoOpt/trajectory.h5
+    params:
+    - ML16_ASEGeoOpt
+  ML16_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML16_ASEMD
+    deps:
+    - nodes/ML16/ASEGeoOpt/model_outs
+    - nodes/ML16/ASEGeoOpt/node-meta.json
+    - nodes/ML16/ASEGeoOpt/trajectory.h5
+    - nodes/wo_d3_model/MLModel/apax_model
+    - nodes/wo_d3_model/MLModel/log.csv
+    - nodes/wo_d3_model/MLModel/metrics.json
+    - nodes/wo_d3_model/MLModel/node-meta.json
+    - nodes/wo_d3_model/MLModel/train_atoms.extxyz
+    - nodes/wo_d3_model/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/ML16/ASEMD/node-meta.json:
+        cache: false
+    - nodes/ML16/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML16/ASEMD/metrics_dict.csv
+    - nodes/ML16/ASEMD/model
+    - nodes/ML16/ASEMD/trajectory.h5
+    params:
+    - ML16_ASEMD
+    - ML16_ASEMD+thermostat
+  ML16_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML16_ConfigurationSelection
+    deps:
+    - nodes/ML16/ASEGeoOpt/model_outs
+    - nodes/ML16/ASEGeoOpt/node-meta.json
+    - nodes/ML16/ASEGeoOpt/trajectory.h5
+    - nodes/wo_d3/CP2KSinglePoint/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint/cp2k
+    - nodes/wo_d3/CP2KSinglePoint/node-meta.json
+    - nodes/wo_d3_model/MLModel/apax_model
+    - nodes/wo_d3_model/MLModel/log.csv
+    - nodes/wo_d3_model/MLModel/metrics.json
+    - nodes/wo_d3_model/MLModel/node-meta.json
+    - nodes/wo_d3_model/MLModel/train_atoms.extxyz
+    - nodes/wo_d3_model/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/ML16/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML16/ConfigurationSelection/selected_configurations.json
+    - nodes/ML16/ConfigurationSelection/selection.png
+    params:
+    - ML16_ConfigurationSelection
+  ML16_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name ML16_ConfigurationSelection_1
+    deps:
+    - nodes/ML16/ASEMD/metrics_dict.csv
+    - nodes/ML16/ASEMD/model
+    - nodes/ML16/ASEMD/node-meta.json
+    - nodes/ML16/ASEMD/steps_before_stopping.json
+    - nodes/ML16/ASEMD/trajectory.h5
+    metrics:
+    - nodes/ML16/ConfigurationSelection_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML16/ConfigurationSelection_1/selected_configurations.json
+    - nodes/ML16/ConfigurationSelection_1/selection.png
+    params:
+    - ML16_ConfigurationSelection_1
+  ML16_ConfigurationSelection_2:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name ML16_ConfigurationSelection_2
+    deps:
+    - nodes/ML16/ConfigurationSelection_1/node-meta.json
+    - nodes/ML16/ConfigurationSelection_1/selected_configurations.json
+    - nodes/ML16/ConfigurationSelection_1/selection.png
+    metrics:
+    - nodes/ML16/ConfigurationSelection_2/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML16/ConfigurationSelection_2/selected_configurations.json
+    - nodes/ML16/ConfigurationSelection_2/selection.png
+    params:
+    - ML16_ConfigurationSelection_2
   ML1_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML1_ASEGeoOpt
     deps:
