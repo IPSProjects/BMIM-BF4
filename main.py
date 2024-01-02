@@ -595,16 +595,87 @@ with project.group("final_ensemble") as final_ensemble:
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
 with project.group("wo_d3") as wo_d3:
-    cp2k = ips.calculators.CP2KSinglePoint(
+    train_data = ips.calculators.CP2KSinglePoint(
         data=train_data,
         cp2k_params="config/cp2k_wo_d3.yaml",
         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS"],
-    )
+    ).atoms
 
-    model = ips.models.Apax(
-        data=cp2k.atoms,
-        validation_data=validation_data.atoms,
-        config="config/final.yaml",
-    )
+    validation_data = ips.calculators.CP2KSinglePoint(
+        data=validation_data.atoms,
+        cp2k_params="config/cp2k_wo_d3.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS"],
+    ).atoms
 
-project.build(nodes=[wo_d3]) # 
+
+# with project.group("wo_d3_model") as wo_d3_model:
+
+#     model = ips.models.Apax(
+#         data=train_data,
+#         validation_data=validation_data,
+#         config="config/final.yaml",
+#     )
+    
+
+# with project.group("ML16") as grp:
+
+#     geo_opt = ips.calculators.ASEGeoOpt(
+#         model=model,
+#         data=md.atoms,
+#         data_id=-1,
+#         optimizer="FIRE",
+#         run_kwargs={"fmax": 0.5},
+#     )
+
+#     md = ips.calculators.ASEMD(
+#         data=geo_opt.atoms,
+#         data_id=-1,
+#         model=model,
+#         modifier=[],
+#         thermostat=thermostat,
+#         checker_list=[],
+#         steps=5_000_000,
+#         sampling_rate=100,
+#     )
+
+#     kernel_selection = ips.models.apax.BatchKernelSelection(
+#         data=geo_opt.atoms,
+#         train_data=train_data,
+#         models=model,
+#         n_configurations=5,
+#         processing_batch_size=8,
+#     )
+
+#     validation_selection = ips.configuration_selection.RandomSelection(
+#         data=md.atoms, n_configurations=100
+#     )
+
+#     train_selection = ips.configuration_selection.RandomSelection(
+#         data=validation_selection.excluded_atoms, n_configurations=100
+#     )
+
+#     cp2k_train = ips.calculators.CP2KSinglePoint(
+#         data=train_selection.atoms + kernel_selection.atoms,
+#         cp2k_params="config/cp2k_wo_d3.yaml",
+#         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS"],
+#     )
+#     cp2k_val = ips.calculators.CP2KSinglePoint(
+#         data=validation_selection.atoms,
+#         cp2k_params="config/cp2k_wo_d3.yaml",
+#         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS"],
+#     )
+#     train_data += cp2k_train.atoms
+#     validation_data += cp2k_val.atoms
+
+#     model = ips.models.Apax(
+#         data=train_data,
+#         validation_data=validation_data,
+#         config="config/initial_model.yaml",
+#     )
+
+#     prediction = ips.analysis.Prediction(data=test_data, model=model)
+#     metrics = ips.analysis.PredictionMetrics(data=prediction)
+#     ips.analysis.EnergyHistogram(data=train_data, bins=100)
+#     ips.analysis.ForcesHistogram(data=train_data)
+
+project.build(nodes=[wo_d3])
