@@ -18,7 +18,7 @@ stages:
       size: 19874075
     - path: nodes/classical/AddData/node-meta.json
       hash: md5
-      md5: e875cc934db72ea4d2b9d3be558e88d1
+      md5: 2d36d059c77955fa89ee8bcb863b696b
       size: 48
   classical_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.RandomSelection --name classical_ConfigurationSelection

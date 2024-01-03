@@ -18325,5 +18325,104 @@
             "_type": "pathlib.Path",
             "value": "nodes/ML16/ConfigurationSelection_2"
         }
+    },
+    "ML16_CP2KSinglePoint": {
+        "cp2k_directory": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/cp2k"
+        },
+        "cp2k_files": [
+            "GTH_BASIS_SETS",
+            "GTH_POTENTIALS"
+        ],
+        "cp2k_params": "config/cp2k_wo_d3.yaml",
+        "cp2k_shell": null,
+        "data": {
+            "_type": "znflow.CombinedConnections",
+            "value": {
+                "connections": [
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "RandomSelection",
+                                "name": "ML16_ConfigurationSelection_2",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    },
+                    {
+                        "instance": {
+                            "_type": "zntrack.Node",
+                            "value": {
+                                "module": "ipsuite.nodes",
+                                "cls": "BatchKernelSelection",
+                                "name": "ML16_ConfigurationSelection",
+                                "remote": null,
+                                "rev": null
+                            }
+                        },
+                        "attribute": "atoms",
+                        "item": null
+                    }
+                ],
+                "item": null
+            }
+        },
+        "data_file": null,
+        "output_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/atoms.h5"
+        },
+        "wfn_restart_file": null,
+        "wfn_restart_node": null,
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML16/CP2KSinglePoint"
+        }
+    },
+    "ML16_CP2KSinglePoint_1": {
+        "cp2k_directory": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/cp2k"
+        },
+        "cp2k_files": [
+            "GTH_BASIS_SETS",
+            "GTH_POTENTIALS"
+        ],
+        "cp2k_params": "config/cp2k_wo_d3.yaml",
+        "cp2k_shell": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "RandomSelection",
+                        "name": "ML16_ConfigurationSelection_1",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "output_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/atoms.h5"
+        },
+        "wfn_restart_file": null,
+        "wfn_restart_node": null,
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ML16/CP2KSinglePoint_1"
+        }
     }
 }
