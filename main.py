@@ -55,6 +55,37 @@ with project.group("classical"):
         sampling_rate=10,
     )
 
+thermostat = ips.calculators.NPTThermostat(
+        time_step=0.5,
+        temperature=300,
+        pressure=6.324e-07, # 1.01325 * units.bar,
+        ttime=2.4557, # 25 * units.fs,
+        pfactor=54.273, # (75 * units.fs) ** 2,
+        tetragonal_strain=True,
+    )
+
+with project.group("AIMD") as aimd_grp:
+    start_conf = ips.configuration_selection.IndexSelection(
+        data.atoms,
+        indices=[2000,]
+    )
+
+    aimd_model = ips.calculators.CP2KSinglePoint(
+        data=start_conf.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+    )
+
+    aimd = ips.calculators.ASEMD(
+        data=start_conf.atoms,
+        data_id=-1,
+        model=aimd_model,
+        thermostat=thermostat,
+        steps=10,
+        sampling_rate=1,
+    )
+
+
 with project.group("ML0"):
     kernel_selection = ips.models.apax.BatchKernelSelection(
         data=train_data.excluded_atoms,
@@ -536,4 +567,4 @@ with project.group("final_ensemble") as final:
     prediction = ips.analysis.Prediction(data=train_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
-project.build(nodes=[final])
+project.build(nodes=[aimd_grp])

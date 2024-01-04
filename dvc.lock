@@ -21337,3 +21337,206 @@ stages:
       hash: md5
       md5: 0a366e37c5368c0f3d9888f5d26a5d13
       size: 58176
+  AIMD_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AIMD_ConfigurationSelection
+    deps:
+    - path: nodes/classical/AddData/atoms.h5
+      hash: md5
+      md5: 4b28c7c0a6ae386fce15e8c814259378
+      size: 19874075
+    - path: nodes/classical/AddData/node-meta.json
+      hash: md5
+      md5: e875cc934db72ea4d2b9d3be558e88d1
+      size: 48
+    params:
+      params.yaml:
+        AIMD_ConfigurationSelection:
+          indices:
+          - 2000
+    outs:
+    - path: nodes/AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: da71f5aa940cb81b46f4aea6f433b722
+      size: 48
+    - path: nodes/AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 755d6c816224dec168bb7ef675f0733d
+      size: 49
+    - path: nodes/AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 509cc04ed4e1e293ee81eb67105a6454
+      size: 25192
+  AIMD_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AIMD_CP2KSinglePoint
+    deps:
+    - path: GTH_BASIS_SETS
+      hash: md5
+      md5: 518e733a7344699cf0b4192bb97eb6a3
+      size: 119403
+    - path: GTH_POTENTIALS
+      hash: md5
+      md5: 3a35b03b26b8ba5cf6c1d849dba11f15
+      size: 128982
+    - path: dftd3.dat
+      hash: md5
+      md5: 88745bcc951a4bcdccc4d6bcfa78d105
+      size: 1959318
+    - path: nodes/AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: da71f5aa940cb81b46f4aea6f433b722
+      size: 48
+    - path: nodes/AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 755d6c816224dec168bb7ef675f0733d
+      size: 49
+    - path: nodes/AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 509cc04ed4e1e293ee81eb67105a6454
+      size: 25192
+    params:
+      config/cp2k.yaml:
+        force_eval:
+          method: quickstep
+          DFT:
+            mgrid:
+              cutoff: 800
+              rel_cutoff: 60
+              ngrids: 5
+            QS:
+              eps_filter_matrix: 0.0
+              eps_pgf_orb: 0.0001
+            SCF:
+              scf_guess: restart
+              max_scf: 100
+              eps_scf: 1e-06
+              OT:
+                minimizer: diis
+                preconditioner: full_single_inverse
+              outer_scf:
+                max_scf: 100
+                eps_scf: 1e-06
+              print:
+                restart:
+                  each:
+                    QS_SCF: 0
+            XC:
+              xc_functional:
+                becke97:
+                  parametrization: B97-3c
+                  scale_c: 1.0
+                  scale_x: 1.0
+              vdw_potential:
+                pair_potential:
+                  type: dftd3(bj)
+                  parameter_file_name: dftd3.dat
+                  reference_functional: B97-3c
+                  r_cutoff: 7.93766
+                  calculate_c9_term: true
+                  short_range_correction: true
+                potential_type: pair_potential
+            charge: 0
+            basis_set_file_name: GTH_BASIS_SETS
+            potential_file_name: GTH_POTENTIALS
+          subsys:
+            kind:
+              N:
+                basis_set: TZVP-GTH-q5
+                potential: GTH-PBE-q5
+              C:
+                basis_set: TZVP-GTH-q4
+                potential: GTH-PBE-q4
+              H:
+                basis_set: TZVP-GTH-q1
+                potential: GTH-PBE-q1
+              B:
+                basis_set: TZVP-GTH-q3
+                potential: GTH-PBE-q3
+              F:
+                basis_set: TZVP-GTH-q7
+                potential: GTH-PBE-q7
+    outs:
+    - path: nodes/AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 913b91fba4bf2e86ee5fc84efeb73667
+      size: 57448
+    - path: nodes/AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 97c3ffe7efca455b49b387f6ceb24389.dir
+      size: 12384695
+      nfiles: 3
+    - path: nodes/AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: a61c58e291a27dd324ab6bb3b1ac6c68
+      size: 48
+  AIMD_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name AIMD_ASEMD
+    deps:
+    - path: nodes/AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 913b91fba4bf2e86ee5fc84efeb73667
+      size: 57448
+    - path: nodes/AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 97c3ffe7efca455b49b387f6ceb24389.dir
+      size: 12384695
+      nfiles: 3
+    - path: nodes/AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: a61c58e291a27dd324ab6bb3b1ac6c68
+      size: 48
+    - path: nodes/AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: da71f5aa940cb81b46f4aea6f433b722
+      size: 48
+    - path: nodes/AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 755d6c816224dec168bb7ef675f0733d
+      size: 49
+    - path: nodes/AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 509cc04ed4e1e293ee81eb67105a6454
+      size: 25192
+    params:
+      params.yaml:
+        AIMD_ASEMD:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 10
+          use_momenta: false
+          wrap: false
+        AIMD_ASEMD+thermostat:
+          pfactor: 54.273
+          pressure: 6.324e-07
+          temperature: 300
+          tetragonal_strain: true
+          time_step: 0.5
+          ttime: 2.4557
+    outs:
+    - path: nodes/AIMD/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 1dd6a0ba58ef2b30c206a55f882e0d80
+      size: 425
+    - path: nodes/AIMD/ASEMD/model
+      hash: md5
+      md5: 652bf93d8635ad1197ec31108f58f913.dir
+      size: 49513918
+      nfiles: 7
+    - path: nodes/AIMD/ASEMD/node-meta.json
+      hash: md5
+      md5: 7b0fa9212731103742ae910d828298a5
+      size: 48
+    - path: nodes/AIMD/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/AIMD/ASEMD/trajectory.h5
+      hash: md5
+      md5: 6900a0d6c1e56b10f74a2a7fda899503
+      size: 357632
