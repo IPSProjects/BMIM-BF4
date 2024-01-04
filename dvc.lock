@@ -23950,3 +23950,418 @@ stages:
       hash: md5
       md5: c704a5d9a27196d6cba51cf7117afc8a
       size: 48
+  ML16_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML16_MLModel
+    deps:
+    - path: nodes/ML16/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 40faec6948a278b884c2b8acef3aea49
+      size: 2625624
+    - path: nodes/ML16/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 36d65da3ce47fe9802fdf06984c20165.dir
+      size: 19958616
+      nfiles: 3
+    - path: nodes/ML16/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 363a506b21cdca4fe3ca8cda4bee67b8
+      size: 48
+    - path: nodes/ML16/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: aacd67088281052e93edf4007d7f73c5
+      size: 2504944
+    - path: nodes/ML16/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 37ed269c87f17128eee4740c046a2a91.dir
+      size: 19655563
+      nfiles: 3
+    - path: nodes/ML16/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: c704a5d9a27196d6cba51cf7117afc8a
+      size: 48
+    - path: nodes/wo_d3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7cb51ad96cc293f6c81f5526b3f2b730
+      size: 28342384
+    - path: nodes/wo_d3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a0f4d8cb132406052b502f4992bbe6bc.dir
+      size: 96838998
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 0527d6df4892c800317a43cb9556ec31
+      size: 48
+    - path: nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 6681e087c96c058bd2688696e975c8ab
+      size: 1773688
+    - path: nodes/wo_d3/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 39852c2c7a57e954338c31ab50e11c73.dir
+      size: 18606425
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: 9cb78e43deac945332b51759560fc78e
+      size: 48
+    params:
+      params.yaml:
+        ML16_MLModel:
+          jax_enable_x64: true
+          use_energy: true
+          use_forces: true
+          use_stresses: false
+      config/wod3.yaml:
+        data:
+          batch_size: 4
+          scale_method: per_element_force_rms_scale
+          shift_method: per_element_regression_shift
+          shift_options:
+            energy_regularisation: 1.0
+          valid_batch_size: 100
+        loss:
+        - name: energy
+        - name: forces
+          weight: 4.0
+        - name: stress
+          weight: 0.2
+        metrics:
+        - name: energy
+          reductions:
+          - mae
+        - name: forces
+          reductions:
+          - mae
+        - name: stress
+          reductions:
+          - mae
+        model:
+          n_basis: 7
+          n_radial: 5
+          nn:
+          - 512
+          - 512
+          r_max: 6.0
+          r_min: 0.7
+          b_init: zeros
+          emb_init: uniform
+          calc_stress: true
+          use_zbl: false
+          descriptor_dtype: fp32
+          readout_dtype: fp32
+          scale_shift_dtype: fp32
+        n_epochs: 2000
+        n_models: 1
+        optimizer:
+          opt_name: adam
+          emb_lr: 0.01
+          nn_lr: 0.005
+          scale_lr: 0.001
+          shift_lr: 0.05
+          zbl_lr: 0.001
+        seed: 1
+    outs:
+    - path: nodes/ML16/MLModel/apax_model
+      hash: md5
+      md5: 2dc05b16131084aa55faefa1fc92e8d7.dir
+      size: 42819526
+      nfiles: 10
+    - path: nodes/ML16/MLModel/log.csv
+      hash: md5
+      md5: 0d62bbb94d81bf3085e193be69413a76
+      size: 356821
+    - path: nodes/ML16/MLModel/metrics.json
+      hash: md5
+      md5: c24ff3ee7b4f484cc6a17ebf39eb4346
+      size: 390
+    - path: nodes/ML16/MLModel/node-meta.json
+      hash: md5
+      md5: 2e5613d9984616c5b0728e0899055b3d
+      size: 48
+    - path: nodes/ML16/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: 8b63beb005d7fab286a57b05315e56d2
+      size: 58529356
+    - path: nodes/ML16/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: a8c243cc6d8661a6bc83018996ecb092
+      size: 7908593
+  ML16_EnergyHistogram:
+    cmd: zntrack run ipsuite.nodes.EnergyHistogram --name ML16_EnergyHistogram
+    deps:
+    - path: nodes/ML16/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 40faec6948a278b884c2b8acef3aea49
+      size: 2625624
+    - path: nodes/ML16/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 36d65da3ce47fe9802fdf06984c20165.dir
+      size: 19958616
+      nfiles: 3
+    - path: nodes/ML16/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 363a506b21cdca4fe3ca8cda4bee67b8
+      size: 48
+    - path: nodes/wo_d3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7cb51ad96cc293f6c81f5526b3f2b730
+      size: 28342384
+    - path: nodes/wo_d3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a0f4d8cb132406052b502f4992bbe6bc.dir
+      size: 96838998
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 0527d6df4892c800317a43cb9556ec31
+      size: 48
+    params:
+      params.yaml:
+        ML16_EnergyHistogram:
+          bins: 100
+          x_lim:
+          y_lim:
+    outs:
+    - path: nodes/ML16/EnergyHistogram/labels_df.csv
+      hash: md5
+      md5: 3870886d395bdf643c308806575eafc1
+      size: 2438
+    - path: nodes/ML16/EnergyHistogram/metrics.json
+      hash: md5
+      md5: d9cfd4908af95b96255e756ad68c10dd
+      size: 121
+    - path: nodes/ML16/EnergyHistogram/node-meta.json
+      hash: md5
+      md5: 9d8bf1452291e3dc5076431d2b4049f2
+      size: 48
+    - path: nodes/ML16/EnergyHistogram/plots
+      hash: md5
+      md5: a571df50e34b2180d5850b6cfec08e5b.dir
+      size: 16615
+      nfiles: 1
+  ML16_ForcesHistogram:
+    cmd: zntrack run ipsuite.nodes.ForcesHistogram --name ML16_ForcesHistogram
+    deps:
+    - path: nodes/ML16/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 40faec6948a278b884c2b8acef3aea49
+      size: 2625624
+    - path: nodes/ML16/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 36d65da3ce47fe9802fdf06984c20165.dir
+      size: 19958616
+      nfiles: 3
+    - path: nodes/ML16/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 363a506b21cdca4fe3ca8cda4bee67b8
+      size: 48
+    - path: nodes/wo_d3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7cb51ad96cc293f6c81f5526b3f2b730
+      size: 28342384
+    - path: nodes/wo_d3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a0f4d8cb132406052b502f4992bbe6bc.dir
+      size: 96838998
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 0527d6df4892c800317a43cb9556ec31
+      size: 48
+    params:
+      params.yaml:
+        ML16_ForcesHistogram:
+          bins:
+          x_lim:
+          y_lim:
+    outs:
+    - path: nodes/ML16/ForcesHistogram/labels_df.csv
+      hash: md5
+      md5: f0ee25387435de43fce46fe9f9cbd858
+      size: 110185
+    - path: nodes/ML16/ForcesHistogram/metrics.json
+      hash: md5
+      md5: adf3001b81eb30053afcc5158e243f18
+      size: 129
+    - path: nodes/ML16/ForcesHistogram/node-meta.json
+      hash: md5
+      md5: 07b6212b35141184acf8a1f68a1c10f4
+      size: 48
+    - path: nodes/ML16/ForcesHistogram/plots
+      hash: md5
+      md5: 4e2f46567030cf5631d0005c8f96342c.dir
+      size: 33393
+      nfiles: 1
+  ML16_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML16_Prediction
+    deps:
+    - path: nodes/ML16/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: aacd67088281052e93edf4007d7f73c5
+      size: 2504944
+    - path: nodes/ML16/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 37ed269c87f17128eee4740c046a2a91.dir
+      size: 19655563
+      nfiles: 3
+    - path: nodes/ML16/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: c704a5d9a27196d6cba51cf7117afc8a
+      size: 48
+    - path: nodes/ML16/MLModel/apax_model
+      hash: md5
+      md5: 2dc05b16131084aa55faefa1fc92e8d7.dir
+      size: 42819526
+      nfiles: 10
+    - path: nodes/ML16/MLModel/log.csv
+      hash: md5
+      md5: 0d62bbb94d81bf3085e193be69413a76
+      size: 356821
+    - path: nodes/ML16/MLModel/metrics.json
+      hash: md5
+      md5: c24ff3ee7b4f484cc6a17ebf39eb4346
+      size: 390
+    - path: nodes/ML16/MLModel/node-meta.json
+      hash: md5
+      md5: 2e5613d9984616c5b0728e0899055b3d
+      size: 48
+    - path: nodes/ML16/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: 8b63beb005d7fab286a57b05315e56d2
+      size: 58529356
+    - path: nodes/ML16/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: a8c243cc6d8661a6bc83018996ecb092
+      size: 7908593
+    - path: nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 6681e087c96c058bd2688696e975c8ab
+      size: 1773688
+    - path: nodes/wo_d3/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 39852c2c7a57e954338c31ab50e11c73.dir
+      size: 18606425
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: 9cb78e43deac945332b51759560fc78e
+      size: 48
+    outs:
+    - path: nodes/ML16/Prediction/atoms.h5
+      hash: md5
+      md5: 41989d0531414898f7e3bf381b577bf3
+      size: 3440280
+    - path: nodes/ML16/Prediction/node-meta.json
+      hash: md5
+      md5: 49bd4d7d417c44438dbb7f8d688b9722
+      size: 48
+  ML16_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML16_PredictionMetrics
+    deps:
+    - path: nodes/ML16/Prediction/atoms.h5
+      hash: md5
+      md5: 41989d0531414898f7e3bf381b577bf3
+      size: 3440280
+    - path: nodes/ML16/Prediction/node-meta.json
+      hash: md5
+      md5: 49bd4d7d417c44438dbb7f8d688b9722
+      size: 48
+    outs:
+    - path: nodes/ML16/PredictionMetrics/deviat_stress.json
+      hash: md5
+      md5: 5d0a7152724ed259d39667db103294d7
+      size: 210
+    - path: nodes/ML16/PredictionMetrics/energy.json
+      hash: md5
+      md5: d5251b86f215a83dbf94f7976f275121
+      size: 190
+    - path: nodes/ML16/PredictionMetrics/energy_df.csv
+      hash: md5
+      md5: 7f491375aa0e13b32c39d727a333ab12
+      size: 8475
+    - path: nodes/ML16/PredictionMetrics/forces.json
+      hash: md5
+      md5: 2ce45a4b850ca91b4cb5e7b3e8e8b0f0
+      size: 188
+    - path: nodes/ML16/PredictionMetrics/forces_df.csv
+      hash: md5
+      md5: d742a850ebd638b54126d58439c557fc
+      size: 9031443
+    - path: nodes/ML16/PredictionMetrics/hydro_stress.json
+      hash: md5
+      md5: 944915b9efd10351979cf16775ecfa00
+      size: 208
+    - path: nodes/ML16/PredictionMetrics/node-meta.json
+      hash: md5
+      md5: 4fe36c92adbbec350343236578b5a470
+      size: 48
+    - path: nodes/ML16/PredictionMetrics/plots
+      hash: md5
+      md5: 92a45694d2603bce0c781c2e019e3c16.dir
+      size: 306686
+      nfiles: 5
+    - path: nodes/ML16/PredictionMetrics/stress.json
+      hash: md5
+      md5: 1beb2455f8db5caddc043f2bd716a1fd
+      size: 208
+    - path: nodes/ML16/PredictionMetrics/stress_deviatoric_df.csv
+      hash: md5
+      md5: 0eb4aa629b326876e92168b7ac9d25e4
+      size: 85076
+    - path: nodes/ML16/PredictionMetrics/stress_df.csv
+      hash: md5
+      md5: 8064171e0d42d74bc3f3138f88d94b4a
+      size: 82985
+    - path: nodes/ML16/PredictionMetrics/stress_hydrostatic_df.csv
+      hash: md5
+      md5: a4346c1b48aa6e2061b10e65637e1311
+      size: 9337
+  ML16_ForceDecomposition:
+    cmd: zntrack run ipsuite.nodes.ForceDecomposition --name ML16_ForceDecomposition
+    deps:
+    - path: nodes/ML16/Prediction/atoms.h5
+      hash: md5
+      md5: 41989d0531414898f7e3bf381b577bf3
+      size: 3440280
+    - path: nodes/ML16/Prediction/node-meta.json
+      hash: md5
+      md5: 49bd4d7d417c44438dbb7f8d688b9722
+      size: 48
+    outs:
+    - path: nodes/ML16/ForceDecomposition/histogram.png
+      hash: md5
+      md5: 02ed885b4d614f81b60ae2f60797b4a2
+      size: 123245
+    - path: nodes/ML16/ForceDecomposition/node-meta.json
+      hash: md5
+      md5: d62133b42ebdd5de96a2c38fcabad3a0
+      size: 48
+    - path: nodes/ML16/ForceDecomposition/rot_force.png
+      hash: md5
+      md5: 0777fd5807d6c760116ac555271ecd92
+      size: 111730
+    - path: nodes/ML16/ForceDecomposition/rot_forces.json
+      hash: md5
+      md5: aab26a19b4583600e0094c539b136077
+      size: 190
+    - path: nodes/ML16/ForceDecomposition/trans_force.png
+      hash: md5
+      md5: bc7e08490ede702cdc92b9ab2b41bf90
+      size: 111412
+    - path: nodes/ML16/ForceDecomposition/trans_forces.json
+      hash: md5
+      md5: 69f095477322a2e9b57139a76e6ac8c3
+      size: 191
+    - path: nodes/ML16/ForceDecomposition/vib_force.png
+      hash: md5
+      md5: 2aa26af2f65a4e6a1299a4874081a469
+      size: 65859
+    - path: nodes/ML16/ForceDecomposition/vib_forces.json
+      hash: md5
+      md5: 6b46b9955cc8df6779e1652b411b2880
+      size: 188
+    - path: nodes/ML16/ForceDecomposition/wasserstein_distance.json
+      hash: md5
+      md5: 3286dd56627d9afde0ec9896683fc61c
+      size: 550

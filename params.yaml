@@ -372,6 +372,19 @@ ML16_ConfigurationSelection_1:
 ML16_ConfigurationSelection_2:
     n_configurations: 100
     seed: 1234
+ML16_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML16_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML16_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 ML1_ASEGeoOpt:
     data_id: -1
     dump_rate: 1000

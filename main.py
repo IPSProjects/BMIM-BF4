@@ -595,13 +595,13 @@ with project.group("final_ensemble") as final_ensemble:
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
 with project.group("wo_d3") as wo_d3:
-    train_data = ips.calculators.CP2KSinglePoint(
+    train_data_nod3 = ips.calculators.CP2KSinglePoint(
         data=train_data,
         cp2k_params="config/cp2k_wo_d3.yaml",
         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS"],
     ).atoms
 
-    validation_data = ips.calculators.CP2KSinglePoint(
+    validation_data_nod3 = ips.calculators.CP2KSinglePoint(
         data=validation_data.atoms,
         cp2k_params="config/cp2k_wo_d3.yaml",
         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS"],
@@ -615,7 +615,7 @@ with project.group("wo_d3_model") as wo_d3_model:
         validation_data=validation_data,
         config="config/final.yaml",
     )
-    
+
 
 with project.group("ML16") as grp:
 
@@ -629,7 +629,7 @@ with project.group("ML16") as grp:
 
     kernel_selection = ips.models.apax.BatchKernelSelection(
         data=geo_opt.atoms,
-        train_data=train_data,
+        train_data=train_data_nod3,
         models=model,
         n_configurations=5,
         processing_batch_size=4,
@@ -664,18 +664,19 @@ with project.group("ML16") as grp:
         cp2k_params="config/cp2k_wo_d3.yaml",
         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS"],
     )
-    train_data += cp2k_train.atoms
-    validation_data += cp2k_val.atoms
+    train_data_nod3 += cp2k_train.atoms
+    validation_data_nod3 += cp2k_val.atoms
 
-#     model = ips.models.Apax(
-#         data=train_data,
-#         validation_data=validation_data,
-#         config="config/initial_model.yaml",
-#     )
+    model = ips.models.Apax(
+        data=train_data_nod3,
+        validation_data=validation_data_nod3,
+        config="config/wod3.yaml",
+    )
 
-#     prediction = ips.analysis.Prediction(data=test_data, model=model)
-#     metrics = ips.analysis.PredictionMetrics(data=prediction)
-#     ips.analysis.EnergyHistogram(data=train_data, bins=100)
-#     ips.analysis.ForcesHistogram(data=train_data)
+    prediction = ips.analysis.Prediction(data=validation_data_nod3, model=model)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
+    ips.analysis.EnergyHistogram(data=train_data_nod3, bins=100)
+    ips.analysis.ForcesHistogram(data=train_data_nod3)
+    ips.analysis.ForceDecomposition(data=prediction)
 
 project.build(nodes=[grp])
