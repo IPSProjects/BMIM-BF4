@@ -179,7 +179,59 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
+- nodes/AIMD/ASEMD/metrics_dict.csv: {}
 stages:
+  AIMD_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name AIMD_ASEMD
+    deps:
+    - nodes/AIMD/CP2KSinglePoint/atoms.h5
+    - nodes/AIMD/CP2KSinglePoint/cp2k
+    - nodes/AIMD/CP2KSinglePoint/node-meta.json
+    - nodes/AIMD/ConfigurationSelection/node-meta.json
+    - nodes/AIMD/ConfigurationSelection/selected_configurations.json
+    - nodes/AIMD/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/AIMD/ASEMD/node-meta.json:
+        cache: false
+    - nodes/AIMD/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/AIMD/ASEMD/metrics_dict.csv
+    - nodes/AIMD/ASEMD/model
+    - nodes/AIMD/ASEMD/trajectory.h5
+    params:
+    - AIMD_ASEMD
+    - AIMD_ASEMD+thermostat
+  AIMD_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AIMD_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/AIMD/ConfigurationSelection/node-meta.json
+    - nodes/AIMD/ConfigurationSelection/selected_configurations.json
+    - nodes/AIMD/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/AIMD/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AIMD/CP2KSinglePoint/atoms.h5
+    - nodes/AIMD/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
+  AIMD_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AIMD_ConfigurationSelection
+    deps:
+    - nodes/classical/AddData/atoms.h5
+    - nodes/classical/AddData/node-meta.json
+    metrics:
+    - nodes/AIMD/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AIMD/ConfigurationSelection/selected_configurations.json
+    - nodes/AIMD/ConfigurationSelection/selection.png
+    params:
+    - AIMD_ConfigurationSelection
   ML0_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML0_ConfigurationSelection
     deps:
@@ -5122,6 +5174,31 @@ stages:
     - nodes/final_ensemble/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/final_ensemble/PredictionMetrics/stress_df.csv
     - nodes/final_ensemble/PredictionMetrics/stress_hydrostatic_df.csv
+  final_ensemble_PredictionMetrics_1:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name final_ensemble_PredictionMetrics_1
+    deps:
+    - nodes/final_ensemble/Prediction_1/atoms.h5
+    - nodes/final_ensemble/Prediction_1/node-meta.json
+    metrics:
+    - nodes/final_ensemble/PredictionMetrics_1/deviat_stress.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/energy.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/forces.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/hydro_stress.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/node-meta.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/stress.json:
+        cache: false
+    outs:
+    - nodes/final_ensemble/PredictionMetrics_1/energy_df.csv
+    - nodes/final_ensemble/PredictionMetrics_1/forces_df.csv
+    - nodes/final_ensemble/PredictionMetrics_1/plots
+    - nodes/final_ensemble/PredictionMetrics_1/stress_deviatoric_df.csv
+    - nodes/final_ensemble/PredictionMetrics_1/stress_df.csv
+    - nodes/final_ensemble/PredictionMetrics_1/stress_hydrostatic_df.csv
   final_ensemble_Prediction_1:
     cmd: zntrack run ipsuite.nodes.Prediction --name final_ensemble_Prediction_1
     deps:
@@ -5182,33 +5259,8 @@ stages:
     - nodes/final_ensemble/MLModel/node-meta.json
     - nodes/final_ensemble/MLModel/train_atoms.extxyz
     - nodes/final_ensemble/MLModel/val_atoms.extxyz
-    outs:
-    - nodes/final_ensemble/Prediction_1/atoms.h5
     metrics:
     - nodes/final_ensemble/Prediction_1/node-meta.json:
         cache: false
-  final_ensemble_PredictionMetrics_1:
-    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name final_ensemble_PredictionMetrics_1
-    deps:
-    - nodes/final_ensemble/Prediction_1/atoms.h5
-    - nodes/final_ensemble/Prediction_1/node-meta.json
     outs:
-    - nodes/final_ensemble/PredictionMetrics_1/energy_df.csv
-    - nodes/final_ensemble/PredictionMetrics_1/forces_df.csv
-    - nodes/final_ensemble/PredictionMetrics_1/plots
-    - nodes/final_ensemble/PredictionMetrics_1/stress_deviatoric_df.csv
-    - nodes/final_ensemble/PredictionMetrics_1/stress_df.csv
-    - nodes/final_ensemble/PredictionMetrics_1/stress_hydrostatic_df.csv
-    metrics:
-    - nodes/final_ensemble/PredictionMetrics_1/deviat_stress.json:
-        cache: false
-    - nodes/final_ensemble/PredictionMetrics_1/energy.json:
-        cache: false
-    - nodes/final_ensemble/PredictionMetrics_1/forces.json:
-        cache: false
-    - nodes/final_ensemble/PredictionMetrics_1/hydro_stress.json:
-        cache: false
-    - nodes/final_ensemble/PredictionMetrics_1/node-meta.json:
-        cache: false
-    - nodes/final_ensemble/PredictionMetrics_1/stress.json:
-        cache: false
+    - nodes/final_ensemble/Prediction_1/atoms.h5

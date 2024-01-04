@@ -81,7 +81,7 @@ with project.group("AIMD") as aimd_grp:
         data_id=-1,
         model=aimd_model,
         thermostat=thermostat,
-        steps=10,
+        steps=10_000,
         sampling_rate=1,
     )
 

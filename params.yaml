@@ -8,7 +8,7 @@ AIMD_ASEMD:
     - 1
     sampling_rate: 1
     seed: 42
-    steps: 10
+    steps: 10000
     use_momenta: false
     wrap: false
 AIMD_ASEMD+thermostat:
