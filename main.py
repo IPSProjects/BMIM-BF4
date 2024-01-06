@@ -583,15 +583,15 @@ with project.group("final") as final:
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
 with project.group("final_ensemble") as final_ensemble:
-    model = ips.models.Apax(
+    final_ensemble_model = ips.models.Apax(
         data=train_data,
         validation_data=validation_data.atoms,
         config="config/final_ensemble.yaml",
     )
-    prediction = ips.analysis.Prediction(data=test_data, model=model)
+    prediction = ips.analysis.Prediction(data=test_data, model=final_ensemble_model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
-    prediction = ips.analysis.Prediction(data=train_data, model=model)
+    prediction = ips.analysis.Prediction(data=train_data, model=final_ensemble_model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
 with project.group("wo_d3") as wo_d3:
@@ -843,4 +843,18 @@ with project.group("density_md", "ml16_dftd3_medium") as e:
 
     density = ips.analysis.AnalyseDensity(data=aimd.atoms)
 
-project.build(nodes=[e])
+with project.group("density_md", "ml15_ensemble") as f:
+
+    aimd = ips.calculators.ASEMD(
+        data=start_conf.atoms,
+        data_id=-1,
+        model=final_ensemble_model,
+        thermostat=thermostat,
+        steps=20_000,
+        sampling_rate=10,
+        dump_rate=1000,
+    )
+
+    density = ips.analysis.AnalyseDensity(data=aimd.atoms)
+
+project.build(nodes=[f])

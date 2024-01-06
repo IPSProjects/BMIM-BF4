@@ -243,6 +243,10 @@ plots:
 - nodes/density_md/ml16_dftd3_medium/AnalyseDensity/density.png: {}
 - nodes/density_md/ml16_dftd3_medium/ASEMD/metrics_dict.csv: {}
 - nodes/density_md/ml16_dftd3_medium/AnalyseDensity/results.csv: {}
+- nodes/density_md/ml15/AnalyseDensity/density.png: {}
+- nodes/density_md/ml15_ensemble/AnalyseDensity/density.png: {}
+- nodes/density_md/ml15_ensemble/ASEMD/metrics_dict.csv: {}
+- nodes/density_md/ml15_ensemble/AnalyseDensity/results.csv: {}
 stages:
   ML0_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML0_ConfigurationSelection
@@ -5690,6 +5694,48 @@ stages:
     - nodes/density_md/ConfigurationSelection/selection.png
     params:
     - density_md_ConfigurationSelection
+  density_md_ml15_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name density_md_ml15_ASEMD
+    deps:
+    - nodes/density_md/ConfigurationSelection/node-meta.json
+    - nodes/density_md/ConfigurationSelection/selected_configurations.json
+    - nodes/density_md/ConfigurationSelection/selection.png
+    - nodes/final_ensemble/MLModel/apax_model
+    - nodes/final_ensemble/MLModel/log.csv
+    - nodes/final_ensemble/MLModel/metrics.json
+    - nodes/final_ensemble/MLModel/node-meta.json
+    - nodes/final_ensemble/MLModel/train_atoms.extxyz
+    - nodes/final_ensemble/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/density_md/ml15/ASEMD/node-meta.json:
+        cache: false
+    - nodes/density_md/ml15/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/density_md/ml15/ASEMD/metrics_dict.csv
+    - nodes/density_md/ml15/ASEMD/model
+    - nodes/density_md/ml15/ASEMD/trajectory.h5
+    params:
+    - density_md_ml15_ASEMD
+    - density_md_ml15_ASEMD+thermostat
+  density_md_ml15_AnalyseDensity:
+    cmd: zntrack run ipsuite.nodes.AnalyseDensity --name density_md_ml15_AnalyseDensity
+    deps:
+    - nodes/density_md/ml15/ASEMD/metrics_dict.csv
+    - nodes/density_md/ml15/ASEMD/model
+    - nodes/density_md/ml15/ASEMD/node-meta.json
+    - nodes/density_md/ml15/ASEMD/steps_before_stopping.json
+    - nodes/density_md/ml15/ASEMD/trajectory.h5
+    metrics:
+    - nodes/density_md/ml15/AnalyseDensity/density.json:
+        cache: false
+    - nodes/density_md/ml15/AnalyseDensity/node-meta.json:
+        cache: false
+    outs:
+    - nodes/density_md/ml15/AnalyseDensity/density.png
+    - nodes/density_md/ml15/AnalyseDensity/results.csv
+    params:
+    - density_md_ml15_AnalyseDensity
   density_md_ml15_d3_long_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name density_md_ml15_d3_long_ASEMD
     deps:
@@ -5774,6 +5820,48 @@ stages:
     - nodes/density_md/ml15_d3_short/AnalyseDensity/results.csv
     params:
     - density_md_ml15_d3_short_AnalyseDensity
+  density_md_ml15_ensemble_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name density_md_ml15_ensemble_ASEMD
+    deps:
+    - nodes/density_md/ConfigurationSelection/node-meta.json
+    - nodes/density_md/ConfigurationSelection/selected_configurations.json
+    - nodes/density_md/ConfigurationSelection/selection.png
+    - nodes/final_ensemble/MLModel/apax_model
+    - nodes/final_ensemble/MLModel/log.csv
+    - nodes/final_ensemble/MLModel/metrics.json
+    - nodes/final_ensemble/MLModel/node-meta.json
+    - nodes/final_ensemble/MLModel/train_atoms.extxyz
+    - nodes/final_ensemble/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/density_md/ml15_ensemble/ASEMD/node-meta.json:
+        cache: false
+    - nodes/density_md/ml15_ensemble/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/density_md/ml15_ensemble/ASEMD/metrics_dict.csv
+    - nodes/density_md/ml15_ensemble/ASEMD/model
+    - nodes/density_md/ml15_ensemble/ASEMD/trajectory.h5
+    params:
+    - density_md_ml15_ensemble_ASEMD
+    - density_md_ml15_ensemble_ASEMD+thermostat
+  density_md_ml15_ensemble_AnalyseDensity:
+    cmd: zntrack run ipsuite.nodes.AnalyseDensity --name density_md_ml15_ensemble_AnalyseDensity
+    deps:
+    - nodes/density_md/ml15_ensemble/ASEMD/metrics_dict.csv
+    - nodes/density_md/ml15_ensemble/ASEMD/model
+    - nodes/density_md/ml15_ensemble/ASEMD/node-meta.json
+    - nodes/density_md/ml15_ensemble/ASEMD/steps_before_stopping.json
+    - nodes/density_md/ml15_ensemble/ASEMD/trajectory.h5
+    metrics:
+    - nodes/density_md/ml15_ensemble/AnalyseDensity/density.json:
+        cache: false
+    - nodes/density_md/ml15_ensemble/AnalyseDensity/node-meta.json:
+        cache: false
+    outs:
+    - nodes/density_md/ml15_ensemble/AnalyseDensity/density.png
+    - nodes/density_md/ml15_ensemble/AnalyseDensity/results.csv
+    params:
+    - density_md_ml15_ensemble_AnalyseDensity
   density_md_ml16_dftd3_medium_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name density_md_ml16_dftd3_medium_ASEMD
     deps:
