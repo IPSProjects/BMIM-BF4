@@ -24365,3 +24365,341 @@ stages:
       hash: md5
       md5: 3286dd56627d9afde0ec9896683fc61c
       size: 550
+  torch_d3_labels_TorchD3:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name torch_d3_labels_TorchD3
+    deps:
+    - path: nodes/wo_d3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7cb51ad96cc293f6c81f5526b3f2b730
+      size: 28342384
+    - path: nodes/wo_d3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a0f4d8cb132406052b502f4992bbe6bc.dir
+      size: 96838998
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 0527d6df4892c800317a43cb9556ec31
+      size: 48
+    params:
+      params.yaml:
+        torch_d3_labels_TorchD3:
+          abc: false
+          cnthr: 7.93766
+          cutoff: 7.93766
+          damping: bj
+          dtype: float32
+          xc: b97-3c
+    outs:
+    - path: nodes/torch_d3_labels/TorchD3/atoms.h5
+      hash: md5
+      md5: cd79336f10615be3c4bd76cddb5dbfc8
+      size: 22975200
+    - path: nodes/torch_d3_labels/TorchD3/node-meta.json
+      hash: md5
+      md5: 489504e9171d1cec53c80110fb69dc74
+      size: 48
+  torch_d3_labels_TorchD3_1:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name torch_d3_labels_TorchD3_1
+    deps:
+    - path: nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 6681e087c96c058bd2688696e975c8ab
+      size: 1773688
+    - path: nodes/wo_d3/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 39852c2c7a57e954338c31ab50e11c73.dir
+      size: 18606425
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: 9cb78e43deac945332b51759560fc78e
+      size: 48
+    params:
+      params.yaml:
+        torch_d3_labels_TorchD3_1:
+          abc: false
+          cnthr: 7.93766
+          cutoff: 7.93766
+          damping: bj
+          dtype: float32
+          xc: b97-3c
+    outs:
+    - path: nodes/torch_d3_labels/TorchD3_1/atoms.h5
+      hash: md5
+      md5: 9b972bed01aa985a5752b07d7a1285c9
+      size: 1739680
+    - path: nodes/torch_d3_labels/TorchD3_1/node-meta.json
+      hash: md5
+      md5: 443fcdd5a1b3eac6e5aa0c3f8ac0ff48
+      size: 48
+  torch_d3_labels_TorchD3_2:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name torch_d3_labels_TorchD3_2
+    deps:
+    - path: nodes/wo_d3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7cb51ad96cc293f6c81f5526b3f2b730
+      size: 28342384
+    - path: nodes/wo_d3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a0f4d8cb132406052b502f4992bbe6bc.dir
+      size: 96838998
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 0527d6df4892c800317a43cb9556ec31
+      size: 48
+    params:
+      params.yaml:
+        torch_d3_labels_TorchD3_2:
+          abc: false
+          cnthr: 20.0
+          cutoff: 40.0
+          damping: bj
+          dtype: float32
+          xc: b97-3c
+    outs:
+    - path: nodes/torch_d3_labels/TorchD3_2/atoms.h5
+      hash: md5
+      md5: f62d83717f2768e4e7820c35712a37f9
+      size: 22975200
+    - path: nodes/torch_d3_labels/TorchD3_2/node-meta.json
+      hash: md5
+      md5: 3043d27d987e64bd88a64a82cf626a4a
+      size: 48
+  torch_d3_labels_TorchD3_3:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name torch_d3_labels_TorchD3_3
+    deps:
+    - path: nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 6681e087c96c058bd2688696e975c8ab
+      size: 1773688
+    - path: nodes/wo_d3/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 39852c2c7a57e954338c31ab50e11c73.dir
+      size: 18606425
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: 9cb78e43deac945332b51759560fc78e
+      size: 48
+    params:
+      params.yaml:
+        torch_d3_labels_TorchD3_3:
+          abc: false
+          cnthr: 20.0
+          cutoff: 40.0
+          damping: bj
+          dtype: float32
+          xc: b97-3c
+    outs:
+    - path: nodes/torch_d3_labels/TorchD3_3/atoms.h5
+      hash: md5
+      md5: 4087e514288ef5c14dfae6d78d5d09e7
+      size: 1739680
+    - path: nodes/torch_d3_labels/TorchD3_3/node-meta.json
+      hash: md5
+      md5: b0325eef4fd86b673bb44a81d2802c11
+      size: 48
+  d3_models_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name d3_models_MLModel
+    deps:
+    - path: nodes/torch_d3_labels/TorchD3/atoms.h5
+      hash: md5
+      md5: cd79336f10615be3c4bd76cddb5dbfc8
+      size: 22975200
+    - path: nodes/torch_d3_labels/TorchD3/node-meta.json
+      hash: md5
+      md5: 489504e9171d1cec53c80110fb69dc74
+      size: 48
+    - path: nodes/torch_d3_labels/TorchD3_1/atoms.h5
+      hash: md5
+      md5: 9b972bed01aa985a5752b07d7a1285c9
+      size: 1739680
+    - path: nodes/torch_d3_labels/TorchD3_1/node-meta.json
+      hash: md5
+      md5: 443fcdd5a1b3eac6e5aa0c3f8ac0ff48
+      size: 48
+    params:
+      params.yaml:
+        d3_models_MLModel:
+          jax_enable_x64: true
+          use_energy: true
+          use_forces: true
+          use_stresses: false
+      config/final.yaml:
+        data:
+          batch_size: 8
+          scale_method: per_element_force_rms_scale
+          shift_method: per_element_regression_shift
+          shift_options:
+            energy_regularisation: 1.0
+          valid_batch_size: 100
+        loss:
+        - name: energy
+        - name: forces
+          weight: 4.0
+        - name: stress
+          weight: 0.2
+        metrics:
+        - name: energy
+          reductions:
+          - mae
+        - name: forces
+          reductions:
+          - mae
+        - name: stress
+          reductions:
+          - mae
+        model:
+          n_basis: 7
+          n_radial: 5
+          nn:
+          - 512
+          - 512
+          r_max: 5.5
+          r_min: 0.7
+          b_init: zeros
+          emb_init: uniform
+          calc_stress: true
+          use_zbl: true
+          descriptor_dtype: fp32
+          readout_dtype: fp32
+          scale_shift_dtype: fp32
+        n_epochs: 2000
+        n_models: 1
+        optimizer:
+          opt_name: adam
+          emb_lr: 0.01
+          nn_lr: 0.005
+          scale_lr: 0.001
+          shift_lr: 0.05
+          zbl_lr: 0.001
+        seed: 1
+    outs:
+    - path: nodes/d3_models/MLModel/apax_model
+      hash: md5
+      md5: b89188fa9a8ccf126b36de313d57afff.dir
+      size: 43083520
+      nfiles: 10
+    - path: nodes/d3_models/MLModel/log.csv
+      hash: md5
+      md5: fd8e01cc1f8d4a9664f56312cca8302f
+      size: 354280
+    - path: nodes/d3_models/MLModel/metrics.json
+      hash: md5
+      md5: 1886277ee50d28e4a793e2a68999c910
+      size: 389
+    - path: nodes/d3_models/MLModel/node-meta.json
+      hash: md5
+      md5: 0f6b065a59f8153fa238be4c3f8a91f7
+      size: 48
+    - path: nodes/d3_models/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: f82d404c479aea8d02aa0c80b2efef65
+      size: 42122902
+    - path: nodes/d3_models/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 687c6c1714339f1815927ef14dc66556
+      size: 3191009
+  d3_models_MLModel_1:
+    cmd: zntrack run ipsuite.nodes.Apax --name d3_models_MLModel_1
+    deps:
+    - path: nodes/torch_d3_labels/TorchD3_2/atoms.h5
+      hash: md5
+      md5: f62d83717f2768e4e7820c35712a37f9
+      size: 22975200
+    - path: nodes/torch_d3_labels/TorchD3_2/node-meta.json
+      hash: md5
+      md5: 3043d27d987e64bd88a64a82cf626a4a
+      size: 48
+    - path: nodes/torch_d3_labels/TorchD3_3/atoms.h5
+      hash: md5
+      md5: 4087e514288ef5c14dfae6d78d5d09e7
+      size: 1739680
+    - path: nodes/torch_d3_labels/TorchD3_3/node-meta.json
+      hash: md5
+      md5: b0325eef4fd86b673bb44a81d2802c11
+      size: 48
+    params:
+      params.yaml:
+        d3_models_MLModel_1:
+          jax_enable_x64: true
+          use_energy: true
+          use_forces: true
+          use_stresses: false
+      config/final.yaml:
+        data:
+          batch_size: 8
+          scale_method: per_element_force_rms_scale
+          shift_method: per_element_regression_shift
+          shift_options:
+            energy_regularisation: 1.0
+          valid_batch_size: 100
+        loss:
+        - name: energy
+        - name: forces
+          weight: 4.0
+        - name: stress
+          weight: 0.2
+        metrics:
+        - name: energy
+          reductions:
+          - mae
+        - name: forces
+          reductions:
+          - mae
+        - name: stress
+          reductions:
+          - mae
+        model:
+          n_basis: 7
+          n_radial: 5
+          nn:
+          - 512
+          - 512
+          r_max: 5.5
+          r_min: 0.7
+          b_init: zeros
+          emb_init: uniform
+          calc_stress: true
+          use_zbl: true
+          descriptor_dtype: fp32
+          readout_dtype: fp32
+          scale_shift_dtype: fp32
+        n_epochs: 2000
+        n_models: 1
+        optimizer:
+          opt_name: adam
+          emb_lr: 0.01
+          nn_lr: 0.005
+          scale_lr: 0.001
+          shift_lr: 0.05
+          zbl_lr: 0.001
+        seed: 1
+    outs:
+    - path: nodes/d3_models/MLModel_1/apax_model
+      hash: md5
+      md5: 95adb410a2aed401521aa13786845690.dir
+      size: 43083526
+      nfiles: 10
+    - path: nodes/d3_models/MLModel_1/log.csv
+      hash: md5
+      md5: 231780fe51d72811543c573fa7cf0f85
+      size: 354331
+    - path: nodes/d3_models/MLModel_1/metrics.json
+      hash: md5
+      md5: 33687c17b8dc54caf8a876a36e171f08
+      size: 390
+    - path: nodes/d3_models/MLModel_1/node-meta.json
+      hash: md5
+      md5: 2c535bb66517137518d9e7dc5a119018
+      size: 48
+    - path: nodes/d3_models/MLModel_1/train_atoms.extxyz
+      hash: md5
+      md5: 37dc37d184a5d73e4a15a4f5cf73a6e1
+      size: 42123017
+    - path: nodes/d3_models/MLModel_1/val_atoms.extxyz
+      hash: md5
+      md5: 671e9a666fefaa0c05a63092aa42029d
+      size: 3191034

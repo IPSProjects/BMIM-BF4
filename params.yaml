@@ -1059,6 +1059,16 @@ classical_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+d3_models_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+d3_models_MLModel_1:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 final_MLModel:
     jax_enable_x64: true
     use_energy: true
@@ -1069,6 +1079,34 @@ final_ensemble_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+torch_d3_labels_TorchD3:
+    abc: false
+    cnthr: 7.93766
+    cutoff: 7.93766
+    damping: bj
+    dtype: float32
+    xc: b97-3c
+torch_d3_labels_TorchD3_1:
+    abc: false
+    cnthr: 7.93766
+    cutoff: 7.93766
+    damping: bj
+    dtype: float32
+    xc: b97-3c
+torch_d3_labels_TorchD3_2:
+    abc: false
+    cnthr: 20.0
+    cutoff: 40.0
+    damping: bj
+    dtype: float32
+    xc: b97-3c
+torch_d3_labels_TorchD3_3:
+    abc: false
+    cnthr: 20.0
+    cutoff: 40.0
+    damping: bj
+    dtype: float32
+    xc: b97-3c
 wo_d3_MLModel:
     jax_enable_x64: true
     use_energy: true

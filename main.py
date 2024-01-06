@@ -610,9 +610,63 @@ with project.group("wo_d3") as wo_d3:
 
 with project.group("wo_d3_model") as wo_d3_model:
 
-    model = ips.models.Apax(
-        data=train_data,
-        validation_data=validation_data,
+    model_wod3 = ips.models.Apax(
+        data=train_data_nod3,
+        validation_data=validation_data_nod3,
+        config="config/final.yaml",
+    )
+
+
+with project.group("torch_d3_labels") as td3l:
+    train_d3_short = ips.calculators.TorchD3(
+        data=train_data_nod3,
+        xc="b97-3c",
+        damping="bj",
+        cutoff=7.93766,
+        cnthr=7.93766,
+        abc=False,
+        dtype="float32",
+    )
+    val_d3_short = ips.calculators.TorchD3(
+        data=validation_data_nod3,
+        xc="b97-3c",
+        damping="bj",
+        cutoff=7.93766,
+        cnthr=7.93766,
+        abc=False,
+        dtype="float32",
+    )
+    train_d3_long = ips.calculators.TorchD3(
+        data=train_data_nod3,
+        xc="b97-3c",
+        damping="bj",
+        cutoff=40.0,
+        cnthr=20.0,
+        abc=False,
+        dtype="float32",
+    )
+    val_d3_long = ips.calculators.TorchD3(
+        data=validation_data_nod3,
+        xc="b97-3c",
+        damping="bj",
+        cutoff=40.0,
+        cnthr=20.0,
+        abc=False,
+        dtype="float32",
+    )
+
+
+with project.group("d3_models") as d3_models:
+
+    model_short = ips.models.Apax(
+        data=train_d3_short,
+        validation_data=val_d3_short,
+        config="config/final.yaml",
+    )
+
+    model_long = ips.models.Apax(
+        data=train_d3_long,
+        validation_data=val_d3_long,
         config="config/final.yaml",
     )
 
@@ -620,7 +674,7 @@ with project.group("wo_d3_model") as wo_d3_model:
 with project.group("ML16") as grp:
 
     geo_opt = ips.calculators.ASEGeoOpt(
-        model=model,
+        model=model_wod3,
         data=md.atoms,
         data_id=-1,
         optimizer="FIRE",
@@ -630,7 +684,7 @@ with project.group("ML16") as grp:
     kernel_selection = ips.models.apax.BatchKernelSelection(
         data=geo_opt.atoms,
         train_data=train_data_nod3,
-        models=model,
+        models=model_wod3,
         n_configurations=5,
         processing_batch_size=4,
     )
@@ -638,7 +692,7 @@ with project.group("ML16") as grp:
     md = ips.calculators.ASEMD(
         data=geo_opt.atoms,
         data_id=-1,
-        model=model,
+        model=model_wod3,
         modifier=[],
         thermostat=thermostat,
         checker_list=[],
@@ -679,4 +733,4 @@ with project.group("ML16") as grp:
     ips.analysis.ForcesHistogram(data=train_data_nod3)
     ips.analysis.ForceDecomposition(data=prediction)
 
-project.build(nodes=[grp])
+project.build(nodes=[d3_models])
