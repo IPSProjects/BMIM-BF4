@@ -1,5 +1,6 @@
 import ipsuite as ips
 from ase import units
+import mace_models
 
 project = ips.Project(automatic_node_names=True)
 
@@ -54,6 +55,80 @@ with project.group("classical"):
         steps=50000,
         sampling_rate=10,
     )
+
+thermostat = ips.calculators.NPTThermostat(
+        time_step=0.5,
+        temperature=303,
+        pressure=1.01325 * units.bar,
+        ttime=25 * units.fs,
+        pfactor=(75 * units.fs) ** 2,
+        tetragonal_strain=True,
+    )
+
+with project.group("AIMD") as aimd_grp:
+    start_conf = ips.configuration_selection.IndexSelection(
+        data.atoms,
+        indices=[2000,]
+    )
+
+    aimd_model = ips.calculators.CP2KSinglePoint(
+        data=start_conf.atoms,
+        cp2k_params="config/cp2k.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS", "dftd3.dat"],
+    )
+
+    aimd = ips.calculators.ASEMD(
+        data=start_conf.atoms,
+        data_id=-1,
+        model=aimd_model,
+        thermostat=thermostat,
+        steps=13_200,
+        sampling_rate=1,
+        dump_rate=100,
+    )
+
+    density = ips.analysis.AnalyseDensity(data=aimd.atoms)
+
+mace_mp_0_model = mace_models.LoadModel.from_rev("MACE-MP-0", rev="MACE-MP-0", remote="https://github.com/RokasEl/MACE-Models.git")
+
+with project.group("density_md", "MACE-MP-0") as mace_mp_0:
+    mace_md = ips.calculators.ASEMD(
+        data=start_conf.atoms,
+        data_id=-1,
+        model=mace_mp_0_model,
+        thermostat=thermostat,
+        steps=20_000,
+        sampling_rate=1,
+        dump_rate=100,
+    )
+
+    density = ips.analysis.AnalyseDensity(data=mace_md.atoms)
+
+mace_d3 = ips.calculators.TorchD3(
+    data=None,
+    xc="pbe",
+    damping="bj",
+    cutoff=20.0,
+    cnthr=18.0,
+    abc=False,
+    dtype="float32",
+)
+
+
+with project.group("density_md", "MACE-MP-0-d3") as mace_mp_0:
+    mace_mp_0_model_with_d3 = ips.calculators.MixCalculator(data=start_conf.atoms, calculators=[mace_mp_0_model, mace_d3])
+
+    mace_md = ips.calculators.ASEMD(
+        data=start_conf.atoms,
+        data_id=-1,
+        model=mace_mp_0_model_with_d3,
+        thermostat=thermostat,
+        steps=20_000,
+        sampling_rate=1,
+        dump_rate=100,
+    )
+
+    density = ips.analysis.AnalyseDensity(data=mace_md.atoms)
 
 with project.group("ML0"):
     kernel_selection = ips.models.apax.BatchKernelSelection(
@@ -536,4 +611,4 @@ with project.group("final_ensemble") as final:
     prediction = ips.analysis.Prediction(data=train_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
-project.build(nodes=[final])
+project.build(nodes=[mace_mp_0])
