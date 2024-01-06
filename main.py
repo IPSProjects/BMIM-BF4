@@ -654,6 +654,15 @@ with project.group("torch_d3_labels") as td3l:
         abc=False,
         dtype="float32",
     )
+    val_d3_medium = ips.calculators.TorchD3(
+        data=validation_data_nod3,
+        xc="b97-3c",
+        damping="bj",
+        cutoff=20.0,
+        cnthr=18.0,
+        abc=False,
+        dtype="float32",
+    )
 
 
 with project.group("d3_models") as d3_models:
@@ -814,4 +823,4 @@ with project.group("density_md", "ml16_dftd3_short") as d:
     density = ips.analysis.AnalyseDensity(data=aimd.atoms)
 
 
-project.build(nodes=[d])
+project.build(nodes=[td3l])

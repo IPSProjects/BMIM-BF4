@@ -25290,7 +25290,7 @@ stages:
           methods: sum
         density_md_ml16_dftd3_short_ASEMD+thermostat:
           pfactor: 54.27299976036698
-          pressure: 6.324209121801211e-07
+          pressure: 6.324209121801210e-07
           temperature: 303
           tetragonal_strain: true
           time_step: 0.5
@@ -25364,3 +25364,37 @@ stages:
       hash: md5
       md5: 95ba3be4d607d332508cf0a748a288c3
       size: 46402
+  torch_d3_labels_TorchD3_4:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name torch_d3_labels_TorchD3_4
+    deps:
+    - path: nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 6681e087c96c058bd2688696e975c8ab
+      size: 1773688
+    - path: nodes/wo_d3/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 39852c2c7a57e954338c31ab50e11c73.dir
+      size: 18606425
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: 9cb78e43deac945332b51759560fc78e
+      size: 48
+    params:
+      params.yaml:
+        torch_d3_labels_TorchD3_4:
+          abc: false
+          cnthr: 18.0
+          cutoff: 20.0
+          damping: bj
+          dtype: float32
+          xc: b97-3c
+    outs:
+    - path: nodes/torch_d3_labels/TorchD3_4/atoms.h5
+      hash: md5
+      md5: 893c64daea54ea801e7346b509edaf50
+      size: 1739680
+    - path: nodes/torch_d3_labels/TorchD3_4/node-meta.json
+      hash: md5
+      md5: ff3d391a13430462928857e05ebcbdb2
+      size: 48

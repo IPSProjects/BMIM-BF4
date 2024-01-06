@@ -1232,6 +1232,13 @@ torch_d3_labels_TorchD3_3:
     damping: bj
     dtype: float32
     xc: b97-3c
+torch_d3_labels_TorchD3_4:
+    abc: false
+    cnthr: 18.0
+    cutoff: 20.0
+    damping: bj
+    dtype: float32
+    xc: b97-3c
 wo_d3_MLModel:
     jax_enable_x64: true
     use_energy: true
