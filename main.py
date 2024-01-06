@@ -733,4 +733,33 @@ with project.group("ML16") as grp:
     ips.analysis.ForcesHistogram(data=train_data_nod3)
     ips.analysis.ForceDecomposition(data=prediction)
 
-project.build(nodes=[d3_models])
+
+thermostat = ips.calculators.NPTThermostat(
+        time_step=0.5,
+        temperature=303,
+        pressure=1.01325 * units.bar,
+        ttime=25 * units.fs,
+        pfactor=(75 * units.fs) ** 2,
+        tetragonal_strain=True,
+    )
+
+with project.group("density_md") as density_md:
+    start_conf = ips.configuration_selection.IndexSelection(
+        data.atoms,
+        indices=[2000,]
+    )
+
+    aimd = ips.calculators.ASEMD(
+        data=start_conf.atoms,
+        data_id=-1,
+        model=model,
+        thermostat=thermostat,
+        steps=20_000,
+        sampling_rate=10,
+        dump_rate=1000,
+    )
+
+    density = ips.analysis.AnalyseDensity(data=aimd.atoms)
+
+
+project.build(nodes=[density_md])

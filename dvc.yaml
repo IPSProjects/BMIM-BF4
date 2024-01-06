@@ -227,6 +227,7 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
+- nodes/density_md/AnalyseDensity/density.png: {}
 stages:
   ML0_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML0_ConfigurationSelection
@@ -5619,6 +5620,61 @@ stages:
     params:
     - d3_models_MLModel_1
     - config/final.yaml: null
+  density_md_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name density_md_ASEMD
+    deps:
+    - nodes/ML16/MLModel/apax_model
+    - nodes/ML16/MLModel/log.csv
+    - nodes/ML16/MLModel/metrics.json
+    - nodes/ML16/MLModel/node-meta.json
+    - nodes/ML16/MLModel/train_atoms.extxyz
+    - nodes/ML16/MLModel/val_atoms.extxyz
+    - nodes/density_md/ConfigurationSelection/node-meta.json
+    - nodes/density_md/ConfigurationSelection/selected_configurations.json
+    - nodes/density_md/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/density_md/ASEMD/node-meta.json:
+        cache: false
+    - nodes/density_md/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/density_md/ASEMD/metrics_dict.csv
+    - nodes/density_md/ASEMD/model
+    - nodes/density_md/ASEMD/trajectory.h5
+    params:
+    - density_md_ASEMD
+    - density_md_ASEMD+thermostat
+  density_md_AnalyseDensity:
+    cmd: zntrack run ipsuite.nodes.AnalyseDensity --name density_md_AnalyseDensity
+    deps:
+    - nodes/density_md/ASEMD/metrics_dict.csv
+    - nodes/density_md/ASEMD/model
+    - nodes/density_md/ASEMD/node-meta.json
+    - nodes/density_md/ASEMD/steps_before_stopping.json
+    - nodes/density_md/ASEMD/trajectory.h5
+    metrics:
+    - nodes/density_md/AnalyseDensity/density.json:
+        cache: false
+    - nodes/density_md/AnalyseDensity/node-meta.json:
+        cache: false
+    outs:
+    - nodes/density_md/AnalyseDensity/density.png
+    - nodes/density_md/AnalyseDensity/results.csv
+    params:
+    - density_md_AnalyseDensity
+  density_md_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name density_md_ConfigurationSelection
+    deps:
+    - nodes/classical/AddData/atoms.h5
+    - nodes/classical/AddData/node-meta.json
+    metrics:
+    - nodes/density_md/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/density_md/ConfigurationSelection/selected_configurations.json
+    - nodes/density_md/ConfigurationSelection/selection.png
+    params:
+    - density_md_ConfigurationSelection
   final_MLModel:
     cmd: zntrack run ipsuite.nodes.Apax --name final_MLModel
     deps:
