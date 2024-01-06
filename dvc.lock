@@ -24920,7 +24920,7 @@ stages:
           wrap: false
         density_md_ml16_no_d3_ASEMD+thermostat:
           pfactor: 54.27299976036698
-          pressure: 6.324209121801212e-07
+          pressure: 6.324209121801210e-07
           temperature: 303
           tetragonal_strain: true
           time_step: 0.5
@@ -25256,3 +25256,111 @@ stages:
       hash: md5
       md5: ae6e3219d17bc3efaeafc5ae83a6e4c2
       size: 46098
+  density_md_ml16_dftd3_short_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name density_md_ml16_dftd3_short_ASEMD
+    deps:
+    - path: nodes/density_md/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 2fded8a078ce7a82fc28dbd9d5c58720
+      size: 48
+    - path: nodes/density_md/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 755d6c816224dec168bb7ef675f0733d
+      size: 49
+    - path: nodes/density_md/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 509cc04ed4e1e293ee81eb67105a6454
+      size: 25192
+    params:
+      params.yaml:
+        density_md_ml16_dftd3_short_ASEMD:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 10
+          seed: 42
+          steps: 20000
+          use_momenta: false
+          wrap: false
+        density_md_ml16_dftd3_short_ASEMD+model:
+          methods: sum
+        density_md_ml16_dftd3_short_ASEMD+thermostat:
+          pfactor: 54.27299976036698
+          pressure: 6.324209121801211e-07
+          temperature: 303
+          tetragonal_strain: true
+          time_step: 0.5
+          ttime: 2.455673697116016
+    outs:
+    - path: nodes/density_md/ml16_dftd3_short/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 2f9c12e189fdc7fcf8ec18e33c52c186
+      size: 84982
+    - path: nodes/density_md/ml16_dftd3_short/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/density_md/ml16_dftd3_short/ASEMD/node-meta.json
+      hash: md5
+      md5: 92beceff222ebc9df66976ddf75b3e4e
+      size: 48
+    - path: nodes/density_md/ml16_dftd3_short/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/density_md/ml16_dftd3_short/ASEMD/trajectory.h5
+      hash: md5
+      md5: a04ff7504778278903261fecc6fd7261
+      size: 49188968
+  density_md_ml16_dftd3_short_AnalyseDensity:
+    cmd: zntrack run ipsuite.nodes.AnalyseDensity --name density_md_ml16_dftd3_short_AnalyseDensity
+    deps:
+    - path: nodes/density_md/ml16_dftd3_short/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 2f9c12e189fdc7fcf8ec18e33c52c186
+      size: 84982
+    - path: nodes/density_md/ml16_dftd3_short/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/density_md/ml16_dftd3_short/ASEMD/node-meta.json
+      hash: md5
+      md5: 92beceff222ebc9df66976ddf75b3e4e
+      size: 48
+    - path: nodes/density_md/ml16_dftd3_short/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/density_md/ml16_dftd3_short/ASEMD/trajectory.h5
+      hash: md5
+      md5: a04ff7504778278903261fecc6fd7261
+      size: 49188968
+    params:
+      params.yaml:
+        density_md_ml16_dftd3_short_AnalyseDensity:
+          end:
+          start: 0
+          window: 1000
+    outs:
+    - path: nodes/density_md/ml16_dftd3_short/AnalyseDensity/density.json
+      hash: md5
+      md5: d317865c2e01906074495734d7928d6f
+      size: 67
+    - path: nodes/density_md/ml16_dftd3_short/AnalyseDensity/density.png
+      hash: md5
+      md5: a1ba608e6ddc0e7b5a772269b53ad166
+      size: 42506
+    - path: nodes/density_md/ml16_dftd3_short/AnalyseDensity/node-meta.json
+      hash: md5
+      md5: f520c3c6eb9cf76f5ee1269e6233f1e7
+      size: 48
+    - path: nodes/density_md/ml16_dftd3_short/AnalyseDensity/results.csv
+      hash: md5
+      md5: 95ba3be4d607d332508cf0a748a288c3
+      size: 46402

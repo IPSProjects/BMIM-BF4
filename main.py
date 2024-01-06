@@ -793,4 +793,25 @@ with project.group("density_md", "ml15_d3_long") as c:
     density = ips.analysis.AnalyseDensity(data=aimd.atoms)
 
 
-project.build(nodes=[a, b, c])
+ml16_dftd3_short_calc = ips.calculators.MixCalculator(
+    data=None,
+    calculators=[val_d3_short, model],
+    methods="sum",
+)
+
+with project.group("density_md", "ml16_dftd3_short") as d:
+
+    aimd = ips.calculators.ASEMD(
+        data=start_conf.atoms,
+        data_id=-1,
+        model=ml16_dftd3_short_calc,
+        thermostat=thermostat,
+        steps=20_000,
+        sampling_rate=10,
+        dump_rate=1000,
+    )
+
+    density = ips.analysis.AnalyseDensity(data=aimd.atoms)
+
+
+project.build(nodes=[d])
