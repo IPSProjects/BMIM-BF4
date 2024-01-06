@@ -19529,5 +19529,123 @@
             "_type": "pathlib.Path",
             "value": "nodes/torch_d3_labels/TorchD3_4"
         }
+    },
+    "density_md_ml16_dftd3_medium_ASEMD": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "IndexSelection",
+                        "name": "density_md_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "MixCalculator",
+                "name": "density_md_ml16_dftd3_medium_ASEMD+model",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "NPTThermostat",
+                "name": "density_md_ml16_dftd3_medium_ASEMD+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/density_md/ml16_dftd3_medium/ASEMD"
+        }
+    },
+    "density_md_ml16_dftd3_medium_ASEMD+model": {
+        "calculators": [
+            {
+                "_type": "zntrack.Node",
+                "value": {
+                    "module": "ipsuite.nodes",
+                    "cls": "TorchD3",
+                    "name": "torch_d3_labels_TorchD3_4",
+                    "remote": null,
+                    "rev": null
+                }
+            },
+            {
+                "_type": "zntrack.Node",
+                "value": {
+                    "module": "ipsuite.nodes",
+                    "cls": "Apax",
+                    "name": "ML16_MLModel",
+                    "remote": null,
+                    "rev": null
+                }
+            }
+        ],
+        "data": null,
+        "data_file": null,
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/density_md_ml16_dftd3_medium_ASEMD+model"
+        }
+    },
+    "density_md_ml16_dftd3_medium_ASEMD+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/density_md_ml16_dftd3_medium_ASEMD+thermostat"
+        }
+    },
+    "density_md_ml16_dftd3_medium_AnalyseDensity": {
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "ASEMD",
+                        "name": "density_md_ml16_dftd3_medium_ASEMD",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "figure": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/density.png"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/density_md/ml16_dftd3_medium/AnalyseDensity"
+        }
     }
 }

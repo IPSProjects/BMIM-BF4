@@ -823,4 +823,24 @@ with project.group("density_md", "ml16_dftd3_short") as d:
     density = ips.analysis.AnalyseDensity(data=aimd.atoms)
 
 
-project.build(nodes=[td3l])
+ml16_dftd3_medium_calc = ips.calculators.MixCalculator(
+    data=None,
+    calculators=[val_d3_medium, model],
+    methods="sum",
+)
+
+with project.group("density_md", "ml16_dftd3_medium") as e:
+
+    aimd = ips.calculators.ASEMD(
+        data=start_conf.atoms,
+        data_id=-1,
+        model=ml16_dftd3_medium_calc,
+        thermostat=thermostat,
+        steps=20_000,
+        sampling_rate=10,
+        dump_rate=1000,
+    )
+
+    density = ips.analysis.AnalyseDensity(data=aimd.atoms)
+
+project.build(nodes=[e])
