@@ -247,6 +247,8 @@ plots:
 - nodes/density_md/ml15_ensemble/AnalyseDensity/density.png: {}
 - nodes/density_md/ml15_ensemble/ASEMD/metrics_dict.csv: {}
 - nodes/density_md/ml15_ensemble/AnalyseDensity/results.csv: {}
+- nodes/density_md/ml16_dftd3_short/ASEMD/metrics_dict.csv: {}
+- nodes/density_md/ml16_dftd3_short/AnalyseDensity/results.csv: {}
 stages:
   ML0_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML0_ConfigurationSelection

@@ -24797,8 +24797,8 @@ stages:
     outs:
     - path: nodes/density_md/ASEMD/metrics_dict.csv
       hash: md5
-      md5: c9e1b8e7682b1951e22935b9162f30ff
-      size: 85056
+      md5: 2aa8e238138fb604f45a14ab1d3a1373
+      size: 85046
     - path: nodes/density_md/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -24806,7 +24806,7 @@ stages:
       nfiles: 1
     - path: nodes/density_md/ASEMD/node-meta.json
       hash: md5
-      md5: 19cc787fafa2e470e62a57a5465dfb45
+      md5: 5ca52450c7ae1f9e7bffb6a6d4ef8227
       size: 48
     - path: nodes/density_md/ASEMD/steps_before_stopping.json
       hash: md5
@@ -24814,15 +24814,15 @@ stages:
       size: 2
     - path: nodes/density_md/ASEMD/trajectory.h5
       hash: md5
-      md5: 85a4cf342e2ed8ad68645e7afd528698
+      md5: 135f6cdcf37a48605136cff40f1c34e4
       size: 49188968
   density_md_AnalyseDensity:
     cmd: zntrack run ipsuite.nodes.AnalyseDensity --name density_md_AnalyseDensity
     deps:
     - path: nodes/density_md/ASEMD/metrics_dict.csv
       hash: md5
-      md5: c9e1b8e7682b1951e22935b9162f30ff
-      size: 85056
+      md5: 2aa8e238138fb604f45a14ab1d3a1373
+      size: 85046
     - path: nodes/density_md/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -24830,7 +24830,7 @@ stages:
       nfiles: 1
     - path: nodes/density_md/ASEMD/node-meta.json
       hash: md5
-      md5: 19cc787fafa2e470e62a57a5465dfb45
+      md5: 5ca52450c7ae1f9e7bffb6a6d4ef8227
       size: 48
     - path: nodes/density_md/ASEMD/steps_before_stopping.json
       hash: md5
@@ -24838,7 +24838,7 @@ stages:
       size: 2
     - path: nodes/density_md/ASEMD/trajectory.h5
       hash: md5
-      md5: 85a4cf342e2ed8ad68645e7afd528698
+      md5: 135f6cdcf37a48605136cff40f1c34e4
       size: 49188968
     params:
       params.yaml:
@@ -24849,20 +24849,20 @@ stages:
     outs:
     - path: nodes/density_md/AnalyseDensity/density.json
       hash: md5
-      md5: 67d26a1c4c82bd6e4f3248831ab7780d
+      md5: d945fd4d34343a9a812c1dc174b5ba37
       size: 67
     - path: nodes/density_md/AnalyseDensity/density.png
       hash: md5
-      md5: 01cfd2e37135b662110e65fe67a12f21
-      size: 28452
+      md5: ecfa1b1ca1ed796bbd660055267eba52
+      size: 28146
     - path: nodes/density_md/AnalyseDensity/node-meta.json
       hash: md5
-      md5: d32a8ca2a75687cd1e9517a9d90f700c
+      md5: 1219a4b5e82edb6c31f3472dd0b30d70
       size: 48
     - path: nodes/density_md/AnalyseDensity/results.csv
       hash: md5
-      md5: 4e52ef25132bdeac3f2db78eff2f05d0
-      size: 44672
+      md5: 750018cef15885d73cb9311e232edb91
+      size: 44725
   density_md_ml16_no_d3_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name density_md_ml16_no_d3_ASEMD
     deps:
@@ -24920,7 +24920,7 @@ stages:
           wrap: false
         density_md_ml16_no_d3_ASEMD+thermostat:
           pfactor: 54.27299976036698
-          pressure: 6.324209121801210e-07
+          pressure: 6.324209121801212e-07
           temperature: 303
           tetragonal_strain: true
           time_step: 0.5
@@ -24928,8 +24928,8 @@ stages:
     outs:
     - path: nodes/density_md/ml16_no_d3/ASEMD/metrics_dict.csv
       hash: md5
-      md5: 112ee40716d3b76c1e2d16d6ace4161b
-      size: 85069
+      md5: 184c459b4f92196eb5cc2ae9628baad4
+      size: 85018
     - path: nodes/density_md/ml16_no_d3/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -24937,7 +24937,7 @@ stages:
       nfiles: 1
     - path: nodes/density_md/ml16_no_d3/ASEMD/node-meta.json
       hash: md5
-      md5: 44d66ed55189c0ba6682a27338efdfa8
+      md5: 5c72cda9a22127b3331f6251036d060a
       size: 48
     - path: nodes/density_md/ml16_no_d3/ASEMD/steps_before_stopping.json
       hash: md5
@@ -24945,15 +24945,15 @@ stages:
       size: 2
     - path: nodes/density_md/ml16_no_d3/ASEMD/trajectory.h5
       hash: md5
-      md5: c2aca43976eb2f034b4b415efbf81881
+      md5: e327a4deac78e707263d3fb39fd5866e
       size: 49188968
   density_md_ml16_no_d3_AnalyseDensity:
     cmd: zntrack run ipsuite.nodes.AnalyseDensity --name density_md_ml16_no_d3_AnalyseDensity
     deps:
     - path: nodes/density_md/ml16_no_d3/ASEMD/metrics_dict.csv
       hash: md5
-      md5: 112ee40716d3b76c1e2d16d6ace4161b
-      size: 85069
+      md5: 184c459b4f92196eb5cc2ae9628baad4
+      size: 85018
     - path: nodes/density_md/ml16_no_d3/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -24961,7 +24961,7 @@ stages:
       nfiles: 1
     - path: nodes/density_md/ml16_no_d3/ASEMD/node-meta.json
       hash: md5
-      md5: 44d66ed55189c0ba6682a27338efdfa8
+      md5: 5c72cda9a22127b3331f6251036d060a
       size: 48
     - path: nodes/density_md/ml16_no_d3/ASEMD/steps_before_stopping.json
       hash: md5
@@ -24969,7 +24969,7 @@ stages:
       size: 2
     - path: nodes/density_md/ml16_no_d3/ASEMD/trajectory.h5
       hash: md5
-      md5: c2aca43976eb2f034b4b415efbf81881
+      md5: e327a4deac78e707263d3fb39fd5866e
       size: 49188968
     params:
       params.yaml:
@@ -24980,20 +24980,20 @@ stages:
     outs:
     - path: nodes/density_md/ml16_no_d3/AnalyseDensity/density.json
       hash: md5
-      md5: 32e363aaf0b25335f15adf99bde1f4bd
-      size: 67
+      md5: 7ab5a1712b73a7752b4e8e6b70470401
+      size: 66
     - path: nodes/density_md/ml16_no_d3/AnalyseDensity/density.png
       hash: md5
-      md5: c1c2015f18a3d32669f77b50fa998229
-      size: 27092
+      md5: 055c24b449826f011bf9c44a48d85ac8
+      size: 27321
     - path: nodes/density_md/ml16_no_d3/AnalyseDensity/node-meta.json
       hash: md5
-      md5: 116bf844ada1640acd0c30ea783c758b
+      md5: c9c852919f6c0b79996d6b2f3bddc03d
       size: 48
     - path: nodes/density_md/ml16_no_d3/AnalyseDensity/results.csv
       hash: md5
-      md5: 4df099a0be995e0af8f3eac16ef4b486
-      size: 44721
+      md5: 210bbc2b17999e93f086ebae7090aa66
+      size: 44730
   density_md_ml15_d3_long_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name density_md_ml15_d3_long_ASEMD
     deps:
@@ -25059,8 +25059,8 @@ stages:
     outs:
     - path: nodes/density_md/ml15_d3_long/ASEMD/metrics_dict.csv
       hash: md5
-      md5: f9520c0fe52cf09cf828930189a791d3
-      size: 84999
+      md5: 47a229eec0cbdc41be6156bba4e37d03
+      size: 84998
     - path: nodes/density_md/ml15_d3_long/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -25068,7 +25068,7 @@ stages:
       nfiles: 1
     - path: nodes/density_md/ml15_d3_long/ASEMD/node-meta.json
       hash: md5
-      md5: f9e7933c03796fa65e1029bc80053303
+      md5: 3d6f1fdb60e7e029d976d9e895b6e3e7
       size: 48
     - path: nodes/density_md/ml15_d3_long/ASEMD/steps_before_stopping.json
       hash: md5
@@ -25076,15 +25076,15 @@ stages:
       size: 2
     - path: nodes/density_md/ml15_d3_long/ASEMD/trajectory.h5
       hash: md5
-      md5: 1f48c3d1c19d63d470f8183bb3b9382e
+      md5: c79ee68da106284d4c9336115aa4594f
       size: 49188968
   density_md_ml15_d3_long_AnalyseDensity:
     cmd: zntrack run ipsuite.nodes.AnalyseDensity --name density_md_ml15_d3_long_AnalyseDensity
     deps:
     - path: nodes/density_md/ml15_d3_long/ASEMD/metrics_dict.csv
       hash: md5
-      md5: f9520c0fe52cf09cf828930189a791d3
-      size: 84999
+      md5: 47a229eec0cbdc41be6156bba4e37d03
+      size: 84998
     - path: nodes/density_md/ml15_d3_long/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -25092,7 +25092,7 @@ stages:
       nfiles: 1
     - path: nodes/density_md/ml15_d3_long/ASEMD/node-meta.json
       hash: md5
-      md5: f9e7933c03796fa65e1029bc80053303
+      md5: 3d6f1fdb60e7e029d976d9e895b6e3e7
       size: 48
     - path: nodes/density_md/ml15_d3_long/ASEMD/steps_before_stopping.json
       hash: md5
@@ -25100,7 +25100,7 @@ stages:
       size: 2
     - path: nodes/density_md/ml15_d3_long/ASEMD/trajectory.h5
       hash: md5
-      md5: 1f48c3d1c19d63d470f8183bb3b9382e
+      md5: c79ee68da106284d4c9336115aa4594f
       size: 49188968
     params:
       params.yaml:
@@ -25111,20 +25111,20 @@ stages:
     outs:
     - path: nodes/density_md/ml15_d3_long/AnalyseDensity/density.json
       hash: md5
-      md5: c18129337c9a0fadae9ea05b83b665d9
-      size: 68
+      md5: 8b4cfc093460bbd9e822bb9a34066bcf
+      size: 66
     - path: nodes/density_md/ml15_d3_long/AnalyseDensity/density.png
       hash: md5
-      md5: b676de3a233f3edf25cbcca069163659
-      size: 33115
+      md5: b95e5ff188908eda8b2435dee9e88902
+      size: 32388
     - path: nodes/density_md/ml15_d3_long/AnalyseDensity/node-meta.json
       hash: md5
-      md5: 2173aba3cb52953f87452c1752ec9368
+      md5: 7982ac8c5bf409fabbe62c8568a4427f
       size: 48
     - path: nodes/density_md/ml15_d3_long/AnalyseDensity/results.csv
       hash: md5
-      md5: 51436b3c2348c21f2b81190a0bd9ede6
-      size: 45491
+      md5: 60a757defe912cd7c9fe1e793abe53c0
+      size: 46135
   density_md_ml15_d3_short_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name density_md_ml15_d3_short_ASEMD
     deps:
@@ -25190,8 +25190,8 @@ stages:
     outs:
     - path: nodes/density_md/ml15_d3_short/ASEMD/metrics_dict.csv
       hash: md5
-      md5: c9c3f651b27a4db20f765de924c9b513
-      size: 85041
+      md5: d05c22507330337987c0ddc991bf1b97
+      size: 84989
     - path: nodes/density_md/ml15_d3_short/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -25199,7 +25199,7 @@ stages:
       nfiles: 1
     - path: nodes/density_md/ml15_d3_short/ASEMD/node-meta.json
       hash: md5
-      md5: 257c56e01a83b708cb3ea0aed5861905
+      md5: fcb37907491c56426b8cce64884d7f7d
       size: 48
     - path: nodes/density_md/ml15_d3_short/ASEMD/steps_before_stopping.json
       hash: md5
@@ -25207,15 +25207,15 @@ stages:
       size: 2
     - path: nodes/density_md/ml15_d3_short/ASEMD/trajectory.h5
       hash: md5
-      md5: 490dcbc1a080f4022c4d80a183e43a0c
+      md5: b8dd10a8e6c734bc0f84a710db788335
       size: 49188968
   density_md_ml15_d3_short_AnalyseDensity:
     cmd: zntrack run ipsuite.nodes.AnalyseDensity --name density_md_ml15_d3_short_AnalyseDensity
     deps:
     - path: nodes/density_md/ml15_d3_short/ASEMD/metrics_dict.csv
       hash: md5
-      md5: c9c3f651b27a4db20f765de924c9b513
-      size: 85041
+      md5: d05c22507330337987c0ddc991bf1b97
+      size: 84989
     - path: nodes/density_md/ml15_d3_short/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -25223,7 +25223,7 @@ stages:
       nfiles: 1
     - path: nodes/density_md/ml15_d3_short/ASEMD/node-meta.json
       hash: md5
-      md5: 257c56e01a83b708cb3ea0aed5861905
+      md5: fcb37907491c56426b8cce64884d7f7d
       size: 48
     - path: nodes/density_md/ml15_d3_short/ASEMD/steps_before_stopping.json
       hash: md5
@@ -25231,7 +25231,7 @@ stages:
       size: 2
     - path: nodes/density_md/ml15_d3_short/ASEMD/trajectory.h5
       hash: md5
-      md5: 490dcbc1a080f4022c4d80a183e43a0c
+      md5: b8dd10a8e6c734bc0f84a710db788335
       size: 49188968
     params:
       params.yaml:
@@ -25242,20 +25242,20 @@ stages:
     outs:
     - path: nodes/density_md/ml15_d3_short/AnalyseDensity/density.json
       hash: md5
-      md5: 63acab4f917738cea87d2cae14bc7a1e
-      size: 67
+      md5: a64658c6fed96e7ba406b747d1c1173b
+      size: 68
     - path: nodes/density_md/ml15_d3_short/AnalyseDensity/density.png
       hash: md5
-      md5: 5842f78a32afdebdd9f2397fb5ea90d1
-      size: 30246
+      md5: 22aa894d6998b199d29ed38b974764b5
+      size: 32703
     - path: nodes/density_md/ml15_d3_short/AnalyseDensity/node-meta.json
       hash: md5
-      md5: bfe4a33bc3b228359c416ef7470e4521
+      md5: 2fbcd3ab1909142815644d80000d6f5f
       size: 48
     - path: nodes/density_md/ml15_d3_short/AnalyseDensity/results.csv
       hash: md5
-      md5: ae6e3219d17bc3efaeafc5ae83a6e4c2
-      size: 46098
+      md5: 349e415ab4bbbcbc47fb919bc5ad29e9
+      size: 45834
   density_md_ml16_dftd3_short_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name density_md_ml16_dftd3_short_ASEMD
     deps:
@@ -25290,7 +25290,7 @@ stages:
           methods: sum
         density_md_ml16_dftd3_short_ASEMD+thermostat:
           pfactor: 54.27299976036698
-          pressure: 6.324209121801210e-07
+          pressure: 6.324209121801211e-07
           temperature: 303
           tetragonal_strain: true
           time_step: 0.5
@@ -25298,8 +25298,8 @@ stages:
     outs:
     - path: nodes/density_md/ml16_dftd3_short/ASEMD/metrics_dict.csv
       hash: md5
-      md5: 2f9c12e189fdc7fcf8ec18e33c52c186
-      size: 84982
+      md5: 557308c2a82d10160d062e708cfe242b
+      size: 85040
     - path: nodes/density_md/ml16_dftd3_short/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -25307,7 +25307,7 @@ stages:
       nfiles: 1
     - path: nodes/density_md/ml16_dftd3_short/ASEMD/node-meta.json
       hash: md5
-      md5: 92beceff222ebc9df66976ddf75b3e4e
+      md5: 86a328b55474cc252f24ef8ab97e1c4d
       size: 48
     - path: nodes/density_md/ml16_dftd3_short/ASEMD/steps_before_stopping.json
       hash: md5
@@ -25315,15 +25315,15 @@ stages:
       size: 2
     - path: nodes/density_md/ml16_dftd3_short/ASEMD/trajectory.h5
       hash: md5
-      md5: a04ff7504778278903261fecc6fd7261
+      md5: 10602f1e32ec7d3081b6443a68bed5bd
       size: 49188968
   density_md_ml16_dftd3_short_AnalyseDensity:
     cmd: zntrack run ipsuite.nodes.AnalyseDensity --name density_md_ml16_dftd3_short_AnalyseDensity
     deps:
     - path: nodes/density_md/ml16_dftd3_short/ASEMD/metrics_dict.csv
       hash: md5
-      md5: 2f9c12e189fdc7fcf8ec18e33c52c186
-      size: 84982
+      md5: 557308c2a82d10160d062e708cfe242b
+      size: 85040
     - path: nodes/density_md/ml16_dftd3_short/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -25331,7 +25331,7 @@ stages:
       nfiles: 1
     - path: nodes/density_md/ml16_dftd3_short/ASEMD/node-meta.json
       hash: md5
-      md5: 92beceff222ebc9df66976ddf75b3e4e
+      md5: 86a328b55474cc252f24ef8ab97e1c4d
       size: 48
     - path: nodes/density_md/ml16_dftd3_short/ASEMD/steps_before_stopping.json
       hash: md5
@@ -25339,7 +25339,7 @@ stages:
       size: 2
     - path: nodes/density_md/ml16_dftd3_short/ASEMD/trajectory.h5
       hash: md5
-      md5: a04ff7504778278903261fecc6fd7261
+      md5: 10602f1e32ec7d3081b6443a68bed5bd
       size: 49188968
     params:
       params.yaml:
@@ -25350,20 +25350,20 @@ stages:
     outs:
     - path: nodes/density_md/ml16_dftd3_short/AnalyseDensity/density.json
       hash: md5
-      md5: d317865c2e01906074495734d7928d6f
+      md5: d51ffffb00f7d482e65cafc6bcaaa22b
       size: 67
     - path: nodes/density_md/ml16_dftd3_short/AnalyseDensity/density.png
       hash: md5
-      md5: a1ba608e6ddc0e7b5a772269b53ad166
-      size: 42506
+      md5: ca133a9816254e78554ed01651b2ee23
+      size: 37897
     - path: nodes/density_md/ml16_dftd3_short/AnalyseDensity/node-meta.json
       hash: md5
-      md5: f520c3c6eb9cf76f5ee1269e6233f1e7
+      md5: 1954868497bd6fde73a6eb08ad8c986f
       size: 48
     - path: nodes/density_md/ml16_dftd3_short/AnalyseDensity/results.csv
       hash: md5
-      md5: 95ba3be4d607d332508cf0a748a288c3
-      size: 46402
+      md5: b713eb54445ac4f2f954190893fc4ae5
+      size: 46397
   torch_d3_labels_TorchD3_4:
     cmd: zntrack run ipsuite.nodes.TorchD3 --name torch_d3_labels_TorchD3_4
     deps:
@@ -25440,7 +25440,7 @@ stages:
     outs:
     - path: nodes/density_md/ml16_dftd3_medium/ASEMD/metrics_dict.csv
       hash: md5
-      md5: 6aad188a63123a3ab7c80a843fc42ef7
+      md5: c99f4d2b1975a9e38d95d9d750ce3908
       size: 85075
     - path: nodes/density_md/ml16_dftd3_medium/ASEMD/model
       hash: md5
@@ -25449,7 +25449,7 @@ stages:
       nfiles: 1
     - path: nodes/density_md/ml16_dftd3_medium/ASEMD/node-meta.json
       hash: md5
-      md5: 8ba936d104b63b49219345d5694c3ff4
+      md5: db6aee910314440ff3d3c0280ca0df8f
       size: 48
     - path: nodes/density_md/ml16_dftd3_medium/ASEMD/steps_before_stopping.json
       hash: md5
@@ -25457,14 +25457,14 @@ stages:
       size: 2
     - path: nodes/density_md/ml16_dftd3_medium/ASEMD/trajectory.h5
       hash: md5
-      md5: c7d06165bfad5fd67e31ea2e44b8c2ad
+      md5: 22cd2ffcbee78b2eb16f02ff85a7a692
       size: 49188968
   density_md_ml16_dftd3_medium_AnalyseDensity:
     cmd: zntrack run ipsuite.nodes.AnalyseDensity --name density_md_ml16_dftd3_medium_AnalyseDensity
     deps:
     - path: nodes/density_md/ml16_dftd3_medium/ASEMD/metrics_dict.csv
       hash: md5
-      md5: 6aad188a63123a3ab7c80a843fc42ef7
+      md5: c99f4d2b1975a9e38d95d9d750ce3908
       size: 85075
     - path: nodes/density_md/ml16_dftd3_medium/ASEMD/model
       hash: md5
@@ -25473,7 +25473,7 @@ stages:
       nfiles: 1
     - path: nodes/density_md/ml16_dftd3_medium/ASEMD/node-meta.json
       hash: md5
-      md5: 8ba936d104b63b49219345d5694c3ff4
+      md5: db6aee910314440ff3d3c0280ca0df8f
       size: 48
     - path: nodes/density_md/ml16_dftd3_medium/ASEMD/steps_before_stopping.json
       hash: md5
@@ -25481,7 +25481,7 @@ stages:
       size: 2
     - path: nodes/density_md/ml16_dftd3_medium/ASEMD/trajectory.h5
       hash: md5
-      md5: c7d06165bfad5fd67e31ea2e44b8c2ad
+      md5: 22cd2ffcbee78b2eb16f02ff85a7a692
       size: 49188968
     params:
       params.yaml:
@@ -25492,20 +25492,20 @@ stages:
     outs:
     - path: nodes/density_md/ml16_dftd3_medium/AnalyseDensity/density.json
       hash: md5
-      md5: d8ab61e5cb9ca1107c09279349c825de
-      size: 68
+      md5: 50d98a509924b9f506f5fe54abfe0983
+      size: 67
     - path: nodes/density_md/ml16_dftd3_medium/AnalyseDensity/density.png
       hash: md5
-      md5: e57a9ef6c2f2123a85d762d9b1718a5f
-      size: 40440
+      md5: de0272e56c1cf14fa8d5586d154d0f4f
+      size: 40429
     - path: nodes/density_md/ml16_dftd3_medium/AnalyseDensity/node-meta.json
       hash: md5
-      md5: 3b077d51dd2e83fd48b35d7128bd1b29
+      md5: 560d478402c7369bdee0a0c192e9df6f
       size: 48
     - path: nodes/density_md/ml16_dftd3_medium/AnalyseDensity/results.csv
       hash: md5
-      md5: 2705e1b510fc21de290abbb2ab4b06c9
-      size: 46427
+      md5: 5608440c7e23d19fdf47b85ec1f9af44
+      size: 46419
   density_md_ml15_ensemble_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name density_md_ml15_ensemble_ASEMD
     deps:
@@ -25563,7 +25563,7 @@ stages:
           wrap: false
         density_md_ml15_ensemble_ASEMD+thermostat:
           pfactor: 54.27299976036698
-          pressure: 6.324209121801211e-07
+          pressure: 6.324209121801210e-07
           temperature: 303
           tetragonal_strain: true
           time_step: 0.5
@@ -25571,8 +25571,8 @@ stages:
     outs:
     - path: nodes/density_md/ml15_ensemble/ASEMD/metrics_dict.csv
       hash: md5
-      md5: 70b19571f5dd107f3cc3c2b50388cd47
-      size: 85033
+      md5: cb6914e20cffba10c7841d4d0578e6c8
+      size: 85021
     - path: nodes/density_md/ml15_ensemble/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -25580,7 +25580,7 @@ stages:
       nfiles: 1
     - path: nodes/density_md/ml15_ensemble/ASEMD/node-meta.json
       hash: md5
-      md5: bad6ce009b3784fc9ef0bb8aac95b9e4
+      md5: db4a13e78449da3cb501a23d06a76ab1
       size: 48
     - path: nodes/density_md/ml15_ensemble/ASEMD/steps_before_stopping.json
       hash: md5
@@ -25588,15 +25588,15 @@ stages:
       size: 2
     - path: nodes/density_md/ml15_ensemble/ASEMD/trajectory.h5
       hash: md5
-      md5: ccacee03ca46fa3f4693ad8dfb44df3f
+      md5: 17297ce3b6ce08fc27e2e712e75ea6fe
       size: 64095280
   density_md_ml15_ensemble_AnalyseDensity:
     cmd: zntrack run ipsuite.nodes.AnalyseDensity --name density_md_ml15_ensemble_AnalyseDensity
     deps:
     - path: nodes/density_md/ml15_ensemble/ASEMD/metrics_dict.csv
       hash: md5
-      md5: 70b19571f5dd107f3cc3c2b50388cd47
-      size: 85033
+      md5: cb6914e20cffba10c7841d4d0578e6c8
+      size: 85021
     - path: nodes/density_md/ml15_ensemble/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -25604,7 +25604,7 @@ stages:
       nfiles: 1
     - path: nodes/density_md/ml15_ensemble/ASEMD/node-meta.json
       hash: md5
-      md5: bad6ce009b3784fc9ef0bb8aac95b9e4
+      md5: db4a13e78449da3cb501a23d06a76ab1
       size: 48
     - path: nodes/density_md/ml15_ensemble/ASEMD/steps_before_stopping.json
       hash: md5
@@ -25612,7 +25612,7 @@ stages:
       size: 2
     - path: nodes/density_md/ml15_ensemble/ASEMD/trajectory.h5
       hash: md5
-      md5: ccacee03ca46fa3f4693ad8dfb44df3f
+      md5: 17297ce3b6ce08fc27e2e712e75ea6fe
       size: 64095280
     params:
       params.yaml:
@@ -25623,17 +25623,148 @@ stages:
     outs:
     - path: nodes/density_md/ml15_ensemble/AnalyseDensity/density.json
       hash: md5
-      md5: 8e4cdf63a311faf1882e16b5ec3fbf87
-      size: 68
+      md5: 863da72714e70d7390a666678611ae39
+      size: 67
     - path: nodes/density_md/ml15_ensemble/AnalyseDensity/density.png
       hash: md5
-      md5: 30c5cf100656519094a4a4bb02e65b98
-      size: 32046
+      md5: ffa771f7a3385c0f19666360c260df52
+      size: 31592
     - path: nodes/density_md/ml15_ensemble/AnalyseDensity/node-meta.json
       hash: md5
-      md5: 068a54c9db5e03be215afdde74bd514d
+      md5: 5ddf5d6c2b3c8d4f109aaf08dfc00b5e
       size: 48
     - path: nodes/density_md/ml15_ensemble/AnalyseDensity/results.csv
       hash: md5
-      md5: cfbd0fa493aaf3827ab35ac33b6baf39
-      size: 46273
+      md5: 38fa8e41db175037b9dd0946454631b0
+      size: 46120
+  density_md_ml15_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name density_md_ml15_ASEMD
+    deps:
+    - path: nodes/density_md/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 2fded8a078ce7a82fc28dbd9d5c58720
+      size: 48
+    - path: nodes/density_md/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 755d6c816224dec168bb7ef675f0733d
+      size: 49
+    - path: nodes/density_md/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 509cc04ed4e1e293ee81eb67105a6454
+      size: 25192
+    - path: nodes/final_ensemble/MLModel/apax_model
+      hash: md5
+      md5: e054548cfd3df5d8f8947391cd78caf9.dir
+      size: 84500151
+      nfiles: 6
+    - path: nodes/final_ensemble/MLModel/log.csv
+      hash: md5
+      md5: 3b9297824cc7d5aebf1d8bc6ed27f11a
+      size: 354342
+    - path: nodes/final_ensemble/MLModel/metrics.json
+      hash: md5
+      md5: ee79f6fc2f07ac9f33298f2ac7cf0e95
+      size: 390
+    - path: nodes/final_ensemble/MLModel/node-meta.json
+      hash: md5
+      md5: 6b0791c05535ad6f864dae3f473914d7
+      size: 48
+    - path: nodes/final_ensemble/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: 6e7cf112aa5205bac393bedc3e3152a5
+      size: 53574955
+    - path: nodes/final_ensemble/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    params:
+      params.yaml:
+        density_md_ml15_ASEMD:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 10
+          seed: 42
+          steps: 20000
+          use_momenta: false
+          wrap: false
+        density_md_ml15_ASEMD+thermostat:
+          pfactor: 54.27299976036698
+          pressure: 6.324209121801210e-07
+          temperature: 303
+          tetragonal_strain: true
+          time_step: 0.5
+          ttime: 2.455673697116016
+    outs:
+    - path: nodes/density_md/ml15/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: b7191962d2e5c50c04d989354a2866b5
+      size: 85050
+    - path: nodes/density_md/ml15/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/density_md/ml15/ASEMD/node-meta.json
+      hash: md5
+      md5: 546b16382b9e1f443b42152a719e433f
+      size: 48
+    - path: nodes/density_md/ml15/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/density_md/ml15/ASEMD/trajectory.h5
+      hash: md5
+      md5: 6bbc7cfd033011b70634033d032eefc4
+      size: 64095280
+  density_md_ml15_AnalyseDensity:
+    cmd: zntrack run ipsuite.nodes.AnalyseDensity --name density_md_ml15_AnalyseDensity
+    deps:
+    - path: nodes/density_md/ml15/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: b7191962d2e5c50c04d989354a2866b5
+      size: 85050
+    - path: nodes/density_md/ml15/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/density_md/ml15/ASEMD/node-meta.json
+      hash: md5
+      md5: 546b16382b9e1f443b42152a719e433f
+      size: 48
+    - path: nodes/density_md/ml15/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/density_md/ml15/ASEMD/trajectory.h5
+      hash: md5
+      md5: 6bbc7cfd033011b70634033d032eefc4
+      size: 64095280
+    params:
+      params.yaml:
+        density_md_ml15_AnalyseDensity:
+          end:
+          start: 0
+          window: 1000
+    outs:
+    - path: nodes/density_md/ml15/AnalyseDensity/density.json
+      hash: md5
+      md5: e17cc98fb847576f1a9b01166bd7c3ec
+      size: 66
+    - path: nodes/density_md/ml15/AnalyseDensity/density.png
+      hash: md5
+      md5: a5543e1bb3e714b90a10e33a0be306ae
+      size: 33734
+    - path: nodes/density_md/ml15/AnalyseDensity/node-meta.json
+      hash: md5
+      md5: a18641a258cee676f14e9f50639426aa
+      size: 48
+    - path: nodes/density_md/ml15/AnalyseDensity/results.csv
+      hash: md5
+      md5: 15f91c727047268ad0128d48f2c914aa
+      size: 45540
