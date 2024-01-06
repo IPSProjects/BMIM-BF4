@@ -3,7 +3,7 @@
 #SBATCH --ntasks=32
 #SBATCH --cpus-per-task=8
 #SBATCH --time=48:00:00
-#SBATCH --mem=32gb
+#SBATCH --mem=64gb
 
 source ~/.bashrc
 

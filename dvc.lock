@@ -21500,7 +21500,7 @@ stages:
       params.yaml:
         AIMD_ASEMD:
           data_id: -1
-          dump_rate: 1000
+          dump_rate: 100
           pop_last: false
           repeat:
           - 1
@@ -21508,35 +21508,35 @@ stages:
           - 1
           sampling_rate: 1
           seed: 42
-          steps: 10
+          steps: 13200
           use_momenta: false
           wrap: false
         AIMD_ASEMD+thermostat:
-          pfactor: 54.273
-          pressure: 6.324e-07
-          temperature: 300
+          pfactor: 54.27299976036698
+          pressure: 6.324209121801212e-07
+          temperature: 303
           tetragonal_strain: true
           time_step: 0.5
-          ttime: 2.4557
+          ttime: 2.455673697116016
     outs:
     - path: nodes/AIMD/ASEMD/metrics_dict.csv
       hash: md5
-      md5: 1dd6a0ba58ef2b30c206a55f882e0d80
-      size: 425
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
     - path: nodes/AIMD/ASEMD/model
       hash: md5
-      md5: 652bf93d8635ad1197ec31108f58f913.dir
-      size: 49513918
+      md5: b8aa27ddf15af66ef17364db5dc35728.dir
+      size: 894284091
       nfiles: 7
     - path: nodes/AIMD/ASEMD/node-meta.json
       hash: md5
-      md5: 7b0fa9212731103742ae910d828298a5
+      md5: 54c35749a37173d453737baac1923f63
       size: 48
     - path: nodes/AIMD/ASEMD/steps_before_stopping.json
       hash: md5
-      md5: 6bb61e3b7bce0931da574d19d1d82c88
-      size: 2
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
     - path: nodes/AIMD/ASEMD/trajectory.h5
       hash: md5
-      md5: 6900a0d6c1e56b10f74a2a7fda899503
-      size: 357632
+      md5: 670ca00ab2a35c9f28d23a62532cb6e0
+      size: 319839264

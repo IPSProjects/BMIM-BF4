@@ -57,10 +57,10 @@ with project.group("classical"):
 
 thermostat = ips.calculators.NPTThermostat(
         time_step=0.5,
-        temperature=300,
-        pressure=6.324e-07, # 1.01325 * units.bar,
-        ttime=2.4557, # 25 * units.fs,
-        pfactor=54.273, # (75 * units.fs) ** 2,
+        temperature=303,
+        pressure=1.01325 * units.bar,
+        ttime=25 * units.fs,
+        pfactor=(75 * units.fs) ** 2,
         tetragonal_strain=True,
     )
 
@@ -81,8 +81,9 @@ with project.group("AIMD") as aimd_grp:
         data_id=-1,
         model=aimd_model,
         thermostat=thermostat,
-        steps=10_000,
+        steps=13_200,
         sampling_rate=1,
+        dump_rate=100,
     )
 
 
