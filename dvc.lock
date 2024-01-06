@@ -21513,7 +21513,7 @@ stages:
           wrap: false
         AIMD_ASEMD+thermostat:
           pfactor: 54.27299976036698
-          pressure: 6.324209121801212e-07
+          pressure: 6.324209121801211e-07
           temperature: 303
           tetragonal_strain: true
           time_step: 0.5
@@ -21540,3 +21540,50 @@ stages:
       hash: md5
       md5: 670ca00ab2a35c9f28d23a62532cb6e0
       size: 319839264
+  AIMD_AnalyseDensity:
+    cmd: zntrack run ipsuite.nodes.AnalyseDensity --name AIMD_AnalyseDensity
+    deps:
+    - path: nodes/AIMD/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 39783ea5f81cfba41bef335289076ff8
+      size: 22
+    - path: nodes/AIMD/ASEMD/model
+      hash: md5
+      md5: b8aa27ddf15af66ef17364db5dc35728.dir
+      size: 894284091
+      nfiles: 7
+    - path: nodes/AIMD/ASEMD/node-meta.json
+      hash: md5
+      md5: 54c35749a37173d453737baac1923f63
+      size: 48
+    - path: nodes/AIMD/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/AIMD/ASEMD/trajectory.h5
+      hash: md5
+      md5: 670ca00ab2a35c9f28d23a62532cb6e0
+      size: 319839264
+    params:
+      params.yaml:
+        AIMD_AnalyseDensity:
+          end:
+          start: 0
+          window: 1000
+    outs:
+    - path: nodes/AIMD/AnalyseDensity/density.json
+      hash: md5
+      md5: 489aff3c573200e5fce6489ef42df802
+      size: 66
+    - path: nodes/AIMD/AnalyseDensity/density.png
+      hash: md5
+      md5: 08764b82caac0c44a0ea410fc57f085f
+      size: 39294
+    - path: nodes/AIMD/AnalyseDensity/node-meta.json
+      hash: md5
+      md5: 34b6390ccd61b45d74f4c8a1fb686800
+      size: 48
+    - path: nodes/AIMD/AnalyseDensity/results.csv
+      hash: md5
+      md5: d225a5b9350de6b87baaea07e4c80719
+      size: 315610

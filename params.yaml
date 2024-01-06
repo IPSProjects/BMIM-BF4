@@ -18,6 +18,10 @@ AIMD_ASEMD+thermostat:
     tetragonal_strain: true
     time_step: 0.5
     ttime: 2.455673697116016
+AIMD_AnalyseDensity:
+    end: null
+    start: 0
+    window: 1000
 AIMD_ConfigurationSelection:
     indices:
     - 2000

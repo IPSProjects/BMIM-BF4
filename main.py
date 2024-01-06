@@ -86,6 +86,8 @@ with project.group("AIMD") as aimd_grp:
         dump_rate=100,
     )
 
+    density = ips.analysis.AnalyseDensity(data=aimd.atoms)
+
 
 with project.group("ML0"):
     kernel_selection = ips.models.apax.BatchKernelSelection(
