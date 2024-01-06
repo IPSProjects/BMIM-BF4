@@ -21513,7 +21513,7 @@ stages:
           wrap: false
         AIMD_ASEMD+thermostat:
           pfactor: 54.27299976036698
-          pressure: 6.324209121801211e-07
+          pressure: 6.324209121801210e-07
           temperature: 303
           tetragonal_strain: true
           time_step: 0.5
@@ -21587,3 +21587,113 @@ stages:
       hash: md5
       md5: d225a5b9350de6b87baaea07e4c80719
       size: 315610
+  density_md_MACE-MP-0_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name density_md_MACE-MP-0_ASEMD
+    deps:
+    - path: external/b1799dde-b87b-47c0-9678-af7fcf7b96e7.json
+      hash: md5
+      md5: accc8a2fcb83d05845ed506eebcf9623
+      size: 48
+    - path: nodes/AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: da71f5aa940cb81b46f4aea6f433b722
+      size: 48
+    - path: nodes/AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 755d6c816224dec168bb7ef675f0733d
+      size: 49
+    - path: nodes/AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 509cc04ed4e1e293ee81eb67105a6454
+      size: 25192
+    params:
+      params.yaml:
+        density_md_MACE-MP-0_ASEMD:
+          data_id: -1
+          dump_rate: 100
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 20000
+          use_momenta: false
+          wrap: false
+        density_md_MACE-MP-0_ASEMD+thermostat:
+          pfactor: 54.27299976036698
+          pressure: 6.324209121801211e-07
+          temperature: 303
+          tetragonal_strain: true
+          time_step: 0.5
+          ttime: 2.455673697116016
+    outs:
+    - path: nodes/density_md/MACE-MP-0/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: e591eca8936ad984250e697e54b6f41b
+      size: 856702
+    - path: nodes/density_md/MACE-MP-0/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/density_md/MACE-MP-0/ASEMD/node-meta.json
+      hash: md5
+      md5: e560c7b9c780c068f893229179eda941
+      size: 48
+    - path: nodes/density_md/MACE-MP-0/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/density_md/MACE-MP-0/ASEMD/trajectory.h5
+      hash: md5
+      md5: 4310cb6fb575c582642659d064a85e71
+      size: 532726016
+  density_md_MACE-MP-0_AnalyseDensity:
+    cmd: zntrack run ipsuite.nodes.AnalyseDensity --name density_md_MACE-MP-0_AnalyseDensity
+    deps:
+    - path: nodes/density_md/MACE-MP-0/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: e591eca8936ad984250e697e54b6f41b
+      size: 856702
+    - path: nodes/density_md/MACE-MP-0/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/density_md/MACE-MP-0/ASEMD/node-meta.json
+      hash: md5
+      md5: e560c7b9c780c068f893229179eda941
+      size: 48
+    - path: nodes/density_md/MACE-MP-0/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/density_md/MACE-MP-0/ASEMD/trajectory.h5
+      hash: md5
+      md5: 4310cb6fb575c582642659d064a85e71
+      size: 532726016
+    params:
+      params.yaml:
+        density_md_MACE-MP-0_AnalyseDensity:
+          end:
+          start: 0
+          window: 1000
+    outs:
+    - path: nodes/density_md/MACE-MP-0/AnalyseDensity/density.json
+      hash: md5
+      md5: 34e7eeaf3c6ac65688fdf6524db1cad3
+      size: 66
+    - path: nodes/density_md/MACE-MP-0/AnalyseDensity/density.png
+      hash: md5
+      md5: 635c7c4205312c5843324ff6f6af6c3f
+      size: 43613
+    - path: nodes/density_md/MACE-MP-0/AnalyseDensity/node-meta.json
+      hash: md5
+      md5: 0ca6baa4c9ceb7f62859ff417affd9a2
+      size: 48
+    - path: nodes/density_md/MACE-MP-0/AnalyseDensity/results.csv
+      hash: md5
+      md5: ab0767e046d015286e8024c9d4c4094a
+      size: 468854

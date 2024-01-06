@@ -1,5 +1,6 @@
 import ipsuite as ips
 from ase import units
+import mace_models
 
 project = ips.Project(automatic_node_names=True)
 
@@ -87,6 +88,22 @@ with project.group("AIMD") as aimd_grp:
     )
 
     density = ips.analysis.AnalyseDensity(data=aimd.atoms)
+
+mace_mp_0_model = mace_models.LoadModel.from_rev("MACE-MP-0", rev="MACE-MP-0", remote="https://github.com/RokasEl/MACE-Models.git")
+
+with project.group("density_md", "MACE-MP-0") as mace_mp_0:
+    mace_md = ips.calculators.ASEMD(
+        data=start_conf.atoms,
+        data_id=-1,
+        model=mace_mp_0_model,
+        thermostat=thermostat,
+        steps=20_000,
+        sampling_rate=1,
+        dump_rate=100,
+    )
+
+    density = ips.analysis.AnalyseDensity(data=mace_md.atoms)
+
 
 
 with project.group("ML0"):
@@ -570,4 +587,4 @@ with project.group("final_ensemble") as final:
     prediction = ips.analysis.Prediction(data=train_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
-project.build(nodes=[aimd_grp])
+project.build(nodes=[mace_mp_0])

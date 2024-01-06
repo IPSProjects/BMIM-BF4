@@ -182,6 +182,9 @@ plots:
 - nodes/AIMD/ASEMD/metrics_dict.csv: {}
 - nodes/AIMD/AnalyseDensity/density.png: {}
 - nodes/AIMD/AnalyseDensity/results.csv: {}
+- nodes/density_md/MACE-MP-0/AnalyseDensity/density.png: {}
+- nodes/density_md/MACE-MP-0/ASEMD/metrics_dict.csv: {}
+- nodes/density_md/MACE-MP-0/AnalyseDensity/results.csv: {}
 stages:
   AIMD_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name AIMD_ASEMD
@@ -4970,6 +4973,43 @@ stages:
     - nodes/classical/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/classical/PredictionMetrics/stress_df.csv
     - nodes/classical/PredictionMetrics/stress_hydrostatic_df.csv
+  density_md_MACE-MP-0_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name density_md_MACE-MP-0_ASEMD
+    deps:
+    - external/b1799dde-b87b-47c0-9678-af7fcf7b96e7.json
+    - nodes/AIMD/ConfigurationSelection/node-meta.json
+    - nodes/AIMD/ConfigurationSelection/selected_configurations.json
+    - nodes/AIMD/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/density_md/MACE-MP-0/ASEMD/node-meta.json:
+        cache: false
+    - nodes/density_md/MACE-MP-0/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/density_md/MACE-MP-0/ASEMD/metrics_dict.csv
+    - nodes/density_md/MACE-MP-0/ASEMD/model
+    - nodes/density_md/MACE-MP-0/ASEMD/trajectory.h5
+    params:
+    - density_md_MACE-MP-0_ASEMD
+    - density_md_MACE-MP-0_ASEMD+thermostat
+  density_md_MACE-MP-0_AnalyseDensity:
+    cmd: zntrack run ipsuite.nodes.AnalyseDensity --name density_md_MACE-MP-0_AnalyseDensity
+    deps:
+    - nodes/density_md/MACE-MP-0/ASEMD/metrics_dict.csv
+    - nodes/density_md/MACE-MP-0/ASEMD/model
+    - nodes/density_md/MACE-MP-0/ASEMD/node-meta.json
+    - nodes/density_md/MACE-MP-0/ASEMD/steps_before_stopping.json
+    - nodes/density_md/MACE-MP-0/ASEMD/trajectory.h5
+    metrics:
+    - nodes/density_md/MACE-MP-0/AnalyseDensity/density.json:
+        cache: false
+    - nodes/density_md/MACE-MP-0/AnalyseDensity/node-meta.json:
+        cache: false
+    outs:
+    - nodes/density_md/MACE-MP-0/AnalyseDensity/density.png
+    - nodes/density_md/MACE-MP-0/AnalyseDensity/results.csv
+    params:
+    - density_md_MACE-MP-0_AnalyseDensity
   final_MLModel:
     cmd: zntrack run ipsuite.nodes.Apax --name final_MLModel
     deps:
