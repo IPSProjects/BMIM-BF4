@@ -1,3 +1,30 @@
+AIMD_ASEMD:
+    data_id: -1
+    dump_rate: 100
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 13200
+    use_momenta: false
+    wrap: false
+AIMD_ASEMD+thermostat:
+    pfactor: 54.27299976036698
+    pressure: 6.324209121801212e-07
+    temperature: 303
+    tetragonal_strain: true
+    time_step: 0.5
+    ttime: 2.455673697116016
+AIMD_AnalyseDensity:
+    end: null
+    start: 0
+    window: 1000
+AIMD_ConfigurationSelection:
+    indices:
+    - 2000
 ML0_ConfigurationSelection:
     base_feature_map:
         layer_name: dense_2
