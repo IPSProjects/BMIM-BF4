@@ -21521,8 +21521,8 @@ stages:
     outs:
     - path: nodes/AIMD/ASEMD/metrics_dict.csv
       hash: md5
-      md5: d41d8cd98f00b204e9800998ecf8427e
-      size: 0
+      md5: 39783ea5f81cfba41bef335289076ff8
+      size: 22
     - path: nodes/AIMD/ASEMD/model
       hash: md5
       md5: b8aa27ddf15af66ef17364db5dc35728.dir
@@ -21534,8 +21534,8 @@ stages:
       size: 48
     - path: nodes/AIMD/ASEMD/steps_before_stopping.json
       hash: md5
-      md5: d41d8cd98f00b204e9800998ecf8427e
-      size: 0
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
     - path: nodes/AIMD/ASEMD/trajectory.h5
       hash: md5
       md5: 670ca00ab2a35c9f28d23a62532cb6e0
