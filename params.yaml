@@ -978,6 +978,39 @@ classical_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+density_md_MACE-MP-0-d3_ASEMD:
+    data_id: -1
+    dump_rate: 100
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 20000
+    use_momenta: false
+    wrap: false
+density_md_MACE-MP-0-d3_ASEMD+thermostat:
+    pfactor: 54.27299976036698
+    pressure: 6.324209121801212e-07
+    temperature: 303
+    tetragonal_strain: true
+    time_step: 0.5
+    ttime: 2.455673697116016
+density_md_MACE-MP-0-d3_AnalyseDensity:
+    end: null
+    start: 0
+    window: 1000
+density_md_MACE-MP-0-d3_MixCalculator:
+    methods: sum
+density_md_MACE-MP-0-d3_MixCalculator+calculators+1:
+    abc: false
+    cnthr: 18.0
+    cutoff: 20.0
+    damping: bj
+    dtype: float32
+    xc: pbe
 density_md_MACE-MP-0_ASEMD:
     data_id: -1
     dump_rate: 100

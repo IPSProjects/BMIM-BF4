@@ -104,7 +104,31 @@ with project.group("density_md", "MACE-MP-0") as mace_mp_0:
 
     density = ips.analysis.AnalyseDensity(data=mace_md.atoms)
 
+mace_d3 = ips.calculators.TorchD3(
+    data=None,
+    xc="pbe",
+    damping="bj",
+    cutoff=20.0,
+    cnthr=18.0,
+    abc=False,
+    dtype="float32",
+)
 
+
+with project.group("density_md", "MACE-MP-0-d3") as mace_mp_0:
+    mace_mp_0_model_with_d3 = ips.calculators.MixCalculator(data=start_conf.atoms, calculators=[mace_mp_0_model, mace_d3])
+
+    mace_md = ips.calculators.ASEMD(
+        data=start_conf.atoms,
+        data_id=-1,
+        model=mace_mp_0_model_with_d3,
+        thermostat=thermostat,
+        steps=20_000,
+        sampling_rate=1,
+        dump_rate=100,
+    )
+
+    density = ips.analysis.AnalyseDensity(data=mace_md.atoms)
 
 with project.group("ML0"):
     kernel_selection = ips.models.apax.BatchKernelSelection(
