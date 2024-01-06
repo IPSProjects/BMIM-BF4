@@ -743,11 +743,12 @@ thermostat = ips.calculators.NPTThermostat(
         tetragonal_strain=True,
     )
 
-with project.group("density_md") as density_md:
+with project.group("density_md"):
     start_conf = ips.configuration_selection.IndexSelection(
         data.atoms,
         indices=[2000,]
     )
+with project.group("density_md", "ml16_no_d3") as a:
 
     aimd = ips.calculators.ASEMD(
         data=start_conf.atoms,
@@ -762,4 +763,34 @@ with project.group("density_md") as density_md:
     density = ips.analysis.AnalyseDensity(data=aimd.atoms)
 
 
-project.build(nodes=[density_md])
+with project.group("density_md", "ml15_d3_short") as b:
+
+    aimd = ips.calculators.ASEMD(
+        data=start_conf.atoms,
+        data_id=-1,
+        model=model_short,
+        thermostat=thermostat,
+        steps=20_000,
+        sampling_rate=10,
+        dump_rate=1000,
+    )
+
+    density = ips.analysis.AnalyseDensity(data=aimd.atoms)
+
+
+with project.group("density_md", "ml15_d3_long") as c:
+
+    aimd = ips.calculators.ASEMD(
+        data=start_conf.atoms,
+        data_id=-1,
+        model=model_long,
+        thermostat=thermostat,
+        steps=20_000,
+        sampling_rate=10,
+        dump_rate=1000,
+    )
+
+    density = ips.analysis.AnalyseDensity(data=aimd.atoms)
+
+
+project.build(nodes=[a, b, c])

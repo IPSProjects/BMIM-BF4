@@ -1096,6 +1096,78 @@ density_md_AnalyseDensity:
 density_md_ConfigurationSelection:
     indices:
     - 2000
+density_md_ml15_d3_long_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 20000
+    use_momenta: false
+    wrap: false
+density_md_ml15_d3_long_ASEMD+thermostat:
+    pfactor: 54.27299976036698
+    pressure: 6.324209121801212e-07
+    temperature: 303
+    tetragonal_strain: true
+    time_step: 0.5
+    ttime: 2.455673697116016
+density_md_ml15_d3_long_AnalyseDensity:
+    end: null
+    start: 0
+    window: 1000
+density_md_ml15_d3_short_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 20000
+    use_momenta: false
+    wrap: false
+density_md_ml15_d3_short_ASEMD+thermostat:
+    pfactor: 54.27299976036698
+    pressure: 6.324209121801212e-07
+    temperature: 303
+    tetragonal_strain: true
+    time_step: 0.5
+    ttime: 2.455673697116016
+density_md_ml15_d3_short_AnalyseDensity:
+    end: null
+    start: 0
+    window: 1000
+density_md_ml16_no_d3_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 20000
+    use_momenta: false
+    wrap: false
+density_md_ml16_no_d3_ASEMD+thermostat:
+    pfactor: 54.27299976036698
+    pressure: 6.324209121801212e-07
+    temperature: 303
+    tetragonal_strain: true
+    time_step: 0.5
+    ttime: 2.455673697116016
+density_md_ml16_no_d3_AnalyseDensity:
+    end: null
+    start: 0
+    window: 1000
 final_MLModel:
     jax_enable_x64: true
     use_energy: true
