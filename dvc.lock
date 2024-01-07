@@ -26256,3 +26256,179 @@ stages:
       hash: md5
       md5: 4bffd1da42c80c8982739f8313c7c38d
       size: 62796
+  torch_d3_labels_TorchD3_5:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name torch_d3_labels_TorchD3_5
+    deps:
+    - path: nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 6681e087c96c058bd2688696e975c8ab
+      size: 1773688
+    - path: nodes/wo_d3/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 39852c2c7a57e954338c31ab50e11c73.dir
+      size: 18606425
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: 9cb78e43deac945332b51759560fc78e
+      size: 48
+    params:
+      params.yaml:
+        torch_d3_labels_TorchD3_5:
+          abc: true
+          cnthr: 7.93766
+          cutoff: 7.93766
+          damping: bj
+          dtype: float32
+          xc: b97-3c
+    outs:
+    - path: nodes/torch_d3_labels/TorchD3_5/atoms.h5
+      hash: md5
+      md5: 62febd80e931c9820d036f1c481da81d
+      size: 1739680
+    - path: nodes/torch_d3_labels/TorchD3_5/node-meta.json
+      hash: md5
+      md5: 0e05039ecbc6c2889b1f2d5debbdaf3a
+      size: 48
+  torch_d3_labels_PredictionMetrics_val_d3_1:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name torch_d3_labels_PredictionMetrics_val_d3_1
+    deps:
+    - path: nodes/classical/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: 214a8afd08f14201c2d2d7a5004d646e
+      size: 48
+    - path: nodes/classical/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: b574b1f0ff57372a517d7eeb93ace532
+      size: 1380
+    - path: nodes/classical/ConfigurationSelection_1/selection.png
+      hash: md5
+      md5: 740759b3fb81dc973f8979ae133161f9
+      size: 43329
+    - path: nodes/torch_d3_labels/TorchD3_5/atoms.h5
+      hash: md5
+      md5: 62febd80e931c9820d036f1c481da81d
+      size: 1739680
+    - path: nodes/torch_d3_labels/TorchD3_5/node-meta.json
+      hash: md5
+      md5: 0e05039ecbc6c2889b1f2d5debbdaf3a
+      size: 48
+    outs:
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_d3_1/deviat_stress.json
+      hash: md5
+      md5: a48aaa5f4c90f867f025032285add39a
+      size: 207
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_d3_1/energy.json
+      hash: md5
+      md5: 2bbb2630b9cc639ecbc5eabe40fb27e1
+      size: 186
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_d3_1/energy_df.csv
+      hash: md5
+      md5: 0a093fa72b7ec6c588664cfbcd84f70f
+      size: 4199
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_d3_1/forces.json
+      hash: md5
+      md5: d6fdf8d099070962c58a84d41f6f7133
+      size: 190
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_d3_1/forces_df.csv
+      hash: md5
+      md5: ae1dcf3f3628dd549505ae44e07b6351
+      size: 4513566
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_d3_1/hydro_stress.json
+      hash: md5
+      md5: 9294c1b775b1c95bcb21b00f9a18e5b7
+      size: 203
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_d3_1/node-meta.json
+      hash: md5
+      md5: cdb3a0dc3f0ad8355eea82ea7a09140c
+      size: 48
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_d3_1/plots
+      hash: md5
+      md5: 38d1abaecdb87262c45d4ab1daad05b6.dir
+      size: 323148
+      nfiles: 5
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_d3_1/stress.json
+      hash: md5
+      md5: 14b48d68065da097a1e9d633d803a24e
+      size: 205
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_d3_1/stress_deviatoric_df.csv
+      hash: md5
+      md5: 67edf1a6812ef520cf0aa964f74d2e2c
+      size: 41750
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_d3_1/stress_df.csv
+      hash: md5
+      md5: f2af64f03a4e0c21a3ed4705a30c3d71
+      size: 40751
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_d3_1/stress_hydrostatic_df.csv
+      hash: md5
+      md5: b283d934991a8ffa33809edcdd81f86e
+      size: 4610
+  torch_d3_labels_PredictionMetrics_val_abc:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name torch_d3_labels_PredictionMetrics_val_abc
+    deps:
+    - path: nodes/torch_d3_labels/TorchD3_1/atoms.h5
+      hash: md5
+      md5: 9b972bed01aa985a5752b07d7a1285c9
+      size: 1739680
+    - path: nodes/torch_d3_labels/TorchD3_1/node-meta.json
+      hash: md5
+      md5: 443fcdd5a1b3eac6e5aa0c3f8ac0ff48
+      size: 48
+    - path: nodes/torch_d3_labels/TorchD3_5/atoms.h5
+      hash: md5
+      md5: 62febd80e931c9820d036f1c481da81d
+      size: 1739680
+    - path: nodes/torch_d3_labels/TorchD3_5/node-meta.json
+      hash: md5
+      md5: 0e05039ecbc6c2889b1f2d5debbdaf3a
+      size: 48
+    outs:
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_abc/deviat_stress.json
+      hash: md5
+      md5: 15a8434ff4b290b04680428d6058ae7b
+      size: 212
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_abc/energy.json
+      hash: md5
+      md5: 5f50ffbf9c1be9eb13d7be376c50f4dd
+      size: 191
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_abc/energy_df.csv
+      hash: md5
+      md5: aeaf96bb70b7fced828c1efd18774595
+      size: 4244
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_abc/forces.json
+      hash: md5
+      md5: 0d92a899f07338f95cbb65ff8edc7dfb
+      size: 193
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_abc/forces_df.csv
+      hash: md5
+      md5: 57a931c760bc96cfa464b6163eb0b49c
+      size: 4672582
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_abc/hydro_stress.json
+      hash: md5
+      md5: bf55f87f14cb6d76494315e41ddcd5be
+      size: 211
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_abc/node-meta.json
+      hash: md5
+      md5: 26e2d1516dae4ccb45dee06e7af77cac
+      size: 48
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_abc/plots
+      hash: md5
+      md5: 4c44c058370fa1753bd6c92b5b2c8c07.dir
+      size: 253062
+      nfiles: 5
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_abc/stress.json
+      hash: md5
+      md5: efa3a8b1fc80c2fae7ba6b8e5d29b41f
+      size: 210
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_abc/stress_deviatoric_df.csv
+      hash: md5
+      md5: a92834197828bb52fa1dba6726a4bb49
+      size: 43201
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_abc/stress_df.csv
+      hash: md5
+      md5: 2368931a6f211e379ef0adff60f08476
+      size: 42921
+    - path: nodes/torch_d3_labels/PredictionMetrics_val_abc/stress_hydrostatic_df.csv
+      hash: md5
+      md5: 8e40035da9e7557733305ca0c4efa5d9
+      size: 4633

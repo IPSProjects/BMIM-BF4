@@ -6652,3 +6652,71 @@ stages:
         cache: false
     - nodes/torch_d3_labels/PredictionMetrics_val_d3/stress.json:
         cache: false
+  torch_d3_labels_TorchD3_5:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name torch_d3_labels_TorchD3_5
+    deps:
+    - nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint_1/cp2k
+    - nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+    params:
+    - torch_d3_labels_TorchD3_5
+    outs:
+    - nodes/torch_d3_labels/TorchD3_5/atoms.h5
+    metrics:
+    - nodes/torch_d3_labels/TorchD3_5/node-meta.json:
+        cache: false
+  torch_d3_labels_PredictionMetrics_val_d3_1:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name torch_d3_labels_PredictionMetrics_val_d3_1
+    deps:
+    - nodes/classical/ConfigurationSelection_1/node-meta.json
+    - nodes/classical/ConfigurationSelection_1/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_1/selection.png
+    - nodes/torch_d3_labels/TorchD3_5/atoms.h5
+    - nodes/torch_d3_labels/TorchD3_5/node-meta.json
+    outs:
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3_1/energy_df.csv
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3_1/forces_df.csv
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3_1/plots
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3_1/stress_deviatoric_df.csv
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3_1/stress_df.csv
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3_1/stress_hydrostatic_df.csv
+    metrics:
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3_1/deviat_stress.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3_1/energy.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3_1/forces.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3_1/hydro_stress.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3_1/node-meta.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3_1/stress.json:
+        cache: false
+  torch_d3_labels_PredictionMetrics_val_abc:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name torch_d3_labels_PredictionMetrics_val_abc
+    deps:
+    - nodes/torch_d3_labels/TorchD3_1/atoms.h5
+    - nodes/torch_d3_labels/TorchD3_1/node-meta.json
+    - nodes/torch_d3_labels/TorchD3_5/atoms.h5
+    - nodes/torch_d3_labels/TorchD3_5/node-meta.json
+    outs:
+    - nodes/torch_d3_labels/PredictionMetrics_val_abc/energy_df.csv
+    - nodes/torch_d3_labels/PredictionMetrics_val_abc/forces_df.csv
+    - nodes/torch_d3_labels/PredictionMetrics_val_abc/plots
+    - nodes/torch_d3_labels/PredictionMetrics_val_abc/stress_deviatoric_df.csv
+    - nodes/torch_d3_labels/PredictionMetrics_val_abc/stress_df.csv
+    - nodes/torch_d3_labels/PredictionMetrics_val_abc/stress_hydrostatic_df.csv
+    metrics:
+    - nodes/torch_d3_labels/PredictionMetrics_val_abc/deviat_stress.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_val_abc/energy.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_val_abc/forces.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_val_abc/hydro_stress.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_val_abc/node-meta.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_val_abc/stress.json:
+        cache: false
