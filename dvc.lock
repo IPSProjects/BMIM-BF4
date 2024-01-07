@@ -24920,7 +24920,7 @@ stages:
           wrap: false
         density_md_ml16_no_d3_ASEMD+thermostat:
           pfactor: 54.27299976036698
-          pressure: 6.324209121801212e-07
+          pressure: 6.324209121801210e-07
           temperature: 303
           tetragonal_strain: true
           time_step: 0.5
@@ -25290,7 +25290,7 @@ stages:
           methods: sum
         density_md_ml16_dftd3_short_ASEMD+thermostat:
           pfactor: 54.27299976036698
-          pressure: 6.324209121801211e-07
+          pressure: 6.324209121801210e-07
           temperature: 303
           tetragonal_strain: true
           time_step: 0.5
@@ -25432,7 +25432,7 @@ stages:
           methods: sum
         density_md_ml16_dftd3_medium_ASEMD+thermostat:
           pfactor: 54.27299976036698
-          pressure: 6.324209121801210e-07
+          pressure: 6.324209121801211e-07
           temperature: 303
           tetragonal_strain: true
           time_step: 0.5
@@ -25563,7 +25563,7 @@ stages:
           wrap: false
         density_md_ml15_ensemble_ASEMD+thermostat:
           pfactor: 54.27299976036698
-          pressure: 6.324209121801210e-07
+          pressure: 6.324209121801212e-07
           temperature: 303
           tetragonal_strain: true
           time_step: 0.5
