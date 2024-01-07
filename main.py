@@ -682,10 +682,23 @@ with project.group("torch_d3_labels") as td3l:
         dtype="float32",
     )
 
-    ips.analysis.PredictionMetrics(data=val_d3_short_abc, reference=validation_data, name="PredictionMetrics_val_d3")
+    train_d3_short_abc = ips.calculators.TorchD3(
+        data=train_data_nod3,
+        xc="b97-3c",
+        damping="bj",
+        cutoff=7.93766,
+        cnthr=7.93766,
+        abc=True,
+        dtype="float32",
+    )
 
+    ips.analysis.PredictionMetrics(data=val_d3_short_abc, reference=validation_data, name="PredictionMetrics_val_d3")
     ips.analysis.PredictionMetrics(data=val_d3_short_abc, reference=val_d3_short, name="PredictionMetrics_val_abc")
 
+    ips.analysis.PredictionMetrics(data=train_d3_short_abc, reference=train_data, name="PredictionMetrics_train_d3")
+
+    ips.analysis.PredictionMetrics(data=train_data, reference=train_data_nod3, name="PredictionMetrics_train_nod3")
+    # ips.analysis.PredictionMetrics(data=train_d3_short_abc, reference=train_d3_short, name="PredictionMetrics_train_abc")
 
 
 
