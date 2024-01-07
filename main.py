@@ -636,6 +636,10 @@ with project.group("torch_d3_labels") as td3l:
         abc=False,
         dtype="float32",
     )
+
+    train_d3_metrics = ips.analysis.PredictionMetrics(data=train_d3_short)
+    val_d3_metrics = ips.analysis.PredictionMetrics(data=val_d3_short)
+
     train_d3_long = ips.calculators.TorchD3(
         data=train_data_nod3,
         xc="b97-3c",
@@ -857,4 +861,4 @@ with project.group("density_md", "ml15_ensemble") as f:
 
     density = ips.analysis.AnalyseDensity(data=aimd.atoms)
 
-project.build(nodes=[f])
+project.build(nodes=[td3l])
