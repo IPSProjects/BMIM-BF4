@@ -6545,3 +6545,110 @@ stages:
         cache: false
     - nodes/torch_d3_labels/PredictionMetrics_1/stress.json:
         cache: false
+  torch_d3_labels_PredictionMetrics_train_d3:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name torch_d3_labels_PredictionMetrics_train_d3
+    deps:
+    - nodes/ML0/ConfigurationSelection/node-meta.json
+    - nodes/ML0/ConfigurationSelection/selected_configurations.json
+    - nodes/ML0/ConfigurationSelection/selection.png
+    - nodes/ML1/CP2KSinglePoint/atoms.h5
+    - nodes/ML1/CP2KSinglePoint/cp2k
+    - nodes/ML1/CP2KSinglePoint/node-meta.json
+    - nodes/ML10/CP2KSinglePoint/atoms.h5
+    - nodes/ML10/CP2KSinglePoint/cp2k
+    - nodes/ML10/CP2KSinglePoint/node-meta.json
+    - nodes/ML11_MultiPack/CP2KSinglePoint/atoms.h5
+    - nodes/ML11_MultiPack/CP2KSinglePoint/cp2k
+    - nodes/ML11_MultiPack/CP2KSinglePoint/node-meta.json
+    - nodes/ML12/CP2KSinglePoint/atoms.h5
+    - nodes/ML12/CP2KSinglePoint/cp2k
+    - nodes/ML12/CP2KSinglePoint/node-meta.json
+    - nodes/ML13/CP2KSinglePoint/atoms.h5
+    - nodes/ML13/CP2KSinglePoint/cp2k
+    - nodes/ML13/CP2KSinglePoint/node-meta.json
+    - nodes/ML14/CP2KSinglePoint/atoms.h5
+    - nodes/ML14/CP2KSinglePoint/cp2k
+    - nodes/ML14/CP2KSinglePoint/node-meta.json
+    - nodes/ML15/CP2KSinglePoint/atoms.h5
+    - nodes/ML15/CP2KSinglePoint/cp2k
+    - nodes/ML15/CP2KSinglePoint/node-meta.json
+    - nodes/ML2/CP2KSinglePoint/atoms.h5
+    - nodes/ML2/CP2KSinglePoint/cp2k
+    - nodes/ML2/CP2KSinglePoint/node-meta.json
+    - nodes/ML3/CP2KSinglePoint/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/cp2k
+    - nodes/ML3/CP2KSinglePoint/node-meta.json
+    - nodes/ML4/CP2KSinglePoint/atoms.h5
+    - nodes/ML4/CP2KSinglePoint/cp2k
+    - nodes/ML4/CP2KSinglePoint/node-meta.json
+    - nodes/ML5/CP2KSinglePoint/atoms.h5
+    - nodes/ML5/CP2KSinglePoint/cp2k
+    - nodes/ML5/CP2KSinglePoint/node-meta.json
+    - nodes/ML6/CP2KSinglePoint/atoms.h5
+    - nodes/ML6/CP2KSinglePoint/cp2k
+    - nodes/ML6/CP2KSinglePoint/node-meta.json
+    - nodes/ML7/CP2KSinglePoint/atoms.h5
+    - nodes/ML7/CP2KSinglePoint/cp2k
+    - nodes/ML7/CP2KSinglePoint/node-meta.json
+    - nodes/ML8/CP2KSinglePoint/atoms.h5
+    - nodes/ML8/CP2KSinglePoint/cp2k
+    - nodes/ML8/CP2KSinglePoint/node-meta.json
+    - nodes/ML9/CP2KSinglePoint/atoms.h5
+    - nodes/ML9/CP2KSinglePoint/cp2k
+    - nodes/ML9/CP2KSinglePoint/node-meta.json
+    - nodes/VS/CP2KSinglePoint/atoms.h5
+    - nodes/VS/CP2KSinglePoint/cp2k
+    - nodes/VS/CP2KSinglePoint/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_2/selection.png
+    - nodes/torch_d3_labels/TorchD3/atoms.h5
+    - nodes/torch_d3_labels/TorchD3/node-meta.json
+    outs:
+    - nodes/torch_d3_labels/PredictionMetrics_train_d3/energy_df.csv
+    - nodes/torch_d3_labels/PredictionMetrics_train_d3/forces_df.csv
+    - nodes/torch_d3_labels/PredictionMetrics_train_d3/plots
+    - nodes/torch_d3_labels/PredictionMetrics_train_d3/stress_deviatoric_df.csv
+    - nodes/torch_d3_labels/PredictionMetrics_train_d3/stress_df.csv
+    - nodes/torch_d3_labels/PredictionMetrics_train_d3/stress_hydrostatic_df.csv
+    metrics:
+    - nodes/torch_d3_labels/PredictionMetrics_train_d3/deviat_stress.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_train_d3/energy.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_train_d3/forces.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_train_d3/hydro_stress.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_train_d3/node-meta.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_train_d3/stress.json:
+        cache: false
+  torch_d3_labels_PredictionMetrics_val_d3:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name torch_d3_labels_PredictionMetrics_val_d3
+    deps:
+    - nodes/classical/ConfigurationSelection_1/node-meta.json
+    - nodes/classical/ConfigurationSelection_1/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_1/selection.png
+    - nodes/torch_d3_labels/TorchD3_1/atoms.h5
+    - nodes/torch_d3_labels/TorchD3_1/node-meta.json
+    outs:
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3/energy_df.csv
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3/forces_df.csv
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3/plots
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3/stress_deviatoric_df.csv
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3/stress_df.csv
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3/stress_hydrostatic_df.csv
+    metrics:
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3/deviat_stress.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3/energy.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3/forces.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3/hydro_stress.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3/node-meta.json:
+        cache: false
+    - nodes/torch_d3_labels/PredictionMetrics_val_d3/stress.json:
+        cache: false

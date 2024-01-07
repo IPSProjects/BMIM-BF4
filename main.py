@@ -640,6 +640,10 @@ with project.group("torch_d3_labels") as td3l:
     train_d3_metrics = ips.analysis.PredictionMetrics(data=train_d3_short)
     val_d3_metrics = ips.analysis.PredictionMetrics(data=val_d3_short)
 
+    ips.analysis.PredictionMetrics(data=train_d3_short, reference=train_data, name="PredictionMetrics_train_d3")
+    ips.analysis.PredictionMetrics(data=val_d3_short, reference=validation_data, name="PredictionMetrics_val_d3")
+
+
     train_d3_long = ips.calculators.TorchD3(
         data=train_data_nod3,
         xc="b97-3c",
