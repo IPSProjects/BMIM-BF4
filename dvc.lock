@@ -21473,3 +21473,238 @@ stages:
       md5: 5565baac7941c2829c2a2ed188d26c0e.dir
       size: 119574
       nfiles: 3
+  simulation_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name simulation_ASEGeoOpt
+    deps:
+    - path: nodes/final_ensemble/MLModel/apax_model
+      hash: md5
+      md5: fe00f4182d47a1eb933de363dec4af98.dir
+      size: 84500151
+      nfiles: 6
+    - path: nodes/final_ensemble/MLModel/log.csv
+      hash: md5
+      md5: 86af95ea8c197783ef9dadcb23499f60
+      size: 354191
+    - path: nodes/final_ensemble/MLModel/metrics.json
+      hash: md5
+      md5: a4eb00b955d4d5a5fb53ff2a7ab2af64
+      size: 389
+    - path: nodes/final_ensemble/MLModel/node-meta.json
+      hash: md5
+      md5: 6124e4e252e66dfa8b01c7cc7f21135d
+      size: 48
+    - path: nodes/final_ensemble/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: c73f7ed92deedd952c59845bde00a0b0
+      size: 48855065
+    - path: nodes/final_ensemble/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/simulation/Packmol_1/atoms.h5
+      hash: md5
+      md5: debfd1a770e6846250cd96aebdc1da3a
+      size: 111968
+    - path: nodes/simulation/Packmol_1/node-meta.json
+      hash: md5
+      md5: d55aff74b416bf2483be301f7fe4287a
+      size: 48
+    - path: nodes/simulation/Packmol_1/packmol
+      hash: md5
+      md5: 5565baac7941c2829c2a2ed188d26c0e.dir
+      size: 119574
+      nfiles: 3
+    params:
+      params.yaml:
+        simulation_ASEGeoOpt:
+          data_id: -1
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: FIRE
+          repeat:
+          - 1
+          - 1
+          - 1
+          run_kwargs:
+            fmax: 0.5
+    outs:
+    - path: nodes/simulation/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/simulation/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 18cd098502cd071c89f07e8efd5d7a0f
+      size: 48
+    - path: nodes/simulation/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 329e1e5da9383df4e4c3d8918799bc81
+      size: 5451976
+  simulation_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name simulation_ASEMD
+    deps:
+    - path: nodes/final_ensemble/MLModel/apax_model
+      hash: md5
+      md5: fe00f4182d47a1eb933de363dec4af98.dir
+      size: 84500151
+      nfiles: 6
+    - path: nodes/final_ensemble/MLModel/log.csv
+      hash: md5
+      md5: 86af95ea8c197783ef9dadcb23499f60
+      size: 354191
+    - path: nodes/final_ensemble/MLModel/metrics.json
+      hash: md5
+      md5: a4eb00b955d4d5a5fb53ff2a7ab2af64
+      size: 389
+    - path: nodes/final_ensemble/MLModel/node-meta.json
+      hash: md5
+      md5: 6124e4e252e66dfa8b01c7cc7f21135d
+      size: 48
+    - path: nodes/final_ensemble/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: c73f7ed92deedd952c59845bde00a0b0
+      size: 48855065
+    - path: nodes/final_ensemble/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/simulation/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/simulation/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 18cd098502cd071c89f07e8efd5d7a0f
+      size: 48
+    - path: nodes/simulation/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 329e1e5da9383df4e4c3d8918799bc81
+      size: 5451976
+    params:
+      params.yaml:
+        simulation_ASEMD:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 10
+          seed: 42
+          steps: 1000
+          use_momenta: false
+          wrap: false
+        simulation_ASEMD+modifier+0:
+          cell:
+          density: 1210
+        simulation_ASEMD+thermostat:
+          friction: 0.01
+          temperature: 303.15
+          time_step: 0.5
+    outs:
+    - path: nodes/simulation/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 613021e42a39742d46b3bb7486b13c40
+      size: 4115
+    - path: nodes/simulation/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/simulation/ASEMD/node-meta.json
+      hash: md5
+      md5: 2a550bafb316facdabe31ad0793b0e31
+      size: 48
+    - path: nodes/simulation/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/simulation/ASEMD/trajectory.h5
+      hash: md5
+      md5: 053e22a5892f0fc1464cc65f738a4413
+      size: 22882016
+  simulation_ASEMD_1:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name simulation_ASEMD_1
+    deps:
+    - path: nodes/final_ensemble/MLModel/apax_model
+      hash: md5
+      md5: fe00f4182d47a1eb933de363dec4af98.dir
+      size: 84500151
+      nfiles: 6
+    - path: nodes/final_ensemble/MLModel/log.csv
+      hash: md5
+      md5: 86af95ea8c197783ef9dadcb23499f60
+      size: 354191
+    - path: nodes/final_ensemble/MLModel/metrics.json
+      hash: md5
+      md5: a4eb00b955d4d5a5fb53ff2a7ab2af64
+      size: 389
+    - path: nodes/final_ensemble/MLModel/node-meta.json
+      hash: md5
+      md5: 6124e4e252e66dfa8b01c7cc7f21135d
+      size: 48
+    - path: nodes/final_ensemble/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: c73f7ed92deedd952c59845bde00a0b0
+      size: 48855065
+    - path: nodes/final_ensemble/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/simulation/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/simulation/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 18cd098502cd071c89f07e8efd5d7a0f
+      size: 48
+    - path: nodes/simulation/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 329e1e5da9383df4e4c3d8918799bc81
+      size: 5451976
+    params:
+      params.yaml:
+        simulation_ASEMD_1:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 100
+          seed: 42
+          steps: 10000
+          use_momenta: false
+          wrap: false
+        simulation_ASEMD_1+thermostat:
+          friction: 0.01
+          temperature: 303.15
+          time_step: 0.5
+    outs:
+    - path: nodes/simulation/ASEMD_1/metrics_dict.csv
+      hash: md5
+      md5: aca93db0bad8ea3b8efb25cc23c1f5c9
+      size: 4120
+    - path: nodes/simulation/ASEMD_1/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/simulation/ASEMD_1/node-meta.json
+      hash: md5
+      md5: c2f4430457a26e4297ec1f93a333968d
+      size: 48
+    - path: nodes/simulation/ASEMD_1/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/simulation/ASEMD_1/trajectory.h5
+      hash: md5
+      md5: d6cd4172b22e5b66d4e352cabb5b55ea
+      size: 22882016

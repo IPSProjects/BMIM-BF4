@@ -536,6 +536,13 @@ with project.group("final_ensemble") as final:
     prediction = ips.analysis.Prediction(data=train_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
+
+ramp_density = ips.calculators.RescaleBoxModifier(density=1210)
+
+thermostat = ips.calculators.LangevinThermostat(
+    temperature=303.15, friction=0.01, time_step=0.5
+)
+
 with project.group("simulation") as sim:
     cation = ips.configuration_generation.SmilesToAtoms("CCCCN1C=C[N+](=C1)C")
     anion = ips.configuration_generation.SmilesToAtoms("[B-](F)(F)(F)F")
@@ -552,5 +559,33 @@ with project.group("simulation") as sim:
         count=[70],
         density=1000,
     )
+
+    geo_opt = ips.calculators.ASEGeoOpt(
+        model=model,
+        data=structure.atoms,
+        data_id=-1,
+        optimizer="FIRE",
+        run_kwargs={"fmax": 0.5},
+    )
+
+    md = ips.calculators.ASEMD(
+        data=geo_opt.atoms,
+        data_id=-1,
+        model=model,
+        thermostat=thermostat,
+        modifier=[ramp_density],
+        steps=1000,
+        sampling_rate=10,
+    )
+
+    eq_md = ips.calculators.ASEMD(
+        data=geo_opt.atoms,
+        data_id=-1,
+        model=model,
+        thermostat=thermostat,
+        steps=10000,
+        sampling_rate=100,
+    )
+
 
 project.build(nodes=[sim])
