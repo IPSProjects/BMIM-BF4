@@ -961,3 +961,30 @@ final_ensemble_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+simulation_Packmol:
+    box: null
+    count:
+    - 1
+    - 1
+    data_ids: null
+    density: 1210
+    pbc: false
+    tolerance: 2.0
+simulation_Packmol_1:
+    box: null
+    count:
+    - 70
+    data_ids: null
+    density: 1000
+    pbc: true
+    tolerance: 2.0
+simulation_SmilesToAtoms:
+    cell: null
+    optimizer: UFF
+    seed: 1234
+    smiles: CCCCN1C=C[N+](=C1)C
+simulation_SmilesToAtoms_1:
+    cell: null
+    optimizer: UFF
+    seed: 1234
+    smiles: '[B-](F)(F)(F)F'

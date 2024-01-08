@@ -21337,3 +21337,139 @@ stages:
       hash: md5
       md5: 0a366e37c5368c0f3d9888f5d26a5d13
       size: 58176
+  simulation_SmilesToAtoms:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name simulation_SmilesToAtoms
+    params:
+      params.yaml:
+        simulation_SmilesToAtoms:
+          cell:
+          optimizer: UFF
+          seed: 1234
+          smiles: CCCCN1C=C[N+](=C1)C
+    outs:
+    - path: nodes/simulation/SmilesToAtoms/atoms.h5
+      hash: md5
+      md5: 744f94e60270ed284980820ff3038f19
+      size: 27968
+    - path: nodes/simulation/SmilesToAtoms/molecule.png
+      hash: md5
+      md5: a9e6627ebd24d022ae34219e921b7e5f
+      size: 7818
+    - path: nodes/simulation/SmilesToAtoms/node-meta.json
+      hash: md5
+      md5: a9af5fa7d06a87250494507912627550
+      size: 48
+  simulation_SmilesToAtoms_1:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name simulation_SmilesToAtoms_1
+    params:
+      params.yaml:
+        simulation_SmilesToAtoms_1:
+          cell:
+          optimizer: UFF
+          seed: 1234
+          smiles: '[B-](F)(F)(F)F'
+    outs:
+    - path: nodes/simulation/SmilesToAtoms_1/atoms.h5
+      hash: md5
+      md5: 181a42114d5c08d6ac24e8ce30a8f82b
+      size: 27968
+    - path: nodes/simulation/SmilesToAtoms_1/molecule.png
+      hash: md5
+      md5: f4d4f99183d79b889d60ffaf0d08a5a7
+      size: 2975
+    - path: nodes/simulation/SmilesToAtoms_1/node-meta.json
+      hash: md5
+      md5: 988ecbe820708f7accb06391fd58b885
+      size: 48
+  simulation_Packmol:
+    cmd: zntrack run ipsuite.nodes.Packmol --name simulation_Packmol
+    deps:
+    - path: nodes/simulation/SmilesToAtoms/atoms.h5
+      hash: md5
+      md5: 744f94e60270ed284980820ff3038f19
+      size: 27968
+    - path: nodes/simulation/SmilesToAtoms/molecule.png
+      hash: md5
+      md5: a9e6627ebd24d022ae34219e921b7e5f
+      size: 7818
+    - path: nodes/simulation/SmilesToAtoms/node-meta.json
+      hash: md5
+      md5: a9af5fa7d06a87250494507912627550
+      size: 48
+    - path: nodes/simulation/SmilesToAtoms_1/atoms.h5
+      hash: md5
+      md5: 181a42114d5c08d6ac24e8ce30a8f82b
+      size: 27968
+    - path: nodes/simulation/SmilesToAtoms_1/molecule.png
+      hash: md5
+      md5: f4d4f99183d79b889d60ffaf0d08a5a7
+      size: 2975
+    - path: nodes/simulation/SmilesToAtoms_1/node-meta.json
+      hash: md5
+      md5: 988ecbe820708f7accb06391fd58b885
+      size: 48
+    params:
+      params.yaml:
+        simulation_Packmol:
+          box:
+          count:
+          - 1
+          - 1
+          data_ids:
+          density: 1210
+          pbc: false
+          tolerance: 2.0
+    outs:
+    - path: nodes/simulation/Packmol/atoms.h5
+      hash: md5
+      md5: 2400ddfca5ec50ebe880626f190e0797
+      size: 27968
+    - path: nodes/simulation/Packmol/node-meta.json
+      hash: md5
+      md5: 208dfe5a4bb58768e3f7b013d375fcee
+      size: 48
+    - path: nodes/simulation/Packmol/packmol
+      hash: md5
+      md5: 9211f580932fa95a1d122b0e2be6699c.dir
+      size: 3841
+      nfiles: 4
+  simulation_Packmol_1:
+    cmd: zntrack run ipsuite.nodes.Packmol --name simulation_Packmol_1
+    deps:
+    - path: nodes/simulation/Packmol/atoms.h5
+      hash: md5
+      md5: 2400ddfca5ec50ebe880626f190e0797
+      size: 27968
+    - path: nodes/simulation/Packmol/node-meta.json
+      hash: md5
+      md5: 208dfe5a4bb58768e3f7b013d375fcee
+      size: 48
+    - path: nodes/simulation/Packmol/packmol
+      hash: md5
+      md5: 9211f580932fa95a1d122b0e2be6699c.dir
+      size: 3841
+      nfiles: 4
+    params:
+      params.yaml:
+        simulation_Packmol_1:
+          box:
+          count:
+          - 70
+          data_ids:
+          density: 1000
+          pbc: true
+          tolerance: 2.0
+    outs:
+    - path: nodes/simulation/Packmol_1/atoms.h5
+      hash: md5
+      md5: debfd1a770e6846250cd96aebdc1da3a
+      size: 111968
+    - path: nodes/simulation/Packmol_1/node-meta.json
+      hash: md5
+      md5: d55aff74b416bf2483be301f7fe4287a
+      size: 48
+    - path: nodes/simulation/Packmol_1/packmol
+      hash: md5
+      md5: 5565baac7941c2829c2a2ed188d26c0e.dir
+      size: 119574
+      nfiles: 3

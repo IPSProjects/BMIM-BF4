@@ -5212,3 +5212,54 @@ stages:
         cache: false
     - nodes/final_ensemble/PredictionMetrics_1/stress.json:
         cache: false
+  simulation_SmilesToAtoms:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name simulation_SmilesToAtoms
+    params:
+    - simulation_SmilesToAtoms
+    outs:
+    - nodes/simulation/SmilesToAtoms/atoms.h5
+    - nodes/simulation/SmilesToAtoms/molecule.png
+    metrics:
+    - nodes/simulation/SmilesToAtoms/node-meta.json:
+        cache: false
+  simulation_SmilesToAtoms_1:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name simulation_SmilesToAtoms_1
+    params:
+    - simulation_SmilesToAtoms_1
+    outs:
+    - nodes/simulation/SmilesToAtoms_1/atoms.h5
+    - nodes/simulation/SmilesToAtoms_1/molecule.png
+    metrics:
+    - nodes/simulation/SmilesToAtoms_1/node-meta.json:
+        cache: false
+  simulation_Packmol:
+    cmd: zntrack run ipsuite.nodes.Packmol --name simulation_Packmol
+    deps:
+    - nodes/simulation/SmilesToAtoms/atoms.h5
+    - nodes/simulation/SmilesToAtoms/molecule.png
+    - nodes/simulation/SmilesToAtoms/node-meta.json
+    - nodes/simulation/SmilesToAtoms_1/atoms.h5
+    - nodes/simulation/SmilesToAtoms_1/molecule.png
+    - nodes/simulation/SmilesToAtoms_1/node-meta.json
+    params:
+    - simulation_Packmol
+    outs:
+    - nodes/simulation/Packmol/atoms.h5
+    - nodes/simulation/Packmol/packmol
+    metrics:
+    - nodes/simulation/Packmol/node-meta.json:
+        cache: false
+  simulation_Packmol_1:
+    cmd: zntrack run ipsuite.nodes.Packmol --name simulation_Packmol_1
+    deps:
+    - nodes/simulation/Packmol/atoms.h5
+    - nodes/simulation/Packmol/node-meta.json
+    - nodes/simulation/Packmol/packmol
+    params:
+    - simulation_Packmol_1
+    outs:
+    - nodes/simulation/Packmol_1/atoms.h5
+    - nodes/simulation/Packmol_1/packmol
+    metrics:
+    - nodes/simulation/Packmol_1/node-meta.json:
+        cache: false

@@ -536,4 +536,21 @@ with project.group("final_ensemble") as final:
     prediction = ips.analysis.Prediction(data=train_data, model=model)
     metrics = ips.analysis.PredictionMetrics(data=prediction)
 
-project.build(nodes=[final])
+with project.group("simulation") as sim:
+    cation = ips.configuration_generation.SmilesToAtoms("CCCCN1C=C[N+](=C1)C")
+    anion = ips.configuration_generation.SmilesToAtoms("[B-](F)(F)(F)F")
+    
+    single_structure = ips.configuration_generation.Packmol(
+        data=[cation.atoms, anion.atoms],
+        count=[1, 1],
+        density=1210,
+        pbc=False,
+    )
+
+    structure = ips.configuration_generation.Packmol(
+        data=[single_structure.atoms],
+        count=[70],
+        density=1000,
+    )
+
+project.build(nodes=[sim])
