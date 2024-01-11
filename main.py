@@ -823,19 +823,19 @@ with project.group("ML17_sampling") as grp:
         data=val_selection_npt.excluded_atoms, n_configurations=80
     )
 
-# with project.group("ML17_datasets") as grp:
-#     cp2k_train = ips.calculators.CP2KSinglePoint(
-#         data=train_selection_opt.atoms + train_selection_nvt.atoms + train_selection_npt.atoms,
-#         cp2k_params="config/cp2k_wo_d3.yaml",
-#         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS"],
-#     )
-#     cp2k_val = ips.calculators.CP2KSinglePoint(
-#         data=val_selection_nvt.atoms + val_selection_npt.atoms,
-#         cp2k_params="config/cp2k_wo_d3.yaml",
-#         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS"],
-#     )
-#     train_data_nod3 += cp2k_train.atoms
-#     validation_data_nod3 += cp2k_val.atoms
+with project.group("ML17_datasets") as grp:
+    cp2k_train = ips.calculators.CP2KSinglePoint(
+        data=train_selection_opt.atoms + train_selection_nvt.atoms + train_selection_npt.atoms,
+        cp2k_params="config/cp2k_wo_d3.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS"],
+    )
+    cp2k_val = ips.calculators.CP2KSinglePoint(
+        data=val_selection_nvt.atoms + val_selection_npt.atoms,
+        cp2k_params="config/cp2k_wo_d3.yaml",
+        cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS"],
+    )
+    train_data_nod3 += cp2k_train.atoms
+    validation_data_nod3 += cp2k_val.atoms
 
 
 #     train_d3_short = ips.calculators.TorchD3(
