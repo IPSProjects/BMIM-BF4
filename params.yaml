@@ -1009,6 +1009,10 @@ simulation_ASEMD_1+thermostat:
     friction: 0.01
     temperature: 303.15
     time_step: 0.5
+simulation_ApaxJaxMD:
+    data_id: -1
+    md_parameter: null
+    repeat: null
 simulation_Packmol:
     box: null
     count:

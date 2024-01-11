@@ -3,7 +3,7 @@ ensemble:
   dt: 0.5 # fs time step
   temperature: 303
 
-duration: 1_000_000 # fs
-n_inner: 1000 # compiled innner steps
-sampling_rate: 100  # dump interval
+duration: 10_000_000 # fs
+n_inner: 10_000 # compiled innner steps
+sampling_rate: 10_000  # dump interval
 dr_threshold: 0.5 # Neighborlist skin

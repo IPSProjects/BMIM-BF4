@@ -21708,3 +21708,73 @@ stages:
       hash: md5
       md5: d6cd4172b22e5b66d4e352cabb5b55ea
       size: 22882016
+  simulation_ApaxJaxMD:
+    cmd: zntrack run ipsuite.nodes.ApaxJaxMD --name simulation_ApaxJaxMD
+    deps:
+    - path: nodes/final_ensemble/MLModel/apax_model
+      hash: md5
+      md5: fe00f4182d47a1eb933de363dec4af98.dir
+      size: 84500151
+      nfiles: 6
+    - path: nodes/final_ensemble/MLModel/log.csv
+      hash: md5
+      md5: 86af95ea8c197783ef9dadcb23499f60
+      size: 354191
+    - path: nodes/final_ensemble/MLModel/metrics.json
+      hash: md5
+      md5: a4eb00b955d4d5a5fb53ff2a7ab2af64
+      size: 389
+    - path: nodes/final_ensemble/MLModel/node-meta.json
+      hash: md5
+      md5: 6124e4e252e66dfa8b01c7cc7f21135d
+      size: 48
+    - path: nodes/final_ensemble/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: c73f7ed92deedd952c59845bde00a0b0
+      size: 48855065
+    - path: nodes/final_ensemble/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 9eda8d89a8543dc151afc20daa607205
+      size: 3188610
+    - path: nodes/simulation/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/simulation/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 18cd098502cd071c89f07e8efd5d7a0f
+      size: 48
+    - path: nodes/simulation/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 329e1e5da9383df4e4c3d8918799bc81
+      size: 5451976
+    params:
+      params.yaml:
+        simulation_ApaxJaxMD:
+          data_id: -1
+          md_parameter:
+          repeat:
+      config/jax_md.yaml:
+        dr_threshold: 0.5
+        duration: 10000000
+        ensemble:
+          name: nvt
+          dt: 0.5
+          temperature: 303
+        n_inner: 10000
+        sampling_rate: 10000
+    outs:
+    - path: nodes/simulation/ApaxJaxMD/initial_structure.extxyz
+      hash: md5
+      md5: eeaa4646c6320cb967f07a33950bf2dd
+      size: 113539
+    - path: nodes/simulation/ApaxJaxMD/md
+      hash: md5
+      md5: 1fe55b68bb115d1a5cbea82dac5ba723.dir
+      size: 337943008
+      nfiles: 2
+    - path: nodes/simulation/ApaxJaxMD/node-meta.json
+      hash: md5
+      md5: 96ba264de341464f1ec72db5c5b59ca2
+      size: 48

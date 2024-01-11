@@ -587,5 +587,12 @@ with project.group("simulation") as sim:
         sampling_rate=100,
     )
 
+    jax_md = ips.calculators.ApaxJaxMD(
+        data=geo_opt.atoms,
+        data_id=-1,
+        model=model,
+        md_parameter_file="config/jax_md.yaml",
+    )
+
 
 project.build(nodes=[sim])

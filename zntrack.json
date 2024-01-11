@@ -16536,5 +16536,55 @@
             "_type": "pathlib.Path",
             "value": "nodes/simulation_ASEMD_1+thermostat"
         }
+    },
+    "simulation_ApaxJaxMD": {
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "ASEGeoOpt",
+                        "name": "simulation_ASEGeoOpt",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "init_struc_dir": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/initial_structure.extxyz"
+        },
+        "md_parameter_file": "config/jax_md.yaml",
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "Apax",
+                        "name": "final_ensemble_MLModel",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "sim_dir": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/md"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/simulation/ApaxJaxMD"
+        }
     }
 }
