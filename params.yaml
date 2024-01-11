@@ -385,6 +385,88 @@ ML16_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+ML17_sampling_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML17_sampling_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 100
+    seed: 42
+    steps: 1000000
+    use_momenta: false
+    wrap: false
+ML17_sampling_ASEMD+modifier+0:
+    end_temperature: 500
+    interval: 1
+    num_oscillations: 10
+    start_temperature: 230
+    temperature_amplitude: 100
+ML17_sampling_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+ML17_sampling_ASEMD_1:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 100
+    seed: 42
+    steps: 1000000
+    use_momenta: false
+    wrap: false
+ML17_sampling_ASEMD_1+thermostat:
+    pfactor: 54.273
+    pressure: 6.324e-07
+    temperature: 298
+    tetragonal_strain: true
+    time_step: 0.5
+    ttime: 2.4557
+ML17_sampling_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 4
+    selection_method: max_dist
+ML17_sampling_ConfigurationSelection_1:
+    n_configurations: 40
+    seed: 1234
+ML17_sampling_ConfigurationSelection_2:
+    n_configurations: 80
+    seed: 1234
+ML17_sampling_ConfigurationSelection_3:
+    n_configurations: 40
+    seed: 1234
+ML17_sampling_ConfigurationSelection_4:
+    n_configurations: 80
+    seed: 1234
+ML17_sampling_MixCalculator:
+    methods: sum
+ML17_sampling_TorchD3:
+    abc: false
+    cnthr: 7.93766
+    cutoff: 7.93766
+    damping: bj
+    dtype: float32
+    skin: 0.5
+    xc: b97-3c
 ML1_ASEGeoOpt:
     data_id: -1
     dump_rate: 1000

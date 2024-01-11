@@ -735,14 +735,15 @@ with project.group("ML16") as grp:
     ips.analysis.ForceDecomposition(data=prediction)
 
 
+thermostat = ips.calculators.LangevinThermostat(
+    temperature=298.15, friction=0.01, time_step=0.5
+)
 temperature_oszillator = ips.calculators.TemperatureOscillatingRampModifier(
     end_temperature=500,  # decomp ~ 290
     start_temperature=230,  # melting -75
     num_oscillations=10,
     temperature_amplitude=100,
 )
-
-
 barostat = ips.calculators.NPTThermostat(
     time_step=0.5,
     temperature=298,
@@ -755,7 +756,7 @@ barostat = ips.calculators.NPTThermostat(
 with project.group("ML17_sampling") as grp:
     geo_opt = ips.calculators.ASEGeoOpt(
         model=model,
-        data=md_nvt.atoms, # last configuration at experimental density
+        data=md_nvt.atoms, # latest configuration at experimental density
         data_id=-1,
         optimizer="FIRE",
         run_kwargs={"fmax": 0.5},
@@ -772,9 +773,19 @@ with project.group("ML17_sampling") as grp:
         sampling_rate=100,
     )
 
-    td3 = ips.calculators.TorchD3()
+    td3 = ips.calculators.TorchD3(
+        data=validation_data_nod3,
+        xc="b97-3c",
+        damping="bj",
+        cutoff=7.93766,
+        cnthr=7.93766,
+        abc=False,
+        dtype="float32",
+        skin=0.5,
+    )
+
     model_td3_mix = ips.calculators.MixCalculator(
-        data=data.atoms,
+        data=validation_data_nod3,
         calculators=[model, td3],
         methods="sum",
     )
@@ -799,14 +810,14 @@ with project.group("ML17_sampling") as grp:
     )
 
     val_selection_nvt = ips.configuration_selection.RandomSelection(
-        data=md_tempramp.atoms, n_configurations=20
+        data=md_tempramp.atoms, n_configurations=40
     )
     train_selection_nvt = ips.configuration_selection.RandomSelection(
         data=val_selection_nvt.excluded_atoms, n_configurations=80
     )
 
     val_selection_npt = ips.configuration_selection.RandomSelection(
-        data=md_npt.atoms, n_configurations=20
+        data=md_npt.atoms, n_configurations=40
     )
     train_selection_npt = ips.configuration_selection.RandomSelection(
         data=val_selection_npt.excluded_atoms, n_configurations=80

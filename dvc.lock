@@ -24703,3 +24703,596 @@ stages:
       hash: md5
       md5: 671e9a666fefaa0c05a63092aa42029d
       size: 3191034
+  ML17_sampling_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML17_sampling_ASEGeoOpt
+    deps:
+    - path: nodes/ML12/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 15c923c8e64cfee208de0fcfff369b0e
+      size: 314171
+    - path: nodes/ML12/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML12/ASEMD/node-meta.json
+      hash: md5
+      md5: 4cefdeb81210ee24ef483a32cdd46d86
+      size: 48
+    - path: nodes/ML12/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML12/ASEMD/trajectory.h5
+      hash: md5
+      md5: 961ea56fc378e1a17923e3349cee5f33
+      size: 160133104
+    - path: nodes/ML16/MLModel/apax_model
+      hash: md5
+      md5: 2dc05b16131084aa55faefa1fc92e8d7.dir
+      size: 42819526
+      nfiles: 10
+    - path: nodes/ML16/MLModel/log.csv
+      hash: md5
+      md5: 0d62bbb94d81bf3085e193be69413a76
+      size: 356821
+    - path: nodes/ML16/MLModel/metrics.json
+      hash: md5
+      md5: c24ff3ee7b4f484cc6a17ebf39eb4346
+      size: 390
+    - path: nodes/ML16/MLModel/node-meta.json
+      hash: md5
+      md5: 2e5613d9984616c5b0728e0899055b3d
+      size: 48
+    - path: nodes/ML16/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: 8b63beb005d7fab286a57b05315e56d2
+      size: 58529356
+    - path: nodes/ML16/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: a8c243cc6d8661a6bc83018996ecb092
+      size: 7908593
+    params:
+      params.yaml:
+        ML17_sampling_ASEGeoOpt:
+          data_id: -1
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: FIRE
+          repeat:
+          - 1
+          - 1
+          - 1
+          run_kwargs:
+            fmax: 0.5
+    outs:
+    - path: nodes/ML17_sampling/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_sampling/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 2d8b3b15b8d8a392e34a94144d7b3ba6
+      size: 48
+    - path: nodes/ML17_sampling/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 66934cb1a246a2a8546f2d8f0315cf8c
+      size: 792536
+  ML17_sampling_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML17_sampling_ConfigurationSelection
+    deps:
+    - path: nodes/ML16/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 40faec6948a278b884c2b8acef3aea49
+      size: 2625624
+    - path: nodes/ML16/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 36d65da3ce47fe9802fdf06984c20165.dir
+      size: 19958616
+      nfiles: 3
+    - path: nodes/ML16/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 363a506b21cdca4fe3ca8cda4bee67b8
+      size: 48
+    - path: nodes/ML16/MLModel/apax_model
+      hash: md5
+      md5: 2dc05b16131084aa55faefa1fc92e8d7.dir
+      size: 42819526
+      nfiles: 10
+    - path: nodes/ML16/MLModel/log.csv
+      hash: md5
+      md5: 0d62bbb94d81bf3085e193be69413a76
+      size: 356821
+    - path: nodes/ML16/MLModel/metrics.json
+      hash: md5
+      md5: c24ff3ee7b4f484cc6a17ebf39eb4346
+      size: 390
+    - path: nodes/ML16/MLModel/node-meta.json
+      hash: md5
+      md5: 2e5613d9984616c5b0728e0899055b3d
+      size: 48
+    - path: nodes/ML16/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: 8b63beb005d7fab286a57b05315e56d2
+      size: 58529356
+    - path: nodes/ML16/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: a8c243cc6d8661a6bc83018996ecb092
+      size: 7908593
+    - path: nodes/ML17_sampling/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_sampling/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 2d8b3b15b8d8a392e34a94144d7b3ba6
+      size: 48
+    - path: nodes/ML17_sampling/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 66934cb1a246a2a8546f2d8f0315cf8c
+      size: 792536
+    - path: nodes/wo_d3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7cb51ad96cc293f6c81f5526b3f2b730
+      size: 28342384
+    - path: nodes/wo_d3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a0f4d8cb132406052b502f4992bbe6bc.dir
+      size: 96838998
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 0527d6df4892c800317a43cb9556ec31
+      size: 48
+    params:
+      params.yaml:
+        ML17_sampling_ConfigurationSelection:
+          base_feature_map:
+            layer_name: dense_2
+            name: ll_grad
+          n_configurations: 4
+          selection_method: max_dist
+    outs:
+    - path: nodes/ML17_sampling/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: d514dec3ea99bf2e998e212a7851f854
+      size: 48
+    - path: nodes/ML17_sampling/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 042fe42ca695920d19de6751257168e1
+      size: 86
+    - path: nodes/ML17_sampling/ConfigurationSelection/selection.png
+      hash: md5
+      md5: d77368fed982843f3ef118f0e257dd8c
+      size: 24179
+  ML17_sampling_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_sampling_ASEMD
+    deps:
+    - path: nodes/ML16/MLModel/apax_model
+      hash: md5
+      md5: 2dc05b16131084aa55faefa1fc92e8d7.dir
+      size: 42819526
+      nfiles: 10
+    - path: nodes/ML16/MLModel/log.csv
+      hash: md5
+      md5: 0d62bbb94d81bf3085e193be69413a76
+      size: 356821
+    - path: nodes/ML16/MLModel/metrics.json
+      hash: md5
+      md5: c24ff3ee7b4f484cc6a17ebf39eb4346
+      size: 390
+    - path: nodes/ML16/MLModel/node-meta.json
+      hash: md5
+      md5: 2e5613d9984616c5b0728e0899055b3d
+      size: 48
+    - path: nodes/ML16/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: 8b63beb005d7fab286a57b05315e56d2
+      size: 58529356
+    - path: nodes/ML16/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: a8c243cc6d8661a6bc83018996ecb092
+      size: 7908593
+    - path: nodes/ML17_sampling/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_sampling/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 2d8b3b15b8d8a392e34a94144d7b3ba6
+      size: 48
+    - path: nodes/ML17_sampling/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 66934cb1a246a2a8546f2d8f0315cf8c
+      size: 792536
+    params:
+      params.yaml:
+        ML17_sampling_ASEMD:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 100
+          seed: 42
+          steps: 1000000
+          use_momenta: false
+          wrap: false
+        ML17_sampling_ASEMD+modifier+0:
+          end_temperature: 500
+          interval: 1
+          num_oscillations: 10
+          start_temperature: 230
+          temperature_amplitude: 100
+        ML17_sampling_ASEMD+thermostat:
+          friction: 0.01
+          temperature: 298.15
+          time_step: 0.5
+    outs:
+    - path: nodes/ML17_sampling/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: f833a09181b37f34970349cb727e23e8
+      size: 429538
+    - path: nodes/ML17_sampling/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_sampling/ASEMD/node-meta.json
+      hash: md5
+      md5: 3812ad356337b9a573f350ff95436d3b
+      size: 48
+    - path: nodes/ML17_sampling/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_sampling/ASEMD/trajectory.h5
+      hash: md5
+      md5: 657ab2219f12bf475184fcbc7e7089c6
+      size: 245582008
+  ML17_sampling_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name ML17_sampling_ConfigurationSelection_1
+    deps:
+    - path: nodes/ML17_sampling/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: f833a09181b37f34970349cb727e23e8
+      size: 429538
+    - path: nodes/ML17_sampling/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_sampling/ASEMD/node-meta.json
+      hash: md5
+      md5: 3812ad356337b9a573f350ff95436d3b
+      size: 48
+    - path: nodes/ML17_sampling/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_sampling/ASEMD/trajectory.h5
+      hash: md5
+      md5: 657ab2219f12bf475184fcbc7e7089c6
+      size: 245582008
+    params:
+      params.yaml:
+        ML17_sampling_ConfigurationSelection_1:
+          n_configurations: 40
+          seed: 1234
+    outs:
+    - path: nodes/ML17_sampling/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: 5a1e3a9773c1d77f77c31023d80e0839
+      size: 48
+    - path: nodes/ML17_sampling/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: d98311501fc75dd6153d294e015e4881
+      size: 594
+    - path: nodes/ML17_sampling/ConfigurationSelection_1/selection.png
+      hash: md5
+      md5: ff865bf0ea638656fd8ff4f0a8d30d8a
+      size: 20221
+  ML17_sampling_ConfigurationSelection_2:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name ML17_sampling_ConfigurationSelection_2
+    deps:
+    - path: nodes/ML17_sampling/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: 5a1e3a9773c1d77f77c31023d80e0839
+      size: 48
+    - path: nodes/ML17_sampling/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: d98311501fc75dd6153d294e015e4881
+      size: 594
+    - path: nodes/ML17_sampling/ConfigurationSelection_1/selection.png
+      hash: md5
+      md5: ff865bf0ea638656fd8ff4f0a8d30d8a
+      size: 20221
+    params:
+      params.yaml:
+        ML17_sampling_ConfigurationSelection_2:
+          n_configurations: 80
+          seed: 1234
+    outs:
+    - path: nodes/ML17_sampling/ConfigurationSelection_2/node-meta.json
+      hash: md5
+      md5: 2ef3b8a2dd05fdfe297bba522f2cde5e
+      size: 48
+    - path: nodes/ML17_sampling/ConfigurationSelection_2/selected_configurations.json
+      hash: md5
+      md5: 13da085c9b8ae313318b5e882799c46b
+      size: 1164
+    - path: nodes/ML17_sampling/ConfigurationSelection_2/selection.png
+      hash: md5
+      md5: f9bf387b60c54dfe0974595bde38a0ee
+      size: 20806
+  ML17_sampling_TorchD3:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name ML17_sampling_TorchD3
+    deps:
+    - path: nodes/ML16/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: aacd67088281052e93edf4007d7f73c5
+      size: 2504944
+    - path: nodes/ML16/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 37ed269c87f17128eee4740c046a2a91.dir
+      size: 19655563
+      nfiles: 3
+    - path: nodes/ML16/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: c704a5d9a27196d6cba51cf7117afc8a
+      size: 48
+    - path: nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 6681e087c96c058bd2688696e975c8ab
+      size: 1773688
+    - path: nodes/wo_d3/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 39852c2c7a57e954338c31ab50e11c73.dir
+      size: 18606425
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: 9cb78e43deac945332b51759560fc78e
+      size: 48
+    params:
+      params.yaml:
+        ML17_sampling_TorchD3:
+          abc: false
+          cnthr: 7.93766
+          cutoff: 7.93766
+          damping: bj
+          dtype: float32
+          skin: 0.5
+          xc: b97-3c
+    outs:
+    - path: nodes/ML17_sampling/TorchD3/atoms.h5
+      hash: md5
+      md5: 37501b7e8c9efb7df5f29938673d332e
+      size: 3446272
+    - path: nodes/ML17_sampling/TorchD3/node-meta.json
+      hash: md5
+      md5: d965819407be2f156113e2e94fece003
+      size: 48
+  ML17_sampling_MixCalculator:
+    cmd: zntrack run ipsuite.nodes.MixCalculator --name ML17_sampling_MixCalculator
+    deps:
+    - path: nodes/ML16/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: aacd67088281052e93edf4007d7f73c5
+      size: 2504944
+    - path: nodes/ML16/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 37ed269c87f17128eee4740c046a2a91.dir
+      size: 19655563
+      nfiles: 3
+    - path: nodes/ML16/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: c704a5d9a27196d6cba51cf7117afc8a
+      size: 48
+    - path: nodes/ML16/MLModel/apax_model
+      hash: md5
+      md5: 2dc05b16131084aa55faefa1fc92e8d7.dir
+      size: 42819526
+      nfiles: 10
+    - path: nodes/ML16/MLModel/log.csv
+      hash: md5
+      md5: 0d62bbb94d81bf3085e193be69413a76
+      size: 356821
+    - path: nodes/ML16/MLModel/metrics.json
+      hash: md5
+      md5: c24ff3ee7b4f484cc6a17ebf39eb4346
+      size: 390
+    - path: nodes/ML16/MLModel/node-meta.json
+      hash: md5
+      md5: 2e5613d9984616c5b0728e0899055b3d
+      size: 48
+    - path: nodes/ML16/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: 8b63beb005d7fab286a57b05315e56d2
+      size: 58529356
+    - path: nodes/ML16/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: a8c243cc6d8661a6bc83018996ecb092
+      size: 7908593
+    - path: nodes/ML17_sampling/TorchD3/atoms.h5
+      hash: md5
+      md5: 37501b7e8c9efb7df5f29938673d332e
+      size: 3446272
+    - path: nodes/ML17_sampling/TorchD3/node-meta.json
+      hash: md5
+      md5: d965819407be2f156113e2e94fece003
+      size: 48
+    - path: nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 6681e087c96c058bd2688696e975c8ab
+      size: 1773688
+    - path: nodes/wo_d3/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 39852c2c7a57e954338c31ab50e11c73.dir
+      size: 18606425
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: 9cb78e43deac945332b51759560fc78e
+      size: 48
+    params:
+      params.yaml:
+        ML17_sampling_MixCalculator:
+          methods: sum
+    outs:
+    - path: nodes/ML17_sampling/MixCalculator/atoms.h5
+      hash: md5
+      md5: ac9c8f834a55d34ce81e2c4d7bb794dd
+      size: 3440280
+    - path: nodes/ML17_sampling/MixCalculator/node-meta.json
+      hash: md5
+      md5: 81718b34b829ff8942ead8aaf8c1cc5f
+      size: 48
+  ML17_sampling_ASEMD_1:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_sampling_ASEMD_1
+    deps:
+    - path: nodes/ML17_sampling/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_sampling/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 2d8b3b15b8d8a392e34a94144d7b3ba6
+      size: 48
+    - path: nodes/ML17_sampling/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 66934cb1a246a2a8546f2d8f0315cf8c
+      size: 792536
+    - path: nodes/ML17_sampling/MixCalculator/atoms.h5
+      hash: md5
+      md5: ac9c8f834a55d34ce81e2c4d7bb794dd
+      size: 3440280
+    - path: nodes/ML17_sampling/MixCalculator/node-meta.json
+      hash: md5
+      md5: 81718b34b829ff8942ead8aaf8c1cc5f
+      size: 48
+    params:
+      params.yaml:
+        ML17_sampling_ASEMD_1:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 100
+          seed: 42
+          steps: 1000000
+          use_momenta: false
+          wrap: false
+        ML17_sampling_ASEMD_1+thermostat:
+          pfactor: 54.273
+          pressure: 6.324e-07
+          temperature: 298
+          tetragonal_strain: true
+          time_step: 0.5
+          ttime: 2.4557
+    outs:
+    - path: nodes/ML17_sampling/ASEMD_1/metrics_dict.csv
+      hash: md5
+      md5: fbc1dae410ef43482969e7528621871a
+      size: 429335
+    - path: nodes/ML17_sampling/ASEMD_1/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_sampling/ASEMD_1/node-meta.json
+      hash: md5
+      md5: 7482cc3dc0331d071a2d5f2b731bcd63
+      size: 48
+    - path: nodes/ML17_sampling/ASEMD_1/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_sampling/ASEMD_1/trajectory.h5
+      hash: md5
+      md5: 2b7f1f420e5c89d3062ce219c0c677d8
+      size: 245582008
+  ML17_sampling_ConfigurationSelection_3:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name ML17_sampling_ConfigurationSelection_3
+    deps:
+    - path: nodes/ML17_sampling/ASEMD_1/metrics_dict.csv
+      hash: md5
+      md5: fbc1dae410ef43482969e7528621871a
+      size: 429335
+    - path: nodes/ML17_sampling/ASEMD_1/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_sampling/ASEMD_1/node-meta.json
+      hash: md5
+      md5: 7482cc3dc0331d071a2d5f2b731bcd63
+      size: 48
+    - path: nodes/ML17_sampling/ASEMD_1/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_sampling/ASEMD_1/trajectory.h5
+      hash: md5
+      md5: 2b7f1f420e5c89d3062ce219c0c677d8
+      size: 245582008
+    params:
+      params.yaml:
+        ML17_sampling_ConfigurationSelection_3:
+          n_configurations: 40
+          seed: 1234
+    outs:
+    - path: nodes/ML17_sampling/ConfigurationSelection_3/node-meta.json
+      hash: md5
+      md5: d51ee92dee143e5ec4f5dd70ac6e3dbf
+      size: 48
+    - path: nodes/ML17_sampling/ConfigurationSelection_3/selected_configurations.json
+      hash: md5
+      md5: 0829d0fc8a9af7687af6a2f89b099abb
+      size: 596
+    - path: nodes/ML17_sampling/ConfigurationSelection_3/selection.png
+      hash: md5
+      md5: 6b56933b7719e6349dbcf6bbff423826
+      size: 26437
+  ML17_sampling_ConfigurationSelection_4:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name ML17_sampling_ConfigurationSelection_4
+    deps:
+    - path: nodes/ML17_sampling/ConfigurationSelection_3/node-meta.json
+      hash: md5
+      md5: d51ee92dee143e5ec4f5dd70ac6e3dbf
+      size: 48
+    - path: nodes/ML17_sampling/ConfigurationSelection_3/selected_configurations.json
+      hash: md5
+      md5: 0829d0fc8a9af7687af6a2f89b099abb
+      size: 596
+    - path: nodes/ML17_sampling/ConfigurationSelection_3/selection.png
+      hash: md5
+      md5: 6b56933b7719e6349dbcf6bbff423826
+      size: 26437
+    params:
+      params.yaml:
+        ML17_sampling_ConfigurationSelection_4:
+          n_configurations: 80
+          seed: 1234
+    outs:
+    - path: nodes/ML17_sampling/ConfigurationSelection_4/node-meta.json
+      hash: md5
+      md5: 27cb41076e709fa44c2a37e122975e10
+      size: 48
+    - path: nodes/ML17_sampling/ConfigurationSelection_4/selected_configurations.json
+      hash: md5
+      md5: 603c28ef1bada0184f32b4ce1990bc41
+      size: 1164
+    - path: nodes/ML17_sampling/ConfigurationSelection_4/selection.png
+      hash: md5
+      md5: 0e9bf2687d64088674515b642943dd50
+      size: 27208
