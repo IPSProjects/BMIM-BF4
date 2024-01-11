@@ -741,7 +741,7 @@ thermostat = ips.calculators.LangevinThermostat(
 temperature_oszillator = ips.calculators.TemperatureOscillatingRampModifier(
     end_temperature=500,  # decomp ~ 290
     start_temperature=230,  # melting -75
-    num_oscillations=10,
+    num_oscillations=5,
     temperature_amplitude=100,
 )
 barostat = ips.calculators.NPTThermostat(

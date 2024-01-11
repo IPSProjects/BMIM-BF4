@@ -24926,7 +24926,7 @@ stages:
         ML17_sampling_ASEMD+modifier+0:
           end_temperature: 500
           interval: 1
-          num_oscillations: 10
+          num_oscillations: 5
           start_temperature: 230
           temperature_amplitude: 100
         ML17_sampling_ASEMD+thermostat:
@@ -24936,8 +24936,8 @@ stages:
     outs:
     - path: nodes/ML17_sampling/ASEMD/metrics_dict.csv
       hash: md5
-      md5: f833a09181b37f34970349cb727e23e8
-      size: 429538
+      md5: fb65725861c6851c79deed29e88ce921
+      size: 429624
     - path: nodes/ML17_sampling/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -24945,7 +24945,7 @@ stages:
       nfiles: 1
     - path: nodes/ML17_sampling/ASEMD/node-meta.json
       hash: md5
-      md5: 3812ad356337b9a573f350ff95436d3b
+      md5: e4638a04c5b65621ebac2e0a1fd94fad
       size: 48
     - path: nodes/ML17_sampling/ASEMD/steps_before_stopping.json
       hash: md5
@@ -24953,15 +24953,15 @@ stages:
       size: 2
     - path: nodes/ML17_sampling/ASEMD/trajectory.h5
       hash: md5
-      md5: 657ab2219f12bf475184fcbc7e7089c6
+      md5: b31d16ee3d85f8cc4fdb5bdf5319674a
       size: 245582008
   ML17_sampling_ConfigurationSelection_1:
     cmd: zntrack run ipsuite.nodes.RandomSelection --name ML17_sampling_ConfigurationSelection_1
     deps:
     - path: nodes/ML17_sampling/ASEMD/metrics_dict.csv
       hash: md5
-      md5: f833a09181b37f34970349cb727e23e8
-      size: 429538
+      md5: fb65725861c6851c79deed29e88ce921
+      size: 429624
     - path: nodes/ML17_sampling/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -24969,7 +24969,7 @@ stages:
       nfiles: 1
     - path: nodes/ML17_sampling/ASEMD/node-meta.json
       hash: md5
-      md5: 3812ad356337b9a573f350ff95436d3b
+      md5: e4638a04c5b65621ebac2e0a1fd94fad
       size: 48
     - path: nodes/ML17_sampling/ASEMD/steps_before_stopping.json
       hash: md5
@@ -24977,7 +24977,7 @@ stages:
       size: 2
     - path: nodes/ML17_sampling/ASEMD/trajectory.h5
       hash: md5
-      md5: 657ab2219f12bf475184fcbc7e7089c6
+      md5: b31d16ee3d85f8cc4fdb5bdf5319674a
       size: 245582008
     params:
       params.yaml:
@@ -24987,7 +24987,7 @@ stages:
     outs:
     - path: nodes/ML17_sampling/ConfigurationSelection_1/node-meta.json
       hash: md5
-      md5: 5a1e3a9773c1d77f77c31023d80e0839
+      md5: 34002054a00d47c96c019f26ac0416bb
       size: 48
     - path: nodes/ML17_sampling/ConfigurationSelection_1/selected_configurations.json
       hash: md5
@@ -24995,14 +24995,14 @@ stages:
       size: 594
     - path: nodes/ML17_sampling/ConfigurationSelection_1/selection.png
       hash: md5
-      md5: ff865bf0ea638656fd8ff4f0a8d30d8a
-      size: 20221
+      md5: 9278595cde9a20b3f9cb4fc688fa3342
+      size: 36622
   ML17_sampling_ConfigurationSelection_2:
     cmd: zntrack run ipsuite.nodes.RandomSelection --name ML17_sampling_ConfigurationSelection_2
     deps:
     - path: nodes/ML17_sampling/ConfigurationSelection_1/node-meta.json
       hash: md5
-      md5: 5a1e3a9773c1d77f77c31023d80e0839
+      md5: 34002054a00d47c96c019f26ac0416bb
       size: 48
     - path: nodes/ML17_sampling/ConfigurationSelection_1/selected_configurations.json
       hash: md5
@@ -25010,8 +25010,8 @@ stages:
       size: 594
     - path: nodes/ML17_sampling/ConfigurationSelection_1/selection.png
       hash: md5
-      md5: ff865bf0ea638656fd8ff4f0a8d30d8a
-      size: 20221
+      md5: 9278595cde9a20b3f9cb4fc688fa3342
+      size: 36622
     params:
       params.yaml:
         ML17_sampling_ConfigurationSelection_2:
@@ -25020,7 +25020,7 @@ stages:
     outs:
     - path: nodes/ML17_sampling/ConfigurationSelection_2/node-meta.json
       hash: md5
-      md5: 2ef3b8a2dd05fdfe297bba522f2cde5e
+      md5: de6b4a80ce1217589d07c33ee30095fb
       size: 48
     - path: nodes/ML17_sampling/ConfigurationSelection_2/selected_configurations.json
       hash: md5
@@ -25028,8 +25028,8 @@ stages:
       size: 1164
     - path: nodes/ML17_sampling/ConfigurationSelection_2/selection.png
       hash: md5
-      md5: f9bf387b60c54dfe0974595bde38a0ee
-      size: 20806
+      md5: 4a8d1c78fdcfbcec3b3fc05a538c97cf
+      size: 37017
   ML17_sampling_TorchD3:
     cmd: zntrack run ipsuite.nodes.TorchD3 --name ML17_sampling_TorchD3
     deps:

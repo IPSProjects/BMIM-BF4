@@ -412,7 +412,7 @@ ML17_sampling_ASEMD:
 ML17_sampling_ASEMD+modifier+0:
     end_temperature: 500
     interval: 1
-    num_oscillations: 10
+    num_oscillations: 5
     start_temperature: 230
     temperature_amplitude: 100
 ML17_sampling_ASEMD+thermostat:
