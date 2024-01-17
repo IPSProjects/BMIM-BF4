@@ -25296,3 +25296,1854 @@ stages:
       hash: md5
       md5: 0e9bf2687d64088674515b642943dd50
       size: 27208
+  ML17_datasets_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML17_datasets_CP2KSinglePoint
+    deps:
+    - path: GTH_BASIS_SETS
+      hash: md5
+      md5: 518e733a7344699cf0b4192bb97eb6a3
+      size: 119403
+    - path: GTH_POTENTIALS
+      hash: md5
+      md5: 3a35b03b26b8ba5cf6c1d849dba11f15
+      size: 128982
+    - path: nodes/ML17_sampling/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: d514dec3ea99bf2e998e212a7851f854
+      size: 48
+    - path: nodes/ML17_sampling/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 042fe42ca695920d19de6751257168e1
+      size: 86
+    - path: nodes/ML17_sampling/ConfigurationSelection/selection.png
+      hash: md5
+      md5: d77368fed982843f3ef118f0e257dd8c
+      size: 24179
+    - path: nodes/ML17_sampling/ConfigurationSelection_2/node-meta.json
+      hash: md5
+      md5: de6b4a80ce1217589d07c33ee30095fb
+      size: 48
+    - path: nodes/ML17_sampling/ConfigurationSelection_2/selected_configurations.json
+      hash: md5
+      md5: 13da085c9b8ae313318b5e882799c46b
+      size: 1164
+    - path: nodes/ML17_sampling/ConfigurationSelection_2/selection.png
+      hash: md5
+      md5: 4a8d1c78fdcfbcec3b3fc05a538c97cf
+      size: 37017
+    - path: nodes/ML17_sampling/ConfigurationSelection_4/node-meta.json
+      hash: md5
+      md5: 27cb41076e709fa44c2a37e122975e10
+      size: 48
+    - path: nodes/ML17_sampling/ConfigurationSelection_4/selected_configurations.json
+      hash: md5
+      md5: 603c28ef1bada0184f32b4ce1990bc41
+      size: 1164
+    - path: nodes/ML17_sampling/ConfigurationSelection_4/selection.png
+      hash: md5
+      md5: 0e9bf2687d64088674515b642943dd50
+      size: 27208
+    params:
+      config/cp2k_wo_d3.yaml:
+        force_eval:
+          method: quickstep
+          DFT:
+            mgrid:
+              cutoff: 800
+              rel_cutoff: 60
+              ngrids: 5
+            QS:
+              eps_filter_matrix: 0.0
+              eps_pgf_orb: 0.0001
+            SCF:
+              scf_guess: restart
+              max_scf: 100
+              eps_scf: 1e-06
+              OT:
+                minimizer: diis
+                preconditioner: full_single_inverse
+              outer_scf:
+                max_scf: 100
+                eps_scf: 1e-06
+              print:
+                restart:
+                  each:
+                    QS_SCF: 0
+            XC:
+              xc_functional:
+                becke97:
+                  parametrization: B97-3c
+                  scale_c: 1.0
+                  scale_x: 1.0
+            charge: 0
+            basis_set_file_name: GTH_BASIS_SETS
+            potential_file_name: GTH_POTENTIALS
+          subsys:
+            kind:
+              N:
+                basis_set: TZVP-GTH-q5
+                potential: GTH-PBE-q5
+              C:
+                basis_set: TZVP-GTH-q4
+                potential: GTH-PBE-q4
+              H:
+                basis_set: TZVP-GTH-q1
+                potential: GTH-PBE-q1
+              B:
+                basis_set: TZVP-GTH-q3
+                potential: GTH-PBE-q3
+              F:
+                basis_set: TZVP-GTH-q7
+                potential: GTH-PBE-q7
+    outs:
+    - path: nodes/ML17_datasets/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 2b23ce66cf05e87b23ca92bb68941119
+      size: 4073528
+    - path: nodes/ML17_datasets/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7f07bdb61035d93bc23cf8fad5114877.dir
+      size: 23277821
+      nfiles: 3
+    - path: nodes/ML17_datasets/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: d33d4f55c20d1231bc5286951c367f0b
+      size: 48
+  ML17_datasets_TorchD3_2:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name ML17_datasets_TorchD3_2
+    deps:
+    - path: nodes/ML16/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 40faec6948a278b884c2b8acef3aea49
+      size: 2625624
+    - path: nodes/ML16/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 36d65da3ce47fe9802fdf06984c20165.dir
+      size: 19958616
+      nfiles: 3
+    - path: nodes/ML16/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 363a506b21cdca4fe3ca8cda4bee67b8
+      size: 48
+    - path: nodes/ML17_datasets/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 2b23ce66cf05e87b23ca92bb68941119
+      size: 4073528
+    - path: nodes/ML17_datasets/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7f07bdb61035d93bc23cf8fad5114877.dir
+      size: 23277821
+      nfiles: 3
+    - path: nodes/ML17_datasets/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: d33d4f55c20d1231bc5286951c367f0b
+      size: 48
+    - path: nodes/wo_d3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7cb51ad96cc293f6c81f5526b3f2b730
+      size: 28342384
+    - path: nodes/wo_d3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a0f4d8cb132406052b502f4992bbe6bc.dir
+      size: 96838998
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 0527d6df4892c800317a43cb9556ec31
+      size: 48
+    params:
+      params.yaml:
+        ML17_datasets_TorchD3_2:
+          abc: false
+          cnthr: 20.0
+          cutoff: 20.0
+          damping: bj
+          dtype: float32
+          skin: 0.0
+          xc: b97-3c
+    outs:
+    - path: nodes/ML17_datasets/TorchD3_2/atoms.h5
+      hash: md5
+      md5: f561656b76b51b6376275b18e92b4d98
+      size: 27607783
+    - path: nodes/ML17_datasets/TorchD3_2/node-meta.json
+      hash: md5
+      md5: b4f100aaf79d96a786521e39cbe185ae
+      size: 48
+  ML17_datasets_CP2KSinglePoint_1:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML17_datasets_CP2KSinglePoint_1
+    deps:
+    - path: GTH_BASIS_SETS
+      hash: md5
+      md5: 518e733a7344699cf0b4192bb97eb6a3
+      size: 119403
+    - path: GTH_POTENTIALS
+      hash: md5
+      md5: 3a35b03b26b8ba5cf6c1d849dba11f15
+      size: 128982
+    - path: nodes/ML17_sampling/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: 34002054a00d47c96c019f26ac0416bb
+      size: 48
+    - path: nodes/ML17_sampling/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: d98311501fc75dd6153d294e015e4881
+      size: 594
+    - path: nodes/ML17_sampling/ConfigurationSelection_1/selection.png
+      hash: md5
+      md5: 9278595cde9a20b3f9cb4fc688fa3342
+      size: 36622
+    - path: nodes/ML17_sampling/ConfigurationSelection_3/node-meta.json
+      hash: md5
+      md5: d51ee92dee143e5ec4f5dd70ac6e3dbf
+      size: 48
+    - path: nodes/ML17_sampling/ConfigurationSelection_3/selected_configurations.json
+      hash: md5
+      md5: 0829d0fc8a9af7687af6a2f89b099abb
+      size: 596
+    - path: nodes/ML17_sampling/ConfigurationSelection_3/selection.png
+      hash: md5
+      md5: 6b56933b7719e6349dbcf6bbff423826
+      size: 26437
+    params:
+      config/cp2k_wo_d3.yaml:
+        force_eval:
+          method: quickstep
+          DFT:
+            mgrid:
+              cutoff: 800
+              rel_cutoff: 60
+              ngrids: 5
+            QS:
+              eps_filter_matrix: 0.0
+              eps_pgf_orb: 0.0001
+            SCF:
+              scf_guess: restart
+              max_scf: 100
+              eps_scf: 1e-06
+              OT:
+                minimizer: diis
+                preconditioner: full_single_inverse
+              outer_scf:
+                max_scf: 100
+                eps_scf: 1e-06
+              print:
+                restart:
+                  each:
+                    QS_SCF: 0
+            XC:
+              xc_functional:
+                becke97:
+                  parametrization: B97-3c
+                  scale_c: 1.0
+                  scale_x: 1.0
+            charge: 0
+            basis_set_file_name: GTH_BASIS_SETS
+            potential_file_name: GTH_POTENTIALS
+          subsys:
+            kind:
+              N:
+                basis_set: TZVP-GTH-q5
+                potential: GTH-PBE-q5
+              C:
+                basis_set: TZVP-GTH-q4
+                potential: GTH-PBE-q4
+              H:
+                basis_set: TZVP-GTH-q1
+                potential: GTH-PBE-q1
+              B:
+                basis_set: TZVP-GTH-q3
+                potential: GTH-PBE-q3
+              F:
+                basis_set: TZVP-GTH-q7
+                potential: GTH-PBE-q7
+    outs:
+    - path: nodes/ML17_datasets/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 9db4d78457e35e82a4c58450d0eec289
+      size: 2022224
+    - path: nodes/ML17_datasets/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: f1e2aadbb9784afe0631f97de04bff77.dir
+      size: 17715402
+      nfiles: 3
+    - path: nodes/ML17_datasets/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: ddb901f23b269ab8422a4a1b0c0d9a05
+      size: 48
+  ML17_training_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML17_training_MLModel
+    deps:
+    - path: nodes/ML16/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 40faec6948a278b884c2b8acef3aea49
+      size: 2625624
+    - path: nodes/ML16/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 36d65da3ce47fe9802fdf06984c20165.dir
+      size: 19958616
+      nfiles: 3
+    - path: nodes/ML16/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 363a506b21cdca4fe3ca8cda4bee67b8
+      size: 48
+    - path: nodes/ML16/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: aacd67088281052e93edf4007d7f73c5
+      size: 2504944
+    - path: nodes/ML16/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 37ed269c87f17128eee4740c046a2a91.dir
+      size: 19655563
+      nfiles: 3
+    - path: nodes/ML16/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: c704a5d9a27196d6cba51cf7117afc8a
+      size: 48
+    - path: nodes/ML17_datasets/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 2b23ce66cf05e87b23ca92bb68941119
+      size: 4073528
+    - path: nodes/ML17_datasets/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7f07bdb61035d93bc23cf8fad5114877.dir
+      size: 23277821
+      nfiles: 3
+    - path: nodes/ML17_datasets/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: d33d4f55c20d1231bc5286951c367f0b
+      size: 48
+    - path: nodes/ML17_datasets/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 9db4d78457e35e82a4c58450d0eec289
+      size: 2022224
+    - path: nodes/ML17_datasets/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: f1e2aadbb9784afe0631f97de04bff77.dir
+      size: 17715402
+      nfiles: 3
+    - path: nodes/ML17_datasets/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: ddb901f23b269ab8422a4a1b0c0d9a05
+      size: 48
+    - path: nodes/wo_d3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7cb51ad96cc293f6c81f5526b3f2b730
+      size: 28342384
+    - path: nodes/wo_d3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a0f4d8cb132406052b502f4992bbe6bc.dir
+      size: 96838998
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 0527d6df4892c800317a43cb9556ec31
+      size: 48
+    - path: nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 6681e087c96c058bd2688696e975c8ab
+      size: 1773688
+    - path: nodes/wo_d3/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 39852c2c7a57e954338c31ab50e11c73.dir
+      size: 18606425
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: 9cb78e43deac945332b51759560fc78e
+      size: 48
+    params:
+      params.yaml:
+        ML17_training_MLModel:
+          jax_enable_x64: true
+          use_energy: true
+          use_forces: true
+          use_stresses: false
+      config/ml17_ensemble.yaml:
+        data:
+          batch_size: 1
+          scale_method: per_element_force_rms_scale
+          shift_method: per_element_regression_shift
+          shift_options:
+            energy_regularisation: 1.0
+          valid_batch_size: 70
+        loss:
+        - name: energy
+        - name: forces
+          weight: 4.0
+        - name: stress
+          weight: 0.2
+        metrics:
+        - name: energy
+          reductions:
+          - mae
+        - name: forces
+          reductions:
+          - mae
+        - name: stress
+          reductions:
+          - mae
+        model:
+          n_basis: 7
+          n_radial: 5
+          nn:
+          - 512
+          - 512
+          r_max: 6.0
+          r_min: 0.7
+          b_init: zeros
+          emb_init: uniform
+          calc_stress: true
+          use_zbl: false
+          descriptor_dtype: fp32
+          readout_dtype: fp32
+          scale_shift_dtype: fp32
+        n_epochs: 2000
+        n_jitted_steps: 8
+        n_models: 2
+        optimizer:
+          opt_name: adam
+          emb_lr: 0.01
+          nn_lr: 0.005
+          scale_lr: 0.001
+          shift_lr: 0.05
+          zbl_lr: 0.001
+        patience: 500
+        seed: 1
+    outs:
+    - path: nodes/ML17_training/MLModel/apax_model
+      hash: md5
+      md5: e02d226c99a6da5f0d86d8ddd0088866.dir
+      size: 85054063
+      nfiles: 10
+    - path: nodes/ML17_training/MLModel/log.csv
+      hash: md5
+      md5: 6b7a6d327cd2c5d89b5a47c6a5dce6b5
+      size: 118571
+    - path: nodes/ML17_training/MLModel/metrics.json
+      hash: md5
+      md5: 3d7f01f2de00c3bb423f426a764dccca
+      size: 390
+    - path: nodes/ML17_training/MLModel/node-meta.json
+      hash: md5
+      md5: 22b523ef425aa0575de0a2e370f5dec2
+      size: 48
+    - path: nodes/ML17_training/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: 58ab5b57b83be5c4083760d4e2ccac63
+      size: 66266892
+    - path: nodes/ML17_training/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 8e5bb5dce10f3ab7ed942c5d0a005ae9
+      size: 11683020
+  ML17_eval_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML17_eval_Prediction
+    deps:
+    - path: nodes/ML16/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: aacd67088281052e93edf4007d7f73c5
+      size: 2504944
+    - path: nodes/ML16/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 37ed269c87f17128eee4740c046a2a91.dir
+      size: 19655563
+      nfiles: 3
+    - path: nodes/ML16/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: c704a5d9a27196d6cba51cf7117afc8a
+      size: 48
+    - path: nodes/ML17_datasets/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 9db4d78457e35e82a4c58450d0eec289
+      size: 2022224
+    - path: nodes/ML17_datasets/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: f1e2aadbb9784afe0631f97de04bff77.dir
+      size: 17715402
+      nfiles: 3
+    - path: nodes/ML17_datasets/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: ddb901f23b269ab8422a4a1b0c0d9a05
+      size: 48
+    - path: nodes/ML17_training/MLModel/apax_model
+      hash: md5
+      md5: e02d226c99a6da5f0d86d8ddd0088866.dir
+      size: 85054063
+      nfiles: 10
+    - path: nodes/ML17_training/MLModel/log.csv
+      hash: md5
+      md5: 6b7a6d327cd2c5d89b5a47c6a5dce6b5
+      size: 118571
+    - path: nodes/ML17_training/MLModel/metrics.json
+      hash: md5
+      md5: 3d7f01f2de00c3bb423f426a764dccca
+      size: 390
+    - path: nodes/ML17_training/MLModel/node-meta.json
+      hash: md5
+      md5: 22b523ef425aa0575de0a2e370f5dec2
+      size: 48
+    - path: nodes/ML17_training/MLModel/train_atoms.extxyz
+      hash: md5
+      md5: 58ab5b57b83be5c4083760d4e2ccac63
+      size: 66266892
+    - path: nodes/ML17_training/MLModel/val_atoms.extxyz
+      hash: md5
+      md5: 8e5bb5dce10f3ab7ed942c5d0a005ae9
+      size: 11683020
+    - path: nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 6681e087c96c058bd2688696e975c8ab
+      size: 1773688
+    - path: nodes/wo_d3/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 39852c2c7a57e954338c31ab50e11c73.dir
+      size: 18606425
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: 9cb78e43deac945332b51759560fc78e
+      size: 48
+    outs:
+    - path: nodes/ML17_eval/Prediction/atoms.h5
+      hash: md5
+      md5: cbb5de0b3f124b04ab91ec25e50da445
+      size: 6852832
+    - path: nodes/ML17_eval/Prediction/node-meta.json
+      hash: md5
+      md5: 9987192da971345d84066a43db61db57
+      size: 48
+  ML17_eval_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML17_eval_PredictionMetrics
+    deps:
+    - path: nodes/ML17_eval/Prediction/atoms.h5
+      hash: md5
+      md5: cbb5de0b3f124b04ab91ec25e50da445
+      size: 6852832
+    - path: nodes/ML17_eval/Prediction/node-meta.json
+      hash: md5
+      md5: 9987192da971345d84066a43db61db57
+      size: 48
+    outs:
+    - path: nodes/ML17_eval/PredictionMetrics/deviat_stress.json
+      hash: md5
+      md5: 320f32dd6fc20a9beea1ade4dc935106
+      size: 209
+    - path: nodes/ML17_eval/PredictionMetrics/energy.json
+      hash: md5
+      md5: d1fe2bb36868e4271670afa80917f277
+      size: 189
+    - path: nodes/ML17_eval/PredictionMetrics/energy_df.csv
+      hash: md5
+      md5: 62fc0d5b459874b6b58a0a01f4df61c2
+      size: 11910
+    - path: nodes/ML17_eval/PredictionMetrics/forces.json
+      hash: md5
+      md5: c0f6c1195aed87b5eaeb50388419de24
+      size: 190
+    - path: nodes/ML17_eval/PredictionMetrics/forces_df.csv
+      hash: md5
+      md5: 2182110a56f287c4755e6dcb4450857f
+      size: 12647860
+    - path: nodes/ML17_eval/PredictionMetrics/hydro_stress.json
+      hash: md5
+      md5: 583f3db3aa3f6a9e79bbe2814ace101e
+      size: 208
+    - path: nodes/ML17_eval/PredictionMetrics/node-meta.json
+      hash: md5
+      md5: 8462deb6f770a109ad72a86d948ab622
+      size: 48
+    - path: nodes/ML17_eval/PredictionMetrics/plots
+      hash: md5
+      md5: d21dd0beee5767fc68f9180a20e1d038.dir
+      size: 317963
+      nfiles: 5
+    - path: nodes/ML17_eval/PredictionMetrics/stress.json
+      hash: md5
+      md5: a675f62022e78bd0acd2fa031c9620bd
+      size: 208
+    - path: nodes/ML17_eval/PredictionMetrics/stress_deviatoric_df.csv
+      hash: md5
+      md5: c882d24e43951d38ccc70c9adeed17d7
+      size: 119446
+    - path: nodes/ML17_eval/PredictionMetrics/stress_df.csv
+      hash: md5
+      md5: 5efdec746ffe843892603051fa632b2e
+      size: 116796
+    - path: nodes/ML17_eval/PredictionMetrics/stress_hydrostatic_df.csv
+      hash: md5
+      md5: 0bec0bd406b4a7fe3d9c4b518397b070
+      size: 13143
+  ML17_datasets_TorchD3_3:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name ML17_datasets_TorchD3_3
+    deps:
+    - path: nodes/ML16/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: aacd67088281052e93edf4007d7f73c5
+      size: 2504944
+    - path: nodes/ML16/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 37ed269c87f17128eee4740c046a2a91.dir
+      size: 19655563
+      nfiles: 3
+    - path: nodes/ML16/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: c704a5d9a27196d6cba51cf7117afc8a
+      size: 48
+    - path: nodes/ML17_datasets/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 9db4d78457e35e82a4c58450d0eec289
+      size: 2022224
+    - path: nodes/ML17_datasets/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: f1e2aadbb9784afe0631f97de04bff77.dir
+      size: 17715402
+      nfiles: 3
+    - path: nodes/ML17_datasets/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: ddb901f23b269ab8422a4a1b0c0d9a05
+      size: 48
+    - path: nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 6681e087c96c058bd2688696e975c8ab
+      size: 1773688
+    - path: nodes/wo_d3/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 39852c2c7a57e954338c31ab50e11c73.dir
+      size: 18606425
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: 9cb78e43deac945332b51759560fc78e
+      size: 48
+    params:
+      params.yaml:
+        ML17_datasets_TorchD3_3:
+          abc: false
+          cnthr: 20.0
+          cutoff: 20.0
+          damping: bj
+          dtype: float32
+          skin: 0.0
+          xc: b97-3c
+    outs:
+    - path: nodes/ML17_datasets/TorchD3_3/atoms.h5
+      hash: md5
+      md5: 184e2c8088e5742613133f5d3c26ddd3
+      size: 4800256
+    - path: nodes/ML17_datasets/TorchD3_3/node-meta.json
+      hash: md5
+      md5: 7b1e5f500c89090f471bffb586e96145
+      size: 48
+  ML17_datasets_TorchD3:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name ML17_datasets_TorchD3
+    deps:
+    - path: nodes/ML16/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 40faec6948a278b884c2b8acef3aea49
+      size: 2625624
+    - path: nodes/ML16/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 36d65da3ce47fe9802fdf06984c20165.dir
+      size: 19958616
+      nfiles: 3
+    - path: nodes/ML16/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 363a506b21cdca4fe3ca8cda4bee67b8
+      size: 48
+    - path: nodes/ML17_datasets/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 2b23ce66cf05e87b23ca92bb68941119
+      size: 4073528
+    - path: nodes/ML17_datasets/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7f07bdb61035d93bc23cf8fad5114877.dir
+      size: 23277821
+      nfiles: 3
+    - path: nodes/ML17_datasets/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: d33d4f55c20d1231bc5286951c367f0b
+      size: 48
+    - path: nodes/wo_d3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7cb51ad96cc293f6c81f5526b3f2b730
+      size: 28342384
+    - path: nodes/wo_d3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a0f4d8cb132406052b502f4992bbe6bc.dir
+      size: 96838998
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 0527d6df4892c800317a43cb9556ec31
+      size: 48
+    params:
+      params.yaml:
+        ML17_datasets_TorchD3:
+          abc: false
+          cnthr: 7.93766
+          cutoff: 7.93766
+          damping: bj
+          dtype: float32
+          skin: 0.0
+          xc: b97-3c
+    outs:
+    - path: nodes/ML17_datasets/TorchD3/atoms.h5
+      hash: md5
+      md5: 6103d479069f56ac746959755e327a0b
+      size: 27607783
+    - path: nodes/ML17_datasets/TorchD3/node-meta.json
+      hash: md5
+      md5: d0e6461f7f24fe4d41cbacbb302cef27
+      size: 48
+  ML17_datasets_TorchD3_1:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name ML17_datasets_TorchD3_1
+    deps:
+    - path: nodes/ML16/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: aacd67088281052e93edf4007d7f73c5
+      size: 2504944
+    - path: nodes/ML16/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 37ed269c87f17128eee4740c046a2a91.dir
+      size: 19655563
+      nfiles: 3
+    - path: nodes/ML16/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: c704a5d9a27196d6cba51cf7117afc8a
+      size: 48
+    - path: nodes/ML17_datasets/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 9db4d78457e35e82a4c58450d0eec289
+      size: 2022224
+    - path: nodes/ML17_datasets/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: f1e2aadbb9784afe0631f97de04bff77.dir
+      size: 17715402
+      nfiles: 3
+    - path: nodes/ML17_datasets/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: ddb901f23b269ab8422a4a1b0c0d9a05
+      size: 48
+    - path: nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+      hash: md5
+      md5: 6681e087c96c058bd2688696e975c8ab
+      size: 1773688
+    - path: nodes/wo_d3/CP2KSinglePoint_1/cp2k
+      hash: md5
+      md5: 39852c2c7a57e954338c31ab50e11c73.dir
+      size: 18606425
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+      hash: md5
+      md5: 9cb78e43deac945332b51759560fc78e
+      size: 48
+    params:
+      params.yaml:
+        ML17_datasets_TorchD3_1:
+          abc: false
+          cnthr: 7.93766
+          cutoff: 7.93766
+          damping: bj
+          dtype: float32
+          skin: 0.0
+          xc: b97-3c
+    outs:
+    - path: nodes/ML17_datasets/TorchD3_1/atoms.h5
+      hash: md5
+      md5: 0a1b6f6259665c84c1a8650550681465
+      size: 4800256
+    - path: nodes/ML17_datasets/TorchD3_1/node-meta.json
+      hash: md5
+      md5: 0d372a7cd0f4b3fa4b0e96211ae3d6ed
+      size: 48
+  ML17_training_MLModel_3:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML17_training_MLModel_3
+    deps:
+    - path: nodes/ML17_datasets/TorchD3_2/atoms.h5
+      hash: md5
+      md5: f561656b76b51b6376275b18e92b4d98
+      size: 27607783
+    - path: nodes/ML17_datasets/TorchD3_2/node-meta.json
+      hash: md5
+      md5: b4f100aaf79d96a786521e39cbe185ae
+      size: 48
+    - path: nodes/ML17_datasets/TorchD3_3/atoms.h5
+      hash: md5
+      md5: 184e2c8088e5742613133f5d3c26ddd3
+      size: 4800256
+    - path: nodes/ML17_datasets/TorchD3_3/node-meta.json
+      hash: md5
+      md5: 7b1e5f500c89090f471bffb586e96145
+      size: 48
+    params:
+      params.yaml:
+        ML17_training_MLModel_3:
+          jax_enable_x64: true
+          use_energy: true
+          use_forces: true
+          use_stresses: false
+      config/ml17_ensemble.yaml:
+        data:
+          batch_size: 1
+          scale_method: per_element_force_rms_scale
+          shift_method: per_element_regression_shift
+          shift_options:
+            energy_regularisation: 1.0
+          valid_batch_size: 70
+        loss:
+        - name: energy
+        - name: forces
+          weight: 4.0
+        - name: stress
+          weight: 0.2
+        metrics:
+        - name: energy
+          reductions:
+          - mae
+        - name: forces
+          reductions:
+          - mae
+        - name: stress
+          reductions:
+          - mae
+        model:
+          n_basis: 7
+          n_radial: 5
+          nn:
+          - 512
+          - 512
+          r_max: 6.0
+          r_min: 0.7
+          b_init: zeros
+          emb_init: uniform
+          calc_stress: true
+          use_zbl: false
+          descriptor_dtype: fp32
+          readout_dtype: fp32
+          scale_shift_dtype: fp32
+        n_epochs: 2000
+        n_jitted_steps: 8
+        n_models: 2
+        optimizer:
+          opt_name: adam
+          emb_lr: 0.01
+          nn_lr: 0.005
+          scale_lr: 0.001
+          shift_lr: 0.05
+          zbl_lr: 0.001
+        patience: 500
+        seed: 1
+    outs:
+    - path: nodes/ML17_training/MLModel_3/apax_model
+      hash: md5
+      md5: b9404d50b05db1d543ca0a638c0471f8.dir
+      size: 85054069
+      nfiles: 10
+    - path: nodes/ML17_training/MLModel_3/log.csv
+      hash: md5
+      md5: 053d37c1ab647c9fdb13d35af157d900
+      size: 127818
+    - path: nodes/ML17_training/MLModel_3/metrics.json
+      hash: md5
+      md5: 68a0cb1b55e23e3c8da7698d27a394d0
+      size: 388
+    - path: nodes/ML17_training/MLModel_3/node-meta.json
+      hash: md5
+      md5: 72c661d0d71e44216f9c9d7eb1d19147
+      size: 48
+    - path: nodes/ML17_training/MLModel_3/train_atoms.extxyz
+      hash: md5
+      md5: 0f74f58daab97bb9f5bc01bbd1e6037f
+      size: 50704029
+    - path: nodes/ML17_training/MLModel_3/val_atoms.extxyz
+      hash: md5
+      md5: 5e8085ac83d16de1ae56af6eff38ca8b
+      size: 8933614
+  ML17_eval_Prediction_3:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML17_eval_Prediction_3
+    deps:
+    - path: nodes/ML17_datasets/TorchD3_3/atoms.h5
+      hash: md5
+      md5: 184e2c8088e5742613133f5d3c26ddd3
+      size: 4800256
+    - path: nodes/ML17_datasets/TorchD3_3/node-meta.json
+      hash: md5
+      md5: 7b1e5f500c89090f471bffb586e96145
+      size: 48
+    - path: nodes/ML17_training/MLModel_3/apax_model
+      hash: md5
+      md5: b9404d50b05db1d543ca0a638c0471f8.dir
+      size: 85054069
+      nfiles: 10
+    - path: nodes/ML17_training/MLModel_3/log.csv
+      hash: md5
+      md5: 053d37c1ab647c9fdb13d35af157d900
+      size: 127818
+    - path: nodes/ML17_training/MLModel_3/metrics.json
+      hash: md5
+      md5: 68a0cb1b55e23e3c8da7698d27a394d0
+      size: 388
+    - path: nodes/ML17_training/MLModel_3/node-meta.json
+      hash: md5
+      md5: 72c661d0d71e44216f9c9d7eb1d19147
+      size: 48
+    - path: nodes/ML17_training/MLModel_3/train_atoms.extxyz
+      hash: md5
+      md5: 0f74f58daab97bb9f5bc01bbd1e6037f
+      size: 50704029
+    - path: nodes/ML17_training/MLModel_3/val_atoms.extxyz
+      hash: md5
+      md5: 5e8085ac83d16de1ae56af6eff38ca8b
+      size: 8933614
+    outs:
+    - path: nodes/ML17_eval/Prediction_3/atoms.h5
+      hash: md5
+      md5: 84cf97c1fe0eed752a254508e57054ec
+      size: 6852832
+    - path: nodes/ML17_eval/Prediction_3/node-meta.json
+      hash: md5
+      md5: a0589edfff3d3ce6136257008b31b118
+      size: 48
+  ML17_eval_PredictionMetrics_3:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML17_eval_PredictionMetrics_3
+    deps:
+    - path: nodes/ML17_eval/Prediction_3/atoms.h5
+      hash: md5
+      md5: 84cf97c1fe0eed752a254508e57054ec
+      size: 6852832
+    - path: nodes/ML17_eval/Prediction_3/node-meta.json
+      hash: md5
+      md5: a0589edfff3d3ce6136257008b31b118
+      size: 48
+    outs:
+    - path: nodes/ML17_eval/PredictionMetrics_3/deviat_stress.json
+      hash: md5
+      md5: ce7b701d26ed6094d6f5b84206874f10
+      size: 210
+    - path: nodes/ML17_eval/PredictionMetrics_3/energy.json
+      hash: md5
+      md5: 28541537cd56101470ce654a90f4b2a0
+      size: 188
+    - path: nodes/ML17_eval/PredictionMetrics_3/energy_df.csv
+      hash: md5
+      md5: 59011cfaac6c433d9574422652afed96
+      size: 12039
+    - path: nodes/ML17_eval/PredictionMetrics_3/forces.json
+      hash: md5
+      md5: 813a6037be771c1c1b848d21b645b21d
+      size: 189
+    - path: nodes/ML17_eval/PredictionMetrics_3/forces_df.csv
+      hash: md5
+      md5: 3ff574ecb9e0251cd03cedb0811d39bd
+      size: 13088901
+    - path: nodes/ML17_eval/PredictionMetrics_3/hydro_stress.json
+      hash: md5
+      md5: 64350cb634642f249dbec138b1b2e927
+      size: 207
+    - path: nodes/ML17_eval/PredictionMetrics_3/node-meta.json
+      hash: md5
+      md5: 883610efa3f1deb1f1f1bed49a147aa5
+      size: 48
+    - path: nodes/ML17_eval/PredictionMetrics_3/plots
+      hash: md5
+      md5: 371d80667842056419f2c6a55908d14e.dir
+      size: 330580
+      nfiles: 5
+    - path: nodes/ML17_eval/PredictionMetrics_3/stress.json
+      hash: md5
+      md5: 13bc9a7ced645cb1699ae827b7844e76
+      size: 208
+    - path: nodes/ML17_eval/PredictionMetrics_3/stress_deviatoric_df.csv
+      hash: md5
+      md5: d6182d86ad99bd604d2a5bcccd02c4b7
+      size: 123821
+    - path: nodes/ML17_eval/PredictionMetrics_3/stress_df.csv
+      hash: md5
+      md5: e8b4a77512b98df0f4322bb49d3edb10
+      size: 122809
+    - path: nodes/ML17_eval/PredictionMetrics_3/stress_hydrostatic_df.csv
+      hash: md5
+      md5: 1b5454d6cd24aca554c50533f17bedbe
+      size: 13201
+  ML17_eval_EnergyHistogram_1:
+    cmd: zntrack run ipsuite.nodes.EnergyHistogram --name ML17_eval_EnergyHistogram_1
+    deps:
+    - path: nodes/ML17_datasets/TorchD3/atoms.h5
+      hash: md5
+      md5: 6103d479069f56ac746959755e327a0b
+      size: 27607783
+    - path: nodes/ML17_datasets/TorchD3/node-meta.json
+      hash: md5
+      md5: d0e6461f7f24fe4d41cbacbb302cef27
+      size: 48
+    params:
+      params.yaml:
+        ML17_eval_EnergyHistogram_1:
+          bins: 100
+          x_lim:
+          y_lim:
+    outs:
+    - path: nodes/ML17_eval/EnergyHistogram_1/labels_df.csv
+      hash: md5
+      md5: 45adeddfc5b07001a7b3cb9c2b849c50
+      size: 2473
+    - path: nodes/ML17_eval/EnergyHistogram_1/metrics.json
+      hash: md5
+      md5: 33a5a6106034da3c27b31f93abb318ee
+      size: 125
+    - path: nodes/ML17_eval/EnergyHistogram_1/node-meta.json
+      hash: md5
+      md5: e9b76f49f3b2cc9d2a0e600f99682d67
+      size: 48
+    - path: nodes/ML17_eval/EnergyHistogram_1/plots
+      hash: md5
+      md5: fba747dc80421ecd04eb2bd7eff3dbdc.dir
+      size: 16313
+      nfiles: 1
+  ML17_training_MLModel_1:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML17_training_MLModel_1
+    deps:
+    - path: nodes/ML17_datasets/TorchD3/atoms.h5
+      hash: md5
+      md5: 6103d479069f56ac746959755e327a0b
+      size: 27607783
+    - path: nodes/ML17_datasets/TorchD3/node-meta.json
+      hash: md5
+      md5: d0e6461f7f24fe4d41cbacbb302cef27
+      size: 48
+    - path: nodes/ML17_datasets/TorchD3_1/atoms.h5
+      hash: md5
+      md5: 0a1b6f6259665c84c1a8650550681465
+      size: 4800256
+    - path: nodes/ML17_datasets/TorchD3_1/node-meta.json
+      hash: md5
+      md5: 0d372a7cd0f4b3fa4b0e96211ae3d6ed
+      size: 48
+    params:
+      params.yaml:
+        ML17_training_MLModel_1:
+          jax_enable_x64: true
+          use_energy: true
+          use_forces: true
+          use_stresses: false
+      config/ml17_ensemble.yaml:
+        data:
+          batch_size: 1
+          scale_method: per_element_force_rms_scale
+          shift_method: per_element_regression_shift
+          shift_options:
+            energy_regularisation: 1.0
+          valid_batch_size: 70
+        loss:
+        - name: energy
+        - name: forces
+          weight: 4.0
+        - name: stress
+          weight: 0.2
+        metrics:
+        - name: energy
+          reductions:
+          - mae
+        - name: forces
+          reductions:
+          - mae
+        - name: stress
+          reductions:
+          - mae
+        model:
+          n_basis: 7
+          n_radial: 5
+          nn:
+          - 512
+          - 512
+          r_max: 6.0
+          r_min: 0.7
+          b_init: zeros
+          emb_init: uniform
+          calc_stress: true
+          use_zbl: false
+          descriptor_dtype: fp32
+          readout_dtype: fp32
+          scale_shift_dtype: fp32
+        n_epochs: 2000
+        n_jitted_steps: 8
+        n_models: 2
+        optimizer:
+          opt_name: adam
+          emb_lr: 0.01
+          nn_lr: 0.005
+          scale_lr: 0.001
+          shift_lr: 0.05
+          zbl_lr: 0.001
+        patience: 500
+        seed: 1
+    outs:
+    - path: nodes/ML17_training/MLModel_1/apax_model
+      hash: md5
+      md5: d7678afd0cb163733fbfd407fef3eae2.dir
+      size: 85054069
+      nfiles: 10
+    - path: nodes/ML17_training/MLModel_1/log.csv
+      hash: md5
+      md5: 3607ffe4448f09d2af3c742921523997
+      size: 127837
+    - path: nodes/ML17_training/MLModel_1/metrics.json
+      hash: md5
+      md5: 5c46e3b2a689b5baa294c3d5b98daad0
+      size: 390
+    - path: nodes/ML17_training/MLModel_1/node-meta.json
+      hash: md5
+      md5: a8064a6ba7ef8aa7568f1da78634ae81
+      size: 48
+    - path: nodes/ML17_training/MLModel_1/train_atoms.extxyz
+      hash: md5
+      md5: 4b24dcda97a81a2018dd430b350725cc
+      size: 50703910
+    - path: nodes/ML17_training/MLModel_1/val_atoms.extxyz
+      hash: md5
+      md5: f610bf1397ca89bf56a9edc2ed047b3d
+      size: 8933596
+  ML17_eval_Prediction_1:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML17_eval_Prediction_1
+    deps:
+    - path: nodes/ML17_datasets/TorchD3_1/atoms.h5
+      hash: md5
+      md5: 0a1b6f6259665c84c1a8650550681465
+      size: 4800256
+    - path: nodes/ML17_datasets/TorchD3_1/node-meta.json
+      hash: md5
+      md5: 0d372a7cd0f4b3fa4b0e96211ae3d6ed
+      size: 48
+    - path: nodes/ML17_training/MLModel_1/apax_model
+      hash: md5
+      md5: d7678afd0cb163733fbfd407fef3eae2.dir
+      size: 85054069
+      nfiles: 10
+    - path: nodes/ML17_training/MLModel_1/log.csv
+      hash: md5
+      md5: 3607ffe4448f09d2af3c742921523997
+      size: 127837
+    - path: nodes/ML17_training/MLModel_1/metrics.json
+      hash: md5
+      md5: 5c46e3b2a689b5baa294c3d5b98daad0
+      size: 390
+    - path: nodes/ML17_training/MLModel_1/node-meta.json
+      hash: md5
+      md5: a8064a6ba7ef8aa7568f1da78634ae81
+      size: 48
+    - path: nodes/ML17_training/MLModel_1/train_atoms.extxyz
+      hash: md5
+      md5: 4b24dcda97a81a2018dd430b350725cc
+      size: 50703910
+    - path: nodes/ML17_training/MLModel_1/val_atoms.extxyz
+      hash: md5
+      md5: f610bf1397ca89bf56a9edc2ed047b3d
+      size: 8933596
+    outs:
+    - path: nodes/ML17_eval/Prediction_1/atoms.h5
+      hash: md5
+      md5: 7154936e672aee261374f4bb80498448
+      size: 6852832
+    - path: nodes/ML17_eval/Prediction_1/node-meta.json
+      hash: md5
+      md5: 806b96d5fbb92c8a69f92580df9593d0
+      size: 48
+  ML17_eval_ForcesHistogram_1:
+    cmd: zntrack run ipsuite.nodes.ForcesHistogram --name ML17_eval_ForcesHistogram_1
+    deps:
+    - path: nodes/ML17_datasets/TorchD3/atoms.h5
+      hash: md5
+      md5: 6103d479069f56ac746959755e327a0b
+      size: 27607783
+    - path: nodes/ML17_datasets/TorchD3/node-meta.json
+      hash: md5
+      md5: d0e6461f7f24fe4d41cbacbb302cef27
+      size: 48
+    params:
+      params.yaml:
+        ML17_eval_ForcesHistogram_1:
+          bins:
+          x_lim:
+          y_lim:
+    outs:
+    - path: nodes/ML17_eval/ForcesHistogram_1/labels_df.csv
+      hash: md5
+      md5: 75f86f1101ae8418876ebd2f2db27a0e
+      size: 123006
+    - path: nodes/ML17_eval/ForcesHistogram_1/metrics.json
+      hash: md5
+      md5: 254f089b418bbb247a84fe978cf436a1
+      size: 126
+    - path: nodes/ML17_eval/ForcesHistogram_1/node-meta.json
+      hash: md5
+      md5: ef0b81f10db2fc78f23b9fa563798114
+      size: 48
+    - path: nodes/ML17_eval/ForcesHistogram_1/plots
+      hash: md5
+      md5: c701e793690ef2643340d9b7b435a517.dir
+      size: 33926
+      nfiles: 1
+  ML17_training_MLModel_2:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML17_training_MLModel_2
+    deps:
+    - path: nodes/ML17_datasets/TorchD3/atoms.h5
+      hash: md5
+      md5: 6103d479069f56ac746959755e327a0b
+      size: 27607783
+    - path: nodes/ML17_datasets/TorchD3/node-meta.json
+      hash: md5
+      md5: d0e6461f7f24fe4d41cbacbb302cef27
+      size: 48
+    - path: nodes/ML17_datasets/TorchD3_1/atoms.h5
+      hash: md5
+      md5: 0a1b6f6259665c84c1a8650550681465
+      size: 4800256
+    - path: nodes/ML17_datasets/TorchD3_1/node-meta.json
+      hash: md5
+      md5: 0d372a7cd0f4b3fa4b0e96211ae3d6ed
+      size: 48
+    params:
+      params.yaml:
+        ML17_training_MLModel_2:
+          jax_enable_x64: true
+          use_energy: true
+          use_forces: true
+          use_stresses: false
+      config/ml17_ensemble_long_cutoff.yaml:
+        data:
+          batch_size: 1
+          scale_method: per_element_force_rms_scale
+          shift_method: per_element_regression_shift
+          shift_options:
+            energy_regularisation: 1.0
+          valid_batch_size: 35
+        loss:
+        - name: energy
+        - name: forces
+          weight: 4.0
+        - name: stress
+          weight: 0.2
+        metrics:
+        - name: energy
+          reductions:
+          - mae
+        - name: forces
+          reductions:
+          - mae
+        - name: stress
+          reductions:
+          - mae
+        model:
+          n_basis: 7
+          n_radial: 5
+          nn:
+          - 512
+          - 512
+          r_max: 7.93766
+          r_min: 0.7
+          b_init: zeros
+          emb_init: uniform
+          calc_stress: true
+          use_zbl: false
+          descriptor_dtype: fp32
+          readout_dtype: fp32
+          scale_shift_dtype: fp32
+        n_epochs: 2000
+        n_jitted_steps: 8
+        n_models: 2
+        optimizer:
+          opt_name: adam
+          emb_lr: 0.01
+          nn_lr: 0.005
+          scale_lr: 0.001
+          shift_lr: 0.05
+          zbl_lr: 0.001
+        patience: 500
+        seed: 1
+    outs:
+    - path: nodes/ML17_training/MLModel_2/apax_model
+      hash: md5
+      md5: af5aa967fa5f16d9d2f82f05df15a884.dir
+      size: 85054073
+      nfiles: 10
+    - path: nodes/ML17_training/MLModel_2/log.csv
+      hash: md5
+      md5: 6fc93f81eca79be5db216fb231676f37
+      size: 123298
+    - path: nodes/ML17_training/MLModel_2/metrics.json
+      hash: md5
+      md5: 641acbd3f5f58c86a195ec00f4de7650
+      size: 387
+    - path: nodes/ML17_training/MLModel_2/node-meta.json
+      hash: md5
+      md5: 33f91350843a5143788a13e6c59662e2
+      size: 48
+    - path: nodes/ML17_training/MLModel_2/train_atoms.extxyz
+      hash: md5
+      md5: 4b24dcda97a81a2018dd430b350725cc
+      size: 50703910
+    - path: nodes/ML17_training/MLModel_2/val_atoms.extxyz
+      hash: md5
+      md5: f610bf1397ca89bf56a9edc2ed047b3d
+      size: 8933596
+  ML17_eval_Prediction_2:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML17_eval_Prediction_2
+    deps:
+    - path: nodes/ML17_datasets/TorchD3_1/atoms.h5
+      hash: md5
+      md5: 0a1b6f6259665c84c1a8650550681465
+      size: 4800256
+    - path: nodes/ML17_datasets/TorchD3_1/node-meta.json
+      hash: md5
+      md5: 0d372a7cd0f4b3fa4b0e96211ae3d6ed
+      size: 48
+    - path: nodes/ML17_training/MLModel_2/apax_model
+      hash: md5
+      md5: af5aa967fa5f16d9d2f82f05df15a884.dir
+      size: 85054073
+      nfiles: 10
+    - path: nodes/ML17_training/MLModel_2/log.csv
+      hash: md5
+      md5: 6fc93f81eca79be5db216fb231676f37
+      size: 123298
+    - path: nodes/ML17_training/MLModel_2/metrics.json
+      hash: md5
+      md5: 641acbd3f5f58c86a195ec00f4de7650
+      size: 387
+    - path: nodes/ML17_training/MLModel_2/node-meta.json
+      hash: md5
+      md5: 33f91350843a5143788a13e6c59662e2
+      size: 48
+    - path: nodes/ML17_training/MLModel_2/train_atoms.extxyz
+      hash: md5
+      md5: 4b24dcda97a81a2018dd430b350725cc
+      size: 50703910
+    - path: nodes/ML17_training/MLModel_2/val_atoms.extxyz
+      hash: md5
+      md5: f610bf1397ca89bf56a9edc2ed047b3d
+      size: 8933596
+    outs:
+    - path: nodes/ML17_eval/Prediction_2/atoms.h5
+      hash: md5
+      md5: 77f07cc0254844538ef7132c21a9da8d
+      size: 6852832
+    - path: nodes/ML17_eval/Prediction_2/node-meta.json
+      hash: md5
+      md5: e035364c0951680052448b3158e7eb8d
+      size: 48
+  ML17_eval_PredictionMetrics_2:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML17_eval_PredictionMetrics_2
+    deps:
+    - path: nodes/ML17_eval/Prediction_2/atoms.h5
+      hash: md5
+      md5: 77f07cc0254844538ef7132c21a9da8d
+      size: 6852832
+    - path: nodes/ML17_eval/Prediction_2/node-meta.json
+      hash: md5
+      md5: e035364c0951680052448b3158e7eb8d
+      size: 48
+    outs:
+    - path: nodes/ML17_eval/PredictionMetrics_2/deviat_stress.json
+      hash: md5
+      md5: 3d0fec37e89c0afb0fbb331b9123f1f1
+      size: 204
+    - path: nodes/ML17_eval/PredictionMetrics_2/energy.json
+      hash: md5
+      md5: 448db5dc5abf27bfd9e8ef744f3a6902
+      size: 190
+    - path: nodes/ML17_eval/PredictionMetrics_2/energy_df.csv
+      hash: md5
+      md5: 33f2a355f900bc4caa7e383b2c404e56
+      size: 12061
+    - path: nodes/ML17_eval/PredictionMetrics_2/forces.json
+      hash: md5
+      md5: c0c5842f38c0261266abb7ce2cb6f9ce
+      size: 189
+    - path: nodes/ML17_eval/PredictionMetrics_2/forces_df.csv
+      hash: md5
+      md5: 57e0f386698a3867b8bc44232a2fa980
+      size: 13088823
+    - path: nodes/ML17_eval/PredictionMetrics_2/hydro_stress.json
+      hash: md5
+      md5: 8ea8f529b213df31d57a24833004089c
+      size: 205
+    - path: nodes/ML17_eval/PredictionMetrics_2/node-meta.json
+      hash: md5
+      md5: d603d7b31a96e5e2ffcd1ae2778c7722
+      size: 48
+    - path: nodes/ML17_eval/PredictionMetrics_2/plots
+      hash: md5
+      md5: 23820eba6dde7816c8c3f0c67f60daf0.dir
+      size: 554904
+      nfiles: 5
+    - path: nodes/ML17_eval/PredictionMetrics_2/stress.json
+      hash: md5
+      md5: c41ff60d2dac309562b86d845a0791b5
+      size: 205
+    - path: nodes/ML17_eval/PredictionMetrics_2/stress_deviatoric_df.csv
+      hash: md5
+      md5: d7c8dcdbebcfbd3132d9527b0f8d3484
+      size: 123842
+    - path: nodes/ML17_eval/PredictionMetrics_2/stress_df.csv
+      hash: md5
+      md5: 3366447de0355bfadbe631bc53ff56e5
+      size: 123146
+    - path: nodes/ML17_eval/PredictionMetrics_2/stress_hydrostatic_df.csv
+      hash: md5
+      md5: af467deb9bf1b5c71dd807a781df0872
+      size: 13281
+  ML17_eval_ForceDecomposition_1:
+    cmd: zntrack run ipsuite.nodes.ForceDecomposition --name ML17_eval_ForceDecomposition_1
+    deps:
+    - path: nodes/ML17_eval/Prediction_1/atoms.h5
+      hash: md5
+      md5: 7154936e672aee261374f4bb80498448
+      size: 6852832
+    - path: nodes/ML17_eval/Prediction_1/node-meta.json
+      hash: md5
+      md5: 806b96d5fbb92c8a69f92580df9593d0
+      size: 48
+    outs:
+    - path: nodes/ML17_eval/ForceDecomposition_1/histogram.png
+      hash: md5
+      md5: 515eb1a1e5710dddb750326c7ac7c977
+      size: 121604
+    - path: nodes/ML17_eval/ForceDecomposition_1/node-meta.json
+      hash: md5
+      md5: 2519d31da88b411990ef2bfa52fc1584
+      size: 48
+    - path: nodes/ML17_eval/ForceDecomposition_1/rot_force.png
+      hash: md5
+      md5: 7a6bf3bab6a68c676bb1adcfd569e62f
+      size: 121495
+    - path: nodes/ML17_eval/ForceDecomposition_1/rot_forces.json
+      hash: md5
+      md5: 44496e035bf7735232e081532531e0f5
+      size: 191
+    - path: nodes/ML17_eval/ForceDecomposition_1/trans_force.png
+      hash: md5
+      md5: 730ab7cafeadebd7ca9d30c9ffed652b
+      size: 109537
+    - path: nodes/ML17_eval/ForceDecomposition_1/trans_forces.json
+      hash: md5
+      md5: d3db685c9aba9adea3fbf469237c51f0
+      size: 190
+    - path: nodes/ML17_eval/ForceDecomposition_1/vib_force.png
+      hash: md5
+      md5: c4d828d0064a39032c0792063d29e1a1
+      size: 59134
+    - path: nodes/ML17_eval/ForceDecomposition_1/vib_forces.json
+      hash: md5
+      md5: bb06a8bf63565ae1724a6797d3d4e16b
+      size: 189
+    - path: nodes/ML17_eval/ForceDecomposition_1/wasserstein_distance.json
+      hash: md5
+      md5: 9b908563d818eb2c5a199fdefb476734
+      size: 549
+  ML17_eval_PredictionMetrics_1:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML17_eval_PredictionMetrics_1
+    deps:
+    - path: nodes/ML17_eval/Prediction_1/atoms.h5
+      hash: md5
+      md5: 7154936e672aee261374f4bb80498448
+      size: 6852832
+    - path: nodes/ML17_eval/Prediction_1/node-meta.json
+      hash: md5
+      md5: 806b96d5fbb92c8a69f92580df9593d0
+      size: 48
+    outs:
+    - path: nodes/ML17_eval/PredictionMetrics_1/deviat_stress.json
+      hash: md5
+      md5: 1a0bb59e204f4d1e75c8bc5ad3498aec
+      size: 207
+    - path: nodes/ML17_eval/PredictionMetrics_1/energy.json
+      hash: md5
+      md5: 8e4c79d7139fae71db63c40953bea84b
+      size: 185
+    - path: nodes/ML17_eval/PredictionMetrics_1/energy_df.csv
+      hash: md5
+      md5: f3031bbfb70371edfa584a7482f24c3a
+      size: 12067
+    - path: nodes/ML17_eval/PredictionMetrics_1/forces.json
+      hash: md5
+      md5: 7472dec77c6cb08854b25f3602e615a2
+      size: 190
+    - path: nodes/ML17_eval/PredictionMetrics_1/forces_df.csv
+      hash: md5
+      md5: d8518485891aba9a47867d0b17d83747
+      size: 13088986
+    - path: nodes/ML17_eval/PredictionMetrics_1/hydro_stress.json
+      hash: md5
+      md5: fb34897edb2d14776deb842ce2b163c5
+      size: 208
+    - path: nodes/ML17_eval/PredictionMetrics_1/node-meta.json
+      hash: md5
+      md5: 98ee19b0cff4ce6e24430191aa4ae4e4
+      size: 48
+    - path: nodes/ML17_eval/PredictionMetrics_1/plots
+      hash: md5
+      md5: 001274558a09dd4250ede0fc185f26b0.dir
+      size: 327292
+      nfiles: 5
+    - path: nodes/ML17_eval/PredictionMetrics_1/stress.json
+      hash: md5
+      md5: 5804f85cddf4216617a082d0ab70d696
+      size: 207
+    - path: nodes/ML17_eval/PredictionMetrics_1/stress_deviatoric_df.csv
+      hash: md5
+      md5: eaefd19226f6c05e07e1a8553a37d70c
+      size: 123695
+    - path: nodes/ML17_eval/PredictionMetrics_1/stress_df.csv
+      hash: md5
+      md5: c7bdf563adf419d801d660e6a3140c3f
+      size: 122785
+    - path: nodes/ML17_eval/PredictionMetrics_1/stress_hydrostatic_df.csv
+      hash: md5
+      md5: 57ee8e6be780c80a6e7b4ae8131beaa4
+      size: 13202
+  ML17_eval_ForceDecomposition:
+    cmd: zntrack run ipsuite.nodes.ForceDecomposition --name ML17_eval_ForceDecomposition
+    deps:
+    - path: nodes/ML17_eval/Prediction/atoms.h5
+      hash: md5
+      md5: cbb5de0b3f124b04ab91ec25e50da445
+      size: 6852832
+    - path: nodes/ML17_eval/Prediction/node-meta.json
+      hash: md5
+      md5: 9987192da971345d84066a43db61db57
+      size: 48
+    outs:
+    - path: nodes/ML17_eval/ForceDecomposition/histogram.png
+      hash: md5
+      md5: dd63ceb41ac92165ed33d5941e585c6d
+      size: 125240
+    - path: nodes/ML17_eval/ForceDecomposition/node-meta.json
+      hash: md5
+      md5: 43f6e2b3d879ac280a3ee4a99c6605b6
+      size: 48
+    - path: nodes/ML17_eval/ForceDecomposition/rot_force.png
+      hash: md5
+      md5: 7d800dd011c37d242bc39439163b0d15
+      size: 122332
+    - path: nodes/ML17_eval/ForceDecomposition/rot_forces.json
+      hash: md5
+      md5: d54f1109a6f79e7b4187e7118eee3436
+      size: 191
+    - path: nodes/ML17_eval/ForceDecomposition/trans_force.png
+      hash: md5
+      md5: 754d137b16aaed52ec2dfa16909286f8
+      size: 111312
+    - path: nodes/ML17_eval/ForceDecomposition/trans_forces.json
+      hash: md5
+      md5: c5fd87f1e61b7571199b461f750c0639
+      size: 190
+    - path: nodes/ML17_eval/ForceDecomposition/vib_force.png
+      hash: md5
+      md5: 0e407c44af8307cf31f3c39ea7bff2df
+      size: 64621
+    - path: nodes/ML17_eval/ForceDecomposition/vib_forces.json
+      hash: md5
+      md5: 1e576a04deaf78f2570ca12336df54fd
+      size: 188
+    - path: nodes/ML17_eval/ForceDecomposition/wasserstein_distance.json
+      hash: md5
+      md5: 231465e701c8ad6f638c8c2b88adb909
+      size: 548
+  ML17_eval_ForceDecomposition_3:
+    cmd: zntrack run ipsuite.nodes.ForceDecomposition --name ML17_eval_ForceDecomposition_3
+    deps:
+    - path: nodes/ML17_eval/Prediction_3/atoms.h5
+      hash: md5
+      md5: 84cf97c1fe0eed752a254508e57054ec
+      size: 6852832
+    - path: nodes/ML17_eval/Prediction_3/node-meta.json
+      hash: md5
+      md5: a0589edfff3d3ce6136257008b31b118
+      size: 48
+    outs:
+    - path: nodes/ML17_eval/ForceDecomposition_3/histogram.png
+      hash: md5
+      md5: aa53a886287a662010a21b2d654797b0
+      size: 121880
+    - path: nodes/ML17_eval/ForceDecomposition_3/node-meta.json
+      hash: md5
+      md5: 1963263705bc312dc6a8923d9a4baa29
+      size: 48
+    - path: nodes/ML17_eval/ForceDecomposition_3/rot_force.png
+      hash: md5
+      md5: 80a23a5a327f98b0cb137194a52c489d
+      size: 119028
+    - path: nodes/ML17_eval/ForceDecomposition_3/rot_forces.json
+      hash: md5
+      md5: 6dbf64d609ecbe063c6acecc4921fc5f
+      size: 191
+    - path: nodes/ML17_eval/ForceDecomposition_3/trans_force.png
+      hash: md5
+      md5: cda6299add4199b4264a766fc7eefbd3
+      size: 111162
+    - path: nodes/ML17_eval/ForceDecomposition_3/trans_forces.json
+      hash: md5
+      md5: 97af6ee2f7b86c9496bb85c4a32e6504
+      size: 191
+    - path: nodes/ML17_eval/ForceDecomposition_3/vib_force.png
+      hash: md5
+      md5: 6c6d48ae7a7d87021ac8e06231ed8f02
+      size: 58629
+    - path: nodes/ML17_eval/ForceDecomposition_3/vib_forces.json
+      hash: md5
+      md5: 4a788dd0d5cba505aa2eb909e7a229b5
+      size: 190
+    - path: nodes/ML17_eval/ForceDecomposition_3/wasserstein_distance.json
+      hash: md5
+      md5: 3b09d02163117b031354df15ce5a5f78
+      size: 550
+  ML17_eval_ForcesHistogram:
+    cmd: zntrack run ipsuite.nodes.ForcesHistogram --name ML17_eval_ForcesHistogram
+    deps:
+    - path: nodes/ML16/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 40faec6948a278b884c2b8acef3aea49
+      size: 2625624
+    - path: nodes/ML16/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 36d65da3ce47fe9802fdf06984c20165.dir
+      size: 19958616
+      nfiles: 3
+    - path: nodes/ML16/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 363a506b21cdca4fe3ca8cda4bee67b8
+      size: 48
+    - path: nodes/ML17_datasets/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 2b23ce66cf05e87b23ca92bb68941119
+      size: 4073528
+    - path: nodes/ML17_datasets/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7f07bdb61035d93bc23cf8fad5114877.dir
+      size: 23277821
+      nfiles: 3
+    - path: nodes/ML17_datasets/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: d33d4f55c20d1231bc5286951c367f0b
+      size: 48
+    - path: nodes/wo_d3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7cb51ad96cc293f6c81f5526b3f2b730
+      size: 28342384
+    - path: nodes/wo_d3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a0f4d8cb132406052b502f4992bbe6bc.dir
+      size: 96838998
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 0527d6df4892c800317a43cb9556ec31
+      size: 48
+    params:
+      params.yaml:
+        ML17_eval_ForcesHistogram:
+          bins:
+          x_lim:
+          y_lim:
+    outs:
+    - path: nodes/ML17_eval/ForcesHistogram/labels_df.csv
+      hash: md5
+      md5: e8b469b26350d8034574c01e8039a57b
+      size: 122942
+    - path: nodes/ML17_eval/ForcesHistogram/metrics.json
+      hash: md5
+      md5: 8f54da96ac71e1337dc1f8b227999316
+      size: 128
+    - path: nodes/ML17_eval/ForcesHistogram/node-meta.json
+      hash: md5
+      md5: fd8d87fe8d043cd1cb8af5326bca2ce2
+      size: 48
+    - path: nodes/ML17_eval/ForcesHistogram/plots
+      hash: md5
+      md5: 12f834b9600d79848be58a0c17af072b.dir
+      size: 33384
+      nfiles: 1
+  ML17_eval_ForceDecomposition_2:
+    cmd: zntrack run ipsuite.nodes.ForceDecomposition --name ML17_eval_ForceDecomposition_2
+    deps:
+    - path: nodes/ML17_eval/Prediction_2/atoms.h5
+      hash: md5
+      md5: 77f07cc0254844538ef7132c21a9da8d
+      size: 6852832
+    - path: nodes/ML17_eval/Prediction_2/node-meta.json
+      hash: md5
+      md5: e035364c0951680052448b3158e7eb8d
+      size: 48
+    outs:
+    - path: nodes/ML17_eval/ForceDecomposition_2/histogram.png
+      hash: md5
+      md5: eae399f16689591be5a22a51782682ee
+      size: 120893
+    - path: nodes/ML17_eval/ForceDecomposition_2/node-meta.json
+      hash: md5
+      md5: 4f99ea312023e0012ee57ea0c06da7f2
+      size: 48
+    - path: nodes/ML17_eval/ForceDecomposition_2/rot_force.png
+      hash: md5
+      md5: d6ee7f7612483215e32acb557ffae549
+      size: 123649
+    - path: nodes/ML17_eval/ForceDecomposition_2/rot_forces.json
+      hash: md5
+      md5: 52e43d563a796f35324d67f777c351a4
+      size: 189
+    - path: nodes/ML17_eval/ForceDecomposition_2/trans_force.png
+      hash: md5
+      md5: bbd7f8be4a152faabaa02239aef6599e
+      size: 114576
+    - path: nodes/ML17_eval/ForceDecomposition_2/trans_forces.json
+      hash: md5
+      md5: 90e156a17062677f4adabbf332a4d498
+      size: 192
+    - path: nodes/ML17_eval/ForceDecomposition_2/vib_force.png
+      hash: md5
+      md5: 8f3573fee63e61c3f3f6f50a38c5fe79
+      size: 60148
+    - path: nodes/ML17_eval/ForceDecomposition_2/vib_forces.json
+      hash: md5
+      md5: 3562dd00d5336776a8f4a8cac696e4e7
+      size: 189
+    - path: nodes/ML17_eval/ForceDecomposition_2/wasserstein_distance.json
+      hash: md5
+      md5: b7c657c2e60d7fb3e385508efa0eed55
+      size: 551
+  ML17_eval_EnergyHistogram_2:
+    cmd: zntrack run ipsuite.nodes.EnergyHistogram --name ML17_eval_EnergyHistogram_2
+    deps:
+    - path: nodes/ML17_datasets/TorchD3_2/atoms.h5
+      hash: md5
+      md5: f561656b76b51b6376275b18e92b4d98
+      size: 27607783
+    - path: nodes/ML17_datasets/TorchD3_2/node-meta.json
+      hash: md5
+      md5: b4f100aaf79d96a786521e39cbe185ae
+      size: 48
+    params:
+      params.yaml:
+        ML17_eval_EnergyHistogram_2:
+          bins: 100
+          x_lim:
+          y_lim:
+    outs:
+    - path: nodes/ML17_eval/EnergyHistogram_2/labels_df.csv
+      hash: md5
+      md5: eddaa45443467326e46469e7f8d2361f
+      size: 2470
+    - path: nodes/ML17_eval/EnergyHistogram_2/metrics.json
+      hash: md5
+      md5: 33e1d112354dd1a3da539ab0e79deb3c
+      size: 126
+    - path: nodes/ML17_eval/EnergyHistogram_2/node-meta.json
+      hash: md5
+      md5: 1ffd942bc98afc2b6782e83afd35eb77
+      size: 48
+    - path: nodes/ML17_eval/EnergyHistogram_2/plots
+      hash: md5
+      md5: a73038a7a4f0e8776383a88f418dfb71.dir
+      size: 16364
+      nfiles: 1
+  ML17_eval_EnergyHistogram:
+    cmd: zntrack run ipsuite.nodes.EnergyHistogram --name ML17_eval_EnergyHistogram
+    deps:
+    - path: nodes/ML16/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 40faec6948a278b884c2b8acef3aea49
+      size: 2625624
+    - path: nodes/ML16/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 36d65da3ce47fe9802fdf06984c20165.dir
+      size: 19958616
+      nfiles: 3
+    - path: nodes/ML16/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 363a506b21cdca4fe3ca8cda4bee67b8
+      size: 48
+    - path: nodes/ML17_datasets/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 2b23ce66cf05e87b23ca92bb68941119
+      size: 4073528
+    - path: nodes/ML17_datasets/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7f07bdb61035d93bc23cf8fad5114877.dir
+      size: 23277821
+      nfiles: 3
+    - path: nodes/ML17_datasets/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: d33d4f55c20d1231bc5286951c367f0b
+      size: 48
+    - path: nodes/wo_d3/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: 7cb51ad96cc293f6c81f5526b3f2b730
+      size: 28342384
+    - path: nodes/wo_d3/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: a0f4d8cb132406052b502f4992bbe6bc.dir
+      size: 96838998
+      nfiles: 3
+    - path: nodes/wo_d3/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 0527d6df4892c800317a43cb9556ec31
+      size: 48
+    params:
+      params.yaml:
+        ML17_eval_EnergyHistogram:
+          bins: 100
+          x_lim:
+          y_lim:
+    outs:
+    - path: nodes/ML17_eval/EnergyHistogram/labels_df.csv
+      hash: md5
+      md5: fea39d7ff9f2973261286b5cd31b328c
+      size: 2438
+    - path: nodes/ML17_eval/EnergyHistogram/metrics.json
+      hash: md5
+      md5: bb739a0f64e8621e542cca476dd74c45
+      size: 122
+    - path: nodes/ML17_eval/EnergyHistogram/node-meta.json
+      hash: md5
+      md5: 38a691e490b12fd0ebb881b7966b618d
+      size: 48
+    - path: nodes/ML17_eval/EnergyHistogram/plots
+      hash: md5
+      md5: a389768bbee52965182b69b96e83c441.dir
+      size: 16654
+      nfiles: 1
+  ML17_eval_ForcesHistogram_2:
+    cmd: zntrack run ipsuite.nodes.ForcesHistogram --name ML17_eval_ForcesHistogram_2
+    deps:
+    - path: nodes/ML17_datasets/TorchD3_2/atoms.h5
+      hash: md5
+      md5: f561656b76b51b6376275b18e92b4d98
+      size: 27607783
+    - path: nodes/ML17_datasets/TorchD3_2/node-meta.json
+      hash: md5
+      md5: b4f100aaf79d96a786521e39cbe185ae
+      size: 48
+    params:
+      params.yaml:
+        ML17_eval_ForcesHistogram_2:
+          bins:
+          x_lim:
+          y_lim:
+    outs:
+    - path: nodes/ML17_eval/ForcesHistogram_2/labels_df.csv
+      hash: md5
+      md5: d4a9ec1fd8bc4d256d69e875be9ed666
+      size: 123046
+    - path: nodes/ML17_eval/ForcesHistogram_2/metrics.json
+      hash: md5
+      md5: fe73de890b360f1f9ce4c78bf6336c6d
+      size: 129
+    - path: nodes/ML17_eval/ForcesHistogram_2/node-meta.json
+      hash: md5
+      md5: 873f7439a9cea9becfd06879514cd871
+      size: 48
+    - path: nodes/ML17_eval/ForcesHistogram_2/plots
+      hash: md5
+      md5: 97a745d67e4b8098190e50cb8a906cda.dir
+      size: 33603
+      nfiles: 1
