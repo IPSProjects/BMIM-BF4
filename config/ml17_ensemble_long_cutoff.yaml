@@ -2,6 +2,7 @@ n_epochs: 2000
 seed: 1
 n_models: 2
 n_jitted_steps: 8
+patience: 500
 
 data:
   batch_size: 1
@@ -9,7 +10,7 @@ data:
   shift_method: per_element_regression_shift
   shift_options:
     energy_regularisation: 1.0
-  valid_batch_size: 100
+  valid_batch_size: 35
 loss:
 - name: energy
 - name: forces

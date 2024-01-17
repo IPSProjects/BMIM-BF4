@@ -385,6 +385,62 @@ ML16_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+ML17_datasets_TorchD3:
+    abc: false
+    cnthr: 7.93766
+    cutoff: 7.93766
+    damping: bj
+    dtype: float32
+    skin: 0.0
+    xc: b97-3c
+ML17_datasets_TorchD3_1:
+    abc: false
+    cnthr: 7.93766
+    cutoff: 7.93766
+    damping: bj
+    dtype: float32
+    skin: 0.0
+    xc: b97-3c
+ML17_datasets_TorchD3_2:
+    abc: false
+    cnthr: 20.0
+    cutoff: 20.0
+    damping: bj
+    dtype: float32
+    skin: 0.0
+    xc: b97-3c
+ML17_datasets_TorchD3_3:
+    abc: false
+    cnthr: 20.0
+    cutoff: 20.0
+    damping: bj
+    dtype: float32
+    skin: 0.0
+    xc: b97-3c
+ML17_eval_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML17_eval_EnergyHistogram_1:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML17_eval_EnergyHistogram_2:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML17_eval_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML17_eval_ForcesHistogram_1:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML17_eval_ForcesHistogram_2:
+    bins: null
+    x_lim: null
+    y_lim: null
 ML17_sampling_ASEGeoOpt:
     data_id: -1
     dump_rate: 1000
@@ -467,6 +523,26 @@ ML17_sampling_TorchD3:
     dtype: float32
     skin: 0.5
     xc: b97-3c
+ML17_training_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML17_training_MLModel_1:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML17_training_MLModel_2:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML17_training_MLModel_3:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 ML1_ASEGeoOpt:
     data_id: -1
     dump_rate: 1000

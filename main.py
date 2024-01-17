@@ -823,7 +823,7 @@ with project.group("ML17_sampling") as grp:
         data=val_selection_npt.excluded_atoms, n_configurations=80
     )
 
-with project.group("ML17_datasets") as grp:
+with project.group("ML17_datasets") as ml17_data:
     cp2k_train = ips.calculators.CP2KSinglePoint(
         data=train_selection_opt.atoms + train_selection_nvt.atoms + train_selection_npt.atoms,
         cp2k_params="config/cp2k_wo_d3.yaml",
@@ -838,91 +838,91 @@ with project.group("ML17_datasets") as grp:
     validation_data_nod3 += cp2k_val.atoms
 
 
-#     train_d3_short = ips.calculators.TorchD3(
-#         data=train_data_nod3,
-#         xc="b97-3c",
-#         damping="bj",
-#         cutoff=7.93766,
-#         cnthr=7.93766,
-#         abc=False,
-#         dtype="float32",
-#     )
-#     val_d3_short = ips.calculators.TorchD3(
-#         data=validation_data_nod3,
-#         xc="b97-3c",
-#         damping="bj",
-#         cutoff=7.93766,
-#         cnthr=7.93766,
-#         abc=False,
-#         dtype="float32",
-#     )
-#     train_d3_medium = ips.calculators.TorchD3(
-#         data=train_data_nod3,
-#         xc="b97-3c",
-#         damping="bj",
-#         cutoff=20.0,
-#         cnthr=20.0,
-#         abc=False,
-#         dtype="float32",
-#     )
-#     val_d3_medium = ips.calculators.TorchD3(
-#         data=validation_data_nod3,
-#         xc="b97-3c",
-#         damping="bj",
-#         cutoff=20.0,
-#         cnthr=20.0,
-#         abc=False,
-#         dtype="float32",
-#     )
+    train_d3_short = ips.calculators.TorchD3(
+        data=train_data_nod3,
+        xc="b97-3c",
+        damping="bj",
+        cutoff=7.93766,
+        cnthr=7.93766,
+        abc=False,
+        dtype="float32",
+    )
+    val_d3_short = ips.calculators.TorchD3(
+        data=validation_data_nod3,
+        xc="b97-3c",
+        damping="bj",
+        cutoff=7.93766,
+        cnthr=7.93766,
+        abc=False,
+        dtype="float32",
+    )
+    train_d3_medium = ips.calculators.TorchD3(
+        data=train_data_nod3,
+        xc="b97-3c",
+        damping="bj",
+        cutoff=20.0,
+        cnthr=20.0,
+        abc=False,
+        dtype="float32",
+    )
+    val_d3_medium = ips.calculators.TorchD3(
+        data=validation_data_nod3,
+        xc="b97-3c",
+        damping="bj",
+        cutoff=20.0,
+        cnthr=20.0,
+        abc=False,
+        dtype="float32",
+    )
 
 
-# with project.group("ML17_training") as grp:
-#     model_nod3 = ips.models.Apax(
-#         data=train_data_nod3,
-#         validation_data=validation_data_nod3,
-#         config="config/ml17_ensemble.yaml",
-#     )
-#     model_short = ips.models.Apax(
-#         data=train_d3_short,
-#         validation_data=val_d3_short,
-#         config="config/ml17_ensemble.yaml",
-#     )
-#     model_long_cutoff = ips.models.Apax(
-#         data=train_d3_short,
-#         validation_data=train_d3_short,
-#         config="config/ml17_ensemble_long_cutoff.yaml",
-#     )
-#     model_long = ips.models.Apax(
-#         data=train_d3_medium,
-#         validation_data=val_d3_medium,
-#         config="config/ml17_ensemble.yaml",
-#     )
+with project.group("ML17_training") as ml17_train:
+    model_nod3 = ips.models.Apax(
+        data=train_data_nod3,
+        validation_data=validation_data_nod3,
+        config="config/ml17_ensemble.yaml",
+    )
+    model_short = ips.models.Apax(
+        data=train_d3_short,
+        validation_data=val_d3_short,
+        config="config/ml17_ensemble.yaml",
+    )
+    model_long_cutoff = ips.models.Apax(
+        data=train_d3_short,
+        validation_data=val_d3_short,
+        config="config/ml17_ensemble_long_cutoff.yaml",
+    )
+    model_long = ips.models.Apax(
+        data=train_d3_medium,
+        validation_data=val_d3_medium,
+        config="config/ml17_ensemble.yaml",
+    )
 
 
-# with project.group("ML17_eval") as grp:
-#     ips.analysis.EnergyHistogram(data=train_data_nod3, bins=100)
-#     ips.analysis.ForcesHistogram(data=train_data_nod3)
-#     ips.analysis.EnergyHistogram(data=train_d3_short, bins=100)
-#     ips.analysis.ForcesHistogram(data=val_d3_short)
-#     ips.analysis.EnergyHistogram(data=train_d3_medium, bins=100)
-#     ips.analysis.ForcesHistogram(data=val_d3_medium)
+with project.group("ML17_eval") as ml17_eval:
+    ips.analysis.EnergyHistogram(data=train_data_nod3, bins=100)
+    ips.analysis.ForcesHistogram(data=train_data_nod3)
+    ips.analysis.EnergyHistogram(data=train_d3_short, bins=100)
+    ips.analysis.ForcesHistogram(data=train_d3_short)
+    ips.analysis.EnergyHistogram(data=train_d3_medium, bins=100)
+    ips.analysis.ForcesHistogram(data=train_d3_medium)
 
-#     prediction = ips.analysis.Prediction(data=validation_data_nod3, model=model_nod3)
-#     metrics = ips.analysis.PredictionMetrics(data=prediction)
-#     ips.analysis.ForceDecomposition(data=prediction)
+    prediction = ips.analysis.Prediction(data=validation_data_nod3, model=model_nod3)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
+    ips.analysis.ForceDecomposition(data=prediction)
 
-#     prediction = ips.analysis.Prediction(data=validation_data_nod3, model=model_short)
-#     metrics = ips.analysis.PredictionMetrics(data=prediction)
-#     ips.analysis.ForceDecomposition(data=prediction)
+    prediction = ips.analysis.Prediction(data=val_d3_short, model=model_short)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
+    ips.analysis.ForceDecomposition(data=prediction)
 
-#     prediction = ips.analysis.Prediction(data=validation_data_nod3, model=model_long_cutoff)
-#     metrics = ips.analysis.PredictionMetrics(data=prediction)
-#     ips.analysis.ForceDecomposition(data=prediction)
+    prediction = ips.analysis.Prediction(data=val_d3_short, model=model_long_cutoff)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
+    ips.analysis.ForceDecomposition(data=prediction)
 
-#     prediction = ips.analysis.Prediction(data=validation_data_nod3, model=model_long)
-#     metrics = ips.analysis.PredictionMetrics(data=prediction)
-#     ips.analysis.ForceDecomposition(data=prediction)
+    prediction = ips.analysis.Prediction(data=val_d3_medium, model=model_long)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
+    ips.analysis.ForceDecomposition(data=prediction)
 
     
 
-project.build(nodes=[grp])
+project.build(nodes=[ml17_data, ml17_train, ml17_eval])
