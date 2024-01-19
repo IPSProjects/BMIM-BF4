@@ -34,8 +34,8 @@ force_eval:
           parameter_file_name: dftd3.dat
           reference_functional: B97-3c
           r_cutoff: 7.93766
-          calculate_c9_term: true
-          short_range_correction: true
+          calculate_c9_term: false
+          short_range_correction: false
         potential_type: pair_potential
     charge: 0
     basis_set_file_name: GTH_BASIS_SETS

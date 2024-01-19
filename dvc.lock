@@ -1,79 +1,79 @@
 schema: '2.0'
 stages:
-  depl_SmilesToAtoms:
-    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name depl_SmilesToAtoms
+  setup_SmilesToAtoms:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name setup_SmilesToAtoms
     params:
       params.yaml:
-        depl_SmilesToAtoms:
+        setup_SmilesToAtoms:
           cell:
           optimizer: UFF
           seed: 1234
           smiles: '[B-](F)(F)(F)F'
     outs:
-    - path: nodes/depl/SmilesToAtoms/atoms.h5
+    - path: nodes/setup/SmilesToAtoms/atoms.h5
       hash: md5
       md5: 181a42114d5c08d6ac24e8ce30a8f82b
       size: 27968
-    - path: nodes/depl/SmilesToAtoms/molecule.png
+    - path: nodes/setup/SmilesToAtoms/molecule.png
       hash: md5
       md5: a6cdd2f1ebf27b41c2c6c694a68f096a
       size: 2975
-    - path: nodes/depl/SmilesToAtoms/node-meta.json
+    - path: nodes/setup/SmilesToAtoms/node-meta.json
       hash: md5
-      md5: d75fbbf67188de6471caa7cd78b28006
+      md5: f14541c2b84898fa66c64c5cb5c5bc16
       size: 48
-  depl_SmilesToAtoms_1:
-    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name depl_SmilesToAtoms_1
+  setup_SmilesToAtoms_1:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name setup_SmilesToAtoms_1
     params:
       params.yaml:
-        depl_SmilesToAtoms_1:
+        setup_SmilesToAtoms_1:
           cell:
           optimizer: UFF
           seed: 1234
           smiles: CCCCN1C=C[N+](=C1)C
     outs:
-    - path: nodes/depl/SmilesToAtoms_1/atoms.h5
+    - path: nodes/setup/SmilesToAtoms_1/atoms.h5
       hash: md5
       md5: 744f94e60270ed284980820ff3038f19
       size: 27968
-    - path: nodes/depl/SmilesToAtoms_1/molecule.png
+    - path: nodes/setup/SmilesToAtoms_1/molecule.png
       hash: md5
       md5: dda73346eb91cdb910f5eaa1eff139a3
       size: 7818
-    - path: nodes/depl/SmilesToAtoms_1/node-meta.json
+    - path: nodes/setup/SmilesToAtoms_1/node-meta.json
       hash: md5
-      md5: d0d6f2f9e7131dd794fce4b04e514144
+      md5: 8df5cef39133ba6dfa321b00dd8690d3
       size: 48
-  depl_Packmol:
-    cmd: zntrack run ipsuite.nodes.Packmol --name depl_Packmol
+  setup_Packmol:
+    cmd: zntrack run ipsuite.nodes.Packmol --name setup_Packmol
     deps:
-    - path: nodes/depl/SmilesToAtoms/atoms.h5
+    - path: nodes/setup/SmilesToAtoms/atoms.h5
       hash: md5
       md5: 181a42114d5c08d6ac24e8ce30a8f82b
       size: 27968
-    - path: nodes/depl/SmilesToAtoms/molecule.png
+    - path: nodes/setup/SmilesToAtoms/molecule.png
       hash: md5
       md5: a6cdd2f1ebf27b41c2c6c694a68f096a
       size: 2975
-    - path: nodes/depl/SmilesToAtoms/node-meta.json
+    - path: nodes/setup/SmilesToAtoms/node-meta.json
       hash: md5
-      md5: d75fbbf67188de6471caa7cd78b28006
+      md5: f14541c2b84898fa66c64c5cb5c5bc16
       size: 48
-    - path: nodes/depl/SmilesToAtoms_1/atoms.h5
+    - path: nodes/setup/SmilesToAtoms_1/atoms.h5
       hash: md5
       md5: 744f94e60270ed284980820ff3038f19
       size: 27968
-    - path: nodes/depl/SmilesToAtoms_1/molecule.png
+    - path: nodes/setup/SmilesToAtoms_1/molecule.png
       hash: md5
       md5: dda73346eb91cdb910f5eaa1eff139a3
       size: 7818
-    - path: nodes/depl/SmilesToAtoms_1/node-meta.json
+    - path: nodes/setup/SmilesToAtoms_1/node-meta.json
       hash: md5
-      md5: d0d6f2f9e7131dd794fce4b04e514144
+      md5: 8df5cef39133ba6dfa321b00dd8690d3
       size: 48
     params:
       params.yaml:
-        depl_Packmol:
+        setup_Packmol:
           box:
           count:
           - 1
@@ -83,38 +83,38 @@ stages:
           pbc: false
           tolerance: 2.0
     outs:
-    - path: nodes/depl/Packmol/atoms.h5
+    - path: nodes/setup/Packmol/atoms.h5
       hash: md5
       md5: 2400ddfca5ec50ebe880626f190e0797
       size: 27968
-    - path: nodes/depl/Packmol/node-meta.json
+    - path: nodes/setup/Packmol/node-meta.json
       hash: md5
-      md5: dd3a4193c67171144f8edba9d70e620f
+      md5: f3491e6b50a3ec4c864cf7aea94d2906
       size: 48
-    - path: nodes/depl/Packmol/packmol
+    - path: nodes/setup/Packmol/packmol
       hash: md5
       md5: 9211f580932fa95a1d122b0e2be6699c.dir
       size: 3841
       nfiles: 4
-  depl_Packmol_1:
-    cmd: zntrack run ipsuite.nodes.Packmol --name depl_Packmol_1
+  setup_Packmol_1:
+    cmd: zntrack run ipsuite.nodes.Packmol --name setup_Packmol_1
     deps:
-    - path: nodes/depl/Packmol/atoms.h5
+    - path: nodes/setup/Packmol/atoms.h5
       hash: md5
       md5: 2400ddfca5ec50ebe880626f190e0797
       size: 27968
-    - path: nodes/depl/Packmol/node-meta.json
+    - path: nodes/setup/Packmol/node-meta.json
       hash: md5
-      md5: dd3a4193c67171144f8edba9d70e620f
+      md5: f3491e6b50a3ec4c864cf7aea94d2906
       size: 48
-    - path: nodes/depl/Packmol/packmol
+    - path: nodes/setup/Packmol/packmol
       hash: md5
       md5: 9211f580932fa95a1d122b0e2be6699c.dir
       size: 3841
       nfiles: 4
     params:
       params.yaml:
-        depl_Packmol_1:
+        setup_Packmol_1:
           box:
           count:
           - 16
@@ -123,16 +123,196 @@ stages:
           pbc: true
           tolerance: 2.0
     outs:
-    - path: nodes/depl/Packmol_1/atoms.h5
+    - path: nodes/setup/Packmol_1/atoms.h5
       hash: md5
       md5: 7ec77fd6549c61434a9b28b7715027a8
       size: 43328
-    - path: nodes/depl/Packmol_1/node-meta.json
+    - path: nodes/setup/Packmol_1/node-meta.json
       hash: md5
-      md5: 7bfe6375c7af611bf654366e17194112
+      md5: af98203795286b54a6043ef3216d2d4c
       size: 48
-    - path: nodes/depl/Packmol_1/packmol
+    - path: nodes/setup/Packmol_1/packmol
       hash: md5
       md5: ac2a1f78e24d4acec487ee8d320e3c86.dir
       size: 28854
       nfiles: 3
+  setup_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name setup_ASEGeoOpt
+    deps:
+    - path: external/7f8eaf10-9f5a-4471-80eb-356cbaedcff1.json
+      hash: md5
+      md5: 33f91350843a5143788a13e6c59662e2
+      size: 48
+    - path: nodes/setup/Packmol_1/atoms.h5
+      hash: md5
+      md5: 7ec77fd6549c61434a9b28b7715027a8
+      size: 43328
+    - path: nodes/setup/Packmol_1/node-meta.json
+      hash: md5
+      md5: af98203795286b54a6043ef3216d2d4c
+      size: 48
+    - path: nodes/setup/Packmol_1/packmol
+      hash: md5
+      md5: ac2a1f78e24d4acec487ee8d320e3c86.dir
+      size: 28854
+      nfiles: 3
+    params:
+      params.yaml:
+        setup_ASEGeoOpt:
+          data_id: -1
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: FIRE
+          repeat:
+          - 1
+          - 1
+          - 1
+          run_kwargs:
+            fmax: 0.05
+    outs:
+    - path: nodes/setup/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/setup/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 475e8d322ddb9a11f6ca125853405939
+      size: 48
+    - path: nodes/setup/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 1448e552fca02ae4ea6a4e24b32104d3
+      size: 14931288
+  setup_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name setup_ASEMD
+    deps:
+    - path: external/7f8eaf10-9f5a-4471-80eb-356cbaedcff1.json
+      hash: md5
+      md5: 33f91350843a5143788a13e6c59662e2
+      size: 48
+    - path: nodes/setup/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/setup/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 475e8d322ddb9a11f6ca125853405939
+      size: 48
+    - path: nodes/setup/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 1448e552fca02ae4ea6a4e24b32104d3
+      size: 14931288
+    params:
+      params.yaml:
+        setup_ASEMD:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 10
+          seed: 42
+          steps: 10000
+          use_momenta: false
+          wrap: false
+        setup_ASEMD+modifier+0:
+          cell:
+          density: 1162
+        setup_ASEMD+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/setup/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 234432ac9c6a856e49439dced5ba9ff3
+      size: 41985
+    - path: nodes/setup/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/setup/ASEMD/node-meta.json
+      hash: md5
+      md5: f7629cbe76775b849a99c9c9d050639b
+      size: 48
+    - path: nodes/setup/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/setup/ASEMD/trajectory.h5
+      hash: md5
+      md5: 51db8e4a6c2d51d291505b4e3e8ce0e5
+      size: 50790792
+  setup_ASEMD_1:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name setup_ASEMD_1
+    deps:
+    - path: external/7f8eaf10-9f5a-4471-80eb-356cbaedcff1.json
+      hash: md5
+      md5: 33f91350843a5143788a13e6c59662e2
+      size: 48
+    - path: nodes/setup/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 234432ac9c6a856e49439dced5ba9ff3
+      size: 41985
+    - path: nodes/setup/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/setup/ASEMD/node-meta.json
+      hash: md5
+      md5: f7629cbe76775b849a99c9c9d050639b
+      size: 48
+    - path: nodes/setup/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/setup/ASEMD/trajectory.h5
+      hash: md5
+      md5: 51db8e4a6c2d51d291505b4e3e8ce0e5
+      size: 50790792
+    params:
+      params.yaml:
+        setup_ASEMD_1:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 10
+          seed: 42
+          steps: 10000
+          use_momenta: false
+          wrap: false
+        setup_ASEMD_1+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/setup/ASEMD_1/metrics_dict.csv
+      hash: md5
+      md5: a6c50d4631c9197616b90b341a4681bd
+      size: 41932
+    - path: nodes/setup/ASEMD_1/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/setup/ASEMD_1/node-meta.json
+      hash: md5
+      md5: d80ecfc2759f4c2643ef77feaf67e5e8
+      size: 48
+    - path: nodes/setup/ASEMD_1/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/setup/ASEMD_1/trajectory.h5
+      hash: md5
+      md5: fffa4133f9b6d5982927becdfc80496d
+      size: 50790792

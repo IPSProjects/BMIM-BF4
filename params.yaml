@@ -1,4 +1,21 @@
-depl_ASEGeoOpt:
+AIMD_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 20000
+    use_momenta: false
+    wrap: false
+AIMD_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+setup_ASEGeoOpt:
     data_id: -1
     dump_rate: 1000
     init_kwargs: {}
@@ -9,7 +26,7 @@ depl_ASEGeoOpt:
     - 1
     run_kwargs:
         fmax: 0.05
-depl_ASEMD:
+setup_ASEMD:
     data_id: -1
     dump_rate: 1000
     pop_last: false
@@ -22,14 +39,14 @@ depl_ASEMD:
     steps: 10000
     use_momenta: false
     wrap: false
-depl_ASEMD+modifier+0:
+setup_ASEMD+modifier+0:
     cell: null
     density: 1162
-depl_ASEMD+thermostat:
+setup_ASEMD+thermostat:
     friction: 0.01
     temperature: 353
     time_step: 0.5
-depl_ASEMD_1:
+setup_ASEMD_1:
     data_id: -1
     dump_rate: 1000
     pop_last: false
@@ -42,11 +59,11 @@ depl_ASEMD_1:
     steps: 10000
     use_momenta: false
     wrap: false
-depl_ASEMD_1+thermostat:
+setup_ASEMD_1+thermostat:
     friction: 0.01
     temperature: 353
     time_step: 0.5
-depl_Packmol:
+setup_Packmol:
     box: null
     count:
     - 1
@@ -55,7 +72,7 @@ depl_Packmol:
     density: 1210
     pbc: false
     tolerance: 2.0
-depl_Packmol_1:
+setup_Packmol_1:
     box: null
     count:
     - 16
@@ -63,12 +80,12 @@ depl_Packmol_1:
     density: 900
     pbc: true
     tolerance: 2.0
-depl_SmilesToAtoms:
+setup_SmilesToAtoms:
     cell: null
     optimizer: UFF
     seed: 1234
     smiles: '[B-](F)(F)(F)F'
-depl_SmilesToAtoms_1:
+setup_SmilesToAtoms_1:
     cell: null
     optimizer: UFF
     seed: 1234
