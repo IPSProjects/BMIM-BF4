@@ -1,0 +1,13 @@
+md5: 3b519d17d3b018d08c64137ccffd28fe
+frozen: true
+deps:
+- path: nodes/ML17_training/MLModel_2/node-meta.json
+  repo:
+    url: https://github.com/IPSProjects/BMIM-BF4_new.git
+    rev: ml17
+    rev_lock: ff5e97806fd6000d150969d1a714c78009304744
+outs:
+- md5: 33f91350843a5143788a13e6c59662e2
+  size: 48
+  hash: md5
+  path: 7f8eaf10-9f5a-4471-80eb-356cbaedcff1.json

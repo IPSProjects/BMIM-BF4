@@ -1,0 +1,138 @@
+schema: '2.0'
+stages:
+  depl_SmilesToAtoms:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name depl_SmilesToAtoms
+    params:
+      params.yaml:
+        depl_SmilesToAtoms:
+          cell:
+          optimizer: UFF
+          seed: 1234
+          smiles: '[B-](F)(F)(F)F'
+    outs:
+    - path: nodes/depl/SmilesToAtoms/atoms.h5
+      hash: md5
+      md5: 181a42114d5c08d6ac24e8ce30a8f82b
+      size: 27968
+    - path: nodes/depl/SmilesToAtoms/molecule.png
+      hash: md5
+      md5: a6cdd2f1ebf27b41c2c6c694a68f096a
+      size: 2975
+    - path: nodes/depl/SmilesToAtoms/node-meta.json
+      hash: md5
+      md5: d75fbbf67188de6471caa7cd78b28006
+      size: 48
+  depl_SmilesToAtoms_1:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name depl_SmilesToAtoms_1
+    params:
+      params.yaml:
+        depl_SmilesToAtoms_1:
+          cell:
+          optimizer: UFF
+          seed: 1234
+          smiles: CCCCN1C=C[N+](=C1)C
+    outs:
+    - path: nodes/depl/SmilesToAtoms_1/atoms.h5
+      hash: md5
+      md5: 744f94e60270ed284980820ff3038f19
+      size: 27968
+    - path: nodes/depl/SmilesToAtoms_1/molecule.png
+      hash: md5
+      md5: dda73346eb91cdb910f5eaa1eff139a3
+      size: 7818
+    - path: nodes/depl/SmilesToAtoms_1/node-meta.json
+      hash: md5
+      md5: d0d6f2f9e7131dd794fce4b04e514144
+      size: 48
+  depl_Packmol:
+    cmd: zntrack run ipsuite.nodes.Packmol --name depl_Packmol
+    deps:
+    - path: nodes/depl/SmilesToAtoms/atoms.h5
+      hash: md5
+      md5: 181a42114d5c08d6ac24e8ce30a8f82b
+      size: 27968
+    - path: nodes/depl/SmilesToAtoms/molecule.png
+      hash: md5
+      md5: a6cdd2f1ebf27b41c2c6c694a68f096a
+      size: 2975
+    - path: nodes/depl/SmilesToAtoms/node-meta.json
+      hash: md5
+      md5: d75fbbf67188de6471caa7cd78b28006
+      size: 48
+    - path: nodes/depl/SmilesToAtoms_1/atoms.h5
+      hash: md5
+      md5: 744f94e60270ed284980820ff3038f19
+      size: 27968
+    - path: nodes/depl/SmilesToAtoms_1/molecule.png
+      hash: md5
+      md5: dda73346eb91cdb910f5eaa1eff139a3
+      size: 7818
+    - path: nodes/depl/SmilesToAtoms_1/node-meta.json
+      hash: md5
+      md5: d0d6f2f9e7131dd794fce4b04e514144
+      size: 48
+    params:
+      params.yaml:
+        depl_Packmol:
+          box:
+          count:
+          - 1
+          - 1
+          data_ids:
+          density: 1210
+          pbc: false
+          tolerance: 2.0
+    outs:
+    - path: nodes/depl/Packmol/atoms.h5
+      hash: md5
+      md5: 2400ddfca5ec50ebe880626f190e0797
+      size: 27968
+    - path: nodes/depl/Packmol/node-meta.json
+      hash: md5
+      md5: dd3a4193c67171144f8edba9d70e620f
+      size: 48
+    - path: nodes/depl/Packmol/packmol
+      hash: md5
+      md5: 9211f580932fa95a1d122b0e2be6699c.dir
+      size: 3841
+      nfiles: 4
+  depl_Packmol_1:
+    cmd: zntrack run ipsuite.nodes.Packmol --name depl_Packmol_1
+    deps:
+    - path: nodes/depl/Packmol/atoms.h5
+      hash: md5
+      md5: 2400ddfca5ec50ebe880626f190e0797
+      size: 27968
+    - path: nodes/depl/Packmol/node-meta.json
+      hash: md5
+      md5: dd3a4193c67171144f8edba9d70e620f
+      size: 48
+    - path: nodes/depl/Packmol/packmol
+      hash: md5
+      md5: 9211f580932fa95a1d122b0e2be6699c.dir
+      size: 3841
+      nfiles: 4
+    params:
+      params.yaml:
+        depl_Packmol_1:
+          box:
+          count:
+          - 16
+          data_ids:
+          density: 900
+          pbc: true
+          tolerance: 2.0
+    outs:
+    - path: nodes/depl/Packmol_1/atoms.h5
+      hash: md5
+      md5: 7ec77fd6549c61434a9b28b7715027a8
+      size: 43328
+    - path: nodes/depl/Packmol_1/node-meta.json
+      hash: md5
+      md5: 7bfe6375c7af611bf654366e17194112
+      size: 48
+    - path: nodes/depl/Packmol_1/packmol
+      hash: md5
+      md5: ac2a1f78e24d4acec487ee8d320e3c86.dir
+      size: 28854
+      nfiles: 3

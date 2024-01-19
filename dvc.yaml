@@ -1,0 +1,108 @@
+stages:
+  depl_SmilesToAtoms:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name depl_SmilesToAtoms
+    params:
+    - depl_SmilesToAtoms
+    outs:
+    - nodes/depl/SmilesToAtoms/atoms.h5
+    - nodes/depl/SmilesToAtoms/molecule.png
+    metrics:
+    - nodes/depl/SmilesToAtoms/node-meta.json:
+        cache: false
+  depl_SmilesToAtoms_1:
+    cmd: zntrack run ipsuite.nodes.SmilesToAtoms --name depl_SmilesToAtoms_1
+    params:
+    - depl_SmilesToAtoms_1
+    outs:
+    - nodes/depl/SmilesToAtoms_1/atoms.h5
+    - nodes/depl/SmilesToAtoms_1/molecule.png
+    metrics:
+    - nodes/depl/SmilesToAtoms_1/node-meta.json:
+        cache: false
+  depl_Packmol:
+    cmd: zntrack run ipsuite.nodes.Packmol --name depl_Packmol
+    deps:
+    - nodes/depl/SmilesToAtoms/atoms.h5
+    - nodes/depl/SmilesToAtoms/molecule.png
+    - nodes/depl/SmilesToAtoms/node-meta.json
+    - nodes/depl/SmilesToAtoms_1/atoms.h5
+    - nodes/depl/SmilesToAtoms_1/molecule.png
+    - nodes/depl/SmilesToAtoms_1/node-meta.json
+    params:
+    - depl_Packmol
+    outs:
+    - nodes/depl/Packmol/atoms.h5
+    - nodes/depl/Packmol/packmol
+    metrics:
+    - nodes/depl/Packmol/node-meta.json:
+        cache: false
+  depl_Packmol_1:
+    cmd: zntrack run ipsuite.nodes.Packmol --name depl_Packmol_1
+    deps:
+    - nodes/depl/Packmol/atoms.h5
+    - nodes/depl/Packmol/node-meta.json
+    - nodes/depl/Packmol/packmol
+    params:
+    - depl_Packmol_1
+    outs:
+    - nodes/depl/Packmol_1/atoms.h5
+    - nodes/depl/Packmol_1/packmol
+    metrics:
+    - nodes/depl/Packmol_1/node-meta.json:
+        cache: false
+  depl_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name depl_ASEGeoOpt
+    deps:
+    - external/7f8eaf10-9f5a-4471-80eb-356cbaedcff1.json
+    - nodes/depl/Packmol_1/atoms.h5
+    - nodes/depl/Packmol_1/node-meta.json
+    - nodes/depl/Packmol_1/packmol
+    params:
+    - depl_ASEGeoOpt
+    outs:
+    - nodes/depl/ASEGeoOpt/model_outs
+    - nodes/depl/ASEGeoOpt/trajectory.h5
+    metrics:
+    - nodes/depl/ASEGeoOpt/node-meta.json:
+        cache: false
+  depl_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name depl_ASEMD
+    deps:
+    - external/7f8eaf10-9f5a-4471-80eb-356cbaedcff1.json
+    - nodes/depl/ASEGeoOpt/model_outs
+    - nodes/depl/ASEGeoOpt/node-meta.json
+    - nodes/depl/ASEGeoOpt/trajectory.h5
+    params:
+    - depl_ASEMD
+    - depl_ASEMD+modifier+0
+    - depl_ASEMD+thermostat
+    outs:
+    - nodes/depl/ASEMD/metrics_dict.csv
+    - nodes/depl/ASEMD/model
+    - nodes/depl/ASEMD/trajectory.h5
+    metrics:
+    - nodes/depl/ASEMD/node-meta.json:
+        cache: false
+    - nodes/depl/ASEMD/steps_before_stopping.json:
+        cache: false
+  depl_ASEMD_1:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name depl_ASEMD_1
+    deps:
+    - external/7f8eaf10-9f5a-4471-80eb-356cbaedcff1.json
+    - nodes/depl/ASEMD/metrics_dict.csv
+    - nodes/depl/ASEMD/model
+    - nodes/depl/ASEMD/node-meta.json
+    - nodes/depl/ASEMD/steps_before_stopping.json
+    - nodes/depl/ASEMD/trajectory.h5
+    params:
+    - depl_ASEMD_1
+    - depl_ASEMD_1+thermostat
+    outs:
+    - nodes/depl/ASEMD_1/metrics_dict.csv
+    - nodes/depl/ASEMD_1/model
+    - nodes/depl/ASEMD_1/trajectory.h5
+    metrics:
+    - nodes/depl/ASEMD_1/node-meta.json:
+        cache: false
+    - nodes/depl/ASEMD_1/steps_before_stopping.json:
+        cache: false
