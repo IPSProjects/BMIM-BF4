@@ -316,3 +316,45 @@ stages:
       hash: md5
       md5: fffa4133f9b6d5982927becdfc80496d
       size: 50790792
+  AIMD_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AIMD_ConfigurationSelection
+    deps:
+    - path: nodes/setup/ASEMD_1/metrics_dict.csv
+      hash: md5
+      md5: a6c50d4631c9197616b90b341a4681bd
+      size: 41932
+    - path: nodes/setup/ASEMD_1/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/setup/ASEMD_1/node-meta.json
+      hash: md5
+      md5: d80ecfc2759f4c2643ef77feaf67e5e8
+      size: 48
+    - path: nodes/setup/ASEMD_1/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/setup/ASEMD_1/trajectory.h5
+      hash: md5
+      md5: fffa4133f9b6d5982927becdfc80496d
+      size: 50790792
+    params:
+      params.yaml:
+        AIMD_ConfigurationSelection:
+          indices:
+          - 999
+    outs:
+    - path: nodes/AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: b4e172bec687a68a6637a9614f2903b5
+      size: 64
+    - path: nodes/AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 6dec54db0224a2926f0e3ff09da4e333
+      size: 44
+    - path: nodes/AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: cad833b8dfbae3a2da861e05465b083d
+      size: 48401

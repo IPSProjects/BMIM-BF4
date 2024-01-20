@@ -9,12 +9,15 @@ AIMD_ASEMD:
     sampling_rate: 1
     seed: 42
     steps: 20000
-    use_momenta: false
+    use_momenta: true
     wrap: false
 AIMD_ASEMD+thermostat:
     friction: 0.01
     temperature: 353
     time_step: 0.5
+AIMD_ConfigurationSelection:
+    indices:
+    - 999
 setup_ASEGeoOpt:
     data_id: -1
     dump_rate: 1000

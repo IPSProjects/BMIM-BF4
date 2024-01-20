@@ -60,9 +60,11 @@ with project.group("setup"):
         sampling_rate=10,
     )
 
-with project.group("AIMD"):
+with project.group("AIMD") as aimd:
+    last_frame = ips.configuration_selection.IndexSelection(md.atoms, indices=[999])
+
     model = ips.calculators.CP2KSinglePoint(
-        data=cation.atoms,  # we still need some input here
+        data=last_frame.atoms, 
         cp2k_params="config/cp2k.yaml",
         cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS"],
     )
@@ -71,9 +73,10 @@ with project.group("AIMD"):
         data=md.atoms,
         data_id=-1,
         model=model,
+        use_momenta=True,
         thermostat=thermostat,
         steps=20_000,
         sampling_rate=1,
     )
 
-project.build()
+project.build(nodes=[aimd])

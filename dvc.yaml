@@ -114,9 +114,9 @@ stages:
     deps:
     - GTH_BASIS_SETS
     - GTH_POTENTIALS
-    - nodes/setup/SmilesToAtoms_1/atoms.h5
-    - nodes/setup/SmilesToAtoms_1/molecule.png
-    - nodes/setup/SmilesToAtoms_1/node-meta.json
+    - nodes/AIMD/ConfigurationSelection/node-meta.json
+    - nodes/AIMD/ConfigurationSelection/selected_configurations.json
+    - nodes/AIMD/ConfigurationSelection/selection.png
     params:
     - config/cp2k.yaml:
     outs:
@@ -147,4 +147,20 @@ stages:
     - nodes/AIMD/ASEMD/node-meta.json:
         cache: false
     - nodes/AIMD/ASEMD/steps_before_stopping.json:
+        cache: false
+  AIMD_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AIMD_ConfigurationSelection
+    deps:
+    - nodes/setup/ASEMD_1/metrics_dict.csv
+    - nodes/setup/ASEMD_1/model
+    - nodes/setup/ASEMD_1/node-meta.json
+    - nodes/setup/ASEMD_1/steps_before_stopping.json
+    - nodes/setup/ASEMD_1/trajectory.h5
+    params:
+    - AIMD_ConfigurationSelection
+    outs:
+    - nodes/AIMD/ConfigurationSelection/selected_configurations.json
+    - nodes/AIMD/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/AIMD/ConfigurationSelection/node-meta.json:
         cache: false
