@@ -27409,16 +27409,16 @@ stages:
           wrap: false
         depl_ASEMD+modifier+0:
           cell:
-          density: 1162
+          density: 1211
         depl_ASEMD+thermostat:
           friction: 0.01
-          temperature: 353
+          temperature: 283
           time_step: 0.5
     outs:
     - path: nodes/depl/ASEMD/metrics_dict.csv
       hash: md5
-      md5: 9eabeb33f3ffd6fd44e887e438258f81
-      size: 42026
+      md5: 174a62d053530d5e7fa3b21e2e5448e9
+      size: 42081
     - path: nodes/depl/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -27426,15 +27426,15 @@ stages:
       nfiles: 1
     - path: nodes/depl/ASEMD/node-meta.json
       hash: md5
-      md5: 702ac4b90cb94907e6daea3925c92de3
-      size: 48
+      md5: f2f9f626c13c490261ba4068b85dd545
+      size: 64
     - path: nodes/depl/ASEMD/steps_before_stopping.json
       hash: md5
       md5: 6bb61e3b7bce0931da574d19d1d82c88
       size: 2
     - path: nodes/depl/ASEMD/trajectory.h5
       hash: md5
-      md5: ed7e9f3b3286701eb4ee6d025a1c72e1
+      md5: f04ed7eaeed6316b93c659b6b888607a
       size: 50790792
   depl_ASEMD_1:
     cmd: zntrack run ipsuite.nodes.ASEMD --name depl_ASEMD_1
@@ -27466,8 +27466,8 @@ stages:
       size: 8933596
     - path: nodes/depl/ASEMD/metrics_dict.csv
       hash: md5
-      md5: 9eabeb33f3ffd6fd44e887e438258f81
-      size: 42026
+      md5: 174a62d053530d5e7fa3b21e2e5448e9
+      size: 42081
     - path: nodes/depl/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -27475,15 +27475,15 @@ stages:
       nfiles: 1
     - path: nodes/depl/ASEMD/node-meta.json
       hash: md5
-      md5: 702ac4b90cb94907e6daea3925c92de3
-      size: 48
+      md5: f2f9f626c13c490261ba4068b85dd545
+      size: 64
     - path: nodes/depl/ASEMD/steps_before_stopping.json
       hash: md5
       md5: 6bb61e3b7bce0931da574d19d1d82c88
       size: 2
     - path: nodes/depl/ASEMD/trajectory.h5
       hash: md5
-      md5: ed7e9f3b3286701eb4ee6d025a1c72e1
+      md5: f04ed7eaeed6316b93c659b6b888607a
       size: 50790792
     params:
       params.yaml:
@@ -27498,17 +27498,17 @@ stages:
           sampling_rate: 10
           seed: 42
           steps: 10000
-          use_momenta: false
+          use_momenta: true
           wrap: false
         depl_ASEMD_1+thermostat:
           friction: 0.01
-          temperature: 353
+          temperature: 283
           time_step: 0.5
     outs:
     - path: nodes/depl/ASEMD_1/metrics_dict.csv
       hash: md5
-      md5: 1d7fedd953d3070286a7f7eb3145a04f
-      size: 41972
+      md5: 46095662f5958a2bb99979ae6b22b382
+      size: 41950
     - path: nodes/depl/ASEMD_1/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -27516,15 +27516,15 @@ stages:
       nfiles: 1
     - path: nodes/depl/ASEMD_1/node-meta.json
       hash: md5
-      md5: b9dc78a7b957ee3fa6edf192a9587642
-      size: 48
+      md5: 919db7bb09e6b23e0fcaf14bbb2a7296
+      size: 64
     - path: nodes/depl/ASEMD_1/steps_before_stopping.json
       hash: md5
       md5: 6bb61e3b7bce0931da574d19d1d82c88
       size: 2
     - path: nodes/depl/ASEMD_1/trajectory.h5
       hash: md5
-      md5: 96704554effb815f0a6f29808461916e
+      md5: 1f617d9fb4e5fc8f384716dc8ff961c4
       size: 50790792
   ML17_training_MLModel_4:
     cmd: zntrack run ipsuite.nodes.Apax --name ML17_training_MLModel_4
@@ -27813,8 +27813,8 @@ stages:
       size: 8933596
     - path: nodes/depl/ASEMD_1/metrics_dict.csv
       hash: md5
-      md5: 1d7fedd953d3070286a7f7eb3145a04f
-      size: 41972
+      md5: 46095662f5958a2bb99979ae6b22b382
+      size: 41950
     - path: nodes/depl/ASEMD_1/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -27822,15 +27822,15 @@ stages:
       nfiles: 1
     - path: nodes/depl/ASEMD_1/node-meta.json
       hash: md5
-      md5: b9dc78a7b957ee3fa6edf192a9587642
-      size: 48
+      md5: 919db7bb09e6b23e0fcaf14bbb2a7296
+      size: 64
     - path: nodes/depl/ASEMD_1/steps_before_stopping.json
       hash: md5
       md5: 6bb61e3b7bce0931da574d19d1d82c88
       size: 2
     - path: nodes/depl/ASEMD_1/trajectory.h5
       hash: md5
-      md5: 96704554effb815f0a6f29808461916e
+      md5: 1f617d9fb4e5fc8f384716dc8ff961c4
       size: 50790792
     params:
       params.yaml:
@@ -27840,25 +27840,26 @@ stages:
           repeat:
       config/md.yaml:
         buffer_size: 1000
+        checkpoint_interval: 200
         dr_threshold: 0.5
         duration: 20000000
         ensemble:
           name: nvt
           dt: 0.5
-          temperature: 353
+          temperature: 283
         n_inner: 5000
         sampling_rate: 200
     outs:
     - path: nodes/depl/ApaxJaxMD/initial_structure.extxyz
       hash: md5
-      md5: d8e66e3ed64784648957086d9c12796c
+      md5: d51fdbe365b0ce76c21d070380185fbf
       size: 50550
     - path: nodes/depl/ApaxJaxMD/md
       hash: md5
-      md5: c90a3eb0c501822a60b483f4bcba4a4a.dir
-      size: 7914518180
-      nfiles: 2
+      md5: bafa3e1ec57e6dee3fdbd59e8dc89472.dir
+      size: 7722459272
+      nfiles: 6
     - path: nodes/depl/ApaxJaxMD/node-meta.json
       hash: md5
-      md5: 449f50cd73381549536365afb653a8ef
-      size: 65
+      md5: edc2fe36be9f643dfee774eeb6583dd2
+      size: 64
