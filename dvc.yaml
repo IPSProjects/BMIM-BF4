@@ -1,7 +1,63 @@
 plots:
 - nodes/setup/ASEMD/metrics_dict.csv: {}
 - nodes/setup/ASEMD_1/metrics_dict.csv: {}
+- nodes/AIMD/ASEMD/metrics_dict.csv: {}
 stages:
+  AIMD_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name AIMD_ASEMD
+    deps:
+    - nodes/AIMD/CP2KSinglePoint/atoms.h5
+    - nodes/AIMD/CP2KSinglePoint/cp2k
+    - nodes/AIMD/CP2KSinglePoint/node-meta.json
+    - nodes/setup/ASEMD_1/metrics_dict.csv
+    - nodes/setup/ASEMD_1/model
+    - nodes/setup/ASEMD_1/node-meta.json
+    - nodes/setup/ASEMD_1/steps_before_stopping.json
+    - nodes/setup/ASEMD_1/trajectory.h5
+    metrics:
+    - nodes/AIMD/ASEMD/node-meta.json:
+        cache: false
+    - nodes/AIMD/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/AIMD/ASEMD/metrics_dict.csv
+    - nodes/AIMD/ASEMD/model
+    - nodes/AIMD/ASEMD/trajectory.h5
+    params:
+    - AIMD_ASEMD
+    - AIMD_ASEMD+thermostat
+  AIMD_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AIMD_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - nodes/AIMD/ConfigurationSelection/node-meta.json
+    - nodes/AIMD/ConfigurationSelection/selected_configurations.json
+    - nodes/AIMD/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/AIMD/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AIMD/CP2KSinglePoint/atoms.h5
+    - nodes/AIMD/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml: null
+  AIMD_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name AIMD_ConfigurationSelection
+    deps:
+    - nodes/setup/ASEMD_1/metrics_dict.csv
+    - nodes/setup/ASEMD_1/model
+    - nodes/setup/ASEMD_1/node-meta.json
+    - nodes/setup/ASEMD_1/steps_before_stopping.json
+    - nodes/setup/ASEMD_1/trajectory.h5
+    metrics:
+    - nodes/AIMD/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/AIMD/ConfigurationSelection/selected_configurations.json
+    - nodes/AIMD/ConfigurationSelection/selection.png
+    params:
+    - AIMD_ConfigurationSelection
   setup_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name setup_ASEGeoOpt
     deps:
@@ -109,58 +165,3 @@ stages:
     - nodes/setup/SmilesToAtoms_1/molecule.png
     params:
     - setup_SmilesToAtoms_1
-  AIMD_CP2KSinglePoint:
-    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AIMD_CP2KSinglePoint
-    deps:
-    - GTH_BASIS_SETS
-    - GTH_POTENTIALS
-    - nodes/AIMD/ConfigurationSelection/node-meta.json
-    - nodes/AIMD/ConfigurationSelection/selected_configurations.json
-    - nodes/AIMD/ConfigurationSelection/selection.png
-    params:
-    - config/cp2k.yaml:
-    outs:
-    - nodes/AIMD/CP2KSinglePoint/atoms.h5
-    - nodes/AIMD/CP2KSinglePoint/cp2k
-    metrics:
-    - nodes/AIMD/CP2KSinglePoint/node-meta.json:
-        cache: false
-  AIMD_ASEMD:
-    cmd: zntrack run ipsuite.nodes.ASEMD --name AIMD_ASEMD
-    deps:
-    - nodes/AIMD/CP2KSinglePoint/atoms.h5
-    - nodes/AIMD/CP2KSinglePoint/cp2k
-    - nodes/AIMD/CP2KSinglePoint/node-meta.json
-    - nodes/setup/ASEMD_1/metrics_dict.csv
-    - nodes/setup/ASEMD_1/model
-    - nodes/setup/ASEMD_1/node-meta.json
-    - nodes/setup/ASEMD_1/steps_before_stopping.json
-    - nodes/setup/ASEMD_1/trajectory.h5
-    params:
-    - AIMD_ASEMD
-    - AIMD_ASEMD+thermostat
-    outs:
-    - nodes/AIMD/ASEMD/metrics_dict.csv
-    - nodes/AIMD/ASEMD/model
-    - nodes/AIMD/ASEMD/trajectory.h5
-    metrics:
-    - nodes/AIMD/ASEMD/node-meta.json:
-        cache: false
-    - nodes/AIMD/ASEMD/steps_before_stopping.json:
-        cache: false
-  AIMD_ConfigurationSelection:
-    cmd: zntrack run ipsuite.nodes.IndexSelection --name AIMD_ConfigurationSelection
-    deps:
-    - nodes/setup/ASEMD_1/metrics_dict.csv
-    - nodes/setup/ASEMD_1/model
-    - nodes/setup/ASEMD_1/node-meta.json
-    - nodes/setup/ASEMD_1/steps_before_stopping.json
-    - nodes/setup/ASEMD_1/trajectory.h5
-    params:
-    - AIMD_ConfigurationSelection
-    outs:
-    - nodes/AIMD/ConfigurationSelection/selected_configurations.json
-    - nodes/AIMD/ConfigurationSelection/selection.png
-    metrics:
-    - nodes/AIMD/ConfigurationSelection/node-meta.json:
-        cache: false
