@@ -13,7 +13,7 @@ AIMD_ASEMD:
     wrap: false
 AIMD_ASEMD+thermostat:
     friction: 0.01
-    temperature: 353
+    temperature: 283
     time_step: 0.5
 AIMD_ConfigurationSelection:
     indices:
@@ -44,10 +44,10 @@ setup_ASEMD:
     wrap: false
 setup_ASEMD+modifier+0:
     cell: null
-    density: 1162
+    density: 1211
 setup_ASEMD+thermostat:
     friction: 0.01
-    temperature: 353
+    temperature: 283
     time_step: 0.5
 setup_ASEMD_1:
     data_id: -1
@@ -64,7 +64,7 @@ setup_ASEMD_1:
     wrap: false
 setup_ASEMD_1+thermostat:
     friction: 0.01
-    temperature: 353
+    temperature: 283
     time_step: 0.5
 setup_Packmol:
     box: null

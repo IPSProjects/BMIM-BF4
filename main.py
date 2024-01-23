@@ -3,9 +3,9 @@ import zntrack
 
 project = ips.Project(automatic_node_names=True)
 
-ramp_density = ips.calculators.RescaleBoxModifier(density=1162)
+ramp_density = ips.calculators.RescaleBoxModifier(density=1211)
 thermostat = ips.calculators.LangevinThermostat(
-    temperature=353, friction=0.01, time_step=0.5
+    temperature=283, friction=0.01, time_step=0.5
 )
 
 mlp = zntrack.from_rev(
@@ -79,4 +79,4 @@ with project.group("AIMD") as aimd:
         sampling_rate=1,
     )
 
-project.build(nodes=[aimd])
+project.build()

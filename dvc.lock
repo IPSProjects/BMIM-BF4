@@ -220,16 +220,16 @@ stages:
           wrap: false
         setup_ASEMD+modifier+0:
           cell:
-          density: 1162
+          density: 1211
         setup_ASEMD+thermostat:
           friction: 0.01
-          temperature: 353
+          temperature: 283
           time_step: 0.5
     outs:
     - path: nodes/setup/ASEMD/metrics_dict.csv
       hash: md5
-      md5: 234432ac9c6a856e49439dced5ba9ff3
-      size: 41985
+      md5: 3651291981539b02723e7e3c85157e47
+      size: 42077
     - path: nodes/setup/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -237,15 +237,15 @@ stages:
       nfiles: 1
     - path: nodes/setup/ASEMD/node-meta.json
       hash: md5
-      md5: f7629cbe76775b849a99c9c9d050639b
-      size: 48
+      md5: 86ebbac33d7c4be86c21a02b6551a451
+      size: 64
     - path: nodes/setup/ASEMD/steps_before_stopping.json
       hash: md5
       md5: 6bb61e3b7bce0931da574d19d1d82c88
       size: 2
     - path: nodes/setup/ASEMD/trajectory.h5
       hash: md5
-      md5: 51db8e4a6c2d51d291505b4e3e8ce0e5
+      md5: da801a8cf9ca2da9050533a4c5354215
       size: 50790792
   setup_ASEMD_1:
     cmd: zntrack run ipsuite.nodes.ASEMD --name setup_ASEMD_1
@@ -256,8 +256,8 @@ stages:
       size: 48
     - path: nodes/setup/ASEMD/metrics_dict.csv
       hash: md5
-      md5: 234432ac9c6a856e49439dced5ba9ff3
-      size: 41985
+      md5: 3651291981539b02723e7e3c85157e47
+      size: 42077
     - path: nodes/setup/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -265,15 +265,15 @@ stages:
       nfiles: 1
     - path: nodes/setup/ASEMD/node-meta.json
       hash: md5
-      md5: f7629cbe76775b849a99c9c9d050639b
-      size: 48
+      md5: 86ebbac33d7c4be86c21a02b6551a451
+      size: 64
     - path: nodes/setup/ASEMD/steps_before_stopping.json
       hash: md5
       md5: 6bb61e3b7bce0931da574d19d1d82c88
       size: 2
     - path: nodes/setup/ASEMD/trajectory.h5
       hash: md5
-      md5: 51db8e4a6c2d51d291505b4e3e8ce0e5
+      md5: da801a8cf9ca2da9050533a4c5354215
       size: 50790792
     params:
       params.yaml:
@@ -292,13 +292,13 @@ stages:
           wrap: false
         setup_ASEMD_1+thermostat:
           friction: 0.01
-          temperature: 353
+          temperature: 283
           time_step: 0.5
     outs:
     - path: nodes/setup/ASEMD_1/metrics_dict.csv
       hash: md5
-      md5: a6c50d4631c9197616b90b341a4681bd
-      size: 41932
+      md5: 450a4bbd8e332300bbcc0a1ea4dc4cd0
+      size: 41984
     - path: nodes/setup/ASEMD_1/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -306,23 +306,23 @@ stages:
       nfiles: 1
     - path: nodes/setup/ASEMD_1/node-meta.json
       hash: md5
-      md5: d80ecfc2759f4c2643ef77feaf67e5e8
-      size: 48
+      md5: 7ba2a492369e1eefef32f35922099976
+      size: 64
     - path: nodes/setup/ASEMD_1/steps_before_stopping.json
       hash: md5
       md5: 6bb61e3b7bce0931da574d19d1d82c88
       size: 2
     - path: nodes/setup/ASEMD_1/trajectory.h5
       hash: md5
-      md5: fffa4133f9b6d5982927becdfc80496d
+      md5: dd45d67213f484d281badd835f4b5691
       size: 50790792
   AIMD_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AIMD_ConfigurationSelection
     deps:
     - path: nodes/setup/ASEMD_1/metrics_dict.csv
       hash: md5
-      md5: a6c50d4631c9197616b90b341a4681bd
-      size: 41932
+      md5: 450a4bbd8e332300bbcc0a1ea4dc4cd0
+      size: 41984
     - path: nodes/setup/ASEMD_1/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -330,15 +330,15 @@ stages:
       nfiles: 1
     - path: nodes/setup/ASEMD_1/node-meta.json
       hash: md5
-      md5: d80ecfc2759f4c2643ef77feaf67e5e8
-      size: 48
+      md5: 7ba2a492369e1eefef32f35922099976
+      size: 64
     - path: nodes/setup/ASEMD_1/steps_before_stopping.json
       hash: md5
       md5: 6bb61e3b7bce0931da574d19d1d82c88
       size: 2
     - path: nodes/setup/ASEMD_1/trajectory.h5
       hash: md5
-      md5: fffa4133f9b6d5982927becdfc80496d
+      md5: dd45d67213f484d281badd835f4b5691
       size: 50790792
     params:
       params.yaml:
@@ -348,7 +348,7 @@ stages:
     outs:
     - path: nodes/AIMD/ConfigurationSelection/node-meta.json
       hash: md5
-      md5: b4e172bec687a68a6637a9614f2903b5
+      md5: 6175f88ec3b39eff78a9b0237a574b85
       size: 64
     - path: nodes/AIMD/ConfigurationSelection/selected_configurations.json
       hash: md5
@@ -356,8 +356,8 @@ stages:
       size: 44
     - path: nodes/AIMD/ConfigurationSelection/selection.png
       hash: md5
-      md5: cad833b8dfbae3a2da861e05465b083d
-      size: 48401
+      md5: 6af4d65e538805b1fa25a1d84ee6d3ca
+      size: 52363
   AIMD_CP2KSinglePoint:
     cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name AIMD_CP2KSinglePoint
     deps:

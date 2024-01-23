@@ -41,7 +41,7 @@ stages:
     - nodes/AIMD/CP2KSinglePoint/atoms.h5
     - nodes/AIMD/CP2KSinglePoint/cp2k
     params:
-    - config/cp2k.yaml: null
+    - config/cp2k.yaml:
   AIMD_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.IndexSelection --name AIMD_ConfigurationSelection
     deps:
