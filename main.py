@@ -935,10 +935,10 @@ with project.group("ML17_eval") as ml17_eval:
 
 
 ramp_density = ips.calculators.RescaleBoxModifier(
-    density=1211
+    density=1190
 )
 thermostat = ips.calculators.LangevinThermostat(
-    temperature=283, friction=0.01, time_step=0.5
+    temperature=313, friction=0.01, time_step=0.5
 )
 # https://pubs.acs.org/doi/10.1021/jp306146s
 

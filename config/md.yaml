@@ -1,7 +1,7 @@
 ensemble:
   name: nvt
   dt: 0.5 # fs time step
-  temperature: 283 # K
+  temperature: 313 # K
 
 duration: 20_000_000 # fs
 n_inner: 5000 # compiled inner steps

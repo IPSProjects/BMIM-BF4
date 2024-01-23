@@ -1258,10 +1258,10 @@ depl_ASEMD:
     wrap: false
 depl_ASEMD+modifier+0:
     cell: null
-    density: 1211
+    density: 1190
 depl_ASEMD+thermostat:
     friction: 0.01
-    temperature: 283
+    temperature: 313
     time_step: 0.5
 depl_ASEMD_1:
     data_id: -1
@@ -1278,7 +1278,7 @@ depl_ASEMD_1:
     wrap: false
 depl_ASEMD_1+thermostat:
     friction: 0.01
-    temperature: 283
+    temperature: 313
     time_step: 0.5
 depl_ApaxJaxMD:
     data_id: -1
