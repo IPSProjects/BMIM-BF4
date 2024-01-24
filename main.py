@@ -935,10 +935,10 @@ with project.group("ML17_eval") as ml17_eval:
 
 
 ramp_density = ips.calculators.RescaleBoxModifier(
-    density=1190
+    density=1176
 )
 thermostat = ips.calculators.LangevinThermostat(
-    temperature=313, friction=0.01, time_step=0.5
+    temperature=333, friction=0.01, time_step=0.5
 )
 # https://pubs.acs.org/doi/10.1021/jp306146s
 
@@ -1001,5 +1001,3 @@ with project.group("depl") as depl:
     )
 
 project.build(nodes=[depl])
-
-# pip uninstall jax jaxlib nvidia-nvtx-cu12 nvidia-nccl-cu12 nvidia-nvjitlink-cu12 nvidia-cusparse-cu12 nvidia-cublas-cu12 nvidia-cuda-cupti-cu12 nvidia-cuda-nvcc-cu12 nvidia-cuda-nvrtc-cu12 nvidia-cuda-runtime-cu12 nvidia-cudnn-cu12 nvidia-cufft-cu12 nvidia-curand-cu12 nvidia-cusolver-cu12 
