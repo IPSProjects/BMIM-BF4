@@ -923,6 +923,173 @@ with project.group("ML17_eval") as ml17_eval:
     metrics = ips.analysis.PredictionMetrics(data=prediction)
     ips.analysis.ForceDecomposition(data=prediction)
 
-    
+    prediction = ips.analysis.Prediction(data=val_d3_medium, model=model_long_cutoff)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
+    ips.analysis.ForceDecomposition(data=prediction)
 
-project.build(nodes=[ml17_data, ml17_train, ml17_eval])
+
+T0 = 283.0
+exp_density = 1211
+thermostat = ips.calculators.LangevinThermostat(
+    temperature=T0, friction=0.01, time_step=0.5
+)
+barostat = ips.calculators.NPTThermostat(
+    time_step=0.5,
+    temperature=T0,
+    pressure=6.324e-07, # 1.01325 * units.bar,
+    ttime=2.4557, # 25 * units.fs,
+    pfactor=54.273, # (75 * units.fs) ** 2,
+    tetragonal_strain=True,
+)
+
+with project.group("ML17_density_models") as density_m:
+    single_cation = ips.configuration_generation.SmilesToAtoms(
+        smiles="CCCCN1C=C[N+](=C1)C"
+    )
+    single_anion = ips.configuration_generation.SmilesToAtoms(
+        smiles="[B-](F)(F)(F)F"
+    )
+    structure = ips.configuration_generation.Packmol(
+        data=[single_cation.atoms, single_anion.atoms],
+        count=[10, 10],
+        density=exp_density,
+        pbc=True,
+    )
+
+    geopt = ips.calculators.ASEGeoOpt(
+        model=model_short,
+        data=structure.atoms,
+        optimizer="BFGS",
+        run_kwargs={"fmax": 0.5},
+    )
+    
+    md_nvt_equil = ips.calculators.ASEMD(
+        data=geopt.atoms,
+        data_id=-1,
+        model=model_short,
+        modifier=[],
+        thermostat=thermostat,
+        checker_list=[],
+        steps=200_000,
+        sampling_rate=200,
+    )
+
+    ml17_td3_mix = ips.calculators.MixCalculator(
+        data=validation_data_nod3,
+        calculators=[model_nod3, td3],
+        methods="sum",
+    )
+
+    td3_20 = ips.calculators.TorchD3(
+        data=validation_data_nod3,
+        xc="b97-3c",
+        damping="bj",
+        cutoff=20,
+        cnthr=20,
+        abc=False,
+        dtype="float32",
+        skin=0.5,
+    )
+
+    ml17_td3_20_mix = ips.calculators.MixCalculator(
+        data=validation_data_nod3,
+        calculators=[model_nod3, td3_20],
+        methods="sum",
+    )
+    # TODO redo model_long with connectivity check
+    for m in [ml17_td3_mix, model_short, model_long_cutoff, model_long, ml17_td3_20_mix, model_nod3]:
+        md_npt = ips.calculators.ASEMD(
+            data=md_nvt_equil.atoms,
+            data_id=-1,
+            model=m,
+            modifier=[],
+            thermostat=barostat,
+            checker_list=[],
+            steps=2_000_000,
+            sampling_rate=100,
+            use_momenta=True,
+        )
+
+thermostats = []
+barostats = []
+# densities = [1162,1165,1169,1172,1176,1179,1183,1186,1190,1193,1197,1200,1204,1207] # ,1211
+# temperatures = [353, 348, 343, 338, 333, 328, 323, 318, 313, 308, 303, 298, 293, 288] # 283
+
+densities = [1162, 1176,1190,1204] # ,1211
+temperatures = [353, 333,  313,  293] # 283
+
+for Ti in temperatures:
+    t = thermostat = ips.calculators.LangevinThermostat(
+        temperature=Ti, friction=0.01, time_step=0.5
+    )
+    b = ips.calculators.NPTThermostat(
+        time_step=0.5,
+        temperature=Ti,
+        pressure=6.324e-07, # 1.01325 * units.bar,
+        ttime=2.4557, # 25 * units.fs,
+        pfactor=54.273, # (75 * units.fs) ** 2,
+        tetragonal_strain=True,
+    )
+    thermostats.append(t)
+    barostats.append(b)
+
+
+
+with project.group("ML17_density_model_short") as density_t:
+    equilibrated_trajs = []
+    for ii, rho in enumerate(densities):
+        structure = ips.configuration_generation.Packmol(
+            data=[single_cation.atoms, single_anion.atoms],
+            count=[10, 10],
+            density=rho,
+            pbc=True,
+        )
+
+        geopt = ips.calculators.ASEGeoOpt(
+            model=model if ii in [2] else model_short,
+            data=structure.atoms,
+            optimizer="FIRE" if ii in [2] else "BFGS",
+            run_kwargs={"fmax": 0.5 if ii in [2] else 0.5},
+        )
+        
+        md_nvt_equil = ips.calculators.ASEMD(
+            data=geopt.atoms,
+            data_id=-1,
+            model=model_short,
+            modifier=[],
+            thermostat=thermostats[ii],
+            checker_list=[],
+            steps=200_000,
+            sampling_rate=200,
+        )
+        equilibrated_trajs.append(md_nvt_equil)
+
+        md_npt = ips.calculators.ASEMD(
+            data=md_nvt_equil.atoms,
+            data_id=-1,
+            model=model_short,
+            modifier=[],
+            thermostat=barostats[ii],
+            checker_list=[],
+            steps=2_000_000,
+            sampling_rate=100,
+            use_momenta=True,
+        )
+
+
+with project.group("ML17_density_model_td3") as density_d3:
+    for ii, rho in enumerate(densities):
+        md_npt = ips.calculators.ASEMD(
+            data=equilibrated_trajs[ii].atoms,
+            data_id=-1,
+            model=model_short,
+            modifier=[],
+            thermostat=barostats[ii],
+            checker_list=[],
+            steps=2_000_000,
+            sampling_rate=100,
+            use_momenta=True,
+        )
+
+
+project.build(nodes=[density_m]) # density_m density_t
