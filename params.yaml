@@ -543,6 +543,11 @@ ML17_training_MLModel_3:
     use_energy: true
     use_forces: true
     use_stresses: false
+ML17_training_MLModel_4:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 ML1_ASEGeoOpt:
     data_id: -1
     dump_rate: 1000
@@ -1227,6 +1232,85 @@ d3_models_MLModel_1:
     use_energy: true
     use_forces: true
     use_stresses: false
+depl_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.05
+depl_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 10000
+    use_momenta: false
+    wrap: false
+depl_ASEMD+modifier+0:
+    cell: null
+    density: 1204
+depl_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 293
+    time_step: 0.5
+depl_ASEMD_1:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 10000
+    use_momenta: true
+    wrap: false
+depl_ASEMD_1+thermostat:
+    friction: 0.01
+    temperature: 293
+    time_step: 0.5
+depl_ApaxJaxMD:
+    data_id: -1
+    md_parameter: null
+    repeat: null
+depl_Packmol:
+    box: null
+    count:
+    - 1
+    - 1
+    data_ids: null
+    density: 1210
+    pbc: false
+    tolerance: 2.0
+depl_Packmol_1:
+    box: null
+    count:
+    - 16
+    data_ids: null
+    density: 900
+    pbc: true
+    tolerance: 2.0
+depl_SmilesToAtoms:
+    cell: null
+    optimizer: UFF
+    seed: 1234
+    smiles: '[B-](F)(F)(F)F'
+depl_SmilesToAtoms_1:
+    cell: null
+    optimizer: UFF
+    seed: 1234
+    smiles: CCCCN1C=C[N+](=C1)C
 final_MLModel:
     jax_enable_x64: true
     use_energy: true

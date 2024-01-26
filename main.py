@@ -898,6 +898,12 @@ with project.group("ML17_training") as ml17_train:
         config="config/ml17_ensemble.yaml",
     )
 
+    model_single = ips.models.Apax(
+        data=train_d3_short,
+        validation_data=val_d3_short,
+        config="config/ml17.yaml",
+    )
+
 
 with project.group("ML17_eval") as ml17_eval:
     ips.analysis.EnergyHistogram(data=train_data_nod3, bins=100)
@@ -923,6 +929,75 @@ with project.group("ML17_eval") as ml17_eval:
     metrics = ips.analysis.PredictionMetrics(data=prediction)
     ips.analysis.ForceDecomposition(data=prediction)
 
-    
+    prediction = ips.analysis.Prediction(data=val_d3_medium, model=model_single)
+    metrics = ips.analysis.PredictionMetrics(data=prediction)
+    ips.analysis.ForceDecomposition(data=prediction)
 
-project.build(nodes=[ml17_data, ml17_train, ml17_eval])
+
+ramp_density = ips.calculators.RescaleBoxModifier(
+    density=1204
+)
+thermostat = ips.calculators.LangevinThermostat(
+    temperature=293, friction=0.01, time_step=0.5
+)
+# https://pubs.acs.org/doi/10.1021/jp306146s
+
+with project.group("depl") as depl:
+    anion = ips.configuration_generation.SmilesToAtoms(
+        smiles="[B-](F)(F)(F)F"
+    )
+    cation = ips.configuration_generation.SmilesToAtoms(
+        smiles="CCCCN1C=C[N+](=C1)C"
+    )
+
+    single_structure = ips.configuration_generation.Packmol(
+        data=[cation.atoms, anion.atoms],
+        count=[1, 1],
+        density=1210,
+        pbc=False,
+    )
+
+    structure = ips.configuration_generation.Packmol(
+        data=[single_structure.atoms],
+        count=[16], # 16, 32, 64
+        density=900,
+    )
+
+    geo_opt = ips.calculators.ASEGeoOpt(
+        model=model_short,
+        data=structure.atoms,
+        data_id=-1,
+        optimizer="FIRE",
+        run_kwargs={"fmax": 0.05},
+    )
+
+    density_md = ips.calculators.ASEMD(
+        data=geo_opt.atoms,
+        data_id=-1,
+        model=model_short,
+        modifier=[ramp_density],
+        thermostat=thermostat,
+        steps=10_000,
+        sampling_rate=10,
+    )
+
+    # relaxation 
+
+    md = ips.calculators.ASEMD(
+        data=density_md.atoms,
+        data_id=-1,
+        model=model_short,
+        thermostat=thermostat,
+        steps=10_000,
+        sampling_rate=10,
+        use_momenta=True,
+    )
+
+    md = ips.calculators.ApaxJaxMD(
+        data=md.atoms,
+        data_id=-1,
+        model=model_short,
+        md_parameter_file="config/md.yaml",
+    )
+
+project.build(nodes=[depl])
