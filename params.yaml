@@ -1242,7 +1242,7 @@ depl_ASEGeoOpt:
     - 1
     - 1
     run_kwargs:
-        fmax: 0.05
+        fmax: 0.01
 depl_ASEMD:
     data_id: -1
     dump_rate: 1000
@@ -1253,7 +1253,7 @@ depl_ASEMD:
     - 1
     sampling_rate: 10
     seed: 42
-    steps: 10000
+    steps: 50000
     use_momenta: false
     wrap: false
 depl_ASEMD+modifier+0:
@@ -1296,7 +1296,7 @@ depl_Packmol:
 depl_Packmol_1:
     box: null
     count:
-    - 16
+    - 32
     data_ids: null
     density: 900
     pbc: true
