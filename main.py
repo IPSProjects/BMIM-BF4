@@ -959,7 +959,7 @@ with project.group("depl") as depl:
 
     structure = ips.configuration_generation.Packmol(
         data=[single_structure.atoms],
-        count=[32], # 16, 32, 64
+        count=[8], # 16, 32, 64
         density=900,
     )
 
