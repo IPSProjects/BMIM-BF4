@@ -277,6 +277,277 @@ ML14_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+ML15_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 100
+    seed: 42
+    steps: 1000000
+    use_momenta: false
+    wrap: false
+ML15_ASEMD+checker_list+0:
+    larger_only: true
+    max_std: null
+    max_value: 0.5
+    minimum_window_size: 1
+    value: forces_uncertainty
+    window_size: 500
+ML15_ASEMD+modifier+0:
+    end_temperature: 300
+    interval: 1
+    num_oscillations: 10
+    start_temperature: 200
+    temperature_amplitude: 100
+ML15_ASEMD+thermostat:
+    pfactor: 54.273
+    pressure: 6.324e-07
+    temperature: 300
+    tetragonal_strain: true
+    time_step: 1.0
+    ttime: 2.4557
+ML15_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 100
+    selection_method: max_dist
+ML15_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML15_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML15_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML16_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML16_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 100
+    seed: 42
+    steps: 1000000
+    use_momenta: false
+    wrap: false
+ML16_ASEMD+thermostat:
+    pfactor: 54.273
+    pressure: 6.324e-07
+    temperature: 300
+    tetragonal_strain: true
+    time_step: 1.0
+    ttime: 2.4557
+ML16_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 5
+    selection_method: max_dist
+ML16_ConfigurationSelection_1:
+    n_configurations: 100
+    seed: 1234
+ML16_ConfigurationSelection_2:
+    n_configurations: 100
+    seed: 1234
+ML16_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML16_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML16_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML17_datasets_TorchD3:
+    abc: false
+    cnthr: 7.93766
+    cutoff: 7.93766
+    damping: bj
+    dtype: float32
+    skin: 0.0
+    xc: b97-3c
+ML17_datasets_TorchD3_1:
+    abc: false
+    cnthr: 7.93766
+    cutoff: 7.93766
+    damping: bj
+    dtype: float32
+    skin: 0.0
+    xc: b97-3c
+ML17_datasets_TorchD3_2:
+    abc: false
+    cnthr: 20.0
+    cutoff: 20.0
+    damping: bj
+    dtype: float32
+    skin: 0.0
+    xc: b97-3c
+ML17_datasets_TorchD3_3:
+    abc: false
+    cnthr: 20.0
+    cutoff: 20.0
+    damping: bj
+    dtype: float32
+    skin: 0.0
+    xc: b97-3c
+ML17_eval_EnergyHistogram:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML17_eval_EnergyHistogram_1:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML17_eval_EnergyHistogram_2:
+    bins: 100
+    x_lim: null
+    y_lim: null
+ML17_eval_ForcesHistogram:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML17_eval_ForcesHistogram_1:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML17_eval_ForcesHistogram_2:
+    bins: null
+    x_lim: null
+    y_lim: null
+ML17_sampling_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML17_sampling_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 100
+    seed: 42
+    steps: 1000000
+    use_momenta: false
+    wrap: false
+ML17_sampling_ASEMD+modifier+0:
+    end_temperature: 500
+    interval: 1
+    num_oscillations: 5
+    start_temperature: 230
+    temperature_amplitude: 100
+ML17_sampling_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 298.15
+    time_step: 0.5
+ML17_sampling_ASEMD_1:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 100
+    seed: 42
+    steps: 1000000
+    use_momenta: false
+    wrap: false
+ML17_sampling_ASEMD_1+thermostat:
+    pfactor: 54.273
+    pressure: 6.324e-07
+    temperature: 298
+    tetragonal_strain: true
+    time_step: 0.5
+    ttime: 2.4557
+ML17_sampling_ConfigurationSelection:
+    base_feature_map:
+        layer_name: dense_2
+        name: ll_grad
+    n_configurations: 4
+    selection_method: max_dist
+ML17_sampling_ConfigurationSelection_1:
+    n_configurations: 40
+    seed: 1234
+ML17_sampling_ConfigurationSelection_2:
+    n_configurations: 80
+    seed: 1234
+ML17_sampling_ConfigurationSelection_3:
+    n_configurations: 40
+    seed: 1234
+ML17_sampling_ConfigurationSelection_4:
+    n_configurations: 80
+    seed: 1234
+ML17_sampling_MixCalculator:
+    methods: sum
+ML17_sampling_TorchD3:
+    abc: false
+    cnthr: 7.93766
+    cutoff: 7.93766
+    damping: bj
+    dtype: float32
+    skin: 0.5
+    xc: b97-3c
+ML17_training_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML17_training_MLModel_1:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML17_training_MLModel_2:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML17_training_MLModel_3:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+ML17_training_MLModel_4:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 ML1_ASEGeoOpt:
     data_id: -1
     dump_rate: 1000
@@ -951,12 +1222,139 @@ classical_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+d3_models_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+d3_models_MLModel_1:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+depl_ASEGeoOpt:
+    data_id: -1
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.05
+depl_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 10000
+    use_momenta: false
+    wrap: false
+depl_ASEMD+modifier+0:
+    cell: null
+    density: 1162
+depl_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+depl_ASEMD_1:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 10
+    seed: 42
+    steps: 10000
+    use_momenta: false
+    wrap: false
+depl_ASEMD_1+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+depl_ApaxJaxMD:
+    data_id: -1
+    md_parameter: null
+    repeat: null
+depl_Packmol:
+    box: null
+    count:
+    - 1
+    - 1
+    data_ids: null
+    density: 1210
+    pbc: false
+    tolerance: 2.0
+depl_Packmol_1:
+    box: null
+    count:
+    - 8
+    data_ids: null
+    density: 900
+    pbc: true
+    tolerance: 2.0
+depl_SmilesToAtoms:
+    cell: null
+    optimizer: UFF
+    seed: 1234
+    smiles: '[B-](F)(F)(F)F'
+depl_SmilesToAtoms_1:
+    cell: null
+    optimizer: UFF
+    seed: 1234
+    smiles: CCCCN1C=C[N+](=C1)C
 final_MLModel:
     jax_enable_x64: true
     use_energy: true
     use_forces: true
     use_stresses: false
 final_ensemble_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+torch_d3_labels_TorchD3:
+    abc: false
+    cnthr: 7.93766
+    cutoff: 7.93766
+    damping: bj
+    dtype: float32
+    xc: b97-3c
+torch_d3_labels_TorchD3_1:
+    abc: false
+    cnthr: 7.93766
+    cutoff: 7.93766
+    damping: bj
+    dtype: float32
+    xc: b97-3c
+torch_d3_labels_TorchD3_2:
+    abc: false
+    cnthr: 20.0
+    cutoff: 40.0
+    damping: bj
+    dtype: float32
+    xc: b97-3c
+torch_d3_labels_TorchD3_3:
+    abc: false
+    cnthr: 20.0
+    cutoff: 40.0
+    damping: bj
+    dtype: float32
+    xc: b97-3c
+wo_d3_MLModel:
+    jax_enable_x64: true
+    use_energy: true
+    use_forces: true
+    use_stresses: false
+wo_d3_model_MLModel:
     jax_enable_x64: true
     use_energy: true
     use_forces: true
