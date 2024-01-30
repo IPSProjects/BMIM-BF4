@@ -27264,7 +27264,7 @@ stages:
         depl_Packmol_1:
           box:
           count:
-          - 32
+          - 8
           data_ids:
           density: 900
           pbc: true
@@ -27272,16 +27272,16 @@ stages:
     outs:
     - path: nodes/depl/Packmol_1/atoms.h5
       hash: md5
-      md5: 1612f30bd68463dabd7a9324b4494cde
-      size: 58688
+      md5: 3cd76ae11c9131c8a7f01264bf5946e4
+      size: 35776
     - path: nodes/depl/Packmol_1/node-meta.json
       hash: md5
-      md5: 75489973dd870daf2c45c0096f02bf9c
+      md5: 41b01eda7c5c1c19272889ee9615d70f
       size: 48
     - path: nodes/depl/Packmol_1/packmol
       hash: md5
-      md5: bf1d31702557a23f4bcc87cf3d6b957d.dir
-      size: 55734
+      md5: 841037c7ba3625d833250e20c6e49d0e.dir
+      size: 15413
       nfiles: 3
   depl_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name depl_ASEGeoOpt
@@ -27313,16 +27313,16 @@ stages:
       size: 8933596
     - path: nodes/depl/Packmol_1/atoms.h5
       hash: md5
-      md5: 1612f30bd68463dabd7a9324b4494cde
-      size: 58688
+      md5: 3cd76ae11c9131c8a7f01264bf5946e4
+      size: 35776
     - path: nodes/depl/Packmol_1/node-meta.json
       hash: md5
-      md5: 75489973dd870daf2c45c0096f02bf9c
+      md5: 41b01eda7c5c1c19272889ee9615d70f
       size: 48
     - path: nodes/depl/Packmol_1/packmol
       hash: md5
-      md5: bf1d31702557a23f4bcc87cf3d6b957d.dir
-      size: 55734
+      md5: 841037c7ba3625d833250e20c6e49d0e.dir
+      size: 15413
       nfiles: 3
     params:
       params.yaml:
@@ -27345,12 +27345,12 @@ stages:
       nfiles: 1
     - path: nodes/depl/ASEGeoOpt/node-meta.json
       hash: md5
-      md5: d7d1e4ac82934f8c551546b0a211961c
+      md5: 83dc8876c4baac269a43e84b211a1b84
       size: 48
     - path: nodes/depl/ASEGeoOpt/trajectory.h5
       hash: md5
-      md5: 5a4f2097dc441393ed105a7a9f1dfe72
-      size: 37109312
+      md5: 44d5c0a1f68bf9db5e2201cf69680eff
+      size: 6918104
   depl_ASEMD:
     cmd: zntrack run ipsuite.nodes.ASEMD --name depl_ASEMD
     deps:
@@ -27386,12 +27386,12 @@ stages:
       nfiles: 1
     - path: nodes/depl/ASEGeoOpt/node-meta.json
       hash: md5
-      md5: d7d1e4ac82934f8c551546b0a211961c
+      md5: 83dc8876c4baac269a43e84b211a1b84
       size: 48
     - path: nodes/depl/ASEGeoOpt/trajectory.h5
       hash: md5
-      md5: 5a4f2097dc441393ed105a7a9f1dfe72
-      size: 37109312
+      md5: 44d5c0a1f68bf9db5e2201cf69680eff
+      size: 6918104
     params:
       params.yaml:
         depl_ASEMD:
@@ -27417,8 +27417,8 @@ stages:
     outs:
     - path: nodes/depl/ASEMD/metrics_dict.csv
       hash: md5
-      md5: 4221b02a0f2ce2bc2e356ce70ad94983
-      size: 42001
+      md5: f6c83567491ddef2c1b7dd0874fd6fe7
+      size: 42008
     - path: nodes/depl/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -27426,7 +27426,7 @@ stages:
       nfiles: 1
     - path: nodes/depl/ASEMD/node-meta.json
       hash: md5
-      md5: afd2ff7798b7632f7333d851b8e12b1f
+      md5: c492fd6a62e68898d8ccc1bdc12d7cbf
       size: 48
     - path: nodes/depl/ASEMD/steps_before_stopping.json
       hash: md5
@@ -27434,8 +27434,8 @@ stages:
       size: 2
     - path: nodes/depl/ASEMD/trajectory.h5
       hash: md5
-      md5: e8052503e5027a79ab895e96609988c4
-      size: 101115384
+      md5: 069c1f8d41a4abd3e0f86d58d2446ed2
+      size: 25409160
   depl_ASEMD_1:
     cmd: zntrack run ipsuite.nodes.ASEMD --name depl_ASEMD_1
     deps:
@@ -27466,8 +27466,8 @@ stages:
       size: 8933596
     - path: nodes/depl/ASEMD/metrics_dict.csv
       hash: md5
-      md5: 4221b02a0f2ce2bc2e356ce70ad94983
-      size: 42001
+      md5: f6c83567491ddef2c1b7dd0874fd6fe7
+      size: 42008
     - path: nodes/depl/ASEMD/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -27475,7 +27475,7 @@ stages:
       nfiles: 1
     - path: nodes/depl/ASEMD/node-meta.json
       hash: md5
-      md5: afd2ff7798b7632f7333d851b8e12b1f
+      md5: c492fd6a62e68898d8ccc1bdc12d7cbf
       size: 48
     - path: nodes/depl/ASEMD/steps_before_stopping.json
       hash: md5
@@ -27483,8 +27483,8 @@ stages:
       size: 2
     - path: nodes/depl/ASEMD/trajectory.h5
       hash: md5
-      md5: e8052503e5027a79ab895e96609988c4
-      size: 101115384
+      md5: 069c1f8d41a4abd3e0f86d58d2446ed2
+      size: 25409160
     params:
       params.yaml:
         depl_ASEMD_1:
@@ -27507,8 +27507,8 @@ stages:
     outs:
     - path: nodes/depl/ASEMD_1/metrics_dict.csv
       hash: md5
-      md5: 88abc30bf53bc11580bd503df1110b29
-      size: 41959
+      md5: ffcd8f9aa6ea0c0a5481968956e86129
+      size: 41968
     - path: nodes/depl/ASEMD_1/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -27516,7 +27516,7 @@ stages:
       nfiles: 1
     - path: nodes/depl/ASEMD_1/node-meta.json
       hash: md5
-      md5: eb8716c810c51cb9e341d5267cc6b056
+      md5: d13bc91d487559827810bce05f46c101
       size: 48
     - path: nodes/depl/ASEMD_1/steps_before_stopping.json
       hash: md5
@@ -27524,8 +27524,8 @@ stages:
       size: 2
     - path: nodes/depl/ASEMD_1/trajectory.h5
       hash: md5
-      md5: 2395678d62b61002fb6b5bbf9eb52f04
-      size: 101115384
+      md5: e9eac3784974406e2b6a560603bf558b
+      size: 25409160
   ML17_training_MLModel_4:
     cmd: zntrack run ipsuite.nodes.Apax --name ML17_training_MLModel_4
     deps:
@@ -27813,8 +27813,8 @@ stages:
       size: 8933596
     - path: nodes/depl/ASEMD_1/metrics_dict.csv
       hash: md5
-      md5: 88abc30bf53bc11580bd503df1110b29
-      size: 41959
+      md5: ffcd8f9aa6ea0c0a5481968956e86129
+      size: 41968
     - path: nodes/depl/ASEMD_1/model
       hash: md5
       md5: 64586897446153f477c052dd0e2579ad.dir
@@ -27822,7 +27822,7 @@ stages:
       nfiles: 1
     - path: nodes/depl/ASEMD_1/node-meta.json
       hash: md5
-      md5: eb8716c810c51cb9e341d5267cc6b056
+      md5: d13bc91d487559827810bce05f46c101
       size: 48
     - path: nodes/depl/ASEMD_1/steps_before_stopping.json
       hash: md5
@@ -27830,8 +27830,8 @@ stages:
       size: 2
     - path: nodes/depl/ASEMD_1/trajectory.h5
       hash: md5
-      md5: 2395678d62b61002fb6b5bbf9eb52f04
-      size: 101115384
+      md5: e9eac3784974406e2b6a560603bf558b
+      size: 25409160
     params:
       params.yaml:
         depl_ApaxJaxMD:
@@ -27852,14 +27852,14 @@ stages:
     outs:
     - path: nodes/depl/ApaxJaxMD/initial_structure.extxyz
       hash: md5
-      md5: aaaa42322fb82082fc362fc021855cd1
-      size: 100950
+      md5: 804564edce897ba124c30aeaf477d02e
+      size: 25347
     - path: nodes/depl/ApaxJaxMD/md
       hash: md5
-      md5: 401163c382d7844d8b2b60fab7e4e5fb.dir
-      size: 17992471020
+      md5: 84051a1a81c58bc16ecc416619eeff57.dir
+      size: 4186169109
       nfiles: 6
     - path: nodes/depl/ApaxJaxMD/node-meta.json
       hash: md5
-      md5: 2180f0ea0fa7da65b4d892ef0b940fb6
+      md5: 56bbac2d3f05e2f9f6ac373d73ed1abe
       size: 48
