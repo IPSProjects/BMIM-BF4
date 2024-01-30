@@ -1296,7 +1296,7 @@ depl_Packmol:
 depl_Packmol_1:
     box: null
     count:
-    - 32
+    - 8
     data_ids: null
     density: 900
     pbc: true
