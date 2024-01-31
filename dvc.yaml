@@ -274,6 +274,18 @@ plots:
 - nodes/ML17_density_model_short/ASEMD_2/metrics_dict.csv: {}
 - nodes/ML17_density_model_short/ASEMD_3/metrics_dict.csv: {}
 - nodes/ML17_density_models/ASEMD_5/metrics_dict.csv: {}
+- nodes/ML17_density_td3_short/ASEMD/metrics_dict.csv: {}
+- nodes/ML17_density_td3_short/ASEMD_6/metrics_dict.csv: {}
+- nodes/ML17_density_td3_short/ASEMD_3/metrics_dict.csv: {}
+- nodes/ML17_density_td3_short/ASEMD_9/metrics_dict.csv: {}
+- nodes/ML17_density_td3_short/ASEMD_1/metrics_dict.csv: {}
+- nodes/ML17_density_td3_short/ASEMD_4/metrics_dict.csv: {}
+- nodes/ML17_density_td3_short/ASEMD_2/metrics_dict.csv: {}
+- nodes/ML17_density_td3_short/ASEMD_7/metrics_dict.csv: {}
+- nodes/ML17_density_td3_short/ASEMD_8/metrics_dict.csv: {}
+- nodes/ML17_density_td3_short/ASEMD_10/metrics_dict.csv: {}
+- nodes/ML17_density_td3_short/ASEMD_11/metrics_dict.csv: {}
+- nodes/ML17_density_td3_short/ASEMD_5/metrics_dict.csv: {}
 stages:
   ML0_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML0_ConfigurationSelection
@@ -4193,6 +4205,398 @@ stages:
     - nodes/ML17_density_models/TorchD3/atoms.h5
     params:
     - ML17_density_models_TorchD3
+  ML17_density_td3_short_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML17_density_td3_short_ASEGeoOpt
+    deps:
+    - nodes/ML17_density_models/MixCalculator/atoms.h5
+    - nodes/ML17_density_models/MixCalculator/node-meta.json
+    - nodes/ML17_density_td3_short/Packmol/atoms.h5
+    - nodes/ML17_density_td3_short/Packmol/node-meta.json
+    - nodes/ML17_density_td3_short/Packmol/packmol
+    metrics:
+    - nodes/ML17_density_td3_short/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/ASEGeoOpt/model_outs
+    - nodes/ML17_density_td3_short/ASEGeoOpt/trajectory.h5
+    params:
+    - ML17_density_td3_short_ASEGeoOpt
+  ML17_density_td3_short_ASEGeoOpt_1:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML17_density_td3_short_ASEGeoOpt_1
+    deps:
+    - nodes/ML17_density_models/MixCalculator/atoms.h5
+    - nodes/ML17_density_models/MixCalculator/node-meta.json
+    - nodes/ML17_density_td3_short/Packmol_1/atoms.h5
+    - nodes/ML17_density_td3_short/Packmol_1/node-meta.json
+    - nodes/ML17_density_td3_short/Packmol_1/packmol
+    metrics:
+    - nodes/ML17_density_td3_short/ASEGeoOpt_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/ASEGeoOpt_1/model_outs
+    - nodes/ML17_density_td3_short/ASEGeoOpt_1/trajectory.h5
+    params:
+    - ML17_density_td3_short_ASEGeoOpt_1
+  ML17_density_td3_short_ASEGeoOpt_2:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML17_density_td3_short_ASEGeoOpt_2
+    deps:
+    - nodes/ML17_density_models/MixCalculator/atoms.h5
+    - nodes/ML17_density_models/MixCalculator/node-meta.json
+    - nodes/ML17_density_td3_short/Packmol_2/atoms.h5
+    - nodes/ML17_density_td3_short/Packmol_2/node-meta.json
+    - nodes/ML17_density_td3_short/Packmol_2/packmol
+    metrics:
+    - nodes/ML17_density_td3_short/ASEGeoOpt_2/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/ASEGeoOpt_2/model_outs
+    - nodes/ML17_density_td3_short/ASEGeoOpt_2/trajectory.h5
+    params:
+    - ML17_density_td3_short_ASEGeoOpt_2
+  ML17_density_td3_short_ASEGeoOpt_3:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML17_density_td3_short_ASEGeoOpt_3
+    deps:
+    - nodes/ML17_density_models/MixCalculator/atoms.h5
+    - nodes/ML17_density_models/MixCalculator/node-meta.json
+    - nodes/ML17_density_td3_short/Packmol_3/atoms.h5
+    - nodes/ML17_density_td3_short/Packmol_3/node-meta.json
+    - nodes/ML17_density_td3_short/Packmol_3/packmol
+    metrics:
+    - nodes/ML17_density_td3_short/ASEGeoOpt_3/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/ASEGeoOpt_3/model_outs
+    - nodes/ML17_density_td3_short/ASEGeoOpt_3/trajectory.h5
+    params:
+    - ML17_density_td3_short_ASEGeoOpt_3
+  ML17_density_td3_short_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_short_ASEMD
+    deps:
+    - nodes/ML17_density_models/MixCalculator/atoms.h5
+    - nodes/ML17_density_models/MixCalculator/node-meta.json
+    - nodes/ML17_density_td3_short/ASEGeoOpt/model_outs
+    - nodes/ML17_density_td3_short/ASEGeoOpt/node-meta.json
+    - nodes/ML17_density_td3_short/ASEGeoOpt/trajectory.h5
+    metrics:
+    - nodes/ML17_density_td3_short/ASEMD/node-meta.json:
+        cache: false
+    - nodes/ML17_density_td3_short/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/ASEMD/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD/model
+    - nodes/ML17_density_td3_short/ASEMD/trajectory.h5
+    params:
+    - ML17_density_td3_short_ASEMD
+    - ML17_density_td3_short_ASEMD+modifier+0
+    - ML17_density_td3_short_ASEMD+thermostat
+  ML17_density_td3_short_ASEMD_1:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_short_ASEMD_1
+    deps:
+    - nodes/ML17_density_models/MixCalculator/atoms.h5
+    - nodes/ML17_density_models/MixCalculator/node-meta.json
+    - nodes/ML17_density_td3_short/ASEMD/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD/model
+    - nodes/ML17_density_td3_short/ASEMD/node-meta.json
+    - nodes/ML17_density_td3_short/ASEMD/steps_before_stopping.json
+    - nodes/ML17_density_td3_short/ASEMD/trajectory.h5
+    metrics:
+    - nodes/ML17_density_td3_short/ASEMD_1/node-meta.json:
+        cache: false
+    - nodes/ML17_density_td3_short/ASEMD_1/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/ASEMD_1/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_1/model
+    - nodes/ML17_density_td3_short/ASEMD_1/trajectory.h5
+    params:
+    - ML17_density_td3_short_ASEMD_1
+    - ML17_density_td3_short_ASEMD_1+thermostat
+  ML17_density_td3_short_ASEMD_10:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_short_ASEMD_10
+    deps:
+    - nodes/ML17_density_models/MixCalculator/atoms.h5
+    - nodes/ML17_density_models/MixCalculator/node-meta.json
+    - nodes/ML17_density_td3_short/ASEMD_9/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_9/model
+    - nodes/ML17_density_td3_short/ASEMD_9/node-meta.json
+    - nodes/ML17_density_td3_short/ASEMD_9/steps_before_stopping.json
+    - nodes/ML17_density_td3_short/ASEMD_9/trajectory.h5
+    metrics:
+    - nodes/ML17_density_td3_short/ASEMD_10/node-meta.json:
+        cache: false
+    - nodes/ML17_density_td3_short/ASEMD_10/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/ASEMD_10/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_10/model
+    - nodes/ML17_density_td3_short/ASEMD_10/trajectory.h5
+    params:
+    - ML17_density_td3_short_ASEMD_10
+    - ML17_density_td3_short_ASEMD_10+thermostat
+  ML17_density_td3_short_ASEMD_11:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_short_ASEMD_11
+    deps:
+    - nodes/ML17_density_models/MixCalculator/atoms.h5
+    - nodes/ML17_density_models/MixCalculator/node-meta.json
+    - nodes/ML17_density_td3_short/ASEMD_10/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_10/model
+    - nodes/ML17_density_td3_short/ASEMD_10/node-meta.json
+    - nodes/ML17_density_td3_short/ASEMD_10/steps_before_stopping.json
+    - nodes/ML17_density_td3_short/ASEMD_10/trajectory.h5
+    metrics:
+    - nodes/ML17_density_td3_short/ASEMD_11/node-meta.json:
+        cache: false
+    - nodes/ML17_density_td3_short/ASEMD_11/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/ASEMD_11/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_11/model
+    - nodes/ML17_density_td3_short/ASEMD_11/trajectory.h5
+    params:
+    - ML17_density_td3_short_ASEMD_11
+    - ML17_density_td3_short_ASEMD_11+thermostat
+  ML17_density_td3_short_ASEMD_2:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_short_ASEMD_2
+    deps:
+    - nodes/ML17_density_models/MixCalculator/atoms.h5
+    - nodes/ML17_density_models/MixCalculator/node-meta.json
+    - nodes/ML17_density_td3_short/ASEMD_1/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_1/model
+    - nodes/ML17_density_td3_short/ASEMD_1/node-meta.json
+    - nodes/ML17_density_td3_short/ASEMD_1/steps_before_stopping.json
+    - nodes/ML17_density_td3_short/ASEMD_1/trajectory.h5
+    metrics:
+    - nodes/ML17_density_td3_short/ASEMD_2/node-meta.json:
+        cache: false
+    - nodes/ML17_density_td3_short/ASEMD_2/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/ASEMD_2/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_2/model
+    - nodes/ML17_density_td3_short/ASEMD_2/trajectory.h5
+    params:
+    - ML17_density_td3_short_ASEMD_2
+    - ML17_density_td3_short_ASEMD_2+thermostat
+  ML17_density_td3_short_ASEMD_3:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_short_ASEMD_3
+    deps:
+    - nodes/ML17_density_models/MixCalculator/atoms.h5
+    - nodes/ML17_density_models/MixCalculator/node-meta.json
+    - nodes/ML17_density_td3_short/ASEGeoOpt_1/model_outs
+    - nodes/ML17_density_td3_short/ASEGeoOpt_1/node-meta.json
+    - nodes/ML17_density_td3_short/ASEGeoOpt_1/trajectory.h5
+    metrics:
+    - nodes/ML17_density_td3_short/ASEMD_3/node-meta.json:
+        cache: false
+    - nodes/ML17_density_td3_short/ASEMD_3/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/ASEMD_3/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_3/model
+    - nodes/ML17_density_td3_short/ASEMD_3/trajectory.h5
+    params:
+    - ML17_density_td3_short_ASEMD_3
+    - ML17_density_td3_short_ASEMD_3+modifier+0
+    - ML17_density_td3_short_ASEMD_3+thermostat
+  ML17_density_td3_short_ASEMD_4:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_short_ASEMD_4
+    deps:
+    - nodes/ML17_density_models/MixCalculator/atoms.h5
+    - nodes/ML17_density_models/MixCalculator/node-meta.json
+    - nodes/ML17_density_td3_short/ASEMD_3/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_3/model
+    - nodes/ML17_density_td3_short/ASEMD_3/node-meta.json
+    - nodes/ML17_density_td3_short/ASEMD_3/steps_before_stopping.json
+    - nodes/ML17_density_td3_short/ASEMD_3/trajectory.h5
+    metrics:
+    - nodes/ML17_density_td3_short/ASEMD_4/node-meta.json:
+        cache: false
+    - nodes/ML17_density_td3_short/ASEMD_4/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/ASEMD_4/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_4/model
+    - nodes/ML17_density_td3_short/ASEMD_4/trajectory.h5
+    params:
+    - ML17_density_td3_short_ASEMD_4
+    - ML17_density_td3_short_ASEMD_4+thermostat
+  ML17_density_td3_short_ASEMD_5:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_short_ASEMD_5
+    deps:
+    - nodes/ML17_density_models/MixCalculator/atoms.h5
+    - nodes/ML17_density_models/MixCalculator/node-meta.json
+    - nodes/ML17_density_td3_short/ASEMD_4/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_4/model
+    - nodes/ML17_density_td3_short/ASEMD_4/node-meta.json
+    - nodes/ML17_density_td3_short/ASEMD_4/steps_before_stopping.json
+    - nodes/ML17_density_td3_short/ASEMD_4/trajectory.h5
+    metrics:
+    - nodes/ML17_density_td3_short/ASEMD_5/node-meta.json:
+        cache: false
+    - nodes/ML17_density_td3_short/ASEMD_5/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/ASEMD_5/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_5/model
+    - nodes/ML17_density_td3_short/ASEMD_5/trajectory.h5
+    params:
+    - ML17_density_td3_short_ASEMD_5
+    - ML17_density_td3_short_ASEMD_5+thermostat
+  ML17_density_td3_short_ASEMD_6:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_short_ASEMD_6
+    deps:
+    - nodes/ML17_density_models/MixCalculator/atoms.h5
+    - nodes/ML17_density_models/MixCalculator/node-meta.json
+    - nodes/ML17_density_td3_short/ASEGeoOpt_2/model_outs
+    - nodes/ML17_density_td3_short/ASEGeoOpt_2/node-meta.json
+    - nodes/ML17_density_td3_short/ASEGeoOpt_2/trajectory.h5
+    metrics:
+    - nodes/ML17_density_td3_short/ASEMD_6/node-meta.json:
+        cache: false
+    - nodes/ML17_density_td3_short/ASEMD_6/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/ASEMD_6/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_6/model
+    - nodes/ML17_density_td3_short/ASEMD_6/trajectory.h5
+    params:
+    - ML17_density_td3_short_ASEMD_6
+    - ML17_density_td3_short_ASEMD_6+modifier+0
+    - ML17_density_td3_short_ASEMD_6+thermostat
+  ML17_density_td3_short_ASEMD_7:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_short_ASEMD_7
+    deps:
+    - nodes/ML17_density_models/MixCalculator/atoms.h5
+    - nodes/ML17_density_models/MixCalculator/node-meta.json
+    - nodes/ML17_density_td3_short/ASEMD_6/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_6/model
+    - nodes/ML17_density_td3_short/ASEMD_6/node-meta.json
+    - nodes/ML17_density_td3_short/ASEMD_6/steps_before_stopping.json
+    - nodes/ML17_density_td3_short/ASEMD_6/trajectory.h5
+    metrics:
+    - nodes/ML17_density_td3_short/ASEMD_7/node-meta.json:
+        cache: false
+    - nodes/ML17_density_td3_short/ASEMD_7/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/ASEMD_7/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_7/model
+    - nodes/ML17_density_td3_short/ASEMD_7/trajectory.h5
+    params:
+    - ML17_density_td3_short_ASEMD_7
+    - ML17_density_td3_short_ASEMD_7+thermostat
+  ML17_density_td3_short_ASEMD_8:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_short_ASEMD_8
+    deps:
+    - nodes/ML17_density_models/MixCalculator/atoms.h5
+    - nodes/ML17_density_models/MixCalculator/node-meta.json
+    - nodes/ML17_density_td3_short/ASEMD_7/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_7/model
+    - nodes/ML17_density_td3_short/ASEMD_7/node-meta.json
+    - nodes/ML17_density_td3_short/ASEMD_7/steps_before_stopping.json
+    - nodes/ML17_density_td3_short/ASEMD_7/trajectory.h5
+    metrics:
+    - nodes/ML17_density_td3_short/ASEMD_8/node-meta.json:
+        cache: false
+    - nodes/ML17_density_td3_short/ASEMD_8/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/ASEMD_8/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_8/model
+    - nodes/ML17_density_td3_short/ASEMD_8/trajectory.h5
+    params:
+    - ML17_density_td3_short_ASEMD_8
+    - ML17_density_td3_short_ASEMD_8+thermostat
+  ML17_density_td3_short_ASEMD_9:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_short_ASEMD_9
+    deps:
+    - nodes/ML17_density_models/MixCalculator/atoms.h5
+    - nodes/ML17_density_models/MixCalculator/node-meta.json
+    - nodes/ML17_density_td3_short/ASEGeoOpt_3/model_outs
+    - nodes/ML17_density_td3_short/ASEGeoOpt_3/node-meta.json
+    - nodes/ML17_density_td3_short/ASEGeoOpt_3/trajectory.h5
+    metrics:
+    - nodes/ML17_density_td3_short/ASEMD_9/node-meta.json:
+        cache: false
+    - nodes/ML17_density_td3_short/ASEMD_9/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/ASEMD_9/metrics_dict.csv
+    - nodes/ML17_density_td3_short/ASEMD_9/model
+    - nodes/ML17_density_td3_short/ASEMD_9/trajectory.h5
+    params:
+    - ML17_density_td3_short_ASEMD_9
+    - ML17_density_td3_short_ASEMD_9+modifier+0
+    - ML17_density_td3_short_ASEMD_9+thermostat
+  ML17_density_td3_short_Packmol:
+    cmd: zntrack run ipsuite.nodes.Packmol --name ML17_density_td3_short_Packmol
+    deps:
+    - nodes/ML17_density_models/SmilesToAtoms/atoms.h5
+    - nodes/ML17_density_models/SmilesToAtoms/molecule.png
+    - nodes/ML17_density_models/SmilesToAtoms/node-meta.json
+    - nodes/ML17_density_models/SmilesToAtoms_1/atoms.h5
+    - nodes/ML17_density_models/SmilesToAtoms_1/molecule.png
+    - nodes/ML17_density_models/SmilesToAtoms_1/node-meta.json
+    metrics:
+    - nodes/ML17_density_td3_short/Packmol/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/Packmol/atoms.h5
+    - nodes/ML17_density_td3_short/Packmol/packmol
+    params:
+    - ML17_density_td3_short_Packmol
+  ML17_density_td3_short_Packmol_1:
+    cmd: zntrack run ipsuite.nodes.Packmol --name ML17_density_td3_short_Packmol_1
+    deps:
+    - nodes/ML17_density_models/SmilesToAtoms/atoms.h5
+    - nodes/ML17_density_models/SmilesToAtoms/molecule.png
+    - nodes/ML17_density_models/SmilesToAtoms/node-meta.json
+    - nodes/ML17_density_models/SmilesToAtoms_1/atoms.h5
+    - nodes/ML17_density_models/SmilesToAtoms_1/molecule.png
+    - nodes/ML17_density_models/SmilesToAtoms_1/node-meta.json
+    metrics:
+    - nodes/ML17_density_td3_short/Packmol_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/Packmol_1/atoms.h5
+    - nodes/ML17_density_td3_short/Packmol_1/packmol
+    params:
+    - ML17_density_td3_short_Packmol_1
+  ML17_density_td3_short_Packmol_2:
+    cmd: zntrack run ipsuite.nodes.Packmol --name ML17_density_td3_short_Packmol_2
+    deps:
+    - nodes/ML17_density_models/SmilesToAtoms/atoms.h5
+    - nodes/ML17_density_models/SmilesToAtoms/molecule.png
+    - nodes/ML17_density_models/SmilesToAtoms/node-meta.json
+    - nodes/ML17_density_models/SmilesToAtoms_1/atoms.h5
+    - nodes/ML17_density_models/SmilesToAtoms_1/molecule.png
+    - nodes/ML17_density_models/SmilesToAtoms_1/node-meta.json
+    metrics:
+    - nodes/ML17_density_td3_short/Packmol_2/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/Packmol_2/atoms.h5
+    - nodes/ML17_density_td3_short/Packmol_2/packmol
+    params:
+    - ML17_density_td3_short_Packmol_2
+  ML17_density_td3_short_Packmol_3:
+    cmd: zntrack run ipsuite.nodes.Packmol --name ML17_density_td3_short_Packmol_3
+    deps:
+    - nodes/ML17_density_models/SmilesToAtoms/atoms.h5
+    - nodes/ML17_density_models/SmilesToAtoms/molecule.png
+    - nodes/ML17_density_models/SmilesToAtoms/node-meta.json
+    - nodes/ML17_density_models/SmilesToAtoms_1/atoms.h5
+    - nodes/ML17_density_models/SmilesToAtoms_1/molecule.png
+    - nodes/ML17_density_models/SmilesToAtoms_1/node-meta.json
+    metrics:
+    - nodes/ML17_density_td3_short/Packmol_3/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_density_td3_short/Packmol_3/atoms.h5
+    - nodes/ML17_density_td3_short/Packmol_3/packmol
+    params:
+    - ML17_density_td3_short_Packmol_3
   ML17_eval_EnergyHistogram:
     cmd: zntrack run ipsuite.nodes.EnergyHistogram --name ML17_eval_EnergyHistogram
     deps:
