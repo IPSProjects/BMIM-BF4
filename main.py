@@ -935,10 +935,10 @@ with project.group("ML17_eval") as ml17_eval:
 
 
 ramp_density = ips.calculators.RescaleBoxModifier(
-    density=1162
+    density=1059
 )
 thermostat = ips.calculators.LangevinThermostat(
-    temperature=353, friction=0.01, time_step=0.5
+    temperature=500, friction=0.01, time_step=0.5
 )
 # https://pubs.acs.org/doi/10.1021/jp306146s
 
@@ -959,7 +959,7 @@ with project.group("depl") as depl:
 
     structure = ips.configuration_generation.Packmol(
         data=[single_structure.atoms],
-        count=[8], # 16, 32, 64
+        count=[16], # 16, 32, 64
         density=900,
     )
 
