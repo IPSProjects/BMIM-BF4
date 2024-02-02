@@ -999,6 +999,26 @@ with project.group("depl") as depl:
         md_parameter_file="config/md.yaml",
     )
 
-project.build(nodes=[depl])
+with project.group("uncorr_AIMD") as uncorr_AIMD:
+    starting = ips.configuration_selection.UniformTemporalSelection(
+        data=md.atoms, n_configurations=20
+    )
+    calc = ips.calculators.CP2KSinglePoint(
+            data=starting.atoms,
+            data_id=0,
+            cp2k_params="config/cp2k_no_c9.yaml",
+            cp2k_files=["GTH_BASIS_SETS", "GTH_POTENTIALS"],
+        )
+    for idx in range(20):
+        md = ips.calculators.ASEMD(
+            data=starting.atoms,
+            data_id=idx,
+            model=calc,
+            thermostat=thermostat,
+            steps=5_000,
+            sampling_rate=1,
+        )
+
+project.build(nodes=[uncorr_AIMD])
 
 # pip uninstall jax jaxlib nvidia-nvtx-cu12 nvidia-nccl-cu12 nvidia-nvjitlink-cu12 nvidia-cusparse-cu12 nvidia-cublas-cu12 nvidia-cuda-cupti-cu12 nvidia-cuda-nvcc-cu12 nvidia-cuda-nvrtc-cu12 nvidia-cuda-runtime-cu12 nvidia-cudnn-cu12 nvidia-cufft-cu12 nvidia-curand-cu12 nvidia-cusolver-cu12 

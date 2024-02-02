@@ -1349,6 +1349,351 @@ torch_d3_labels_TorchD3_3:
     damping: bj
     dtype: float32
     xc: b97-3c
+uncorr_AIMD_ASEMD:
+    data_id: 0
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_1:
+    data_id: 1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_1+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_10:
+    data_id: 10
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_10+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_11:
+    data_id: 11
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_11+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_12:
+    data_id: 12
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_12+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_13:
+    data_id: 13
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_13+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_14:
+    data_id: 14
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_14+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_15:
+    data_id: 15
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_15+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_16:
+    data_id: 16
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_16+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_17:
+    data_id: 17
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_17+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_18:
+    data_id: 18
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_18+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_19:
+    data_id: 19
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_19+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_2:
+    data_id: 2
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_2+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_3:
+    data_id: 3
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_3+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_4:
+    data_id: 4
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_4+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_5:
+    data_id: 5
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_5+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_6:
+    data_id: 6
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_6+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_7:
+    data_id: 7
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_7+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_8:
+    data_id: 8
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_8+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_ASEMD_9:
+    data_id: 9
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 1
+    seed: 42
+    steps: 5000
+    use_momenta: false
+    wrap: false
+uncorr_AIMD_ASEMD_9+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+uncorr_AIMD_CP2KSinglePoint:
+    data_id: 0
+uncorr_AIMD_ConfigurationSelection:
+    data_id: null
+    n_configurations: 20
 wo_d3_MLModel:
     jax_enable_x64: true
     use_energy: true

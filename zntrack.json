@@ -21490,5 +21490,1437 @@
             "_type": "pathlib.Path",
             "value": "nodes/depl/ApaxJaxMD"
         }
+    },
+    "uncorr_AIMD_ConfigurationSelection": {
+        "data": {
+            "depl_ApaxJaxMD": {
+                "_type": "znflow.Connection",
+                "value": {
+                    "instance": {
+                        "_type": "zntrack.Node",
+                        "value": {
+                            "module": "ipsuite.nodes",
+                            "cls": "ApaxJaxMD",
+                            "name": "depl_ApaxJaxMD",
+                            "remote": null,
+                            "rev": null
+                        }
+                    },
+                    "attribute": "atoms",
+                    "item": null
+                }
+            }
+        },
+        "data_file": null,
+        "exclude": null,
+        "exclude_configurations": null,
+        "img_selection": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/selection.png"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ConfigurationSelection"
+        }
+    },
+    "uncorr_AIMD_CP2KSinglePoint": {
+        "cp2k_directory": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/cp2k"
+        },
+        "cp2k_files": [
+            "GTH_BASIS_SETS",
+            "GTH_POTENTIALS"
+        ],
+        "cp2k_params": "config/cp2k_no_c9.yaml",
+        "cp2k_shell": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "output_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/atoms.h5"
+        },
+        "wfn_restart_file": null,
+        "wfn_restart_node": null,
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/CP2KSinglePoint"
+        }
+    },
+    "uncorr_AIMD_ASEMD": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD"
+        }
+    },
+    "uncorr_AIMD_ASEMD+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_1": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_1+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_1"
+        }
+    },
+    "uncorr_AIMD_ASEMD_1+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_1+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_2": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_2+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_2"
+        }
+    },
+    "uncorr_AIMD_ASEMD_2+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_2+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_3": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_3+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_3"
+        }
+    },
+    "uncorr_AIMD_ASEMD_3+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_3+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_4": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_4+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_4"
+        }
+    },
+    "uncorr_AIMD_ASEMD_4+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_4+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_5": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_5+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_5"
+        }
+    },
+    "uncorr_AIMD_ASEMD_5+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_5+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_6": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_6+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_6"
+        }
+    },
+    "uncorr_AIMD_ASEMD_6+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_6+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_7": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_7+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_7"
+        }
+    },
+    "uncorr_AIMD_ASEMD_7+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_7+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_8": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_8+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_8"
+        }
+    },
+    "uncorr_AIMD_ASEMD_8+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_8+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_9": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_9+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_9"
+        }
+    },
+    "uncorr_AIMD_ASEMD_9+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_9+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_10": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_10+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_10"
+        }
+    },
+    "uncorr_AIMD_ASEMD_10+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_10+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_11": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_11+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_11"
+        }
+    },
+    "uncorr_AIMD_ASEMD_11+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_11+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_12": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_12+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_12"
+        }
+    },
+    "uncorr_AIMD_ASEMD_12+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_12+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_13": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_13+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_13"
+        }
+    },
+    "uncorr_AIMD_ASEMD_13+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_13+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_14": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_14+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_14"
+        }
+    },
+    "uncorr_AIMD_ASEMD_14+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_14+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_15": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_15+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_15"
+        }
+    },
+    "uncorr_AIMD_ASEMD_15+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_15+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_16": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_16+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_16"
+        }
+    },
+    "uncorr_AIMD_ASEMD_16+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_16+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_17": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_17+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_17"
+        }
+    },
+    "uncorr_AIMD_ASEMD_17+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_17+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_18": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_18+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_18"
+        }
+    },
+    "uncorr_AIMD_ASEMD_18+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_18+thermostat"
+        }
+    },
+    "uncorr_AIMD_ASEMD_19": {
+        "checker_list": null,
+        "constraint_list": null,
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "UniformTemporalSelection",
+                        "name": "uncorr_AIMD_ConfigurationSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "atoms",
+                "item": null
+            }
+        },
+        "data_file": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.nodes",
+                        "cls": "CP2KSinglePoint",
+                        "name": "uncorr_AIMD_CP2KSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_outs": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/model"
+        },
+        "modifier": null,
+        "thermostat": {
+            "_type": "zntrack.Node",
+            "value": {
+                "module": "ipsuite.nodes",
+                "cls": "LangevinThermostat",
+                "name": "uncorr_AIMD_ASEMD_19+thermostat",
+                "remote": null,
+                "rev": null
+            }
+        },
+        "traj_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/trajectory.h5"
+        },
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD/ASEMD_19"
+        }
+    },
+    "uncorr_AIMD_ASEMD_19+thermostat": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/uncorr_AIMD_ASEMD_19+thermostat"
+        }
     }
 }
