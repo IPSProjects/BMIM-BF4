@@ -923,6 +923,13 @@ with project.group("ML17_eval") as ml17_eval:
     metrics = ips.analysis.PredictionMetrics(data=prediction)
     ips.analysis.ForceDecomposition(data=prediction)
 
+with project.group("ml17_mace") as ml17_mace:
+    mace = ips.models.MACE(
+        data=train_data_nod3,
+        test_data=validation_data_nod3,
+        config="config/mace_foundation.yaml",
+    )
+    pred = ips.analysis.Prediction(data=validation_data_nod3, model=mace)
+    metrics = ips.analysis.PredictionMetrics(data=pred)
     
-
-project.build(nodes=[ml17_data, ml17_train, ml17_eval])
+project.build(nodes=[ml17_mace])

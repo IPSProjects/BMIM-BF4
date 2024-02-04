@@ -1,0 +1,14 @@
+foundation_model: small
+energy_weight: 1.0
+forces_weight: 1.0
+stress_weight: 1.0
+E0s: average
+lr: 0.01
+scaling: rms_forces_scaling
+batch_size: 1
+max_num_epochs: 50
+ema: true
+ema_decay: 0.99
+amsgrad: true
+default_dtype: float64
+seed: 3
