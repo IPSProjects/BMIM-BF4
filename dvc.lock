@@ -27404,3 +27404,167 @@ stages:
       hash: md5
       md5: 2c8940f4a68782f4c611387711c34f3b
       size: 13134
+  ml17_mace_MLModel_1:
+    cmd: zntrack run ipsuite.nodes.MACE --name ml17_mace_MLModel_1
+    deps:
+    - path: nodes/ML17_datasets/TorchD3_2/atoms.h5
+      hash: md5
+      md5: f561656b76b51b6376275b18e92b4d98
+      size: 27607783
+    - path: nodes/ML17_datasets/TorchD3_2/node-meta.json
+      hash: md5
+      md5: b4f100aaf79d96a786521e39cbe185ae
+      size: 48
+    - path: nodes/ML17_datasets/TorchD3_3/atoms.h5
+      hash: md5
+      md5: 184e2c8088e5742613133f5d3c26ddd3
+      size: 4800256
+    - path: nodes/ML17_datasets/TorchD3_3/node-meta.json
+      hash: md5
+      md5: 7b1e5f500c89090f471bffb586e96145
+      size: 48
+    params:
+      params.yaml:
+        ml17_mace_MLModel_1:
+          use_energy: true
+          use_forces: true
+          use_stresses: false
+      config/mace_foundation.yaml:
+        E0s: average
+        amsgrad: true
+        batch_size: 1
+        default_dtype: float64
+        ema: true
+        ema_decay: 0.99
+        energy_weight: 1.0
+        forces_weight: 1.0
+        foundation_model: small
+        lr: 0.01
+        max_num_epochs: 50
+        scaling: rms_forces_scaling
+        seed: 3
+        stress_weight: 1.0
+    outs:
+    - path: nodes/ml17_mace/MLModel_1/model
+      hash: md5
+      md5: 809a33e6c06da3f912604a0db9eda04c.dir
+      size: 35041468
+      nfiles: 5
+    - path: nodes/ml17_mace/MLModel_1/node-meta.json
+      hash: md5
+      md5: 6b0492f456ff45cc5235c768999408d4
+      size: 48
+    - path: nodes/ml17_mace/MLModel_1/test-data.extxyz
+      hash: md5
+      md5: ce051bd6e3846807c0f9584d4c517856
+      size: 8933614
+    - path: nodes/ml17_mace/MLModel_1/train-data.extxyz
+      hash: md5
+      md5: 3796645bae2c84ed01655f35ad340a11
+      size: 50704029
+    - path: nodes/ml17_mace/MLModel_1/training.csv
+      hash: md5
+      md5: ecdba432419c8651a15f3b8c22ddfbf3
+      size: 6492
+  ml17_mace_Prediction_1:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ml17_mace_Prediction_1
+    deps:
+    - path: nodes/ML17_datasets/TorchD3_3/atoms.h5
+      hash: md5
+      md5: 184e2c8088e5742613133f5d3c26ddd3
+      size: 4800256
+    - path: nodes/ML17_datasets/TorchD3_3/node-meta.json
+      hash: md5
+      md5: 7b1e5f500c89090f471bffb586e96145
+      size: 48
+    - path: nodes/ml17_mace/MLModel_1/model
+      hash: md5
+      md5: 809a33e6c06da3f912604a0db9eda04c.dir
+      size: 35041468
+      nfiles: 5
+    - path: nodes/ml17_mace/MLModel_1/node-meta.json
+      hash: md5
+      md5: 6b0492f456ff45cc5235c768999408d4
+      size: 48
+    - path: nodes/ml17_mace/MLModel_1/test-data.extxyz
+      hash: md5
+      md5: ce051bd6e3846807c0f9584d4c517856
+      size: 8933614
+    - path: nodes/ml17_mace/MLModel_1/train-data.extxyz
+      hash: md5
+      md5: 3796645bae2c84ed01655f35ad340a11
+      size: 50704029
+    - path: nodes/ml17_mace/MLModel_1/training.csv
+      hash: md5
+      md5: ecdba432419c8651a15f3b8c22ddfbf3
+      size: 6492
+    outs:
+    - path: nodes/ml17_mace/Prediction_1/atoms.h5
+      hash: md5
+      md5: e44dfc64075c8799e3f651d8868134e9
+      size: 5476720
+    - path: nodes/ml17_mace/Prediction_1/node-meta.json
+      hash: md5
+      md5: f67a09da73356f19a162dc6279cf2a91
+      size: 48
+  ml17_mace_PredictionMetrics_1:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ml17_mace_PredictionMetrics_1
+    deps:
+    - path: nodes/ml17_mace/Prediction_1/atoms.h5
+      hash: md5
+      md5: e44dfc64075c8799e3f651d8868134e9
+      size: 5476720
+    - path: nodes/ml17_mace/Prediction_1/node-meta.json
+      hash: md5
+      md5: f67a09da73356f19a162dc6279cf2a91
+      size: 48
+    outs:
+    - path: nodes/ml17_mace/PredictionMetrics_1/deviat_stress.json
+      hash: md5
+      md5: b555aa103d1e0d5a72fbb83356f54e75
+      size: 209
+    - path: nodes/ml17_mace/PredictionMetrics_1/energy.json
+      hash: md5
+      md5: 63ae9729c0202aa71f4c1dfb8b81ee75
+      size: 191
+    - path: nodes/ml17_mace/PredictionMetrics_1/energy_df.csv
+      hash: md5
+      md5: 65e343fbf56c6d564b598cfd3f8560e0
+      size: 12052
+    - path: nodes/ml17_mace/PredictionMetrics_1/forces.json
+      hash: md5
+      md5: 2be3cec6a0967524e4a584d2a84b04d9
+      size: 189
+    - path: nodes/ml17_mace/PredictionMetrics_1/forces_df.csv
+      hash: md5
+      md5: a377254e62eb7c6936475184353bc2eb
+      size: 13089377
+    - path: nodes/ml17_mace/PredictionMetrics_1/hydro_stress.json
+      hash: md5
+      md5: 491f0f218daeb15dee20f716d0e69108
+      size: 207
+    - path: nodes/ml17_mace/PredictionMetrics_1/node-meta.json
+      hash: md5
+      md5: eabd36c8515353492ce10cebac682d6b
+      size: 48
+    - path: nodes/ml17_mace/PredictionMetrics_1/plots
+      hash: md5
+      md5: ec4282638d7781dba18ee90187fab547.dir
+      size: 304237
+      nfiles: 5
+    - path: nodes/ml17_mace/PredictionMetrics_1/stress.json
+      hash: md5
+      md5: 978e88bd9cb3ac7322aafdc9d19c5b40
+      size: 208
+    - path: nodes/ml17_mace/PredictionMetrics_1/stress_deviatoric_df.csv
+      hash: md5
+      md5: ca7d533d11809537abb89b3ecfd5c8f5
+      size: 123715
+    - path: nodes/ml17_mace/PredictionMetrics_1/stress_df.csv
+      hash: md5
+      md5: 8a892ecb5873b2705a45697d2bb3cdb6
+      size: 122657
+    - path: nodes/ml17_mace/PredictionMetrics_1/stress_hydrostatic_df.csv
+      hash: md5
+      md5: 91c23ac8ef86492de3ff4f13bc25f7de
+      size: 13146

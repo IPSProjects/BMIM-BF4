@@ -931,5 +931,13 @@ with project.group("ml17_mace") as ml17_mace:
     )
     pred = ips.analysis.Prediction(data=validation_data_nod3, model=mace)
     metrics = ips.analysis.PredictionMetrics(data=pred)
+
+    mace_d3 = ips.models.MACE(
+        data=train_d3_medium,
+        test_data=val_d3_medium,
+        config="config/mace_foundation.yaml",
+    )
+    pred = ips.analysis.Prediction(data=val_d3_medium, model=mace_d3)
+    metrics = ips.analysis.PredictionMetrics(data=pred)
     
 project.build(nodes=[ml17_mace])

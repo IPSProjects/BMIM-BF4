@@ -1241,6 +1241,10 @@ ml17_mace_MLModel:
     use_energy: true
     use_forces: true
     use_stresses: false
+ml17_mace_MLModel_1:
+    use_energy: true
+    use_forces: true
+    use_stresses: false
 torch_d3_labels_TorchD3:
     abc: false
     cnthr: 7.93766
