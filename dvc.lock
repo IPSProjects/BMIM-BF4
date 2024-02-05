@@ -27862,3 +27862,1449 @@ stages:
       hash: md5
       md5: 449f50cd73381549536365afb653a8ef
       size: 65
+  uncorr_AIMD_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.UniformTemporalSelection --name uncorr_AIMD_ConfigurationSelection
+    deps:
+    - path: nodes/depl/ApaxJaxMD/initial_structure.extxyz
+      hash: md5
+      md5: d8e66e3ed64784648957086d9c12796c
+      size: 50550
+    - path: nodes/depl/ApaxJaxMD/md
+      hash: md5
+      md5: c90a3eb0c501822a60b483f4bcba4a4a.dir
+      size: 7914518180
+      nfiles: 2
+    - path: nodes/depl/ApaxJaxMD/node-meta.json
+      hash: md5
+      md5: 449f50cd73381549536365afb653a8ef
+      size: 65
+    params:
+      params.yaml:
+        uncorr_AIMD_ConfigurationSelection:
+          data_id:
+          n_configurations: 20
+    outs:
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+  uncorr_AIMD_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name uncorr_AIMD_CP2KSinglePoint
+    deps:
+    - path: GTH_BASIS_SETS
+      hash: md5
+      md5: 518e733a7344699cf0b4192bb97eb6a3
+      size: 119403
+    - path: GTH_POTENTIALS
+      hash: md5
+      md5: 3a35b03b26b8ba5cf6c1d849dba11f15
+      size: 128982
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_CP2KSinglePoint:
+          data_id: 0
+      config/cp2k_no_c9.yaml:
+        force_eval:
+          method: quickstep
+          DFT:
+            mgrid:
+              cutoff: 800
+              rel_cutoff: 60
+              ngrids: 5
+            QS:
+              eps_filter_matrix: 0.0
+              eps_pgf_orb: 0.0001
+            SCF:
+              scf_guess: restart
+              max_scf: 100
+              eps_scf: 1e-06
+              OT:
+                minimizer: diis
+                preconditioner: full_single_inverse
+              outer_scf:
+                max_scf: 100
+                eps_scf: 1e-06
+              print:
+                restart:
+                  each:
+                    QS_SCF: 0
+            XC:
+              xc_functional:
+                becke97:
+                  parametrization: B97-3c
+                  scale_c: 1.0
+                  scale_x: 1.0
+              vdw_potential:
+                pair_potential:
+                  type: dftd3(bj)
+                  parameter_file_name: dftd3.dat
+                  reference_functional: B97-3c
+                  r_cutoff: 7.93766
+                  calculate_c9_term: false
+                  short_range_correction: false
+                potential_type: pair_potential
+            charge: 0
+            basis_set_file_name: GTH_BASIS_SETS
+            potential_file_name: GTH_POTENTIALS
+          subsys:
+            kind:
+              N:
+                basis_set: TZVP-GTH-q5
+                potential: GTH-PBE-q5
+              C:
+                basis_set: TZVP-GTH-q4
+                potential: GTH-PBE-q4
+              H:
+                basis_set: TZVP-GTH-q1
+                potential: GTH-PBE-q1
+              B:
+                basis_set: TZVP-GTH-q3
+                potential: GTH-PBE-q3
+              F:
+                basis_set: TZVP-GTH-q7
+                potential: GTH-PBE-q7
+    outs:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+  uncorr_AIMD_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD:
+          data_id: 0
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 1f994912e8a0ce93071caf0755d7c268
+      size: 214200
+    - path: nodes/uncorr_AIMD/ASEMD/model
+      hash: md5
+      md5: f53b7798872a3f4dc7bfafcd3176ed8c.dir
+      size: 532881540
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD/node-meta.json
+      hash: md5
+      md5: 81b022d313f04b24fc6624ff13c7a6e7
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD/trajectory.h5
+      hash: md5
+      md5: bd04c7c2907463a5ba2bc69f6232da1c
+      size: 194899168
+  uncorr_AIMD_ASEMD_1:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_1
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_1:
+          data_id: 1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_1+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_1/metrics_dict.csv
+      hash: md5
+      md5: cd538661f0a202f9058081645d7e2a05
+      size: 214160
+    - path: nodes/uncorr_AIMD/ASEMD_1/model
+      hash: md5
+      md5: aaff57e352c7301ec25a955bbd89551b.dir
+      size: 532875840
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_1/node-meta.json
+      hash: md5
+      md5: 90dfd74a414465a7e4def6a684f57dc8
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_1/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_1/trajectory.h5
+      hash: md5
+      md5: cf76dffdc50848c60714bda8de3d05d3
+      size: 194899168
+  uncorr_AIMD_ASEMD_2:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_2
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_2:
+          data_id: 2
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_2+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_2/metrics_dict.csv
+      hash: md5
+      md5: 9a358ae4704fd597d8e50209810accc9
+      size: 214180
+    - path: nodes/uncorr_AIMD/ASEMD_2/model
+      hash: md5
+      md5: 5df5507301c30e9f5487251f9c83cf48.dir
+      size: 532880376
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_2/node-meta.json
+      hash: md5
+      md5: bb17323bec2064a2dda8a8c6b589aaff
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_2/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_2/trajectory.h5
+      hash: md5
+      md5: 8ea1fa3a4562e872d0a5a7cfe069e13e
+      size: 194899168
+  uncorr_AIMD_ASEMD_3:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_3
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_3:
+          data_id: 3
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_3+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_3/metrics_dict.csv
+      hash: md5
+      md5: dac7cfed4530d519a850aa83f6630844
+      size: 214076
+    - path: nodes/uncorr_AIMD/ASEMD_3/model
+      hash: md5
+      md5: a7eb52013e7386a00e7d61d24e659bd6.dir
+      size: 532883616
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_3/node-meta.json
+      hash: md5
+      md5: 8730d51f1f56536e3d7fb5c13496dcb1
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_3/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_3/trajectory.h5
+      hash: md5
+      md5: 8693aa1f8e79c2803b4c3238c1442b1e
+      size: 194899168
+  uncorr_AIMD_ASEMD_4:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_4
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_4:
+          data_id: 4
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_4+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_4/metrics_dict.csv
+      hash: md5
+      md5: 7dd343b1a944c135dacb8534d225f8c8
+      size: 214151
+    - path: nodes/uncorr_AIMD/ASEMD_4/model
+      hash: md5
+      md5: 5f98d8ba111934e5f99a945c6cdb380c.dir
+      size: 492882992
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_4/node-meta.json
+      hash: md5
+      md5: 3caf8e72f9a0a1fab08ffd57ca55f746
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_4/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_4/trajectory.h5
+      hash: md5
+      md5: f189c686f32a90a644ae1fa3522de6d5
+      size: 194899168
+  uncorr_AIMD_ASEMD_5:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_5
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_5:
+          data_id: 5
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_5+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_5/metrics_dict.csv
+      hash: md5
+      md5: f670fdc0a98f6308cefa4369195712b3
+      size: 214180
+    - path: nodes/uncorr_AIMD/ASEMD_5/model
+      hash: md5
+      md5: 01a8015d9d70056a4891d75b5876aa30.dir
+      size: 532890987
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_5/node-meta.json
+      hash: md5
+      md5: 88dda1623b8d27933fcdcdb6b981d6a6
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_5/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_5/trajectory.h5
+      hash: md5
+      md5: c6149ef6dabc31f10aef5208b411b2eb
+      size: 194899168
+  uncorr_AIMD_ASEMD_6:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_6
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_6:
+          data_id: 6
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_6+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_6/metrics_dict.csv
+      hash: md5
+      md5: c35c2d550f6bf62ae530571c7db7648e
+      size: 214187
+    - path: nodes/uncorr_AIMD/ASEMD_6/model
+      hash: md5
+      md5: dd40001baec9e924d48aa8061d1f8524.dir
+      size: 532883454
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_6/node-meta.json
+      hash: md5
+      md5: ad8e9a7f067a18ef02ac19edec8e380d
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_6/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_6/trajectory.h5
+      hash: md5
+      md5: 5135b3ca5dc89b9eac0c2528f63da45e
+      size: 194899168
+  uncorr_AIMD_ASEMD_7:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_7
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_7:
+          data_id: 7
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_7+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_7/metrics_dict.csv
+      hash: md5
+      md5: c53e8a1486d5b0939027ad872ec6daff
+      size: 214178
+    - path: nodes/uncorr_AIMD/ASEMD_7/model
+      hash: md5
+      md5: 885d35693b2a0301fc6166c196aece3a.dir
+      size: 532881510
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_7/node-meta.json
+      hash: md5
+      md5: 3bfc5322db063aa3705c01a1b8aa50bd
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_7/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_7/trajectory.h5
+      hash: md5
+      md5: 8bd8031db86a70ecdb3dff806edd8ae0
+      size: 194899168
+  uncorr_AIMD_ASEMD_8:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_8
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_8:
+          data_id: 8
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_8+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_8/metrics_dict.csv
+      hash: md5
+      md5: b562a2c45a04d604601422e86217e7fa
+      size: 214136
+    - path: nodes/uncorr_AIMD/ASEMD_8/model
+      hash: md5
+      md5: bfef895a65d92bb23e433d9bc351e620.dir
+      size: 532886127
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_8/node-meta.json
+      hash: md5
+      md5: ee116c1e6725baa5131c77872b1ce515
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_8/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_8/trajectory.h5
+      hash: md5
+      md5: d242989adffc744fa552e6f2b5a189dc
+      size: 194899168
+  uncorr_AIMD_ASEMD_9:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_9
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_9:
+          data_id: 9
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_9+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_9/metrics_dict.csv
+      hash: md5
+      md5: 1aaa32388aa7e502725623cfecc97481
+      size: 214161
+    - path: nodes/uncorr_AIMD/ASEMD_9/model
+      hash: md5
+      md5: d61cefc1fa3a4eef20749b5cf6f688d3.dir
+      size: 532875354
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_9/node-meta.json
+      hash: md5
+      md5: 726e986b99a100fde91695741720179f
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_9/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_9/trajectory.h5
+      hash: md5
+      md5: c589d8084bfc91c0a45b2856f27c0d7a
+      size: 194899168
+  uncorr_AIMD_ASEMD_10:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_10
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_10:
+          data_id: 10
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_10+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_10/metrics_dict.csv
+      hash: md5
+      md5: c2551372bfb84119b77426bb29c8d675
+      size: 214166
+    - path: nodes/uncorr_AIMD/ASEMD_10/model
+      hash: md5
+      md5: ab7d9abe0b5d44a8b3e4c7c8882999d6.dir
+      size: 532877462
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_10/node-meta.json
+      hash: md5
+      md5: 082054ab1734025075d72b3d028b45c7
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_10/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_10/trajectory.h5
+      hash: md5
+      md5: e7b0cd69c77bce112ed8277a5b2948cd
+      size: 194899168
+  uncorr_AIMD_ASEMD_11:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_11
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_11:
+          data_id: 11
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_11+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_11/metrics_dict.csv
+      hash: md5
+      md5: b45b33d06e11c62a78847f5265c20aba
+      size: 214189
+    - path: nodes/uncorr_AIMD/ASEMD_11/model
+      hash: md5
+      md5: 1125f73d5adf9a0a21dcb3ab7a839999.dir
+      size: 532983093
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_11/node-meta.json
+      hash: md5
+      md5: 79b306c8dd8038f53e2bf867ce71001e
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_11/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_11/trajectory.h5
+      hash: md5
+      md5: 431b4bfe59aa8b1240efc698b9be137d
+      size: 233869456
+  uncorr_AIMD_ASEMD_13:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_13
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_13:
+          data_id: 13
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_13+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_13/metrics_dict.csv
+      hash: md5
+      md5: 2484345aded1a552bb4ab177fb1e1888
+      size: 214291
+    - path: nodes/uncorr_AIMD/ASEMD_13/model
+      hash: md5
+      md5: da773c87ef7c6c211fe5dd8ae8618939.dir
+      size: 532881755
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_13/node-meta.json
+      hash: md5
+      md5: 22fa540b3171d06734d99d0c80dc9bb7
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_13/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_13/trajectory.h5
+      hash: md5
+      md5: c148f5990ea9ddc93777c59b0d76bdd2
+      size: 194899168
+  uncorr_AIMD_ASEMD_14:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_14
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_14:
+          data_id: 14
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_14+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_14/metrics_dict.csv
+      hash: md5
+      md5: 9b48e5e084cc4eaf9a09684b85487485
+      size: 214156
+    - path: nodes/uncorr_AIMD/ASEMD_14/model
+      hash: md5
+      md5: dad6121b987a1b7a7c80ee4a52176153.dir
+      size: 532875275
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_14/node-meta.json
+      hash: md5
+      md5: 4fb63b086b115d95ea6cc7271eef2d55
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_14/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_14/trajectory.h5
+      hash: md5
+      md5: f79dc13d3bf180a20269f9b40a5e9e63
+      size: 194899168
+  uncorr_AIMD_ASEMD_15:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_15
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_15:
+          data_id: 15
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_15+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_15/metrics_dict.csv
+      hash: md5
+      md5: 68a91ea371bb2098ed7434f88c9c9b0d
+      size: 214148
+    - path: nodes/uncorr_AIMD/ASEMD_15/model
+      hash: md5
+      md5: f77a7d9484ac1fd8158027bd024f28c4.dir
+      size: 532875518
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_15/node-meta.json
+      hash: md5
+      md5: 5e307892b1dc633407a649070de78610
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_15/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_15/trajectory.h5
+      hash: md5
+      md5: cf6f42edf22db2a626e1d30a96c7a20b
+      size: 194899168
+  uncorr_AIMD_ASEMD_16:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_16
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_16:
+          data_id: 16
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_16+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_16/metrics_dict.csv
+      hash: md5
+      md5: b0a305193f2f9a3be14404fd11d2d437
+      size: 214159
+    - path: nodes/uncorr_AIMD/ASEMD_16/model
+      hash: md5
+      md5: 12b6f1004c978b29faa646b58ac3d821.dir
+      size: 532884023
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_16/node-meta.json
+      hash: md5
+      md5: c70184d68144011be69009432da6b4ee
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_16/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_16/trajectory.h5
+      hash: md5
+      md5: e8aca33a3c2cb347c53c578dc52fd1f1
+      size: 194899168
+  uncorr_AIMD_ASEMD_17:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_17
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_17:
+          data_id: 17
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_17+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_17/metrics_dict.csv
+      hash: md5
+      md5: 5f706381705132555791925b6c58a017
+      size: 214163
+    - path: nodes/uncorr_AIMD/ASEMD_17/model
+      hash: md5
+      md5: 2e2037807869be99e744f538f2554959.dir
+      size: 532875842
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_17/node-meta.json
+      hash: md5
+      md5: 223b1a640fcca1467e08970225a2dbe6
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_17/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_17/trajectory.h5
+      hash: md5
+      md5: 0c83de458c97e2df52c997b65a8df1d3
+      size: 194899168
+  uncorr_AIMD_ASEMD_18:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_18
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_18:
+          data_id: 18
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_18+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_18/metrics_dict.csv
+      hash: md5
+      md5: 2c92bd97cae9d1ab336a72901987488f
+      size: 214254
+    - path: nodes/uncorr_AIMD/ASEMD_18/model
+      hash: md5
+      md5: 21fbed8a768d348b53d93637ba284f5b.dir
+      size: 532897388
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_18/node-meta.json
+      hash: md5
+      md5: b40e0c341816f6c01a395e65fbab36c1
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_18/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_18/trajectory.h5
+      hash: md5
+      md5: f80b9f3c77177159dcc3589aa14580b7
+      size: 194899168
+  uncorr_AIMD_ASEMD_19:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_19
+    deps:
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/atoms.h5
+      hash: md5
+      md5: c270842d8b9688eb093548db9acaaa1f
+      size: 84032
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/cp2k
+      hash: md5
+      md5: 7710e72d9b244c1000376ce2e796284c.dir
+      size: 31393582
+      nfiles: 3
+    - path: nodes/uncorr_AIMD/CP2KSinglePoint/node-meta.json
+      hash: md5
+      md5: 24607c6327c8a792a5e88eca72548ac9
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b5ebfbec82ec91df4fe7f053d96f4ce
+      size: 48
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 898ded87060fa640f6c862d32e02978f
+      size: 338
+    - path: nodes/uncorr_AIMD/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 3961f24c3737224cd85fc4fb4579f0ba
+      size: 29676
+    params:
+      params.yaml:
+        uncorr_AIMD_ASEMD_19:
+          data_id: 19
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 1
+          seed: 42
+          steps: 5000
+          use_momenta: false
+          wrap: false
+        uncorr_AIMD_ASEMD_19+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/uncorr_AIMD/ASEMD_19/metrics_dict.csv
+      hash: md5
+      md5: be72cdaf4de0ca41f2bf18fd431ea009
+      size: 214120
+    - path: nodes/uncorr_AIMD/ASEMD_19/model
+      hash: md5
+      md5: 9b688d8ce2f6d8daee070f2caf58eb3c.dir
+      size: 532872845
+      nfiles: 7
+    - path: nodes/uncorr_AIMD/ASEMD_19/node-meta.json
+      hash: md5
+      md5: fa9411d11517c803901d527a76f544a1
+      size: 48
+    - path: nodes/uncorr_AIMD/ASEMD_19/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/uncorr_AIMD/ASEMD_19/trajectory.h5
+      hash: md5
+      md5: c2ab6d7b9d4ef466142bcd581188049a
+      size: 194899168

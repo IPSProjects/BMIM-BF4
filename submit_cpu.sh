@@ -2,8 +2,9 @@
 #SBATCH --partition=cpu-multi
 #SBATCH --ntasks=32
 #SBATCH --cpus-per-task=8
-#SBATCH --time=16:00:00
+#SBATCH --time=10:00:00
 #SBATCH --mem=32gb
+#SBATCH --job-name=ASEMD_19
 
 source ~/.bashrc
 
@@ -14,4 +15,6 @@ module load compiler/gnu
 module load mpi/openmpi
 conda activate ips_jax
 
-dvc repro
+zntrack run ipsuite.nodes.ASEMD --name uncorr_AIMD_ASEMD_19
+
+# uncorr_AIMD_ASEMD_12 failed
