@@ -6,9 +6,12 @@ E0s: average
 lr: 0.01
 scaling: rms_forces_scaling
 batch_size: 1
-max_num_epochs: 50
+max_num_epochs: 200
 ema: true
 ema_decay: 0.99
+swa: true
+start_swa: 100
+patience: 50
 amsgrad: true
 default_dtype: float64
 seed: 3
