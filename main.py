@@ -1046,32 +1046,72 @@ with project.group("ML17_density_model_short") as density_t:
     structures = []
     equilibrated_trajs = []
     for ii, rho in enumerate(densities):
-        structure = ips.configuration_generation.Packmol(
-            data=[single_cation.atoms, single_anion.atoms],
-            count=[10, 10],
-            density=rho,
-            pbc=True,
-        )
-        structures.append(structure)
 
-        geopt = ips.calculators.ASEGeoOpt(
-            model=model if ii in [2] else model_short,
-            data=structure.atoms,
-            optimizer="FIRE" if ii in [2] else "BFGS",
-            run_kwargs={"fmax": 0.5 if ii in [2] else 0.5},
-        )
-        
-        md_nvt_equil = ips.calculators.ASEMD(
-            data=geopt.atoms,
-            data_id=-1,
-            model=model_short,
-            modifier=[],
-            thermostat=thermostats[ii],
-            checker_list=[],
-            steps=200_000,
-            sampling_rate=200,
-        )
-        equilibrated_trajs.append(md_nvt_equil)
+        if ii in [2]:
+            structure = ips.configuration_generation.Packmol(
+                data=[single_cation.atoms, single_anion.atoms],
+                count=[10, 10],
+                density=rho * 0.85,
+                pbc=True,
+            )
+
+            geopt = ips.calculators.ASEGeoOpt(
+                model=model_short,
+                data=structure.atoms,
+                optimizer="FIRE",
+                run_kwargs={"fmax": 0.5},
+            )
+
+            md_density_ramp = ips.calculators.ASEMD(
+                data=geopt.atoms,
+                data_id=-1,
+                model=model_short,
+                modifier=[density_ramps[ii]],
+                thermostat=thermostats[ii],
+                checker_list=[],
+                steps=10_000,
+                sampling_rate=500,
+                name="ASEMD_density_ramp"
+            )
+
+            md_nvt_equil = ips.calculators.ASEMD(
+                data=md_density_ramp.atoms,
+                data_id=-1,
+                model=model_short,
+                modifier=[],
+                thermostat=thermostats[ii],
+                checker_list=[],
+                steps=200_000,
+                sampling_rate=200,
+                use_momenta=True,
+            )
+            
+        else:
+            structure = ips.configuration_generation.Packmol(
+                data=[single_cation.atoms, single_anion.atoms],
+                count=[10, 10],
+                density=rho,
+                pbc=True,
+            )
+            structures.append(structure)
+            geopt = ips.calculators.ASEGeoOpt(
+                model=model_short,
+                data=structure.atoms,
+                optimizer="FIRE" if ii in [2] else "BFGS",
+                run_kwargs={"fmax": 0.5},
+            )
+            
+            md_nvt_equil = ips.calculators.ASEMD(
+                data=geopt.atoms,
+                data_id=-1,
+                model=model_short,
+                modifier=[],
+                thermostat=thermostats[ii],
+                checker_list=[],
+                steps=200_000,
+                sampling_rate=200,
+            )
+            equilibrated_trajs.append(md_nvt_equil)
 
         md_npt = ips.calculators.ASEMD(
             data=md_nvt_equil.atoms,
@@ -1087,6 +1127,7 @@ with project.group("ML17_density_model_short") as density_t:
 
 
 with project.group("ML17_density_td3_short") as density_d3_short:
+    structures = []
     for ii, rho in enumerate(densities):
         structure = ips.configuration_generation.Packmol(
             data=[single_cation.atoms, single_anion.atoms],
@@ -1094,6 +1135,7 @@ with project.group("ML17_density_td3_short") as density_d3_short:
             density=rho * 0.85,
             pbc=True,
         )
+        structures.append(structure)
 
         geopt = ips.calculators.ASEGeoOpt(
             model=ml17_td3_mix,
@@ -1137,4 +1179,47 @@ with project.group("ML17_density_td3_short") as density_d3_short:
         )
 
 
-project.build(nodes=[density_d3_short]) # density_m density_t
+with project.group("ML17_density_td3_long") as density_d3_long:
+    for ii, rho in enumerate(densities):
+        geopt = ips.calculators.ASEGeoOpt(
+            model=ml17_td3_20_mix,
+            data=structures[ii].atoms,
+            optimizer="FIRE",
+            run_kwargs={"fmax": 0.5},
+        )
+
+        md_density_ramp = ips.calculators.ASEMD(
+            data=geopt.atoms,
+            data_id=-1,
+            model=ml17_td3_20_mix,
+            modifier=[density_ramps[ii]],
+            thermostat=thermostats[ii],
+            checker_list=[],
+            steps=10_000,
+            sampling_rate=500,
+        )
+
+        md_nvt_equil = ips.calculators.ASEMD(
+            data=md_density_ramp.atoms,
+            data_id=-1,
+            model=ml17_td3_20_mix,
+            modifier=[],
+            thermostat=thermostats[ii],
+            checker_list=[],
+            steps=200_000,
+            sampling_rate=200,
+            use_momenta=True,
+        )
+        md_npt = ips.calculators.ASEMD(
+            data=md_nvt_equil.atoms,
+            data_id=-1,
+            model=ml17_td3_20_mix,
+            modifier=[],
+            thermostat=barostats[ii],
+            checker_list=[],
+            steps=2_000_000,
+            sampling_rate=200,
+            use_momenta=True,
+        )
+
+project.build(nodes=[density_d3_long]) # density_m density_t

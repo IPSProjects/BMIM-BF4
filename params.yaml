@@ -989,7 +989,7 @@ ML17_density_model_short_ASEMD_4:
     sampling_rate: 200
     seed: 42
     steps: 200000
-    use_momenta: false
+    use_momenta: true
     wrap: false
 ML17_density_model_short_ASEMD_4+thermostat:
     friction: 0.01
@@ -1089,6 +1089,26 @@ ML17_density_model_short_ASEMD_9+thermostat:
     tetragonal_strain: true
     time_step: 0.5
     ttime: 2.4557
+ML17_density_model_short_ASEMD_density_ramp:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 500
+    seed: 42
+    steps: 10000
+    use_momenta: false
+    wrap: false
+ML17_density_model_short_ASEMD_density_ramp+modifier+0:
+    cell: null
+    density: 1190
+ML17_density_model_short_ASEMD_density_ramp+thermostat:
+    friction: 0.01
+    temperature: 313
+    time_step: 0.5
 ML17_density_model_short_Packmol:
     box: null
     count:
@@ -1149,7 +1169,7 @@ ML17_density_model_short_Packmol_2:
     - 10
     - 10
     data_ids: null
-    density: 1190
+    density: 1011.5
     pbc: true
     tolerance: 2.0
 ML17_density_model_short_Packmol_3:
@@ -1394,6 +1414,278 @@ ML17_density_models_TorchD3:
     dtype: float32
     skin: 0.5
     xc: b97-3c
+ML17_density_td3_long_ASEGeoOpt:
+    data_id: 0
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML17_density_td3_long_ASEGeoOpt_1:
+    data_id: 0
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML17_density_td3_long_ASEGeoOpt_2:
+    data_id: 0
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML17_density_td3_long_ASEGeoOpt_3:
+    data_id: 0
+    dump_rate: 1000
+    init_kwargs: {}
+    optimizer: FIRE
+    repeat:
+    - 1
+    - 1
+    - 1
+    run_kwargs:
+        fmax: 0.5
+ML17_density_td3_long_ASEMD:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 500
+    seed: 42
+    steps: 10000
+    use_momenta: false
+    wrap: false
+ML17_density_td3_long_ASEMD+modifier+0:
+    cell: null
+    density: 1162
+ML17_density_td3_long_ASEMD+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+ML17_density_td3_long_ASEMD_1:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 200
+    seed: 42
+    steps: 200000
+    use_momenta: true
+    wrap: false
+ML17_density_td3_long_ASEMD_1+thermostat:
+    friction: 0.01
+    temperature: 353
+    time_step: 0.5
+ML17_density_td3_long_ASEMD_10:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 200
+    seed: 42
+    steps: 200000
+    use_momenta: true
+    wrap: false
+ML17_density_td3_long_ASEMD_10+thermostat:
+    friction: 0.01
+    temperature: 293
+    time_step: 0.5
+ML17_density_td3_long_ASEMD_11:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 200
+    seed: 42
+    steps: 2000000
+    use_momenta: true
+    wrap: false
+ML17_density_td3_long_ASEMD_11+thermostat:
+    pfactor: 54.273
+    pressure: 6.324e-07
+    temperature: 293
+    tetragonal_strain: true
+    time_step: 0.5
+    ttime: 2.4557
+ML17_density_td3_long_ASEMD_2:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 200
+    seed: 42
+    steps: 2000000
+    use_momenta: true
+    wrap: false
+ML17_density_td3_long_ASEMD_2+thermostat:
+    pfactor: 54.273
+    pressure: 6.324e-07
+    temperature: 353
+    tetragonal_strain: true
+    time_step: 0.5
+    ttime: 2.4557
+ML17_density_td3_long_ASEMD_3:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 500
+    seed: 42
+    steps: 10000
+    use_momenta: false
+    wrap: false
+ML17_density_td3_long_ASEMD_3+modifier+0:
+    cell: null
+    density: 1176
+ML17_density_td3_long_ASEMD_3+thermostat:
+    friction: 0.01
+    temperature: 333
+    time_step: 0.5
+ML17_density_td3_long_ASEMD_4:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 200
+    seed: 42
+    steps: 200000
+    use_momenta: true
+    wrap: false
+ML17_density_td3_long_ASEMD_4+thermostat:
+    friction: 0.01
+    temperature: 333
+    time_step: 0.5
+ML17_density_td3_long_ASEMD_5:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 200
+    seed: 42
+    steps: 2000000
+    use_momenta: true
+    wrap: false
+ML17_density_td3_long_ASEMD_5+thermostat:
+    pfactor: 54.273
+    pressure: 6.324e-07
+    temperature: 333
+    tetragonal_strain: true
+    time_step: 0.5
+    ttime: 2.4557
+ML17_density_td3_long_ASEMD_6:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 500
+    seed: 42
+    steps: 10000
+    use_momenta: false
+    wrap: false
+ML17_density_td3_long_ASEMD_6+modifier+0:
+    cell: null
+    density: 1190
+ML17_density_td3_long_ASEMD_6+thermostat:
+    friction: 0.01
+    temperature: 313
+    time_step: 0.5
+ML17_density_td3_long_ASEMD_7:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 200
+    seed: 42
+    steps: 200000
+    use_momenta: true
+    wrap: false
+ML17_density_td3_long_ASEMD_7+thermostat:
+    friction: 0.01
+    temperature: 313
+    time_step: 0.5
+ML17_density_td3_long_ASEMD_8:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 200
+    seed: 42
+    steps: 2000000
+    use_momenta: true
+    wrap: false
+ML17_density_td3_long_ASEMD_8+thermostat:
+    pfactor: 54.273
+    pressure: 6.324e-07
+    temperature: 313
+    tetragonal_strain: true
+    time_step: 0.5
+    ttime: 2.4557
+ML17_density_td3_long_ASEMD_9:
+    data_id: -1
+    dump_rate: 1000
+    pop_last: false
+    repeat:
+    - 1
+    - 1
+    - 1
+    sampling_rate: 500
+    seed: 42
+    steps: 10000
+    use_momenta: false
+    wrap: false
+ML17_density_td3_long_ASEMD_9+modifier+0:
+    cell: null
+    density: 1204
+ML17_density_td3_long_ASEMD_9+thermostat:
+    friction: 0.01
+    temperature: 293
+    time_step: 0.5
 ML17_density_td3_short_ASEGeoOpt:
     data_id: 0
     dump_rate: 1000

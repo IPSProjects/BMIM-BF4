@@ -28496,21 +28496,21 @@ stages:
           - 10
           - 10
           data_ids:
-          density: 1190
+          density: 1011.5
           pbc: true
           tolerance: 2.0
     outs:
     - path: nodes/ML17_density_model_short/Packmol_2/atoms.h5
       hash: md5
-      md5: 7c0e61222c86cc6611a66ab057168922
+      md5: a1965b37090d391063156a0a13308c78
       size: 37568
     - path: nodes/ML17_density_model_short/Packmol_2/node-meta.json
       hash: md5
-      md5: ed56e119afa7ae6a8e78e192d6fb7da1
+      md5: 08a6e81a822e62d6dc06c056d8693153
       size: 48
     - path: nodes/ML17_density_model_short/Packmol_2/packmol
       hash: md5
-      md5: d386afbc4f67873fcf912f7219b291b4.dir
+      md5: 6603ca5ebea2e0f8fa6a7632db5298e9.dir
       size: 18969
       nfiles: 4
   ML17_density_model_short_ASEMD_1:
@@ -29160,15 +29160,15 @@ stages:
     deps:
     - path: nodes/ML17_density_model_short/Packmol_2/atoms.h5
       hash: md5
-      md5: 7c0e61222c86cc6611a66ab057168922
+      md5: a1965b37090d391063156a0a13308c78
       size: 37568
     - path: nodes/ML17_density_model_short/Packmol_2/node-meta.json
       hash: md5
-      md5: af9bf6893059f51baf10a2437eaad27a
+      md5: 08a6e81a822e62d6dc06c056d8693153
       size: 48
     - path: nodes/ML17_density_model_short/Packmol_2/packmol
       hash: md5
-      md5: d386afbc4f67873fcf912f7219b291b4.dir
+      md5: 6603ca5ebea2e0f8fa6a7632db5298e9.dir
       size: 18969
       nfiles: 4
     - path: nodes/ML17_training/MLModel_1/apax_model
@@ -29208,7 +29208,7 @@ stages:
           - 1
           - 1
           run_kwargs:
-            fmax: 0.1
+            fmax: 0.5
     outs:
     - path: nodes/ML17_density_model_short/ASEGeoOpt_2/model_outs
       hash: md5
@@ -29217,12 +29217,12 @@ stages:
       nfiles: 1
     - path: nodes/ML17_density_model_short/ASEGeoOpt_2/node-meta.json
       hash: md5
-      md5: 432c3bfa2e9403f41510e7607e1c7f36
+      md5: 51c0ebb2f77189210bfa11562eb85098
       size: 48
     - path: nodes/ML17_density_model_short/ASEGeoOpt_2/trajectory.h5
       hash: md5
-      md5: fc83a9822d28b8158e44206ab1d7902e
-      size: 5103208
+      md5: 7c98e429b05edb2c969a5662d01a9111
+      size: 803688
   ML17_density_model_short_Packmol_3:
     cmd: zntrack run ipsuite.nodes.Packmol --name ML17_density_model_short_Packmol_3
     deps:
@@ -31048,4 +31048,1251 @@ stages:
     - path: nodes/ML17_density_td3_short/ASEMD_5/trajectory.h5
       hash: md5
       md5: 119a46efff05d7f620b86f329da62a62
+      size: 245582008
+  ML17_density_model_short_ASEMD_density_ramp:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_model_short_ASEMD_density_ramp
+    deps:
+    - path: nodes/ML17_density_model_short/ASEGeoOpt_2/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_model_short/ASEGeoOpt_2/node-meta.json
+      hash: md5
+      md5: 51c0ebb2f77189210bfa11562eb85098
+      size: 48
+    - path: nodes/ML17_density_model_short/ASEGeoOpt_2/trajectory.h5
+      hash: md5
+      md5: 7c98e429b05edb2c969a5662d01a9111
+      size: 803688
+    - path: nodes/ML17_training/MLModel_1/apax_model
+      hash: md5
+      md5: d7678afd0cb163733fbfd407fef3eae2.dir
+      size: 85054069
+      nfiles: 10
+    - path: nodes/ML17_training/MLModel_1/log.csv
+      hash: md5
+      md5: 3607ffe4448f09d2af3c742921523997
+      size: 127837
+    - path: nodes/ML17_training/MLModel_1/metrics.json
+      hash: md5
+      md5: 5c46e3b2a689b5baa294c3d5b98daad0
+      size: 390
+    - path: nodes/ML17_training/MLModel_1/node-meta.json
+      hash: md5
+      md5: a8064a6ba7ef8aa7568f1da78634ae81
+      size: 48
+    - path: nodes/ML17_training/MLModel_1/train_atoms.extxyz
+      hash: md5
+      md5: 4b24dcda97a81a2018dd430b350725cc
+      size: 50703910
+    - path: nodes/ML17_training/MLModel_1/val_atoms.extxyz
+      hash: md5
+      md5: f610bf1397ca89bf56a9edc2ed047b3d
+      size: 8933596
+    params:
+      params.yaml:
+        ML17_density_model_short_ASEMD_density_ramp:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 500
+          seed: 42
+          steps: 10000
+          use_momenta: false
+          wrap: false
+        ML17_density_model_short_ASEMD_density_ramp+modifier+0:
+          cell:
+          density: 1190
+        ML17_density_model_short_ASEMD_density_ramp+thermostat:
+          friction: 0.01
+          temperature: 313
+          time_step: 0.5
+    outs:
+    - path: nodes/ML17_density_model_short/ASEMD_density_ramp/metrics_dict.csv
+      hash: md5
+      md5: 19804f30938c76469472c568ddda7703
+      size: 830
+    - path: nodes/ML17_density_model_short/ASEMD_density_ramp/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_model_short/ASEMD_density_ramp/node-meta.json
+      hash: md5
+      md5: e4d182d4d03e6ed697a073b46fbad4f9
+      size: 48
+    - path: nodes/ML17_density_model_short/ASEMD_density_ramp/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_model_short/ASEMD_density_ramp/trajectory.h5
+      hash: md5
+      md5: 19b980b134eb5000afaa8fccb964d9ad
+      size: 875872
+  ML17_density_model_short_ASEMD_4:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_model_short_ASEMD_4
+    deps:
+    - path: nodes/ML17_density_model_short/ASEMD_density_ramp/metrics_dict.csv
+      hash: md5
+      md5: 19804f30938c76469472c568ddda7703
+      size: 830
+    - path: nodes/ML17_density_model_short/ASEMD_density_ramp/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_model_short/ASEMD_density_ramp/node-meta.json
+      hash: md5
+      md5: e4d182d4d03e6ed697a073b46fbad4f9
+      size: 48
+    - path: nodes/ML17_density_model_short/ASEMD_density_ramp/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_model_short/ASEMD_density_ramp/trajectory.h5
+      hash: md5
+      md5: 19b980b134eb5000afaa8fccb964d9ad
+      size: 875872
+    - path: nodes/ML17_training/MLModel_1/apax_model
+      hash: md5
+      md5: d7678afd0cb163733fbfd407fef3eae2.dir
+      size: 85054069
+      nfiles: 10
+    - path: nodes/ML17_training/MLModel_1/log.csv
+      hash: md5
+      md5: 3607ffe4448f09d2af3c742921523997
+      size: 127837
+    - path: nodes/ML17_training/MLModel_1/metrics.json
+      hash: md5
+      md5: 5c46e3b2a689b5baa294c3d5b98daad0
+      size: 390
+    - path: nodes/ML17_training/MLModel_1/node-meta.json
+      hash: md5
+      md5: a8064a6ba7ef8aa7568f1da78634ae81
+      size: 48
+    - path: nodes/ML17_training/MLModel_1/train_atoms.extxyz
+      hash: md5
+      md5: 4b24dcda97a81a2018dd430b350725cc
+      size: 50703910
+    - path: nodes/ML17_training/MLModel_1/val_atoms.extxyz
+      hash: md5
+      md5: f610bf1397ca89bf56a9edc2ed047b3d
+      size: 8933596
+    params:
+      params.yaml:
+        ML17_density_model_short_ASEMD_4:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 200
+          seed: 42
+          steps: 200000
+          use_momenta: true
+          wrap: false
+        ML17_density_model_short_ASEMD_4+thermostat:
+          friction: 0.01
+          temperature: 313
+          time_step: 0.5
+    outs:
+    - path: nodes/ML17_density_model_short/ASEMD_4/metrics_dict.csv
+      hash: md5
+      md5: 9916ad98e2fc27e8e9c6018d5b609a6a
+      size: 41983
+    - path: nodes/ML17_density_model_short/ASEMD_4/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_model_short/ASEMD_4/node-meta.json
+      hash: md5
+      md5: bba85b7e20387432d0b47a3303d31744
+      size: 48
+    - path: nodes/ML17_density_model_short/ASEMD_4/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_model_short/ASEMD_4/trajectory.h5
+      hash: md5
+      md5: 75a1030a7b774c599c8e5d64fabe1a84
+      size: 32069256
+  ML17_density_td3_long_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML17_density_td3_long_ASEGeoOpt
+    deps:
+    - path: nodes/ML17_density_models/MixCalculator_1/atoms.h5
+      hash: md5
+      md5: 23b4cf788cdb50c9d71e5a96fa32eaa2
+      size: 4794072
+    - path: nodes/ML17_density_models/MixCalculator_1/node-meta.json
+      hash: md5
+      md5: 5d4a46de894ed9e5d05ee39d6781bb5f
+      size: 48
+    - path: nodes/ML17_density_td3_short/Packmol/atoms.h5
+      hash: md5
+      md5: c5e651bc43531acdc03cbab8a10baad1
+      size: 37568
+    - path: nodes/ML17_density_td3_short/Packmol/node-meta.json
+      hash: md5
+      md5: da211a7a5450391a1dfabdf4df595685
+      size: 48
+    - path: nodes/ML17_density_td3_short/Packmol/packmol
+      hash: md5
+      md5: 9de7b7f00a6dcaddeac6e194813b0fe2.dir
+      size: 18969
+      nfiles: 4
+    params:
+      params.yaml:
+        ML17_density_td3_long_ASEGeoOpt:
+          data_id: 0
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: FIRE
+          repeat:
+          - 1
+          - 1
+          - 1
+          run_kwargs:
+            fmax: 0.5
+    outs:
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 701ecc88382b502adbf0f9826680e8d7
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 4420262a866845229130660b2e879bac
+      size: 557152
+  ML17_density_td3_long_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_long_ASEMD
+    deps:
+    - path: nodes/ML17_density_models/MixCalculator_1/atoms.h5
+      hash: md5
+      md5: 23b4cf788cdb50c9d71e5a96fa32eaa2
+      size: 4794072
+    - path: nodes/ML17_density_models/MixCalculator_1/node-meta.json
+      hash: md5
+      md5: 5d4a46de894ed9e5d05ee39d6781bb5f
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt/node-meta.json
+      hash: md5
+      md5: 701ecc88382b502adbf0f9826680e8d7
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt/trajectory.h5
+      hash: md5
+      md5: 4420262a866845229130660b2e879bac
+      size: 557152
+    params:
+      params.yaml:
+        ML17_density_td3_long_ASEMD:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 500
+          seed: 42
+          steps: 10000
+          use_momenta: false
+          wrap: false
+        ML17_density_td3_long_ASEMD+modifier+0:
+          cell:
+          density: 1162
+        ML17_density_td3_long_ASEMD+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/ML17_density_td3_long/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 64f67cc377083f4cfd2072698b8fa7f6
+      size: 831
+    - path: nodes/ML17_density_td3_long/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD/node-meta.json
+      hash: md5
+      md5: 0bc7322db44121b927b1773209c52106
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD/trajectory.h5
+      hash: md5
+      md5: b7c3669c40f10a3d21b5dea9908392f7
+      size: 667736
+  ML17_density_td3_long_ASEMD_1:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_long_ASEMD_1
+    deps:
+    - path: nodes/ML17_density_models/MixCalculator_1/atoms.h5
+      hash: md5
+      md5: 23b4cf788cdb50c9d71e5a96fa32eaa2
+      size: 4794072
+    - path: nodes/ML17_density_models/MixCalculator_1/node-meta.json
+      hash: md5
+      md5: 5d4a46de894ed9e5d05ee39d6781bb5f
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD/metrics_dict.csv
+      hash: md5
+      md5: 64f67cc377083f4cfd2072698b8fa7f6
+      size: 831
+    - path: nodes/ML17_density_td3_long/ASEMD/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD/node-meta.json
+      hash: md5
+      md5: 0bc7322db44121b927b1773209c52106
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD/trajectory.h5
+      hash: md5
+      md5: b7c3669c40f10a3d21b5dea9908392f7
+      size: 667736
+    params:
+      params.yaml:
+        ML17_density_td3_long_ASEMD_1:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 200
+          seed: 42
+          steps: 200000
+          use_momenta: true
+          wrap: false
+        ML17_density_td3_long_ASEMD_1+thermostat:
+          friction: 0.01
+          temperature: 353
+          time_step: 0.5
+    outs:
+    - path: nodes/ML17_density_td3_long/ASEMD_1/metrics_dict.csv
+      hash: md5
+      md5: 7c5e0add40368dedc683b754ca57f1d6
+      size: 41954
+    - path: nodes/ML17_density_td3_long/ASEMD_1/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_1/node-meta.json
+      hash: md5
+      md5: 4db385bb1af63c98be56a8548a5b1a4b
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_1/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_1/trajectory.h5
+      hash: md5
+      md5: 233eefa1f8354678e35c732664752cc4
+      size: 24610624
+  ML17_density_td3_long_ASEMD_2:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_long_ASEMD_2
+    deps:
+    - path: nodes/ML17_density_models/MixCalculator_1/atoms.h5
+      hash: md5
+      md5: 23b4cf788cdb50c9d71e5a96fa32eaa2
+      size: 4794072
+    - path: nodes/ML17_density_models/MixCalculator_1/node-meta.json
+      hash: md5
+      md5: 5d4a46de894ed9e5d05ee39d6781bb5f
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_1/metrics_dict.csv
+      hash: md5
+      md5: 7c5e0add40368dedc683b754ca57f1d6
+      size: 41954
+    - path: nodes/ML17_density_td3_long/ASEMD_1/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_1/node-meta.json
+      hash: md5
+      md5: 4db385bb1af63c98be56a8548a5b1a4b
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_1/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_1/trajectory.h5
+      hash: md5
+      md5: 233eefa1f8354678e35c732664752cc4
+      size: 24610624
+    params:
+      params.yaml:
+        ML17_density_td3_long_ASEMD_2:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 200
+          seed: 42
+          steps: 2000000
+          use_momenta: true
+          wrap: false
+        ML17_density_td3_long_ASEMD_2+thermostat:
+          pfactor: 54.273
+          pressure: 6.324e-07
+          temperature: 353
+          tetragonal_strain: true
+          time_step: 0.5
+          ttime: 2.4557
+    outs:
+    - path: nodes/ML17_density_td3_long/ASEMD_2/metrics_dict.csv
+      hash: md5
+      md5: 0ee1333adfca9ed8b686e0539a61c890
+      size: 429440
+    - path: nodes/ML17_density_td3_long/ASEMD_2/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_2/node-meta.json
+      hash: md5
+      md5: 680be4aab8edf7bda58fa9e564ce7b36
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_2/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_2/trajectory.h5
+      hash: md5
+      md5: 53a03fded3fad25c863c973ef21c3be5
+      size: 245582008
+  ML17_density_td3_long_ASEGeoOpt_1:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML17_density_td3_long_ASEGeoOpt_1
+    deps:
+    - path: nodes/ML17_density_models/MixCalculator_1/atoms.h5
+      hash: md5
+      md5: 23b4cf788cdb50c9d71e5a96fa32eaa2
+      size: 4794072
+    - path: nodes/ML17_density_models/MixCalculator_1/node-meta.json
+      hash: md5
+      md5: 5d4a46de894ed9e5d05ee39d6781bb5f
+      size: 48
+    - path: nodes/ML17_density_td3_short/Packmol_1/atoms.h5
+      hash: md5
+      md5: 53ff471f2c42a8fff96d573731ebed4f
+      size: 37568
+    - path: nodes/ML17_density_td3_short/Packmol_1/node-meta.json
+      hash: md5
+      md5: 884d078285a2bb5b11fdc405b96f8ebf
+      size: 48
+    - path: nodes/ML17_density_td3_short/Packmol_1/packmol
+      hash: md5
+      md5: 9ae1028ab1c8e0ec3083652fca3643f0.dir
+      size: 18969
+      nfiles: 4
+    params:
+      params.yaml:
+        ML17_density_td3_long_ASEGeoOpt_1:
+          data_id: 0
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: FIRE
+          repeat:
+          - 1
+          - 1
+          - 1
+          run_kwargs:
+            fmax: 0.5
+    outs:
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_1/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_1/node-meta.json
+      hash: md5
+      md5: aa78781591260dbb8d5ffa9a2baac189
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_1/trajectory.h5
+      hash: md5
+      md5: d05e15a6489528b7d203af5d2c870e1f
+      size: 557152
+  ML17_density_td3_long_ASEMD_3:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_long_ASEMD_3
+    deps:
+    - path: nodes/ML17_density_models/MixCalculator_1/atoms.h5
+      hash: md5
+      md5: 23b4cf788cdb50c9d71e5a96fa32eaa2
+      size: 4794072
+    - path: nodes/ML17_density_models/MixCalculator_1/node-meta.json
+      hash: md5
+      md5: 5d4a46de894ed9e5d05ee39d6781bb5f
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_1/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_1/node-meta.json
+      hash: md5
+      md5: aa78781591260dbb8d5ffa9a2baac189
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_1/trajectory.h5
+      hash: md5
+      md5: d05e15a6489528b7d203af5d2c870e1f
+      size: 557152
+    params:
+      params.yaml:
+        ML17_density_td3_long_ASEMD_3:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 500
+          seed: 42
+          steps: 10000
+          use_momenta: false
+          wrap: false
+        ML17_density_td3_long_ASEMD_3+modifier+0:
+          cell:
+          density: 1176
+        ML17_density_td3_long_ASEMD_3+thermostat:
+          friction: 0.01
+          temperature: 333
+          time_step: 0.5
+    outs:
+    - path: nodes/ML17_density_td3_long/ASEMD_3/metrics_dict.csv
+      hash: md5
+      md5: d3583b57ac1d1c8cbf76cca9c520b247
+      size: 837
+    - path: nodes/ML17_density_td3_long/ASEMD_3/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_3/node-meta.json
+      hash: md5
+      md5: 01247f6e0456d3249d9b6ee7e668522a
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_3/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_3/trajectory.h5
+      hash: md5
+      md5: c1343ecfcd7b15ec28631cf18c93112c
+      size: 667736
+  ML17_density_td3_long_ASEMD_4:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_long_ASEMD_4
+    deps:
+    - path: nodes/ML17_density_models/MixCalculator_1/atoms.h5
+      hash: md5
+      md5: 23b4cf788cdb50c9d71e5a96fa32eaa2
+      size: 4794072
+    - path: nodes/ML17_density_models/MixCalculator_1/node-meta.json
+      hash: md5
+      md5: 5d4a46de894ed9e5d05ee39d6781bb5f
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_3/metrics_dict.csv
+      hash: md5
+      md5: d3583b57ac1d1c8cbf76cca9c520b247
+      size: 837
+    - path: nodes/ML17_density_td3_long/ASEMD_3/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_3/node-meta.json
+      hash: md5
+      md5: 01247f6e0456d3249d9b6ee7e668522a
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_3/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_3/trajectory.h5
+      hash: md5
+      md5: c1343ecfcd7b15ec28631cf18c93112c
+      size: 667736
+    params:
+      params.yaml:
+        ML17_density_td3_long_ASEMD_4:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 200
+          seed: 42
+          steps: 200000
+          use_momenta: true
+          wrap: false
+        ML17_density_td3_long_ASEMD_4+thermostat:
+          friction: 0.01
+          temperature: 333
+          time_step: 0.5
+    outs:
+    - path: nodes/ML17_density_td3_long/ASEMD_4/metrics_dict.csv
+      hash: md5
+      md5: 4dd0e2a331c1319e4bf43831f44963d0
+      size: 42011
+    - path: nodes/ML17_density_td3_long/ASEMD_4/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_4/node-meta.json
+      hash: md5
+      md5: 477b536b117e8016dcb018add861b600
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_4/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_4/trajectory.h5
+      hash: md5
+      md5: fb9acb88baf3e1e9bd8f1fc8c41629e2
+      size: 24610624
+  ML17_density_td3_long_ASEMD_5:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_long_ASEMD_5
+    deps:
+    - path: nodes/ML17_density_models/MixCalculator_1/atoms.h5
+      hash: md5
+      md5: 23b4cf788cdb50c9d71e5a96fa32eaa2
+      size: 4794072
+    - path: nodes/ML17_density_models/MixCalculator_1/node-meta.json
+      hash: md5
+      md5: 5d4a46de894ed9e5d05ee39d6781bb5f
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_4/metrics_dict.csv
+      hash: md5
+      md5: 4dd0e2a331c1319e4bf43831f44963d0
+      size: 42011
+    - path: nodes/ML17_density_td3_long/ASEMD_4/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_4/node-meta.json
+      hash: md5
+      md5: 477b536b117e8016dcb018add861b600
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_4/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_4/trajectory.h5
+      hash: md5
+      md5: fb9acb88baf3e1e9bd8f1fc8c41629e2
+      size: 24610624
+    params:
+      params.yaml:
+        ML17_density_td3_long_ASEMD_5:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 200
+          seed: 42
+          steps: 2000000
+          use_momenta: true
+          wrap: false
+        ML17_density_td3_long_ASEMD_5+thermostat:
+          pfactor: 54.273
+          pressure: 6.324e-07
+          temperature: 333
+          tetragonal_strain: true
+          time_step: 0.5
+          ttime: 2.4557
+    outs:
+    - path: nodes/ML17_density_td3_long/ASEMD_5/metrics_dict.csv
+      hash: md5
+      md5: f7e44c6a745efc922341a6b48cbd5ded
+      size: 429267
+    - path: nodes/ML17_density_td3_long/ASEMD_5/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_5/node-meta.json
+      hash: md5
+      md5: c434136b90d14c91f3fcfc5493653042
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_5/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_5/trajectory.h5
+      hash: md5
+      md5: 01c0b5c575c1aa31cfbe4ad0400ad039
+      size: 245582008
+  ML17_density_td3_long_ASEGeoOpt_2:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML17_density_td3_long_ASEGeoOpt_2
+    deps:
+    - path: nodes/ML17_density_models/MixCalculator_1/atoms.h5
+      hash: md5
+      md5: 23b4cf788cdb50c9d71e5a96fa32eaa2
+      size: 4794072
+    - path: nodes/ML17_density_models/MixCalculator_1/node-meta.json
+      hash: md5
+      md5: 5d4a46de894ed9e5d05ee39d6781bb5f
+      size: 48
+    - path: nodes/ML17_density_td3_short/Packmol_2/atoms.h5
+      hash: md5
+      md5: a1965b37090d391063156a0a13308c78
+      size: 37568
+    - path: nodes/ML17_density_td3_short/Packmol_2/node-meta.json
+      hash: md5
+      md5: 6d7977e1735c0c8121f46cff0bafe9f3
+      size: 48
+    - path: nodes/ML17_density_td3_short/Packmol_2/packmol
+      hash: md5
+      md5: 6603ca5ebea2e0f8fa6a7632db5298e9.dir
+      size: 18969
+      nfiles: 4
+    params:
+      params.yaml:
+        ML17_density_td3_long_ASEGeoOpt_2:
+          data_id: 0
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: FIRE
+          repeat:
+          - 1
+          - 1
+          - 1
+          run_kwargs:
+            fmax: 0.5
+    outs:
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_2/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_2/node-meta.json
+      hash: md5
+      md5: c7c9e4ba43fad64678910173fc3c7150
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_2/trajectory.h5
+      hash: md5
+      md5: 8540fc9a0eb9ade113dd5258127504c5
+      size: 557152
+  ML17_density_td3_long_ASEMD_6:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_long_ASEMD_6
+    deps:
+    - path: nodes/ML17_density_models/MixCalculator_1/atoms.h5
+      hash: md5
+      md5: 23b4cf788cdb50c9d71e5a96fa32eaa2
+      size: 4794072
+    - path: nodes/ML17_density_models/MixCalculator_1/node-meta.json
+      hash: md5
+      md5: 5d4a46de894ed9e5d05ee39d6781bb5f
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_2/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_2/node-meta.json
+      hash: md5
+      md5: c7c9e4ba43fad64678910173fc3c7150
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_2/trajectory.h5
+      hash: md5
+      md5: 8540fc9a0eb9ade113dd5258127504c5
+      size: 557152
+    params:
+      params.yaml:
+        ML17_density_td3_long_ASEMD_6:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 500
+          seed: 42
+          steps: 10000
+          use_momenta: false
+          wrap: false
+        ML17_density_td3_long_ASEMD_6+modifier+0:
+          cell:
+          density: 1190
+        ML17_density_td3_long_ASEMD_6+thermostat:
+          friction: 0.01
+          temperature: 313
+          time_step: 0.5
+    outs:
+    - path: nodes/ML17_density_td3_long/ASEMD_6/metrics_dict.csv
+      hash: md5
+      md5: 291d9fdd1ed8bdee41f51b986c392dee
+      size: 839
+    - path: nodes/ML17_density_td3_long/ASEMD_6/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_6/node-meta.json
+      hash: md5
+      md5: c6d3e5e90e1d7f8215c5fd4e5ba87cca
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_6/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_6/trajectory.h5
+      hash: md5
+      md5: 0ad327e18773c29cd78baaa3eeaeaba9
+      size: 667736
+  ML17_density_td3_long_ASEMD_7:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_long_ASEMD_7
+    deps:
+    - path: nodes/ML17_density_models/MixCalculator_1/atoms.h5
+      hash: md5
+      md5: 23b4cf788cdb50c9d71e5a96fa32eaa2
+      size: 4794072
+    - path: nodes/ML17_density_models/MixCalculator_1/node-meta.json
+      hash: md5
+      md5: 5d4a46de894ed9e5d05ee39d6781bb5f
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_6/metrics_dict.csv
+      hash: md5
+      md5: 291d9fdd1ed8bdee41f51b986c392dee
+      size: 839
+    - path: nodes/ML17_density_td3_long/ASEMD_6/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_6/node-meta.json
+      hash: md5
+      md5: c6d3e5e90e1d7f8215c5fd4e5ba87cca
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_6/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_6/trajectory.h5
+      hash: md5
+      md5: 0ad327e18773c29cd78baaa3eeaeaba9
+      size: 667736
+    params:
+      params.yaml:
+        ML17_density_td3_long_ASEMD_7:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 200
+          seed: 42
+          steps: 200000
+          use_momenta: true
+          wrap: false
+        ML17_density_td3_long_ASEMD_7+thermostat:
+          friction: 0.01
+          temperature: 313
+          time_step: 0.5
+    outs:
+    - path: nodes/ML17_density_td3_long/ASEMD_7/metrics_dict.csv
+      hash: md5
+      md5: bc18c5cb65e8b063d63efb6f7dae345f
+      size: 41976
+    - path: nodes/ML17_density_td3_long/ASEMD_7/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_7/node-meta.json
+      hash: md5
+      md5: ee29fdc8972f46cc49af62ef1ce7130f
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_7/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_7/trajectory.h5
+      hash: md5
+      md5: 067023a9a997f1ae84066dcb1d8886e1
+      size: 24610624
+  ML17_density_td3_long_ASEMD_8:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_long_ASEMD_8
+    deps:
+    - path: nodes/ML17_density_models/MixCalculator_1/atoms.h5
+      hash: md5
+      md5: 23b4cf788cdb50c9d71e5a96fa32eaa2
+      size: 4794072
+    - path: nodes/ML17_density_models/MixCalculator_1/node-meta.json
+      hash: md5
+      md5: 5d4a46de894ed9e5d05ee39d6781bb5f
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_7/metrics_dict.csv
+      hash: md5
+      md5: bc18c5cb65e8b063d63efb6f7dae345f
+      size: 41976
+    - path: nodes/ML17_density_td3_long/ASEMD_7/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_7/node-meta.json
+      hash: md5
+      md5: ee29fdc8972f46cc49af62ef1ce7130f
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_7/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_7/trajectory.h5
+      hash: md5
+      md5: 067023a9a997f1ae84066dcb1d8886e1
+      size: 24610624
+    params:
+      params.yaml:
+        ML17_density_td3_long_ASEMD_8:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 200
+          seed: 42
+          steps: 2000000
+          use_momenta: true
+          wrap: false
+        ML17_density_td3_long_ASEMD_8+thermostat:
+          pfactor: 54.273
+          pressure: 6.324e-07
+          temperature: 313
+          tetragonal_strain: true
+          time_step: 0.5
+          ttime: 2.4557
+    outs:
+    - path: nodes/ML17_density_td3_long/ASEMD_8/metrics_dict.csv
+      hash: md5
+      md5: a1a47858c491d58c9edfa2eb9429e4a9
+      size: 429411
+    - path: nodes/ML17_density_td3_long/ASEMD_8/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_8/node-meta.json
+      hash: md5
+      md5: a688e0f642fa27ba237580a90bc6ef64
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_8/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_8/trajectory.h5
+      hash: md5
+      md5: 3df85140fd0d0db02d872cdd5320828e
+      size: 245582008
+  ML17_density_td3_long_ASEGeoOpt_3:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML17_density_td3_long_ASEGeoOpt_3
+    deps:
+    - path: nodes/ML17_density_models/MixCalculator_1/atoms.h5
+      hash: md5
+      md5: 23b4cf788cdb50c9d71e5a96fa32eaa2
+      size: 4794072
+    - path: nodes/ML17_density_models/MixCalculator_1/node-meta.json
+      hash: md5
+      md5: 5d4a46de894ed9e5d05ee39d6781bb5f
+      size: 48
+    - path: nodes/ML17_density_td3_short/Packmol_3/atoms.h5
+      hash: md5
+      md5: 3f08ca2c97f908ac815f6199cd34fc70
+      size: 37568
+    - path: nodes/ML17_density_td3_short/Packmol_3/node-meta.json
+      hash: md5
+      md5: 3d070d943be67ab7aae96ffa4c4e169d
+      size: 48
+    - path: nodes/ML17_density_td3_short/Packmol_3/packmol
+      hash: md5
+      md5: 1911e6da31616f0a08a24e6b8af5ffe6.dir
+      size: 18969
+      nfiles: 4
+    params:
+      params.yaml:
+        ML17_density_td3_long_ASEGeoOpt_3:
+          data_id: 0
+          dump_rate: 1000
+          init_kwargs: {}
+          optimizer: FIRE
+          repeat:
+          - 1
+          - 1
+          - 1
+          run_kwargs:
+            fmax: 0.5
+    outs:
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_3/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_3/node-meta.json
+      hash: md5
+      md5: c4e86d1add9426b0e23def5fef302cfb
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_3/trajectory.h5
+      hash: md5
+      md5: 71e1fc6ed4cf7ac9c5dd34d89429a31b
+      size: 643552
+  ML17_density_td3_long_ASEMD_9:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_long_ASEMD_9
+    deps:
+    - path: nodes/ML17_density_models/MixCalculator_1/atoms.h5
+      hash: md5
+      md5: 23b4cf788cdb50c9d71e5a96fa32eaa2
+      size: 4794072
+    - path: nodes/ML17_density_models/MixCalculator_1/node-meta.json
+      hash: md5
+      md5: 5d4a46de894ed9e5d05ee39d6781bb5f
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_3/model_outs
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_3/node-meta.json
+      hash: md5
+      md5: c4e86d1add9426b0e23def5fef302cfb
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEGeoOpt_3/trajectory.h5
+      hash: md5
+      md5: 71e1fc6ed4cf7ac9c5dd34d89429a31b
+      size: 643552
+    params:
+      params.yaml:
+        ML17_density_td3_long_ASEMD_9:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 500
+          seed: 42
+          steps: 10000
+          use_momenta: false
+          wrap: false
+        ML17_density_td3_long_ASEMD_9+modifier+0:
+          cell:
+          density: 1204
+        ML17_density_td3_long_ASEMD_9+thermostat:
+          friction: 0.01
+          temperature: 293
+          time_step: 0.5
+    outs:
+    - path: nodes/ML17_density_td3_long/ASEMD_9/metrics_dict.csv
+      hash: md5
+      md5: 85a9f98d50ab26c8045fe4c2d8d13375
+      size: 838
+    - path: nodes/ML17_density_td3_long/ASEMD_9/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_9/node-meta.json
+      hash: md5
+      md5: 9da0f0f268e5eb0b623af07979cee709
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_9/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_9/trajectory.h5
+      hash: md5
+      md5: 561eb61c4289b7384efc0a91cdd9b2ef
+      size: 667736
+  ML17_density_td3_long_ASEMD_10:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_long_ASEMD_10
+    deps:
+    - path: nodes/ML17_density_models/MixCalculator_1/atoms.h5
+      hash: md5
+      md5: 23b4cf788cdb50c9d71e5a96fa32eaa2
+      size: 4794072
+    - path: nodes/ML17_density_models/MixCalculator_1/node-meta.json
+      hash: md5
+      md5: 5d4a46de894ed9e5d05ee39d6781bb5f
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_9/metrics_dict.csv
+      hash: md5
+      md5: 85a9f98d50ab26c8045fe4c2d8d13375
+      size: 838
+    - path: nodes/ML17_density_td3_long/ASEMD_9/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_9/node-meta.json
+      hash: md5
+      md5: 9da0f0f268e5eb0b623af07979cee709
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_9/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_9/trajectory.h5
+      hash: md5
+      md5: 561eb61c4289b7384efc0a91cdd9b2ef
+      size: 667736
+    params:
+      params.yaml:
+        ML17_density_td3_long_ASEMD_10:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 200
+          seed: 42
+          steps: 200000
+          use_momenta: true
+          wrap: false
+        ML17_density_td3_long_ASEMD_10+thermostat:
+          friction: 0.01
+          temperature: 293
+          time_step: 0.5
+    outs:
+    - path: nodes/ML17_density_td3_long/ASEMD_10/metrics_dict.csv
+      hash: md5
+      md5: afd4c31d124c994cf7567cb2cd4373de
+      size: 41951
+    - path: nodes/ML17_density_td3_long/ASEMD_10/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_10/node-meta.json
+      hash: md5
+      md5: b4c7c0d6413c1f3cc66631a4efca3e26
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_10/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_10/trajectory.h5
+      hash: md5
+      md5: bbc87987a060f75b4345ee81e954d9ec
+      size: 24610624
+  ML17_density_td3_long_ASEMD_11:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_density_td3_long_ASEMD_11
+    deps:
+    - path: nodes/ML17_density_models/MixCalculator_1/atoms.h5
+      hash: md5
+      md5: 23b4cf788cdb50c9d71e5a96fa32eaa2
+      size: 4794072
+    - path: nodes/ML17_density_models/MixCalculator_1/node-meta.json
+      hash: md5
+      md5: 5d4a46de894ed9e5d05ee39d6781bb5f
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_10/metrics_dict.csv
+      hash: md5
+      md5: afd4c31d124c994cf7567cb2cd4373de
+      size: 41951
+    - path: nodes/ML17_density_td3_long/ASEMD_10/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_10/node-meta.json
+      hash: md5
+      md5: b4c7c0d6413c1f3cc66631a4efca3e26
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_10/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_10/trajectory.h5
+      hash: md5
+      md5: bbc87987a060f75b4345ee81e954d9ec
+      size: 24610624
+    params:
+      params.yaml:
+        ML17_density_td3_long_ASEMD_11:
+          data_id: -1
+          dump_rate: 1000
+          pop_last: false
+          repeat:
+          - 1
+          - 1
+          - 1
+          sampling_rate: 200
+          seed: 42
+          steps: 2000000
+          use_momenta: true
+          wrap: false
+        ML17_density_td3_long_ASEMD_11+thermostat:
+          pfactor: 54.273
+          pressure: 6.324e-07
+          temperature: 293
+          tetragonal_strain: true
+          time_step: 0.5
+          ttime: 2.4557
+    outs:
+    - path: nodes/ML17_density_td3_long/ASEMD_11/metrics_dict.csv
+      hash: md5
+      md5: 873cab4cd985765316123cd312b956e2
+      size: 429560
+    - path: nodes/ML17_density_td3_long/ASEMD_11/model
+      hash: md5
+      md5: 64586897446153f477c052dd0e2579ad.dir
+      size: 11
+      nfiles: 1
+    - path: nodes/ML17_density_td3_long/ASEMD_11/node-meta.json
+      hash: md5
+      md5: 0f0cfdcc9e7ce071fe3fa77eda783994
+      size: 48
+    - path: nodes/ML17_density_td3_long/ASEMD_11/steps_before_stopping.json
+      hash: md5
+      md5: 6bb61e3b7bce0931da574d19d1d82c88
+      size: 2
+    - path: nodes/ML17_density_td3_long/ASEMD_11/trajectory.h5
+      hash: md5
+      md5: e872322f874c3a3c8b04a5558e438f59
       size: 245582008
