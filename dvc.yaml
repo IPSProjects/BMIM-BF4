@@ -179,6 +179,86 @@ plots:
     x_label: epochs
     y: val_loss
     y_label: validation loss
+- nodes/ML15/ASEMD/metrics_dict.csv: {}
+- nodes/ML15/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/ML15/EnergyHistogram/labels_df.csv: {}
+- nodes/ML15/ForcesHistogram/labels_df.csv: {}
+- nodes/wo_d3/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/wo_d3_split/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/wo_d3_model/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/ML16/ASEMD/metrics_dict.csv: {}
+- nodes/ML16/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/ML16/EnergyHistogram/labels_df.csv: {}
+- nodes/ML16/ForcesHistogram/labels_df.csv: {}
+- nodes/d3_models/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/d3_models/MLModel_1/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/ML17_sampling/ASEMD/metrics_dict.csv: {}
+- nodes/ML17_sampling/ASEMD_1/metrics_dict.csv: {}
+- nodes/ML17_training/MLModel/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/ML17_training/MLModel_1/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/ML17_training/MLModel_2/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/ML17_training/MLModel_3/log.csv:
+    template: dvc_plots/templates/y_log.json
+    x: epoch
+    x_label: epochs
+    y: val_loss
+    y_label: validation loss
+- nodes/ML17_eval/EnergyHistogram_1/labels_df.csv: {}
+- nodes/ML17_eval/ForcesHistogram_1/labels_df.csv: {}
+- nodes/ML17_eval/ForcesHistogram/labels_df.csv: {}
+- nodes/ML17_eval/EnergyHistogram_2/labels_df.csv: {}
+- nodes/ML17_eval/EnergyHistogram/labels_df.csv: {}
+- nodes/ML17_eval/ForcesHistogram_2/labels_df.csv: {}
 stages:
   ML0_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML0_ConfigurationSelection
@@ -1828,6 +1908,1402 @@ stages:
     - nodes/ML14/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/ML14/PredictionMetrics/stress_df.csv
     - nodes/ML14/PredictionMetrics/stress_hydrostatic_df.csv
+  ML15_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML15_ASEMD
+    deps:
+    - nodes/ML14/ASEMD/metrics_dict.csv
+    - nodes/ML14/ASEMD/model
+    - nodes/ML14/ASEMD/node-meta.json
+    - nodes/ML14/ASEMD/steps_before_stopping.json
+    - nodes/ML14/ASEMD/trajectory.h5
+    - nodes/ML14/MLModel/apax_model
+    - nodes/ML14/MLModel/log.csv
+    - nodes/ML14/MLModel/metrics.json
+    - nodes/ML14/MLModel/node-meta.json
+    - nodes/ML14/MLModel/train_atoms.extxyz
+    - nodes/ML14/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/ML15/ASEMD/node-meta.json:
+        cache: false
+    - nodes/ML15/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML15/ASEMD/metrics_dict.csv
+    - nodes/ML15/ASEMD/model
+    - nodes/ML15/ASEMD/trajectory.h5
+    params:
+    - ML15_ASEMD
+    - ML15_ASEMD+checker_list+0
+    - ML15_ASEMD+modifier+0
+    - ML15_ASEMD+thermostat
+  ML15_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML15_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - dftd3.dat
+    - nodes/ML15/ConfigurationSelection/node-meta.json
+    - nodes/ML15/ConfigurationSelection/selected_configurations.json
+    - nodes/ML15/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/ML15/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML15/CP2KSinglePoint/atoms.h5
+    - nodes/ML15/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k.yaml:
+  ML15_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML15_ConfigurationSelection
+    deps:
+    - nodes/ML0/ConfigurationSelection/node-meta.json
+    - nodes/ML0/ConfigurationSelection/selected_configurations.json
+    - nodes/ML0/ConfigurationSelection/selection.png
+    - nodes/ML1/CP2KSinglePoint/atoms.h5
+    - nodes/ML1/CP2KSinglePoint/cp2k
+    - nodes/ML1/CP2KSinglePoint/node-meta.json
+    - nodes/ML10/CP2KSinglePoint/atoms.h5
+    - nodes/ML10/CP2KSinglePoint/cp2k
+    - nodes/ML10/CP2KSinglePoint/node-meta.json
+    - nodes/ML11_MultiPack/CP2KSinglePoint/atoms.h5
+    - nodes/ML11_MultiPack/CP2KSinglePoint/cp2k
+    - nodes/ML11_MultiPack/CP2KSinglePoint/node-meta.json
+    - nodes/ML12/CP2KSinglePoint/atoms.h5
+    - nodes/ML12/CP2KSinglePoint/cp2k
+    - nodes/ML12/CP2KSinglePoint/node-meta.json
+    - nodes/ML13/CP2KSinglePoint/atoms.h5
+    - nodes/ML13/CP2KSinglePoint/cp2k
+    - nodes/ML13/CP2KSinglePoint/node-meta.json
+    - nodes/ML14/CP2KSinglePoint/atoms.h5
+    - nodes/ML14/CP2KSinglePoint/cp2k
+    - nodes/ML14/CP2KSinglePoint/node-meta.json
+    - nodes/ML14/MLModel/apax_model
+    - nodes/ML14/MLModel/log.csv
+    - nodes/ML14/MLModel/metrics.json
+    - nodes/ML14/MLModel/node-meta.json
+    - nodes/ML14/MLModel/train_atoms.extxyz
+    - nodes/ML14/MLModel/val_atoms.extxyz
+    - nodes/ML15/ASEMD/metrics_dict.csv
+    - nodes/ML15/ASEMD/model
+    - nodes/ML15/ASEMD/node-meta.json
+    - nodes/ML15/ASEMD/steps_before_stopping.json
+    - nodes/ML15/ASEMD/trajectory.h5
+    - nodes/ML2/CP2KSinglePoint/atoms.h5
+    - nodes/ML2/CP2KSinglePoint/cp2k
+    - nodes/ML2/CP2KSinglePoint/node-meta.json
+    - nodes/ML3/CP2KSinglePoint/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/cp2k
+    - nodes/ML3/CP2KSinglePoint/node-meta.json
+    - nodes/ML4/CP2KSinglePoint/atoms.h5
+    - nodes/ML4/CP2KSinglePoint/cp2k
+    - nodes/ML4/CP2KSinglePoint/node-meta.json
+    - nodes/ML5/CP2KSinglePoint/atoms.h5
+    - nodes/ML5/CP2KSinglePoint/cp2k
+    - nodes/ML5/CP2KSinglePoint/node-meta.json
+    - nodes/ML6/CP2KSinglePoint/atoms.h5
+    - nodes/ML6/CP2KSinglePoint/cp2k
+    - nodes/ML6/CP2KSinglePoint/node-meta.json
+    - nodes/ML7/CP2KSinglePoint/atoms.h5
+    - nodes/ML7/CP2KSinglePoint/cp2k
+    - nodes/ML7/CP2KSinglePoint/node-meta.json
+    - nodes/ML8/CP2KSinglePoint/atoms.h5
+    - nodes/ML8/CP2KSinglePoint/cp2k
+    - nodes/ML8/CP2KSinglePoint/node-meta.json
+    - nodes/ML9/CP2KSinglePoint/atoms.h5
+    - nodes/ML9/CP2KSinglePoint/cp2k
+    - nodes/ML9/CP2KSinglePoint/node-meta.json
+    - nodes/VS/CP2KSinglePoint/atoms.h5
+    - nodes/VS/CP2KSinglePoint/cp2k
+    - nodes/VS/CP2KSinglePoint/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_2/selection.png
+    metrics:
+    - nodes/ML15/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML15/ConfigurationSelection/selected_configurations.json
+    - nodes/ML15/ConfigurationSelection/selection.png
+    params:
+    - ML15_ConfigurationSelection
+  ML15_EnergyHistogram:
+    cmd: zntrack run ipsuite.nodes.EnergyHistogram --name ML15_EnergyHistogram
+    deps:
+    - nodes/ML0/ConfigurationSelection/node-meta.json
+    - nodes/ML0/ConfigurationSelection/selected_configurations.json
+    - nodes/ML0/ConfigurationSelection/selection.png
+    - nodes/ML1/CP2KSinglePoint/atoms.h5
+    - nodes/ML1/CP2KSinglePoint/cp2k
+    - nodes/ML1/CP2KSinglePoint/node-meta.json
+    - nodes/ML10/CP2KSinglePoint/atoms.h5
+    - nodes/ML10/CP2KSinglePoint/cp2k
+    - nodes/ML10/CP2KSinglePoint/node-meta.json
+    - nodes/ML11_MultiPack/CP2KSinglePoint/atoms.h5
+    - nodes/ML11_MultiPack/CP2KSinglePoint/cp2k
+    - nodes/ML11_MultiPack/CP2KSinglePoint/node-meta.json
+    - nodes/ML12/CP2KSinglePoint/atoms.h5
+    - nodes/ML12/CP2KSinglePoint/cp2k
+    - nodes/ML12/CP2KSinglePoint/node-meta.json
+    - nodes/ML13/CP2KSinglePoint/atoms.h5
+    - nodes/ML13/CP2KSinglePoint/cp2k
+    - nodes/ML13/CP2KSinglePoint/node-meta.json
+    - nodes/ML14/CP2KSinglePoint/atoms.h5
+    - nodes/ML14/CP2KSinglePoint/cp2k
+    - nodes/ML14/CP2KSinglePoint/node-meta.json
+    - nodes/ML15/CP2KSinglePoint/atoms.h5
+    - nodes/ML15/CP2KSinglePoint/cp2k
+    - nodes/ML15/CP2KSinglePoint/node-meta.json
+    - nodes/ML2/CP2KSinglePoint/atoms.h5
+    - nodes/ML2/CP2KSinglePoint/cp2k
+    - nodes/ML2/CP2KSinglePoint/node-meta.json
+    - nodes/ML3/CP2KSinglePoint/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/cp2k
+    - nodes/ML3/CP2KSinglePoint/node-meta.json
+    - nodes/ML4/CP2KSinglePoint/atoms.h5
+    - nodes/ML4/CP2KSinglePoint/cp2k
+    - nodes/ML4/CP2KSinglePoint/node-meta.json
+    - nodes/ML5/CP2KSinglePoint/atoms.h5
+    - nodes/ML5/CP2KSinglePoint/cp2k
+    - nodes/ML5/CP2KSinglePoint/node-meta.json
+    - nodes/ML6/CP2KSinglePoint/atoms.h5
+    - nodes/ML6/CP2KSinglePoint/cp2k
+    - nodes/ML6/CP2KSinglePoint/node-meta.json
+    - nodes/ML7/CP2KSinglePoint/atoms.h5
+    - nodes/ML7/CP2KSinglePoint/cp2k
+    - nodes/ML7/CP2KSinglePoint/node-meta.json
+    - nodes/ML8/CP2KSinglePoint/atoms.h5
+    - nodes/ML8/CP2KSinglePoint/cp2k
+    - nodes/ML8/CP2KSinglePoint/node-meta.json
+    - nodes/ML9/CP2KSinglePoint/atoms.h5
+    - nodes/ML9/CP2KSinglePoint/cp2k
+    - nodes/ML9/CP2KSinglePoint/node-meta.json
+    - nodes/VS/CP2KSinglePoint/atoms.h5
+    - nodes/VS/CP2KSinglePoint/cp2k
+    - nodes/VS/CP2KSinglePoint/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_2/selection.png
+    metrics:
+    - nodes/ML15/EnergyHistogram/metrics.json:
+        cache: false
+    - nodes/ML15/EnergyHistogram/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML15/EnergyHistogram/labels_df.csv
+    - nodes/ML15/EnergyHistogram/plots
+    params:
+    - ML15_EnergyHistogram
+  ML15_ForcesHistogram:
+    cmd: zntrack run ipsuite.nodes.ForcesHistogram --name ML15_ForcesHistogram
+    deps:
+    - nodes/ML0/ConfigurationSelection/node-meta.json
+    - nodes/ML0/ConfigurationSelection/selected_configurations.json
+    - nodes/ML0/ConfigurationSelection/selection.png
+    - nodes/ML1/CP2KSinglePoint/atoms.h5
+    - nodes/ML1/CP2KSinglePoint/cp2k
+    - nodes/ML1/CP2KSinglePoint/node-meta.json
+    - nodes/ML10/CP2KSinglePoint/atoms.h5
+    - nodes/ML10/CP2KSinglePoint/cp2k
+    - nodes/ML10/CP2KSinglePoint/node-meta.json
+    - nodes/ML11_MultiPack/CP2KSinglePoint/atoms.h5
+    - nodes/ML11_MultiPack/CP2KSinglePoint/cp2k
+    - nodes/ML11_MultiPack/CP2KSinglePoint/node-meta.json
+    - nodes/ML12/CP2KSinglePoint/atoms.h5
+    - nodes/ML12/CP2KSinglePoint/cp2k
+    - nodes/ML12/CP2KSinglePoint/node-meta.json
+    - nodes/ML13/CP2KSinglePoint/atoms.h5
+    - nodes/ML13/CP2KSinglePoint/cp2k
+    - nodes/ML13/CP2KSinglePoint/node-meta.json
+    - nodes/ML14/CP2KSinglePoint/atoms.h5
+    - nodes/ML14/CP2KSinglePoint/cp2k
+    - nodes/ML14/CP2KSinglePoint/node-meta.json
+    - nodes/ML15/CP2KSinglePoint/atoms.h5
+    - nodes/ML15/CP2KSinglePoint/cp2k
+    - nodes/ML15/CP2KSinglePoint/node-meta.json
+    - nodes/ML2/CP2KSinglePoint/atoms.h5
+    - nodes/ML2/CP2KSinglePoint/cp2k
+    - nodes/ML2/CP2KSinglePoint/node-meta.json
+    - nodes/ML3/CP2KSinglePoint/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/cp2k
+    - nodes/ML3/CP2KSinglePoint/node-meta.json
+    - nodes/ML4/CP2KSinglePoint/atoms.h5
+    - nodes/ML4/CP2KSinglePoint/cp2k
+    - nodes/ML4/CP2KSinglePoint/node-meta.json
+    - nodes/ML5/CP2KSinglePoint/atoms.h5
+    - nodes/ML5/CP2KSinglePoint/cp2k
+    - nodes/ML5/CP2KSinglePoint/node-meta.json
+    - nodes/ML6/CP2KSinglePoint/atoms.h5
+    - nodes/ML6/CP2KSinglePoint/cp2k
+    - nodes/ML6/CP2KSinglePoint/node-meta.json
+    - nodes/ML7/CP2KSinglePoint/atoms.h5
+    - nodes/ML7/CP2KSinglePoint/cp2k
+    - nodes/ML7/CP2KSinglePoint/node-meta.json
+    - nodes/ML8/CP2KSinglePoint/atoms.h5
+    - nodes/ML8/CP2KSinglePoint/cp2k
+    - nodes/ML8/CP2KSinglePoint/node-meta.json
+    - nodes/ML9/CP2KSinglePoint/atoms.h5
+    - nodes/ML9/CP2KSinglePoint/cp2k
+    - nodes/ML9/CP2KSinglePoint/node-meta.json
+    - nodes/VS/CP2KSinglePoint/atoms.h5
+    - nodes/VS/CP2KSinglePoint/cp2k
+    - nodes/VS/CP2KSinglePoint/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_2/selection.png
+    metrics:
+    - nodes/ML15/ForcesHistogram/metrics.json:
+        cache: false
+    - nodes/ML15/ForcesHistogram/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML15/ForcesHistogram/labels_df.csv
+    - nodes/ML15/ForcesHistogram/plots
+    params:
+    - ML15_ForcesHistogram
+  ML15_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML15_MLModel
+    deps:
+    - nodes/ML0/ConfigurationSelection/node-meta.json
+    - nodes/ML0/ConfigurationSelection/selected_configurations.json
+    - nodes/ML0/ConfigurationSelection/selection.png
+    - nodes/ML1/CP2KSinglePoint/atoms.h5
+    - nodes/ML1/CP2KSinglePoint/cp2k
+    - nodes/ML1/CP2KSinglePoint/node-meta.json
+    - nodes/ML10/CP2KSinglePoint/atoms.h5
+    - nodes/ML10/CP2KSinglePoint/cp2k
+    - nodes/ML10/CP2KSinglePoint/node-meta.json
+    - nodes/ML11_MultiPack/CP2KSinglePoint/atoms.h5
+    - nodes/ML11_MultiPack/CP2KSinglePoint/cp2k
+    - nodes/ML11_MultiPack/CP2KSinglePoint/node-meta.json
+    - nodes/ML12/CP2KSinglePoint/atoms.h5
+    - nodes/ML12/CP2KSinglePoint/cp2k
+    - nodes/ML12/CP2KSinglePoint/node-meta.json
+    - nodes/ML13/CP2KSinglePoint/atoms.h5
+    - nodes/ML13/CP2KSinglePoint/cp2k
+    - nodes/ML13/CP2KSinglePoint/node-meta.json
+    - nodes/ML14/CP2KSinglePoint/atoms.h5
+    - nodes/ML14/CP2KSinglePoint/cp2k
+    - nodes/ML14/CP2KSinglePoint/node-meta.json
+    - nodes/ML15/CP2KSinglePoint/atoms.h5
+    - nodes/ML15/CP2KSinglePoint/cp2k
+    - nodes/ML15/CP2KSinglePoint/node-meta.json
+    - nodes/ML2/CP2KSinglePoint/atoms.h5
+    - nodes/ML2/CP2KSinglePoint/cp2k
+    - nodes/ML2/CP2KSinglePoint/node-meta.json
+    - nodes/ML3/CP2KSinglePoint/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/cp2k
+    - nodes/ML3/CP2KSinglePoint/node-meta.json
+    - nodes/ML4/CP2KSinglePoint/atoms.h5
+    - nodes/ML4/CP2KSinglePoint/cp2k
+    - nodes/ML4/CP2KSinglePoint/node-meta.json
+    - nodes/ML5/CP2KSinglePoint/atoms.h5
+    - nodes/ML5/CP2KSinglePoint/cp2k
+    - nodes/ML5/CP2KSinglePoint/node-meta.json
+    - nodes/ML6/CP2KSinglePoint/atoms.h5
+    - nodes/ML6/CP2KSinglePoint/cp2k
+    - nodes/ML6/CP2KSinglePoint/node-meta.json
+    - nodes/ML7/CP2KSinglePoint/atoms.h5
+    - nodes/ML7/CP2KSinglePoint/cp2k
+    - nodes/ML7/CP2KSinglePoint/node-meta.json
+    - nodes/ML8/CP2KSinglePoint/atoms.h5
+    - nodes/ML8/CP2KSinglePoint/cp2k
+    - nodes/ML8/CP2KSinglePoint/node-meta.json
+    - nodes/ML9/CP2KSinglePoint/atoms.h5
+    - nodes/ML9/CP2KSinglePoint/cp2k
+    - nodes/ML9/CP2KSinglePoint/node-meta.json
+    - nodes/VS/CP2KSinglePoint/atoms.h5
+    - nodes/VS/CP2KSinglePoint/cp2k
+    - nodes/VS/CP2KSinglePoint/node-meta.json
+    - nodes/classical/ConfigurationSelection_1/node-meta.json
+    - nodes/classical/ConfigurationSelection_1/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_1/selection.png
+    - nodes/classical/ConfigurationSelection_2/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_2/selection.png
+    metrics:
+    - nodes/ML15/MLModel/metrics.json:
+        cache: false
+    - nodes/ML15/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML15/MLModel/apax_model
+    - nodes/ML15/MLModel/log.csv
+    - nodes/ML15/MLModel/train_atoms.extxyz
+    - nodes/ML15/MLModel/val_atoms.extxyz
+    params:
+    - ML15_MLModel
+    - config/initial_model.yaml:
+  ML15_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML15_Prediction
+    deps:
+    - nodes/ML15/MLModel/apax_model
+    - nodes/ML15/MLModel/log.csv
+    - nodes/ML15/MLModel/metrics.json
+    - nodes/ML15/MLModel/node-meta.json
+    - nodes/ML15/MLModel/train_atoms.extxyz
+    - nodes/ML15/MLModel/val_atoms.extxyz
+    - nodes/classical/ConfigurationSelection/node-meta.json
+    - nodes/classical/ConfigurationSelection/selected_configurations.json
+    - nodes/classical/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/ML15/Prediction/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML15/Prediction/atoms.h5
+  ML15_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML15_PredictionMetrics
+    deps:
+    - nodes/ML15/Prediction/atoms.h5
+    - nodes/ML15/Prediction/node-meta.json
+    metrics:
+    - nodes/ML15/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/ML15/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/ML15/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/ML15/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/ML15/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/ML15/PredictionMetrics/stress.json:
+        cache: false
+    outs:
+    - nodes/ML15/PredictionMetrics/energy_df.csv
+    - nodes/ML15/PredictionMetrics/forces_df.csv
+    - nodes/ML15/PredictionMetrics/plots
+    - nodes/ML15/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/ML15/PredictionMetrics/stress_df.csv
+    - nodes/ML15/PredictionMetrics/stress_hydrostatic_df.csv
+  ML16_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML16_ASEGeoOpt
+    deps:
+    - nodes/ML15/ASEMD/metrics_dict.csv
+    - nodes/ML15/ASEMD/model
+    - nodes/ML15/ASEMD/node-meta.json
+    - nodes/ML15/ASEMD/steps_before_stopping.json
+    - nodes/ML15/ASEMD/trajectory.h5
+    - nodes/wo_d3_model/MLModel/apax_model
+    - nodes/wo_d3_model/MLModel/log.csv
+    - nodes/wo_d3_model/MLModel/metrics.json
+    - nodes/wo_d3_model/MLModel/node-meta.json
+    - nodes/wo_d3_model/MLModel/train_atoms.extxyz
+    - nodes/wo_d3_model/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/ML16/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML16/ASEGeoOpt/model_outs
+    - nodes/ML16/ASEGeoOpt/trajectory.h5
+    params:
+    - ML16_ASEGeoOpt
+  ML16_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML16_ASEMD
+    deps:
+    - nodes/ML16/ASEGeoOpt/model_outs
+    - nodes/ML16/ASEGeoOpt/node-meta.json
+    - nodes/ML16/ASEGeoOpt/trajectory.h5
+    - nodes/wo_d3_model/MLModel/apax_model
+    - nodes/wo_d3_model/MLModel/log.csv
+    - nodes/wo_d3_model/MLModel/metrics.json
+    - nodes/wo_d3_model/MLModel/node-meta.json
+    - nodes/wo_d3_model/MLModel/train_atoms.extxyz
+    - nodes/wo_d3_model/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/ML16/ASEMD/node-meta.json:
+        cache: false
+    - nodes/ML16/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML16/ASEMD/metrics_dict.csv
+    - nodes/ML16/ASEMD/model
+    - nodes/ML16/ASEMD/trajectory.h5
+    params:
+    - ML16_ASEMD
+    - ML16_ASEMD+thermostat
+  ML16_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML16_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - nodes/ML16/ConfigurationSelection/node-meta.json
+    - nodes/ML16/ConfigurationSelection/selected_configurations.json
+    - nodes/ML16/ConfigurationSelection/selection.png
+    - nodes/ML16/ConfigurationSelection_2/node-meta.json
+    - nodes/ML16/ConfigurationSelection_2/selected_configurations.json
+    - nodes/ML16/ConfigurationSelection_2/selection.png
+    metrics:
+    - nodes/ML16/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML16/CP2KSinglePoint/atoms.h5
+    - nodes/ML16/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k_wo_d3.yaml:
+  ML16_CP2KSinglePoint_1:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML16_CP2KSinglePoint_1
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - nodes/ML16/ConfigurationSelection_1/node-meta.json
+    - nodes/ML16/ConfigurationSelection_1/selected_configurations.json
+    - nodes/ML16/ConfigurationSelection_1/selection.png
+    metrics:
+    - nodes/ML16/CP2KSinglePoint_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML16/CP2KSinglePoint_1/atoms.h5
+    - nodes/ML16/CP2KSinglePoint_1/cp2k
+    params:
+    - config/cp2k_wo_d3.yaml:
+  ML16_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML16_ConfigurationSelection
+    deps:
+    - nodes/ML16/ASEGeoOpt/model_outs
+    - nodes/ML16/ASEGeoOpt/node-meta.json
+    - nodes/ML16/ASEGeoOpt/trajectory.h5
+    - nodes/wo_d3/CP2KSinglePoint/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint/cp2k
+    - nodes/wo_d3/CP2KSinglePoint/node-meta.json
+    - nodes/wo_d3_model/MLModel/apax_model
+    - nodes/wo_d3_model/MLModel/log.csv
+    - nodes/wo_d3_model/MLModel/metrics.json
+    - nodes/wo_d3_model/MLModel/node-meta.json
+    - nodes/wo_d3_model/MLModel/train_atoms.extxyz
+    - nodes/wo_d3_model/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/ML16/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML16/ConfigurationSelection/selected_configurations.json
+    - nodes/ML16/ConfigurationSelection/selection.png
+    params:
+    - ML16_ConfigurationSelection
+  ML16_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name ML16_ConfigurationSelection_1
+    deps:
+    - nodes/ML16/ASEMD/metrics_dict.csv
+    - nodes/ML16/ASEMD/model
+    - nodes/ML16/ASEMD/node-meta.json
+    - nodes/ML16/ASEMD/steps_before_stopping.json
+    - nodes/ML16/ASEMD/trajectory.h5
+    metrics:
+    - nodes/ML16/ConfigurationSelection_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML16/ConfigurationSelection_1/selected_configurations.json
+    - nodes/ML16/ConfigurationSelection_1/selection.png
+    params:
+    - ML16_ConfigurationSelection_1
+  ML16_ConfigurationSelection_2:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name ML16_ConfigurationSelection_2
+    deps:
+    - nodes/ML16/ConfigurationSelection_1/node-meta.json
+    - nodes/ML16/ConfigurationSelection_1/selected_configurations.json
+    - nodes/ML16/ConfigurationSelection_1/selection.png
+    metrics:
+    - nodes/ML16/ConfigurationSelection_2/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML16/ConfigurationSelection_2/selected_configurations.json
+    - nodes/ML16/ConfigurationSelection_2/selection.png
+    params:
+    - ML16_ConfigurationSelection_2
+  ML16_EnergyHistogram:
+    cmd: zntrack run ipsuite.nodes.EnergyHistogram --name ML16_EnergyHistogram
+    deps:
+    - nodes/ML16/CP2KSinglePoint/atoms.h5
+    - nodes/ML16/CP2KSinglePoint/cp2k
+    - nodes/ML16/CP2KSinglePoint/node-meta.json
+    - nodes/wo_d3/CP2KSinglePoint/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint/cp2k
+    - nodes/wo_d3/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/ML16/EnergyHistogram/metrics.json:
+        cache: false
+    - nodes/ML16/EnergyHistogram/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML16/EnergyHistogram/labels_df.csv
+    - nodes/ML16/EnergyHistogram/plots
+    params:
+    - ML16_EnergyHistogram
+  ML16_ForceDecomposition:
+    cmd: zntrack run ipsuite.nodes.ForceDecomposition --name ML16_ForceDecomposition
+    deps:
+    - nodes/ML16/Prediction/atoms.h5
+    - nodes/ML16/Prediction/node-meta.json
+    metrics:
+    - nodes/ML16/ForceDecomposition/node-meta.json:
+        cache: false
+    - nodes/ML16/ForceDecomposition/rot_forces.json:
+        cache: false
+    - nodes/ML16/ForceDecomposition/trans_forces.json:
+        cache: false
+    - nodes/ML16/ForceDecomposition/vib_forces.json:
+        cache: false
+    - nodes/ML16/ForceDecomposition/wasserstein_distance.json:
+        cache: false
+    outs:
+    - nodes/ML16/ForceDecomposition/histogram.png
+    - nodes/ML16/ForceDecomposition/rot_force.png
+    - nodes/ML16/ForceDecomposition/trans_force.png
+    - nodes/ML16/ForceDecomposition/vib_force.png
+  ML16_ForcesHistogram:
+    cmd: zntrack run ipsuite.nodes.ForcesHistogram --name ML16_ForcesHistogram
+    deps:
+    - nodes/ML16/CP2KSinglePoint/atoms.h5
+    - nodes/ML16/CP2KSinglePoint/cp2k
+    - nodes/ML16/CP2KSinglePoint/node-meta.json
+    - nodes/wo_d3/CP2KSinglePoint/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint/cp2k
+    - nodes/wo_d3/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/ML16/ForcesHistogram/metrics.json:
+        cache: false
+    - nodes/ML16/ForcesHistogram/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML16/ForcesHistogram/labels_df.csv
+    - nodes/ML16/ForcesHistogram/plots
+    params:
+    - ML16_ForcesHistogram
+  ML16_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML16_MLModel
+    deps:
+    - nodes/ML16/CP2KSinglePoint/atoms.h5
+    - nodes/ML16/CP2KSinglePoint/cp2k
+    - nodes/ML16/CP2KSinglePoint/node-meta.json
+    - nodes/ML16/CP2KSinglePoint_1/atoms.h5
+    - nodes/ML16/CP2KSinglePoint_1/cp2k
+    - nodes/ML16/CP2KSinglePoint_1/node-meta.json
+    - nodes/wo_d3/CP2KSinglePoint/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint/cp2k
+    - nodes/wo_d3/CP2KSinglePoint/node-meta.json
+    - nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint_1/cp2k
+    - nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+    metrics:
+    - nodes/ML16/MLModel/metrics.json:
+        cache: false
+    - nodes/ML16/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML16/MLModel/apax_model
+    - nodes/ML16/MLModel/log.csv
+    - nodes/ML16/MLModel/train_atoms.extxyz
+    - nodes/ML16/MLModel/val_atoms.extxyz
+    params:
+    - ML16_MLModel
+    - config/wod3.yaml:
+  ML16_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML16_Prediction
+    deps:
+    - nodes/ML16/CP2KSinglePoint_1/atoms.h5
+    - nodes/ML16/CP2KSinglePoint_1/cp2k
+    - nodes/ML16/CP2KSinglePoint_1/node-meta.json
+    - nodes/ML16/MLModel/apax_model
+    - nodes/ML16/MLModel/log.csv
+    - nodes/ML16/MLModel/metrics.json
+    - nodes/ML16/MLModel/node-meta.json
+    - nodes/ML16/MLModel/train_atoms.extxyz
+    - nodes/ML16/MLModel/val_atoms.extxyz
+    - nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint_1/cp2k
+    - nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+    metrics:
+    - nodes/ML16/Prediction/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML16/Prediction/atoms.h5
+  ML16_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML16_PredictionMetrics
+    deps:
+    - nodes/ML16/Prediction/atoms.h5
+    - nodes/ML16/Prediction/node-meta.json
+    metrics:
+    - nodes/ML16/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/ML16/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/ML16/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/ML16/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/ML16/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/ML16/PredictionMetrics/stress.json:
+        cache: false
+    outs:
+    - nodes/ML16/PredictionMetrics/energy_df.csv
+    - nodes/ML16/PredictionMetrics/forces_df.csv
+    - nodes/ML16/PredictionMetrics/plots
+    - nodes/ML16/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/ML16/PredictionMetrics/stress_df.csv
+    - nodes/ML16/PredictionMetrics/stress_hydrostatic_df.csv
+  ML17_datasets_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML17_datasets_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - nodes/ML17_sampling/ConfigurationSelection/node-meta.json
+    - nodes/ML17_sampling/ConfigurationSelection/selected_configurations.json
+    - nodes/ML17_sampling/ConfigurationSelection/selection.png
+    - nodes/ML17_sampling/ConfigurationSelection_2/node-meta.json
+    - nodes/ML17_sampling/ConfigurationSelection_2/selected_configurations.json
+    - nodes/ML17_sampling/ConfigurationSelection_2/selection.png
+    - nodes/ML17_sampling/ConfigurationSelection_4/node-meta.json
+    - nodes/ML17_sampling/ConfigurationSelection_4/selected_configurations.json
+    - nodes/ML17_sampling/ConfigurationSelection_4/selection.png
+    metrics:
+    - nodes/ML17_datasets/CP2KSinglePoint/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_datasets/CP2KSinglePoint/atoms.h5
+    - nodes/ML17_datasets/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k_wo_d3.yaml:
+  ML17_datasets_CP2KSinglePoint_1:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name ML17_datasets_CP2KSinglePoint_1
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - nodes/ML17_sampling/ConfigurationSelection_1/node-meta.json
+    - nodes/ML17_sampling/ConfigurationSelection_1/selected_configurations.json
+    - nodes/ML17_sampling/ConfigurationSelection_1/selection.png
+    - nodes/ML17_sampling/ConfigurationSelection_3/node-meta.json
+    - nodes/ML17_sampling/ConfigurationSelection_3/selected_configurations.json
+    - nodes/ML17_sampling/ConfigurationSelection_3/selection.png
+    metrics:
+    - nodes/ML17_datasets/CP2KSinglePoint_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_datasets/CP2KSinglePoint_1/atoms.h5
+    - nodes/ML17_datasets/CP2KSinglePoint_1/cp2k
+    params:
+    - config/cp2k_wo_d3.yaml:
+  ML17_datasets_TorchD3:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name ML17_datasets_TorchD3
+    deps:
+    - nodes/ML16/CP2KSinglePoint/atoms.h5
+    - nodes/ML16/CP2KSinglePoint/cp2k
+    - nodes/ML16/CP2KSinglePoint/node-meta.json
+    - nodes/ML17_datasets/CP2KSinglePoint/atoms.h5
+    - nodes/ML17_datasets/CP2KSinglePoint/cp2k
+    - nodes/ML17_datasets/CP2KSinglePoint/node-meta.json
+    - nodes/wo_d3/CP2KSinglePoint/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint/cp2k
+    - nodes/wo_d3/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/ML17_datasets/TorchD3/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_datasets/TorchD3/atoms.h5
+    params:
+    - ML17_datasets_TorchD3
+  ML17_datasets_TorchD3_1:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name ML17_datasets_TorchD3_1
+    deps:
+    - nodes/ML16/CP2KSinglePoint_1/atoms.h5
+    - nodes/ML16/CP2KSinglePoint_1/cp2k
+    - nodes/ML16/CP2KSinglePoint_1/node-meta.json
+    - nodes/ML17_datasets/CP2KSinglePoint_1/atoms.h5
+    - nodes/ML17_datasets/CP2KSinglePoint_1/cp2k
+    - nodes/ML17_datasets/CP2KSinglePoint_1/node-meta.json
+    - nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint_1/cp2k
+    - nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+    metrics:
+    - nodes/ML17_datasets/TorchD3_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_datasets/TorchD3_1/atoms.h5
+    params:
+    - ML17_datasets_TorchD3_1
+  ML17_datasets_TorchD3_2:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name ML17_datasets_TorchD3_2
+    deps:
+    - nodes/ML16/CP2KSinglePoint/atoms.h5
+    - nodes/ML16/CP2KSinglePoint/cp2k
+    - nodes/ML16/CP2KSinglePoint/node-meta.json
+    - nodes/ML17_datasets/CP2KSinglePoint/atoms.h5
+    - nodes/ML17_datasets/CP2KSinglePoint/cp2k
+    - nodes/ML17_datasets/CP2KSinglePoint/node-meta.json
+    - nodes/wo_d3/CP2KSinglePoint/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint/cp2k
+    - nodes/wo_d3/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/ML17_datasets/TorchD3_2/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_datasets/TorchD3_2/atoms.h5
+    params:
+    - ML17_datasets_TorchD3_2
+  ML17_datasets_TorchD3_3:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name ML17_datasets_TorchD3_3
+    deps:
+    - nodes/ML16/CP2KSinglePoint_1/atoms.h5
+    - nodes/ML16/CP2KSinglePoint_1/cp2k
+    - nodes/ML16/CP2KSinglePoint_1/node-meta.json
+    - nodes/ML17_datasets/CP2KSinglePoint_1/atoms.h5
+    - nodes/ML17_datasets/CP2KSinglePoint_1/cp2k
+    - nodes/ML17_datasets/CP2KSinglePoint_1/node-meta.json
+    - nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint_1/cp2k
+    - nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+    metrics:
+    - nodes/ML17_datasets/TorchD3_3/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_datasets/TorchD3_3/atoms.h5
+    params:
+    - ML17_datasets_TorchD3_3
+  ML17_eval_EnergyHistogram:
+    cmd: zntrack run ipsuite.nodes.EnergyHistogram --name ML17_eval_EnergyHistogram
+    deps:
+    - nodes/ML16/CP2KSinglePoint/atoms.h5
+    - nodes/ML16/CP2KSinglePoint/cp2k
+    - nodes/ML16/CP2KSinglePoint/node-meta.json
+    - nodes/ML17_datasets/CP2KSinglePoint/atoms.h5
+    - nodes/ML17_datasets/CP2KSinglePoint/cp2k
+    - nodes/ML17_datasets/CP2KSinglePoint/node-meta.json
+    - nodes/wo_d3/CP2KSinglePoint/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint/cp2k
+    - nodes/wo_d3/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/ML17_eval/EnergyHistogram/metrics.json:
+        cache: false
+    - nodes/ML17_eval/EnergyHistogram/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/EnergyHistogram/labels_df.csv
+    - nodes/ML17_eval/EnergyHistogram/plots
+    params:
+    - ML17_eval_EnergyHistogram
+  ML17_eval_EnergyHistogram_1:
+    cmd: zntrack run ipsuite.nodes.EnergyHistogram --name ML17_eval_EnergyHistogram_1
+    deps:
+    - nodes/ML17_datasets/TorchD3/atoms.h5
+    - nodes/ML17_datasets/TorchD3/node-meta.json
+    metrics:
+    - nodes/ML17_eval/EnergyHistogram_1/metrics.json:
+        cache: false
+    - nodes/ML17_eval/EnergyHistogram_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/EnergyHistogram_1/labels_df.csv
+    - nodes/ML17_eval/EnergyHistogram_1/plots
+    params:
+    - ML17_eval_EnergyHistogram_1
+  ML17_eval_EnergyHistogram_2:
+    cmd: zntrack run ipsuite.nodes.EnergyHistogram --name ML17_eval_EnergyHistogram_2
+    deps:
+    - nodes/ML17_datasets/TorchD3_2/atoms.h5
+    - nodes/ML17_datasets/TorchD3_2/node-meta.json
+    metrics:
+    - nodes/ML17_eval/EnergyHistogram_2/metrics.json:
+        cache: false
+    - nodes/ML17_eval/EnergyHistogram_2/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/EnergyHistogram_2/labels_df.csv
+    - nodes/ML17_eval/EnergyHistogram_2/plots
+    params:
+    - ML17_eval_EnergyHistogram_2
+  ML17_eval_ForceDecomposition:
+    cmd: zntrack run ipsuite.nodes.ForceDecomposition --name ML17_eval_ForceDecomposition
+    deps:
+    - nodes/ML17_eval/Prediction/atoms.h5
+    - nodes/ML17_eval/Prediction/node-meta.json
+    metrics:
+    - nodes/ML17_eval/ForceDecomposition/node-meta.json:
+        cache: false
+    - nodes/ML17_eval/ForceDecomposition/rot_forces.json:
+        cache: false
+    - nodes/ML17_eval/ForceDecomposition/trans_forces.json:
+        cache: false
+    - nodes/ML17_eval/ForceDecomposition/vib_forces.json:
+        cache: false
+    - nodes/ML17_eval/ForceDecomposition/wasserstein_distance.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/ForceDecomposition/histogram.png
+    - nodes/ML17_eval/ForceDecomposition/rot_force.png
+    - nodes/ML17_eval/ForceDecomposition/trans_force.png
+    - nodes/ML17_eval/ForceDecomposition/vib_force.png
+  ML17_eval_ForceDecomposition_1:
+    cmd: zntrack run ipsuite.nodes.ForceDecomposition --name ML17_eval_ForceDecomposition_1
+    deps:
+    - nodes/ML17_eval/Prediction_1/atoms.h5
+    - nodes/ML17_eval/Prediction_1/node-meta.json
+    metrics:
+    - nodes/ML17_eval/ForceDecomposition_1/node-meta.json:
+        cache: false
+    - nodes/ML17_eval/ForceDecomposition_1/rot_forces.json:
+        cache: false
+    - nodes/ML17_eval/ForceDecomposition_1/trans_forces.json:
+        cache: false
+    - nodes/ML17_eval/ForceDecomposition_1/vib_forces.json:
+        cache: false
+    - nodes/ML17_eval/ForceDecomposition_1/wasserstein_distance.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/ForceDecomposition_1/histogram.png
+    - nodes/ML17_eval/ForceDecomposition_1/rot_force.png
+    - nodes/ML17_eval/ForceDecomposition_1/trans_force.png
+    - nodes/ML17_eval/ForceDecomposition_1/vib_force.png
+  ML17_eval_ForceDecomposition_2:
+    cmd: zntrack run ipsuite.nodes.ForceDecomposition --name ML17_eval_ForceDecomposition_2
+    deps:
+    - nodes/ML17_eval/Prediction_2/atoms.h5
+    - nodes/ML17_eval/Prediction_2/node-meta.json
+    metrics:
+    - nodes/ML17_eval/ForceDecomposition_2/node-meta.json:
+        cache: false
+    - nodes/ML17_eval/ForceDecomposition_2/rot_forces.json:
+        cache: false
+    - nodes/ML17_eval/ForceDecomposition_2/trans_forces.json:
+        cache: false
+    - nodes/ML17_eval/ForceDecomposition_2/vib_forces.json:
+        cache: false
+    - nodes/ML17_eval/ForceDecomposition_2/wasserstein_distance.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/ForceDecomposition_2/histogram.png
+    - nodes/ML17_eval/ForceDecomposition_2/rot_force.png
+    - nodes/ML17_eval/ForceDecomposition_2/trans_force.png
+    - nodes/ML17_eval/ForceDecomposition_2/vib_force.png
+  ML17_eval_ForceDecomposition_3:
+    cmd: zntrack run ipsuite.nodes.ForceDecomposition --name ML17_eval_ForceDecomposition_3
+    deps:
+    - nodes/ML17_eval/Prediction_3/atoms.h5
+    - nodes/ML17_eval/Prediction_3/node-meta.json
+    metrics:
+    - nodes/ML17_eval/ForceDecomposition_3/node-meta.json:
+        cache: false
+    - nodes/ML17_eval/ForceDecomposition_3/rot_forces.json:
+        cache: false
+    - nodes/ML17_eval/ForceDecomposition_3/trans_forces.json:
+        cache: false
+    - nodes/ML17_eval/ForceDecomposition_3/vib_forces.json:
+        cache: false
+    - nodes/ML17_eval/ForceDecomposition_3/wasserstein_distance.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/ForceDecomposition_3/histogram.png
+    - nodes/ML17_eval/ForceDecomposition_3/rot_force.png
+    - nodes/ML17_eval/ForceDecomposition_3/trans_force.png
+    - nodes/ML17_eval/ForceDecomposition_3/vib_force.png
+  ML17_eval_ForcesHistogram:
+    cmd: zntrack run ipsuite.nodes.ForcesHistogram --name ML17_eval_ForcesHistogram
+    deps:
+    - nodes/ML16/CP2KSinglePoint/atoms.h5
+    - nodes/ML16/CP2KSinglePoint/cp2k
+    - nodes/ML16/CP2KSinglePoint/node-meta.json
+    - nodes/ML17_datasets/CP2KSinglePoint/atoms.h5
+    - nodes/ML17_datasets/CP2KSinglePoint/cp2k
+    - nodes/ML17_datasets/CP2KSinglePoint/node-meta.json
+    - nodes/wo_d3/CP2KSinglePoint/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint/cp2k
+    - nodes/wo_d3/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/ML17_eval/ForcesHistogram/metrics.json:
+        cache: false
+    - nodes/ML17_eval/ForcesHistogram/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/ForcesHistogram/labels_df.csv
+    - nodes/ML17_eval/ForcesHistogram/plots
+    params:
+    - ML17_eval_ForcesHistogram
+  ML17_eval_ForcesHistogram_1:
+    cmd: zntrack run ipsuite.nodes.ForcesHistogram --name ML17_eval_ForcesHistogram_1
+    deps:
+    - nodes/ML17_datasets/TorchD3/atoms.h5
+    - nodes/ML17_datasets/TorchD3/node-meta.json
+    metrics:
+    - nodes/ML17_eval/ForcesHistogram_1/metrics.json:
+        cache: false
+    - nodes/ML17_eval/ForcesHistogram_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/ForcesHistogram_1/labels_df.csv
+    - nodes/ML17_eval/ForcesHistogram_1/plots
+    params:
+    - ML17_eval_ForcesHistogram_1
+  ML17_eval_ForcesHistogram_2:
+    cmd: zntrack run ipsuite.nodes.ForcesHistogram --name ML17_eval_ForcesHistogram_2
+    deps:
+    - nodes/ML17_datasets/TorchD3_2/atoms.h5
+    - nodes/ML17_datasets/TorchD3_2/node-meta.json
+    metrics:
+    - nodes/ML17_eval/ForcesHistogram_2/metrics.json:
+        cache: false
+    - nodes/ML17_eval/ForcesHistogram_2/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/ForcesHistogram_2/labels_df.csv
+    - nodes/ML17_eval/ForcesHistogram_2/plots
+    params:
+    - ML17_eval_ForcesHistogram_2
+  ML17_eval_Prediction:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML17_eval_Prediction
+    deps:
+    - nodes/ML16/CP2KSinglePoint_1/atoms.h5
+    - nodes/ML16/CP2KSinglePoint_1/cp2k
+    - nodes/ML16/CP2KSinglePoint_1/node-meta.json
+    - nodes/ML17_datasets/CP2KSinglePoint_1/atoms.h5
+    - nodes/ML17_datasets/CP2KSinglePoint_1/cp2k
+    - nodes/ML17_datasets/CP2KSinglePoint_1/node-meta.json
+    - nodes/ML17_training/MLModel/apax_model
+    - nodes/ML17_training/MLModel/log.csv
+    - nodes/ML17_training/MLModel/metrics.json
+    - nodes/ML17_training/MLModel/node-meta.json
+    - nodes/ML17_training/MLModel/train_atoms.extxyz
+    - nodes/ML17_training/MLModel/val_atoms.extxyz
+    - nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint_1/cp2k
+    - nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+    metrics:
+    - nodes/ML17_eval/Prediction/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/Prediction/atoms.h5
+  ML17_eval_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML17_eval_PredictionMetrics
+    deps:
+    - nodes/ML17_eval/Prediction/atoms.h5
+    - nodes/ML17_eval/Prediction/node-meta.json
+    metrics:
+    - nodes/ML17_eval/PredictionMetrics/deviat_stress.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics/hydro_stress.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics/stress.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/PredictionMetrics/energy_df.csv
+    - nodes/ML17_eval/PredictionMetrics/forces_df.csv
+    - nodes/ML17_eval/PredictionMetrics/plots
+    - nodes/ML17_eval/PredictionMetrics/stress_deviatoric_df.csv
+    - nodes/ML17_eval/PredictionMetrics/stress_df.csv
+    - nodes/ML17_eval/PredictionMetrics/stress_hydrostatic_df.csv
+  ML17_eval_PredictionMetrics_1:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML17_eval_PredictionMetrics_1
+    deps:
+    - nodes/ML17_eval/Prediction_1/atoms.h5
+    - nodes/ML17_eval/Prediction_1/node-meta.json
+    metrics:
+    - nodes/ML17_eval/PredictionMetrics_1/deviat_stress.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics_1/energy.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics_1/forces.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics_1/hydro_stress.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics_1/node-meta.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics_1/stress.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/PredictionMetrics_1/energy_df.csv
+    - nodes/ML17_eval/PredictionMetrics_1/forces_df.csv
+    - nodes/ML17_eval/PredictionMetrics_1/plots
+    - nodes/ML17_eval/PredictionMetrics_1/stress_deviatoric_df.csv
+    - nodes/ML17_eval/PredictionMetrics_1/stress_df.csv
+    - nodes/ML17_eval/PredictionMetrics_1/stress_hydrostatic_df.csv
+  ML17_eval_PredictionMetrics_2:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML17_eval_PredictionMetrics_2
+    deps:
+    - nodes/ML17_eval/Prediction_2/atoms.h5
+    - nodes/ML17_eval/Prediction_2/node-meta.json
+    metrics:
+    - nodes/ML17_eval/PredictionMetrics_2/deviat_stress.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics_2/energy.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics_2/forces.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics_2/hydro_stress.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics_2/node-meta.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics_2/stress.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/PredictionMetrics_2/energy_df.csv
+    - nodes/ML17_eval/PredictionMetrics_2/forces_df.csv
+    - nodes/ML17_eval/PredictionMetrics_2/plots
+    - nodes/ML17_eval/PredictionMetrics_2/stress_deviatoric_df.csv
+    - nodes/ML17_eval/PredictionMetrics_2/stress_df.csv
+    - nodes/ML17_eval/PredictionMetrics_2/stress_hydrostatic_df.csv
+  ML17_eval_PredictionMetrics_3:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name ML17_eval_PredictionMetrics_3
+    deps:
+    - nodes/ML17_eval/Prediction_3/atoms.h5
+    - nodes/ML17_eval/Prediction_3/node-meta.json
+    metrics:
+    - nodes/ML17_eval/PredictionMetrics_3/deviat_stress.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics_3/energy.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics_3/forces.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics_3/hydro_stress.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics_3/node-meta.json:
+        cache: false
+    - nodes/ML17_eval/PredictionMetrics_3/stress.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/PredictionMetrics_3/energy_df.csv
+    - nodes/ML17_eval/PredictionMetrics_3/forces_df.csv
+    - nodes/ML17_eval/PredictionMetrics_3/plots
+    - nodes/ML17_eval/PredictionMetrics_3/stress_deviatoric_df.csv
+    - nodes/ML17_eval/PredictionMetrics_3/stress_df.csv
+    - nodes/ML17_eval/PredictionMetrics_3/stress_hydrostatic_df.csv
+  ML17_eval_Prediction_1:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML17_eval_Prediction_1
+    deps:
+    - nodes/ML17_datasets/TorchD3_1/atoms.h5
+    - nodes/ML17_datasets/TorchD3_1/node-meta.json
+    - nodes/ML17_training/MLModel_1/apax_model
+    - nodes/ML17_training/MLModel_1/log.csv
+    - nodes/ML17_training/MLModel_1/metrics.json
+    - nodes/ML17_training/MLModel_1/node-meta.json
+    - nodes/ML17_training/MLModel_1/train_atoms.extxyz
+    - nodes/ML17_training/MLModel_1/val_atoms.extxyz
+    metrics:
+    - nodes/ML17_eval/Prediction_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/Prediction_1/atoms.h5
+  ML17_eval_Prediction_2:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML17_eval_Prediction_2
+    deps:
+    - nodes/ML17_datasets/TorchD3_1/atoms.h5
+    - nodes/ML17_datasets/TorchD3_1/node-meta.json
+    - nodes/ML17_training/MLModel_2/apax_model
+    - nodes/ML17_training/MLModel_2/log.csv
+    - nodes/ML17_training/MLModel_2/metrics.json
+    - nodes/ML17_training/MLModel_2/node-meta.json
+    - nodes/ML17_training/MLModel_2/train_atoms.extxyz
+    - nodes/ML17_training/MLModel_2/val_atoms.extxyz
+    metrics:
+    - nodes/ML17_eval/Prediction_2/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/Prediction_2/atoms.h5
+  ML17_eval_Prediction_3:
+    cmd: zntrack run ipsuite.nodes.Prediction --name ML17_eval_Prediction_3
+    deps:
+    - nodes/ML17_datasets/TorchD3_3/atoms.h5
+    - nodes/ML17_datasets/TorchD3_3/node-meta.json
+    - nodes/ML17_training/MLModel_3/apax_model
+    - nodes/ML17_training/MLModel_3/log.csv
+    - nodes/ML17_training/MLModel_3/metrics.json
+    - nodes/ML17_training/MLModel_3/node-meta.json
+    - nodes/ML17_training/MLModel_3/train_atoms.extxyz
+    - nodes/ML17_training/MLModel_3/val_atoms.extxyz
+    metrics:
+    - nodes/ML17_eval/Prediction_3/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_eval/Prediction_3/atoms.h5
+  ML17_sampling_ASEGeoOpt:
+    cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML17_sampling_ASEGeoOpt
+    deps:
+    - nodes/ML12/ASEMD/metrics_dict.csv
+    - nodes/ML12/ASEMD/model
+    - nodes/ML12/ASEMD/node-meta.json
+    - nodes/ML12/ASEMD/steps_before_stopping.json
+    - nodes/ML12/ASEMD/trajectory.h5
+    - nodes/ML16/MLModel/apax_model
+    - nodes/ML16/MLModel/log.csv
+    - nodes/ML16/MLModel/metrics.json
+    - nodes/ML16/MLModel/node-meta.json
+    - nodes/ML16/MLModel/train_atoms.extxyz
+    - nodes/ML16/MLModel/val_atoms.extxyz
+    metrics:
+    - nodes/ML17_sampling/ASEGeoOpt/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_sampling/ASEGeoOpt/model_outs
+    - nodes/ML17_sampling/ASEGeoOpt/trajectory.h5
+    params:
+    - ML17_sampling_ASEGeoOpt
+  ML17_sampling_ASEMD:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_sampling_ASEMD
+    deps:
+    - nodes/ML16/MLModel/apax_model
+    - nodes/ML16/MLModel/log.csv
+    - nodes/ML16/MLModel/metrics.json
+    - nodes/ML16/MLModel/node-meta.json
+    - nodes/ML16/MLModel/train_atoms.extxyz
+    - nodes/ML16/MLModel/val_atoms.extxyz
+    - nodes/ML17_sampling/ASEGeoOpt/model_outs
+    - nodes/ML17_sampling/ASEGeoOpt/node-meta.json
+    - nodes/ML17_sampling/ASEGeoOpt/trajectory.h5
+    metrics:
+    - nodes/ML17_sampling/ASEMD/node-meta.json:
+        cache: false
+    - nodes/ML17_sampling/ASEMD/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML17_sampling/ASEMD/metrics_dict.csv
+    - nodes/ML17_sampling/ASEMD/model
+    - nodes/ML17_sampling/ASEMD/trajectory.h5
+    params:
+    - ML17_sampling_ASEMD
+    - ML17_sampling_ASEMD+modifier+0
+    - ML17_sampling_ASEMD+thermostat
+  ML17_sampling_ASEMD_1:
+    cmd: zntrack run ipsuite.nodes.ASEMD --name ML17_sampling_ASEMD_1
+    deps:
+    - nodes/ML17_sampling/ASEGeoOpt/model_outs
+    - nodes/ML17_sampling/ASEGeoOpt/node-meta.json
+    - nodes/ML17_sampling/ASEGeoOpt/trajectory.h5
+    - nodes/ML17_sampling/MixCalculator/atoms.h5
+    - nodes/ML17_sampling/MixCalculator/node-meta.json
+    metrics:
+    - nodes/ML17_sampling/ASEMD_1/node-meta.json:
+        cache: false
+    - nodes/ML17_sampling/ASEMD_1/steps_before_stopping.json:
+        cache: false
+    outs:
+    - nodes/ML17_sampling/ASEMD_1/metrics_dict.csv
+    - nodes/ML17_sampling/ASEMD_1/model
+    - nodes/ML17_sampling/ASEMD_1/trajectory.h5
+    params:
+    - ML17_sampling_ASEMD_1
+    - ML17_sampling_ASEMD_1+thermostat
+  ML17_sampling_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.BatchKernelSelection --name ML17_sampling_ConfigurationSelection
+    deps:
+    - nodes/ML16/CP2KSinglePoint/atoms.h5
+    - nodes/ML16/CP2KSinglePoint/cp2k
+    - nodes/ML16/CP2KSinglePoint/node-meta.json
+    - nodes/ML16/MLModel/apax_model
+    - nodes/ML16/MLModel/log.csv
+    - nodes/ML16/MLModel/metrics.json
+    - nodes/ML16/MLModel/node-meta.json
+    - nodes/ML16/MLModel/train_atoms.extxyz
+    - nodes/ML16/MLModel/val_atoms.extxyz
+    - nodes/ML17_sampling/ASEGeoOpt/model_outs
+    - nodes/ML17_sampling/ASEGeoOpt/node-meta.json
+    - nodes/ML17_sampling/ASEGeoOpt/trajectory.h5
+    - nodes/wo_d3/CP2KSinglePoint/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint/cp2k
+    - nodes/wo_d3/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/ML17_sampling/ConfigurationSelection/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_sampling/ConfigurationSelection/selected_configurations.json
+    - nodes/ML17_sampling/ConfigurationSelection/selection.png
+    params:
+    - ML17_sampling_ConfigurationSelection
+  ML17_sampling_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name ML17_sampling_ConfigurationSelection_1
+    deps:
+    - nodes/ML17_sampling/ASEMD/metrics_dict.csv
+    - nodes/ML17_sampling/ASEMD/model
+    - nodes/ML17_sampling/ASEMD/node-meta.json
+    - nodes/ML17_sampling/ASEMD/steps_before_stopping.json
+    - nodes/ML17_sampling/ASEMD/trajectory.h5
+    metrics:
+    - nodes/ML17_sampling/ConfigurationSelection_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_sampling/ConfigurationSelection_1/selected_configurations.json
+    - nodes/ML17_sampling/ConfigurationSelection_1/selection.png
+    params:
+    - ML17_sampling_ConfigurationSelection_1
+  ML17_sampling_ConfigurationSelection_2:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name ML17_sampling_ConfigurationSelection_2
+    deps:
+    - nodes/ML17_sampling/ConfigurationSelection_1/node-meta.json
+    - nodes/ML17_sampling/ConfigurationSelection_1/selected_configurations.json
+    - nodes/ML17_sampling/ConfigurationSelection_1/selection.png
+    metrics:
+    - nodes/ML17_sampling/ConfigurationSelection_2/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_sampling/ConfigurationSelection_2/selected_configurations.json
+    - nodes/ML17_sampling/ConfigurationSelection_2/selection.png
+    params:
+    - ML17_sampling_ConfigurationSelection_2
+  ML17_sampling_ConfigurationSelection_3:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name ML17_sampling_ConfigurationSelection_3
+    deps:
+    - nodes/ML17_sampling/ASEMD_1/metrics_dict.csv
+    - nodes/ML17_sampling/ASEMD_1/model
+    - nodes/ML17_sampling/ASEMD_1/node-meta.json
+    - nodes/ML17_sampling/ASEMD_1/steps_before_stopping.json
+    - nodes/ML17_sampling/ASEMD_1/trajectory.h5
+    metrics:
+    - nodes/ML17_sampling/ConfigurationSelection_3/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_sampling/ConfigurationSelection_3/selected_configurations.json
+    - nodes/ML17_sampling/ConfigurationSelection_3/selection.png
+    params:
+    - ML17_sampling_ConfigurationSelection_3
+  ML17_sampling_ConfigurationSelection_4:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name ML17_sampling_ConfigurationSelection_4
+    deps:
+    - nodes/ML17_sampling/ConfigurationSelection_3/node-meta.json
+    - nodes/ML17_sampling/ConfigurationSelection_3/selected_configurations.json
+    - nodes/ML17_sampling/ConfigurationSelection_3/selection.png
+    metrics:
+    - nodes/ML17_sampling/ConfigurationSelection_4/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_sampling/ConfigurationSelection_4/selected_configurations.json
+    - nodes/ML17_sampling/ConfigurationSelection_4/selection.png
+    params:
+    - ML17_sampling_ConfigurationSelection_4
+  ML17_sampling_MixCalculator:
+    cmd: zntrack run ipsuite.nodes.MixCalculator --name ML17_sampling_MixCalculator
+    deps:
+    - nodes/ML16/CP2KSinglePoint_1/atoms.h5
+    - nodes/ML16/CP2KSinglePoint_1/cp2k
+    - nodes/ML16/CP2KSinglePoint_1/node-meta.json
+    - nodes/ML16/MLModel/apax_model
+    - nodes/ML16/MLModel/log.csv
+    - nodes/ML16/MLModel/metrics.json
+    - nodes/ML16/MLModel/node-meta.json
+    - nodes/ML16/MLModel/train_atoms.extxyz
+    - nodes/ML16/MLModel/val_atoms.extxyz
+    - nodes/ML17_sampling/TorchD3/atoms.h5
+    - nodes/ML17_sampling/TorchD3/node-meta.json
+    - nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint_1/cp2k
+    - nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+    metrics:
+    - nodes/ML17_sampling/MixCalculator/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_sampling/MixCalculator/atoms.h5
+    params:
+    - ML17_sampling_MixCalculator
+  ML17_sampling_TorchD3:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name ML17_sampling_TorchD3
+    deps:
+    - nodes/ML16/CP2KSinglePoint_1/atoms.h5
+    - nodes/ML16/CP2KSinglePoint_1/cp2k
+    - nodes/ML16/CP2KSinglePoint_1/node-meta.json
+    - nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint_1/cp2k
+    - nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+    metrics:
+    - nodes/ML17_sampling/TorchD3/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_sampling/TorchD3/atoms.h5
+    params:
+    - ML17_sampling_TorchD3
+  ML17_training_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML17_training_MLModel
+    deps:
+    - nodes/ML16/CP2KSinglePoint/atoms.h5
+    - nodes/ML16/CP2KSinglePoint/cp2k
+    - nodes/ML16/CP2KSinglePoint/node-meta.json
+    - nodes/ML16/CP2KSinglePoint_1/atoms.h5
+    - nodes/ML16/CP2KSinglePoint_1/cp2k
+    - nodes/ML16/CP2KSinglePoint_1/node-meta.json
+    - nodes/ML17_datasets/CP2KSinglePoint/atoms.h5
+    - nodes/ML17_datasets/CP2KSinglePoint/cp2k
+    - nodes/ML17_datasets/CP2KSinglePoint/node-meta.json
+    - nodes/ML17_datasets/CP2KSinglePoint_1/atoms.h5
+    - nodes/ML17_datasets/CP2KSinglePoint_1/cp2k
+    - nodes/ML17_datasets/CP2KSinglePoint_1/node-meta.json
+    - nodes/wo_d3/CP2KSinglePoint/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint/cp2k
+    - nodes/wo_d3/CP2KSinglePoint/node-meta.json
+    - nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint_1/cp2k
+    - nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+    metrics:
+    - nodes/ML17_training/MLModel/metrics.json:
+        cache: false
+    - nodes/ML17_training/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_training/MLModel/apax_model
+    - nodes/ML17_training/MLModel/log.csv
+    - nodes/ML17_training/MLModel/train_atoms.extxyz
+    - nodes/ML17_training/MLModel/val_atoms.extxyz
+    params:
+    - ML17_training_MLModel
+    - config/ml17_ensemble.yaml:
+  ML17_training_MLModel_1:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML17_training_MLModel_1
+    deps:
+    - nodes/ML17_datasets/TorchD3/atoms.h5
+    - nodes/ML17_datasets/TorchD3/node-meta.json
+    - nodes/ML17_datasets/TorchD3_1/atoms.h5
+    - nodes/ML17_datasets/TorchD3_1/node-meta.json
+    metrics:
+    - nodes/ML17_training/MLModel_1/metrics.json:
+        cache: false
+    - nodes/ML17_training/MLModel_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_training/MLModel_1/apax_model
+    - nodes/ML17_training/MLModel_1/log.csv
+    - nodes/ML17_training/MLModel_1/train_atoms.extxyz
+    - nodes/ML17_training/MLModel_1/val_atoms.extxyz
+    params:
+    - ML17_training_MLModel_1
+    - config/ml17_ensemble.yaml:
+  ML17_training_MLModel_2:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML17_training_MLModel_2
+    deps:
+    - nodes/ML17_datasets/TorchD3/atoms.h5
+    - nodes/ML17_datasets/TorchD3/node-meta.json
+    - nodes/ML17_datasets/TorchD3_1/atoms.h5
+    - nodes/ML17_datasets/TorchD3_1/node-meta.json
+    metrics:
+    - nodes/ML17_training/MLModel_2/metrics.json:
+        cache: false
+    - nodes/ML17_training/MLModel_2/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_training/MLModel_2/apax_model
+    - nodes/ML17_training/MLModel_2/log.csv
+    - nodes/ML17_training/MLModel_2/train_atoms.extxyz
+    - nodes/ML17_training/MLModel_2/val_atoms.extxyz
+    params:
+    - ML17_training_MLModel_2
+    - config/ml17_ensemble_long_cutoff.yaml:
+  ML17_training_MLModel_3:
+    cmd: zntrack run ipsuite.nodes.Apax --name ML17_training_MLModel_3
+    deps:
+    - nodes/ML17_datasets/TorchD3_2/atoms.h5
+    - nodes/ML17_datasets/TorchD3_2/node-meta.json
+    - nodes/ML17_datasets/TorchD3_3/atoms.h5
+    - nodes/ML17_datasets/TorchD3_3/node-meta.json
+    metrics:
+    - nodes/ML17_training/MLModel_3/metrics.json:
+        cache: false
+    - nodes/ML17_training/MLModel_3/node-meta.json:
+        cache: false
+    outs:
+    - nodes/ML17_training/MLModel_3/apax_model
+    - nodes/ML17_training/MLModel_3/log.csv
+    - nodes/ML17_training/MLModel_3/train_atoms.extxyz
+    - nodes/ML17_training/MLModel_3/val_atoms.extxyz
+    params:
+    - ML17_training_MLModel_3
+    - config/ml17_ensemble.yaml:
   ML1_ASEGeoOpt:
     cmd: zntrack run ipsuite.nodes.ASEGeoOpt --name ML1_ASEGeoOpt
     deps:
@@ -4898,6 +6374,46 @@ stages:
     - nodes/classical/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/classical/PredictionMetrics/stress_df.csv
     - nodes/classical/PredictionMetrics/stress_hydrostatic_df.csv
+  d3_models_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name d3_models_MLModel
+    deps:
+    - nodes/torch_d3_labels/TorchD3/atoms.h5
+    - nodes/torch_d3_labels/TorchD3/node-meta.json
+    - nodes/torch_d3_labels/TorchD3_1/atoms.h5
+    - nodes/torch_d3_labels/TorchD3_1/node-meta.json
+    metrics:
+    - nodes/d3_models/MLModel/metrics.json:
+        cache: false
+    - nodes/d3_models/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/d3_models/MLModel/apax_model
+    - nodes/d3_models/MLModel/log.csv
+    - nodes/d3_models/MLModel/train_atoms.extxyz
+    - nodes/d3_models/MLModel/val_atoms.extxyz
+    params:
+    - d3_models_MLModel
+    - config/final.yaml:
+  d3_models_MLModel_1:
+    cmd: zntrack run ipsuite.nodes.Apax --name d3_models_MLModel_1
+    deps:
+    - nodes/torch_d3_labels/TorchD3_2/atoms.h5
+    - nodes/torch_d3_labels/TorchD3_2/node-meta.json
+    - nodes/torch_d3_labels/TorchD3_3/atoms.h5
+    - nodes/torch_d3_labels/TorchD3_3/node-meta.json
+    metrics:
+    - nodes/d3_models/MLModel_1/metrics.json:
+        cache: false
+    - nodes/d3_models/MLModel_1/node-meta.json:
+        cache: false
+    outs:
+    - nodes/d3_models/MLModel_1/apax_model
+    - nodes/d3_models/MLModel_1/log.csv
+    - nodes/d3_models/MLModel_1/train_atoms.extxyz
+    - nodes/d3_models/MLModel_1/val_atoms.extxyz
+    params:
+    - d3_models_MLModel_1
+    - config/final.yaml:
   final_MLModel:
     cmd: zntrack run ipsuite.nodes.Apax --name final_MLModel
     deps:
@@ -4922,6 +6438,9 @@ stages:
     - nodes/ML14/CP2KSinglePoint/atoms.h5
     - nodes/ML14/CP2KSinglePoint/cp2k
     - nodes/ML14/CP2KSinglePoint/node-meta.json
+    - nodes/ML15/CP2KSinglePoint/atoms.h5
+    - nodes/ML15/CP2KSinglePoint/cp2k
+    - nodes/ML15/CP2KSinglePoint/node-meta.json
     - nodes/ML2/CP2KSinglePoint/atoms.h5
     - nodes/ML2/CP2KSinglePoint/cp2k
     - nodes/ML2/CP2KSinglePoint/node-meta.json
@@ -5034,6 +6553,9 @@ stages:
     - nodes/ML14/CP2KSinglePoint/atoms.h5
     - nodes/ML14/CP2KSinglePoint/cp2k
     - nodes/ML14/CP2KSinglePoint/node-meta.json
+    - nodes/ML15/CP2KSinglePoint/atoms.h5
+    - nodes/ML15/CP2KSinglePoint/cp2k
+    - nodes/ML15/CP2KSinglePoint/node-meta.json
     - nodes/ML2/CP2KSinglePoint/atoms.h5
     - nodes/ML2/CP2KSinglePoint/cp2k
     - nodes/ML2/CP2KSinglePoint/node-meta.json
@@ -5122,6 +6644,31 @@ stages:
     - nodes/final_ensemble/PredictionMetrics/stress_deviatoric_df.csv
     - nodes/final_ensemble/PredictionMetrics/stress_df.csv
     - nodes/final_ensemble/PredictionMetrics/stress_hydrostatic_df.csv
+  final_ensemble_PredictionMetrics_1:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name final_ensemble_PredictionMetrics_1
+    deps:
+    - nodes/final_ensemble/Prediction_1/atoms.h5
+    - nodes/final_ensemble/Prediction_1/node-meta.json
+    metrics:
+    - nodes/final_ensemble/PredictionMetrics_1/deviat_stress.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/energy.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/forces.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/hydro_stress.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/node-meta.json:
+        cache: false
+    - nodes/final_ensemble/PredictionMetrics_1/stress.json:
+        cache: false
+    outs:
+    - nodes/final_ensemble/PredictionMetrics_1/energy_df.csv
+    - nodes/final_ensemble/PredictionMetrics_1/forces_df.csv
+    - nodes/final_ensemble/PredictionMetrics_1/plots
+    - nodes/final_ensemble/PredictionMetrics_1/stress_deviatoric_df.csv
+    - nodes/final_ensemble/PredictionMetrics_1/stress_df.csv
+    - nodes/final_ensemble/PredictionMetrics_1/stress_hydrostatic_df.csv
   final_ensemble_Prediction_1:
     cmd: zntrack run ipsuite.nodes.Prediction --name final_ensemble_Prediction_1
     deps:
@@ -5146,6 +6693,9 @@ stages:
     - nodes/ML14/CP2KSinglePoint/atoms.h5
     - nodes/ML14/CP2KSinglePoint/cp2k
     - nodes/ML14/CP2KSinglePoint/node-meta.json
+    - nodes/ML15/CP2KSinglePoint/atoms.h5
+    - nodes/ML15/CP2KSinglePoint/cp2k
+    - nodes/ML15/CP2KSinglePoint/node-meta.json
     - nodes/ML2/CP2KSinglePoint/atoms.h5
     - nodes/ML2/CP2KSinglePoint/cp2k
     - nodes/ML2/CP2KSinglePoint/node-meta.json
@@ -5182,33 +6732,187 @@ stages:
     - nodes/final_ensemble/MLModel/node-meta.json
     - nodes/final_ensemble/MLModel/train_atoms.extxyz
     - nodes/final_ensemble/MLModel/val_atoms.extxyz
-    outs:
-    - nodes/final_ensemble/Prediction_1/atoms.h5
     metrics:
     - nodes/final_ensemble/Prediction_1/node-meta.json:
         cache: false
-  final_ensemble_PredictionMetrics_1:
-    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name final_ensemble_PredictionMetrics_1
-    deps:
-    - nodes/final_ensemble/Prediction_1/atoms.h5
-    - nodes/final_ensemble/Prediction_1/node-meta.json
     outs:
-    - nodes/final_ensemble/PredictionMetrics_1/energy_df.csv
-    - nodes/final_ensemble/PredictionMetrics_1/forces_df.csv
-    - nodes/final_ensemble/PredictionMetrics_1/plots
-    - nodes/final_ensemble/PredictionMetrics_1/stress_deviatoric_df.csv
-    - nodes/final_ensemble/PredictionMetrics_1/stress_df.csv
-    - nodes/final_ensemble/PredictionMetrics_1/stress_hydrostatic_df.csv
+    - nodes/final_ensemble/Prediction_1/atoms.h5
+  torch_d3_labels_TorchD3:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name torch_d3_labels_TorchD3
+    deps:
+    - nodes/wo_d3/CP2KSinglePoint/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint/cp2k
+    - nodes/wo_d3/CP2KSinglePoint/node-meta.json
     metrics:
-    - nodes/final_ensemble/PredictionMetrics_1/deviat_stress.json:
+    - nodes/torch_d3_labels/TorchD3/node-meta.json:
         cache: false
-    - nodes/final_ensemble/PredictionMetrics_1/energy.json:
+    outs:
+    - nodes/torch_d3_labels/TorchD3/atoms.h5
+    params:
+    - torch_d3_labels_TorchD3
+  torch_d3_labels_TorchD3_1:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name torch_d3_labels_TorchD3_1
+    deps:
+    - nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint_1/cp2k
+    - nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+    metrics:
+    - nodes/torch_d3_labels/TorchD3_1/node-meta.json:
         cache: false
-    - nodes/final_ensemble/PredictionMetrics_1/forces.json:
+    outs:
+    - nodes/torch_d3_labels/TorchD3_1/atoms.h5
+    params:
+    - torch_d3_labels_TorchD3_1
+  torch_d3_labels_TorchD3_2:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name torch_d3_labels_TorchD3_2
+    deps:
+    - nodes/wo_d3/CP2KSinglePoint/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint/cp2k
+    - nodes/wo_d3/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/torch_d3_labels/TorchD3_2/node-meta.json:
         cache: false
-    - nodes/final_ensemble/PredictionMetrics_1/hydro_stress.json:
+    outs:
+    - nodes/torch_d3_labels/TorchD3_2/atoms.h5
+    params:
+    - torch_d3_labels_TorchD3_2
+  torch_d3_labels_TorchD3_3:
+    cmd: zntrack run ipsuite.nodes.TorchD3 --name torch_d3_labels_TorchD3_3
+    deps:
+    - nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint_1/cp2k
+    - nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+    metrics:
+    - nodes/torch_d3_labels/TorchD3_3/node-meta.json:
         cache: false
-    - nodes/final_ensemble/PredictionMetrics_1/node-meta.json:
+    outs:
+    - nodes/torch_d3_labels/TorchD3_3/atoms.h5
+    params:
+    - torch_d3_labels_TorchD3_3
+  wo_d3_CP2KSinglePoint:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name wo_d3_CP2KSinglePoint
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - nodes/ML0/ConfigurationSelection/node-meta.json
+    - nodes/ML0/ConfigurationSelection/selected_configurations.json
+    - nodes/ML0/ConfigurationSelection/selection.png
+    - nodes/ML1/CP2KSinglePoint/atoms.h5
+    - nodes/ML1/CP2KSinglePoint/cp2k
+    - nodes/ML1/CP2KSinglePoint/node-meta.json
+    - nodes/ML10/CP2KSinglePoint/atoms.h5
+    - nodes/ML10/CP2KSinglePoint/cp2k
+    - nodes/ML10/CP2KSinglePoint/node-meta.json
+    - nodes/ML11_MultiPack/CP2KSinglePoint/atoms.h5
+    - nodes/ML11_MultiPack/CP2KSinglePoint/cp2k
+    - nodes/ML11_MultiPack/CP2KSinglePoint/node-meta.json
+    - nodes/ML12/CP2KSinglePoint/atoms.h5
+    - nodes/ML12/CP2KSinglePoint/cp2k
+    - nodes/ML12/CP2KSinglePoint/node-meta.json
+    - nodes/ML13/CP2KSinglePoint/atoms.h5
+    - nodes/ML13/CP2KSinglePoint/cp2k
+    - nodes/ML13/CP2KSinglePoint/node-meta.json
+    - nodes/ML14/CP2KSinglePoint/atoms.h5
+    - nodes/ML14/CP2KSinglePoint/cp2k
+    - nodes/ML14/CP2KSinglePoint/node-meta.json
+    - nodes/ML15/CP2KSinglePoint/atoms.h5
+    - nodes/ML15/CP2KSinglePoint/cp2k
+    - nodes/ML15/CP2KSinglePoint/node-meta.json
+    - nodes/ML2/CP2KSinglePoint/atoms.h5
+    - nodes/ML2/CP2KSinglePoint/cp2k
+    - nodes/ML2/CP2KSinglePoint/node-meta.json
+    - nodes/ML3/CP2KSinglePoint/atoms.h5
+    - nodes/ML3/CP2KSinglePoint/cp2k
+    - nodes/ML3/CP2KSinglePoint/node-meta.json
+    - nodes/ML4/CP2KSinglePoint/atoms.h5
+    - nodes/ML4/CP2KSinglePoint/cp2k
+    - nodes/ML4/CP2KSinglePoint/node-meta.json
+    - nodes/ML5/CP2KSinglePoint/atoms.h5
+    - nodes/ML5/CP2KSinglePoint/cp2k
+    - nodes/ML5/CP2KSinglePoint/node-meta.json
+    - nodes/ML6/CP2KSinglePoint/atoms.h5
+    - nodes/ML6/CP2KSinglePoint/cp2k
+    - nodes/ML6/CP2KSinglePoint/node-meta.json
+    - nodes/ML7/CP2KSinglePoint/atoms.h5
+    - nodes/ML7/CP2KSinglePoint/cp2k
+    - nodes/ML7/CP2KSinglePoint/node-meta.json
+    - nodes/ML8/CP2KSinglePoint/atoms.h5
+    - nodes/ML8/CP2KSinglePoint/cp2k
+    - nodes/ML8/CP2KSinglePoint/node-meta.json
+    - nodes/ML9/CP2KSinglePoint/atoms.h5
+    - nodes/ML9/CP2KSinglePoint/cp2k
+    - nodes/ML9/CP2KSinglePoint/node-meta.json
+    - nodes/VS/CP2KSinglePoint/atoms.h5
+    - nodes/VS/CP2KSinglePoint/cp2k
+    - nodes/VS/CP2KSinglePoint/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/node-meta.json
+    - nodes/classical/ConfigurationSelection_2/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_2/selection.png
+    metrics:
+    - nodes/wo_d3/CP2KSinglePoint/node-meta.json:
         cache: false
-    - nodes/final_ensemble/PredictionMetrics_1/stress.json:
+    outs:
+    - nodes/wo_d3/CP2KSinglePoint/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint/cp2k
+    params:
+    - config/cp2k_wo_d3.yaml:
+  wo_d3_CP2KSinglePoint_1:
+    cmd: zntrack run ipsuite.nodes.CP2KSinglePoint --name wo_d3_CP2KSinglePoint_1
+    deps:
+    - GTH_BASIS_SETS
+    - GTH_POTENTIALS
+    - nodes/classical/ConfigurationSelection_1/node-meta.json
+    - nodes/classical/ConfigurationSelection_1/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_1/selection.png
+    metrics:
+    - nodes/wo_d3/CP2KSinglePoint_1/node-meta.json:
         cache: false
+    outs:
+    - nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint_1/cp2k
+    params:
+    - config/cp2k_wo_d3.yaml:
+  wo_d3_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name wo_d3_MLModel
+    deps:
+    - nodes/classical/ConfigurationSelection_1/node-meta.json
+    - nodes/classical/ConfigurationSelection_1/selected_configurations.json
+    - nodes/classical/ConfigurationSelection_1/selection.png
+    - nodes/wo_d3/CP2KSinglePoint/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint/cp2k
+    - nodes/wo_d3/CP2KSinglePoint/node-meta.json
+    metrics:
+    - nodes/wo_d3/MLModel/metrics.json:
+        cache: false
+    - nodes/wo_d3/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/wo_d3/MLModel/apax_model
+    - nodes/wo_d3/MLModel/log.csv
+    - nodes/wo_d3/MLModel/train_atoms.extxyz
+    - nodes/wo_d3/MLModel/val_atoms.extxyz
+    params:
+    - wo_d3_MLModel
+    - config/final.yaml:
+  wo_d3_model_MLModel:
+    cmd: zntrack run ipsuite.nodes.Apax --name wo_d3_model_MLModel
+    deps:
+    - nodes/wo_d3/CP2KSinglePoint/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint/cp2k
+    - nodes/wo_d3/CP2KSinglePoint/node-meta.json
+    - nodes/wo_d3/CP2KSinglePoint_1/atoms.h5
+    - nodes/wo_d3/CP2KSinglePoint_1/cp2k
+    - nodes/wo_d3/CP2KSinglePoint_1/node-meta.json
+    metrics:
+    - nodes/wo_d3_model/MLModel/metrics.json:
+        cache: false
+    - nodes/wo_d3_model/MLModel/node-meta.json:
+        cache: false
+    outs:
+    - nodes/wo_d3_model/MLModel/apax_model
+    - nodes/wo_d3_model/MLModel/log.csv
+    - nodes/wo_d3_model/MLModel/train_atoms.extxyz
+    - nodes/wo_d3_model/MLModel/val_atoms.extxyz
+    params:
+    - wo_d3_model_MLModel
+    - config/final.yaml:
