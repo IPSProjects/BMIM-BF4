@@ -1,6 +1,7 @@
 [core]
     remote = origin
 ['remote "origin"']
-    url = s3://fabian.zills/dvc/ipsprojects/BMIM-BF4
+    url = s3://public/paper/2024-BMIM-BF4
     endpointurl = https://minio.icp.uni-stuttgart.de
-
+    access_key_id = public_eip8waishae6ies
+    secret_access_key = OoCiedah9aw9Pui8mie7phahlatie7oi
