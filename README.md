@@ -1,4 +1,5 @@
 [![ZnTrack](https://img.shields.io/badge/Powered%20by-ZnTrack-%23007CB0)](https://zntrack.readthedocs.io/en/latest/)
+[![DOI](https://zenodo.org/badge/692027634.svg)](https://zenodo.org/doi/10.5281/zenodo.10797062)
 
 # Machine Learning-Driven Investigation of the Structure and Dynamics of the BMIM BF4 Room Temperature Ionic Liquid
 
